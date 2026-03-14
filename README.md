@@ -68,7 +68,7 @@ memory_dumps/
 This will run all configured plugins over all dumps in parallel and write CSVs to `extracted_data/`:
 
 ```bash
-python extract_csv.py
+python auto_vol.py
 ```
 
 ### 3. Run IOC analysis scripts
