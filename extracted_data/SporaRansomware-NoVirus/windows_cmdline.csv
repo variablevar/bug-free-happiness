@@ -1,0 +1,95 @@
+TreeDepth,PID,Process,Args
+0,4,System,-
+0,100,Registry,-
+0,360,smss.exe,\\SystemRoot\\System32\\smss.exe
+0,448,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,524,wininit.exe,wininit.exe
+0,544,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,624,winlogon.exe,winlogon.exe
+0,668,services.exe,C:\\Windows\\system32\\services.exe
+0,692,lsass.exe,C:\\Windows\\system32\\lsass.exe
+0,772,fontdrvhost.ex,"""fontdrvhost.exe"""
+0,780,fontdrvhost.ex,"""fontdrvhost.exe"""
+0,860,svchost.exe,C:\\Windows\\system32\\svchost.exe -k DcomLaunch -p
+0,928,svchost.exe,C:\\Windows\\system32\\svchost.exe -k RPCSS -p
+0,1008,dwm.exe,"""dwm.exe"""
+0,1104,svchost.exe,C:\\Windows\\system32\\svchost.exe -k netsvcs -p
+0,1144,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceNoNetwork -p
+0,1152,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted -p
+0,1240,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalSystemNetworkRestricted -p
+0,1336,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalService -p
+0,1512,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalService -p
+0,1596,svchost.exe,C:\\Windows\\System32\\svchost.exe -k NetworkService -p
+0,1608,MemCompression,-
+0,1820,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted -p
+0,1916,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted -p
+0,1924,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceNetworkRestricted -p
+0,1936,svchost.exe,C:\\Windows\\system32\\svchost.exe -k appmodel -p
+0,408,spoolsv.exe,C:\\Windows\\System32\\spoolsv.exe
+0,516,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceNoNetworkFirewall -p
+0,740,svchost.exe,C:\\Windows\\System32\\svchost.exe -k utcsvc -p
+0,2100,MsMpEng.exe,"""C:\\ProgramData\\Microsoft\\Windows Defender\\platform\\4.18.2302.7-0\\MsMpEng.exe"""
+0,2472,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted
+0,2708,svchost.exe,C:\\Windows\\system32\\svchost.exe -k wsappx -p
+0,3836,sihost.exe,sihost.exe
+0,3884,svchost.exe,C:\\Windows\\system32\\svchost.exe -k UnistackSvcGroup
+0,3956,taskhostw.exe,taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+0,1096,ctfmon.exe,"""ctfmon.exe"""
+0,2744,userinit.exe,-
+0,1848,explorer.exe,C:\\Windows\\Explorer.EXE
+0,3040,svchost.exe,C:\\Windows\\system32\\svchost.exe -k ClipboardSvcGroup -p
+0,3516,NisSrv.exe,"""C:\\ProgramData\\Microsoft\\Windows Defender\\platform\\4.18.2302.7-0\\NisSrv.exe"""
+0,3552,StartMenuExper,"""C:\\Windows\\SystemApps\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\StartMenuExperienceHost.exe"" -ServerName:App.AppXywbrabmsek0gm3tkwpr5kwzbs55tkqay.mca"
+0,4040,RuntimeBroker.,C:\\Windows\\System32\\RuntimeBroker.exe -Embedding
+0,1212,SearchApp.exe,-
+0,2140,SearchIndexer.,C:\\Windows\\system32\\SearchIndexer.exe /Embedding
+0,2948,RuntimeBroker.,C:\\Windows\\System32\\RuntimeBroker.exe -Embedding
+0,4948,SkypeApp.exe,"""C:\\Program Files\\WindowsApps\\Microsoft.SkypeApp_14.53.77.0_x86__kzf8qxf38zg5c\\SkypeApp.exe"" -ServerName:App.AppXffn3yxqvgawq9fpmnhy90fr3y01d1t5b.mca"
+0,5036,SkypeBackgroun,"""C:\\Program Files\\WindowsApps\\Microsoft.SkypeApp_14.53.77.0_x86__kzf8qxf38zg5c\\SkypeBackgroundHost.exe"" -ServerName:SkypeBackgroundHost"
+0,5148,RuntimeBroker.,C:\\Windows\\System32\\RuntimeBroker.exe -Embedding
+0,5288,RuntimeBroker.,C:\\Windows\\System32\\RuntimeBroker.exe -Embedding
+0,5632,smartscreen.ex,C:\\Windows\\System32\\smartscreen.exe -Embedding
+0,5684,SecurityHealth,"""C:\\Windows\\System32\\SecurityHealthSystray.exe"" "
+0,5720,SecurityHealth,C:\\Windows\\system32\\SecurityHealthService.exe
+0,5904,OneDrive.exe,"""C:\\Users\\mapo9\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe"" /background"
+0,6016,Microsoft.Shar,-
+0,3172,TextInputHost.,"""C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\TextInputHost.exe"" -ServerName:InputApp.AppXjd5de1g66v206tj52m9d0dtpppx4cgpn.mca"
+0,1064,dllhost.exe,C:\\Windows\\system32\\DllHost.exe /Processid:{973D20D7-562D-44B9-B70B-5A0F49CCDF3F}
+0,5848,ShellExperienc,"""C:\\Windows\\SystemApps\\ShellExperienceHost_cw5n1h2txyewy\\ShellExperienceHost.exe"" -ServerName:App.AppXtk181tbxbce2qsex02s8tw7hfxa9xb3t.mca"
+0,5596,RuntimeBroker.,C:\\Windows\\System32\\RuntimeBroker.exe -Embedding
+0,5592,audiodg.exe,C:\\Windows\\system32\\AUDIODG.EXE 0x4d0
+0,6260,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceAndNoImpersonation -p
+0,6372,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --no-startup-window --win-session-start /prefetch:5"
+0,6392,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=crashpad-handler ""--user-data-dir=C:\\Users\\mapo9\\AppData\\Local\\Microsoft\\Edge\\User Data"" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler ""--database=C:\\Users\\mapo9\\AppData\\Local\\Microsoft\\Edge\\User Data\\Crashpad"" --annotation=IsOfficialBuild=1 --annotation=channel= --annotation=chromium-version=111.0.5563.111 ""--annotation=exe=C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --annotation=plat=Win32 ""--annotation=prod=Microsoft Edge"" --annotation=ver=111.0.1661.54 --initial-client-data=0x40,0x100,0x104,0xdc,0x10c,0x52638650,0x52638660,0x5263866c"
+0,6600,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=gpu-process --gpu-preferences=UAAAAAAAAADgAAAYAAAAAAAAAAAAAAAAAABgAAAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --mojo-platform-channel-handle=1896 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:2"
+0,6608,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mojo-platform-channel-handle=2000 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:3"
+0,6632,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mojo-platform-channel-handle=2516 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:8"
+0,7500,FileCoAuth.exe,"""C:\\Users\\mapo9\\AppData\\Local\\Microsoft\\OneDrive\\23.048.0305.0002\\FileCoAuth.exe"" -Embedding"
+0,7988,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=17 --time-ticks-at-unix-epoch=-1680103089292951 --launch-time-ticks=92362239 --mojo-platform-channel-handle=3612 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:1"
+0,7996,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=18 --time-ticks-at-unix-epoch=-1680103089292951 --launch-time-ticks=92374107 --mojo-platform-channel-handle=3580 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:1"
+0,6340,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=utility --utility-sub-type=edge_search_indexer.mojom.SearchIndexerInterfaceBroker --lang=en-US --service-sandbox-type=search_indexer --message-loop-type-ui --mojo-platform-channel-handle=4424 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:8"
+0,6980,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=23 --time-ticks-at-unix-epoch=-1680103089292951 --launch-time-ticks=114079654 --mojo-platform-channel-handle=6528 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:1"
+0,4512,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mojo-platform-channel-handle=6400 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:8"
+0,7360,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted -p
+0,7832,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=29 --time-ticks-at-unix-epoch=-1680103089292951 --launch-time-ticks=142179682 --mojo-platform-channel-handle=3588 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:1"
+0,8020,MicrosoftEdgeU,C:\\Users\\mapo9\\AppData\\Local\\Microsoft\\EdgeUpdate\\MicrosoftEdgeUpdate.exe /c
+0,7984,MicrosoftEdgeU,"""C:\\Program Files\\Microsoft\\EdgeUpdate\\MicrosoftEdgeUpdate.exe"" /c"
+0,1508,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=39 --time-ticks-at-unix-epoch=-1680103089292951 --launch-time-ticks=194670457 --mojo-platform-channel-handle=6444 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:1"
+0,2040,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=43 --time-ticks-at-unix-epoch=-1680103089292951 --launch-time-ticks=209617850 --mojo-platform-channel-handle=6376 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:1"
+0,5300,ApplicationFra,C:\\Windows\\system32\\ApplicationFrameHost.exe -Embedding
+0,7916,WinStore.App.e,-
+0,7784,RuntimeBroker.,C:\\Windows\\System32\\RuntimeBroker.exe -Embedding
+0,5176,FTK Imager.exe,"""C:\\Program Files\\AccessData\\FTK Imager\\FTK Imager.exe"""
+0,1360,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --instant-process --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=51 --time-ticks-at-unix-epoch=-1680103089292951 --launch-time-ticks=430094368 --mojo-platform-channel-handle=3560 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:1"
+0,4256,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=52 --time-ticks-at-unix-epoch=-1680103089292951 --launch-time-ticks=433931340 --mojo-platform-channel-handle=8112 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:1"
+0,2832,SearchProtocol,"""C:\\Windows\\system32\\SearchProtocolHost.exe"" Global\\UsGthrFltPipeMssGthrPipe_S-1-5-21-1088007597-2744559703-1598807515-10014_ Global\\UsGthrCtrlFltPipeMssGthrPipe_S-1-5-21-1088007597-2744559703-1598807515-10014 1 -2147483646 ""Software\\Microsoft\\Windows Search"" ""Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)"" ""C:\\ProgramData\\Microsoft\\Search\\Data\\Temp\\usgthrsvc"" ""DownLevelDaemon""  ""1"""
+0,7040,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=55 --time-ticks-at-unix-epoch=-1680103089292951 --launch-time-ticks=445445195 --mojo-platform-channel-handle=7108 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:1"
+0,5372,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=62 --time-ticks-at-unix-epoch=-1680103089292951 --launch-time-ticks=576263856 --mojo-platform-channel-handle=8624 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:1"
+0,6108,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=63 --time-ticks-at-unix-epoch=-1680103089292951 --launch-time-ticks=576739300 --mojo-platform-channel-handle=3932 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:1"
+0,1088,svchost.exe,C:\\Windows\\System32\\svchost.exe -k NetworkService -p
+0,2588,msedge.exe,"""C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=64 --time-ticks-at-unix-epoch=-1680103089292951 --launch-time-ticks=632088568 --mojo-platform-channel-handle=2076 --field-trial-handle=2192,i,11141670019489479655,7548727925930253365,131072 /prefetch:1"
+0,7388,SearchFilterHo,"""C:\\Windows\\system32\\SearchFilterHost.exe"" 0 784 788 796 8192 792 768 "
+0,2480,OneDriveStanda,C:\\Users\\mapo9\\AppData\\Local\\Microsoft\\OneDrive\\OneDriveStandaloneUpdater.exe /reporting
+0,6132,SearchProtocol,"""C:\\Windows\\system32\\SearchProtocolHost.exe"" Global\\UsGthrFltPipeMssGthrPipe5_ Global\\UsGthrCtrlFltPipeMssGthrPipe5 1 -2147483646 ""Software\\Microsoft\\Windows Search"" ""Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)"" ""C:\\ProgramData\\Microsoft\\Search\\Data\\Temp\\usgthrsvc"" ""DownLevelDaemon"" "
+0,289090992,,-
+

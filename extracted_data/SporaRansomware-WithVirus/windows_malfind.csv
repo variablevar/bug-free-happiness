@@ -1,0 +1,67 @@
+TreeDepth,PID,Process,Start VPN,End VPN,Tag,Protection,CommitCharge,PrivateMemory,File output,Notes,Hexdump,Disasm
+0,2100,MsMpEng.exe,0x3ee0000,0x3fbffff,VadS,PAGE_EXECUTE_READWRITE,224,1,Disabled,N/A,"
+00 00 40 00 80 00 00 00 89 e9 b8 d0 de 58 7b ff ..@..........X{.
+d0 ff a5 fc 36 00 00 00 00 00 00 00 00 00 00 00 ....6...........
+8b 93 38 00 00 00 8b b3 44 00 00 00 0f b7 04 4a ..8.....D......J
+8b 93 08 01 00 00 03 04 8a 8a 14 4e 80 e2 fe 89 ...........N....",00 00 40 00 80 00 00 00 89 e9 b8 d0 de 58 7b ff d0 ff a5 fc 36 00 00 00 00 00 00 00 00 00 00 00 8b 93 38 00 00 00 8b b3 44 00 00 00 0f b7 04 4a 8b 93 08 01 00 00 03 04 8a 8a 14 4e 80 e2 fe 89
+0,2100,MsMpEng.exe,0x3bc0000,0x3c9ffff,VadS,PAGE_EXECUTE_READWRITE,224,1,Disabled,N/A,"
+00 00 40 00 80 00 00 00 89 e9 b8 d0 de 58 7b ff ..@..........X{.
+d0 ff a5 fc 36 00 00 00 00 00 00 00 00 00 00 00 ....6...........
+8b 93 38 00 00 00 8b b3 44 00 00 00 0f b7 04 4a ..8.....D......J
+8b 93 08 01 00 00 03 04 8a 8a 14 4e 80 e2 fe 89 ...........N....",00 00 40 00 80 00 00 00 89 e9 b8 d0 de 58 7b ff d0 ff a5 fc 36 00 00 00 00 00 00 00 00 00 00 00 8b 93 38 00 00 00 8b b3 44 00 00 00 0f b7 04 4a 8b 93 08 01 00 00 03 04 8a 8a 14 4e 80 e2 fe 89
+0,2100,MsMpEng.exe,0x21500000,0x215fffff,VadS,PAGE_EXECUTE_READWRITE,256,1,Disabled,N/A,"
+08 00 42 00 00 00 00 05 8b 45 14 89 c2 8b 45 10 ..B......E....E.
+8b 08 8b 40 04 89 0a 89 42 04 8b 45 14 81 00 a0 ...@....B..E....
+00 00 00 8d 45 08 89 c2 8b 45 14 8b 08 89 0a 8b ....E....E......
+45 14 89 c2 8b 45 08 8b 00 89 02 c7 42 04 00 00 E....E......B...",08 00 42 00 00 00 00 05 8b 45 14 89 c2 8b 45 10 8b 08 8b 40 04 89 0a 89 42 04 8b 45 14 81 00 a0 00 00 00 8d 45 08 89 c2 8b 45 14 8b 08 89 0a 8b 45 14 89 c2 8b 45 08 8b 00 89 02 c7 42 04 00 00
+0,2100,MsMpEng.exe,0x21600000,0x217fffff,VadS,PAGE_EXECUTE_READWRITE,512,1,Disabled,N/A,"
+09 00 34 00 09 00 01 05 8b 55 18 8b 4d 54 8d 54 ..4......U..MT.T
+0a fc 89 d6 b9 04 00 1a 00 ff 95 6c 37 00 00 8b ...........l7...
+4d 1c 89 08 83 45 18 fc 8d 45 1c 8b 4d 18 89 08 M....E...E..M...
+81 6d 18 9c 02 00 00 9f 0f 90 c0 66 89 45 38 8d .m.........f.E8.",09 00 34 00 09 00 01 05 8b 55 18 8b 4d 54 8d 54 0a fc 89 d6 b9 04 00 1a 00 ff 95 6c 37 00 00 8b 4d 1c 89 08 83 45 18 fc 8d 45 1c 8b 4d 18 89 08 81 6d 18 9c 02 00 00 9f 0f 90 c0 66 89 45 38 8d
+0,1212,SearchApp.exe,0xce00000,0xce1ffff,VadS,PAGE_EXECUTE_READWRITE,21,1,Disabled,PE header,"
+55 8b ec 81 fc 9c c9 70 0b 7f 1c 6a 00 6a 00 68 U......p...j.j.h
+28 5b 33 0b 68 9c 09 00 00 e8 b2 47 60 51 0f 1f ([3.h......G`Q..
+00 0f 1f 40 00 66 90 6a 00 8d 64 24 c8 57 56 53 ...@.f.j..d$.WVS
+b8 30 37 14 10 8b 08 83 e9 01 72 04 89 08 eb 06 .07.......r.....",55 8b ec 81 fc 9c c9 70 0b 7f 1c 6a 00 6a 00 68 28 5b 33 0b 68 9c 09 00 00 e8 b2 47 60 51 0f 1f 00 0f 1f 40 00 66 90 6a 00 8d 64 24 c8 57 56 53 b8 30 37 14 10 8b 08 83 e9 01 72 04 89 08 eb 06
+0,1212,SearchApp.exe,0xde00000,0xde1ffff,VadS,PAGE_EXECUTE_READWRITE,9,1,Disabled,PE header,"
+55 8b ec 8b 45 08 8b 40 14 8b 40 04 8b 48 30 83 U...E..@..@..H0.
+e1 f8 8b c1 2d 38 00 e0 0d 3d b8 0f 00 00 76 07 ....-8...=....v.
+b9 05 00 00 00 cd 29 8d 45 08 50 b8 70 c7 11 5e ......).E.P.p..^
+ff e1 cc cc cc cc cc cc ff d0 e9 b1 0f 00 00 cc ................",55 8b ec 8b 45 08 8b 40 14 8b 40 04 8b 48 30 83 e1 f8 8b c1 2d 38 00 e0 0d 3d b8 0f 00 00 76 07 b9 05 00 00 00 cd 29 8d 45 08 50 b8 70 c7 11 5e ff e1 cc cc cc cc cc cc ff d0 e9 b1 0f 00 00 cc
+0,1212,SearchApp.exe,0xefa0000,0xefbffff,VadS,PAGE_EXECUTE_READWRITE,32,1,Disabled,PE header,"
+55 8b ec 81 fc 64 c9 70 0b 7f 22 6a 00 6a 00 68 U....d.p..""j.j.h
+28 5b 33 0b 68 64 09 00 00 e8 b2 47 46 4f 0f 1f ([3.hd.....GFO..
+00 0f 1f 40 00 0f 1f 40 00 0f 1f 40 00 6a 00 8d ...@...@...@.j..
+64 24 e8 57 56 53 b8 b0 59 a6 0e 8b 08 83 e9 01 d$.WVS..Y.......",55 8b ec 81 fc 64 c9 70 0b 7f 22 6a 00 6a 00 68 28 5b 33 0b 68 64 09 00 00 e8 b2 47 46 4f 0f 1f 00 0f 1f 40 00 0f 1f 40 00 0f 1f 40 00 6a 00 8d 64 24 e8 57 56 53 b8 b0 59 a6 0e 8b 08 83 e9 01
+0,1212,SearchApp.exe,0xefe0000,0xf043fff,VadS,PAGE_EXECUTE_READWRITE,4,1,Disabled,N/A,"
+e9 fb ff fb ff cc cc cc cc cc cc cc cc cc cc cc ................
+e9 eb 01 fc ff cc cc cc cc cc cc cc cc cc cc cc ................
+e9 db 0f fc ff cc cc cc cc cc cc cc cc cc cc cc ................
+cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",e9 fb ff fb ff cc cc cc cc cc cc cc cc cc cc cc e9 eb 01 fc ff cc cc cc cc cc cc cc cc cc cc cc e9 db 0f fc ff cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc
+0,880,SearchApp.exe,0xbdf0000,0xbe0ffff,VadS,PAGE_EXECUTE_READWRITE,18,1,Disabled,N/A,"
+__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................
+__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................
+__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................
+__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................",00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0,880,SearchApp.exe,0xdb90000,0xdbf3fff,VadS,PAGE_EXECUTE_READWRITE,4,1,Disabled,N/A,"
+e9 fb ff 06 00 cc cc cc cc cc cc cc cc cc cc cc ................
+e9 eb 03 07 00 cc cc cc cc cc cc cc cc cc cc cc ................
+e9 db 17 07 00 cc cc cc cc cc cc cc cc cc cc cc ................
+e9 cb 2f 07 00 cc cc cc cc cc cc cc cc cc cc cc ../.............",e9 fb ff 06 00 cc cc cc cc cc cc cc cc cc cc cc e9 eb 03 07 00 cc cc cc cc cc cc cc cc cc cc cc e9 db 17 07 00 cc cc cc cc cc cc cc cc cc cc cc e9 cb 2f 07 00 cc cc cc cc cc cc cc cc cc cc cc
+0,880,SearchApp.exe,0xf810000,0xf82ffff,VadS,PAGE_EXECUTE_READWRITE,20,1,Disabled,PE header,"
+55 8b ec 81 fc 64 c9 b0 04 7f 14 6a 00 6a 00 68 U....d.....j.j.h
+10 03 03 0a 68 64 09 00 00 e8 b2 47 bf 4e 90 6a ....hd.....G.N.j
+00 8d 64 24 f8 57 56 53 b8 70 ba ef 0e 8b 08 83 ..d$.WVS.p......
+e9 01 72 04 89 08 eb 06 55 e8 62 79 95 4e 55 e8 ..r.....U.by.NU.",55 8b ec 81 fc 64 c9 b0 04 7f 14 6a 00 6a 00 68 10 03 03 0a 68 64 09 00 00 e8 b2 47 bf 4e 90 6a 00 8d 64 24 f8 57 56 53 b8 70 ba ef 0e 8b 08 83 e9 01 72 04 89 08 eb 06 55 e8 62 79 95 4e 55 e8
+0,2360,smartscreen.ex,0x4aa0000,0x4abffff,VadS,PAGE_EXECUTE_READWRITE,1,1,Disabled,PE header,"
+55 8b ec 8b 45 08 8b 40 14 8b 40 04 8b 48 30 83 U...E..@..@..H0.
+e1 f8 8b c1 2d 38 00 aa 04 3d b8 0f 00 00 76 07 ....-8...=....v.
+b9 05 00 00 00 cd 29 8d 45 08 50 b8 70 c7 11 5e ......).E.P.p..^
+ff e1 cc cc cc cc cc cc ff d0 e9 b1 0f 00 00 cc ................",55 8b ec 8b 45 08 8b 40 14 8b 40 04 8b 48 30 83 e1 f8 8b c1 2d 38 00 aa 04 3d b8 0f 00 00 76 07 b9 05 00 00 00 cd 29 8d 45 08 50 b8 70 c7 11 5e ff e1 cc cc cc cc cc cc ff d0 e9 b1 0f 00 00 cc
+0,2360,smartscreen.ex,0x5240000,0x52a3fff,VadS,PAGE_EXECUTE_READWRITE,1,1,Disabled,N/A,"
+e9 fb ff 16 00 cc cc cc cc cc cc cc cc cc cc cc ................
+e9 eb 01 17 00 cc cc cc cc cc cc cc cc cc cc cc ................
+e9 db 1f 17 00 cc cc cc cc cc cc cc cc cc cc cc ................
+e9 cb 27 17 00 cc cc cc cc cc cc cc cc cc cc cc ..'.............",e9 fb ff 16 00 cc cc cc cc cc cc cc cc cc cc cc e9 eb 01 17 00 cc cc cc cc cc cc cc cc cc cc cc e9 db 1f 17 00 cc cc cc cc cc cc cc cc cc cc cc e9 cb 27 17 00 cc cc cc cc cc cc cc cc cc cc cc
+

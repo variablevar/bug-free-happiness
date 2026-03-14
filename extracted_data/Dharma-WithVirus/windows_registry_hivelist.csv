@@ -1,0 +1,18 @@
+TreeDepth,Offset,FileFullPath,File output
+0,0x81e0e008,,Disabled
+0,0x81e1c008,\\REGISTRY\\MACHINE\\SYSTEM,Disabled
+0,0x81e31008,\\REGISTRY\\MACHINE\\HARDWARE,Disabled
+0,0x828da008,\\SystemRoot\\System32\\Config\\SAM,Disabled
+0,0x828df008,\\SystemRoot\\System32\\Config\\SECURITY,Disabled
+0,0x828d4008,\\SystemRoot\\System32\\Config\\DEFAULT,Disabled
+0,0x828d6008,\\SystemRoot\\System32\\Config\\SOFTWARE,Disabled
+0,0x9343d008,\\Device\\HarddiskVolume1\\Boot\\BCD,Disabled
+0,0x98254008,\\??\\C:\\Windows\\ServiceProfiles\\NetworkService\\NTUSER.DAT,Disabled
+0,0x982cd008,\\SystemRoot\\System32\\Config\\BBI,Disabled
+0,0x9832e008,\\??\\C:\\Windows\\ServiceProfiles\\LocalService\\NTUSER.DAT,Disabled
+0,0x9e3b3008,\\??\\C:\\Windows\\AppCompat\\Programs\\Amcache.hve,Disabled
+0,0x807cb008,\\??\\C:\\Users\\Mark\\ntuser.dat,Disabled
+0,0xa6033008,\\Registry\\User\\S-1-5-21-2150415697-633925282-3831303979-1001_Classes,Disabled
+0,0xabb03008,\\??\\C:\\Users\\Mark\\AppData\\Local\\Packages\\winstore_cw5n1h2txyewy\\Settings\\settings.dat,Disabled
+0,0xabbb73e0,\\??\\C:\\Users\\Mark\\AppData\\Local\\Packages\\microsoft.windowscommunicationsapps_8wekyb3d8bbwe\\Settings\\settings.dat,Disabled
+

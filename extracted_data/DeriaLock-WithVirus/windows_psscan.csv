@@ -1,0 +1,185 @@
+TreeDepth,PID,PPID,ImageFileName,Offset(V),Threads,Handles,SessionId,Wow64,CreateTime,ExitTime,File output
+0,2016,804,svchost.exe,0xc70180053080,2,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,2996,804,svchost.exe,0xc70180089080,4,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2880,804,svchost.exe,0xc701800d4080,8,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2860,804,svchost.exe,0xc701800d9080,2,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2904,804,svchost.exe,0xc7018010e0c0,3,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2844,4,MemCompression,0xc70180155040,38,-,N/A,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,6652,7556,msedgewebview2,0xc701801820c0,0,-,1,False,2023-03-30 16:28:21.000000 UTC,2023-03-30 16:31:16.000000 UTC,Disabled
+0,96,4,Registry,0xe78f13d17080,4,-,N/A,False,2023-03-30 16:21:42.000000 UTC,N/A,Disabled
+0,1524,804,svchost.exe,0xe78f13d1e080,4,-,0,False,2023-03-30 16:21:49.000000 UTC,N/A,Disabled
+0,1460,804,svchost.exe,0xe78f13d3f080,8,-,0,False,2023-03-30 16:21:49.000000 UTC,N/A,Disabled
+0,1380,1360,msoobe.exe,0xe78f13d5f080,0,-,1,False,2023-03-30 16:21:49.000000 UTC,2023-03-30 16:23:11.000000 UTC,Disabled
+0,1404,804,svchost.exe,0xe78f13d74080,2,-,0,False,2023-03-30 16:21:49.000000 UTC,N/A,Disabled
+0,1636,804,svchost.exe,0xe78f13de7080,4,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,1612,804,svchost.exe,0xe78f13df4080,0,-,0,False,2023-03-30 16:21:50.000000 UTC,2023-03-30 16:41:37.000000 UTC,Disabled
+0,4760,944,ApplicationFra,0xe78f13f130c0,4,-,2,False,2023-03-30 16:50:55.000000 UTC,N/A,Disabled
+0,408,4,smss.exe,0xe78f1487a040,2,-,N/A,False,2023-03-30 16:21:43.000000 UTC,N/A,Disabled
+0,660,560,wininit.exe,0xe78f14fe4140,2,-,0,False,2023-03-30 16:21:44.000000 UTC,N/A,Disabled
+0,588,560,csrss.exe,0xe78f14fe5080,10,-,0,False,2023-03-30 16:21:44.000000 UTC,N/A,Disabled
+0,804,660,services.exe,0xe78f171a4080,7,-,0,False,2023-03-30 16:21:44.000000 UTC,N/A,Disabled
+0,828,660,lsass.exe,0xe78f171c6080,9,-,0,False,2023-03-30 16:21:44.000000 UTC,N/A,Disabled
+0,944,804,svchost.exe,0xe78f17364080,21,-,0,False,2023-03-30 16:21:44.000000 UTC,N/A,Disabled
+0,972,660,fontdrvhost.ex,0xe78f1738a140,5,-,0,False,2023-03-30 16:21:44.000000 UTC,N/A,Disabled
+0,436,804,svchost.exe,0xe78f174130c0,10,-,0,False,2023-03-30 16:21:44.000000 UTC,N/A,Disabled
+0,672,804,svchost.exe,0xe78f17422080,4,-,0,False,2023-03-30 16:21:44.000000 UTC,N/A,Disabled
+0,5904,944,HxTsr.exe,0xe78f17447080,0,-,2,False,2023-03-30 17:27:45.000000 UTC,2023-03-30 17:27:55.000000 UTC,Disabled
+0,800,804,sppsvc.exe,0xe78f17469080,0,-,0,False,2023-03-30 16:21:44.000000 UTC,2023-03-30 16:25:01.000000 UTC,Disabled
+0,1068,804,svchost.exe,0xe78f174aa080,1,-,0,False,2023-03-30 16:21:45.000000 UTC,N/A,Disabled
+0,1136,804,svchost.exe,0xe78f174d80c0,2,-,0,False,2023-03-30 16:21:45.000000 UTC,N/A,Disabled
+0,1216,804,svchost.exe,0xe78f1750a080,1,-,0,False,2023-03-30 16:21:45.000000 UTC,N/A,Disabled
+0,1696,804,svchost.exe,0xe78f17665080,14,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,1860,804,svchost.exe,0xe78f176c7080,6,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,1868,804,svchost.exe,0xe78f176cd080,6,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,1876,804,svchost.exe,0xe78f176d0080,12,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,1852,804,svchost.exe,0xe78f176e2080,3,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,1892,804,svchost.exe,0xe78f17711080,3,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,1960,804,svchost.exe,0xe78f17750080,3,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,1996,804,svchost.exe,0xe78f1776e080,13,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,1732,804,svchost.exe,0xe78f177a9080,7,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2084,804,svchost.exe,0xe78f177f6080,2,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2300,804,svchost.exe,0xe78f1787b0c0,7,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2332,804,svchost.exe,0xe78f178b8080,3,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2520,804,svchost.exe,0xe78f1794a080,2,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2596,804,svchost.exe,0xe78f1795b080,7,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2628,804,svchost.exe,0xe78f179ab080,4,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2636,804,svchost.exe,0xe78f179ac080,3,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2664,804,svchost.exe,0xe78f179b6080,4,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2692,804,svchost.exe,0xe78f179c2080,5,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2844,4,MemCompression,0xe78f17a53040,38,-,N/A,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2904,804,svchost.exe,0xe78f17a560c0,3,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2860,804,svchost.exe,0xe78f17ae2080,2,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2880,804,svchost.exe,0xe78f17aec080,8,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,3328,804,svchost.exe,0xe78f17b2f080,6,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,3344,804,svchost.exe,0xe78f17b37080,3,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,3372,804,MsMpEng.exe,0xe78f17b450c0,11,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,3392,804,svchost.exe,0xe78f17b4b080,10,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,6264,8028,msedge.exe,0xe78f17b4c080,8,-,2,False,2023-03-30 16:32:37.000000 UTC,N/A,Disabled
+0,3404,804,svchost.exe,0xe78f17b5e0c0,6,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,3512,804,svchost.exe,0xe78f17bb10c0,2,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,2996,804,svchost.exe,0xe78f17c0a080,4,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2968,804,svchost.exe,0xe78f17c6b080,3,-,0,False,2023-03-30 16:21:50.000000 UTC,N/A,Disabled
+0,2016,804,svchost.exe,0xe78f17c81080,2,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,3912,3248,AggregatorHost,0xe78f17c9b080,2,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,2992,804,spoolsv.exe,0xe78f17d060c0,7,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,3176,804,svchost.exe,0xe78f17dd7080,5,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,3272,804,svchost.exe,0xe78f17de0080,5,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,3248,804,svchost.exe,0xe78f17df0080,10,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,3256,804,svchost.exe,0xe78f17df4080,15,-,0,False,2023-03-30 16:21:51.000000 UTC,N/A,Disabled
+0,7616,6676,userinit.exe,0xe78f17f870c0,0,-,2,False,2023-03-30 16:31:18.000000 UTC,2023-03-30 16:31:47.000000 UTC,Disabled
+0,5248,652,msiexec.exe,0xe78f17fd4080,0,-,2,True,2023-03-30 17:24:28.000000 UTC,2023-03-30 17:24:49.000000 UTC,Disabled
+0,9792,944,rundll32.exe,0xe78f18016080,4,-,2,False,2023-03-30 17:01:55.000000 UTC,N/A,Disabled
+0,4024,804,SearchIndexer.,0xe78f18018080,11,-,0,False,2023-03-30 16:21:52.000000 UTC,N/A,Disabled
+0,1336,804,svchost.exe,0xe78f18036080,2,-,0,False,2023-03-30 16:23:14.000000 UTC,N/A,Disabled
+0,2704,804,svchost.exe,0xe78f1812e080,9,-,0,False,2023-03-30 16:23:13.000000 UTC,N/A,Disabled
+0,1668,804,svchost.exe,0xe78f18214080,3,-,0,False,2023-03-30 16:23:13.000000 UTC,N/A,Disabled
+0,912,804,svchost.exe,0xe78f18251080,9,-,0,False,2023-03-30 16:21:53.000000 UTC,N/A,Disabled
+0,956,944,dllhost.exe,0xe78f182e40c0,5,-,2,False,2023-03-30 16:31:20.000000 UTC,N/A,Disabled
+0,5096,804,svchost.exe,0xe78f18398080,5,-,0,False,2023-03-30 16:23:17.000000 UTC,N/A,Disabled
+0,5232,804,svchost.exe,0xe78f18399080,4,-,0,False,2023-03-30 16:23:18.000000 UTC,N/A,Disabled
+0,4644,804,svchost.exe,0xe78f183b1080,3,-,0,False,2023-03-30 16:23:15.000000 UTC,N/A,Disabled
+0,3160,944,CloudExperienc,0xe78f183b70c0,3,-,0,False,2023-03-30 16:23:16.000000 UTC,N/A,Disabled
+0,4540,804,svchost.exe,0xe78f183ea0c0,4,-,0,False,2023-03-30 16:32:37.000000 UTC,N/A,Disabled
+0,708,804,svchost.exe,0xe78f184430c0,5,-,0,False,2023-03-30 16:32:37.000000 UTC,N/A,Disabled
+0,4516,1460,audiodg.exe,0xe78f185130c0,3,-,0,False,2023-03-30 17:24:19.000000 UTC,N/A,Disabled
+0,7640,2692,sihost.exe,0xe78f185240c0,13,-,2,False,2023-03-30 16:31:18.000000 UTC,N/A,Disabled
+0,5228,8028,msedge.exe,0xe78f185350c0,12,-,2,False,2023-03-30 17:24:11.000000 UTC,N/A,Disabled
+0,4592,8028,msedge.exe,0xe78f18542080,15,-,2,False,2023-03-30 17:03:46.000000 UTC,N/A,Disabled
+0,1704,804,svchost.exe,0xe78f1855f080,3,-,0,False,2023-03-30 16:23:16.000000 UTC,N/A,Disabled
+0,8028,5312,msedge.exe,0xe78f185f4080,49,-,2,False,2023-03-30 16:32:37.000000 UTC,N/A,Disabled
+0,4412,804,svchost.exe,0xe78f18669080,2,-,2,False,2023-03-30 16:31:28.000000 UTC,N/A,Disabled
+0,7020,944,RuntimeBroker.,0xe78f188f7080,1,-,2,False,2023-03-30 17:19:40.000000 UTC,N/A,Disabled
+0,6488,804,svchost.exe,0xe78f18a84080,10,-,0,False,2023-03-30 16:23:21.000000 UTC,N/A,Disabled
+0,2556,944,backgroundTask,0xe78f18a8b080,9,-,2,False,2023-03-30 17:19:40.000000 UTC,N/A,Disabled
+0,4216,8028,msedge.exe,0xe78f18cd70c0,14,-,2,False,2023-03-30 17:05:04.000000 UTC,N/A,Disabled
+0,7864,8028,msedge.exe,0xe78f18cd8080,15,-,2,False,2023-03-30 17:22:14.000000 UTC,N/A,Disabled
+0,1744,804,svchost.exe,0xe78f18d840c0,2,-,2,False,2023-03-30 16:31:18.000000 UTC,N/A,Disabled
+0,5528,804,svchost.exe,0xe78f18d85080,8,-,0,False,2023-03-30 16:23:28.000000 UTC,N/A,Disabled
+0,4672,804,svchost.exe,0xe78f18dc80c0,0,-,0,False,2023-03-30 16:23:20.000000 UTC,2023-03-30 16:25:20.000000 UTC,Disabled
+0,6400,804,svchost.exe,0xe78f18dd90c0,5,-,2,False,2023-03-30 16:31:18.000000 UTC,N/A,Disabled
+0,6676,6356,winlogon.exe,0xe78f18dea0c0,4,-,2,False,2023-03-30 16:31:17.000000 UTC,N/A,Disabled
+0,464,944,dllhost.exe,0xe78f18ed8080,7,-,2,False,2023-03-30 16:31:30.000000 UTC,N/A,Disabled
+0,1132,944,RuntimeBroker.,0xe78f18f30080,7,-,2,False,2023-03-30 16:31:28.000000 UTC,N/A,Disabled
+0,1040,7616,explorer.exe,0xe78f18f350c0,0,-,2,False,2023-03-30 16:31:18.000000 UTC,2023-03-30 16:59:28.000000 UTC,Disabled
+0,3368,804,svchost.exe,0xe78f18f670c0,7,-,2,False,2023-03-30 16:31:26.000000 UTC,N/A,Disabled
+0,3748,5436,FTK Imager.exe,0xe78f18f6f080,25,-,2,False,2023-03-30 17:24:49.000000 UTC,N/A,Disabled
+0,1912,7556,msedgewebview2,0xe78f18f890c0,0,-,1,False,2023-03-30 16:28:21.000000 UTC,2023-03-30 16:31:16.000000 UTC,Disabled
+0,1144,944,SearchHost.exe,0xe78f18fa2080,65,-,2,False,2023-03-30 16:31:27.000000 UTC,N/A,Disabled
+0,4408,944,dllhost.exe,0xe78f190230c0,3,-,2,False,2023-03-30 17:12:18.000000 UTC,N/A,Disabled
+0,2384,8028,msedge.exe,0xe78f191640c0,14,-,2,False,2023-03-30 17:05:28.000000 UTC,N/A,Disabled
+0,5800,944,FileCoAuth.exe,0xe78f19285140,3,-,2,False,2023-03-30 16:37:08.000000 UTC,N/A,Disabled
+0,7660,8028,msedge.exe,0xe78f192bd0c0,16,-,2,False,2023-03-30 17:06:21.000000 UTC,N/A,Disabled
+0,3056,944,HxTsr.exe,0xe78f193240c0,0,-,2,False,2023-03-30 17:06:50.000000 UTC,2023-03-30 17:07:03.000000 UTC,Disabled
+0,5988,804,svchost.exe,0xe78f1932f080,4,-,0,False,2023-03-30 16:23:32.000000 UTC,N/A,Disabled
+0,4788,944,rundll32.exe,0xe78f194460c0,3,-,2,False,2023-03-30 17:16:47.000000 UTC,N/A,Disabled
+0,8008,5316,msiexec.exe,0xe78f1947d080,6,-,2,False,2023-03-30 17:26:32.000000 UTC,N/A,Disabled
+0,2888,804,svchost.exe,0xe78f194880c0,1,-,0,False,2023-03-30 16:31:18.000000 UTC,N/A,Disabled
+0,5300,804,svchost.exe,0xe78f194a8080,7,-,0,False,2023-03-30 16:23:42.000000 UTC,N/A,Disabled
+0,7688,7556,msedgewebview2,0xe78f194eb0c0,0,-,1,False,2023-03-30 16:28:21.000000 UTC,2023-03-30 16:31:16.000000 UTC,Disabled
+0,10080,1040,SecurityHealth,0xe78f19a03080,1,-,2,False,2023-03-30 16:32:47.000000 UTC,N/A,Disabled
+0,7416,1868,taskhostw.exe,0xe78f19b130c0,6,-,2,False,2023-03-30 16:32:37.000000 UTC,N/A,Disabled
+0,4292,804,svchost.exe,0xe78f19bbb0c0,4,-,0,False,2023-03-30 16:55:32.000000 UTC,N/A,Disabled
+0,1988,804,svchost.exe,0xe78f19ec50c0,11,-,0,False,2023-03-30 16:46:07.000000 UTC,N/A,Disabled
+0,10096,804,SecurityHealth,0xe78f1a96e080,18,-,0,False,2023-03-30 16:32:47.000000 UTC,N/A,Disabled
+0,10156,8028,msedge.exe,0xe78f1aa27080,14,-,2,False,2023-03-30 16:33:14.000000 UTC,N/A,Disabled
+0,5324,2904,ctfmon.exe,0xe78f1aa340c0,8,-,2,False,2023-03-30 16:32:18.000000 UTC,N/A,Disabled
+0,7044,804,svchost.exe,0xe78f1aa53080,5,-,0,False,2023-03-30 17:08:07.000000 UTC,N/A,Disabled
+0,8456,4064,msedgewebview2,0xe78f1aa54080,34,-,2,False,2023-03-30 16:32:40.000000 UTC,N/A,Disabled
+0,9480,944,RuntimeBroker.,0xe78f1aad00c0,5,-,2,False,2023-03-30 16:33:38.000000 UTC,N/A,Disabled
+0,6652,7556,msedgewebview2,0xe78f1aae10c0,0,-,1,False,2023-03-30 16:28:21.000000 UTC,2023-03-30 16:31:16.000000 UTC,Disabled
+0,8292,944,RuntimeBroker.,0xe78f1aaee080,2,-,2,False,2023-03-30 16:32:40.000000 UTC,N/A,Disabled
+0,7780,804,svchost.exe,0xe78f1ab1a080,8,-,0,False,2023-03-30 16:23:51.000000 UTC,N/A,Disabled
+0,4344,1536,AccessData_FTK,0xe78f1ab240c0,3,-,2,True,2023-03-30 17:26:27.000000 UTC,N/A,Disabled
+0,7724,804,SgrmBroker.exe,0xe78f1ab25080,8,-,0,False,2023-03-30 16:23:51.000000 UTC,N/A,Disabled
+0,3896,804,svchost.exe,0xe78f1ab460c0,3,-,0,False,2023-03-30 16:55:32.000000 UTC,N/A,Disabled
+0,9236,1868,taskhostw.exe,0xe78f1c0460c0,4,-,2,False,2023-03-30 17:11:53.000000 UTC,N/A,Disabled
+0,9252,944,SecurityHealth,0xe78f1c0ed0c0,1,-,2,False,2023-03-30 16:51:05.000000 UTC,N/A,Disabled
+0,7608,8028,msedge.exe,0xe78f1c5430c0,9,-,2,False,2023-03-30 16:33:38.000000 UTC,N/A,Disabled
+0,9208,2868,OneDrive.exe,0xe78f1c550080,28,-,2,False,2023-03-30 16:33:32.000000 UTC,N/A,Disabled
+0,1036,8028,msedge.exe,0xe78f1c57e080,14,-,2,False,2023-03-30 16:32:38.000000 UTC,N/A,Disabled
+0,2624,8028,msedge.exe,0xe78f1c57f080,18,-,2,False,2023-03-30 16:32:38.000000 UTC,N/A,Disabled
+0,7676,804,svchost.exe,0xe78f1c8df0c0,5,-,2,False,2023-03-30 16:31:18.000000 UTC,N/A,Disabled
+0,9632,804,svchost.exe,0xe78f1e055080,7,-,2,False,2023-03-30 16:33:18.000000 UTC,N/A,Disabled
+0,10044,944,Microsoft.Phot,0xe78f1e059080,15,-,2,False,2023-03-30 16:47:51.000000 UTC,N/A,Disabled
+0,8504,8456,msedgewebview2,0xe78f1e0a0080,7,-,2,False,2023-03-30 16:32:41.000000 UTC,N/A,Disabled
+0,2660,944,smartscreen.ex,0xe78f1e0a1080,1,-,2,False,2023-03-30 17:24:18.000000 UTC,N/A,Disabled
+0,652,804,msiexec.exe,0xe78f1e0a5080,5,-,0,False,2023-03-30 17:24:28.000000 UTC,N/A,Disabled
+0,6420,8028,msedge.exe,0xe78f1e0be080,8,-,2,False,2023-03-30 16:32:38.000000 UTC,N/A,Disabled
+0,8884,8456,msedgewebview2,0xe78f1e0f9080,15,-,2,False,2023-03-30 16:32:41.000000 UTC,N/A,Disabled
+0,6732,944,SystemSettings,0xe78f215020c0,19,-,2,False,2023-03-30 16:50:55.000000 UTC,N/A,Disabled
+0,10168,804,svchost.exe,0xe78f223240c0,1,-,2,False,2023-03-30 16:50:55.000000 UTC,N/A,Disabled
+0,9948,804,svchost.exe,0xe78f2238a0c0,2,-,0,False,2023-03-30 17:18:48.000000 UTC,N/A,Disabled
+0,6740,8028,msedge.exe,0xe78f225230c0,14,-,2,False,2023-03-30 17:03:04.000000 UTC,N/A,Disabled
+0,4064,1040,msteams.exe,0xe78f22e5b080,23,-,2,False,2023-03-30 16:32:40.000000 UTC,N/A,Disabled
+0,1056,6356,csrss.exe,0xe78f233240c0,14,-,2,False,2023-03-30 16:31:17.000000 UTC,N/A,Disabled
+0,8168,944,rundll32.exe,0xe78f233350c0,3,-,2,False,2023-03-30 17:01:55.000000 UTC,N/A,Disabled
+0,5316,4344,AccessData_FTK,0xe78f233c10c0,3,-,2,True,2023-03-30 17:26:27.000000 UTC,N/A,Disabled
+0,8676,944,MiniSearchHost,0xe78f238540c0,19,-,2,False,2023-03-30 16:50:46.000000 UTC,N/A,Disabled
+0,3700,7556,msedgewebview2,0xe78f2429b0c0,0,-,1,False,2023-03-30 16:28:21.000000 UTC,2023-03-30 16:31:16.000000 UTC,Disabled
+0,5452,8028,msedge.exe,0xe78f242ed0c0,14,-,2,False,2023-03-30 16:33:41.000000 UTC,N/A,Disabled
+0,2536,944,UserOOBEBroker,0xe78f243cb0c0,1,-,2,False,2023-03-30 16:50:56.000000 UTC,N/A,Disabled
+0,9400,8028,msedge.exe,0xe78f243dc0c0,14,-,2,False,2023-03-30 16:49:51.000000 UTC,N/A,Disabled
+0,1552,944,SecHealthUI.ex,0xe78f243ed0c0,28,-,2,False,2023-03-30 16:51:05.000000 UTC,N/A,Disabled
+0,7268,8028,msedge.exe,0xe78f246c50c0,16,-,2,False,2023-03-30 16:49:15.000000 UTC,N/A,Disabled
+0,8336,804,svchost.exe,0xe78f247b60c0,4,-,0,False,2023-03-30 17:08:07.000000 UTC,N/A,Disabled
+0,3444,944,RuntimeBroker.,0xe78f247e80c0,5,-,2,False,2023-03-30 16:47:52.000000 UTC,N/A,Disabled
+0,6348,944,rundll32.exe,0xe78f253540c0,5,-,2,False,2023-03-30 17:01:55.000000 UTC,N/A,Disabled
+0,596,652,msiexec.exe,0xe78f2535e080,5,-,2,True,2023-03-30 17:26:32.000000 UTC,N/A,Disabled
+0,9688,8028,msedge.exe,0xe78f253650c0,14,-,2,False,2023-03-30 17:06:02.000000 UTC,N/A,Disabled
+0,9844,8028,msedge.exe,0xe78f25ec50c0,15,-,2,False,2023-03-30 16:49:15.000000 UTC,N/A,Disabled
+0,7772,944,RuntimeBroker.,0xe78f25ec9080,3,-,2,False,2023-03-30 16:51:05.000000 UTC,N/A,Disabled
+0,3696,944,backgroundTask,0xe78f25ed60c0,7,-,2,False,2023-03-30 17:28:08.000000 UTC,N/A,Disabled
+0,9996,8028,msedge.exe,0xe78f25f0b080,14,-,2,False,2023-03-30 16:33:14.000000 UTC,N/A,Disabled
+0,1416,6676,fontdrvhost.ex,0xe78f25f460c0,5,-,2,False,2023-03-30 16:31:17.000000 UTC,N/A,Disabled
+0,8628,804,svchost.exe,0xe78f25fcc0c0,2,-,0,False,2023-03-30 16:50:55.000000 UTC,N/A,Disabled
+0,7156,6676,dwm.exe,0xe78f2628a0c0,23,-,2,False,2023-03-30 16:31:17.000000 UTC,N/A,Disabled
+0,8748,8456,msedgewebview2,0xe78f262df080,11,-,2,False,2023-03-30 16:32:41.000000 UTC,N/A,Disabled
+0,8728,8456,msedgewebview2,0xe78f262e0080,15,-,2,False,2023-03-30 16:32:41.000000 UTC,N/A,Disabled
+0,8780,8456,msedgewebview2,0xe78f262f7080,7,-,2,False,2023-03-30 16:32:41.000000 UTC,N/A,Disabled
+0,1236,944,RuntimeBroker.,0xe78f278790c0,7,-,2,False,2023-03-30 17:27:45.000000 UTC,N/A,Disabled
+0,4664,8028,msedge.exe,0xe78f278dc0c0,14,-,2,False,2023-03-30 17:05:30.000000 UTC,N/A,Disabled
+0,1536,944,explorer.exe,0xe78f278e5080,46,-,2,False,2023-03-30 17:01:55.000000 UTC,N/A,Disabled
+0,6980,8028,msedge.exe,0xe78f278ed0c0,8,-,2,False,2023-03-30 16:33:42.000000 UTC,N/A,Disabled
+0,6696,8028,msedge.exe,0xe78f2a6020c0,14,-,2,False,2023-03-30 17:12:45.000000 UTC,N/A,Disabled
+0,5440,944,SecurityHealth,0xe78f2a6130c0,1,-,2,False,2023-03-30 16:51:41.000000 UTC,N/A,Disabled
+

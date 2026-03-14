@@ -1,0 +1,43 @@
+TreeDepth,PID,Process,Args
+0,4,System,-
+0,236,smss.exe,\\SystemRoot\\System32\\smss.exe
+0,316,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,364,wininit.exe,wininit.exe
+0,372,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,412,winlogon.exe,winlogon.exe
+0,456,services.exe,C:\\Windows\\system32\\services.exe
+0,472,lsass.exe,C:\\Windows\\system32\\lsass.exe
+0,488,lsm.exe,C:\\Windows\\system32\\lsm.exe
+0,588,svchost.exe,C:\\Windows\\system32\\svchost.exe -k DcomLaunch
+0,668,svchost.exe,C:\\Windows\\system32\\svchost.exe -k RPCSS
+0,748,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted
+0,800,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalSystemNetworkRestricted
+0,828,svchost.exe,C:\\Windows\\system32\\svchost.exe -k netsvcs
+0,964,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalService
+0,1052,svchost.exe,C:\\Windows\\system32\\svchost.exe -k NetworkService
+0,1220,spoolsv.exe,C:\\Windows\\System32\\spoolsv.exe
+0,1260,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceNoNetwork
+0,1360,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceAndNoImpersonation
+0,268,dwm.exe,"""C:\\Windows\\system32\\Dwm.exe"""
+0,328,explorer.exe,C:\\Windows\\Explorer.EXE
+0,360,taskhost.exe,"""taskhost.exe"""
+0,1316,regsvr32.exe,-
+0,1008,SearchIndexer.,C:\\Windows\\system32\\SearchIndexer.exe /Embedding
+0,932,wmpnetwk.exe,"""C:\\Program Files\\Windows Media Player\\wmpnetwk.exe"""
+0,4020,sppsvc.exe,C:\\Windows\\system32\\sppsvc.exe
+0,4048,svchost.exe,C:\\Windows\\System32\\svchost.exe -k secsvcs
+0,2428,GoogleCrashHan,"""C:\\Program Files\\Google\\Update\\1.3.36.152\\GoogleCrashHandler.exe"""
+0,2728,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --from-installer"
+0,2696,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=crashpad-handler ""--user-data-dir=C:\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data"" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler ""--database=C:\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Crashpad"" ""--metrics-dir=C:\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data"" --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win32 --annotation=prod=Chrome --annotation=ver=109.0.5414.120 --initial-client-data=0xa0,0xa4,0xa8,0x74,0xac,0x69bf8b38,0x69bf8b48,0x69bf8b54"
+0,1472,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-GB --service-sandbox-type=none --mojo-platform-channel-handle=1492 --field-trial-handle=1168,i,10617341804942265273,14300328758443434581,131072 /prefetch:8"
+0,1572,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-GB --service-sandbox-type=service --mojo-platform-channel-handle=1584 --field-trial-handle=1168,i,10617341804942265273,14300328758443434581,131072 /prefetch:8"
+0,3388,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=gpu-process --gpu-preferences=UAAAAAAAAADgAAAYAAAAAAAAAAAAAAAAAABgAAAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAASAAAAAAAAAAYAAAAAgAAABAAAAAAAAAAGAAAAAAAAAAQAAAAAAAAAAAAAAAOAAAAEAAAAAAAAAABAAAADgAAAAgAAAAAAAAACAAAAAAAAAA= --use-gl=angle --use-angle=swiftshader-webgl --mojo-platform-channel-handle=1288 --field-trial-handle=1168,i,10617341804942265273,14300328758443434581,131072 /prefetch:2"
+0,2336,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-GB --service-sandbox-type=audio --mojo-platform-channel-handle=1944 --field-trial-handle=1168,i,10617341804942265273,14300328758443434581,131072 /prefetch:8"
+0,476,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=43 --time-ticks-at-unix-epoch=-1680042888785017 --launch-time-ticks=282388426 --mojo-platform-channel-handle=2328 --field-trial-handle=1168,i,10617341804942265273,14300328758443434581,131072 /prefetch:1"
+0,2780,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=49 --time-ticks-at-unix-epoch=-1680042888785017 --launch-time-ticks=286712272 --mojo-platform-channel-handle=2344 --field-trial-handle=1168,i,10617341804942265273,14300328758443434581,131072 /prefetch:1"
+0,2476,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=64 --time-ticks-at-unix-epoch=-1680042888785017 --launch-time-ticks=387817600 --mojo-platform-channel-handle=5040 --field-trial-handle=1168,i,10617341804942265273,14300328758443434581,131072 /prefetch:1"
+0,3948,FTK Imager.exe,"""C:\\Program Files\\AccessData\\FTK Imager\\FTK Imager.exe"""
+0,888,131.exe,-
+0,1536,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=93 --time-ticks-at-unix-epoch=-1680042888785017 --launch-time-ticks=2396366475 --mojo-platform-channel-handle=972 --field-trial-handle=1168,i,10617341804942265273,14300328758443434581,131072 /prefetch:1"
+0,948,audiodg.exe,C:\\Windows\\system32\\AUDIODG.EXE 0x810
+

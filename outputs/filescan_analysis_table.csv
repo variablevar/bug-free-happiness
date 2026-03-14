@@ -1,0 +1,16 @@
+Ransomware Family,WithVirus Suspicious,NoVirus Suspicious,Differential,Suspicious Names
+Locky.AZ,42,41,+1,\\users\\user\\appdata\\local\\microsoft\\onedrive
+W32.MyDoom.A.,0,0,+0,
+Win32.BlackWorm,6,80,+-74,"\\users\\devmac\\downloads\\ransomware.cryptowall., \\users\\devmac\\downloads\\ransomware.cryptowall\, \\users\\devmac\\appdata\\local\\microsoft\\window"
+DLLHijacking,57,51,+6,"\\users\\vboxuser\\appdata\\local\\microsoft\\oned, \\windows\\system32\\devdispitemprovider.dll"
+WannaCry,0,0,+0,
+GoldenEye,35,42,+-7,\\users\\mapo9\\appdata\\local\\microsoft\\onedriv
+LuckyLcoker,1,1,+0,\\windows\\system32\\devdispitemprovider.dll
+InfinityCrypt,43,41,+2,"\\users\\ieuser\\appdata\\local\\microsoft\\onedri, \\windows\\system32\\devdispitemprovider.dll"
+DeriaLock,61,45,+16,\\users\\mapo9\\appdata\\local\\microsoft\\onedriv
+RedTail,42,51,+-9,"\\users\\vboxuser\\appdata\\local\\microsoft\\oned, \\windows\\system32\\devdispitemprovider.dll"
+Dharma,10,8,+2,"\\program files\\google\\chrome\\temp\\source2856_, 螅売쀌ꮹrs\\mark\\appdata\\local\\microsoft\\windows\\"
+PowerLoader,114,12,+102,\\windows\\assembly\\nativeimages_v2.0.50727_32\\t
+SporaRansomware,59,62,+-3,"\\users\\mapo9\\appdata\\local\\microsoft\\edgeupd, \\users\\mapo9\\appdata\\local\\temp\\020e8418-049, \\users\\mapo9\\appdata\\local\\microsoft\\onedriv, \\windows\\system32\\devdispitemprovider.dll"
+Cerber,1,9,+-8,\\users\\devmac\\downloads\\ransomware.cryptowall.
+GandCrab,60,61,+-1,"\\windows\\system32\\devdispitemprovider.dll, \\users\\mapo9\\appdata\\local\\microsoft\\onedriv"

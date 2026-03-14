@@ -1,0 +1,54 @@
+TreeDepth,PID,Process,Args
+0,4,System,-
+0,248,smss.exe,\\SystemRoot\\System32\\smss.exe
+0,320,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,368,wininit.exe,wininit.exe
+0,380,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,404,winlogon.exe,winlogon.exe
+0,468,services.exe,C:\\Windows\\system32\\services.exe
+0,476,lsass.exe,C:\\Windows\\system32\\lsass.exe
+0,484,lsm.exe,-
+0,572,svchost.exe,C:\\Windows\\system32\\svchost.exe -k DcomLaunch
+0,652,svchost.exe,-
+0,740,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted
+0,776,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalSystemNetworkRestricted
+0,804,svchost.exe,C:\\Windows\\system32\\svchost.exe -k netsvcs
+0,956,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalService
+0,280,svchost.exe,C:\\Windows\\system32\\svchost.exe -k NetworkService
+0,852,spoolsv.exe,-
+0,304,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceNoNetwork
+0,1120,svchost.exe,-
+0,1516,svchost.exe,-
+0,1812,taskhost.exe,"""taskhost.exe"""
+0,1896,dwm.exe,"""C:\\Windows\\system32\\Dwm.exe"""
+0,1928,explorer.exe,C:\\Windows\\Explorer.EXE
+0,1264,SearchIndexer.,C:\\Windows\\system32\\SearchIndexer.exe /Embedding
+0,2144,sppsvc.exe,-
+0,2204,svchost.exe,C:\\Windows\\System32\\svchost.exe -k secsvcs
+0,2440,GoogleCrashHan,-
+0,2448,GoogleCrashHan,"""C:\\Program Files (x86)\\Google\\Update\\1.3.36.152\\GoogleCrashHandler64.exe"""
+0,2588,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --from-installer"
+0,2596,chrome.exe,-
+0,2876,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-GB --service-sandbox-type=none --mojo-platform-channel-handle=1368 --field-trial-handle=1292,i,3536617241012723897,15781738060763921657,131072 /prefetch:8"
+0,2332,chrome.exe,-
+0,2972,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=gpu-process --gpu-preferences=UAAAAAAAAADgAAAYAAAAAAAAAAAAAAAAAABgAAAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAASAAAAAAAAAAYAAAAAgAAABAAAAAAAAAAGAAAAAAAAAAQAAAAAAAAAAAAAAAOAAAAEAAAAAAAAAABAAAADgAAAAgAAAAAAAAACAAAAAAAAAA= --use-gl=angle --use-angle=swiftshader-webgl --mojo-platform-channel-handle=3496 --field-trial-handle=1292,i,3536617241012723897,15781738060763921657,131072 /prefetch:2"
+0,2936,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-GB --service-sandbox-type=audio --mojo-platform-channel-handle=5168 --field-trial-handle=1292,i,3536617241012723897,15781738060763921657,131072 /prefetch:8"
+0,2456,chrome.exe,-
+0,3100,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=40 --time-ticks-at-unix-epoch=-1679930273703297 --launch-time-ticks=391922871 --mojo-platform-channel-handle=1000 --field-trial-handle=1292,i,3536617241012723897,15781738060763921657,131072 /prefetch:1"
+0,3724,TrustedInstall,C:\\Windows\\servicing\\TrustedInstaller.exe
+0,1376,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=49 --time-ticks-at-unix-epoch=-1679930273703297 --launch-time-ticks=503900355 --mojo-platform-channel-handle=4932 --field-trial-handle=1292,i,3536617241012723897,15781738060763921657,131072 /prefetch:1"
+0,2200,cmd.exe,"""C:\\Windows\\System32\\cmd.exe"" "
+0,2628,conhost.exe,\\??\\C:\\Windows\\system32\\conhost.exe
+0,3884,taskhost.exe,"""taskhost.exe"""
+0,1952,SearchProtocol,"""C:\\Windows\\system32\\SearchProtocolHost.exe"" Global\\UsGthrFltPipeMssGthrPipe6_ Global\\UsGthrCtrlFltPipeMssGthrPipe6 1 -2147483646 ""Software\\Microsoft\\Windows Search"" ""Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)"" ""C:\\ProgramData\\Microsoft\\Search\\Data\\Temp\\usgthrsvc"" ""DownLevelDaemon"" "
+0,3364,ed01ebfbc9eb5b,"""C:\\Users\\Win7\\Downloads\\ed01ebfbc9eb5bbea545af4d01bf5f1071661840480439c6e5babe8e080e41aa.exe"" "
+0,3860,@WanaDecryptor,@WanaDecryptor@.exe co
+0,2500,@WanaDecryptor,@WanaDecryptor@.exe  vs
+0,3348,taskhsvc.exe,TaskData\\Tor\\taskhsvc.exe
+0,3200,conhost.exe,\\??\\C:\\Windows\\system32\\conhost.exe
+0,1764,consent.exe,consent.exe 804 678 0000000008535760
+0,2928,@WanaDecryptor,@WanaDecryptor@.exe
+0,2532,SearchFilterHo,"""C:\\Windows\\system32\\SearchFilterHost.exe"" 0 504 508 516 65536 512 "
+0,2492,winpmem_mini_x,winpmem_mini_x64_rc2.exe  WithVirus.raw
+0,3420,dllhost.exe,-
+

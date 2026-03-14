@@ -1,0 +1,2940 @@
+TreeDepth,Offset,Name
+0,0x4bf2df8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Session Storage\\MANIFEST-000002
+0,0x4bf4158,\\Windows\\System32\\keyiso.dll
+0,0x4bf50e0,\\Endpoint
+0,0x4bf5930,\\Windows\\System32\\avicap32.dll
+0,0x4bf5e60,\\Windows\\Fonts\\cambria.ttc
+0,0x4bf8870,\\$Directory
+0,0x4bf8b00,\\Windows\\System32\\devmgr.dll
+0,0x75801117,＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ＀ÿ
+0,0x7e006928,\\Windows\\System32\\wdi.dll
+0,0x7e006bf0,\\Endpoint
+0,0x7e009250,\\$Directory
+0,0x7e009308,\\Windows\\Vss\\Writers\\System\\0bada1de-01a9-4625-8278-69e735f39dd2.xml
+0,0x7e0096d0,\\$Directory
+0,0x7e00a3e8,\\Endpoint
+0,0x7e00ab88,\\Endpoint
+0,0x7e00c738,\\Windows\\System32\\winrnr.dll
+0,0x7e00c8a8,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7e00d738,\\$PrepareToShrinkFileSize
+0,0x7e00ecf8,\\Windows\\Fonts\\davidbd.ttf
+0,0x7e017038,\\Windows\\Fonts\\majallab.ttf
+0,0x7e0170f8,\\Windows\\Fonts\\wingding.ttf
+0,0x7e0171b0,\\Windows\\Fonts\\vijaya.ttf
+0,0x7e017268,\\Windows\\Fonts\\simpfxo.ttf
+0,0x7e0173a8,\\Windows\\System32\\tdh.dll
+0,0x7e01a028,\\
+0,0x7e01a810,\\Endpoint
+0,0x7e01a910,\\srvsvc
+0,0x7e01aa00,\\Endpoint
+0,0x7e01b038,\\Windows\\Fonts\\utsaah.ttf
+0,0x7e01b918,\\Windows\\Fonts\\mriamc.ttf
+0,0x7e01bb00,\\Windows\\Fonts\\mriam.ttf
+0,0x7e027230,\\Endpoint
+0,0x7e0288f8,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-GroupPolicy%4Operational.evtx
+0,0x7e028a90,\\Endpoint
+0,0x7e028c10,\\Windows\\System32\\adtschema.dll
+0,0x7e02a970,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Dhcp-Client%4Admin.evtx
+0,0x7e02c0f8,\\Winsock2\\CatalogChangeListener-1c8-0
+0,0x7e02c1b0,\\srvsvc
+0,0x7e02c4e8,\\mojo.2728.2716.12975547242312401537
+0,0x7e02d4c8,\\Windows\\System32\\aelupsvc.dll
+0,0x7e02d5c0,\\Windows\\System32\\wpdbusenum.dll
+0,0x7e02eaf8,\\Windows\\System32\\ncobjapi.dll
+0,0x7e02eec8,\\Windows\\AppCompat\\Programs\\RecentFileCache.bcf
+0,0x7e02ef80,\\Windows\\System32\\perftrack.dll
+0,0x7e02fe58,\\System Volume Information\\Syscache.hve
+0,0x7e030548,\\Windows\\System32\\diagperf.dll
+0,0x7e030b20,\\System Volume Information\\Syscache.hve.LOG2
+0,0x7e031578,\\Windows\\System32\\aepic.dll
+0,0x7e032e08,\\System Volume Information\\Syscache.hve.LOG1
+0,0x7e035800,\\Windows\\System32\\wer.dll
+0,0x7e036e38,\\Windows\\System32\\en-US\\lsm.exe.mui
+0,0x7e036f80,\\Windows\\System32\\sfc_os.dll
+0,0x7e039320,\\Windows\\System32\\pnpts.dll
+0,0x7e0398d0,\\Windows\\System32\\PortableDeviceApi.dll
+0,0x7e03a430,\\Windows\\System32\\ntmarta.dll
+0,0x7e03b320,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-NCSI%4Operational.evtx
+0,0x7e03bb80,\\Windows\\Fonts\\utsaahb.ttf
+0,0x7e03cc98,\\Windows\\System32\\Apphlpdm.dll
+0,0x7e03cea8,\\Windows\\Fonts\\StaticCache.dat
+0,0x7e03db60,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Windows Firewall With Advanced Security%4Firewall.evtx
+0,0x7e052740,\\Windows\\System32\\xolehlp.dll
+0,0x7e052dd8,\\Windows\\System32\\dllhost.exe
+0,0x7e059e38,\\Device\\HarddiskVolume2\\Users\\devmac\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TM
+0,0x7e05c300,\\Windows\\Fonts\\ariali.ttf
+0,0x7e05f1c8,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\Printer Shortcuts
+0,0x7e060ad0,\\Program Files\\AccessData\\FTK Imager\\langs\\jpn_adencrypt.dll
+0,0x7e06cb00,\\Endpoint
+0,0x7e06d0f8,\\Windows\\Fonts\\moolbor.ttf
+0,0x7e06d1b0,\\Windows\\Fonts\\leelawdb.ttf
+0,0x7e06d268,\\Windows\\Fonts\\vijayab.ttf
+0,0x7e06dd98,\\Windows\\Installer\\5b7a2.msi
+0,0x7e074038,\\Windows\\System32\\wuauclt.exe
+0,0x7e0745c8,\\Windows\\System32\\NapiNSP.dll
+0,0x7e075460,\\Windows\\System32\\usbceip.dll
+0,0x7e0755d0,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a
+0,0x7e07af80,\\Windows\\System32\\pnrpnsp.dll
+0,0x7e080780,\\Windows\\Fonts\\vrindab.ttf
+0,0x7e086e48,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7e08e278,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension Scripts\\000003.log
+0,0x7e08e830,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Low\\Content.IE5\\index.dat
+0,0x7e094bc8,\\Windows\\System32\\wscinterop.dll
+0,0x7e094d48,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Windows Firewall With Advanced Security%4ConnectionSecurity.evtx
+0,0x7e094f18,\\$Directory
+0,0x7e097578,\\Device\\HarddiskVolume2\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat{03a0b2e8-cd59-11ed-b6ba-08002713084b}.TM
+0,0x7e097f00,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat{03a0b2e8-cd59-11ed-b6ba-08002713084b}.TMContainer00000000000000000002.regtrans-ms
+0,0x7e098268,\\Windows\\Fonts\\utsaahbi.ttf
+0,0x7e098778,\\Endpoint
+0,0x7e0a4740,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat{03a0b2e8-cd59-11ed-b6ba-08002713084b}.TM.blf
+0,0x7e0a48c0,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat.LOG2
+0,0x7e0a4d00,\\Users\\devmac\\NTUSER.DAT
+0,0x7e0a5038,\\$Directory
+0,0x7e0a5510,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat
+0,0x7e0a5638,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-TerminalServices-LocalSessionManager%4Admin.evtx
+0,0x7e0a5d70,\\Users\\devmac\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TMContainer00000000000000000001.regtrans-ms
+0,0x7e0a5f18,\\$Directory
+0,0x7e0a6248,\\Windows\\System32\\IDStore.dll
+0,0x7e0a6d80,\\Windows\\System32\\msmpeg2vdec.dll
+0,0x7e0aa530,\\Program Files\\AccessData\\FTK Imager\\LMS.dll
+0,0x7e0aa840,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a
+0,0x7e0aaf80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\9ba8ea0dab65409c_0
+0,0x7e0ab298,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a
+0,0x7e0ac690,\\Windows\\System32\\radardt.dll
+0,0x7e0ae1a8,\\Windows\\System32\\IconCodecService.dll
+0,0x7e0aed58,\\Windows\\Prefetch\\CHROME.EXE-5A1054AF.pf
+0,0x7e0aef80,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_5.82.7600.16661_none_ebfb56996c72aefc\\comctl32.dll
+0,0x7e0b04c8,\\Device\\HarddiskVolume2\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat{03a0b2e8-cd59-11ed-b6ba-08002713084b}.TM
+0,0x7e0b06b0,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat{03a0b2e8-cd59-11ed-b6ba-08002713084b}.TMContainer00000000000000000001.regtrans-ms
+0,0x7e0b4378,\\Windows\\System32\\desk.cpl
+0,0x7e0b4ce0,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Accessibility\\Desktop.ini
+0,0x7e0b4d98,\\Windows\\System32\\en-US\\lsm.exe.mui
+0,0x7e0b52a0,\\Windows\\System32\\appwiz.cpl
+0,0x7e0b54d0,\\Windows\\System32\\taskhost.exe
+0,0x7e0b5a00,\\Windows\\System32\\catsrvut.dll
+0,0x7e0b5ab8,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7e0b73d8,\\Endpoint
+0,0x7e0b7658,\\Endpoint
+0,0x7e0b85a8,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\SecStore\\CiST0000.000
+0,0x7e0b9f80,\\Windows\\Fonts\\tahomabd.ttf
+0,0x7e0ba768,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-PrintService%4Admin.evtx
+0,0x7e0bb288,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\index
+0,0x7e0bb460,\\Windows\\System32\\userinit.exe
+0,0x7e0bba20,\\Windows\\System32\\psbase.dll
+0,0x7e0bbc88,\\Windows\\System32\\en-US\\msimsg.dll.mui
+0,0x7e0bbf18,\\Windows\\System32\\mpr.dll
+0,0x7e0bcf80,\\Windows\\System32\\themeui.dll
+0,0x7e0c85b8,\\Windows\\System32\\PrintIsolationProxy.dll
+0,0x7e0c8978,\\Windows\\System32\\dxgi.dll
+0,0x7e0c8a30,\\Windows\\System32\\dimsjob.dll
+0,0x7e0c8cf8,\\Windows\\System32\\spool\\prtprocs\\w32x86\\winprint.dll
+0,0x7e0c9968,\\Windows\\Fonts\\courbi.ttf
+0,0x7e0c9be8,\\Windows\\System32\\umb.dll
+0,0x7e0cb9d0,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-TerminalServices-LocalSessionManager%4Operational.evtx
+0,0x7e0cba88,\\$Directory
+0,0x7e0cde68,\\Windows\\System32\\ntshrui.dll
+0,0x7e0cdf80,\\Windows\\System32\\localspl.dll
+0,0x7e0ce938,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010002.dir
+0,0x7e0cf038,\\Windows\\System32\\spoolss.dll
+0,0x7e0cfb10,\\Windows\\System32\\winspool.drv
+0,0x7e0d00d8,\\Windows\\System32\\prnfldr.dll
+0,0x7e0d09a0,\\Windows\\System32\\FXSMON.dll
+0,0x7e0d1248,\\Windows\\System32\\snmpapi.dll
+0,0x7e0d15c0,\\Windows\\System32\\wmp.dll
+0,0x7e0d1950,\\Windows\\System32\\pautoenr.dll
+0,0x7e0d1c50,\\Windows\\Fonts\\nyala.ttf
+0,0x7e0d2038,\\Windows\\System32\\usercpl.dll
+0,0x7e0d24b0,\\Windows\\System32\\wsnmp32.dll
+0,0x7e0d27f0,\\Windows\\System32\\en-US\\ntshrui.dll.mui
+0,0x7e0d2f30,\\Windows\\System32\\tcpmon.dll
+0,0x7e0d31c0,\\Windows\\System32\\certcli.dll
+0,0x7e0d32b8,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7e0d36c0,\\Windows\\System32\\CertEnroll.dll
+0,0x7e0d38f8,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\AutomaticDestinations\\7e4dca80246863e3.automaticDestinations-ms
+0,0x7e0d4d30,\\Windows\\System32\\fdPnp.dll
+0,0x7e0d5f80,\\Windows\\System32\\usbmon.dll
+0,0x7e0d6a58,\\Windows\\System32\\WSDMon.dll
+0,0x7e0d6b10,\\Windows\\System32\\win32spl.dll
+0,0x7e0d7688,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\PropMap\\CiPT0000.002
+0,0x7e0d7740,\\Windows\\System32\\unregmp2.exe
+0,0x7e0d7870,\\Windows\\System32\\taskeng.exe
+0,0x7e0d82c8,\\Windows\\System32\\dwm.exe
+0,0x7e0e20f0,\\Windows\\System32\\thumbcache.dll
+0,0x7e0e25c0,\\Windows\\System32\\d3d10_1.dll
+0,0x7e0e2858,\\Windows\\System32\\dwmredir.dll
+0,0x7e0e4f08,\\Windows\\System32
+0,0x7e0e5e30,\\Windows\\explorer.exe
+0,0x7e0e6870,\\Windows\\System32\\netman.dll
+0,0x7e0e69e0,\\Users\\Public\\Desktop\\Browser Choice.lnk
+0,0x7e0e7760,\\Windows\\Fonts\\mingliub.ttc
+0,0x7e0e7ae8,\\Windows\\explorer.exe
+0,0x7e0e7e48,\\Windows\\System32
+0,0x7e0e8538,\\Windows\\System32\\ExplorerFrame.dll
+0,0x7e0e9b00,\\Windows\\System32\\msoeacct.dll
+0,0x7e0eac28,\\Program Files\\Common Files\\System\\wab32res.dll
+0,0x7e0eb038,\\Windows\\System32\\SearchFilterHost.exe
+0,0x7e0ebaf0,\\$Directory
+0,0x7e0ec038,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\services.lnk
+0,0x7e0ecaf0,\\Windows\\System32\\DriverStore\\INFCACHE.1
+0,0x7e0ecf18,\\mojo.2728.2868.12067071095771030498
+0,0x7e0ed4e8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Performance Monitor.lnk
+0,0x7e0ed5a0,\\mojo.2728.2716.13125800280393197148
+0,0x7e0ed658,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\93497a2b9b4cbfa7_0
+0,0x7e0eda20,\\$Directory
+0,0x7e0edf80,\\Windows\\System32\\msconfig.exe
+0,0x7e0eeba8,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned
+0,0x7e0eeeb8,\\Endpoint
+0,0x7e0f02a0,\\Windows\\Fonts\\consolab.ttf
+0,0x7e0f0890,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\c058864d48dd3bfd_0
+0,0x7e0f0cd8,\\Windows\\System32\\msident.dll
+0,0x7e0f1308,\\Windows\\System32\\netapi32.dll
+0,0x7e0f1688,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Protect\\S-1-5-21-2220469523-2987558975-3863374619-1000\\Preferred
+0,0x7e0f1c40,\\Endpoint
+0,0x7e0f1da0,\\Endpoint
+0,0x7e0f1f80,\\Windows\\System32\\advapi32.dll
+0,0x7e0f2310,\\Windows\\winsxs\\x86_microsoft.windows.gdiplus_6595b64144ccf1df_1.1.7600.16385_none_72fc7cbf861225ca
+0,0x7e0f2da8,\\Windows\\System32\\SearchFolder.dll
+0,0x7e0f35a8,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Resource-Exhaustion-Detector%4Operational.evtx
+0,0x7e0f36d0,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar\\Internet Explorer (2).lnk
+0,0x7e0f3da8,\\$Directory
+0,0x7e0f4208,\\Windows\\System32\\PlaySndSrv.dll
+0,0x7e0f4990,\\Windows\\System32\\EhStorShell.dll
+0,0x7e101320,\\Windows\\Fonts\\StaticCache.dat
+0,0x7e1015b8,\\Windows\\System32\\wmploc.DLL
+0,0x7e101770,\\Windows\\System32\\en-US\\wmploc.DLL.mui
+0,0x7e101828,\\$Directory
+0,0x7e102900,\\Windows\\System32\\iedkcs32.dll
+0,0x7e1029b8,\\Windows\\System32\\actxprxy.dll
+0,0x7e102bf0,\\Windows\\System32\\en-US\\ie4uinit.exe.mui
+0,0x7e102ec8,\\Windows\\System32\\ie4uinit.exe
+0,0x7e102f80,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e1042a8,\\Users\\Public\\Videos\\desktop.ini
+0,0x7e104888,\\Windows\\System32\\msoert2.dll
+0,0x7e105038,\\Windows\\System32\\advpack.dll
+0,0x7e1053a8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Windows Media Player.lnk
+0,0x7e105cb8,\\Windows\\Fonts\\courbd.ttf
+0,0x7e105d70,\\Windows\\System32\\oleacc.dll
+0,0x7e106548,\\Windows\\Resources\\Ease of Access Themes\\hcwhite.theme
+0,0x7e1067d0,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\Cookies\\Low\\index.dat
+0,0x7e106c58,\\Windows\\System32\\msftedit.dll
+0,0x7e106d10,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\WER\\ReportArchive
+0,0x7e107110,\\Windows\\System32\\msutb.dll
+0,0x7e107f80,\\Windows\\Resources\\Ease of Access Themes\\basic.theme
+0,0x7e108038,\\$Directory
+0,0x7e108390,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010004.dir
+0,0x7e1085a0,\\Windows\\System32\\MsCtfMonitor.dll
+0,0x7e108a20,\\Windows\\System32\\oleaccrc.dll
+0,0x7e108b18,\\$Directory
+0,0x7e109038,\\Users\\devmac\\AppData\\Local\\Microsoft\\Feeds Cache\\index.dat
+0,0x7e109738,\\$Directory
+0,0x7e109f80,\\Windows\\System32\\mydocs.dll
+0,0x7e10a120,\\Windows\\System32\\msidcrl30.dll
+0,0x7e10a1d8,\\Windows\\System32\\esent.dll
+0,0x7e10a290,\\Windows\\Fonts\\arialbi.ttf
+0,0x7e10a348,\\Windows\\System32\\KBDUS.DLL
+0,0x7e10b1d8,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\Libraries\\desktop.ini
+0,0x7e10b570,\\$Directory
+0,0x7e10b7e8,\\Windows\\System32\\msimg32.dll
+0,0x7e10b930,\\Windows\\Fonts\\segoescb.ttf
+0,0x7e10ba28,\\Windows\\AppPatch\\AcGenral.dll
+0,0x7e10cbd8,\\Windows\\System32\\oleaut32.dll
+0,0x7e10d660,\\Windows\\System32\\FXSST.dll
+0,0x7e10d8d8,\\Windows\\Resources\\Ease of Access Themes\\hcblack.theme
+0,0x7e10dce8,\\Windows\\System32\\QUTIL.DLL
+0,0x7e10dda0,\\ProgramData\\Microsoft\\Windows\\Start Menu\\desktop.ini
+0,0x7e10e0d0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Variations
+0,0x7e10e778,\\Windows\\System32\\shdocvw.dll
+0,0x7e10f110,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7e10f888,\\$Directory
+0,0x7e10f9e8,\\Windows\\Resources\\Ease of Access Themes\\hc1.theme
+0,0x7e10faa0,\\Windows\\System32\\iesetup.dll
+0,0x7e10fec8,\\srvsvc
+0,0x7e10ff80,\\Windows\\System32\\cdd.dll
+0,0x7e110bd8,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a\\msvcr90.dll
+0,0x7e110da0,\\Windows\\System32\\ieuinit.inf
+0,0x7e1112c8,\\Windows\\Resources\\Ease of Access Themes\\hc2.theme
+0,0x7e1117f0,\\Windows\\System32\\stobject.dll
+0,0x7e111ec8,\\Windows\\System32\\spfileq.dll
+0,0x7e112038,\\$Directory
+0,0x7e112b50,\\Windows\\System32\\msxml3r.dll
+0,0x7e1133c8,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010001.dir
+0,0x7e114868,\\$Directory
+0,0x7e114f80,\\Windows\\System32\\inetcpl.cpl
+0,0x7e115328,\\Windows\\System32\\mshtml.dll
+0,0x7e1153e0,\\Windows\\Resources\\Ease of Access Themes\\classic.theme
+0,0x7e1156d0,\\Windows\\System32\\msls31.dll
+0,0x7e115788,\\Windows\\System32\\rundll32.exe
+0,0x7e115ac8,\\Windows\\System32\\ieframe.dll
+0,0x7e115e38,\\Windows\\System32\\msidle.dll
+0,0x7e115ef0,\\Windows\\System32\\en-US\\urlmon.dll.mui
+0,0x7e1160d0,\\Windows\\System32\\cryptdlg.dll
+0,0x7e116238,\\Program Files\\Windows Media Player\\wmplayer.exe
+0,0x7e116c18,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7e116f80,\\$Directory
+0,0x7e11fd60,\\Windows\\System32\\en-US\\dnsapi.dll.mui
+0,0x7e120038,\\Windows\\System32\\en-US\\kernel32.dll.mui
+0,0x7e120428,\\ProgramData\\Microsoft\\Windows\\Caches\\{67D69890-D853-4011-A87E-AA64FA83CE5A}.2.ver0x0000000000000001.db
+0,0x7e120500,\\Windows\\System32\\en-US\\unregmp2.exe.mui
+0,0x7e1208d8,\\Program Files\\AccessData\\FTK Imager\\adencrypt.dll
+0,0x7e120990,\\wkssvc
+0,0x7e129380,\\Program Files\\Windows Media Player\\en-US\\wmplayer.exe.mui
+0,0x7e129f80,\\Windows\\System32\\SensApi.dll
+0,0x7e12a450,\\Windows\\System32\\wucltux.dll
+0,0x7e12a878,\\Windows\\System32\\mmsys.cpl
+0,0x7e12b638,\\Program Files\\AccessData\\FTK Imager\\microsoft.vc90.mfc
+0,0x7e138038,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7e1383a8,\\Windows\\System32\\ACCTRES.dll
+0,0x7e138548,\\Windows\\System32\\inetcomm.dll
+0,0x7e139b30,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\GatherLogs\\SystemIndex\\SystemIndex.1.gthr
+0,0x7e139be8,\\Windows\\System32\\INETRES.dll
+0,0x7e139ca0,\\Windows\\System32\\en-US\\mlang.dll.mui
+0,0x7e13b118,\\Windows\\System32\\wlanhlp.dll
+0,0x7e13bd98,\\Windows\\Fonts\\impact.ttf
+0,0x7e13c038,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_1024.db
+0,0x7e13c1d0,\\Program Files\\AccessData\\FTK Imager\\langs\\deu_ftki.dll
+0,0x7e13c618,\\Windows\\System32\\RpcRtRemote.dll
+0,0x7e13cb80,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\IETldCache\\index.dat
+0,0x7e13d038,\\Windows\\System32\\pstorsvc.dll
+0,0x7e13e3e0,\\Program Files\\AccessData\\FTK Imager\\langs\\esp_adencrypt.dll
+0,0x7e13e758,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\History\\History.IE5\\index.dat
+0,0x7e13f380,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Windows PowerShell Modules.lnk
+0,0x7e13f438,\\Windows\\System32\\recdisc.exe
+0,0x7e13fb08,\\Windows\\Fonts\\phagspa.ttf
+0,0x7e140038,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\SecStore\\CiST0000.001
+0,0x7e140410,\\Windows\\System32\\SearchProtocolHost.exe
+0,0x7e140510,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Winlogon%4Operational.evtx
+0,0x7e140828,\\Windows\\System32\\ntprint.dll
+0,0x7e141038,\\Windows\\Fonts\\ariblk.ttf
+0,0x7e141580,\\Endpoint
+0,0x7e141938,\\Windows\\Fonts\\browai.ttf
+0,0x7e142418,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History
+0,0x7e1428d8,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\INDEX.000
+0,0x7e143150,\\Windows\\System32\\shlwapi.dll
+0,0x7e1441f8,\\$Directory
+0,0x7e1468e8,\\Windows\\System32\\webcheck.dll
+0,0x7e146a78,\\Windows\\System32\\xpsrchvw.exe
+0,0x7e151100,\\Users\\Public\\Desktop\\desktop.ini
+0,0x7e151c18,\\Windows\\System32\\spp.dll
+0,0x7e151e80,\\Windows\\System32\\en-US\\urlmon.dll.mui
+0,0x7e1521b0,\\Users\\Public\\Music\\desktop.ini
+0,0x7e152338,\\Windows\\System32\\linkinfo.dll
+0,0x7e1529c0,\\Windows\\System32\\batmeter.dll
+0,0x7e1533c0,\\Users\\Public\\desktop.ini
+0,0x7e153478,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\WebStorage\\QuotaManager
+0,0x7e1544a8,\\Users\\devmac\\Links\\desktop.ini
+0,0x7e154950,\\$Directory
+0,0x7e1551a8,\\Windows\\System32\\Wpc.dll
+0,0x7e1555b0,\\Windows\\System32\\WWanAPI.dll
+0,0x7e155da0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\78db34209a42a6d5_0
+0,0x7e156200,\\Windows\\System32\\UIAnimation.dll
+0,0x7e1564c8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Sync Data\\LevelDB\\LOCK
+0,0x7e156640,\\Windows\\System32\\PortableDeviceTypes.dll
+0,0x7e157258,\\Windows\\System32\\apss.dll
+0,0x7e1573d8,\\Windows\\System32
+0,0x7e157a70,\\Windows\\System32\\wmpps.dll
+0,0x7e158130,\\Users\\devmac\\Links\\Downloads.lnk
+0,0x7e1588f0,\\Users\\devmac\\Links\\RecentPlaces.lnk
+0,0x7e158a68,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\INDEX.002
+0,0x7e158d60,\\Windows\\System32\\zipfldr.dll
+0,0x7e165038,\\$Directory
+0,0x7e1651a8,\\Users\\devmac\\Links\\Desktop.lnk
+0,0x7e168718,\\Windows\\System32\\Wldap32.dll
+0,0x7e169c20,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\XPS Viewer.lnk
+0,0x7e16ac50,\\Windows\\System32\\en-US\\tquery.dll.mui
+0,0x7e16ad08,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\GatherLogs\\SystemIndex\\SystemIndex.1.Crwl
+0,0x7e16cd58,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb
+0,0x7e16ce20,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\tmp.edb
+0,0x7e16d4e8,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb
+0,0x7e16dce0,\\Windows\\System32\\MdSched.exe
+0,0x7e176a30,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e176b40,\\Windows\\System32\\NlsLexicons0009.dll
+0,0x7e176e80,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\SecStore\\CiST0000.002
+0,0x7e177098,\\Windows\\System32\\LogFiles\\Scm\\a7e29e63-1534-4fc2-96c4-ad84709a0e87
+0,0x7e178218,\\Windows\\System32\\mssha.dll
+0,0x7e178300,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Desktop.ini
+0,0x7e178788,\\MsFteWds
+0,0x7e178ba8,\\Windows\\System32\\kernel32.dll
+0,0x7e178c60,\\Windows\\System32\\mscories.dll
+0,0x7e17b778,\\Windows\\System32\\DXP.dll
+0,0x7e17b878,\\Program Files\\AccessData\\FTK Imager\\langs\\kor_adencrypt.dll
+0,0x7e17d780,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Desktop.ini
+0,0x7e17d948,\\Windows\\System32\\ddraw.dll
+0,0x7e17e798,\\Windows\\System32\\ddrawex.dll
+0,0x7e17e9e0,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Task Scheduler.lnk
+0,0x7e17f038,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Memory Diagnostics Tool.lnk
+0,0x7e17f5f0,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Windows Firewall with Advanced Security.lnk
+0,0x7e17fc00,\\Program Files\\Windows Media Player\\en-US\\wmpnetwk.exe.mui
+0,0x7e180160,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e180260,\\Program Files\\AccessData\\FTK Imager\\libeay32.dll
+0,0x7e180a78,\\Windows\\System32\\dot3api.dll
+0,0x7e182798,\\Windows\\System32\\t2embed.dll
+0,0x7e183608,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e183880,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\System Configuration.lnk
+0,0x7e185250,\\Windows\\System32\\usp10.dll
+0,0x7e1865c8,\\Windows\\System32\\en-US\\wpccpl.dll.mui
+0,0x7e188f80,\\Windows\\System32\\dxva2.dll
+0,0x7e189c70,\\Program Files\\AccessData\\FTK Imager\\microsoft.vc90.mfc\\mfc90u.dll
+0,0x7e189e58,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Welcome Center.lnk
+0,0x7e18b038,\\$Directory
+0,0x7e18bbc8,\\Windows\\System32\\ssdpsrv.dll
+0,0x7e18c3f0,\\Windows\\System32\\wpdshext.dll
+0,0x7e18c4a8,\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\fusion.dll
+0,0x7e18d250,\\$Directory
+0,0x7e196d58,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\Locales\\en-GB.pak
+0,0x7e1975e0,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\Cookies\\index.dat
+0,0x7e197f80,\\Windows\\System32\\en-US\\msiexec.exe.mui
+0,0x7e198638,\\Windows\\System32\\ntlanman.dll
+0,0x7e1987e0,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_32.db
+0,0x7e198e20,\\Windows\\System32\\catroot2\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\catdb
+0,0x7e1a1598,\\Windows\\System32\\WindowsAnytimeUpgradeui.exe
+0,0x7e1a1c58,\\Windows\\System32\\en-US\\windowsanytimeupgradeui.exe.mui
+0,0x7e1a4190,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned
+0,0x7e1a4940,\\Program Files\\AccessData\\FTK Imager\\adshattrdefs.dll
+0,0x7e1a4f80,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\Printer Shortcuts
+0,0x7e1a5408,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu
+0,0x7e1a5530,\\Program Files\\Common Files\\System\\en-US\\wab32res.dll.mui
+0,0x7e1a56c0,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_idx.db
+0,0x7e1a5da0,\\Windows\\System32\\config\\TxR\\{6cced300-6e01-11de-8bed-001e0bcd1824}.TxR.1.regtrans-ms
+0,0x7e1a5ef0,\\Windows\\System32\\thumbcache.dll
+0,0x7e1a6500,\\Windows\\System32\\catroot2\\edb.log
+0,0x7e1a71e0,\\Windows\\System32\\NlsData0009.dll
+0,0x7e1a7720,\\Windows\\System32\\msfeeds.dll
+0,0x7e1a8b88,\\Windows\\System32\\en-US\\DeviceCenter.dll.mui
+0,0x7e1a9180,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\History\\Low\\History.IE5\\MSHist012023032820230329\\index.dat
+0,0x7e1a93e0,\\Windows\\System32\\NaturalLanguage6.dll
+0,0x7e1a95c0,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.IE5\\index.dat
+0,0x7e1a9d00,\\Users\\devmac\\Favorites\\Links\\desktop.ini
+0,0x7e1aa5f8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Windows Anytime Upgrade.lnk
+0,0x7e1aae38,\\Windows\\SoftwareDistribution\\DataStore\\DataStore.edb
+0,0x7e1aaef0,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Wordpad.lnk
+0,0x7e1ab9a8,\\$Directory
+0,0x7e1ac178,\\Windows\\System32\\Syncreg.dll
+0,0x7e1ac758,\\Windows\\System32\\ieui.dll
+0,0x7e1adf80,\\Windows\\System32\\netshell.dll
+0,0x7e1ae468,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e1aed90,\\Windows\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows Media Player NSS\\3.0\\Icon Files
+0,0x7e1af318,\\$Directory
+0,0x7e1af3d0,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-NetworkAccessProtection%4Operational.evtx
+0,0x7e1afd98,\\Windows\\Fonts\\pala.ttf
+0,0x7e1b0530,\\Windows\\winsxs\\x86_microsoft.vc80.crt_1fc8b3b9a1e18e3b_8.0.50727.4927_none_d08a205e442db5b5\\msvcr80.dll
+0,0x7e1b09c0,\\Windows\\System32\\DeviceCenter.dll
+0,0x7e1b0d18,\\Windows\\System32\\en-US\\oobefldr.dll.mui
+0,0x7e1b0e60,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-HomeGroup Provider Service%4Operational.evtx
+0,0x7e1b0f80,\\Program Files\\Google\\Update\\1.3.36.152\\GoogleUpdateOnDemand.exe
+0,0x7e1b1b28,\\Endpoint
+0,0x7e1b1f80,\\Windows\\System32\\bthprops.cpl
+0,0x7e1b25d8,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e1b2dc0,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e1b3e58,\\Windows\\System32\\WPDShServiceObj.dll
+0,0x7e1b4038,\\Windows\\System32\\accessibilitycpl.dll
+0,0x7e1b4320,\\Windows\\System32\\FXSAPI.dll
+0,0x7e1b6380,\\Windows\\System32\\wuapp.exe
+0,0x7e1b7dc0,\\Windows\\System32\\sud.dll
+0,0x7e1b8718,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_96.db
+0,0x7e1b87d0,\\Windows\\System32\\en-US\\sud.dll.mui
+0,0x7e1b8af8,\\Windows\\System32\\en-US\\sxs.dll.mui
+0,0x7e1b9110,\\$Directory
+0,0x7e1b91c8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Windows Update.lnk
+0,0x7e1b9828,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Default Programs.lnk
+0,0x7e1badc8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Games\\Desktop.ini
+0,0x7e1bb940,\\$Directory
+0,0x7e1bb9f8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\desktop.ini
+0,0x7e1bc3d8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\desktop.ini
+0,0x7e1bc8d0,\\$Directory
+0,0x7e1bca18,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Maintenance\\Desktop.ini
+0,0x7e1bcad0,\\Windows\\System32\\mssph.dll
+0,0x7e1bd0e8,\\Windows\\System32\\FXSRESM.dll
+0,0x7e1bdf18,\\$Directory
+0,0x7e1be4a0,\\Program Files\\AccessData\\FTK Imager\\cximage.dll
+0,0x7e1be620,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Remote Desktop Connection.lnk
+0,0x7e1be838,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Calculator.lnk
+0,0x7e1be8f0,\\Windows\\Fonts\\courbd.ttf
+0,0x7e1bf2c0,\\Windows\\System32\\DisplaySwitch.exe
+0,0x7e1bf378,\\Windows\\System32\\mstsc.exe
+0,0x7e1bf430,\\Windows\\System32\\SoundRecorder.exe
+0,0x7e1c01e8,\\Program Files\\AccessData\\FTK Imager\\boost_regex-vc90-mt-1_39.dll
+0,0x7e1c0368,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Paint.lnk
+0,0x7e1c06c8,\\Windows\\System32\\FXSSVC.exe
+0,0x7e1c0830,\\Program Files\\AccessData\\FTK Imager\\boost_filesystem-vc90-mt-1_39.dll
+0,0x7e1c0a48,\\Program Files\\AccessData\\FTK Imager\\boost_date_time-vc90-mt-1_39.dll
+0,0x7e1c0b00,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\displayswitch.lnk
+0,0x7e1c0c48,\\$Directory
+0,0x7e1c0d00,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Windows PowerShell\\desktop.ini
+0,0x7e1c1338,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Sync Center.lnk
+0,0x7e1c1ec8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Sound Recorder.lnk
+0,0x7e1c22d0,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Accessibility\\Speech Recognition.lnk
+0,0x7e1c27c0,\\$Directory
+0,0x7e1c2f80,\\Windows\\System32\\SyncCenter.dll
+0,0x7e1c31a0,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Character Map.lnk
+0,0x7e1c4160,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Disk Cleanup.lnk
+0,0x7e1c4680,\\Windows\\System32\\dfrgui.exe
+0,0x7e1c47f0,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\System Information.lnk
+0,0x7e1c4a88,\\Program Files\\AccessData\\FTK Imager\\langs\\fra_adencrypt.dll
+0,0x7e1c4c70,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\dfrgui.lnk
+0,0x7e1c5168,\\Program Files\\AccessData\\FTK Imager\\icudt40.dll
+0,0x7e1c5c70,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Resource Monitor.lnk
+0,0x7e1c5dc8,\\Windows\\System32\\catroot2\\edb.chk
+0,0x7e1c60c8,\\Windows\\Fonts\\latha.ttf
+0,0x7e1c66e8,\\Windows\\System32\\riched20.dll
+0,0x7e1c6cc0,\\Windows\\System32\\wdc.dll
+0,0x7e1c6eb0,\\Windows\\System32\\TSWorkspace.dll
+0,0x7e1c73a0,\\Program Files\\AccessData\\FTK Imager\\boost_system-vc90-mt-1_39.dll
+0,0x7e1c7608,\\Windows\\System32\\rstrui.exe
+0,0x7e1c77a0,\\Windows\\winsxs\\Manifests\\x86_policy.9.0.microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_f47c47b2f658b4a8.manifest
+0,0x7e1c7ab8,\\Program Files\\AccessData\\FTK Imager\\adshdll.dll
+0,0x7e1c7c30,\\Windows\\System32\\msinfo32.exe
+0,0x7e1c8038,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\System Restore.lnk
+0,0x7e1c8728,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Task Scheduler.lnk
+0,0x7e1c8a80,\\Windows\\System32\\miguiresource.dll
+0,0x7e1c9618,\\$Directory
+0,0x7e1c9828,\\Windows\\System32\\migwiz\\wet.dll
+0,0x7e1c99a8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Windows Easy Transfer Reports.lnk
+0,0x7e1c9a60,\\$Directory
+0,0x7e1c9da0,\\Program Files\\AccessData\\FTK Imager\\boost_thread-vc90-mt-1_39.dll
+0,0x7e1c9ec8,\\Windows\\System32\\UIAutomationCore.dll
+0,0x7e1ca1f8,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_sr.db
+0,0x7e1ca378,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Windows PowerShell\\Windows PowerShell ISE.lnk
+0,0x7e1ca8c0,\\Program Files\\AccessData\\FTK Imager\\langs\\kor_ftki.dll
+0,0x7e1cab68,\\Windows\\System32\\ELSCore.dll
+0,0x7e1cace8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\System Tools\\Windows Easy Transfer.lnk
+0,0x7e1cb0e0,\\Windows\\System32\\fltLib.dll
+0,0x7e1cb9f0,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a
+0,0x7e1cbc78,\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe
+0,0x7e1cbd98,\\Windows\\System32\\en-US\\elscore.dll.mui
+0,0x7e1cc2e0,\\Windows\\Fonts\\monbaiti.ttf
+0,0x7e1cc450,\\Program Files\\AccessData\\FTK Imager\\icuuc40.dll
+0,0x7e1cc688,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Accessories\\Windows PowerShell\\Windows PowerShell.lnk
+0,0x7e1cc7e8,\\Windows\\System32\\en-US\\gameux.dll.mui
+0,0x7e1cc8a0,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Computer Management.lnk
+0,0x7e1cc958,\\Windows\\System32\\mycomput.dll
+0,0x7e1ccb30,\\Windows\\System32\\en-US\\mycomput.dll.mui
+0,0x7e1ccdd0,\\Windows\\System32\\mssitlb.dll
+0,0x7e1cd038,\\Program Files\\AccessData\\FTK Imager\\adshattrdefs.dll
+0,0x7e1ce758,\\$Directory
+0,0x7e1cea98,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Component Services.lnk
+0,0x7e1cef80,\\Windows\\System32\\elslad.dll
+0,0x7e1cf038,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Data Sources (ODBC).lnk
+0,0x7e1cfaa0,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\Event Viewer.lnk
+0,0x7e1cfd40,\\$ConvertToNonresident
+0,0x7e1d8038,\\Windows\\System32\\NlsData0416.dll
+0,0x7e1d81b8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Administrative Tools\\iSCSI Initiator.lnk
+0,0x7e1d8270,\\Windows\\System32\\iscsicpl.dll
+0,0x7e1d8508,\\Endpoint
+0,0x7e1d8938,\\Windows\\System32\\AuthFWGP.dll
+0,0x7e1d8f80,\\Windows\\System32\\odbcint.dll
+0,0x7e1d9130,\\Windows\\System32\\en-US\\gameux.dll.mui
+0,0x7e1d9348,\\Windows\\System32\\NlsLexicons0416.dll
+0,0x7e1d9400,\\Windows\\System32\\filemgmt.dll
+0,0x7e1d98c8,\\Windows\\ServiceProfiles\\NetworkService\\AppData\\Roaming\\Microsoft\\SystemCertificates\\My
+0,0x7e1d9f80,\\Windows\\winsxs\\Manifests\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a.manifest
+0,0x7e1da350,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Games\\Hearts.lnk
+0,0x7e1da408,\\Windows\\System32\\gameux.dll
+0,0x7e1da650,\\Windows\\System32\\version.dll
+0,0x7e1da860,\\Windows\\System32\\NlsData000c.dll
+0,0x7e1daa78,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e1dac90,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Games\\FreeCell.lnk
+0,0x7e1dad48,\\Windows\\System32\\sdcpl.dll
+0,0x7e1db400,\\Windows\\System32\\en-US\\sysmain.dll.mui
+0,0x7e1db4b8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Games\\Spider Solitaire.lnk
+0,0x7e1db638,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Games\\Solitaire.lnk
+0,0x7e1db7b8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Games\\Minesweeper.lnk
+0,0x7e1db880,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Games\\More Games from Microsoft.lnk
+0,0x7e1dca58,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Games\\GameExplorer.lnk
+0,0x7e1dd1b8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Maintenance\\Create Recovery Disc.lnk
+0,0x7e1dd710,\\Windows\\System32\\msra.exe
+0,0x7e1ddca0,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Games\\Purble Place.lnk
+0,0x7e1ddec8,\\Windows\\System32\\NlsLexicons000c.dll
+0,0x7e1ddf80,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Maintenance\\Backup and Restore Center.lnk
+0,0x7e1de558,\\Windows\\System32\\security.dll
+0,0x7e1de930,\\$Directory
+0,0x7e1debc0,\\Windows\\System32\\cabinet.dll
+0,0x7e1dedd0,\\Windows\\System32\\ieframe.dll
+0,0x7e1deec8,\\Windows\\Fonts\\msgothic.ttc
+0,0x7e1df1b8,\\Windows\\System32
+0,0x7e1df390,\\Windows\\System32\\eappcfg.dll
+0,0x7e1dfa78,\\Windows\\System32\\drivers\\portcls.sys
+0,0x7e1e0038,\\Windows\\ServiceProfiles\\NetworkService\\AppData\\Roaming\\Microsoft\\SoftwareProtectionPlatform\\tokens.dat
+0,0x7e1e0b48,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\desktop.ini
+0,0x7e1e0c10,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7e1e0f80,\\$Directory
+0,0x7e1e1578,\\Windows\\System32\\drivers\\intelppm.sys
+0,0x7e1e1630,\\$Directory
+0,0x7e1e1d10,\\$Directory
+0,0x7e1e1e58,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar\\desktop.ini
+0,0x7e1e2320,\\Windows\\System32\\drivers\\mssmbios.sys
+0,0x7e1e23f8,\\Windows\\System32\\NlsData0000.dll
+0,0x7e1e2d10,\\Windows\\System32\\drivers\\monitor.sys
+0,0x7e1e35d0,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar\\Windows Explorer (2).lnk
+0,0x7e1e3820,\\Windows\\System32\\wmdrmdev.dll
+0,0x7e1e3c68,\\Program Files\\AccessData\\FTK Imager\\MD5Remote.dll
+0,0x7e1e3da8,\\Windows\\System32\\drivers\\hdaudbus.sys
+0,0x7e1e4038,\\Program Files\\Windows Media Player\\wmpnetwk.exe
+0,0x7e1e4570,\\Windows\\System32\\wwapi.dll
+0,0x7e1e4a58,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_96.db
+0,0x7e1e4d18,\\Users\\devmac\\Desktop\\CA\\NoVirus.mem
+0,0x7e1e5200,\\Windows\\System32\\AltTab.dll
+0,0x7e1e55e8,\\Windows\\System32\\srchadmin.dll
+0,0x7e1e61a8,\\Windows\\System32\\timedate.cpl
+0,0x7e1e6260,\\Windows\\winsxs\\x86_microsoft.windows.c..-controls.resources_6595b64144ccf1df_6.0.7600.16385_en-us_581cd2bf5825dde9
+0,0x7e1e6998,\\Windows\\System32\\wsecedit.dll
+0,0x7e1e7280,\\Windows\\winsxs\\x86_microsoft.windows.c..-controls.resources_6595b64144ccf1df_6.0.7600.16385_en-us_581cd2bf5825dde9\\comctl32.dll.mui
+0,0x7e1e7c28,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e1e7f80,\\Windows\\System32\\en-US\\jscript.dll.mui
+0,0x7e1e82b8,\\$Directory
+0,0x7e1e8bb0,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_idx.db
+0,0x7e1e8f80,\\Program Files\\Internet Explorer\\en-US\\iexplore.exe.mui
+0,0x7e1e94a0,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e1e9808,\\Windows\\Fonts\\dokchamp.ttf
+0,0x7e1e98c0,\\Program Files\\Internet Explorer\\iexplore.exe
+0,0x7e1e9ce8,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Burn
+0,0x7e1e9da0,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Burn
+0,0x7e1ea2e0,\\Windows\\System32\\stdole2.tlb
+0,0x7e1eaa48,\\Windows\\System32\\onex.dll
+0,0x7e1ead68,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_32.db
+0,0x7e1eae20,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_96.db
+0,0x7e1eba20,\\$Directory
+0,0x7e1ebad8,\\Windows\\System32\\dxtrans.dll
+0,0x7e1ebb90,\\Windows\\System32\\en-US\\MMDevAPI.dll.mui
+0,0x7e1ec558,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\resources.pak
+0,0x7e1ec948,\\Windows\\Resources\\Themes\\Aero\\Shell\\NormalColor\\shellstyle.dll
+0,0x7e1ecab8,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu
+0,0x7e1ed520,\\Program Files\\Google\\Update\\1.3.36.152\\GoogleCrashHandler.exe
+0,0x7e1ed700,\\Endpoint
+0,0x7e1ed8f0,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e1edad0,\\Windows\\Fonts\\lucon.ttf
+0,0x7e1edc40,\\$Directory
+0,0x7e1ede70,\\Windows\\Fonts\\segoeuii.ttf
+0,0x7e1edf30,\\Windows\\System32\\en-US\\wdmaud.drv.mui
+0,0x7e1ee170,\\Windows\\System32\\en-US\\DeviceCenter.dll.mui
+0,0x7e1ee3b0,\\Windows\\System32\\mctadmin.exe
+0,0x7e1ee538,\\Windows\\System32\\en-US\\duser.dll.mui
+0,0x7e1ee5f0,\\Program Files\\Windows NT\\Accessories\\wordpad.exe
+0,0x7e1eea60,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e1eeba8,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_256.db
+0,0x7e1eedc0,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_96.db
+0,0x7e1eee78,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_32.db
+0,0x7e1f0558,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_sr.db
+0,0x7e1f0730,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_1024.db
+0,0x7e1f1038,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\Libraries
+0,0x7e1f1f80,\\$Directory
+0,0x7e1f2590,\\Windows\\System32\\en-US\\NetworkExplorer.dll.mui
+0,0x7e1f29d0,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.IE5\\index.dat
+0,0x7e1f45f8,\\Windows\\System32\\RacEngn.dll
+0,0x7e1f46b0,\\Windows\\System32\\drmv2clt.dll
+0,0x7e1f5100,\\Windows\\System32\\upnp.dll
+0,0x7e1f51c0,\\samr
+0,0x7e1f5da0,\\Windows\\Fonts\\mangal.ttf
+0,0x7e1f5f20,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Known Folders API Service.evtx
+0,0x7e1f63b0,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e1f6638,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e1f7038,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\Libraries
+0,0x7e1f7708,\\Windows\\System32\\browserchoice.exe
+0,0x7e1f7920,\\Windows\\System32\\networkexplorer.dll
+0,0x7e1f7f80,\\Windows\\System32\\pnidui.dll
+0,0x7e21b240,\\Program Files\\Internet Explorer\\ieproxy.dll
+0,0x7e21b410,\\Windows\\System32\\ActionCenter.dll
+0,0x7e21b4c8,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e21ecd8,\\Windows\\WindowsUpdate.log
+0,0x7e21ef80,\\Program Files\\AccessData\\FTK Imager\\ProfUIS284ad32.dll
+0,0x7e220bc8,\\Windows\\winsxs\\x86_microsoft.windows.gdiplus_6595b64144ccf1df_1.1.7600.16385_none_72fc7cbf861225ca
+0,0x7e221890,\\Windows\\System32\\hgcpl.dll
+0,0x7e2219d0,\\Windows\\System32\\en-US\\wmploc.DLL.mui
+0,0x7e222728,\\Windows\\System32\\fdPHost.dll
+0,0x7e222d08,\\Windows\\System32\\fdWSD.dll
+0,0x7e224b20,\\Program Files\\Windows Defender\\MsMpRes.dll
+0,0x7e224bd8,\\Windows\\System32\\fdSSDP.dll
+0,0x7e2253c0,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7e225640,\\Users\\devmac\\AppData\\Local\\Temp\\FXSAPIDebugLogFile.txt
+0,0x7e225e10,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e226ec8,\\Program Files\\Google\\Chrome\\Temp\\source3948_661393057\\Chrome-bin\\109.0.5414.120\\icudtl.dat
+0,0x7e226f80,\\Windows\\System32\\fdProxy.dll
+0,0x7e229370,\\Program Files\\Windows Sidebar\\en-US\\sbdrop.dll.mui
+0,0x7e229a50,\\Program Files\\Windows Sidebar\\sbdrop.dll
+0,0x7e22a3d8,\\Endpoint
+0,0x7e22a4d8,\\Program Files\\AccessData\\FTK Imager\\MD5Remote.dll
+0,0x7e22a590,\\Endpoint
+0,0x7e22b038,\\Endpoint
+0,0x7e22bf80,\\Program Files\\Windows Sidebar\\en-US\\sbdrop.dll.mui
+0,0x7e22c200,\\Endpoint
+0,0x7e22c538,\\Windows\\System32\\Display.dll
+0,0x7e22cce0,\\Endpoint
+0,0x7e22d3a8,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\History\\History.IE5\\MSHist012023032820230329\\index.dat
+0,0x7e22dc60,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\d3dcompiler_47.dll
+0,0x7e22e038,\\Windows\\System32\\notepad.exe
+0,0x7e244038,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-RestartManager%4Operational.evtx
+0,0x7e252a60,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010004.dir
+0,0x7e255ec8,\\Windows\\Fonts\\cordiaz.ttf
+0,0x7e255f80,\\Windows\\Fonts\\ebrima.ttf
+0,0x7e25a180,\\$Directory
+0,0x7e25a2c8,\\Endpoint
+0,0x7e25a380,\\Windows\\Fonts\\consolai.ttf
+0,0x7e25a730,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\4ce08fe292727875_0
+0,0x7e25c888,\\Windows\\System32\\jscript.dll
+0,0x7e261360,\\Endpoint
+0,0x7e261d70,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Data.SqlXml\\f7e995e1a099c38dacf8f2aac311e14b\\System.Data.SqlXml.ni.dll
+0,0x7e266038,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7e266430,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Bits-Client%4Operational.evtx
+0,0x7e26a258,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\ccd2f725646283b8_0
+0,0x7e26a828,\\Windows\\System32\\config\\TxR\\{6cced300-6e01-11de-8bed-001e0bcd1824}.TxR.blf
+0,0x7e26b6d8,\\Program Files\\Windows Defender\\MpEvMsg.dll
+0,0x7e26bee8,\\MsFteWds
+0,0x7e26cbb0,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_1265564862\\manifest.fingerprint
+0,0x7e26cc68,\\Windows\\Fonts\\timesbi.ttf
+0,0x7e26cd20,\\Windows\\Fonts\\tunga.ttf
+0,0x7e26cf80,\\Program Files\\AccessData\\FTK Imager\\microsoft.vc90.crt\\msvcr90.dll
+0,0x7e275e88,\\Windows\\Fonts\\arialbi.ttf
+0,0x7e2763e8,\\Windows\\System32\\lsmproxy.dll
+0,0x7e278560,\\Windows\\System32\\config\\TxR\\{6cced300-6e01-11de-8bed-001e0bcd1824}.TxR.0.regtrans-ms
+0,0x7e278e78,\\Windows\\assembly\\GAC_32\\System.Web\\2.0.0.0__b03f5f7f11d50a3a\\System.Web.dll
+0,0x7e27a778,\\Windows\\System32\\wuaueng.dll
+0,0x7e27a990,\\Windows\\System32\\ntdll.dll
+0,0x7e27db80,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_1024.db
+0,0x7e27dd68,\\Windows\\Fonts\\consolai.ttf
+0,0x7e27e038,\\$Directory
+0,0x7e27e0f0,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_5.82.7600.16661_none_ebfb56996c72aefc\\comctl32.dll
+0,0x7e27e8e8,\\ProgramData\\Microsoft\\Windows Defender\\IMpService925A3ACA-C353-458A-AC8D-A7E5EB378092.lock
+0,0x7e27ea58,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\IETldCache\\Low\\index.dat
+0,0x7e27f4d8,\\Windows\\System32\\FirewallControlPanel.dll
+0,0x7e27fbe0,\\Windows\\System32\\d3d10level9.dll
+0,0x7e280360,\\Windows\\System32\\PhotoMetadataHandler.dll
+0,0x7e280940,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\History\\Low\\History.IE5\\index.dat
+0,0x7e280aa0,\\$Directory
+0,0x7e283b70,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010001.wid
+0,0x7e283e58,\\Windows\\Fonts\\KhmerUI.ttf
+0,0x7e2843a8,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-ReadyBoost%4Operational.evtx
+0,0x7e285038,\\Windows\\Fonts\\seguisb.ttf
+0,0x7e285290,\\Windows\\Fonts\\raavi.ttf
+0,0x7e285480,\\Windows\\Fonts\\ebrimabd.ttf
+0,0x7e285538,\\Windows\\Fonts\\gisha.ttf
+0,0x7e285eb8,\\Windows\\Fonts\\raavib.ttf
+0,0x7e286318,\\Windows\\SoftwareDistribution\\ReportingEvents.log
+0,0x7e287340,\\Windows\\Fonts\\utsaahi.ttf
+0,0x7e2874c0,\\Windows\\Fonts\\aparaji.ttf
+0,0x7e2875e0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\shared_proto_db\\metadata\\000003.log
+0,0x7e287b78,\\Windows\\Fonts\\browauz.ttf
+0,0x7e287d90,\\Windows\\Fonts\\ntailub.ttf
+0,0x7e288038,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\shared_proto_db\\LOG
+0,0x7e288718,\\Windows\\System32\\ieapfltr.dat
+0,0x7e288ad0,\\$Directory
+0,0x7e2895b8,\\Windows\\Fonts\\aparajbi.ttf
+0,0x7e28a4c8,\\Windows\\Fonts\\upcibi.ttf
+0,0x7e28a820,\\Windows\\Fonts\\upcfbi.ttf
+0,0x7e28a8d8,\\Windows\\Fonts\\upcil.ttf
+0,0x7e28aa70,\\Windows\\Fonts\\arial.ttf
+0,0x7e28ab28,\\Windows\\System32\\imgutil.dll
+0,0x7e28aec8,\\Program Files\\Google\\Chrome\\ChromeRecovery\\scoped_dir3512_2036193084\\manifest.json
+0,0x7e28af80,\\Windows\\System32\\VSSVC.exe
+0,0x7e293840,\\Windows\\Fonts\\msuighur.ttf
+0,0x7e2938f8,\\Windows\\Fonts\\Shonar.ttf
+0,0x7e2939b0,\\Windows\\Fonts\\aparaj.ttf
+0,0x7e293b60,\\Windows\\System32\\iepeers.dll
+0,0x7e293e10,\\Windows\\Fonts\\aparajb.ttf
+0,0x7e293ec8,\\Windows\\Fonts\\cordiab.ttf
+0,0x7e293f80,\\Windows\\Fonts\\angsaz.ttf
+0,0x7e295818,\\Windows\\System32\\fontext.dll
+0,0x7e295dc8,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\PrivacIE\\Low\\index.dat
+0,0x7e296a10,\\Windows\\System32\\msimtf.dll
+0,0x7e296ac8,\\Windows\\System32\\wtsapi32.dll
+0,0x7e2976d0,\\Windows\\Fonts\\consola.ttf
+0,0x7e297900,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\v8_context_snapshot.bin
+0,0x7e298c58,\\$Directory
+0,0x7e299038,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Low\\AntiPhishing\\2CEDBFBC-DBA8-43AA-B1FD-CC8E6316E3E2.dat
+0,0x7e299c38,\\Windows\\System32\\systemcpl.dll
+0,0x7e299e28,\\Users\\Public\\Desktop
+0,0x7e29a700,\\Windows\\System32\\schedcli.dll
+0,0x7e403990,\\Windows\\Fonts\\msyhbd.ttf
+0,0x7e403a48,\\Windows\\Fonts\\msyh.ttf
+0,0x7e403f80,\\Windows\\Fonts\\msjhbd.ttf
+0,0x7e4040f0,\\Windows\\System32\\en-US\\FXSRESM.dll.mui
+0,0x7e404370,\\Windows\\Fonts\\arialbi.ttf
+0,0x7e404468,\\Program Files\\Windows Sidebar\\sidebar.exe
+0,0x7e404ad8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Sidebar.lnk
+0,0x7e40c1b8,\\Windows\\System32\\config\\RegBack\\SAM
+0,0x7e40c7c0,\\Windows\\System32\\config\\SECURITY.LOG1
+0,0x7e40c868,\\Windows\\System32\\config\\DEFAULT.LOG1
+0,0x7e40c9d8,\\Windows\\System32\\config\\DEFAULT
+0,0x7e429338,\\Windows\\System32\\WMVCORE.DLL
+0,0x7e42ae10,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\Launch Internet Explorer Browser.lnk
+0,0x7e42ea78,\\Windows\\Fonts\\lathab.ttf
+0,0x7e4326d8,\\Windows\\AppPatch\\AcLayers.dll
+0,0x7e432f80,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_sr.db
+0,0x7e433e20,\\Windows\\System32\\csrsrv.dll
+0,0x7e43a398,\\Windows\\System32\\config\\SECURITY.LOG2
+0,0x7e43ab28,\\Windows\\System32\\config\\SAM
+0,0x7e43aeb0,\\Windows\\System32\\intl.cpl
+0,0x7e43bac8,\\Windows\\System32\\wscapi.dll
+0,0x7e43bf20,\\Windows\\System32\\config\\DEFAULT.LOG2
+0,0x7e43e520,\\$ConvertToNonresident
+0,0x7e43e858,\\$Directory
+0,0x7e43ef80,\\srvsvc
+0,0x7e4413e8,\\$Directory
+0,0x7e441538,\\Windows\\System32\\LogFiles\\WMI\\RtBackup\\EtwRTEventlog-Security.etl
+0,0x7e441718,\\Windows\\System32\\TSChannel.dll
+0,0x7e441c80,\\Windows\\System32\\LogFiles\\WMI\\RtBackup\\EtwRTUBPM.etl
+0,0x7e441d28,\\Windows\\System32\\LogFiles\\WMI\\RtBackup\\EtwRTEventLog-System.etl
+0,0x7e441ed8,\\Windows\\System32\\LogFiles\\WMI\\RtBackup\\EtwRTEventLog-Application.etl
+0,0x7e444490,\\$Directory
+0,0x7e4469e0,\\$Directory
+0,0x7e446eb8,\\Windows\\Fonts\\cga40850.fon
+0,0x7e4472c8,\\Windows\\System32\\feclient.dll
+0,0x7e44ef80,\\$ConvertToNonresident
+0,0x7e45e038,\\mojo.2728.2868.15713448162710371596
+0,0x7e45e318,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_idx.db
+0,0x7e45e780,\\Windows\\Vss\\Writers\\System\\75DFB225-E2E4-4d39-9AC9-FFAFF65DDF06.xml
+0,0x7e461498,\\Windows\\Media\\Windows Navigation Start.wav
+0,0x7e461550,\\Windows\\System32\\dssenh.dll
+0,0x7e461f80,\\Windows\\AppPatch\\msimain.sdb
+0,0x7e462878,\\$Directory
+0,0x7e462dc8,\\Windows\\System32\\dbghelp.dll
+0,0x7e462ec8,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_293209016\\manifest.fingerprint
+0,0x7e462f80,\\Windows\\System32\\en-US\\wuaueng.dll.mui
+0,0x7e46e4c8,\\Windows\\Branding\\ShellBrd\\shellbrd.dll
+0,0x7e46e5d0,\\Windows\\System32\\msvcrt.dll
+0,0x7e46f3d0,\\Windows\\System32\\DriverStore\\infstrng.dat
+0,0x7e46f8b8,\\Windows\\System32\\mscoree.dll
+0,0x7e46fa30,\\Windows\\System32\\DriverStore\\infstor.dat
+0,0x7e479c38,\\Windows\\Fonts\\rod.ttf
+0,0x7e48a038,\\Endpoint
+0,0x7e48a1f8,:$VMCB$
+0,0x7e48ac58,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\0e4b419b361c842a_0
+0,0x7e48f9f0,\\Windows\\System32\\prncache.dll
+0,0x7e495498,\\Windows\\System32\\imapi2.dll
+0,0x7e495f80,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd\\comctl32.dll
+0,0x7e496038,\\Windows\\System32\\QAGENT.DLL
+0,0x7e4961c0,\\Windows\\Fonts\\simkai.ttf
+0,0x7e4963c0,\\Windows\\Fonts\\browab.ttf
+0,0x7e4a4730,\\Program Files\\AccessData\\FTK Imager\\langs\\deu_adencrypt.dll
+0,0x7e4a49f0,\\Windows\\Fonts\\consolab.ttf
+0,0x7e4af148,\\Windows\\System32
+0,0x7e4af200,\\$Directory
+0,0x7e4b2200,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\resources.pak
+0,0x7e4c2450,\\Windows\\System32\\LogFiles\\WMI\\RtBackup\\EtwRTDiagLog.etl
+0,0x7e4cedd0,\\$Directory
+0,0x7e4cfa48,\\Windows\\System32\\wdi\\LogFiles\\WdiContextLog.etl.003
+0,0x7e4cfef0,\\$Directory
+0,0x7e4d3440,\\$Directory
+0,0x7e4d6518,\\$BitMap
+0,0x7e4d6c70,\\$Directory
+0,0x7e4d7cc0,\\$Directory
+0,0x7e4def58,\\Windows\\System32\\basesrv.dll
+0,0x7e528038,\\Windows\\Fonts\\ahronbd.ttf
+0,0x7e528138,\\Windows\\Fonts\\david.ttf
+0,0x7e528c88,\\$Directory
+0,0x7e528e20,\\$Directory
+0,0x7e528ed8,\\Windows\\System32\\en-US\\win32k.sys.mui
+0,0x7e529a40,\\$Directory
+0,0x7e52abc0,\\Windows\\System32\\main.cpl
+0,0x7e52ac78,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_256.db
+0,0x7e52bb40,\\Windows\\System32\\locale.nls
+0,0x7e52c038,\\Windows\\System32
+0,0x7e52de48,\\$Directory
+0,0x7e54c5f0,\\Windows\\System32\\win32k.sys
+0,0x7e551260,\\Windows\\System32\\WMNetMgr.dll
+0,0x7e551e00,\\$Directory
+0,0x7e551eb8,\\Users\\Public\\Documents\\desktop.ini
+0,0x7e557540,\\Windows\\System32\\normaliz.dll
+0,0x7e557688,\\Windows\\System32\\tquery.dll
+0,0x7e557c90,\\Windows\\System32\\eappprxy.dll
+0,0x7e557e10,\\Users\\Public\\Pictures\\desktop.ini
+0,0x7e55bc30,\\Endpoint
+0,0x7e56e5e0,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Windows Fax and Scan.lnk
+0,0x7e56eef0,\\Windows\\Fonts\\arialbd.ttf
+0,0x7e570eb8,\\$Directory
+0,0x7e5d1038,\\$Directory
+0,0x7e5d1768,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\Cookies\\index.dat
+0,0x7e5d1988,\\Program Files\\Windows Defender\\MpRTP.dll
+0,0x7e5d1a40,\\Windows\\System32\\WMASF.DLL
+0,0x7e5d32a8,\\$Directory
+0,0x7e5d35d8,\\Users\\devmac\\Pictures\\desktop.ini
+0,0x7e5d3870,\\Windows\\System32\\config\\TxR\\{6cced300-6e01-11de-8bed-001e0bcd1824}.TxR.2.regtrans-ms
+0,0x7e5d3970,\\SystemRoot\\System32\\Config\\TxR\\{6cced300-6e01-11de-8bed-001e0bcd1824}.TxR
+0,0x7e5d3b80,\\Users\\devmac\\Videos\\desktop.ini
+0,0x7e5d3d18,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e5db228,\\$Directory
+0,0x7e5db848,\\Users\\devmac\\Documents\\desktop.ini
+0,0x7e5dbc70,\\$Directory
+0,0x7e5dbd70,\\Windows\\System32\\perfc009.dat
+0,0x7e5dbe28,\\Users\\devmac\\Music\\desktop.ini
+0,0x7e5ddca0,\\Windows\\Fonts\\ega40850.fon
+0,0x7e5ddec8,\\Windows\\System32\\sxssrv.dll
+0,0x7e5ddf80,\\Windows\\Fonts\\app850.fon
+0,0x7e5df118,\\Windows\\System32
+0,0x7e5df2c0,\\Windows\\System32\\wininit.exe
+0,0x7e5e07d0,\\Windows\\System32\\en-US\\NetworkExplorer.dll.mui
+0,0x7e5e0f80,\\Windows\\Fonts\\segoeuil.ttf
+0,0x7e5ebbb8,\\Windows\\System32\\KBDUK.DLL
+0,0x7e5ebde8,\\Windows\\System32\\RpcRtRemote.dll
+0,0x7e5ec1b0,\\Windows\\System32\\profapi.dll
+0,0x7e5ec5c0,\\Windows\\System32\\imm32.dll
+0,0x7e5ef2e8,\\Windows\\System32\\vga.dll
+0,0x7e5f2910,\\Windows\\System32
+0,0x7e5f2e48,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_898317515\\manifest.fingerprint
+0,0x7e5f64f8,\\Windows\\System32\\vga256.dll
+0,0x7e5f6f08,\\Windows\\inf\\WmiApRpl\\0009\\WmiApRpl.ini
+0,0x7e5f9140,\\Windows\\System32\\vga64k.dll
+0,0x7e5f9998,\\Windows\\Fonts\\batang.ttc
+0,0x7e5f9a50,\\$Directory
+0,0x7e5fe948,\\Windows\\System32\\mfcsubs.dll
+0,0x7e600980,\\Windows\\Fonts\\malgun.ttf
+0,0x7e600f80,\\Windows\\System32\\mstask.dll
+0,0x7e6016f0,\\Windows\\Fonts\\gulim.ttc
+0,0x7e6041e0,\\Windows\\System32\\wlanapi.dll
+0,0x7e6044d0,\\Windows\\System32\\msshooks.dll
+0,0x7e604da8,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\desktop.ini
+0,0x7e604ec8,\\Windows\\System32\\SearchIndexer.exe
+0,0x7e604f80,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e6054a8,\\Windows\\System32\\msiexec.exe
+0,0x7e605818,\\Windows\\Fonts\\msgothic.ttc
+0,0x7e605940,\\Windows\\System32\\netlogon.dll
+0,0x7e6077a0,\\mojo.2728.2716.4201502116902635522
+0,0x7e608780,\\Windows\\System32\\mlang.dll
+0,0x7e608838,\\Windows\\Fonts\\micross.ttf
+0,0x7e608f80,\\Windows\\Fonts\\tahoma.ttf
+0,0x7e609038,\\Windows\\Fonts\\malgunbd.ttf
+0,0x7e609278,\\Windows\\Fonts\\meiryob.ttc
+0,0x7e60a308,\\Windows\\System32\\mswsock.dll
+0,0x7e60a810,\\Windows\\System32\\msv1_0.dll
+0,0x7e60ad28,\\Windows\\Fonts\\meiryo.ttc
+0,0x7e60adf0,\\$Directory
+0,0x7e60c220,\\Windows\\System32\\winlogon.exe
+0,0x7e60c500,\\Windows\\Fonts\\mingliu.ttc
+0,0x7e60cf80,\\Windows\\Fonts\\msjh.ttf
+0,0x7e6109e0,\\Windows\\System32\\logoncli.dll
+0,0x7e610b60,\\Windows\\System32\\TSpkg.dll
+0,0x7e6115d0,\\Windows\\winsxs\\Manifests\\x86_microsoft.windows.c..-controls.resources_6595b64144ccf1df_6.0.7600.16385_en-us_581cd2bf5825dde9.manifest
+0,0x7e6118e8,\\Windows\\System32\\LogFiles\\Scm\\9334c323-f100-4656-9ba0-e4aa69c0f9c2
+0,0x7e611ad8,\\Windows\\ServiceProfiles\\LocalService\\AppData\\Local\\lastalive1.dat
+0,0x7e611d90,\\Windows\\System32
+0,0x7e612b50,\\Windows\\Fonts\\marlett.ttf
+0,0x7e613790,\\Windows\\Fonts\\simsun.ttc
+0,0x7e6139d8,\\Windows\\System32\\winsta.dll
+0,0x7e613bb0,\\Windows\\Fonts\\segoeuib.ttf
+0,0x7e613d90,\\Windows\\Fonts\\segoeui.ttf
+0,0x7e6213c8,\\Windows\\System32\\wsock32.dll
+0,0x7e621730,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\33a4c3b8b467eb0f_0
+0,0x7e6218b0,\\Windows\\System32\\en-US\\dnsapi.dll.mui
+0,0x7e621a30,\\$Directory
+0,0x7e621b90,\\Windows\\System32\\gdi32.dll
+0,0x7e6241e0,\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Maintenance\\Remote Assistance.lnk
+0,0x7e625638,\\Windows\\System32\\VaultCredProvider.dll
+0,0x7e6264e8,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e6265a0,\\Endpoint
+0,0x7e627f80,\\Endpoint
+0,0x7e62b2e0,\\$Directory
+0,0x7e62b510,\\mojo.2728.2716.8749747924114012213
+0,0x7e632038,\\Windows\\Fonts\\times.ttf
+0,0x7e632100,\\Windows\\Fonts\\timesi.ttf
+0,0x7e632228,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a
+0,0x7e6327e0,\\Windows\\Fonts\\consolaz.ttf
+0,0x7e632c50,\\Windows\\System32\\sppobjs.dll
+0,0x7e633f80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Safe Browsing Network\\Safe Browsing Cookies
+0,0x7e6364a0,\\Windows\\System32\\pots.dll
+0,0x7e63a310,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7e63a458,\\Windows\\Cursors\\aero_up.cur
+0,0x7e63a848,\\Windows\\Cursors\\aero_working.ani
+0,0x7e63ab08,\\Windows\\ServiceProfiles\\LocalService\\AppData\\Local\\lastalive0.dat
+0,0x7e63acf0,\\Windows\\Cursors\\aero_arrow.cur
+0,0x7e643880,\\Endpoint
+0,0x7e644350,\\Windows\\System32\\WlS0WndH.dll
+0,0x7e644988,\\Windows\\AppPatch\\sysmain.sdb
+0,0x7e644ad0,\\Windows\\Cursors\\aero_unavail.cur
+0,0x7e644cb0,\\Windows\\Cursors\\aero_move.cur
+0,0x7e646268,\\InitShutdown
+0,0x7e6463b0,\\InitShutdown
+0,0x7e646590,\\Windows\\Cursors\\aero_link.cur
+0,0x7e646710,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\v8_context_snapshot.bin
+0,0x7e646a78,\\Windows\\Cursors\\aero_pen.cur
+0,0x7e646c58,\\Windows\\Cursors\\aero_helpsel.cur
+0,0x7e646eb8,\\Windows\\System32\\webio.dll
+0,0x7e6481c8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\a4c87a629d28541c_0
+0,0x7e648910,\\Windows\\Globalization\\Sorting\\SortDefault.nls
+0,0x7e6496c0,\\Windows\\System32\\apphelp.dll
+0,0x7e64a760,\\Windows\\System32\\sxs.dll
+0,0x7e64a8d8,\\Windows\\Fonts\\majalla.ttf
+0,0x7e64b038,\\$Directory
+0,0x7e64b318,\\$Directory
+0,0x7e64bc60,\\$Directory
+0,0x7e64bda8,\\Windows\\winsxs\\Manifests\\x86_microsoft.windows.systemcompatible_6595b64144ccf1df_6.0.7600.16385_none_49adccbde8169a03.manifest
+0,0x7e64d348,\\Windows\\System32\\wintrust.dll
+0,0x7e64d400,\\Windows\\winsxs\\Manifests\\x86_microsoft.windows.isolationautomation_6595b64144ccf1df_1.0.0.0_none_35d357a66c38ade4.manifest
+0,0x7e64d760,\\Windows\\System32\\schannel.dll
+0,0x7e64e210,\\Windows\\winsxs\\Manifests\\x86_microsoft.windows.c..-controls.resources_6595b64144ccf1df_5.82.7600.16385_en-us_020378a8991bbcc2.manifest
+0,0x7e64e330,\\Windows\\winsxs\\Manifests\\x86_microsoft.windows.common-controls_6595b64144ccf1df_5.82.7600.16661_none_ebfb56996c72aefc.manifest
+0,0x7e64e588,\\Endpoint
+0,0x7e64ecf8,\\Windows\\System32
+0,0x7e64f3e8,\\Windows\\winsxs\\Manifests\\x86_microsoft.windows.gdiplus_6595b64144ccf1df_1.1.7600.16385_none_72fc7cbf861225ca.manifest
+0,0x7e64f858,\\Windows\\System32\\wship6.dll
+0,0x7e64faa0,\\Windows\\System32\\cryptbase.dll
+0,0x7e64fc98,\\Windows\\winsxs\\Manifests\\x86_microsoft.windows.i..utomation.proxystub_6595b64144ccf1df_1.0.7600.16385_none_9d148a8db8d32238.manifest
+0,0x7e652a08,\\$Directory
+0,0x7e652ef0,\\Windows\\System32\\scext.dll
+0,0x7e6534a0,\\Endpoint
+0,0x7e653c38,\\Windows\\System32\\lsasrv.dll
+0,0x7e654a40,\\Windows\\System32\\sspicli.dll
+0,0x7e654b60,\\Windows\\System32\\lsass.exe
+0,0x7e656038,\\Windows\\System32\\LogFiles\\Scm\\SCM.EVM
+0,0x7e659348,\\$PrepareToShrinkFileSize
+0,0x7e65a1e0,\\Windows\\System32
+0,0x7e65aa78,\\Windows\\System32\\cryptui.dll
+0,0x7e65b0c8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Web Data-journal
+0,0x7e65bd30,\\Windows\\System32\\lsm.exe
+0,0x7e65e660,\\Windows\\Fonts\\StaticCache.dat
+0,0x7e678468,\\Windows\\System32\\wevtapi.dll
+0,0x7e678828,\\Windows\\System32\\sspisrv.dll
+0,0x7e679a50,\\Windows\\System32\\samsrv.dll
+0,0x7e67af80,\\Windows\\System32\\cryptdll.dll
+0,0x7e67bf80,\\Windows\\System32\\ncsi.dll
+0,0x7e67d038,\\Windows\\System32\\authz.dll
+0,0x7e67d398,\\Windows\\System32\\bcrypt.dll
+0,0x7e67ddf0,\\Windows\\System32\\ncrypt.dll
+0,0x7e67f888,\\$Directory
+0,0x7e67fb08,\\Windows\\System32\\nlasvc.dll
+0,0x7e6805b0,\\Windows\\System32\\cngaudit.dll
+0,0x7e680930,\\Windows\\System32\\bcryptprimitives.dll
+0,0x7e6809e8,\\Windows\\win.ini
+0,0x7e681490,\\Windows\\System32\\pku2u.dll
+0,0x7e6817c0,\\Windows\\System32\\propsys.dll
+0,0x7e681c40,\\$Directory
+0,0x7e682470,\\Endpoint
+0,0x7e682798,\\Windows\\System32\\msprivs.dll
+0,0x7e683168,\\Windows\\System32\\negoexts.dll
+0,0x7e683988,\\Windows\\System32
+0,0x7e683bd0,\\Windows\\System32\\netjoin.dll
+0,0x7e684a18,\\Windows\\System32\\wbem\\wbemsvc.dll
+0,0x7e6868e8,\\Windows\\System32\\kerberos.dll
+0,0x7e686f80,\\Windows\\System32\\sysntfy.dll
+0,0x7e6871c0,\\mojo.2728.2868.16515239386985944000
+0,0x7e688028,\\$PrepareToShrinkFileSize
+0,0x7e688c20,\\Windows\\System32\\wmsgapi.dll
+0,0x7e688d48,\\Windows\\System32\\credssp.dll
+0,0x7e68a9b0,\\Windows\\winsxs\\Manifests\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd.manifest
+0,0x7e68b1f8,\\Windows\\System32\\wevtsvc.dll
+0,0x7e68b918,\\Windows\\System32\\en-US\\syncui.dll.mui
+0,0x7e68bb30,\\Windows\\debug\\PASSWD.LOG
+0,0x7e68d170,\\Windows\\System32\\dnsapi.dll
+0,0x7e68eae8,\\Windows\\Fonts\\sserife.fon
+0,0x7e68eda0,\\protected_storage
+0,0x7e68f568,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\ea2a909332ed3f58_0
+0,0x7e68f790,\\Program Files\\AccessData\\FTK Imager\\microsoft.vc90.crt\\Microsoft.VC90.CRT.manifest
+0,0x7e690400,\\Endpoint
+0,0x7e6905f8,\\Windows\\System32\\ole32.dll
+0,0x7e6908f8,\\Windows\\Fonts\\serife.fon
+0,0x7e692450,\\lsass
+0,0x7e692578,\\Windows\\System32
+0,0x7e692630,\\Windows\\System32\\efslsaext.dll
+0,0x7e692788,\\Windows\\System32\\avrt.dll
+0,0x7e693718,\\protected_storage
+0,0x7e693cf8,\\Windows\\System32\\scecli.dll
+0,0x7e696190,\\scerpc
+0,0x7e696248,\\scerpc
+0,0x7e6963b8,\\scerpc
+0,0x7e696a28,\\ntsvcs
+0,0x7e696b98,\\ntsvcs
+0,0x7e696c98,\\ntsvcs
+0,0x7e697038,\\Windows\\Fonts\\lvnm.ttf
+0,0x7e69aaa8,\\Windows\\ServiceProfiles\\LocalService\\NTUSER.DAT
+0,0x7e69bab8,\\Windows\\ServiceProfiles\\LocalService\\NTUSER.DAT.LOG2
+0,0x7e69bf80,\\Windows\\ServiceProfiles\\LocalService\\NTUSER.DAT.LOG1
+0,0x7e69c3c8,\\Endpoint
+0,0x7e69d0b0,\\Windows\\System32\\umpnpmgr.dll
+0,0x7e69e038,\\LSM_API_service
+0,0x7e69e650,\\LSM_API_service
+0,0x7e69e908,\\Windows\\ServiceProfiles\\LocalService\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TMContainer00000000000000000002.regtrans-ms
+0,0x7e69e9c0,\\Endpoint
+0,0x7e69ec98,\\epmapper
+0,0x7e69ed50,\\epmapper
+0,0x7e69ee08,\\Endpoint
+0,0x7e69eec0,\\epmapper
+0,0x7e69fdb0,\\Windows\\System32\\SPInf.dll
+0,0x7e6a11b8,\\Windows\\ServiceProfiles\\LocalService\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TM.blf
+0,0x7e6a1db8,\\LSM_API_service
+0,0x7e6a5e48,\\Windows\\System32
+0,0x7e6a5f00,\\Windows\\System32\\ubpm.dll
+0,0x7e6aef80,\\Winsock2\\CatalogChangeListener-16c-0
+0,0x7e6b02e0,\\Windows\\System32\\version.dll
+0,0x7e6b0498,\\Device\\HarddiskVolume2\\Windows\\ServiceProfiles\\LocalService\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TM
+0,0x7e6b0bb8,\\Windows\\System32\\FirewallAPI.dll
+0,0x7e6b1800,\\Windows\\ServiceProfiles\\LocalService\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TMContainer00000000000000000001.regtrans-ms
+0,0x7e6b1b50,\\Device\\HarddiskVolume2\\Windows\\ServiceProfiles\\LocalService\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TM
+0,0x7e6b2e18,\\Windows\\System32\\audiosrv.dll
+0,0x7e6b3f80,\\$Directory
+0,0x7e6b4038,\\Users\\devmac\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache\\MetaData
+0,0x7e6b5b78,\\Windows\\Fonts\\cordiaui.ttf
+0,0x7e6b6038,\\Endpoint
+0,0x7e6b6a00,\\Endpoint
+0,0x7e6b7038,\\Windows\\Fonts\\kalinga.ttf
+0,0x7e6b8198,\\Windows\\System32\\authui.dll
+0,0x7e6b8b48,\\Winsock2\\CatalogChangeListener-1d8-0
+0,0x7e6b8c80,\\Program Files\\AccessData\\FTK Imager\\microsoft.vc90.mfc\\mfc90u.dll
+0,0x7e6b8f80,\\Windows\\System32\\dwmcore.dll
+0,0x7e6bb138,\\Endpoint
+0,0x7e6bfc38,\\Windows\\System32\\wbem\\wbemess.dll
+0,0x7e6c1ab0,\\eventlog
+0,0x7e6c1b68,\\eventlog
+0,0x7e6c1cd8,\\eventlog
+0,0x7e6c1f80,\\$Directory
+0,0x7e6cace0,\\Windows\\System32\\fundisc.dll
+0,0x7e6cc5d8,\\Windows\\System32\\PSHED.DLL
+0,0x7e6cc8b0,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd\\comctl32.dll
+0,0x7e6cd038,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Kernel-WHEA%4Operational.evtx
+0,0x7e6cd1a8,\\Windows\\System32\\winevt\\Logs\\Internet Explorer.evtx
+0,0x7e6cd9f8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Site Characteristics Database\\LOCK
+0,0x7e6cdc80,\\Windows\\Fonts\\gautamib.ttf
+0,0x7e6ce4c0,\\Program Files\\AccessData\\FTK Imager\\langs\\nld_ftki.dll
+0,0x7e6ceb00,\\Endpoint
+0,0x7e6d05b0,\\Windows\\System32\\hnetcfg.dll
+0,0x7e6d0888,\\Windows\\Fonts\\trado.ttf
+0,0x7e6d0ab8,\\Windows\\System32\\shacct.dll
+0,0x7e6d0f80,\\Windows\\System32\\winevt\\Logs\\System.evtx
+0,0x7e6d12d0,\\Windows\\System32\\catroot2\\{127D0A1D-4EF2-11D1-8608-00C04FC295EE}\\catdb
+0,0x7e6d1a28,\\Windows\\System32\\samlib.dll
+0,0x7e6d28f8,\\Windows\\System32
+0,0x7e6d3738,\\Endpoint
+0,0x7e6d3bf0,\\$Directory
+0,0x7e6d45d8,\\Endpoint
+0,0x7e6d5338,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a
+0,0x7e6d5b90,\\Windows\\System32\\dui70.dll
+0,0x7e6d8380,\\Windows\\System32\\rasdlg.dll
+0,0x7e6d8e98,\\Program Files\\Google\\Chrome\\Application
+0,0x7e6d9210,\\Windows\\System32\\audiodg.exe
+0,0x7e6d9f80,\\Windows\\System32\\winevt\\Logs\\Security.evtx
+0,0x7e6da9e8,\\Windows\\System32\\winevt\\Logs\\HardwareEvents.evtx
+0,0x7e6daaa8,\\Windows\\System32\\microsoft-windows-kernel-power-events.dll
+0,0x7e6daba0,\\Windows
+0,0x7e6daef8,\\espeakertopo
+0,0x7e6db550,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_100_percent.pak
+0,0x7e6db608,\\Windows\\System32\\xmllite.dll
+0,0x7e6dd038,\\Windows\\System32\\SndVolSSO.dll
+0,0x7e6dd7f8,\\Windows\\System32\\hid.dll
+0,0x7e6de360,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\shared_proto_db\\metadata\\LOCK
+0,0x7e6de4d8,\\Windows\\System32\\syncui.dll
+0,0x7e6df368,\\Windows\\System32\\tzres.dll
+0,0x7e6e1590,\\Windows\\System32\\ntmarta.dll
+0,0x7e6e1d38,\\Windows\\System32\\en-US\\audiodg.exe.mui
+0,0x7e6e2190,\\Windows\\System32\\imageres.dll
+0,0x7e6ec430,\\Windows\\System32\\WindowsCodecs.dll
+0,0x7e6eca28,\\espeakertopo
+0,0x7e6ecd70,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_1024.db
+0,0x7e6ecef0,\\Users\\devmac\\Downloads
+0,0x7e6ed658,\\Windows\\System32\\wkscli.dll
+0,0x7e6f0f80,\\Windows\\System32\\nlaapi.dll
+0,0x7e6f1ab0,\\Windows\\System32\\themeservice.dll
+0,0x7e6f2a40,\\Windows\\System32\\atl.dll
+0,0x7e6f2f50,\\Windows\\System32\\profsvc.dll
+0,0x7e6f3860,\\Windows\\System32\\dsrole.dll
+0,0x7e6f4f80,\\Windows\\System32\\slc.dll
+0,0x7e6f52a8,\\emicinwave
+0,0x7e6f5488,\\emicintopo
+0,0x7e6f55e0,\\Windows\\System32\\gpsvc.dll
+0,0x7e6f5d40,\\$Directory
+0,0x7e6f75f0,\\Windows\\System32\\winmm.dll
+0,0x7e6f8610,\\Windows\\System32\\shell32.dll
+0,0x7e6f9c48,\\Windows\\System32\\ksuser.dll
+0,0x7e6fa978,\\$Directory
+0,0x7e6faf30,\\Windows\\System32\\wdmaud.drv
+0,0x7e6fbf80,\\Windows\\System32
+0,0x7e6fed60,\\Program Files\\AccessData\\FTK Imager\\boost_date_time-vc90-mt-1_39.dll
+0,0x7e6ff308,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010002.ci
+0,0x7e6ff868,\\Windows\\System32\\en-US\\wdmaud.drv.mui
+0,0x7e6ffdc8,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_287833031\\manifest.fingerprint
+0,0x7e700348,\\Windows\\System32\\es.dll
+0,0x7e701278,\\Windows\\System32\\msacm32.drv
+0,0x7e701968,\\Windows\\System32\\AudioSes.dll
+0,0x7e701a50,\\Windows\\System32\\midimap.dll
+0,0x7e701ec8,\\Windows\\System32\\msacm32.dll
+0,0x7e702038,\\Windows\\System32\\en-US\\MMDevAPI.dll.mui
+0,0x7e7025c0,\\$Directory
+0,0x7e702678,\\Windows\\inf\\hdaudio.PNF
+0,0x7e702e18,\\$Directory
+0,0x7e703cd8,\\Program Files\\AccessData\\FTK Imager\\microsoft.vc90.mfc
+0,0x7e7049b8,\\Windows\\Fonts\\times.ttf
+0,0x7e704f08,\\Windows\\Fonts\\Vani.ttf
+0,0x7e705948,\\Windows\\bootstat.dat
+0,0x7e705cd8,\\Windows\\System32\\Sens.dll
+0,0x7e709cd0,\\Endpoint
+0,0x7e70a690,\\Windows\\System32\\nsisvc.dll
+0,0x7e70a7f8,\\Windows\\System32\\npmproxy.dll
+0,0x7e70b8d0,\\Windows\\System32\\AudioEng.dll
+0,0x7e70c978,\\Windows\\System32\\uxsms.dll
+0,0x7e70ca30,\\Windows\\System32\\comres.dll
+0,0x7e70cae8,\\Windows\\System32\\wtsapi32.dll
+0,0x7e70d6b8,\\Windows\\System32\\lmhsvc.dll
+0,0x7e70f570,\\Windows\\System32\\winnsi.dll
+0,0x7e70f7d8,\\Windows\\System32\\wdiasqmmodule.dll
+0,0x7e70f8f8,\\Windows\\System32\\IPHLPAPI.DLL
+0,0x7e710a48,\\Windows\\Branding\\Basebrd\\basebrd.dll
+0,0x7e711348,\\Windows\\System32\\dhcpcore6.dll
+0,0x7e711878,\\Windows\\System32\\winbrand.dll
+0,0x7e711de8,\\Windows\\System32\\PortableDeviceConnectApi.dll
+0,0x7e711ea0,\\Windows\\System32\\nrpsrv.dll
+0,0x7e712a58,\\Windows\\System32\\AUDIOKSE.dll
+0,0x7e712c30,\\Windows\\System32\\dhcpcore.dll
+0,0x7e716238,\\Windows\\System32\\BioCredProv.dll
+0,0x7e71b558,\\Windows\\System32\\winbio.dll
+0,0x7e71ba70,\\Windows\\System32
+0,0x7e71ca10,\\Windows\\Fonts\\KhmerUIb.ttf
+0,0x7e71ccd0,\\Windows\\System32\\credui.dll
+0,0x7e71d188,\\$Directory
+0,0x7e71e330,\\Windows\\System32\\netapi32.dll
+0,0x7e71e7e8,\\Windows\\System32\\vaultcli.dll
+0,0x7e71e9b0,\\Windows\\System32\\dnsrslvr.dll
+0,0x7e71ea70,\\Users\\devmac\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TM.blf
+0,0x7e71f188,\\Windows\\System32\\netutils.dll
+0,0x7e71f240,\\Windows\\System32\\fvecerts.dll
+0,0x7e71f368,\\Windows\\System32\\wfp\\wfpdiag.etl
+0,0x7e71fb18,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e71fe88,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat.LOG1
+0,0x7e720188,\\Windows\\System32\\FWPUCLNT.DLL
+0,0x7e720240,\\Windows\\System32\\certCredProvider.dll
+0,0x7e720ad0,\\Windows\\System32\\samcli.dll
+0,0x7e720c40,\\Windows\\System32\\rasman.dll
+0,0x7e721560,\\Windows\\System32\\drivers\\etc
+0,0x7e7221d8,\\Windows\\System32\\dnsext.dll
+0,0x7e7224b8,\\Windows\\System32\\WMALFXGFXDSP.dll
+0,0x7e723328,\\Windows\\System32\\rasplap.dll
+0,0x7e7236d0,\\Windows\\System32\\wlanutil.dll
+0,0x7e724308,\\Windows\\System32\\corpol.dll
+0,0x7e7248a8,\\Windows\\System32\\wscui.cpl
+0,0x7e724960,\\Windows\\System32\\mfplat.dll
+0,0x7e72dbf8,\\Windows\\System32\\dhcpcsvc.dll
+0,0x7e72e708,\\Windows\\Fonts\\StaticCache.dat
+0,0x7e72eec8,\\Windows\\System32\\rasapi32.dll
+0,0x7e72ef80,\\Windows\\System32\\rtutils.dll
+0,0x7e72ff80,\\Windows\\System32\\d3d10_1core.dll
+0,0x7e730680,\\Windows\\System32\\ktmw32.dll
+0,0x7e7315d0,\\Windows\\System32\\schedsvc.dll
+0,0x7e7318a8,\\Windows\\System32\\dhcpcsvc6.dll
+0,0x7e7325a8,\\Windows\\System32\\en-US\\FXSRESM.dll.mui
+0,0x7e734458,\\Windows\\System32\\input.dll
+0,0x7e7349c8,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7e736550,\\Windows\\System32\\StructuredQuery.dll
+0,0x7e736988,\\Windows\\System32\\UXInit.dll
+0,0x7e737d60,\\$Directory
+0,0x7e738ed8,\\Program Files\\Windows NT\\TableTextService\\TableTextService.dll
+0,0x7e73a148,\\Windows\\System32\\taskcomp.dll
+0,0x7e73a270,\\Windows\\System32\\cscapi.dll
+0,0x7e73a858,\\Users\\devmac\\ntuser.dat.LOG2
+0,0x7e73b3e8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\88b06ddd231669de_0
+0,0x7e73c190,\\lsass
+0,0x7e73c518,\\Device\\HarddiskVolume2\\Users\\devmac\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TM
+0,0x7e73c700,\\Users\\devmac\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TMContainer00000000000000000002.regtrans-ms
+0,0x7e73cad0,\\lsass
+0,0x7e73e038,\\Endpoint
+0,0x7e73e300,\\Windows\\System32\\mmres.dll
+0,0x7e73e3b8,\\Windows\\System32\\tbs.dll
+0,0x7e73e738,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Session Storage\\000003.log
+0,0x7e73ea88,\\Windows\\System32\\schtasks.exe
+0,0x7e73f038,\\Endpoint
+0,0x7e73f1d8,\\atsvc
+0,0x7e73f290,\\Windows\\Tasks
+0,0x7e73fe10,\\atsvc
+0,0x7e73fec8,\\atsvc
+0,0x7e7404a8,\\Endpoint
+0,0x7e742f80,\\$Directory
+0,0x7e744208,\\Winsock2\\CatalogChangeListener-33c-0
+0,0x7e744f40,\\Windows\\Tasks\\SCHEDLGU.TXT
+0,0x7e74a7a0,\\Windows\\System32\\spoolsv.exe
+0,0x7e74e338,\\Windows\\Fonts\\couri.ttf
+0,0x7e74e4e8,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Deployment\\17acef277a65333d0cd2003266af184d\\System.Deployment.ni.dll
+0,0x7e74e620,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\Temp\\ZAP2551.tmp\\System.Workflow.Activities.dll
+0,0x7e7583c8,\\Windows\\System32\\cscapi.dll
+0,0x7e759f08,\\$Directory
+0,0x7e75a038,\\Windows\\Fonts\\LaoUIb.ttf
+0,0x7e75af40,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e75c708,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_367089618\\manifest.fingerprint
+0,0x7e75d650,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_idx.db
+0,0x7e75ea10,\\Windows\\System32\\LogFiles\\Scm\\071d41b6-8806-4eb0-b661-6cb67be6e86e
+0,0x7e75fab8,\\Windows\\Fonts\\himalaya.ttf
+0,0x7e75ff80,\\Windows\\System32\\LogFiles\\Scm\\0d9b5d92-3a22-486d-a887-3aa21597cf27
+0,0x7e761660,\\Windows\\System32\\LogFiles\\Scm\\18e6d428-d26c-4169-bedf-3b5bddc952f6
+0,0x7e761b58,\\Windows\\System32\\regsvr32.exe
+0,0x7e761f80,\\Windows\\System32\\en-US\\urlmon.dll.mui
+0,0x7e763550,\\Windows\\System32
+0,0x7e764038,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\34ad5546797b1f9e_0
+0,0x7e7649a8,\\mojo.2728.2868.16371039004622859213
+0,0x7e765968,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\745880b7bdc02d04_0
+0,0x7e767b38,\\$Directory
+0,0x7e76a198,\\Windows\\System32\\WFSR.dll
+0,0x7e76ae80,\\Windows\\System32\\BFE.DLL
+0,0x7e76c870,\\Windows\\Fonts\\couri.ttf
+0,0x7e76cad0,\\Windows\\Fonts\\euphemia.ttf
+0,0x7e76cca0,\\Users\\devmac\\AppData\\Local\\Google\\Software Reporter Tool\\software_reporter_tool-crashpad.log
+0,0x7e76e650,\\Windows\\System32\\iertutil.dll
+0,0x7e76ec10,\\Windows\\System32\\LogFiles\\Scm\\6b7ac694-8d6d-481b-9dd8-2a3a741ada6d
+0,0x7e76fbe0,\\Windows\\System32\\LogFiles\\Scm\\a1cfa52f-06f2-418d-addb-cd6456d66f43
+0,0x7e76fc98,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\WebStorage\\QuotaManager-journal
+0,0x7e770658,\\$Directory
+0,0x7e7709d0,\\Windows\\System32\\LogFiles\\Scm\\a316e645-1c56-45a6-bd6a-7dca79778090
+0,0x7e7713f0,\\$Directory
+0,0x7e771698,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Kernel-StoreMgr%4Operational.evtx
+0,0x7e771e50,\\Windows\\System32\\LogFiles\\Scm\\9efacbe6-a797-4905-a0c6-014cd3000dbb
+0,0x7e7723a0,\\Windows\\System32\\mapi32.dll
+0,0x7e774b70,\\Windows\\System32\\LogFiles\\Scm\\a6394592-54ce-4e93-8d64-1a068f462632
+0,0x7e775378,\\Users\\devmac\\ntuser.dat.LOG1
+0,0x7e775470,\\Windows\\System32\\LogFiles\\Scm\\d21f6024-191f-4454-bbbc-09a650da2549
+0,0x7e7756f8,\\Program Files\\Common Files\\System\\wab32.dll
+0,0x7e7757b0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\SwReporter\\107.294.200\\software_reporter_tool.exe
+0,0x7e7758d0,\\Windows\\System32\\LogFiles\\Scm\\b9bee219-c29e-4310-819c-147a5a0e045e
+0,0x7e775d90,\\ProgramData\\Microsoft\\Windows\\Caches\\{6AF0698E-D558-4F6E-9B3C-3716689AF493}.2.ver0x0000000000000003.db
+0,0x7e776a88,\\$Directory
+0,0x7e7779f8,\\Windows\\System32\\microsoft-windows-kernel-processor-power-events.dll
+0,0x7e777ab0,\\Windows\\System32\\LogFiles\\Scm\\d8bb5b7f-d0ca-4f67-a3d7-73e1d05f63da
+0,0x7e7786b8,\\Windows\\Fonts\\mangalb.ttf
+0,0x7e778c98,\\$Directory
+0,0x7e7793c0,\\ProgramData\\Microsoft\\User Account Pictures\\user.bmp
+0,0x7e77a1a8,\\ProgramData\\Microsoft\\Windows\\Caches\\cversions.2.db
+0,0x7e77a5b0,\\wkssvc
+0,0x7e77ac18,\\Windows\\System32\\imageres.dll
+0,0x7e77b218,\\$Directory
+0,0x7e77b2d0,\\$Directory
+0,0x7e77eef8,\\ProgramData\\Microsoft\\Windows\\Caches\\{DDF571F2-BE98-426D-8288-1A9A39C3FDA2}.2.ver0x0000000000000001.db
+0,0x7e77f7d8,\\$Directory
+0,0x7e780320,\\Windows\\System32\\MPSSVC.dll
+0,0x7e781b90,\\Program Files\\Google\\Update\\1.3.36.152
+0,0x7e788568,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll
+0,0x7e78ae70,\\Windows\\System32\\wkssvc.dll
+0,0x7e78d408,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Dhcpv6-Client%4Admin.evtx
+0,0x7e78dea0,\\Windows\\System32\\msxml6r.dll
+0,0x7e790468,\\Windows\\System32\\cryptsvc.dll
+0,0x7e7911e8,\\Windows\\System32\\wfapigp.dll
+0,0x7e7940b8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7e794530,\\Windows\\System32\\dps.dll
+0,0x7e794828,\\keysvc
+0,0x7e794950,\\Windows\\System32\\vsstrace.dll
+0,0x7e795358,\\keysvc
+0,0x7e795580,\\keysvc
+0,0x7e795810,\\Windows\\System32\\vssapi.dll
+0,0x7e795f80,\\Windows\\System32
+0,0x7e796d40,\\Windows\\System32\\taskschd.dll
+0,0x7e7985c8,\\Program Files\\AccessData\\FTK Imager\\boost_thread-vc90-mt-1_39.dll
+0,0x7e7989a8,\\Windows\\System32\\tsgqec.dll
+0,0x7e799ec8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7e79a7f0,\\Windows\\System32\\webservices.dll
+0,0x7e79a968,\\Windows\\Fonts\\cordiaub.ttf
+0,0x7e79af80,\\Windows\\System32\\FDResPub.dll
+0,0x7e79bec8,\\Windows\\System32\\winhttp.dll
+0,0x7e79bf80,\\Windows\\System32\\WSDApi.dll
+0,0x7e79ceb0,\\Windows\\System32\\es.dll
+0,0x7e79f420,\\Windows\\System32\\wkscli.dll
+0,0x7e79f540,\\System Volume Information\\tracking.log
+0,0x7e79f6f8,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e7a0638,\\Windows\\System32\\ssdpapi.dll
+0,0x7e7a2a88,\\Windows\\System32\\sysmain.dll
+0,0x7e7a2ec8,\\Windows\\System32\\wbem\\esscli.dll
+0,0x7e7b1180,\\$Directory
+0,0x7e7b5c28,\\Windows\\System32\\srvsvc.dll
+0,0x7e7ba1c0,\\Windows\\System32\\resutils.dll
+0,0x7e7ba278,\\Windows\\System32\\ntdsapi.dll
+0,0x7e7ba740,\\trkwks
+0,0x7e7bac18,\\Windows\\System32\\mscms.dll
+0,0x7e7bb200,\\Windows\\System32\\sfc.dll
+0,0x7e7bb388,\\Windows\\System32\\wbem\\MOF
+0,0x7e7bb620,\\Windows\\System32\\browser.dll
+0,0x7e7bb7f8,\\$Extend\\$ObjId
+0,0x7e7bc2b0,\\Windows\\System32\\sqmapi.dll
+0,0x7e7bcc30,\\Program Files\\Internet Explorer\\iexplore.exe
+0,0x7e7bd540,\\Windows\\System32\\wbem\\fastprox.dll
+0,0x7e7bd718,\\$Directory
+0,0x7e7bd800,\\$MapAttributeValue
+0,0x7e7bdec8,\\Windows\\System32\\pcasvc.dll
+0,0x7e7be478,\\$Directory
+0,0x7e7be798,\\Windows\\System32\\wbem\\WinMgmtR.dll
+0,0x7e7bea80,\\$Directory
+0,0x7e7bf270,\\Windows\\System32\\iphlpsvc.dll
+0,0x7e7bf690,\\Windows\\System32\\trkwks.dll
+0,0x7e7bfc98,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_100_percent.pak
+0,0x7e7bfd50,\\Windows\\System32\\wbemcomn.dll
+0,0x7e7c06b8,\\Windows\\System32\\wdscore.dll
+0,0x7e7c1438,\\Windows\\System32\\netmsg.dll
+0,0x7e7c2458,\\Windows\\System32\\wbem\\WmiDcPrv.dll
+0,0x7e7c3268,\\Windows\\Fonts\\symbol.ttf
+0,0x7e7c5a28,\\trkwks
+0,0x7e7c63d0,\\Windows\\System32\\ndiscapCfg.dll
+0,0x7e7c66c8,\\Windows\\Fonts\\browa.ttf
+0,0x7e7c6ac0,\\Windows\\System32\\taskeng.exe
+0,0x7e7c6b78,\\Windows\\System32\\clusapi.dll
+0,0x7e7c7880,\\$Directory
+0,0x7e7c7938,\\Windows\\System32\\sscore.dll
+0,0x7e7c7c10,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\History\\History.IE5\\index.dat
+0,0x7e7c7d38,\\Windows\\Fonts\\cour.ttf
+0,0x7e7c7df0,\\Windows\\System32\\rascfg.dll
+0,0x7e7c9038,\\$Directory
+0,0x7e7c9768,\\Windows\\Fonts\\andlso.ttf
+0,0x7e7ca968,\\Windows\\System32\\wbem\\wbemprox.dll
+0,0x7e7cab48,\\Windows\\Fonts\\ntailu.ttf
+0,0x7e7cb8b8,\\Windows\\System32\\winevt\\Logs\\Setup.evtx
+0,0x7e7cbbe0,\\Windows\\Fonts
+0,0x7e7ceec8,\\Windows\\Fonts\\simpbdo.ttf
+0,0x7e7cfb00,\\
+0,0x7e7d0850,\\Windows\\System32\\wbem\\WMIsvc.dll
+0,0x7e7d0f30,\\Windows\\System32\\stdole2.tlb
+0,0x7e7d1f80,\\$Directory
+0,0x7e7d3038,\\Windows\\Fonts\\angsaub.ttf
+0,0x7e7d31e8,\\Windows\\Fonts\\angsaui.ttf
+0,0x7e7d3ec8,\\Windows\\Fonts\\gishabd.ttf
+0,0x7e7d3f80,\\Windows\\Fonts\\kokila.ttf
+0,0x7e7d41a0,\\Windows\\Fonts\\simpo.ttf
+0,0x7e7d46a8,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a
+0,0x7e7d4760,\\Windows\\System32\\netprofm.dll
+0,0x7e7d57c0,\\Endpoint
+0,0x7e7d5880,\\Windows\\System32\\en-US\\umpnpmgr.dll.mui
+0,0x7e7d5a98,\\Windows\\Fonts\\kokilabi.ttf
+0,0x7e7d6268,\\Windows\\Fonts\\kokilai.ttf
+0,0x7e7d6610,\\Windows\\System32\\netcfgx.dll
+0,0x7e7d68d8,\\Windows\\System32\\wbem\\wbemcore.dll
+0,0x7e7d6bc0,\\Windows\\System32\\nci.dll
+0,0x7e7da310,\\Windows\\System32\\profapi.dll
+0,0x7e7da7b0,\\Windows\\System32\\sstpsvc.dll
+0,0x7e7daf80,\\Windows\\Fonts\\arabtype.ttf
+0,0x7e7dbf80,\\Windows\\System32\\winnsi.dll
+0,0x7e7dc4c0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\97d2a94cf707a9d6_0
+0,0x7e7dc870,\\Windows\\System32\\wbem\\Repository\\MAPPING1.MAP
+0,0x7e7dcef0,\\Program Files\\AccessData\\FTK Imager\\ADIsoDLL.dll
+0,0x7e7dd868,\\mojo.2728.2716.16161054240589156774
+0,0x7e7ddd58,\\Windows\\System32\\wbem\\Repository\\MAPPING2.MAP
+0,0x7e7de1b0,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7e7e4348,\\$Directory
+0,0x7e7e76d0,\\Windows\\Fonts\\kartika.ttf
+0,0x7e7e8e58,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7e7ee7c8,\\Windows\\System32\\wbem\\wmiutils.dll
+0,0x7e7efb50,\\Windows\\System32\\netutils.dll
+0,0x7e7efd78,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a
+0,0x7e7f0500,\\Windows\\System32\\wbem\\Repository\\MAPPING3.MAP
+0,0x7e7f0860,\\Windows\\System32\\wbem\\Repository\\INDEX.BTR
+0,0x7e7f09a8,\\Windows\\System32\\wbem\\Repository\\OBJECTS.DATA
+0,0x7e7f5d68,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\optimization_guide_prediction_model_downloads\\4e5fd093-d74f-48d8-b158-1d39cd6c232c\\model.tflite
+0,0x7e7f5f80,\\$Directory
+0,0x7ebfbbe0,\\Windows\\System32\\config\\RegBack\\SOFTWARE
+0,0x7ebfbd50,\\Windows\\System32\\config\\SECURITY
+0,0x7ec10ec8,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\desktop.ini
+0,0x7ec110e8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\92747788d09d64d8_0
+0,0x7ec11230,\\Windows\\System32\\mmres.dll
+0,0x7ec114c0,\\Windows\\System32\\wpccpl.dll
+0,0x7ec118b8,\\Windows\\System32\\OobeFldr.dll
+0,0x7ec19e18,\\Windows\\Vss\\Writers\\System\\D61D61C8-D73A-4EEE-8CDD-F6F9786B7124.xml
+0,0x7ec1e038,\\Windows\\Cursors\\aero_ew.cur
+0,0x7ec1e1c0,\\Windows\\Cursors\\aero_ns.cur
+0,0x7ec1ec00,\\Windows\\Cursors\\aero_nesw.cur
+0,0x7ec1eeb8,\\Windows\\Cursors\\aero_nwse.cur
+0,0x7ec22028,\\$LogFile
+0,0x7ec22180,\\Windows\\Installer\\{81BF3DDF-C290-485D-9A0F-DBD3A4BBD0C8}\\producticon
+0,0x7ec24148,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_2144637776\\manifest.fingerprint
+0,0x7ec24ac8,\\Users\\devmac\\Desktop
+0,0x7ec293e8,\\Windows\\System32\\dllhost.exe
+0,0x7ec387e8,\\ProgramData\\Microsoft\\Windows\\Start Menu
+0,0x7ec3c2d0,\\Windows\\Fonts\\segoeuiz.ttf
+0,0x7ec41900,\\Windows\\System32\\msasn1.dll
+0,0x7ec45968,\\Windows\\Fonts\\seguisym.ttf
+0,0x7ec529a0,\\Windows\\Fonts\\courbi.ttf
+0,0x7ec57a00,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Local Storage\\leveldb\\CURRENTdbtmp
+0,0x7ec5b608,\\mojo.2728.2868.12067071095771030498
+0,0x7ec5bb28,\\Windows\\System32\\virtdisk.dll
+0,0x7ec5d470,\\Windows\\System32\\catroot\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\Package_2_for_KB2286198~31bf3856ad364e35~x86~~6.1.1.1.cat
+0,0x7ec5d838,\\Windows\\System32\\msimg32.dll
+0,0x7ec5e4e8,\\Endpoint
+0,0x7ec5e938,\\Endpoint
+0,0x7ec5eef0,\\Endpoint
+0,0x7ec625c8,\\Windows\\System32\\dciman32.dll
+0,0x7ec65470,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\61d97fdd76487e34_0
+0,0x7ec659f8,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7ec66720,\\Windows\\System32\\wbem\\WmiPrvSE.exe
+0,0x7ec668f8,\\Windows\\System32\\catroot\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\Package_2_for_KB2296011~31bf3856ad364e35~x86~~6.1.1.0.cat
+0,0x7ec71400,\\Windows\\System32\\en-US\\bthprops.cpl.mui
+0,0x7ec71710,\\Endpoint
+0,0x7ec71d58,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7ec71e10,\\Endpoint
+0,0x7ec71f80,\\Endpoint
+0,0x7ec87200,\\Windows\\System32\\comctl32.dll
+0,0x7ec87588,\\Windows\\System32\\fveui.dll
+0,0x7ec878e8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\ghbmnnjooekpmoecnnnilnnbdlolhkhi\\1.60.0_0\\page_embed_script.js
+0,0x7ec87a78,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\b4bf7d28b1595f13_0
+0,0x7ec88d70,\\$Directory
+0,0x7ec8e4b0,\\Windows\\System32\\IKEEXT.DLL
+0,0x7ec8eef0,\\Windows\\System32\\NlsLexicons001b.dll
+0,0x7ec94938,\\$Directory
+0,0x7ec94e28,\\Windows\\Fonts\\msgothic.ttc
+0,0x7ec94f80,\\Windows\\System32\\sysclass.dll
+0,0x7eca4f80,\\Windows\\System32\\catroot\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\Package_2_for_KB980408~31bf3856ad364e35~x86~~6.1.1.0.cat
+0,0x7ecae7b0,\\Windows\\System32\\wbem\\wmipcima.dll
+0,0x7ecaeb50,\\Windows\\System32\\ieapfltr.dll
+0,0x7ecaec08,\\Windows\\System32
+0,0x7ecb28c8,\\Windows\\System32\\catroot\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\Package_3_for_KB2416400~31bf3856ad364e35~x86~~6.1.1.2.cat
+0,0x7ecb2a18,\\Windows\\System32\\autoplay.dll
+0,0x7ecb6538,\\$ConvertToNonresident
+0,0x7ecbfbd0,\\Windows\\System32\\WinSCard.dll
+0,0x7ecc41d0,\\$Mft
+0,0x7eccbb78,\\Windows\\System32\\clbcatq.dll
+0,0x7eccbc30,\\Windows\\System32\\p2pcollab.dll
+0,0x7ecd85c8,\\$Directory
+0,0x7ecdae60,\\Program Files\\Google\\Chrome\\Temp\\source3948_661393057\\Chrome-bin\\109.0.5414.120\\chrome_200_percent.pak
+0,0x7eced830,\\Windows\\System32\\cryptnet.dll
+0,0x7ed02190,\\Windows\\System32\\QAGENTRT.DLL
+0,0x7ed03908,\\$Directory
+0,0x7ed11888,\\Windows\\System32\\wiarpc.dll
+0,0x7ed11b90,\\Windows\\System32\\wbem\\repdrvfs.dll
+0,0x7ed11c48,\\Windows\\System32\\fveapi.dll
+0,0x7ed26720,\\$Directory
+0,0x7ed3a198,\\Windows\\Fonts\\simfang.ttf
+0,0x7ed3a330,\\Windows\\Fonts\\angsau.ttf
+0,0x7ed43238,\\Windows\\System32\\dwmapi.dll
+0,0x7ed43e88,\\ProgramData\\Microsoft\\Windows\\Start Menu
+0,0x7ed474d0,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_113514081\\manifest.fingerprint
+0,0x7ed4ab88,\\Windows\\Fonts\\kartikab.ttf
+0,0x7ed58570,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\v8_context_snapshot.bin
+0,0x7ed5f790,\\Windows\\System32\\bitsigd.dll
+0,0x7ed7bbe0,\\srvsvc
+0,0x7ed829c8,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-User Profile Service%4Operational.evtx
+0,0x7ed87200,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\efefcfe0f5372f98_0
+0,0x7ed87748,\\Endpoint
+0,0x7ed87af8,\\Windows\\System32\\mprmsg.dll
+0,0x7ed87f80,\\Windows\\System32\\mprapi.dll
+0,0x7ed88668,\\Windows\\System32\\tcpipcfg.dll
+0,0x7ed89170,\\Windows\\System32\\urlmon.dll
+0,0x7ed8b310,\\Windows\\System32\\httpapi.dll
+0,0x7ed95a70,\\Windows\\System32\\msxml6.dll
+0,0x7ed97f80,\\Windows\\System32\\icardres.dll
+0,0x7ed98f80,\\Users\\Public\\Desktop
+0,0x7ed992e8,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-NetworkProfile%4Operational.evtx
+0,0x7ed99da8,\\Windows\\System32\\wbem\\WmiPrvSD.dll
+0,0x7edb4e68,\\Windows\\System32\\rasadhlp.dll
+0,0x7edcc390,\\Windows\\System32\\en-US\\NetworkExplorer.dll.mui
+0,0x7edd8e48,\\Windows\\Fonts\\seguisym.ttf
+0,0x7eddc9c0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\6bd52ad9fa9447f5_0
+0,0x7ede3e00,\\Windows\\System32\\uxtheme.dll
+0,0x7ede94d8,\\Users\\desktop.ini
+0,0x7edec320,\\Windows\\System32\\apisetschema.dll
+0,0x7edf4dc8,\\Windows\\System32\\propsys.dll
+0,0x7edfe620,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_96.db
+0,0x7edfe950,\\System Volume Information\\{d5eb5686-cdb8-11ed-82bc-08002713084b}{3808876b-c176-4e48-b7ae-04046e6cc752}
+0,0x7ee00af8,\\$ConvertToNonresident
+0,0x7ee20c70,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_256.db
+0,0x7ee20d28,\\Windows\\System32\\davclnt.dll
+0,0x7ee3f6d8,\\wkssvc
+0,0x7ee3fad8,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7ee4f028,\\Windows\\System32\\apisetschema.dll
+0,0x7ee5b668,\\ProtectedPrefix\\NetWorkService
+0,0x7ee5b720,\\ProtectedPrefix\\NetWorkService
+0,0x7ee5bac0,\\ProtectedPrefix\\LocalService
+0,0x7ee5bb78,\\ProtectedPrefix\\LocalService
+0,0x7ee5bc30,\\ProtectedPrefix\\Administrators
+0,0x7ee5bce8,\\ProtectedPrefix\\Administrators
+0,0x7ee5be18,\\Windows
+0,0x7ee60cf0,\\Windows\\System32\\config\\SOFTWARE
+0,0x7ee61e30,\\Windows\\System32\\config\\SYSTEM.LOG2
+0,0x7ee68f80,\\$MftMirr
+0,0x7ee6af80,\\Windows\\System32\\smss.exe
+0,0x7ee6bf80,\\$LogFile
+0,0x7ee6ceb8,\\$Extend\\$RmMetadata\\$TxfLog\\$TxfLogContainer00000000000000000002
+0,0x7ee71528,\\$Mft
+0,0x7ee71d10,\\$BitMap
+0,0x7ee7b6e0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\55583b2c3a3299ee_0
+0,0x7ee7be20,\\Windows\\System32\\mssrch.dll
+0,0x7ee7c940,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\586643832c339202_0
+0,0x7ee7ce60,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\9c7d7391455f2be1_0
+0,0x7ee7d790,\\Windows\\System32
+0,0x7ee7e260,\\$Directory
+0,0x7ee7e320,\\Windows\\System32
+0,0x7ee7edd0,\\$Directory
+0,0x7ee7f028,\\Device\\HarddiskVolume1\\$Extend\\$RmMetadata\\$TxfLog\\$TxfLog
+0,0x7ee83200,\\Windows\\Fonts\\lvnmbd.ttf
+0,0x7ee834c8,\\$Directory
+0,0x7ee844b0,\\ProtectedPrefix
+0,0x7ee84568,\\ProtectedPrefix
+0,0x7ee93880,\\$Directory
+0,0x7ee94408,\\$Extend\\$RmMetadata\\$TxfLog\\$TxfLogContainer00000000000000000001
+0,0x7ee958c0,\\$Directory
+0,0x7ee95968,\\$Extend\\$RmMetadata\\$TxfLog\\$TxfLog.blf
+0,0x7ee97298,\\Boot\\BCD.LOG
+0,0x7ee977c0,\\protected_storage
+0,0x7ee981c0,\\Windows\\System32\\urlmon.dll
+0,0x7ee98488,TxfLog
+0,0x7ee9b3f8,\\Windows\\System32\\ole32.dll
+0,0x7ee9bb88,\\$Directory
+0,0x7ee9d250,\\Device\\HarddiskVolume1\\$Extend\\$RmMetadata\\$TxfLog\\$TxfLog
+0,0x7ee9daa8,\\Device\\HarddiskVolume1\\$Extend\\$RmMetadata\\$TxfLog\\$TxfLog
+0,0x7eea2168,\\$Directory
+0,0x7eea3420,\\Windows\\System32\\usp10.dll
+0,0x7eea3638,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\a54c7262e2ddcded_0
+0,0x7eea3be0,\\Windows\\Fonts\\frank.ttf
+0,0x7eea3dc8,\\Windows\\Fonts\\tradbdo.ttf
+0,0x7eea3ed8,\\Windows\\System32\\config\\TxR\\{6cced301-6e01-11de-8bed-001e0bcd1824}.TMContainer00000000000000000002.regtrans-ms
+0,0x7eea5028,KtmLog
+0,0x7eea9f80,\\Windows\\System32\\config\\SOFTWARE.LOG2
+0,0x7eeab470,\\Windows\\System32\\KernelBase.dll
+0,0x7eeab6c8,\\Windows\\System32\\crypt32.dll
+0,0x7eeabee0,\\Windows\\System32\\gdi32.dll
+0,0x7eeac418,\\Windows\\System32\\msvcrt.dll
+0,0x7eeac770,\\Windows\\System32\\config\\RegBack\\SECURITY
+0,0x7eeacf80,\\Windows\\System32\\config\\SYSTEM.LOG1
+0,0x7eead328,\\Windows\\System32\\ws2_32.dll
+0,0x7eeada58,\\$Directory
+0,0x7eeaf038,\\Windows\\System32\\setupapi.dll
+0,0x7eeaf330,\\Windows\\System32\\shlwapi.dll
+0,0x7eeaf760,\\Windows\\System32\\psapi.dll
+0,0x7eeafce8,\\Windows\\System32\\wininet.dll
+0,0x7eeb0390,\\Windows\\System32\\winsrv.dll
+0,0x7eeb0570,\\Windows\\System32\\winevt\\Logs\\Application.evtx
+0,0x7eeb0e70,\\Windows\\System32\\secur32.dll
+0,0x7eeb18e8,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7eeb1a10,\\Windows\\Fonts\\msmincho.ttc
+0,0x7eeb1ab8,\\Windows\\System32\\config\\SOFTWARE.LOG1
+0,0x7eeb7298,\\Windows\\System32\\devobj.dll
+0,0x7eeb9a50,\\Windows\\System32\\config\\SAM.LOG1
+0,0x7eeb9bd0,\\Windows\\System32\\msctf.dll
+0,0x7eeb9de0,\\Windows\\System32\\difxapi.dll
+0,0x7eeba990,\\Windows\\System32\\config\\TxR\\{6cced301-6e01-11de-8bed-001e0bcd1824}.TMContainer00000000000000000001.regtrans-ms
+0,0x7eebae20,\\Windows\\System32\\pngfilt.dll
+0,0x7eebb1a0,\\Windows\\System32\\en-US\\sxs.dll.mui
+0,0x7eebb390,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GCM Store\\MANIFEST-000002
+0,0x7eebb500,\\Windows\\System32\\user32.dll
+0,0x7eebb8b8,\\Windows\\System32\\rpcrt4.dll
+0,0x7eebbdc0,\\Windows\\System32\\Wldap32.dll
+0,0x7eebd440,\\SystemRoot\\System32\\Config\\TxR\\{6cced301-6e01-11de-8bed-001e0bcd1824}.TM
+0,0x7eebd7e8,\\Windows\\System32\\imagehlp.dll
+0,0x7eebf540,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7eebfa50,\\Windows\\Fonts\\nrkis.ttf
+0,0x7eebfb48,\\Windows\\Fonts\\simhei.ttf
+0,0x7eebfd60,\\Windows\\System32\\wbem\\WMIADAP.exe
+0,0x7eec0038,\\Windows\\System32\\lpk.dll
+0,0x7eec13c0,\\Windows\\System32\\cfgmgr32.dll
+0,0x7eec14e0,\\Windows\\System32\\wintrust.dll
+0,0x7eec1c88,\\Windows\\System32\\comdlg32.dll
+0,0x7eec2698,\\Windows\\System32\\advapi32.dll
+0,0x7eec2ac0,\\SystemRoot\\System32\\Config\\TxR\\{6cced301-6e01-11de-8bed-001e0bcd1824}.TM
+0,0x7eecaf80,\\$Directory
+0,0x7eecb618,\\Windows\\Fonts\\vgasys.fon
+0,0x7eecb778,\\$Directory
+0,0x7eecedf0,\\Windows\\System32\\en-US\\wdmaud.drv.mui
+0,0x7eecf818,\\InitShutdown
+0,0x7eed1848,\\Windows\\System32\\srvcli.dll
+0,0x7eed1a28,\\Windows\\System32\\scesrv.dll
+0,0x7eed1f80,\\Windows\\Fonts\\cga80850.fon
+0,0x7eed2740,\\Windows\\Fonts\\kokilab.ttf
+0,0x7eed28a0,\\Windows\\Fonts\\leelawad.ttf
+0,0x7eed34d0,\\Windows\\System32\\svchost.exe
+0,0x7eed4730,\\Windows\\System32\\provsvc.dll
+0,0x7eed5468,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Kernel-WHEA%4Errors.evtx
+0,0x7eed5948,\\Windows\\System32\\MMDevAPI.dll
+0,0x7eed7170,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Kernel-Power%4Thermal-Operational.evtx
+0,0x7eed7c40,\\Windows\\System32\\winevt\\Logs\\Key Management Service.evtx
+0,0x7eed8b50,\\Program Files\\Windows Sidebar\\sidebar.exe
+0,0x7eed8c08,\\Windows\\winsxs\\x86_microsoft.windows.gdiplus_6595b64144ccf1df_1.1.7600.16385_none_72fc7cbf861225ca\\GdiPlus.dll
+0,0x7eed9038,\\Windows\\System32\\uxtheme.dll
+0,0x7eed98c8,\\Windows\\System32\\duser.dll
+0,0x7eed9c90,\\espeakerwave
+0,0x7eeda038,\\eheadphonetopo
+0,0x7eedad70,\\Windows\\System32\\shsvcs.dll
+0,0x7eedb038,\\emicintopo
+0,0x7eedb1d8,\\Windows\\System32\\pstorec.dll
+0,0x7eedb290,\\Windows\\System32\\msxml3.dll
+0,0x7eedb770,\\Users\\devmac\\AppData\\Local\\Microsoft\\Internet Explorer\\frameiconcache.dat
+0,0x7eedc300,\\Windows\\System32\\oleaut32.dll
+0,0x7eedd3a0,\\Boot\\BCD
+0,0x7eede6b8,\\Windows\\System32\\normaliz.dll
+0,0x7eedf118,\\Windows\\System32\\shell32.dll
+0,0x7eedf468,\\Windows\\System32
+0,0x7eedf800,\\Windows\\System32\\msasn1.dll
+0,0x7eee03a0,\\Windows\\System32\\config\\RegBack\\SYSTEM
+0,0x7eee06c0,\\Windows\\System32\\nsi.dll
+0,0x7eee1dc0,\\Windows\\System32\\sechost.dll
+0,0x7eee5618,\\Windows\\Fonts\\cordiai.ttf
+0,0x7eee8aa8,\\Windows\\Fonts\\mvboli.ttf
+0,0x7eeef858,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Low\\MSIMGSIZ.DAT
+0,0x7eef5e20,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_idx.db
+0,0x7eef6a30,\\Windows\\System32\\termsrv.dll
+0,0x7eefa8f0,\\Program Files\\Google\\Chrome\\Temp\\source3948_661393057\\Chrome-bin\\109.0.5414.120\\109.0.5414.120.manifest
+0,0x7eefcf80,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_256.db
+0,0x7f215f80,\\Windows\\System32\\C_20127.NLS
+0,0x7f23f5e0,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_1024.db
+0,0x7f23ff80,\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\mscoree.tlb
+0,0x7f24a870,\\Windows\\System32\\services.exe
+0,0x7f2507f8,\\Windows\\Fonts\\segoeuii.ttf
+0,0x7f251260,\\Windows\\System32
+0,0x7f2515c0,\\$Directory
+0,0x7f2516f8,\\Windows\\System32\\config\\TxR\\{6cced301-6e01-11de-8bed-001e0bcd1824}.TM.blf
+0,0x7f254630,\\Windows\\System32\\clbcatq.dll
+0,0x7f254f80,\\$Extend\\$RmMetadata\\$TxfLog\\$TxfLog.blf
+0,0x7f264038,\\Windows\\Fonts\\cordiau.ttf
+0,0x7f264148,\\Windows\\Fonts\\browaz.ttf
+0,0x7f264290,\\Windows\\Fonts\\browau.ttf
+0,0x7f264a18,\\Endpoint
+0,0x7f264c50,\\$Extend\\$RmMetadata\\$TxfLog\\$TxfLogContainer00000000000000000002
+0,0x7f2739e0,\\Windows\\System32\\config\\RegBack\\DEFAULT
+0,0x7f275500,\\$LogFile
+0,0x7f275b60,\\$Directory
+0,0x7f2768e0,\\$MftMirr
+0,0x7f277300,\\$Directory
+0,0x7f27eb90,\\$Directory
+0,0x7f27f258,TxfLog
+0,0x7f2802d8,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010002.dir
+0,0x7f2803b8,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_sr.db
+0,0x7f281420,\\Device\\HarddiskVolume2\\$Extend\\$RmMetadata\\$TxfLog\\$TxfLog
+0,0x7f282100,\\$Directory
+0,0x7f282970,KtmLog
+0,0x7f282bc8,\\Device\\HarddiskVolume2\\$Extend\\$RmMetadata\\$TxfLog\\$TxfLog
+0,0x7f283690,\\$BitMap
+0,0x7f283bc8,\\Device\\HarddiskVolume2\\$Extend\\$RmMetadata\\$TxfLog\\$TxfLog
+0,0x7f283e68,\\Windows\\System32\\config\\SAM.LOG2
+0,0x7f2843f0,\\$Mft
+0,0x7f2b54e0,\\Windows\\System32\\userenv.dll
+0,0x7f2b5998,\\Windows\\System32\\devrtl.dll
+0,0x7f2b5b60,\\plugplay
+0,0x7f2b6d20,\\plugplay
+0,0x7f2b8328,\\plugplay
+0,0x7f2b8a98,\\Windows\\System32\\gpapi.dll
+0,0x7f2b9df0,\\Windows\\System32\\SmartcardCredentialProvider.dll
+0,0x7f2ba0c8,\\Windows\\System32\\pcwum.dll
+0,0x7f2bbb20,\\Windows\\System32\\umpo.dll
+0,0x7f2bddd8,\\Windows\\System32\\powrprof.dll
+0,0x7f2bdf80,\\$Directory
+0,0x7f2bf038,\\Windows\\ServiceProfiles\\NetworkService\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TMContainer00000000000000000002.regtrans-ms
+0,0x7f2bf658,\\Windows\\System32\\RpcEpMap.dll
+0,0x7f2bf9f0,\\Device\\HarddiskVolume2\\Windows\\ServiceProfiles\\NetworkService\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TM
+0,0x7f2c1198,\\Windows\\Fonts\\browaui.ttf
+0,0x7f2c2890,\\Device\\HarddiskVolume2\\Windows\\ServiceProfiles\\NetworkService\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TM
+0,0x7f2c2e60,\\$Directory
+0,0x7f2c2f80,\\Windows\\ServiceProfiles\\NetworkService\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TM.blf
+0,0x7f2c3c98,\\Windows\\System32
+0,0x7f2c41f8,\\Windows\\ServiceProfiles\\NetworkService\\NTUSER.DAT.LOG1
+0,0x7f2c4358,\\Windows\\ServiceProfiles\\NetworkService\\NTUSER.DAT
+0,0x7f2c4d48,\\Windows\\ServiceProfiles\\NetworkService\\NTUSER.DAT.LOG2
+0,0x7f2c54e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7f2c58e8,\\$Directory
+0,0x7f2c6758,\\Windows\\System32\\crypt32.dll
+0,0x7f2ca858,\\Windows\\System32\\catroot\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\ntpe.cat
+0,0x7f2d2388,\\Windows\\System32\\rpcss.dll
+0,0x7f2d2c60,\\Windows\\ServiceProfiles\\NetworkService\\NTUSER.DAT{6cced2f1-6e01-11de-8bed-001e0bcd1824}.TMContainer00000000000000000001.regtrans-ms
+0,0x7f2d33d8,\\Windows\\Fonts\\cordiauz.ttf
+0,0x7f2d67e0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\581faa453b98efa6_0
+0,0x7f2d7f18,\\Windows\\System32\\drivers\\en-US\\mssmbios.sys.mui
+0,0x7f2da830,\\Endpoint
+0,0x7f2da8e8,\\Windows\\System32\\WSHTCPIP.DLL
+0,0x7f2db320,\\Endpoint
+0,0x7f2dbf80,\\Endpoint
+0,0x7f2dcd60,\\Winsock2\\CatalogChangeListener-29c-0
+0,0x7f2dce68,\\Endpoint
+0,0x7f2de9b0,\\$Directory
+0,0x7f2df240,\\Endpoint
+0,0x7f2dfa00,\\Endpoint
+0,0x7f2e0ba8,\\Endpoint
+0,0x7f2e5200,\\$Directory
+0,0x7f2e5b08,\\Program Files\\AccessData\\FTK Imager\\zlib1.dll
+0,0x7f2e5f80,\\Windows\\Fonts\\phagspab.ttf
+0,0x7f2ed038,\\Windows\\System32\\wdigest.dll
+0,0x7f2ed7b0,\\Windows\\System32\\LogonUI.exe
+0,0x7f2ee768,\\Windows\\System32\\catroot\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\ntph.cat
+0,0x7f2ef028,\\Windows\\System32\\catroot\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\Microsoft-Windows-Client-Features-Package~31bf3856ad364e35~x86~~6.1.7600.16385.cat
+0,0x7f2ef428,\\$Directory
+0,0x7f2f8670,\\MsFteWds
+0,0x7f2f9950,\\Windows\\System32\\hidserv.dll
+0,0x7f2fa290,\\$Mft
+0,0x7f2fe148,\\$Extend\\$RmMetadata\\$TxfLog\\$TxfLogContainer00000000000000000001
+0,0x7f2fe6c0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\shared_proto_db\\000003.log
+0,0x7f3007d8,\\Windows\\System32\\iertutil.dll
+0,0x7f300d28,\\Windows\\System32\\kernel32.dll
+0,0x7f3016c0,\\$Directory
+0,0x7f301b18,\\Windows\\System32\\mmcss.dll
+0,0x7f301bd0,\\Windows\\System32\\winevt\\Logs\\Windows PowerShell.evtx
+0,0x7f301f80,\\Windows\\System32\\C_28591.NLS
+0,0x7f302d50,\\$Directory
+0,0x7f303718,\\Windows\\System32\\ntdll.dll
+0,0x7f304240,\\$Directory
+0,0x7f304558,\\Windows\\ServiceProfiles\\NetworkService\\AppData\\Roaming\\Microsoft\\SoftwareProtectionPlatform\\Cache\\cache.dat
+0,0x7f30ccd0,\\pagefile.sys
+0,0x7f3170d8,\\Windows\\System32\\en-US\\oleaccrc.dll.mui
+0,0x7f31c198,\\$Directory
+0,0x7f31d230,\\Windows\\System32\\catroot\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\nt5.cat
+0,0x7f31f910,\\Windows\\System32\\catroot\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\Microsoft-Media-Foundation-Package~31bf3856ad364e35~x86~~6.1.7600.16385.cat
+0,0x7f32c2f0,\\Program Files\\Windows Defender\\MpClient.dll
+0,0x7f32cf80,\\Windows\\System32\\csrss.exe
+0,0x7f354368,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_32.db
+0,0x7f356328,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\PropMap\\CiPT0000.000
+0,0x7f356500,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\PropMap\\CiPT0000.001
+0,0x7f356ec8,\\$Directory
+0,0x7f357650,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Sessions\\Tabs_13324516880591535
+0,0x7f357708,\\Windows\\System32\\mssprxy.dll
+0,0x7f359250,\\Windows\\Cursors\\aero_busy.ani
+0,0x7f3626e8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\9d6d24f050660ade_0
+0,0x7f362b90,\\Windows\\System32\\en-US\\VSSVC.exe.mui
+0,0x7f36cc58,\\$Mft
+0,0x7f373598,\\Users\\devmac\\AppData\\Local\\Temp\\ad_driver.sys
+0,0x7f376e48,\\Windows\\System32\\recovery.dll
+0,0x7f37b570,\\System Volume Information\\{3808876b-c176-4e48-b7ae-04046e6cc752}
+0,0x7f37c7e0,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Credentials
+0,0x7f37cc28,\\Users\\devmac\\AppData\\Local\\Microsoft\\Credentials
+0,0x7f37cd98,\\$Directory
+0,0x7f381610,\\Windows\\System32\\en-US\\Display.dll.mui
+0,0x7f381ed0,\\Program Files\\desktop.ini
+0,0x7f388038,\\Winsock2\\CatalogChangeListener-2ec-0
+0,0x7f3885e0,\\Windows\\System32\\rsaenh.dll
+0,0x7f3887f0,\\Windows\\System32\\rsaenh.dll
+0,0x7f391488,\\Windows\\System32\\catroot\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\Microsoft-Windows-Gadget-Platform-Package~31bf3856ad364e35~x86~~6.1.7600.16385.cat
+0,0x7f3915d8,\\Windows\\System32\\wbem\\cimwin32.dll
+0,0x7f396f80,\\$Directory
+0,0x7f398758,\\Windows\\System32\\lpk.dll
+0,0x7f398800,\\$MftMirr
+0,0x7f39a338,\\Windows\\System32\\ieframe.dll
+0,0x7f39de50,\\Windows\\System32\\w32time.dll
+0,0x7f39e148,\\Windows\\System32\\en-US\\MMDevAPI.dll.mui
+0,0x7f39e510,\\Windows\\System32\\wbem\\WmiPrvSE.exe
+0,0x7f3a91e8,\\Windows\\System32\\catroot\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\Microsoft-Windows-Media-Format-Package~31bf3856ad364e35~x86~~6.1.7600.16385.cat
+0,0x7f3aac78,\\trkwks
+0,0x7f3b05e0,\\Program Files\\AccessData\\FTK Imager\\libeay32.dll
+0,0x7f3b9110,\\Windows\\AppPatch\\drvmain.sdb
+0,0x7f3c26e0,\\$Directory
+0,0x7f3c2ed8,\\$Mft
+0,0x7f3d9498,\\Windows\\System32\\spp\\plugin-manifests-signed\\sppwinob-spp-plugin-manifest-signed.xrm-ms
+0,0x7f3e1678,\\W32TIME_ALT
+0,0x7f3ead10,\\Endpoint
+0,0x7f3eaef0,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Runtime.Seri#\\d35d360c6e410684be7ea9fd0a8e6b53\\System.Runtime.Serialization.Formatters.Soap.ni.dll
+0,0x7f593038,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Safe Browsing Network\\Safe Browsing Cookies-journal
+0,0x7f59a988,\\Windows\\System32\\config\\SYSTEM
+0,0x7f805b98,\\Program Files\\Google\\Chrome\\Application\\master_preferences
+0,0x7f806358,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7f806520,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\icudtl.dat
+0,0x7f806688,\\mojo.2728.2716.9361253315869820624
+0,0x7f806860,\\GoogleCrashServices\\S-1-5-18
+0,0x7f807e88,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010001.ci
+0,0x7f8081b8,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\WindowsBase\\3c0fbe23fa37ca50fea3dbe200b40f7a\\WindowsBase.ni.dll
+0,0x7f8082e0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\shared_proto_db\\metadata\\CURRENTdbtmp
+0,0x7f8086b8,\\Windows\\System32\\en-US\\kernel32.dll.mui
+0,0x7f809188,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\GrShaderCache\\data_1
+0,0x7f8094b8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\87d427ea6063f166_0
+0,0x7f809570,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7f809628,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network\\Reporting and NEL-journal
+0,0x7f80be20,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_5.82.7600.16661_none_ebfb56996c72aefc
+0,0x7f80bed8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Web Data
+0,0x7f80c2b8,\\Windows\\System32\\ulib.dll
+0,0x7f80c4d8,\\Windows\\System32\\en-US\\ntshrui.dll.mui
+0,0x7f80c888,\\$Directory
+0,0x7f80cab0,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7f80d1e8,\\mojo.2728.2868.9026062989202852527
+0,0x7f814c98,\\$Directory
+0,0x7f818e90,\\mojo.2728.2868.15713448162710371596
+0,0x7f81a960,\\Windows\\System32\\en-US\\notepad.exe.mui
+0,0x7f81ab78,\\Program Files\\Windows NT\\Accessories\\en-US\\wordpad.exe.mui
+0,0x7f81e1f0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\IndexedDB\\https_docs.google.com_0.indexeddb.leveldb\\MANIFEST-000002
+0,0x7f81e398,\\Windows\\System32\\acppage.dll
+0,0x7f81e558,\\Windows\\System32\\en-US\\acppage.dll.mui
+0,0x7f81ea90,\\Windows\\System32\\acppage.dll
+0,0x7f81ed08,\\Endpoint
+0,0x7f81ee30,\\Windows\\System32\\sechost.dll
+0,0x7f81ef80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\wasm\\index-dir\\the-real-i
+0,0x7f81ff80,\\$Directory
+0,0x7f822230,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\resources.pak
+0,0x7f822558,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\Locales\\en-GB.pak
+0,0x7f822b08,\\$Directory
+0,0x7f8238a0,\\Endpoint
+0,0x7f823f80,\\Program Files\\AccessData\\FTK Imager\\boost_filesystem-vc90-mt-1_39.dll
+0,0x7f824720,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\IndexedDB\\https_docs.google.com_0.indexeddb.leveldb\\CURRENTdbtmp
+0,0x7f8251e0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Session Storage\\CURRENTdbtmp
+0,0x7f8253b0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network\\Cookies
+0,0x7f8259b0,\\Program Files\\AccessData\\FTK Imager\\IsoBuster.dll
+0,0x7f826378,\\Windows\\System32\\en-US\\systemcpl.dll.mui
+0,0x7f827488,\\$Directory
+0,0x7f8275e8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\IndexedDB\\https_drive.google.com_0.indexeddb.leveldb\\MANIFEST-000002
+0,0x7f827ac8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GCM Store\\Encryption\\LOG
+0,0x7f827bc0,\\$Directory
+0,0x7f827d30,\\mojo.2728.2868.16371039004622859213
+0,0x7f828038,\\$ConvertToNonresident
+0,0x7f828230,\\$ConvertToNonresident
+0,0x7f828310,\\$ConvertToNonresident
+0,0x7f829590,\\mojo.2728.2716.8066581422494815578
+0,0x7f82a460,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache\\data_2
+0,0x7f82b860,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_374514454\\manifest.fingerprint
+0,0x7f82b958,\\Windows\\assembly\\GAC_MSIL\\System.Runtime.Remoting\\2.0.0.0__b77a5c561934e089\\System.Runtime.Remoting.dll
+0,0x7f82ba50,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Runtime.Remo#\\6afe3a43d112ed5356d73468c5c44045\\System.Runtime.Remoting.ni.dll
+0,0x7f82bbb0,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\Temp\\ZAP2BF8.tmp\\System.Workflow.ComponentModel.dll
+0,0x7f82bc68,\\Windows\\System32\\sspicli.dll
+0,0x7f82bd60,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network Action Predictor-journal
+0,0x7f82cb80,\\$Directory
+0,0x7f82cd50,\\Endpoint
+0,0x7f82d4e0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\GrShaderCache\\data_1
+0,0x7f82d770,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\GrShaderCache\\data_0
+0,0x7f82de80,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7f82e5d0,\\Endpoint
+0,0x7f82e898,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\icudtl.dat
+0,0x7f82ea80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension State\\000003.log
+0,0x7f82eb38,\\Endpoint
+0,0x7f82f0e8,\\Program Files\\Google\\Chrome\\Temp\\source3948_661393057\\Chrome-bin\\109.0.5414.120\\v8_context_snapshot.bin
+0,0x7f82f6e0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache\\data_0
+0,0x7f830d80,\\Program Files\\Google\\Chrome\\Application\\chrome_proxy.exe
+0,0x7f830ef0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\Installer\\chrmstp.exe
+0,0x7f831518,\\$ConvertToNonresident
+0,0x7f831650,\\Windows\\System32\\NlsData001b.dll
+0,0x7f8319a8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Visited Links
+0,0x7f831a60,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension State\\MANIFEST-000002
+0,0x7f832708,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Code Cache\\js\\index
+0,0x7f834380,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\770114ebc9ee73c6_0
+0,0x7f834438,\\$ConvertToNonresident
+0,0x7f8344f0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\1872d15f4655f19d_0
+0,0x7f8359c8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\c1850d111a78b2d1_0
+0,0x7f835a80,\\Windows\\Fonts\\palabi.ttf
+0,0x7f836218,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Code Cache\\wasm\\index
+0,0x7f8363d0,\\Windows\\System32\\DHCPQEC.DLL
+0,0x7f8364c8,\\Program Files\\Common Files\\System\\wab32.dll
+0,0x7f836880,\\Windows\\System32\\en-US\\conhost.exe.mui
+0,0x7f836978,\\Windows\\System32\\Microsoft\\Protect\\S-1-5-18\\User\\Preferred
+0,0x7f837270,\\Windows\\System32\\adsldp.dll
+0,0x7f8375b0,\\Windows\\System32\\synceng.dll
+0,0x7f837868,\\Windows\\System32\\drivers\\en-US\\portcls.sys.mui
+0,0x7f8388b8,\\Windows\\System32\\evr.dll
+0,0x7f838a20,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Sync Data\\LevelDB\\LOG
+0,0x7f838b88,\\$Directory
+0,0x7f8393a0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\IndexedDB\\https_drive.google.com_0.indexeddb.leveldb\\000003.log
+0,0x7f83d460,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\lockfile
+0,0x7f83d5c8,\\mojo.2728.2716.11671341838474115495
+0,0x7f83d730,\\mojo.2728.2716.11671341838474115495
+0,0x7f83def0,\\Windows\\System32
+0,0x7f83e608,\\Program Files\\AccessData\\FTK Imager\\langs\\fra_ftki.dll
+0,0x7f83e750,\\$Directory
+0,0x7f83f4a8,\\Windows\\System32\\twext.dll
+0,0x7f83f5d0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\GrShaderCache\\data_0
+0,0x7f83f740,\\Windows\\System32\\NlsData0013.dll
+0,0x7f840420,\\Program Files\\Google\\Chrome\\Temp\\source3948_661393057\\Chrome-bin\\109.0.5414.120\\chrome_elf.dll
+0,0x7f840568,\\$Directory
+0,0x7f840990,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Sync Data\\LevelDB\\000003.log
+0,0x7f842168,\\crashpad_2728_WEBUDYUWYAYUIYRK
+0,0x7f842330,\\$ConvertToNonresident
+0,0x7f842a20,\\$Directory
+0,0x7f842dd0,\\$Directory
+0,0x7f8438a8,\\mojo.2728.2868.97324876124205809
+0,0x7f843b38,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7f843d68,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\DawnCache\\data_2
+0,0x7f845308,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\resources.pak
+0,0x7f845560,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\INDEX.001
+0,0x7f845658,\\Program Files\\AccessData\\FTK Imager\\adencrypt.dll
+0,0x7f845b20,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7f845bd8,\\$Directory
+0,0x7f84e5f0,\\mojo.2728.2868.14899055284155785660
+0,0x7f84e878,\\Windows\\System32\\catroot\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\Microsoft-Windows-Common-Drivers-Package~31bf3856ad364e35~x86~~6.1.7600.16385.cat
+0,0x7f84f260,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\a857e2fff6c8d332_0
+0,0x7f84f538,\\Windows\\System32\\framedynos.dll
+0,0x7f84f8b8,\\Windows\\System32\\Microsoft\\Protect\\S-1-5-18\\User\\61db9d0a-981f-4d51-affb-ed0f9c6f99fe
+0,0x7f850038,\\$ConvertToNonresident
+0,0x7f850188,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_200_percent.pak
+0,0x7f850478,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Local Storage\\leveldb\\000003.log
+0,0x7f8505d0,\\$Directory
+0,0x7f850858,\\Endpoint
+0,0x7f850cd8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\icudtl.dat
+0,0x7f850f80,\\Windows\\System32\\mf.dll
+0,0x7f8517c8,\\Windows\\Fonts\\arialbd.ttf
+0,0x7f851b38,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\resources.pak
+0,0x7f851db8,\\Windows\\Fonts\\palai.ttf
+0,0x7f852270,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_200_percent.pak
+0,0x7f852748,\\Windows\\System32\\en-US\\WinSATAPI.dll.mui
+0,0x7f8529d0,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010003.wid
+0,0x7f852ae8,\\Windows\\System32\\oobe\\en-US\\winsetup.dll.mui
+0,0x7f852cb8,\\$Directory
+0,0x7f854af8,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\PresentationFramewo#\\9da2c4ccbf8dead2507879555e600ab7\\PresentationFramework.Classic.ni.dll
+0,0x7f855f10,\\$ConvertToNonresident
+0,0x7f856f58,\\Windows\\System32\\EhStorAPI.dll
+0,0x7f857dd0,\\mojo.2728.2868.10190654047728907225
+0,0x7f857ef0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Session Storage\\CURRENTdbtmp
+0,0x7f858b48,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\GrShaderCache\\data_2
+0,0x7f858d10,\\mojo.2728.2868.8740246848331392425
+0,0x7f858e78,\\mojo.2728.2868.8740246848331392425
+0,0x7f858f40,\\Windows\\Fonts\\mingliu.ttc
+0,0x7f85a6b8,\\Program Files\\Google\\Update\\1.3.36.152
+0,0x7f85c4a8,\\Windows\\Fonts\\kartikab.ttf
+0,0x7f85d0f0,\\Windows\\System32\\userenv.dll
+0,0x7f85d278,\\Windows\\System32\\catroot2\\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\\catdb
+0,0x7f85da00,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension State\\LOG
+0,0x7f85dc10,\\Windows\\Fonts\\l_10646.ttf
+0,0x7f85eec8,\\Windows\\System32\\en-US\\mlang.dll.mui
+0,0x7f85f038,\\Windows\\System32\\msi.dll
+0,0x7f85f180,\\Program Files\\Google\\Chrome\\Application\\chrome.exe
+0,0x7f85f348,\\Windows\\System32\\twext.dll
+0,0x7f85f780,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache\\data_2
+0,0x7f85fcb0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\GrShaderCache\\index
+0,0x7f8613a8,\\$Directory
+0,0x7f8615a8,\\Endpoint
+0,0x7f861710,\\Users\\devmac\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\Last Active\\{3B402C22-CDB9-11ED-82BC-08002713084B}.dat
+0,0x7f861b68,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\Locales\\en-GB.pak
+0,0x7f863038,\\Windows\\Fonts\\ariblk.ttf
+0,0x7f863160,\\Endpoint
+0,0x7f864188,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GCM Store\\LOG
+0,0x7f864398,\\mojo.2728.2868.1963861159603032892
+0,0x7f8658b8,\\Windows\\Fonts\\timesbd.ttf
+0,0x7f8669f8,\\mojo.2728.2868.14899055284155785660
+0,0x7f8675d0,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_453995747\\manifest.fingerprint
+0,0x7f869038,\\Windows\\Fonts\\cour.ttf
+0,0x7f869720,\\Windows\\System32\\RacEngn.dll
+0,0x7f8698e8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_100_percent.pak
+0,0x7f869ab0,\\Endpoint
+0,0x7f869e08,\\Windows\\Fonts\\seguisym.ttf
+0,0x7f86a038,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7f86a578,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\Accessibility\\b2e6d33df15f6ca262db09558982e0f2\\Accessibility.ni.dll
+0,0x7f86a6b0,\\Windows\\Fonts\\simsun.ttc
+0,0x7f86b098,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\GrShaderCache\\data_3
+0,0x7f86cd88,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\IndexedDB\\https_docs.google.com_0.indexeddb.leveldb\\000003.log
+0,0x7f86cf80,\\$ConvertToNonresident
+0,0x7f86e208,\\Program Files\\AccessData\\FTK Imager\\adshdll.dll
+0,0x7f86e2c0,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_1321105874\\manifest.fingerprint
+0,0x7f86eb38,\\Windows\\System32\\RstrtMgr.dll
+0,0x7f86f248,\\Windows\\System32\\srclient.dll
+0,0x7f8731c8,\\Windows\\assembly\\GAC_MSIL\\System.Web.Services\\2.0.0.0__b03f5f7f11d50a3a\\System.Web.Services.dll
+0,0x7f873338,\\Endpoint
+0,0x7f8733f0,\\$ConvertToNonresident
+0,0x7f8746c8,\\Program Files\\AccessData\\FTK Imager\\langs\\chs_ftki.dll
+0,0x7f874b60,\\Windows\\System32\\audiodev.dll
+0,0x7f874f80,\\Windows\\System32\\adsldpc.dll
+0,0x7f875788,\\Windows\\System32\\wbem\\Performance\\WmiApRpl.ini.ini
+0,0x7f875d80,\\Users\\devmac\\Desktop
+0,0x7f877d98,\\Program Files\\AccessData\\FTK Imager\\langs\\esp_ftki.dll
+0,0x7f877f80,\\Windows\\System32\\oleaccrc.dll
+0,0x7f879468,\\Windows\\System32
+0,0x7f879c10,\\Windows\\System32\\en-US\\wsqmcons.exe.mui
+0,0x7f87a148,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010002.wid
+0,0x7f87a340,\\mojo.2728.2716.8066581422494815578
+0,0x7f87a6b8,\\$Directory
+0,0x7f87a870,\\Windows\\Fonts\\segoeuib.ttf
+0,0x7f87a9c8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\GrShaderCache\\data_3
+0,0x7f87bbb0,\\Windows\\System32\\wuaueng.dll
+0,0x7f87c218,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache\\data_0
+0,0x7f87c408,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GCM Store\\Encryption\\LOCK
+0,0x7f87c5f8,\\Windows\\assembly\\GAC_MSIL\\System.Design\\2.0.0.0__b03f5f7f11d50a3a\\System.Design.dll
+0,0x7f87c9d8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache\\index
+0,0x7f87cbc8,\\mojo.2728.2868.3417981896181550201
+0,0x7f87cdb8,\\mojo.2728.2868.3417981896181550201
+0,0x7f87cf80,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Windows.Forms\\f92c882fd4e7005c005e208daa04c28d\\System.Windows.Forms.ni.dll
+0,0x7f87d4b0,\\Windows\\Fonts\\tahomabd.ttf
+0,0x7f87f7c0,\\$Directory
+0,0x7f87f988,\\$ConvertToNonresident
+0,0x7f87fb20,\\Windows\\assembly\\GAC_32\\mscorlib\\2.0.0.0__b77a5c561934e089\\sorttbls.nlp
+0,0x7f87fc88,\\Windows\\System32\\drivers\\en-US\\ndis.sys.mui
+0,0x7f8816c0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7f8817b8,\\Users\\devmac\\Desktop\\desktop.ini
+0,0x7f8833a8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Local Storage\\leveldb\\LOG
+0,0x7f883460,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension Rules\\CURRENTdbtmp
+0,0x7f883518,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension Rules\\MANIFEST-000002
+0,0x7f8835d0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension Rules\\000003.log
+0,0x7f883ac0,\\Windows\\System32\\WinSATAPI.dll
+0,0x7f884038,\\Windows\\System32\\C_936.NLS
+0,0x7f884e78,\\Windows\\System32\\wbem\\en-US\\mofd.dll.mui
+0,0x7f8863b8,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\SystemCertificates\\My
+0,0x7f886470,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension Rules\\LOG
+0,0x7f8865e0,\\Users\\devmac\\Downloads\\accessdata_ftk_imager.exe
+0,0x7f886698,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GCM Store\\Encryption\\MANIFEST-000002
+0,0x7f886e40,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\IndexedDB\\https_drive.google.com_0.indexeddb.leveldb\\LOCK
+0,0x7f888260,\\mojo.2728.2868.10436381576475228850
+0,0x7f888380,\\W32TIME_ALT
+0,0x7f88b4c8,\\Windows\\Fonts\\timesbi.ttf
+0,0x7f88c1f8,\\$ConvertToNonresident
+0,0x7f88c2c0,\\$Directory
+0,0x7f88c990,\\Windows\\Fonts\\segoeuiz.ttf
+0,0x7f88ca48,\\Windows\\System32\\en-US\\sc.exe.mui
+0,0x7f88cf80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\c7939eb4bc9de2ab_0
+0,0x7f88d738,\\Windows\\Fonts\\times.ttf
+0,0x7f88dd38,\\Windows\\Fonts\\ariali.ttf
+0,0x7f88df80,\\mojo.2728.2868.6529354251663679305
+0,0x7f88e548,\\Windows\\System32\\sc.exe
+0,0x7f88f1a0,\\Windows\\Branding\\ShellBrd\\shellbrd.dll
+0,0x7f88f830,\\Windows\\Fonts\\micross.ttf
+0,0x7f892330,\\Windows\\Fonts\\segoeuil.ttf
+0,0x7f892610,\\Windows\\System32\\control.exe
+0,0x7f8928b0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Safe Browsing\\IpMalware.store_new
+0,0x7f892ca0,\\Windows\\System32\\cryptsp.dll
+0,0x7f893200,\\W32TIME_ALT
+0,0x7f894de8,\\Windows\\System32\\drvinst.exe
+0,0x7f8955e0,\\Endpoint
+0,0x7f895698,\\$Directory
+0,0x7f896338,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\icudtl.dat
+0,0x7f896e60,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_816688049\\manifest.fingerprint
+0,0x7f897550,\\$Directory
+0,0x7f897710,\\mojo.2728.2868.10436381576475228850
+0,0x7f897b20,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7f8985a0,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\Temp\\ZAP2551.tmp\\System.Workflow.Activities.dll
+0,0x7f89d8f8,\\Windows\\System32\\KMSVC.DLL
+0,0x7f89dd70,\\Windows\\System32\\wbem\\en-US\\WmiApRes.dll.mui
+0,0x7f89e7b8,\\mojo.2728.2716.4201502116902635522
+0,0x7f89ea48,\\Users\\devmac\\Downloads\\accessdata_ftk_imager.exe
+0,0x7f89ef80,\\Users\\devmac\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\Last Active\\{3B402C21-CDB9-11ED-82BC-08002713084B}.dat
+0,0x7f8a11f8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\trusted_vault.pb20-bc8b-2583798673e2.tmp
+0,0x7f8a15a0,\\Windows\\System32\\vbscript.dll
+0,0x7f8a21b0,\\Windows\\Fonts\\pala.ttf
+0,0x7f8a2268,\\Windows\\System32\\drivers\\acpi.sys
+0,0x7f8a2f80,\\Windows\\System32\\cscdll.dll
+0,0x7f8a4cb0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Code Cache\\js\\index-dir\\temp-index
+0,0x7f8a4f80,\\Windows\\System32\\en-US\\oleaccrc.dll.mui
+0,0x7f8a5690,\\Endpoint
+0,0x7f8a7aa0,\\Windows\\System32\\en-US\\netevent.dll.mui
+0,0x7f8a85f8,\\Endpoint
+0,0x7f8a8740,\\Windows\\System32\\sppc.dll
+0,0x7f8a9ab0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_200_percent.pak
+0,0x7f8a9c30,\\Windows\\Fonts\\timesi.ttf
+0,0x7f8abc60,\\Windows\\Prefetch\\DRVINST.EXE-4CB4314A.pf
+0,0x7f8aca40,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a
+0,0x7f8ace20,\\Windows\\Fonts\\timesbi.ttf
+0,0x7f8ad038,\\$Directory
+0,0x7f8ad2c8,\\Windows\\Fonts\\tahoma.ttf
+0,0x7f8adc08,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GCM Store\\LOCK
+0,0x7f8adf80,\\mojo.2728.2868.1963861159603032892
+0,0x7f8af5a0,\\Windows\\Fonts\\gulim.ttc
+0,0x7f8b05f8,\\Windows\\System32\\C_932.NLS
+0,0x7f8b06b0,\\Windows\\assembly\\GAC_MSIL\\Accessibility\\2.0.0.0__b03f5f7f11d50a3a\\Accessibility.dll
+0,0x7f8b0768,\\Windows\\System32\\PhotoMetadataHandler.dll
+0,0x7f8b0820,\\Program Files\\AccessData\\FTK Imager\\FTK Imager.exe
+0,0x7f8b08d8,\\Windows\\System32
+0,0x7f8b0990,\\Windows\\System32\\C_950.NLS
+0,0x7f8b0cd0,\\Windows\\System32\\drivers\\en-US\\intelppm.sys.mui
+0,0x7f8b1300,\\mojo.2728.2868.10478293683181971084
+0,0x7f8b1e20,\\Windows\\System32\\Vault.dll
+0,0x7f8b35d8,\\Windows\\Fonts\\mingliu.ttc
+0,0x7f8b4390,\\Windows\\System32\\wbem\\Performance\\WmiApRpl.hew.h
+0,0x7f8b4448,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Diagnosis-Scheduled%4Operational.evtx
+0,0x7f8b4658,\\$Directory
+0,0x7f8b4ba0,䄨騺indows\\System32\\cryptbase.dl
+0,0x7f8b6268,\\lsass
+0,0x7f8b6478,\\Windows\\Fonts\\segoeui.ttf
+0,0x7f8b6f80,\\$Directory
+0,0x7f8b75f8,\\Windows\\assembly\\GAC_MSIL\\System.Messaging\\2.0.0.0__b03f5f7f11d50a3a\\System.Messaging.dll
+0,0x7f8b76c0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\1c18a1f77ff6d8b9_0
+0,0x7f8b8f80,\\Windows\\System32\\davhlpr.dll
+0,0x7f8b9610,\\Users\\devmac\\AppData\\Local\\Temp\\bf10bf4e-e9dd-49dc-9c13-a14254810ac2.tmp
+0,0x7f8ba180,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Local Storage\\leveldb\\CURRENTdbtmp
+0,0x7f8bac30,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\Locales\\en-GB.pak
+0,0x7f8bb2d8,\\Windows\\System32\\verclsid.exe
+0,0x7f8bb628,\\Windows\\System32\\en-US\\mfplat.dll.mui
+0,0x7f8bbec8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\Locales\\en-GB.pak
+0,0x7f8bbf80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\0fd3d81286c340f9_0
+0,0x7f8bd2e0,\\Windows\\System32\\ActionCenterCPL.dll
+0,0x7f8bef80,\\$Directory
+0,0x7f8bf8c8,\\$ConvertToNonresident
+0,0x7f8c0420,\\Windows\\assembly\\GAC_32\\System.Transactions\\2.0.0.0__b77a5c561934e089\\System.Transactions.dll
+0,0x7f8c04d8,\\mojo.2728.2868.6529354251663679305
+0,0x7f8c0f80,\\$Directory
+0,0x7f8c1038,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension Rules\\LOCK
+0,0x7f8c1610,\\ProgramData\\Microsoft\\RAC\\StateData\\RacMetaData.dat
+0,0x7f8c3650,\\Windows\\assembly\\GAC_MSIL\\System.Workflow.Activities\\3.0.0.0__31bf3856ad364e35\\System.Workflow.Activities.dll
+0,0x7f8c3880,\\Windows\\assembly\\GAC_MSIL\\System.Workflow.ComponentModel\\3.0.0.0__31bf3856ad364e35\\System.Workflow.ComponentModel.dll
+0,0x7f8c39c8,\\Windows\\Fonts\\cour.ttf
+0,0x7f8c3ec8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\v8_context_snapshot.bin
+0,0x7f8c3f80,\\Windows\\Fonts\\msmincho.ttc
+0,0x7f8c4ca8,\\Windows\\inf\\setupapi.ev3
+0,0x7f8c5520,\\$ConvertToNonresident
+0,0x7f8c5c38,\\Windows\\System32\\en-US\\systemcpl.dll.mui
+0,0x7f8c5ea0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Local Extension Settings\\ghbmnnjooekpmoecnnnilnnbdlolhkhi\\MANIFEST-000002
+0,0x7f8c6198,\\$Directory
+0,0x7f8c6ab0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\resources.pak
+0,0x7f8c6d90,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Local Extension Settings\\ghbmnnjooekpmoecnnnilnnbdlolhkhi\\LOCK
+0,0x7f8c74a0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\f336552aa8318201_0
+0,0x7f8c7938,\\Windows\\Fonts\\palab.ttf
+0,0x7f8c7ef0,\\Endpoint
+0,0x7f8c8a78,\\Windows\\System32\\sc.exe
+0,0x7f8c8d28,\\Program Files\\AccessData\\FTK Imager\\FTK Imager.exe
+0,0x7f8c8f80,\\Windows\\System32
+0,0x7f8ca420,\\Windows\\Fonts\\consola.ttf
+0,0x7f8cb038,\\Endpoint
+0,0x7f8cb128,\\Windows\\System32\\en-US\\msctf.dll.mui
+0,0x7f8cb688,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7f8cb8d0,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Transactions\\c744f0f95227e75796b8689801740d4b\\System.Transactions.ni.dll
+0,0x7f8cb9f0,\\mojo.2728.2868.2972886704177128586
+0,0x7f8cbca0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\2cb84379f17c8798_0
+0,0x7f8cc1f0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\88453999ccf410df_0
+0,0x7f8cc7c0,\\Windows\\Fonts\\tahomabd.ttf
+0,0x7f8cdd98,\\Windows\\Fonts\\timesbi.ttf
+0,0x7f8cde50,\\Windows\\Fonts\\timesbd.ttf
+0,0x7f8ce038,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_32.db
+0,0x7f8ce6d0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\2c3f0b577e26d0ac_0
+0,0x7f8cecd8,\\Windows\\System32\\perfh009.dat
+0,0x7f8ced90,\\Windows\\Prefetch\\GOOGLEUPDATE.EXE-FE771DDA.pf
+0,0x7f8cf718,\\$Directory
+0,0x7f8d0038,\\$ConvertToNonresident
+0,0x7f8d02b0,\\Windows\\System32\\cryptbase.dll
+0,0x7f8d0ab8,\\Windows\\Fonts\\palabi.ttf
+0,0x7f8d0ec8,\\Endpoint
+0,0x7f8d13a0,\\Endpoint
+0,0x7f8d1d30,\\Windows\\Fonts\\timesi.ttf
+0,0x7f8d26f0,\\Windows\\System32\\msvfw32.dll
+0,0x7f8d27a8,\\Windows\\Fonts\\arialbd.ttf
+0,0x7f8d30f0,\\$Directory
+0,0x7f8d35e8,\\Windows\\Fonts\\ariali.ttf
+0,0x7f8d3998,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\icudtl.dat
+0,0x7f8d3eb8,\\Windows\\Fonts\\arialbi.ttf
+0,0x7f8d4038,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_367089618\\manifest.json
+0,0x7f8d4560,\\Users\\devmac\\AppData\\Local\\Microsoft\\Internet Explorer\\Recovery\\Last Active\\RecoveryStore.{43C2038D-CD9C-11ED-B6BA-08002713084B}.dat
+0,0x7f8d4a30,\\Windows\\System32\\hcproviders.dll
+0,0x7f8d4ae8,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Web.Services\\eff56eb13480ff414dfca0496a3f572c\\System.Web.Services.ni.dll
+0,0x7f8d4ba0,\\Windows\\Fonts\\ariblk.ttf
+0,0x7f8d4e10,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\databases\\Databases.db
+0,0x7f8d4ec8,\\Windows\\Prefetch\\CONHOST.EXE-1F3E9D7E.pf
+0,0x7f8d56e0,\\Windows\\System32\\drprov.dll
+0,0x7f8d5b18,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\b15c34d2380390e2_0
+0,0x7f8d5c78,\\$ConvertToNonresident
+0,0x7f8d5f80,\\$Directory
+0,0x7f8d62a0,\\mojo.2728.2716.1559526934453487615
+0,0x7f8d6360,\\Windows\\Fonts\\arial.ttf
+0,0x7f8d6430,\\$Directory
+0,0x7f8d76c0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\Locales\\en-GB.pak
+0,0x7f8d7c10,\\$Directory
+0,0x7f8d8878,\\mojo.2728.2716.1559526934453487615
+0,0x7f8d9038,\\mojo.2728.2868.7848848783229146730
+0,0x7f8d9720,\\Windows\\System32\\en-US\\advapi32.dll.mui
+0,0x7f8d9d30,\\Windows\\System32\\WsmSvc.dll
+0,0x7f8da1a8,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Xml\\3060dfcdecbeb8ee65077fb29b217c3d\\System.Xml.ni.dll
+0,0x7f8da398,\\Windows\\System32\\en-US\\UIAutomationCore.dll.mui
+0,0x7f8da450,\\Users\\devmac\\AppData\\Local\\Temp\\86cb6376-cf0e-4c45-b707-5d4c84a2e01f.tmp
+0,0x7f8dab20,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_200_percent.pak
+0,0x7f8dae00,\\Program Files\\Windows Mail\\wab.exe
+0,0x7f8daeb8,\\$Directory
+0,0x7f8db7d0,\\$Directory
+0,0x7f8dbf80,\\Windows\\System32\\en-US\\schtasks.exe.mui
+0,0x7f8dc540,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\dcd767a55b067868_0
+0,0x7f8dca78,\\Program Files\\AccessData\\FTK Imager\\langs\\chs_adencrypt.dll
+0,0x7f8dcd18,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\resources.pak
+0,0x7f8dd340,\\$Directory
+0,0x7f8dd9f0,\\$Directory
+0,0x7f8e0378,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Drawing\\fdeec42fa02f3d789c42be2e33b130eb\\System.Drawing.ni.dll
+0,0x7f8e1318,\\$Directory
+0,0x7f8e1c70,\\$Directory
+0,0x7f8e2038,\\$Directory
+0,0x7f8e22d8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll
+0,0x7f8e2a88,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\MSS.log
+0,0x7f8e3038,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Session Storage\\LOCK
+0,0x7f8e39e8,\\$Directory
+0,0x7f8e3aa0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Local Storage\\leveldb\\MANIFEST-000002
+0,0x7f8e4308,\\srvsvc
+0,0x7f8e43c0,\\Endpoint
+0,0x7f8e45d0,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\MSStmp.log
+0,0x7f8e4798,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7f8e49b8,\\Windows\\System32\\wercplsupport.dll
+0,0x7f8e4a70,\\Windows\\assembly\\GAC_32\\System.Transactions\\2.0.0.0__b77a5c561934e089\\System.Transactions.dll
+0,0x7f8e4f80,\\mojo.2728.2868.7848848783229146730
+0,0x7f8e61a8,\\Windows\\System32\\colorui.dll
+0,0x7f8e6260,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\mscorlib\\f58ab951b57c8526430
+0,0x7f8e63c0,\\$Directory
+0,0x7f8e6478,\\Windows\\assembly\\GAC_MSIL\\Microsoft.Build.Utilities\\2.0.0.0__b03f5f7f11d50a3a\\Microsoft.Build.Utilities.dll
+0,0x7f8e6690,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\Temp\\ZAP35BC.tmp\\System.Workflow.Runtime.dll
+0,0x7f8e6e50,\\Endpoint
+0,0x7f8e7618,\\Windows\\Fonts\\l_10646.ttf
+0,0x7f8e76d0,\\Windows\\System32\\drivers\\en-US\\hdaudbus.sys.mui
+0,0x7f8e8960,\\mojo.2728.2716.12975547242312401537
+0,0x7f8e94b8,\\Endpoint
+0,0x7f8eb2b0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\fe1c182aa02ce4aa_0
+0,0x7f8eb9e0,\\$Directory
+0,0x7f8ebb28,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\DawnCache\\index
+0,0x7f8ebbe0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\resources.pak
+0,0x7f8ed250,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010004.ci
+0,0x7f8ed468,\\Program Files\\AccessData\\FTK Imager\\LMS.dll
+0,0x7f8ed6a0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Session Storage\\LOG
+0,0x7f8edb58,\\Program Files\\AccessData\\FTK Imager\\ADIsoDLL.dll
+0,0x7f8ee250,\\Windows\\System32\\wscui.cpl
+0,0x7f8ee308,\\Windows\\System32\\eapsvc.dll
+0,0x7f8ee618,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\PresentationFramewo#\\caa7dd69e03dada6747085a5f2d4fb0c\\PresentationFramework.Aero.ni.dll
+0,0x7f8ee980,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010003.dir
+0,0x7f8eee38,\\Endpoint
+0,0x7f8eeef0,\\Windows\\System32\\conhost.exe
+0,0x7f8ef970,\\Windows\\System32\\en-US\\racengn.dll.mui
+0,0x7f8eff80,\\wkssvc
+0,0x7f8f1760,\\Endpoint
+0,0x7f8f1af0,\\Windows\\System32\\devenum.dll
+0,0x7f8f51f8,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Configuration\\4be2653d1c9804d2ff6e6b66d22764e1\\System.Configuration.ni.dll
+0,0x7f8f53a8,\\Windows\\assembly\\GAC_MSIL\\Microsoft.Build.Framework\\2.0.0.0__b03f5f7f11d50a3a\\Microsoft.Build.Framework.dll
+0,0x7f8f5908,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\IndexedDB\\https_docs.google.com_0.indexeddb.leveldb\\LOCK
+0,0x7f8f60c8,\\Windows\\System32\\en-US\\sechost.dll.mui
+0,0x7f8f64d8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Session Storage\\000003.log
+0,0x7f8f78b0,\\mojo.2728.2868.13855010263433941768
+0,0x7f8f7ab8,\\Windows\\System32\\en-US\\ActionCenter.dll.mui
+0,0x7f8f7e60,\\Windows\\System32\\en-US\\ole32.dll.mui
+0,0x7f8fb588,\\Windows\\System32\\en-US\\msimsg.dll.mui
+0,0x7f9003a8,\\Program Files\\AccessData\\FTK Imager\\ProfUIS284ad32.dll
+0,0x7f900718,\\$Directory
+0,0x7f900c18,\\Windows\\System32\\en-US\\winhttp.dll.mui
+0,0x7f900f80,\\Windows\\System32\\en-US\\winspool.drv.mui
+0,0x7f901038,\\Windows\\System32\\syncui.dll
+0,0x7f901190,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Data\\935ac020241e59cab3287d5eb38c592d\\System.Data.ni.dll
+0,0x7f9013e0,\\Windows\\System32\\msisip.dll
+0,0x7f901720,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\WER\\ERC
+0,0x7f9019f0,\\Windows\\System32\\en-US\\ncrypt.dll.mui
+0,0x7f901c08,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Drawing.Desi#\\0964202aa721ad3fc6f4d3d9d93dbf52\\System.Drawing.Design.ni.dll
+0,0x7f903550,\\$Directory
+0,0x7f9036b0,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Design\\11768b1a056f85182e774a21dd920347\\System.Design.ni.dll
+0,0x7f909738,\\Windows\\assembly\\GAC_MSIL\\System.Workflow.ComponentModel\\3.0.0.0__31bf3856ad364e35\\System.Workflow.ComponentModel.dll
+0,0x7f90a938,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\PresentationFramewo#\\0aa86db18e6c85f0b6144ca8b6de9b52\\PresentationFramework.Luna.ni.dll
+0,0x7f90ab50,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Subresource Filter\\Indexed Rules\\35\\9.44.0\\Ruleset Data
+0,0x7f90ad68,\\Windows\\System32\\swprv.dll
+0,0x7f90af80,\\Windows\\System32\\fms.dll
+0,0x7f90c758,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Local Extension Settings\\ghbmnnjooekpmoecnnnilnnbdlolhkhi\\CURRENTdbtmp
+0,0x7f94bc80,\\$Directory
+0,0x7f94e468,\\Windows\\System32\\cryptext.dll
+0,0x7f94ea80,\\$Directory
+0,0x7f94ee78,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Local Extension Settings\\ghbmnnjooekpmoecnnnilnnbdlolhkhi\\000003.log
+0,0x7fc01528,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010003.ci
+0,0x7fc015e0,\\Program Files\\Google\\Chrome\\Temp\\source3948_661393057\\Chrome-bin\\109.0.5414.120\\resources.pak
+0,0x7fc03958,\\$Directory
+0,0x7fc03a10,\\$ConvertToNonresident
+0,0x7fc04518,\\Program Files\\Google\\Chrome\\Application\\chrome.exe
+0,0x7fc04708,\\Windows\\System32\\pdh.dll
+0,0x7fc04800,\\Program Files\\Google\\Chrome\\Temp\\source3948_661393057\\Chrome-bin\\109.0.5414.120\\elevation_service.exe
+0,0x7fc04db0,\\Program Files\\Google\\Chrome\\Application\\chrome.VisualElementsManifest.xmlisualElementsManifest.xml
+0,0x7fc04f80,\\$Directory
+0,0x7fc059e0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\Cache_Data\\data_2
+0,0x7fc05a98,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\shared_proto_db\\CURRENTdbtmp
+0,0x7fc05b50,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\Cache_Data\\data_1
+0,0x7fc06770,\\$Directory
+0,0x7fc06b88,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Shortcuts-journal
+0,0x7fc09038,\\Windows\\System32\\NlsLexicons0013.dll
+0,0x7fc09420,\\Windows\\Fonts\\cambria.ttc
+0,0x7fc0c430,\\Windows\\System32\\config\\systemprofile\\AppData\\Roaming\\Microsoft\\SystemCertificates\\My
+0,0x7fc0c920,\\Windows\\System32\\wscsvc.dll
+0,0x7fc0d640,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7fc0df80,\\Windows\\System32\\sppsvc.exe
+0,0x7fc0e918,\\Windows\\Fonts\\palai.ttf
+0,0x7fc0ee20,\\Windows\\Fonts\\segoeuil.ttf
+0,0x7fc0f038,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\heavy_ad_intervention_opt_out.db-journal
+0,0x7fc0f0f8,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Security\\5025c0c5e7134226b2fc0c4bdabf67ef\\System.Security.ni.dll
+0,0x7fc0f1b0,\\mojo.2728.2868.3577287777097239304
+0,0x7fc12250,\\Windows\\Fonts\\ariali.ttf
+0,0x7fc12458,\\mojo.2728.2868.16515239386985944000
+0,0x7fc14438,\\Windows\\System32\\wbem\\mofd.dll
+0,0x7fc146d8,\\Windows\\System32\\mspatcha.dll
+0,0x7fc157d0,\\Windows\\System32\\wshext.dll
+0,0x7fc16be0,\\Windows\\System32\\wpdshext.dll
+0,0x7fc16c98,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\Cache_Data\\index
+0,0x7fc172c8,\\Windows\\System32\\sqlceqp30.dll
+0,0x7fc17550,\\Endpoint
+0,0x7fc17698,\\Windows\\System32\\HelpPaneProxy.dll
+0,0x7fc17d00,\\Windows\\assembly\\GAC_MSIL\\System.Workflow.Runtime\\3.0.0.0__31bf3856ad364e35\\System.Workflow.Runtime.dll
+0,0x7fc17db8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Local Storage\\leveldb\\LOCK
+0,0x7fc17f80,\\Windows\\assembly\\GAC_MSIL\\Microsoft.Build.Tasks\\2.0.0.0__b03f5f7f11d50a3a\\Microsoft.Build.Tasks.dll
+0,0x7fc18038,\\$ConvertToNonresident
+0,0x7fc18b40,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension Scripts\\LOCK
+0,0x7fc18f80,\\Windows\\System32\\sxs.dll
+0,0x7fc1a2a8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Local Storage\\leveldb\\LOCK
+0,0x7fc1a6d8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\Cache_Data\\data_3
+0,0x7fc1ac30,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\Cache_Data\\data_3
+0,0x7fc1ad68,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\Cache_Data\\data_2
+0,0x7fc1ba20,\\Windows\\System32\\eventcls.dll
+0,0x7fc1bb78,\\Endpoint
+0,0x7fc1c198,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.DirectorySer#\\86d99a77ba6496b2300d9e347373fdd9\\System.DirectoryServices.ni.dll
+0,0x7fc1c290,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\PresentationFramewo#\\645eac5513e6a5587dd3f334d9fab4c2\\PresentationFramework.Royale.ni.dll
+0,0x7fc1c388,\\$Directory
+0,0x7fc1c480,\\$Directory
+0,0x7fc1c690,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\elevation_service.exe
+0,0x7fc1c9e0,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\Temp\\ZAP35BC.tmp\\System.Workflow.Runtime.dll
+0,0x7fc1fa08,\\Windows\\System32\\eapphost.dll
+0,0x7fc1fb10,\\Windows\\System32\\werconcpl.dll
+0,0x7fc21028,\\Windows\\System32\\7B296FB0-376B-497e-B012-9C450E1B7327-5P-1.C7483456-A289-439d-8115-601632D005A0
+0,0x7fc21278,\\Windows\\System32\\aclui.dll
+0,0x7fc220f0,\\Windows\\System32\\es.dll
+0,0x7fc22460,\\$ConvertToNonresident
+0,0x7fc236f8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Local Storage\\leveldb\\000003.log
+0,0x7fc23e88,\\Windows\\System32\\msdmo.dll
+0,0x7fc246e8,\\Windows\\Fonts\\couri.ttf
+0,0x7fc24ab0,\\$Directory
+0,0x7fc24bd8,\\$Directory
+0,0x7fc24cd8,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar\\Windows Media Player (2).lnk
+0,0x7fc25178,\\Windows\\System32\\RacRules.xml
+0,0x7fc25eb8,\\Windows\\System32\\vss_ps.dll
+0,0x7fc26dd0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_100_percent.pak
+0,0x7fc27620,\\Windows\\System32\\Magnify.exe
+0,0x7fc28328,\\Windows\\System32\\sppwinob.dll
+0,0x7fc283e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\icudtl.dat
+0,0x7fc29258,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-WindowsUpdateClient%4Operational.evtx
+0,0x7fc2c300,\\Windows\\System32\\wbem\\WMIADAP.exe
+0,0x7fc2d038,\\mojo.2728.2716.16161054240589156774
+0,0x7fc2de48,\\Windows\\System32
+0,0x7fc30278,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\System and Security.lnk
+0,0x7fc31038,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_100_percent.pak
+0,0x7fc31488,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\GrShaderCache\\index
+0,0x7fc31838,\\Users\\devmac\\AppData\\Roaming\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar\\Google Chrome.lnk
+0,0x7fc31bf8,\\$ConvertToNonresident
+0,0x7fc31d80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\en-GB-10-1.bdic
+0,0x7fc31e38,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\Installer\\chrmstp.exe
+0,0x7fc32f80,\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\ngen_service.log
+0,0x7fc33908,\\Windows\\System32\\loadperf.dll
+0,0x7fc33b98,\\$Directory
+0,0x7fc33ed0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GCM Store\\000003.log
+0,0x7fc34038,\\Windows\\System32\\msiltcfg.dll
+0,0x7fc34b60,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7fc35b70,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\DawnCache\\data_3
+0,0x7fc35c38,\\Endpoint
+0,0x7fc364d0,\\Windows\\System32\\mssvp.dll
+0,0x7fc36938,\\Windows\\Fonts\\segoeuiz.ttf
+0,0x7fc36d20,\\$ConvertToNonresident
+0,0x7fc36dd8,\\Windows\\System32\\wbem\\wmiprov.dll
+0,0x7fc36e90,\\Program Files\\AccessData\\FTK Imager\\boost_system-vc90-mt-1_39.dll
+0,0x7fc3aaf8,\\Windows\\System32\\wininet.dll
+0,0x7fc3ad40,\\Users\\devmac\\AppData\\Local\\Temp\\4c001e4e-bc45-4652-8ff1-381a7f013a07.tmp
+0,0x7fc3b718,\\mojo.2728.2868.10478293683181971084
+0,0x7fc3f0a0,\\Windows\\System32\\DriverStore\\infpub.dat
+0,0x7fc3f540,\\$Directory
+0,0x7fc3f708,\\mojo.2728.2868.97324876124205809
+0,0x7fc3fb08,\\Windows\\System32\\WindowsCodecsExt.dll
+0,0x7fc3fd38,\\Windows\\System32\\NlsData0021.dll
+0,0x7fc40ca8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache\\index
+0,0x7fc42798,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Sync Data\\LevelDB\\MANIFEST-000002
+0,0x7fc43430,\\Windows\\System32\\KernelBase.dll
+0,0x7fc45038,\\$Directory
+0,0x7fc4b318,\\$Directory
+0,0x7fc4b8d0,\\$Directory
+0,0x7fc66340,\\autoexec.bat
+0,0x7fc66700,\\Program Files\\AccessData\\FTK Imager\\help\\enu\\FTKImager_UserGuide.pdf
+0,0x7fc67038,\\Windows\\System32\\rdpcorekmts.dll
+0,0x7fc67ab0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Affiliation Database-journal
+0,0x7fc67b68,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Favicons-journal
+0,0x7fc69ec8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7fc69f80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Login Data For Account
+0,0x7fc70038,\\Windows\\System32\\DiagCpl.dll
+0,0x7fc70ba0,\\Windows\\assembly\\GAC_MSIL\\System.DirectoryServices\\2.0.0.0__b03f5f7f11d50a3a\\System.DirectoryServices.dll
+0,0x7fc70e08,\\Windows\\System32\\wups2.dll
+0,0x7fc75d68,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network\\Cookies-journal
+0,0x7fc75ef0,\\Windows\\assembly\\GAC_MSIL\\System.Web.RegularExpressions\\2.0.0.0__b03f5f7f11d50a3a\\System.Web.RegularExpressions.dll
+0,0x7fc78740,\\Windows\\assembly\\GAC_MSIL\\System.Workflow.Runtime\\3.0.0.0__31bf3856ad364e35\\System.Workflow.Runtime.dll
+0,0x7fc78cc8,\\Users\\devmac\\Favorites\\desktop.ini
+0,0x7fc7ab70,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a
+0,0x7fc7b320,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7fc7e580,\\$Directory
+0,0x7fc809f8,\\Windows\\System32\\oobe\\winsetup.dll
+0,0x7fc80d98,\\Windows\\System32\\wuauclt.exe
+0,0x7fc810f0,\\Windows\\SoftwareDistribution\\DataStore\\Logs\\edb.chk
+0,0x7fc81be0,\\Windows\\Fonts\\segoeui.ttf
+0,0x7fc81d00,\\Windows\\System32\\wbem\\NCProv.dll
+0,0x7fc822b0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\DawnCache\\data_0
+0,0x7fc82368,\\Windows\\System32\\bitsprx4.dll
+0,0x7fc83a38,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\icudtl.dat
+0,0x7fc85038,\\Windows\\System32\\drivers\\etc
+0,0x7fc85280,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Site Characteristics Database\\MANIFEST-000002
+0,0x7fc88038,\\$Directory
+0,0x7fc892b0,\\Users\\devmac\\AppData\\Local\\Google\\Software Reporter Tool\\software_reporter_tool.log
+0,0x7fc893e8,\\Windows\\System32\\drivers\\spsys.sys
+0,0x7fc8c5a8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\DawnCache\\data_1
+0,0x7fc8c7c0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\ShaderCache\\data_2
+0,0x7fc8cb18,\\Endpoint
+0,0x7fc8d178,\\Windows\\System32\\msihnd.dll
+0,0x7fc8da00,\\Windows\\System32\\restore\\MachineGuid.txt
+0,0x7fc8f280,\\Windows\\System32\\PerfStringBackup.INI
+0,0x7fc8f620,\\mojo.2728.2868.5225754052969631741
+0,0x7fc8fb18,\\Windows\\System32\\en-US\\slc.dll.mui
+0,0x7fc8ff80,\\Windows\\Fonts\\courbi.ttf
+0,0x7fc90038,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Local Extension Settings\\ghbmnnjooekpmoecnnnilnnbdlolhkhi\\LOG
+0,0x7fc903d0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_100_percent.pak
+0,0x7fc90a88,\\Windows\\System32\\wsqmcons.exe
+0,0x7fc913d0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_100_percent.pak
+0,0x7fc91a88,\\Windows\\System32\\wsqmcons.exe
+0,0x7fc93810,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\IndexedDB\\https_docs.google.com_0.indexeddb.leveldb\\LOG
+0,0x7fc93b28,\\Windows\\System32\\browcli.dll
+0,0x7fc94710,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Web Applications\\Temp\\scoped_dir2728_595787939\\Icons\\16.png
+0,0x7fc94ca0,\\Windows\\Fonts\\arial.ttf
+0,0x7fc95518,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\ShaderCache\\data_3
+0,0x7fc95c50,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Sync Data\\LevelDB\\CURRENTdbtmp
+0,0x7fc96038,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\ShaderCache\\index
+0,0x7fc97270,\\PIPE_EVENTROOT\\CIMV2SCM EVENT PROVIDER
+0,0x7fc97668,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\ShaderCache\\data_2
+0,0x7fc97dc0,\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\mscorjit.dll
+0,0x7fc97f80,\\$Directory
+0,0x7fc98038,\\$Directory
+0,0x7fc98da8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\shared_proto_db\\LOCK
+0,0x7fc99210,\\Windows\\System32\\msimsg.dll
+0,0x7fc99370,\\crashpad_2728_WEBUDYUWYAYUIYRK
+0,0x7fc99478,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7fc99f18,\\Windows\\System32\\Tasks\\Microsoft\\Windows Defender\\MP Scheduled Scan
+0,0x7fc9ac98,\\Windows\\Fonts\\arial.ttf
+0,0x7fc9bcf0,\\Endpoint
+0,0x7fc9c270,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\DawnCache\\data_1
+0,0x7fc9ce88,\\Windows\\System32\\qmgrprxy.dll
+0,0x7fc9eca0,\\$Directory
+0,0x7fc9ef80,\\Windows\\Fonts\\micross.ttf
+0,0x7fc9f478,\\Windows\\assembly\\GAC_MSIL\\System.Data.SqlXml\\2.0.0.0__b77a5c561934e089\\System.Data.SqlXml.dll
+0,0x7fc9fab8,\\mojo.2728.2868.10190654047728907225
+0,0x7fca0908,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_1472970136\\manifest.fingerprint
+0,0x7fca0ba0,\\Windows\\System32\\IPHLPAPI.DLL
+0,0x7fca1038,\\Endpoint
+0,0x7fca1b08,\\Windows\\assembly\\GAC_MSIL\\System.Drawing.Design\\2.0.0.0__b03f5f7f11d50a3a\\System.Drawing.Design.dll
+0,0x7fca1c98,\\Windows\\System32\\netcenter.dll
+0,0x7fca1f80,\\Windows\\System32\\en-US\\DWrite.dll.mui
+0,0x7fca2b30,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\IndexedDB\\https_drive.google.com_0.indexeddb.leveldb\\CURRENTdbtmp
+0,0x7fca2cc8,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System.Web\\ace3bede2f516f9e5bca620ad86cc063\\System.Web.ni.dll
+0,0x7fca2d80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\GPUCache\\index
+0,0x7fca2ec8,\\Windows\\Fonts\\simsun.ttc
+0,0x7fca2f80,\\Windows\\System32\\ExplorerFrame.dll
+0,0x7fca6390,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Storage\\ext\\nmmhkkegccagdldgiimedpiccmgmieda\\def\\Code Cache\\wasm\\index-dir\\temp-index
+0,0x7fcaa1e0,\\Program Files\\Google\\Update\\1.3.36.152\\GoogleCrashHandler.exe
+0,0x7fcaaa78,\\Windows\\System32\\drivers\\etc
+0,0x7fcaadb8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\Installer\\setup.exe
+0,0x7fcab5a8,\\Program Files\\Google\\Update\\1.3.36.152\\goopdate.dll
+0,0x7fcab8e8,\\$Directory
+0,0x7fcac828,\\lsass
+0,0x7fcac950,\\Windows\\System32\\psapi.dll
+0,0x7fcace50,\\Windows\\assembly\\GAC_MSIL\\System\\2.0.0.0__b77a5c561934e089\\System.dll
+0,0x7fcadf80,\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\mscorsvw.exe
+0,0x7fcae0f8,\\Windows\\System32\\dfscli.dll
+0,0x7fcaeb18,\\$Directory
+0,0x7fcb0668,\\Windows\\assembly\\GAC_MSIL\\System.Runtime.Serialization.Formatters.Soap\\2.0.0.0__b03f5f7f11d50a3a\\System.Runtime.Serialization.Formatters.Soap.dll
+0,0x7fcb09b0,\\Program Files\\AccessData\\FTK Imager\\langs\\ptb_adencrypt.dll
+0,0x7fcb0d68,\\Program Files\\AccessData\\FTK Imager\\langs\\nld_adencrypt.dll
+0,0x7fcb0e20,\\Windows\\System32\\Tasks\\GoogleUpdateTaskMachineCore{FAC4C087-A423-47B9-B031-3B9849508ED6}
+0,0x7fcb0f80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network Action Predictor
+0,0x7fcb1418,\\mojo.2728.2868.2972886704177128586
+0,0x7fcb1ac0,\\Windows\\Fonts\\times.ttf
+0,0x7fcb2098,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a\\msvcp90.dll
+0,0x7fcb2c88,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\SwReporter\\107.294.200\\debug.log
+0,0x7fcb3038,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\shared_proto_db\\metadata\\LOG
+0,0x7fcb61a8,\\Windows\\System32\\7B296FB0-376B-497e-B012-9C450E1B7327-5P-0.C7483456-A289-439d-8115-601632D005A0
+0,0x7fcb6ac8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache\\data_1
+0,0x7fcb72b0,\\mojo.2728.2868.13855010263433941768
+0,0x7fcb73b0,\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\Updates
+0,0x7fcb7b48,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7fcb9f80,\\Windows\\Temp\\Crashpad\\settings.dat
+0,0x7fcbaab8,\\Windows\\winsxs\\x86_microsoft.vc80.crt_1fc8b3b9a1e18e3b_8.0.50727.4927_none_d08a205e442db5b5
+0,0x7fcbc038,\\Program Files\\AccessData\\FTK Imager\\cximage.dll
+0,0x7fcbc570,\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\mscorwks.dll
+0,0x7fcbd768,\\Windows\\System32\\Query.dll
+0,0x7fcbd998,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_256.db
+0,0x7fcbdc38,\\Windows\\System32\\en-US\\ntdll.dll.mui
+0,0x7fcbe038,\\Users\\devmac\\AppData\\Local\\Temp\\556995be-6219-4190-903b-636602cba01a.tmp
+0,0x7fcbe2f8,\\Program Files\\AccessData\\FTK Imager\\langs\\sve_ftki.dll
+0,0x7fcbe800,\\Windows\\System32\\msiexec.exe
+0,0x7fcbe9d8,\\Program Files\\AccessData\\FTK Imager\\langs\\sve_adencrypt.dll
+0,0x7fcbeb48,\\Windows\\System32\\sppsvc.exe
+0,0x7fcbed58,\\Program Files\\AccessData\\FTK Imager\\langs\\ptb_ftki.dll
+0,0x7fcbf038,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7fcbfb40,\\Program Files\\AccessData\\FTK Imager\\microsoft.vc90.mfc
+0,0x7fcbfeb8,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a
+0,0x7fcc0730,\\Program Files\\AccessData\\FTK Imager\\langs\\trk_ftki.dll
+0,0x7fcc0b68,\\Program Files\\Google\\Update\\1.3.36.152\\GoogleUpdateOnDemand.exe
+0,0x7fcc1380,\\Windows\\System32\\certprop.dll
+0,0x7fcc18d8,\\Windows\\ServiceProfiles\\LocalService\\AppData\\Local\\Microsoft\\Windows\\WindowsUpdate.log
+0,0x7fcc1c40,\\Program Files\\Windows Defender\\MpOAV.dll
+0,0x7fcc2038,\\Windows\\System32\\mfreadwrite.dll
+0,0x7fcc2e10,\\Windows\\System32\\bitsperf.dll
+0,0x7fcc2ec8,\\Program Files\\Google\\Update\\GoogleUpdate.exe
+0,0x7fcc4400,\\Windows\\System32\\wuapi.dll
+0,0x7fcc44b8,\\$Directory
+0,0x7fcc4638,\\Program Files\\Google\\Update\\1.3.36.152\\goopdate.dll
+0,0x7fcc6120,\\$Directory
+0,0x7fcc61d8,\\Program Files\\Google\\Update\\1.3.36.152\\goopdateres_en-GB.dll
+0,0x7fcc73d8,\\Windows\\System32\\msctf.dll
+0,0x7fcc77c8,\\$Directory
+0,0x7fcc7d50,\\Program Files\\Google\\Update\\1.3.36.152\\psmachine.dll
+0,0x7fcc9388,\\Windows\\System32\\spool\\drivers\\color\\sRGB Color Space Profile.icm
+0,0x7fcc9c98,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\Locales\\en-GB.pak
+0,0x7fcca420,\\Windows\\System32\\drivers\\en-US\\acpi.sys.mui
+0,0x7fccac48,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7fccaf80,\\Windows\\System32\\wscisvif.dll
+0,0x7fccc198,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7fccd498,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7fcce7b0,\\Windows\\assembly\\GAC_32\\System.Data\\2.0.0.0__b77a5c561934e089\\System.Data.dll
+0,0x7fcce868,\\Windows\\assembly\\GAC_32\\System.Data\\2.0.0.0__b77a5c561934e089\\System.Data.dll
+0,0x7fccfb60,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\Locales\\en-GB.pak
+0,0x7fcd0558,\\Windows\\Fonts\\segoeuib.ttf
+0,0x7fcd1210,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Local Storage\\leveldb\\LOG
+0,0x7fcd1d68,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\Cache_Data\\data_0
+0,0x7fcd2500,\\Windows\\inf\\setupapi.dev.log
+0,0x7fcd5348,\\ProgramData\\Microsoft\\Network\\Downloader\\qmgr0.dat
+0,0x7fcd5470,\\$Directory
+0,0x7fcd5b70,\\Windows\\winsxs\\x86_microsoft.vc80.crt_1fc8b3b9a1e18e3b_8.0.50727.4927_none_d08a205e442db5b5
+0,0x7fcd5c28,\\Windows\\System32\\pegibbfc.rs
+0,0x7fcd5f80,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\System\\500ddd904b1099f95552a81b54223b7f\\System.ni.dll
+0,0x7fcd62f0,\\Windows\\assembly\\GAC_MSIL\\System.Deployment\\2.0.0.0__b03f5f7f11d50a3a\\System.Deployment.dll
+0,0x7fcd7170,\\Windows\\System32\\qmgr.dll
+0,0x7fcd7410,\\Windows\\assembly\\GAC_MSIL\\System.Security\\2.0.0.0__b03f5f7f11d50a3a\\System.Security.dll
+0,0x7fcd7a90,\\Windows\\System32\\user32.dll
+0,0x7fcd8380,\\Windows\\Fonts\\timesbd.ttf
+0,0x7fcda748,\\Windows\\System32\\en-US\\MMDevAPI.dll.mui
+0,0x7fcdac98,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Diagnosis-DPS%4Operational.evtx
+0,0x7fcdbd58,\\Windows\\System32\\control.exe
+0,0x7fcdbe10,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\GrShaderCache\\data_2
+0,0x7fcdbec8,\\Windows\\System32\\sqlceoledb30.dll
+0,0x7fcdbf80,\\$ConvertToNonresident
+0,0x7fcdce00,\\Endpoint
+0,0x7fcdd738,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\dfff8a24639a14ec_0
+0,0x7fcdd7f0,\\Windows\\System32\\stdole2.tlb
+0,0x7fcdde58,\\ProgramData\\Microsoft\\Windows Defender\\Support\\MPLog-07132009-215552.log
+0,0x7fcde328,\\Windows\\assembly\\GAC_MSIL\\System.Windows.Forms\\2.0.0.0__b77a5c561934e089\\System.Windows.Forms.dll
+0,0x7fcdfe68,\\Windows\\Fonts\\gulim.ttc
+0,0x7fce1a78,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_installer.log
+0,0x7fce1ca0,\\Windows\\Fonts\\seguisb.ttf
+0,0x7fce2f38,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Top Sites-journal
+0,0x7fce64a8,\\ProgramData\\Microsoft\\Network\\Downloader\\qmgr1.dat
+0,0x7fce6bc8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\icudtl.dat
+0,0x7fce7bc0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\resources.pak
+0,0x7fce7f80,\\Windows\\Prefetch\\TASKHOST.EXE-7238F31D.pf
+0,0x7fce8460,\\$ConvertToNonresident
+0,0x7fce8590,\\$ConvertToNonresident
+0,0x7fce8780,\\Windows\\assembly\\GAC_MSIL\\System.Drawing\\2.0.0.0__b03f5f7f11d50a3a\\System.Drawing.dll
+0,0x7fce9380,\\Program Files\\Google\\Chrome\\Temp\\source3948_661393057\\Chrome-bin\\109.0.5414.120\\Locales\\en-GB.pak
+0,0x7fcea038,\\Windows\\System32\\activeds.dll
+0,0x7fcea410,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7fcead08,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\optimization_guide_internal.dll
+0,0x7fceaf10,\\wkssvc
+0,0x7fcec3c8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\Cache_Data\\data_1
+0,0x7fcec480,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\Cache_Data\\data_0
+0,0x7fcecbb8,\\Windows\\System32\\drivers\\ndis.sys
+0,0x7fcecce0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension State\\LOCK
+0,0x7fcee3e0,\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\mscorsvc.dll
+0,0x7fcf21c0,\\Windows\\Fonts\\tahoma.ttf
+0,0x7fcf22b8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\libGLESv2.dll
+0,0x7fcf3c58,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_200_percent.pak
+0,0x7fcf3f80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\ShaderCache\\data_1
+0,0x7fcf5038,\\Windows\\Fonts\\seguisb.ttf
+0,0x7fcf5328,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\shared_proto_db\\metadata\\MANIFEST-000002
+0,0x7fcf5ac8,\\Program Files\\Google\\Chrome\\ChromeRecovery\\scoped_dir3512_2036193084\\ChromeRecovery.exe
+0,0x7fcf62a0,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\mscorlib\\f58ab951b57c8526430
+0,0x7fcf6780,\\Windows\\assembly\\GAC_MSIL\\WindowsBase\\3.0.0.0__31bf3856ad364e35\\WindowsBase.dll
+0,0x7fcf6938,\\wkssvc
+0,0x7fcf6af0,\\Windows\\System32\\en-US\\msiexec.exe.mui
+0,0x7fcf7838,\\$ConvertToNonresident
+0,0x7fcf7ae0,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Application-Experience%4Program-Inventory.evtx
+0,0x7fcf8288,\\$Directory
+0,0x7fcf85b0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7fcf8668,\\$Directory
+0,0x7fcf87c8,\\Windows\\System32\\srvcli.dll
+0,0x7fcf8880,\\Windows\\System32
+0,0x7fcf8cb0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_100_percent.pak
+0,0x7fcf9728,\\$ConvertToNonresident
+0,0x7fcf9c78,\\ProgramData\\Microsoft\\Windows Defender\\Support\\MPLog-07132009-215552.log
+0,0x7fcfa190,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Application-Experience%4Program-Compatibility-Assistant.evtx
+0,0x7fcfad28,\\Windows\\assembly\\GAC_32\\mscorlib\\2.0.0.0__b77a5c561934e089\\mscorlib.dll
+0,0x7fcfc480,\\Program Files\\AccessData\\FTK Imager\\langs\\trk_adencrypt.dll
+0,0x7fcfc5b0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Session Storage\\MANIFEST-000002
+0,0x7fcfc668,\\$ConvertToNonresident
+0,0x7fcfc9a0,\\$ConvertToNonresident
+0,0x7fcfcc90,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Application-Experience%4Program-Telemetry.evtx
+0,0x7fcff038,\\$ConvertToNonresident
+0,0x7fcff120,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Shortcuts
+0,0x7fcff7e8,\\$ConvertToNonresident
+0,0x7fcff8e8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache\\data_3
+0,0x7fcffc48,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\ShaderCache\\data_1
+0,0x7fcfff80,\\Windows\\System32\\WFS.exe
+0,0x7fd28038,\\$Directory
+0,0x7fd280f0,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Application-Experience%4Program-Compatibility-Troubleshooter.evtx
+0,0x7fd281a8,\\Windows\\System32\\en-US\\KernelBase.dll.mui
+0,0x7fd29188,\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\mscorsvw.exe
+0,0x7fd29540,\\Windows\\System32\\catroot2\\edb.log
+0,0x7fd295f8,\\Windows\\Fonts\\palab.ttf
+0,0x7fd2a580,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Login Data-journal
+0,0x7fd2a9a8,\\$Directory
+0,0x7fd2af80,\\$Directory
+0,0x7fd2b470,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Site Characteristics Database\\CURRENTdbtmp
+0,0x7fd2bb18,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\wasm\\index
+0,0x7fd2bdf8,\\Windows\\System32\\drvinst.exe
+0,0x7fd2c038,\\$Directory
+0,0x7fd2c858,\\Windows\\System32\\WindowsPowerShell\\v1.0\\pwrshsip.dll
+0,0x7fd2d700,\\$Directory
+0,0x7fd2f740,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\ShaderCache\\data_0
+0,0x7fd2fa08,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\v8_context_snapshot.bin
+0,0x7fd2fe80,\\Windows\\System32\\SessEnv.dll
+0,0x7fd32860,\\Windows\\Fonts\\iskpotab.ttf
+0,0x7fd34290,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\v8_context_snapshot.bin
+0,0x7fd345c0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\databases\\Databases.db-journal
+0,0x7fd361f0,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-NetworkAccessProtection%4WHC.evtx
+0,0x7fd37038,\\$ConvertToNonresident
+0,0x7fd37440,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\e4014239dca3ee51_0
+0,0x7fd37778,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\vk_swiftshader.dll
+0,0x7fd37a28,\\Windows\\System32\\d3d8thk.dll
+0,0x7fd37d30,\\Endpoint
+0,0x7fd38518,\\Windows\\System32\\ReAgent.dll
+0,0x7fd385d0,\\mojo.2728.2716.9361253315869820624
+0,0x7fd38870,\\Windows\\assembly\\GAC_MSIL\\System.Xml\\2.0.0.0__b77a5c561934e089\\System.XML.dll
+0,0x7fd38c50,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Session Storage\\LOCK
+0,0x7fd38ef0,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7fd39130,\\$Directory
+0,0x7fd39478,\\$ConvertToNonresident
+0,0x7fd39860,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120
+0,0x7fd39bf8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History-journal
+0,0x7fd3a240,\\$Directory
+0,0x7fd3aa10,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\BrowserMetrics\\BrowserMetrics-64236C2F-AA8.pma
+0,0x7fd3b038,\\$ConvertToNonresident
+0,0x7fd3b5a0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\ShaderCache\\data_3
+0,0x7fd3be60,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension Scripts\\LOG
+0,0x7fd3c7d0,\\Windows\\Media\\Windows User Account Control.wav
+0,0x7fd3cf80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\DawnCache\\data_0
+0,0x7fd3d290,\\Windows\\System32\\en-US\\zipfldr.dll.mui
+0,0x7fd40410,\\$Directory
+0,0x7fd41248,\\$ConvertToNonresident
+0,0x7fd41f18,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network\\Reporting and NEL
+0,0x7fd42398,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_200_percent.pak
+0,0x7fd42558,\\Windows\\System32\\taskbarcpl.dll
+0,0x7fd42610,\\$Directory
+0,0x7fd42cb8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\v8_context_snapshot.bin
+0,0x7fd44038,\\$Directory
+0,0x7fd44bb8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\ShaderCache\\index
+0,0x7fd4cf80,\\Windows\\System32\\spp\\plugin-manifests-signed\\sppobjs-spp-plugin-manifest-signed.xrm-ms
+0,0x7fd4d9a8,\\Windows\\System32\\clb.dll
+0,0x7fd50168,\\ProgramData\\Microsoft\\RAC\\StateData\\RacDatabase.sdf
+0,0x7fd51f80,\\Endpoint
+0,0x7fd531c0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Favicons
+0,0x7fd56d10,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Top Sites
+0,0x7fd56f80,\\$Directory
+0,0x7fd57918,\\$Directory
+0,0x7fd58038,\\Windows\\System32\\DWrite.dll
+0,0x7fd58800,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Diagnostics-Performance%4Operational.evtx
+0,0x7fd58928,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\GrShaderCache\\index
+0,0x7fd58ef0,\\Windows\\System32\\dbghelp.dll
+0,0x7fd59100,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_200_percent.pak
+0,0x7fd59758,\\Windows\\System32\\nsi.dll
+0,0x7fd5a528,\\Windows\\System32\\appinfo.dll
+0,0x7fd5a7d8,\\Windows\\Fonts\\timesi.ttf
+0,0x7fd5b570,\\mojo.2728.2868.3577287777097239304
+0,0x7fd5bc88,\\Windows\\System32\\FntCache.dll
+0,0x7fd5cd60,\\Windows\\System32\\l_intl.nls
+0,0x7fd5d038,\\$Directory
+0,0x7fd5d818,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Application-Experience%4Problem-Steps-Recorder.evtx
+0,0x7fd5dd68,\\$ConvertToNonresident
+0,0x7fd5df80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Local Storage\\leveldb\\MANIFEST-000002
+0,0x7fd5ed90,\\Windows\\System32\\msfeedsbs.dll
+0,0x7fd60a60,\\Windows\\System32\\powercpl.dll
+0,0x7fd60d58,\\Windows\\Fonts\\arialbd.ttf
+0,0x7fd623c0,\\Windows\\inf\\WmiApRpl\\WmiApRpl.h
+0,0x7fd62478,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\libEGL.dll
+0,0x7fd628a8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\DawnCache\\index
+0,0x7fd62f80,\\Windows\\System32\\consent.exe
+0,0x7fd63038,\\Windows\\System32
+0,0x7fd63230,\\Windows\\System32\\en-US\\drvinst.exe.mui
+0,0x7fd633b0,\\$ConvertToNonresident
+0,0x7fd63c70,\\$Directory
+0,0x7fd644b0,\\Windows\\System32\\en-US\\consent.exe.mui
+0,0x7fd64800,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache\\data_1
+0,0x7fd65140,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_200_percent.pak
+0,0x7fd653e8,\\$ConvertToNonresident
+0,0x7fd656e8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\shared_proto_db\\MANIFEST-000002
+0,0x7fd65d98,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache\\data_3
+0,0x7fd66038,\\Program Files\\Windows Defender\\MpSvc.dll
+0,0x7fd66490,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension Scripts\\MANIFEST-000002
+0,0x7fd66678,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\icudtl.dat
+0,0x7fd66d48,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Site Characteristics Database\\000003.log
+0,0x7fd66e00,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\heavy_ad_intervention_opt_out.db
+0,0x7fd66ec8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\ShaderCache\\index
+0,0x7fd66f80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\DawnCache\\index
+0,0x7fd67800,\\Windows\\System32\\wups.dll
+0,0x7fd683d0,\\$ConvertToNonresident
+0,0x7fd68488,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\DawnCache\\data_3
+0,0x7fd68ab8,\\$ConvertToNonresident
+0,0x7fd68e10,\\$ConvertToNonresident
+0,0x7fd68ec8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\DawnCache\\data_2
+0,0x7fd69038,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\ShaderCache\\data_0
+0,0x7fd691a0,\\Windows\\assembly\\GAC_MSIL\\System.Configuration\\2.0.0.0__b03f5f7f11d50a3a\\System.configuration.dll
+0,0x7fd69510,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Affiliation Database
+0,0x7fd69bb8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Last Version
+0,0x7fd69e60,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010001.dir
+0,0x7fd6b798,\\$ConvertToNonresident
+0,0x7fd6b9b8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Login Data
+0,0x7fd6bb78,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\0b6a1d14246c1196_0
+0,0x7fd6bc30,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GCM Store\\Encryption\\000003.log
+0,0x7fd6d190,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\v8_context_snapshot.bin
+0,0x7fd6d2d0,\\Windows\\System32\\en-US\\shlwapi.dll.mui
+0,0x7fd6dbc0,\\Windows\\Fonts\\segoeuii.ttf
+0,0x7fd6dcc8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Sessions\\Session_13324516657960169
+0,0x7fd6de60,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Crashpad\\settings.dat
+0,0x7fd6e0f8,\\Windows\\Fonts\\kartika.ttf
+0,0x7fd6e440,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Windows Defender%4WHC.evtx
+0,0x7fd6ee58,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-Windows Defender%4Operational.evtx
+0,0x7fe017b8,\\Program Files\\AccessData\\FTK Imager\\langs\\ita_ftki.dll
+0,0x7fe01c38,\\Endpoint
+0,0x7fe021f0,\\Windows\\System32\\wmi.dll
+0,0x7fe02608,\\Windows\\Fonts\\Vanib.ttf
+0,0x7fe03038,\\Windows\\System32\\seclogon.dll
+0,0x7fe048b0,\\Windows\\System32\\dxtmsft.dll
+0,0x7fe04968,\\Windows\\System32\\en-US\\ddraw.dll.mui
+0,0x7fe04a20,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7fe04db8,\\Windows\\System32\\wscproxystub.dll
+0,0x7fe059b0,\\$Directory
+0,0x7fe05cf8,\\$MapAttributeValue
+0,0x7fe063f0,\\Windows\\System32\\d3dim700.dll
+0,0x7fe067e8,\\Windows\\Fonts\\kartika.ttf
+0,0x7fe06d38,\\Windows\\Fonts\\tungab.ttf
+0,0x7fe078f0,\\Windows\\Fonts\\taile.ttf
+0,0x7fe079a8,\\Windows\\Fonts\\timesbd.ttf
+0,0x7fe07a60,\\Program Files\\AccessData\\FTK Imager\\langs\\jpn_ftki.dll
+0,0x7fe08d30,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\GPUCache\\index
+0,0x7fe08df0,\\Windows\\Fonts\\vrinda.ttf
+0,0x7fe093b8,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010003.dir
+0,0x7fe09928,\\Program Files\\Google\\Chrome\\Temp\\source3948_661393057\\Chrome-bin\\109.0.5414.120\\optimization_guide_internal.dll
+0,0x7fe0a2d0,\\Windows\\Fonts\\verdana.ttf
+0,0x7fe0a5b0,\\Windows\\Fonts\\verdanai.ttf
+0,0x7fe0a828,\\Windows\\Fonts\\trebucbd.ttf
+0,0x7fe0ab08,\\Windows\\Fonts\\trebucbi.ttf
+0,0x7fe0ad80,\\Windows\\Fonts\\trebuc.ttf
+0,0x7fe0af80,\\Windows\\Fonts\\trebucit.ttf
+0,0x7fe0b860,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a
+0,0x7fe0bf40,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\9e84abd223b5fba0_0
+0,0x7fe0c3f0,\\Windows\\System32\\d3d9.dll
+0,0x7fe0c4a8,\\Program Files\\Windows Defender\\MpOAV.dll
+0,0x7fe0c560,\\Windows\\Fonts\\StaticCache.dat
+0,0x7fe0c7e8,\\ProgramData\\Microsoft\\RAC\\PublishedData\\RacWmiDatabase.sdf
+0,0x7fe0ceb8,\\Windows\\Fonts\\consolaz.ttf
+0,0x7fe0d3c0,\\Windows\\Fonts\\upcfb.ttf
+0,0x7fe0d5a8,\\Windows\\Fonts\\upcfi.ttf
+0,0x7fe0da70,\\mojo.2728.2716.13125800280393197148
+0,0x7fe0dbd8,\\Windows\\Fonts\\shruti.ttf
+0,0x7fe0f398,\\Program Files\\AccessData\\FTK Imager\\langs\\ita_adencrypt.dll
+0,0x7fe10750,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Code Cache\\js\\aca86a39f7c4f737_0
+0,0x7fe11160,\\Program Files\\AccessData\\FTK Imager\\microsoft.vc90.crt\\msvcp90.dll
+0,0x7fe121b0,\\Endpoint
+0,0x7fe130e8,\\Program Files\\Google\\Chrome\\Temp\\source3948_661393057\\Chrome-bin\\109.0.5414.120\\chrome_100_percent.pak
+0,0x7fe13460,\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive
+0,0x7fe13708,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\vulkan-1.dll
+0,0x7fe13bc0,\\$Directory
+0,0x7fe13f18,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\Cache_Data\\index
+0,0x7fe15100,\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\mscorie.dll
+0,0x7fe153a0,\\Windows\\System32\\sqlcese30.dll
+0,0x7fe15510,\\Windows\\winsxs\\Manifests\\x86_policy.8.0.microsoft.vc80.crt_1fc8b3b9a1e18e3b_8.0.50727.4927_none_516ad11f0f4bdafe.manifest
+0,0x7fe16470,\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Projects\\SystemIndex\\Indexer\\CiFiles\\00010004.wid
+0,0x7fe16af0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Login Data For Account-journal
+0,0x7fe17038,\\mojo.2728.2868.9026062989202852527
+0,0x7fe172d8,\\Endpoint
+0,0x7fe17578,\\Windows\\Fonts\\Shonarb.ttf
+0,0x7fe17630,\\Windows\\Fonts\\cordia.ttf
+0,0x7fe17bf8,\\Windows\\Fonts\\plantc.ttf
+0,0x7fe17ef0,\\Windows\\Fonts\\angsauz.ttf
+0,0x7fe186b8,\\Endpoint
+0,0x7fe18770,\\AsyncConnectHlp
+0,0x7fe1ae48,\\Windows\\System32\\winevt\\Logs\\Microsoft-Windows-WindowsBackup%4ActionCenter.evtx
+0,0x7fe232e0,\\Windows\\System32\\wbem\\WmiApRes.dll
+0,0x7fe70038,\\Windows\\Prefetch\\SVCHOST.EXE-05F624AB.pf
+0,0x7fe70730,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Session Storage\\LOG
+0,0x7fe70e28,\\Windows\\System32\\mf.dll
+0,0x7fe753e0,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\Cache_Data\\index
+0,0x7fe75a10,\\Windows\\System32
+0,0x7fe77038,\\Windows\\SoftwareDistribution\\DataStore\\Logs\\edb.log
+0,0x7fe771a0,\\Windows\\Fonts\\taileb.ttf
+0,0x7fe77258,\\Windows\\Fonts\\angsa.ttf
+0,0x7fe784a8,\\Windows\\Fonts\\estre.ttf
+0,0x7fe785e8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_200_percent.pak
+0,0x7fe7b038,\\Windows\\assembly\\GAC_MSIL\\System.Workflow.Activities\\3.0.0.0__31bf3856ad364e35\\System.Workflow.Activities.dll
+0,0x7fe7b160,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\CrashpadMetrics-active.pma
+0,0x7fe7b3f8,\\Windows\\Fonts\\kartikab.ttf
+0,0x7fe7c038,\\Windows\\Fonts\\simsunb.ttf
+0,0x7fe7c0f0,\\Windows\\Fonts\\msyi.ttf
+0,0x7fe7c210,\\Windows\\Fonts\\kalingab.ttf
+0,0x7fe7c6d0,\\Windows\\Fonts\\upcel.ttf
+0,0x7fe7c8b8,\\Windows\\Fonts\\upcdbi.ttf
+0,0x7fe7ceb8,\\Windows\\Fonts\\angsab.ttf
+0,0x7fe7d3a0,\\Windows\\Fonts\\upcfl.ttf
+0,0x7fe7d588,\\Windows\\Fonts\\upcebi.ttf
+0,0x7fe7dd10,\\Windows\\Fonts\\segoesc.ttf
+0,0x7fe7eb98,\\Windows\\Fonts\\angsai.ttf
+0,0x7fe7f1a8,\\Windows\\Fonts\\LaoUI.ttf
+0,0x7fe7fcc8,\\Windows\\Fonts\\gautami.ttf
+0,0x7fe80038,\\Windows\\System32\\catroot2\\{127D0A1D-4EF2-11D1-8608-00C04FC295EE}\\catdb
+0,0x7fe80298,\\Windows\\Microsoft.NET\\Framework\\v2.0.50727\\fusion.dll
+0,0x7fe80ca8,\\Windows\\System32\\audiodev.dll
+0,0x7fe80d60,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension State\\CURRENTdbtmp
+0,0x7fec5ae8,\\Windows\\System32\\rpcrt4.dll
+0,0x7fec6780,\\$Directory
+0,0x7fec6998,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Site Characteristics Database\\LOG
+0,0x7fec6b80,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\DawnCache\\index
+0,0x7fec6eb8,\\$Directory
+0,0x7fec7230,\\Windows\\Fonts\\constan.ttf
+0,0x7fec73f0,\\Windows\\Fonts\\corbel.ttf
+0,0x7fec7510,\\Windows\\System32\\netevent.dll
+0,0x7fec7720,\\Windows\\Fonts\\consolab.ttf
+0,0x7fec7a00,\\Windows\\Fonts\\consolaz.ttf
+0,0x7fec7c10,\\Windows\\Fonts\\consola.ttf
+0,0x7fec7ef0,\\Windows\\Fonts\\consolai.ttf
+0,0x7fec84d8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extension Scripts\\CURRENTdbtmp
+0,0x7fec85c0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\icudtl.dat
+0,0x7fec86e0,\\Windows\\System32\\rpcss.dll
+0,0x7fec9038,\\Windows\\Fonts\\upcli.ttf
+0,0x7fec95f0,\\Windows\\Fonts\\l_10646.ttf
+0,0x7fec9b48,\\Windows\\Fonts\\upclbi.ttf
+0,0x7fec9cd0,\\Windows\\Fonts\\ariblk.ttf
+0,0x7fec9eb8,\\Windows\\Fonts\\upclb.ttf
+0,0x7fecad08,\\$ConvertToNonresident
+0,0x7fecb038,\\Windows\\Fonts\\calibri.ttf
+0,0x7fecb350,\\Windows\\Fonts\\cambriaz.ttf
+0,0x7fecb658,\\Windows\\Fonts\\cambria.ttc
+0,0x7fecb910,\\Windows\\Fonts\\cambriai.ttf
+0,0x7fecb9c8,\\Windows\\Fonts\\calibriz.ttf
+0,0x7fecbb48,\\Windows\\Fonts\\calibrib.ttf
+0,0x7fecbeb8,\\Windows\\Fonts\\calibrii.ttf
+0,0x7fecc3a8,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.IE5\\1L81YYTD\\ChromeSetup[1].exe
+0,0x7fecc948,\\Windows\\Fonts\\webdings.ttf
+0,0x7feccc00,\\Windows\\System32\\wsqmcons.exe
+0,0x7feccd80,\\Windows\\Fonts\\verdanab.ttf
+0,0x7feccec8,\\Windows\\winsxs\\Manifests\\x86_microsoft.vc80.crt_1fc8b3b9a1e18e3b_8.0.50727.4927_none_d08a205e442db5b5.manifest
+0,0x7feccf80,\\Windows\\Fonts\\verdanaz.ttf
+0,0x7fecd038,\\Windows\\Fonts\\corbelz.ttf
+0,0x7fecd128,\\Windows\\Fonts\\georgiab.ttf
+0,0x7fecd408,\\Windows\\Fonts\\georgiaz.ttf
+0,0x7fecd618,\\Windows\\Fonts\\georgia.ttf
+0,0x7fecd8f8,\\Windows\\Fonts\\georgiai.ttf
+0,0x7fecdb70,\\Windows\\Fonts\\framdit.ttf
+0,0x7fecddc0,\\Windows\\Fonts\\Gabriola.ttf
+0,0x7fed1f80,\\Windows\\assembly\\GAC_32\\System.Data.OracleClient\\2.0.0.0__b77a5c561934e089\\System.Data.OracleClient.dll
+0,0x7fed2868,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_elf.dll
+0,0x7fed2920,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_100_percent.pak
+0,0x7fed3238,\\Windows\\System32\\EAPQEC.DLL
+0,0x7fed3c48,\\Windows\\Fonts\\courbd.ttf
+0,0x7fed3eb8,\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\IndexedDB\\https_drive.google.com_0.indexeddb.leveldb\\LOG
+0,0x7fed5538,\\Endpoint
+0,0x7fed5680,\\Windows\\Fonts\\sylfaen.ttf
+0,0x7fed6360,\\Windows\\System32\\dxtrans.dll
+0,0x7fed6578,\\Windows\\System32\\dxtmsft.dll
+0,0x7fed68a8,\\Windows\\Fonts\\daunpenh.ttf
+0,0x7fed6e00,\\Windows\\Fonts\\upcdl.ttf
+0,0x7fed7230,\\Windows\\Fonts\\segoepr.ttf
+0,0x7fed7510,\\Windows\\Fonts\\segoeprb.ttf
+0,0x7fed7720,\\Windows\\Fonts\\palab.ttf
+0,0x7fed7a00,\\Windows\\Fonts\\palabi.ttf
+0,0x7fed7c10,\\Windows\\Fonts\\pala.ttf
+0,0x7fed7ef0,\\Windows\\Fonts\\palai.ttf
+0,0x7fed8bc0,\\Program Files\\Google\\Update\\1.3.36.152\\goopdateres_en-GB.dll
+0,0x7fed9038,\\$Directory
+0,0x7fed92f0,\\Windows\\Fonts\\iskpota.ttf
+0,0x7fedb4e8,\\Windows\\System32\\NlsLexicons0021.dll
+0,0x7fedc770,\\Windows\\System32\\d3d11.dll
+0,0x7fedcf80,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Explorer\\thumbcache_sr.db
+0,0x7fede718,\\mojo.2728.2868.5225754052969631741
+0,0x7fedea08,\\Windows\\Fonts\\msmincho.ttc
+0,0x7fedf130,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome_100_percent.pak
+0,0x7fedf6a8,\\Windows\\System32\\aeevts.dll
+0,0x7fee1d68,\\Windows\\System32\\wuapi.dll
+0,0x7fee1f80,\\Windows\\Fonts\\shrutib.ttf
+0,0x7fee53f8,\\
+0,0x7fee72a0,\\Windows\\Fonts\\browaub.ttf
+0,0x7fee76e8,\\Windows\\Fonts\\upcdi.ttf
+0,0x7fee7d80,\\Windows\\Fonts\\upcei.ttf
+0,0x7fee7f80,\\Windows\\Fonts\\upceb.ttf
+0,0x7fee8b80,\\Windows\\winsxs\\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16661_none_420fe3fa2b8113bd
+0,0x7fee9038,\\Windows\\Fonts\\upcjbi.ttf
+0,0x7fee9220,\\Windows\\Fonts\\kaiu.ttf
+0,0x7fee9408,\\Windows\\Fonts\\upcll.ttf
+0,0x7fee9588,\\Windows\\Fonts\\upckbi.ttf
+0,0x7fee9ae0,\\Windows\\Fonts\\upcki.ttf
+0,0x7feea350,\\Windows\\Fonts\\framd.ttf
+0,0x7feea658,\\Windows\\Fonts\\corbeli.ttf
+0,0x7feea880,\\Windows\\Fonts\\corbelb.ttf
+0,0x7feeab48,\\Windows\\Fonts\\constanz.ttf
+0,0x7feead48,\\Windows\\Fonts\\constanb.ttf
+0,0x7feeaec8,\\Windows\\Fonts\\constani.ttf
+0,0x7feeb038,\\Windows\\Fonts\\cambriab.ttf
+0,0x7feeb128,\\Windows\\Fonts\\comic.ttf
+0,0x7feeb408,\\Windows\\Fonts\\comicbd.ttf
+0,0x7feeb618,\\Windows\\Fonts\\Candarab.ttf
+0,0x7feeb8f8,\\Windows\\Fonts\\Candaraz.ttf
+0,0x7feebb70,\\Windows\\Fonts\\Candara.ttf
+0,0x7feebdc0,\\Windows\\Fonts\\Candarai.ttf
+0,0x7feec940,\\Windows\\assembly\\NativeImages_v2.0.50727_32\\Temp\\ZAP2BF8.tmp\\System.Workflow.ComponentModel.dll
+0,0x7feecf00,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\Locales\\en-GB.pak
+0,0x7feed210,\\Windows\\Fonts\\upcjb.ttf
+0,0x7feed2f0,\\Windows\\Fonts\\upckl.ttf
+0,0x7feed568,\\Windows\\Fonts\\upcji.ttf
+0,0x7feed7a8,\\Windows\\Fonts\\upckb.ttf
+0,0x7feedb10,\\Windows\\Fonts\\upcib.ttf
+0,0x7feedcf8,\\Windows\\Fonts\\upcii.ttf
+0,0x7feede50,\\Windows\\Fonts\\upcjl.ttf
+0,0x7feef368,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4926_none_508ed732bcbc0e5a
+0,0x7feef848,\\$ConvertToNonresident
+0,0x7feef9c8,\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\Temporary Internet Files\\Content.IE5\\1L81YYTD\\ChromeSetup[1].exe
+0,0x7ff02ef0,\\$Directory
+0,0x7ff093b8,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\Installe
+0,0x7ff2ef48,\\Endpoint
+0,0x7ff39c20,\\Windows\\Fonts\\upcdb.ttf
+0,0x7ff3a898,\\Users\\devmac\\AppData\\Local\\Temp\\chrome_ComponentUnpacker_BeginUnzipping2728_725841457\\manifest.fingerprint
+0,0x7ff3e8d0,\\Program Files\\AccessData\\FTK Imager\\boost_regex-vc90-mt-1_39.dll
+0,0x7ff3ef80,\\$Directory
+0,0x7ff42328,\\mojo.2728.2716.8749747924114012213
+0,0x7ff42540,\\$Directory
+0,0x7ff43220,\\Windows\\Fonts\\vga850.fon
+0,0x7ff43bb0,\\Windows\\Fonts\\vgafix.fon
+0,0x7ff43df8,\\Windows\\System32\\cryptsp.dll
+0,0x7ff48c80,\\$Directory
+0,0x7ff4d268,\\Windows\\System32\\imm32.dll
+0,0x7ff69378,\\Windows\\System32\\apds.dll
+0,0x7ff69dd0,\\Program Files\\AccessData\\FTK Imager\\microsoft.vc90.mfc\\Microsoft.VC90.MFC.manifest
+0,0x7ff69f80,\\Program Files\\Internet Explorer\\IEShims.dll
+0,0x7ff6b6a8,\\$Directory
+

@@ -1,0 +1,25 @@
+TreeDepth,Variable,Value
+0,Kernel Base,0x84600000
+0,DTB,0x1a8000
+0,Symbols,file:///usr/local/lib/python3.14/site-packages/volatility3/symbols/windows/ntkrpamp.pdb/80F5FE0C8A297DC13D87D9E065B94DE9-1.json.xz
+0,Is64Bit,False
+0,IsPAE,True
+0,layer_name,0 WindowsIntelPAE
+0,memory_layer,1 FileLayer
+0,KdDebuggerDataBlock,0x848aca88
+0,NTBuildLab,19041.1.x86fre.vb_release.191206
+0,CSDVersion,0
+0,KdVersionBlock,0x848aef78
+0,Major/Minor,15.19041
+0,MachineType,332
+0,KeNumberProcessors,3
+0,SystemTime,2023-03-29 17:23:10+00:00
+0,NtSystemRoot,C:\\Windows
+0,NtProductType,NtProductWinNt
+0,NtMajorVersion,10
+0,NtMinorVersion,0
+0,PE MajorOperatingSystemVersion,10
+0,PE MinorOperatingSystemVersion,0
+0,PE Machine,332
+0,PE TimeDateStamp,Wed May 27 08:35:09 2020
+

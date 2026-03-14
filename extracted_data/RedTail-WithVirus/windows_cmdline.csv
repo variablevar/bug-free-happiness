@@ -1,0 +1,140 @@
+TreeDepth,PID,Process,Args
+0,4,System,-
+0,100,Registry,-
+0,432,smss.exe,-
+0,636,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,704,wininit.exe,wininit.exe
+0,712,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,768,winlogon.exe,winlogon.exe
+0,816,services.exe,C:\\WINDOWS\\system32\\services.exe
+0,856,lsass.exe,C:\\WINDOWS\\system32\\lsass.exe
+0,960,fontdrvhost.ex,"""fontdrvhost.exe"""
+0,968,fontdrvhost.ex,-
+0,544,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k DcomLaunch -p
+0,640,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k RPCSS -p
+0,916,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k DcomLaunch -p -s LSM
+0,1060,svchost.exe,-
+0,1068,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k NetworkService -p
+0,1100,svchost.exe,-
+0,1148,dwm.exe,"""dwm.exe"""
+0,1216,svchost.exe,-
+0,1232,svchost.exe,-
+0,1272,svchost.exe,-
+0,1380,svchost.exe,-
+0,1444,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k LocalService -p -s nsi
+0,1528,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k netsvcs -p -s Schedule
+0,1560,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k UserProfileService -p -s ProfSvc
+0,1568,svchost.exe,-
+0,1588,svchost.exe,C:\\WINDOWS\\System32\\svchost.exe -k netprofm -p -s netprofm
+0,1692,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k netsvcs -p -s UserManager
+0,2016,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k NetworkService -p
+0,1036,VBoxService.ex,C:\\WINDOWS\\System32\\VBoxService.exe
+0,1864,svchost.exe,C:\\WINDOWS\\System32\\svchost.exe -k LocalServiceNetworkRestricted -p -s EventLog
+0,2144,svchost.exe,-
+0,2160,svchost.exe,-
+0,2196,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k LocalServiceNetworkRestricted -p -s Dhcp
+0,2208,svchost.exe,-
+0,2352,svchost.exe,-
+0,2396,MemCompression,-
+0,2432,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k LocalServiceNetworkRestricted -p -s WinHttpAutoProxySvc
+0,2480,svchost.exe,-
+0,2524,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k LocalService -p -s FontCache
+0,2644,svchost.exe,C:\\WINDOWS\\System32\\svchost.exe -k LocalServiceNetworkRestricted -p
+0,2712,svchost.exe,C:\\WINDOWS\\System32\\svchost.exe -k LocalSystemNetworkRestricted -p -s TextInputManagementService
+0,2728,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k appmodel -p -s StateRepository
+0,2776,svchost.exe,-
+0,2784,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k LocalServiceNetworkRestricted -p -s Wcmsvc
+0,2872,svchost.exe,-
+0,2980,spoolsv.exe,-
+0,3060,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k LocalServiceNoNetworkFirewall -p
+0,2140,svchost.exe,-
+0,3120,svchost.exe,C:\\WINDOWS\\System32\\svchost.exe -k utcsvc -p
+0,3128,svchost.exe,C:\\WINDOWS\\System32\\svchost.exe -k LocalServiceNoNetwork -p -s DPS
+0,3136,svchost.exe,-
+0,3160,svchost.exe,-
+0,3232,svchost.exe,-
+0,3248,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k NetworkServiceNetworkRestricted -p -s PolicyAgent
+0,3284,MsMpEng.exe,"""C:\\Program Files\\Windows Defender\\MsMpEng.exe"""
+0,3292,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k netsvcs -p -s Winmgmt
+0,3300,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k netsvcs -p -s WpnService
+0,3308,svchost.exe,-
+0,3848,AggregatorHost,AggregatorHost.exe
+0,356,svchost.exe,-
+0,4128,sihost.exe,sihost.exe
+0,4144,svchost.exe,-
+0,4200,svchost.exe,-
+0,4240,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k UnistackSvcGroup -s WpnUserService
+0,4268,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k netsvcs -p -s TokenBroker
+0,4332,taskhostw.exe,taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+0,4624,userinit.exe,-
+0,4656,ShellHost.exe,"""C:\\Windows\\System32\\ShellHost.exe"""
+0,4672,explorer.exe,C:\\WINDOWS\\Explorer.EXE
+0,4744,svchost.exe,-
+0,4928,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k ClipboardSvcGroup -p -s cbdhsvc
+0,4992,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k netsvcs -p -s Appinfo
+0,5204,SearchHost.exe,-
+0,5244,StartMenuExper,"""C:\\Windows\\SystemApps\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\StartMenuExperienceHost.exe"" -ServerName:App.AppXywbrabmsek0gm3tkwpr5kwzbs55tkqay.mca"
+0,5332,RuntimeBroker.,-
+0,5364,svchost.exe,-
+0,5376,Widgets.exe,"""C:\\Program Files\\WindowsApps\\MicrosoftWindows.Client.WebExperience_424.1301.270.9_x64__cw5n1h2txyewy\\Dashboard\\Widgets.exe"" -ServerName:Microsoft.Windows.DashboardServer"
+0,5472,svchost.exe,-
+0,5488,RuntimeBroker.,-
+0,5912,dllhost.exe,-
+0,6168,backgroundTask,-
+0,6284,svchost.exe,-
+0,6604,ctfmon.exe,/QuitInfo:0000000000000270;0000000000000274; 
+0,6864,svchost.exe,-
+0,6268,NisSrv.exe,"""C:\\Program Files\\Windows Defender\\NisSrv.exe"""
+0,6348,RuntimeBroker.,-
+0,6588,backgroundTask,-
+0,848,SecurityHealth,-
+0,4384,SecurityHealth,C:\\WINDOWS\\system32\\SecurityHealthService.exe
+0,1168,VBoxTray.exe,"""C:\\Windows\\System32\\VBoxTray.exe"" "
+0,4048,svchost.exe,-
+0,1332,OneDrive.exe,"""C:\\Users\\vboxuser\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe"" /background"
+0,6820,Microsoft.Shar,-
+0,5796,svchost.exe,-
+0,7744,cmd.exe,-
+0,7756,conhost.exe,\\??\\C:\\WINDOWS\\system32\\conhost.exe 0x4
+0,8020,SystemSettings,-
+0,8028,ApplicationFra,-
+0,4124,svchost.exe,-
+0,5076,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k netsvcs -p -s UsoSvc
+0,6208,MoUsoCoreWorke,"""C:\\WINDOWS\\uus\\AMD64\\MoUsoCoreWorker.exe"" useprivatenamespaces"
+0,4936,MoNotification,-
+0,1944,svchost.exe,-
+0,7628,SearchIndexer.,-
+0,7484,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k LocalSystemNetworkRestricted -p -s PcaSvc
+0,4680,svchost.exe,-
+0,5680,svchost.exe,C:\\WINDOWS\\System32\\svchost.exe -k LocalServiceNetworkRestricted -p -s wscsvc
+0,7508,svchost.exe,-
+0,2316,xmrig.exe,-
+0,6312,backgroundTask,-
+0,7800,ShellExperienc,"""C:\\Windows\\SystemApps\\ShellExperienceHost_cw5n1h2txyewy\\ShellExperienceHost.exe"" -ServerName:App.AppXtk181tbxbce2qsex02s8tw7hfxa9xb3t.mca"
+0,3584,RuntimeBroker.,C:\\Windows\\System32\\RuntimeBroker.exe -Embedding
+0,4648,WidgetService.,-
+0,1932,msedgewebview2,-
+0,1936,msedgewebview2,-
+0,7328,msedgewebview2,-
+0,7344,msedgewebview2,-
+0,5920,msedgewebview2,-
+0,4844,msedgewebview2,-
+0,7356,svchost.exe,-
+0,828,taskhostw.exe,taskhostw.exe
+0,1476,TrustedInstall,C:\\WINDOWS\\servicing\\TrustedInstaller.exe
+0,2504,TiWorker.exe,C:\\WINDOWS\\winsxs\\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.26100.1738_none_a5031b637767a4e7\\TiWorker.exe -Embedding
+0,7332,taskhostw.exe,taskhostw.exe Install $(Arg0)
+0,5612,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k netsvcs -p -s wlidsvc
+0,3872,svchost.exe,-
+0,6880,svchost.exe,-
+0,5096,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k netsvcs -p -s wuauserv
+0,1228,WmiPrvSE.exe,C:\\WINDOWS\\system32\\wbem\\wmiprvse.exe
+0,2216,fodhelper.exe,C:\\WINDOWS\\System32\\FodHelper.exe -Embedding
+0,7336,audiodg.exe,C:\\WINDOWS\\system32\\AUDIODG.EXE 0x00000000000004EC
+0,3940,svchost.exe,-
+0,6756,sppsvc.exe,-
+0,3484,svchost.exe,C:\\WINDOWS\\system32\\svchost.exe -k wsappx -p -s AppXSvc
+0,1616,smartscreen.ex,C:\\Windows\\System32\\smartscreen.exe -Embedding
+0,1852,FTK Imager.exe,"""C:\\Program Files\\AccessData\\FTK Imager\\FTK Imager.exe"" "
+0,3560,dllhost.exe,-
+

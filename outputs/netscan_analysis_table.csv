@@ -1,0 +1,16 @@
+Ransomware Family,WithVirus C2,NoVirus C2,Differential
+Locky.AZ,59,66,+-7
+W32.MyDoom.A.,109,55,+54
+Win32.BlackWorm,43,40,+3
+DLLHijacking,0,0,+0
+WannaCry,38,38,+0
+GoldenEye,68,48,+20
+LuckyLcoker,72,73,+-1
+InfinityCrypt,85,58,+27
+DeriaLock,75,105,+-30
+RedTail,0,0,+0
+Dharma,124,65,+59
+PowerLoader,47,75,+-28
+SporaRansomware,62,58,+4
+Cerber,98,43,+55
+GandCrab,88,78,+10

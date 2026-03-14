@@ -1,0 +1,57 @@
+TreeDepth,PID,Process,Args
+0,4,System,-
+0,248,smss.exe,\\SystemRoot\\System32\\smss.exe
+0,340,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,392,wininit.exe,wininit.exe
+0,400,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,428,winlogon.exe,winlogon.exe
+0,484,services.exe,C:\\Windows\\system32\\services.exe
+0,492,lsass.exe,C:\\Windows\\system32\\lsass.exe
+0,564,svchost.exe,C:\\Windows\\system32\\svchost.exe -k DcomLaunch
+0,608,svchost.exe,C:\\Windows\\system32\\svchost.exe -k RPCSS
+0,700,dwm.exe,"""dwm.exe"""
+0,716,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted
+0,768,svchost.exe,C:\\Windows\\system32\\svchost.exe -k netsvcs
+0,808,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalService
+0,888,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalSystemNetworkRestricted
+0,1008,svchost.exe,C:\\Windows\\system32\\svchost.exe -k NetworkService
+0,1148,spoolsv.exe,C:\\Windows\\System32\\spoolsv.exe
+0,1176,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceNoNetwork
+0,1320,MsMpEng.exe,"""C:\\Program Files\\Windows Defender\\MsMpEng.exe"""
+0,1828,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceAndNoImpersonation
+0,1932,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServicePeerNet
+0,2132,explorer.exe,C:\\Windows\\Explorer.EXE
+0,2168,taskhostex.exe,taskhostex.exe 
+0,2444,RestoreOptIn.e,-
+0,2588,SearchIndexer.,C:\\Windows\\system32\\SearchIndexer.exe /Embedding
+0,2940,RuntimeBroker.,C:\\Windows\\System32\\RuntimeBroker.exe -Embedding
+0,3176,iexplore.exe,"""C:\\Program Files\\Internet Explorer\\iexplore.exe"" "
+0,3192,NisSrv.exe,"""C:\\Program Files\\Windows Defender\\NisSrv.exe"""
+0,3264,iexplore.exe,"""C:\\Program Files\\Internet Explorer\\iexplore.exe"" SCODEF:3176 CREDAT:267777 /prefetch:2"
+0,3448,SettingSyncHos,"""C:\\Windows\\System32\\SettingSyncHost.exe"" -Embedding"
+0,3836,WWAHost.exe,"""C:\\Windows\\System32\\WWAHost.exe"" -ServerName:Windows.Store"
+0,3944,WSHost.exe,C:\\Windows\\WinStore\\WSHost.exe -Embedding
+0,1816,wmpnetwk.exe,"""C:\\Program Files\\Windows Media Player\\wmpnetwk.exe"""
+0,1504,WmiPrvSE.exe,C:\\Windows\\system32\\wbem\\wmiprvse.exe
+0,2876,GoogleCrashHan,"""C:\\Program Files\\Google\\Update\\1.3.36.152\\GoogleCrashHandler.exe"""
+0,2348,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --from-installer"
+0,3064,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=crashpad-handler ""--user-data-dir=C:\\Users\\Mark\\AppData\\Local\\Google\\Chrome\\User Data"" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler ""--database=C:\\Users\\Mark\\AppData\\Local\\Google\\Chrome\\User Data\\Crashpad"" ""--metrics-dir=C:\\Users\\Mark\\AppData\\Local\\Google\\Chrome\\User Data"" --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win32 --annotation=prod=Chrome --annotation=ver=109.0.5414.129 --initial-client-data=0x8c,0x90,0x94,0x68,0x98,0x6d0b8b38,0x6d0b8b48,0x6d0b8b54"
+0,3220,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=gpu-process --gpu-preferences=UAAAAAAAAADgAAAYAAAAAAAAAAAAAAAAAABgAAAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAASAAAAAAAAAAYAAAAAgAAABAAAAAAAAAAGAAAAAAAAAAQAAAAAAAAAAAAAAAOAAAAEAAAAAAAAAABAAAADgAAAAgAAAAAAAAACAAAAAAAAAA= --mojo-platform-channel-handle=1284 --field-trial-handle=1336,i,18035339428632871234,3716210804801803659,131072 /prefetch:2"
+0,1624,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-GB --service-sandbox-type=none --mojo-platform-channel-handle=1596 --field-trial-handle=1336,i,18035339428632871234,3716210804801803659,131072 /prefetch:8"
+0,2388,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-GB --service-sandbox-type=service --mojo-platform-channel-handle=1680 --field-trial-handle=1336,i,18035339428632871234,3716210804801803659,131072 /prefetch:8"
+0,2064,SearchProtocol,"""C:\\Windows\\system32\\SearchProtocolHost.exe"" Global\\UsGthrFltPipeMssGthrPipe3_ Global\\UsGthrCtrlFltPipeMssGthrPipe3 1 -2147483646 ""Software\\Microsoft\\Windows Search"" ""Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)"" ""C:\\ProgramData\\Microsoft\\Search\\Data\\Temp\\usgthrsvc"" ""DownLevelDaemon"" "
+0,3760,taskhost.exe,taskhost.exe $(Arg0)
+0,2356,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=35 --time-ticks-at-unix-epoch=-1680020817141072 --launch-time-ticks=261668274 --mojo-platform-channel-handle=4728 --field-trial-handle=1336,i,18035339428632871234,3716210804801803659,131072 /prefetch:1"
+0,2116,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-GB --service-sandbox-type=audio --mojo-platform-channel-handle=4536 --field-trial-handle=1336,i,18035339428632871234,3716210804801803659,131072 /prefetch:8"
+0,3324,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=40 --time-ticks-at-unix-epoch=-1680020817141072 --launch-time-ticks=288597291 --mojo-platform-channel-handle=4756 --field-trial-handle=1336,i,18035339428632871234,3716210804801803659,131072 /prefetch:1"
+0,1336,GoogleUpdate.e,"""C:\\Program Files\\Google\\Update\\GoogleUpdate.exe"" /c"
+0,1576,SearchFilterHo,"""C:\\Windows\\system32\\SearchFilterHost.exe"" 0 584 588 596 65536 592 "
+0,596,audiodg.exe,C:\\Windows\\system32\\AUDIODG.EXE 0xa10
+0,2364,msiexec.exe,C:\\Windows\\system32\\msiexec.exe /V
+0,2808,VSSVC.exe,C:\\Windows\\system32\\vssvc.exe
+0,2900,svchost.exe,C:\\Windows\\System32\\svchost.exe -k swprv
+0,544,notepad.exe,"""C:\\Windows\\system32\\NOTEPAD.EXE"" C:\\Users\\Mark\\Downloads\\Ramsomware Links.txt"
+0,344,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=66 --time-ticks-at-unix-epoch=-1680020817141072 --launch-time-ticks=569608462 --mojo-platform-channel-handle=6040 --field-trial-handle=1336,i,18035339428632871234,3716210804801803659,131072 /prefetch:1"
+0,920,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=71 --time-ticks-at-unix-epoch=-1680020817141072 --launch-time-ticks=570787082 --mojo-platform-channel-handle=6384 --field-trial-handle=1336,i,18035339428632871234,3716210804801803659,131072 /prefetch:1"
+0,4012,FTK Imager.exe,"""C:\\Program Files\\AccessData\\FTK Imager\\FTK Imager.exe"""
+

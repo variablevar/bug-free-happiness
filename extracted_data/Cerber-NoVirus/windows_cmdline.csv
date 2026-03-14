@@ -1,0 +1,54 @@
+TreeDepth,PID,Process,Args
+0,4,System,-
+0,248,smss.exe,\\SystemRoot\\System32\\smss.exe
+0,320,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,368,wininit.exe,wininit.exe
+0,376,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,408,winlogon.exe,winlogon.exe
+0,464,services.exe,C:\\Windows\\system32\\services.exe
+0,472,lsass.exe,C:\\Windows\\system32\\lsass.exe
+0,480,lsm.exe,C:\\Windows\\system32\\lsm.exe
+0,580,svchost.exe,C:\\Windows\\system32\\svchost.exe -k DcomLaunch
+0,660,svchost.exe,C:\\Windows\\system32\\svchost.exe -k RPCSS
+0,756,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted
+0,792,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalSystemNetworkRestricted
+0,820,svchost.exe,C:\\Windows\\system32\\svchost.exe -k netsvcs
+0,948,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalService
+0,1036,svchost.exe,C:\\Windows\\system32\\svchost.exe -k NetworkService
+0,1224,spoolsv.exe,C:\\Windows\\System32\\spoolsv.exe
+0,1264,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceNoNetwork
+0,1372,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceAndNoImpersonation
+0,2040,taskhost.exe,"""taskhost.exe"""
+0,476,dwm.exe,"""C:\\Windows\\system32\\Dwm.exe"""
+0,816,explorer.exe,C:\\Windows\\Explorer.EXE
+0,1768,regsvr32.exe,-
+0,1880,SearchIndexer.,C:\\Windows\\system32\\SearchIndexer.exe /Embedding
+0,888,wmpnetwk.exe,"""C:\\Program Files\\Windows Media Player\\wmpnetwk.exe"""
+0,3828,sppsvc.exe,C:\\Windows\\system32\\sppsvc.exe
+0,3868,svchost.exe,C:\\Windows\\System32\\svchost.exe -k secsvcs
+0,200,GoogleCrashHan,"""C:\\Program Files\\Google\\Update\\1.3.36.152\\GoogleCrashHandler.exe"""
+0,2344,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --from-installer"
+0,3748,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=crashpad-handler ""--user-data-dir=C:\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data"" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler ""--database=C:\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data\\Crashpad"" ""--metrics-dir=C:\\Users\\devmac\\AppData\\Local\\Google\\Chrome\\User Data"" --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win32 --annotation=prod=Chrome --annotation=ver=109.0.5414.120 --initial-client-data=0xa8,0xac,0xb0,0x7c,0xb4,0x6c798b38,0x6c798b48,0x6c798b54"
+0,3992,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-GB --service-sandbox-type=none --mojo-platform-channel-handle=1468 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:8"
+0,4044,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-GB --service-sandbox-type=service --mojo-platform-channel-handle=1564 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:8"
+0,3052,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=gpu-process --gpu-preferences=UAAAAAAAAADgAAAYAAAAAAAAAAAAAAAAAABgAAAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAASAAAAAAAAAAYAAAAAgAAABAAAAAAAAAAGAAAAAAAAAAQAAAAAAAAAAAAAAAOAAAAEAAAAAAAAAABAAAADgAAAAgAAAAAAAAACAAAAAAAAAA= --use-gl=angle --use-angle=swiftshader-webgl --mojo-platform-channel-handle=1436 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:2"
+0,2592,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-GB --service-sandbox-type=audio --mojo-platform-channel-handle=4912 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:8"
+0,1568,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=42 --time-ticks-at-unix-epoch=-1680040164552556 --launch-time-ticks=285105606 --mojo-platform-channel-handle=3168 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:1"
+0,2916,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=43 --time-ticks-at-unix-epoch=-1680040164552556 --launch-time-ticks=286267758 --mojo-platform-channel-handle=3972 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:1"
+0,3508,taskeng.exe,taskeng.exe {E9C3DC82-9C5E-4E37-997D-EA72E5647C41}
+0,1112,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=data_decoder.mojom.DataDecoderService --lang=en-GB --service-sandbox-type=service --mojo-platform-channel-handle=4984 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:8"
+0,2988,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=80 --time-ticks-at-unix-epoch=-1680040164552556 --launch-time-ticks=664754588 --mojo-platform-channel-handle=4632 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:1"
+0,3628,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=83 --time-ticks-at-unix-epoch=-1680040164552556 --launch-time-ticks=719900985 --mojo-platform-channel-handle=1884 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:1"
+0,924,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=84 --time-ticks-at-unix-epoch=-1680040164552556 --launch-time-ticks=725792347 --mojo-platform-channel-handle=5112 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:1"
+0,3712,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=97 --time-ticks-at-unix-epoch=-1680040164552556 --launch-time-ticks=828730960 --mojo-platform-channel-handle=5600 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:1"
+0,2724,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=99 --time-ticks-at-unix-epoch=-1680040164552556 --launch-time-ticks=831204253 --mojo-platform-channel-handle=4976 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:1"
+0,3768,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=100 --time-ticks-at-unix-epoch=-1680040164552556 --launch-time-ticks=842269034 --mojo-platform-channel-handle=5620 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:1"
+0,3696,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=2 --enable-main-frame-before-activation --renderer-client-id=102 --time-ticks-at-unix-epoch=-1680040164552556 --launch-time-ticks=845090147 --mojo-platform-channel-handle=5520 --field-trial-handle=1160,i,2452472565242094706,3536893430830006888,131072 /prefetch:1"
+0,3260,SearchProtocol,"""C:\\Windows\\system32\\SearchProtocolHost.exe"" Global\\UsGthrFltPipeMssGthrPipe3_ Global\\UsGthrCtrlFltPipeMssGthrPipe3 1 -2147483646 ""Software\\Microsoft\\Windows Search"" ""Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)"" ""C:\\ProgramData\\Microsoft\\Search\\Data\\Temp\\usgthrsvc"" ""DownLevelDaemon"" "
+0,2996,SearchFilterHo,"""C:\\Windows\\system32\\SearchFilterHost.exe"" 0 516 520 528 65536 524 "
+0,1124,audiodg.exe,C:\\Windows\\system32\\AUDIODG.EXE 0x714
+0,1580,msiexec.exe,C:\\Windows\\system32\\msiexec.exe /V
+0,3424,VSSVC.exe,C:\\Windows\\system32\\vssvc.exe
+0,4012,svchost.exe,C:\\Windows\\System32\\svchost.exe -k swprv
+0,3048,FTK Imager.exe,"""C:\\Program Files\\AccessData\\FTK Imager\\FTK Imager.exe"""
+

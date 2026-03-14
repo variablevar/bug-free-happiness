@@ -1,0 +1,87 @@
+TreeDepth,PID,Process,Args
+0,4,System,-
+0,100,Registry,-
+0,332,smss.exe,\\SystemRoot\\System32\\smss.exe
+0,444,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,520,wininit.exe,wininit.exe
+0,540,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,620,winlogon.exe,winlogon.exe
+0,664,services.exe,C:\\Windows\\system32\\services.exe
+0,688,lsass.exe,C:\\Windows\\system32\\lsass.exe
+0,796,svchost.exe,C:\\Windows\\system32\\svchost.exe -k DcomLaunch -p
+0,812,fontdrvhost.ex,"""fontdrvhost.exe"""
+0,820,fontdrvhost.ex,"""fontdrvhost.exe"""
+0,908,svchost.exe,C:\\Windows\\system32\\svchost.exe -k RPCSS -p
+0,1000,dwm.exe,"""dwm.exe"""
+0,384,svchost.exe,C:\\Windows\\system32\\svchost.exe -k netsvcs -p
+0,724,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalSystemNetworkRestricted -p
+0,1044,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted -p
+0,1096,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceNoNetwork -p
+0,1228,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalService -p
+0,1384,svchost.exe,C:\\Windows\\System32\\svchost.exe -k NetworkService -p
+0,1432,MemCompression,-
+0,1560,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted -p
+0,1636,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceNetworkRestricted -p
+0,1648,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted -p
+0,1724,svchost.exe,C:\\Windows\\system32\\svchost.exe -k appmodel -p
+0,1800,spoolsv.exe,C:\\Windows\\System32\\spoolsv.exe
+0,1900,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceNoNetworkFirewall -p
+0,1412,svchost.exe,C:\\Windows\\System32\\svchost.exe -k utcsvc -p
+0,2072,MsMpEng.exe,"""C:\\Program Files\\Windows Defender\\MsMpEng.exe"""
+0,2492,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted
+0,2696,svchost.exe,C:\\Windows\\system32\\svchost.exe -k wsappx -p
+0,2988,NisSrv.exe,"""C:\\Program Files\\Windows Defender\\NisSrv.exe"""
+0,1756,sihost.exe,sihost.exe
+0,2552,svchost.exe,C:\\Windows\\system32\\svchost.exe -k UnistackSvcGroup
+0,3232,taskhostw.exe,taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}
+0,3324,ctfmon.exe,"""ctfmon.exe"""
+0,3472,userinit.exe,-
+0,3496,explorer.exe,C:\\Windows\\Explorer.EXE
+0,4004,svchost.exe,C:\\Windows\\system32\\svchost.exe -k ClipboardSvcGroup -p
+0,3756,StartMenuExper,"""C:\\Windows\\SystemApps\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\StartMenuExperienceHost.exe"" -ServerName:App.AppXywbrabmsek0gm3tkwpr5kwzbs55tkqay.mca"
+0,4120,RuntimeBroker.,C:\\Windows\\System32\\RuntimeBroker.exe -Embedding
+0,4352,SearchApp.exe,-
+0,4476,RuntimeBroker.,C:\\Windows\\System32\\RuntimeBroker.exe -Embedding
+0,4620,SearchIndexer.,C:\\Windows\\system32\\SearchIndexer.exe /Embedding
+0,5476,RuntimeBroker.,C:\\Windows\\System32\\RuntimeBroker.exe -Embedding
+0,5332,smartscreen.ex,C:\\Windows\\System32\\smartscreen.exe -Embedding
+0,3212,msedge.exe,"""C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" "
+0,5096,msedge.exe,"""C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" --type=crashpad-handler ""--user-data-dir=C:\\Users\\devmac\\AppData\\Local\\Microsoft\\Edge\\User Data"" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler ""--database=C:\\Users\\devmac\\AppData\\Local\\Microsoft\\Edge\\User Data\\Crashpad"" --annotation=IsOfficialBuild=1 --annotation=channel= --annotation=chromium-version=111.0.5563.111 ""--annotation=exe=C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" --annotation=plat=Win64 ""--annotation=prod=Microsoft Edge"" --annotation=ver=111.0.1661.54 --initial-client-data=0x10c,0x110,0x114,0xe8,0x8c,0x7ffdab51b5f8,0x7ffdab51b608,0x7ffdab51b618"
+0,3528,SecurityHealth,"""C:\\Windows\\System32\\SecurityHealthSystray.exe"" "
+0,5704,SecurityHealth,C:\\Windows\\system32\\SecurityHealthService.exe
+0,4452,msedge.exe,"""C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" --type=gpu-process --gpu-preferences=UAAAAAAAAADgAAAYAAAAAAAAAAAAAAAAAABgAAAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --mojo-platform-channel-handle=1940 --field-trial-handle=2128,i,17586257037087588781,15662887178685646679,131072 /prefetch:2"
+0,2476,msedge.exe,"""C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mojo-platform-channel-handle=2052 --field-trial-handle=2128,i,17586257037087588781,15662887178685646679,131072 /prefetch:3"
+0,5636,msedge.exe,"""C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mojo-platform-channel-handle=2516 --field-trial-handle=2128,i,17586257037087588781,15662887178685646679,131072 /prefetch:8"
+0,6880,TextInputHost.,"""C:\\Windows\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\TextInputHost.exe"" -ServerName:InputApp.AppXjd5de1g66v206tj52m9d0dtpppx4cgpn.mca"
+0,6916,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceAndNoImpersonation -p
+0,6328,msedge.exe,"""C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=13 --time-ticks-at-unix-epoch=-1680168132325495 --launch-time-ticks=41105676 --mojo-platform-channel-handle=6348 --field-trial-handle=2128,i,17586257037087588781,15662887178685646679,131072 /prefetch:1"
+0,2912,msedge.exe,"""C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=16 --time-ticks-at-unix-epoch=-1680168132325495 --launch-time-ticks=42215205 --mojo-platform-channel-handle=6724 --field-trial-handle=2128,i,17586257037087588781,15662887178685646679,131072 /prefetch:1"
+0,7332,msedge.exe,"""C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=17 --time-ticks-at-unix-epoch=-1680168132325495 --launch-time-ticks=47023497 --mojo-platform-channel-handle=6820 --field-trial-handle=2128,i,17586257037087588781,15662887178685646679,131072 /prefetch:1"
+0,7556,msedge.exe,"""C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mojo-platform-channel-handle=3780 --field-trial-handle=2128,i,17586257037087588781,15662887178685646679,131072 /prefetch:8"
+0,268,msedge.exe,"""C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=37 --time-ticks-at-unix-epoch=-1680168132325495 --launch-time-ticks=68645146 --mojo-platform-channel-handle=2116 --field-trial-handle=2128,i,17586257037087588781,15662887178685646679,131072 /prefetch:1"
+0,6416,OneDrive.exe, /updateInstalled /background
+0,4016,msedge.exe,"""C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=44 --time-ticks-at-unix-epoch=-1680168132325495 --launch-time-ticks=99406340 --mojo-platform-channel-handle=3660 --field-trial-handle=2128,i,17586257037087588781,15662887178685646679,131072 /prefetch:1"
+0,1576,SkypeApp.exe,-
+0,6524,RuntimeBroker.,C:\\Windows\\System32\\RuntimeBroker.exe -Embedding
+0,7468,SgrmBroker.exe,C:\\Windows\\system32\\SgrmBroker.exe
+0,7992,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted -p
+0,3180,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalService -p
+0,1584,ApplicationFra,C:\\Windows\\system32\\ApplicationFrameHost.exe -Embedding
+0,8044,WWAHost.exe,-
+0,4952,dllhost.exe,C:\\Windows\\system32\\DllHost.exe /Processid:{973D20D7-562D-44B9-B70B-5A0F49CCDF3F}
+0,8084,msedge.exe,"""C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=59 --time-ticks-at-unix-epoch=-1680168132325495 --launch-time-ticks=193424772 --mojo-platform-channel-handle=3692 --field-trial-handle=2128,i,17586257037087588781,15662887178685646679,131072 /prefetch:1"
+0,676,WMIADAP.exe,wmiadap.exe /F /T /R
+0,7744,WmiPrvSE.exe,C:\\Windows\\system32\\wbem\\wmiprvse.exe
+0,7968,MicrosoftEdgeU,-
+0,4632,svchost.exe,C:\\Windows\\System32\\svchost.exe -k netsvcs -p
+0,7668,svchost.exe,C:\\Windows\\System32\\svchost.exe -k smphost
+0,8112,svchost.exe,C:\\Windows\\system32\\svchost.exe -k WbioSvcGroup
+0,5044,WinStore.App.e,-
+0,2064,RuntimeBroker.,C:\\Windows\\System32\\RuntimeBroker.exe -Embedding
+0,2792,SearchProtocol,"""C:\\Windows\\system32\\SearchProtocolHost.exe"" Global\\UsGthrFltPipeMssGthrPipe2_ Global\\UsGthrCtrlFltPipeMssGthrPipe2 1 -2147483646 ""Software\\Microsoft\\Windows Search"" ""Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)"" ""C:\\ProgramData\\Microsoft\\Search\\Data\\Temp\\usgthrsvc"" ""DownLevelDaemon"" "
+0,1372,SearchFilterHo,"""C:\\Windows\\system32\\SearchFilterHost.exe"" 0 796 800 808 8192 804 780 "
+0,4588,audiodg.exe,C:\\Windows\\system32\\AUDIODG.EXE 0x50c
+0,6788,cmd.exe,"""C:\\Windows\\system32\\cmd.exe"" "
+0,4304,conhost.exe,\\??\\C:\\Windows\\system32\\conhost.exe 0x4
+0,5768,winpmem_mini_x,winpmem_mini_x64_rc2  NoVirus.raw
+

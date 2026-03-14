@@ -1,0 +1,31 @@
+Ransomware Family,Configuration,Suspicious Files,Deleted Files,Suspicious Names
+Locky.AZ,WithVirus,42,0,\\users\\user\\appdata\\local\\microsoft\\onedrive
+W32.MyDoom.A.,WithVirus,0,0,
+GoldenEye,NoVirus,42,0,\\users\\devmac\\appdata\\local\\microsoft\\onedri
+Win32.BlackWorm,WithVirus,6,0,"\\users\\devmac\\downloads\\ransomware.cryptowall., \\users\\devmac\\downloads\\ransomware.cryptowall\, \\users\\devmac\\appdata\\local\\microsoft\\window"
+LuckyLcoker,NoVirus,1,0,\\windows\\system32\\devdispitemprovider.dll
+WannaCry,NoVirus,0,0,
+DLLHijacking,WithVirus,57,0,"\\users\\vboxuser\\appdata\\local\\microsoft\\oned, \\windows\\system32\\devdispitemprovider.dll"
+Win32.BlackWorm,NoVirus,80,0,"\\windows\\assembly\\nativeimages_v2.0.50727_64\\t, \\windows\\assembly\\nativeimages_v2.0.50727_32\\t"
+WannaCry,WithVirus,0,0,
+GoldenEye,WithVirus,35,0,\\users\\mapo9\\appdata\\local\\microsoft\\onedriv
+SporaRansomware,NoVirus,62,0,"\\windows\\system32\\devdispitemprovider.dll, \\users\\mapo9\\appdata\\local\\microsoft\\onedriv, \\users\\mapo9\\appdata\\local\\microsoft\\edgeupd"
+PowerLoader,NoVirus,12,0,"\\users\\devmac\\appdata\\local\\google\\chrome\\u, \\program files\\google\\chrome\\temp\\source3948_, \\windows\\assembly\\nativeimages_v2.0.50727_32\\t"
+LuckyLcoker,WithVirus,1,0,\\windows\\system32\\devdispitemprovider.dll
+InfinityCrypt,WithVirus,43,0,"\\users\\ieuser\\appdata\\local\\microsoft\\onedri, \\windows\\system32\\devdispitemprovider.dll"
+DeriaLock,WithVirus,61,0,\\users\\mapo9\\appdata\\local\\microsoft\\onedriv
+GandCrab,NoVirus,61,0,"\\windows\\system32\\devdispitemprovider.dll, \\users\\mapo9\\appdata\\local\\microsoft\\onedriv"
+RedTail,WithVirus,42,0,"\\users\\vboxuser\\appdata\\local\\microsoft\\oned, \\windows\\system32\\devdispitemprovider.dll"
+Dharma,WithVirus,10,0,"\\program files\\google\\chrome\\temp\\source2856_, 螅売쀌ꮹrs\\mark\\appdata\\local\\microsoft\\windows\\"
+Dharma,NoVirus,8,0,"\\program files\\google\\chrome\\temp\\source2856_, \\users\\mark\\appdata\\local\\google\\chrome\\use, \\windows\\system32\\devdispitemprovider.dll, \\users\\mark\\appdata\\local\\microsoft\\windows\"
+W32.MyDoom.A.,NoVirus,0,0,
+PowerLoader,WithVirus,114,0,\\windows\\assembly\\nativeimages_v2.0.50727_32\\t
+DeriaLock,NoVirus,45,0,\\users\\mapo9\\appdata\\local\\microsoft\\onedriv
+Cerber,NoVirus,9,0,"\\users\\devmac\\appdata\\local\\google\\chrome\\u, \\program files\\google\\chrome\\temp\\source2880_, \\users\\devmac\\appdata\\local\\microsoft\\window"
+DLLHijacking,NoVirus,51,0,"\\users\\vboxuser\\appdata\\local\\microsoft\\oned, \\windows\\system32\\devdispitemprovider.dll"
+SporaRansomware,WithVirus,59,0,"\\users\\mapo9\\appdata\\local\\microsoft\\edgeupd, \\users\\mapo9\\appdata\\local\\temp\\020e8418-049, \\users\\mapo9\\appdata\\local\\microsoft\\onedriv, \\windows\\system32\\devdispitemprovider.dll"
+Cerber,WithVirus,1,0,\\users\\devmac\\downloads\\ransomware.cryptowall.
+InfinityCrypt,NoVirus,41,0,"\\users\\ieuser\\appdata\\local\\microsoft\\onedri, \\windows\\system32\\devdispitemprovider.dll"
+RedTail,NoVirus,51,0,"\\users\\vboxuser\\appdata\\local\\microsoft\\oned, \\windows\\system32\\devdispitemprovider.dll"
+GandCrab,WithVirus,60,0,"\\windows\\system32\\devdispitemprovider.dll, \\users\\mapo9\\appdata\\local\\microsoft\\onedriv"
+Locky.AZ,NoVirus,41,0,"\\windows\\system32\\devdispitemprovider.dll, \\users\\user\\appdata\\local\\microsoft\\onedrive"

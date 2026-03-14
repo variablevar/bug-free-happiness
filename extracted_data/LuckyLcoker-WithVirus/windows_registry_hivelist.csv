@@ -1,0 +1,16 @@
+TreeDepth,Offset,FileFullPath,File output
+0,0xc0000001e000,,Disabled
+0,0xc00000027000,\\REGISTRY\\MACHINE\\SYSTEM,Disabled
+0,0xc0000004a000,\\REGISTRY\\MACHINE\\HARDWARE,Disabled
+0,0xc00000519000,\\SystemRoot\\System32\\Config\\SAM,Disabled
+0,0xc00000511000,\\SystemRoot\\System32\\Config\\SECURITY,Disabled
+0,0xc00000533000,\\SystemRoot\\System32\\Config\\DEFAULT,Disabled
+0,0xc00000516000,\\SystemRoot\\System32\\Config\\SOFTWARE,Disabled
+0,0xc0000388b000,\\Device\\HarddiskVolume1\\Boot\\BCD,Disabled
+0,0xc00001042000,\\??\\C:\\Windows\\ServiceProfiles\\NetworkService\\NTUSER.DAT,Disabled
+0,0xc000010b8000,\\SystemRoot\\System32\\Config\\BBI,Disabled
+0,0xc00001160000,\\??\\C:\\Windows\\ServiceProfiles\\LocalService\\NTUSER.DAT,Disabled
+0,0xc000019a7000,\\??\\C:\\Windows\\AppCompat\\Programs\\Amcache.hve,Disabled
+0,0xc00001aaa000,\\??\\C:\\Users\\Mark\\ntuser.dat,Disabled
+0,0xc00001ac4000,\\??\\C:\\Users\\Mark\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat,Disabled
+

@@ -1,0 +1,48 @@
+TreeDepth,PID,Process,Args
+0,4,System,-
+0,248,smss.exe,\\SystemRoot\\System32\\smss.exe
+0,320,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,368,wininit.exe,wininit.exe
+0,380,csrss.exe,"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16"
+0,404,winlogon.exe,winlogon.exe
+0,468,services.exe,C:\\Windows\\system32\\services.exe
+0,476,lsass.exe,C:\\Windows\\system32\\lsass.exe
+0,484,lsm.exe,C:\\Windows\\system32\\lsm.exe
+0,572,svchost.exe,C:\\Windows\\system32\\svchost.exe -k DcomLaunch
+0,652,svchost.exe,C:\\Windows\\system32\\svchost.exe -k RPCSS
+0,740,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalServiceNetworkRestricted
+0,776,svchost.exe,C:\\Windows\\System32\\svchost.exe -k LocalSystemNetworkRestricted
+0,804,svchost.exe,C:\\Windows\\system32\\svchost.exe -k netsvcs
+0,956,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalService
+0,280,svchost.exe,C:\\Windows\\system32\\svchost.exe -k NetworkService
+0,852,spoolsv.exe,C:\\Windows\\System32\\spoolsv.exe
+0,304,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceNoNetwork
+0,1120,svchost.exe,C:\\Windows\\system32\\svchost.exe -k LocalServiceAndNoImpersonation
+0,1516,svchost.exe,C:\\Windows\\system32\\svchost.exe -k NetworkServiceNetworkRestricted
+0,1812,taskhost.exe,"""taskhost.exe"""
+0,1896,dwm.exe,"""C:\\Windows\\system32\\Dwm.exe"""
+0,1928,explorer.exe,C:\\Windows\\Explorer.EXE
+0,1264,SearchIndexer.,C:\\Windows\\system32\\SearchIndexer.exe /Embedding
+0,2144,sppsvc.exe,-
+0,2204,svchost.exe,C:\\Windows\\System32\\svchost.exe -k secsvcs
+0,2440,GoogleCrashHan,-
+0,2448,GoogleCrashHan,"""C:\\Program Files (x86)\\Google\\Update\\1.3.36.152\\GoogleCrashHandler64.exe"""
+0,2588,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --from-installer"
+0,2596,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=crashpad-handler ""--user-data-dir=C:\\Users\\Win7\\AppData\\Local\\Google\\Chrome\\User Data"" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler ""--database=C:\\Users\\Win7\\AppData\\Local\\Google\\Chrome\\User Data\\Crashpad"" ""--metrics-dir=C:\\Users\\Win7\\AppData\\Local\\Google\\Chrome\\User Data"" --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win64 --annotation=prod=Chrome --annotation=ver=109.0.5414.120 --initial-client-data=0x9c,0xa0,0xa4,0x70,0xa8,0x7fef3666b58,0x7fef3666b68,0x7fef3666b78"
+0,2876,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-GB --service-sandbox-type=none --mojo-platform-channel-handle=1368 --field-trial-handle=1292,i,3536617241012723897,15781738060763921657,131072 /prefetch:8"
+0,2332,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-GB --service-sandbox-type=service --mojo-platform-channel-handle=1468 --field-trial-handle=1292,i,3536617241012723897,15781738060763921657,131072 /prefetch:8"
+0,2972,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=gpu-process --gpu-preferences=UAAAAAAAAADgAAAYAAAAAAAAAAAAAAAAAABgAAAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAASAAAAAAAAAAYAAAAAgAAABAAAAAAAAAAGAAAAAAAAAAQAAAAAAAAAAAAAAAOAAAAEAAAAAAAAAABAAAADgAAAAgAAAAAAAAACAAAAAAAAAA= --use-gl=angle --use-angle=swiftshader-webgl --mojo-platform-channel-handle=3496 --field-trial-handle=1292,i,3536617241012723897,15781738060763921657,131072 /prefetch:2"
+0,840,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=17 --time-ticks-at-unix-epoch=-1679930273703297 --launch-time-ticks=307518540 --mojo-platform-channel-handle=5012 --field-trial-handle=1292,i,3536617241012723897,15781738060763921657,131072 /prefetch:1"
+0,2936,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-GB --service-sandbox-type=audio --mojo-platform-channel-handle=5168 --field-trial-handle=1292,i,3536617241012723897,15781738060763921657,131072 /prefetch:8"
+0,2456,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=38 --time-ticks-at-unix-epoch=-1679930273703297 --launch-time-ticks=386881823 --mojo-platform-channel-handle=4640 --field-trial-handle=1292,i,3536617241012723897,15781738060763921657,131072 /prefetch:1"
+0,3100,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=40 --time-ticks-at-unix-epoch=-1679930273703297 --launch-time-ticks=391922871 --mojo-platform-channel-handle=1000 --field-trial-handle=1292,i,3536617241012723897,15781738060763921657,131072 /prefetch:1"
+0,3724,TrustedInstall,C:\\Windows\\servicing\\TrustedInstaller.exe
+0,1376,chrome.exe,"""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=renderer --disable-gpu-compositing --lang=en-GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=49 --time-ticks-at-unix-epoch=-1679930273703297 --launch-time-ticks=503900355 --mojo-platform-channel-handle=4932 --field-trial-handle=1292,i,3536617241012723897,15781738060763921657,131072 /prefetch:1"
+0,3544,taskeng.exe,taskeng.exe {8F4E248C-7046-4AB6-AF2B-CC94340E5200}
+0,1840,GoogleUpdate.e,"""C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe"" /c"
+0,3004,svchost.exe,C:\\Windows\\System32\\svchost.exe -k WerSvcGroup
+0,3972,rundll32.exe,"""C:\\Windows\\system32\\RunDll32.exe"" ""C:\\Windows\\system32\\WerConCpl.dll"", LaunchErcApp -queuereporting"
+0,2200,cmd.exe,"""C:\\Windows\\System32\\cmd.exe"" "
+0,2628,conhost.exe,\\??\\C:\\Windows\\system32\\conhost.exe
+0,1744,winpmem_mini_x,winpmem_mini_x64_rc2.exe  NoVirus.raw
+

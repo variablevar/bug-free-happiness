@@ -1,0 +1,32 @@
+TreeDepth,PID,Process,Start VPN,End VPN,Tag,Protection,CommitCharge,PrivateMemory,File output,Notes,Hexdump,Disasm
+0,748,svchost.exe,0xd80000,0xd81fff,VadS,PAGE_EXECUTE_READWRITE,2,1,Disabled,N/A,"
+b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d
+b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\...X...T
+b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D
+b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34
+0,964,svchost.exe,0x330000,0x331fff,VadS,PAGE_EXECUTE_READWRITE,2,1,Disabled,N/A,"
+b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d
+b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\...X...T
+b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D
+b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34
+0,328,explorer.exe,0x46e0000,0x46e1fff,VadS,PAGE_EXECUTE_READWRITE,2,1,Disabled,N/A,"
+b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d
+b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\...X...T
+b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D
+b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34
+0,932,wmpnetwk.exe,0x980000,0x981fff,VadS,PAGE_EXECUTE_READWRITE,2,1,Disabled,N/A,"
+b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d
+b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\...X...T
+b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D
+b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34
+0,3992,mscorsvw.exe,0x6b0000,0x6effff,VadS,PAGE_EXECUTE_READWRITE,1,1,Disabled,N/A,"
+e9 9d 5d e3 d2 90 00 01 ee ff ee ff 00 00 00 00 ..].............
+a8 00 6b 00 a8 00 6b 00 00 00 6b 00 00 00 6b 00 ..k...k...k...k.
+40 00 00 00 88 05 6b 00 00 00 6f 00 3f 00 00 00 @.....k...o.?...
+01 00 00 00 00 00 00 00 f0 0f 6b 00 f0 0f 6b 00 ..........k...k.",e9 9d 5d e3 d2 90 00 01 ee ff ee ff 00 00 00 00 a8 00 6b 00 a8 00 6b 00 00 00 6b 00 00 00 6b 00 40 00 00 00 88 05 6b 00 00 00 6f 00 3f 00 00 00 01 00 00 00 00 00 00 00 f0 0f 6b 00 f0 0f 6b 00
+0,376,SearchFilterHo,0x940000,0x97ffff,VadS,PAGE_EXECUTE_READWRITE,1,1,Disabled,N/A,"
+8e aa 3d f9 a2 c8 00 01 ee ff ee ff 00 00 00 00 ..=.............
+a8 00 94 00 a8 00 94 00 00 00 94 00 00 00 94 00 ................
+40 00 00 00 88 05 94 00 00 00 98 00 3f 00 00 00 @...........?...
+01 00 00 00 00 00 00 00 f0 0f 94 00 f0 0f 94 00 ................",8e aa 3d f9 a2 c8 00 01 ee ff ee ff 00 00 00 00 a8 00 94 00 a8 00 94 00 00 00 94 00 00 00 94 00 40 00 00 00 88 05 94 00 00 00 98 00 3f 00 00 00 01 00 00 00 00 00 00 00 f0 0f 94 00 f0 0f 94 00
+

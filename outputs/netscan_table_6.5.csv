@@ -1,0 +1,4 @@
+Connection Type,WithVirus Count,NoVirus Count,Difference
+HTTP (port 80),0 ± 0,0 ± 0,+0
+Non-Std Ports (>1000),1342 ± 51,1070 ± 34,+18
+Listening Ports (server),411 ± 19,329 ± 12,+5

@@ -1,0 +1,785 @@
+TreeDepth,Offset,PID,TID,StartAddress,StartPath,Win32StartAddress,Win32StartPath,CreateTime,ExitTime
+0,0x8483c668,4,8,0x829a0440,-,0x829a0440,-,N/A,-
+0,0x848cf878,4,12,0x8281f2cd,-,0x8281f2cd,-,N/A,-
+0,0x848cf5a0,4,16,0x828326fe,-,0x828326fe,-,N/A,-
+0,0x848d3020,4,20,0x828326fe,-,0x828326fe,-,N/A,-
+0,0x848d3410,4,24,0x82877076,-,0x82877076,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848cd020,4,28,0x82877076,-,0x82877076,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848cdd48,4,32,0x82877076,-,0x82877076,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848cda70,4,36,0x82877076,-,0x82877076,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848cd798,4,40,0x82877076,-,0x82877076,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848cd4c0,4,44,0x82877076,-,0x82877076,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848c6020,4,48,0x82877076,-,0x82877076,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848c6d48,4,52,0x82877076,-,0x82877076,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848c6a70,4,56,0x82877076,-,0x82877076,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848c6798,4,60,0x82877076,-,0x82877076,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848c64c0,4,64,0x82877076,-,0x82877076,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848c8020,4,68,0x82877076,-,0x82877076,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848c8d48,4,72,0x82877076,-,0x82877076,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848c8a70,4,76,0x82a235c3,-,0x82a235c3,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848ce578,4,80,0x82849ddd,-,0x82849ddd,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848ce2a0,4,84,0x82849ddd,-,0x82849ddd,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848d0020,4,88,0x82849ddd,-,0x82849ddd,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848d0d48,4,92,0x82849ddd,-,0x82849ddd,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848d0a70,4,96,0x82849ddd,-,0x82849ddd,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848d4d48,4,100,0x8283a029,-,0x8283a029,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848d49a8,4,104,0x82843215,-,0x82843215,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848d4430,4,108,0x8283e97f,-,0x8283e97f,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848d2020,4,112,0x8287a214,-,0x8287a214,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848d2d48,4,116,0x82880349,-,0x82880349,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848ac020,4,140,0x828a1804,-,0x828a1804,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848cba90,4,144,0x8281d558,-,0x8281d558,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848c7d48,4,148,0x8281d558,-,0x8281d558,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848aed48,4,152,0x82897aec,-,0x82897aec,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848dd020,4,156,0x82a15331,-,0x82a15331,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848eed48,4,160,0x82a15331,-,0x82a15331,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848ee7b0,4,164,0x82a15331,-,0x82a15331,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x84901d48,4,168,0x82a15331,-,0x82a15331,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x849017b0,4,172,0x82a15331,-,0x82a15331,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x8494b630,4,180,0x82a15331,-,0x82a15331,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x84bcda88,4,184,0x82a15331,-,0x82a15331,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x8517c2c8,4,188,0x82a0422e,-,0x82a0422e,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x848ed3e0,4,192,0x89222c80,-,0x89222c80,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x84879d48,4,196,0x8921d95e,-,0x8921d95e,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x851afb20,4,204,0x8960491b,-,0x8960491b,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x851af848,4,208,0x895f3fea,-,0x895f3fea,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x855c1a18,4,212,0x895e929f,-,0x895e929f,-,2023-03-28 21:50:17.000000 UTC,-
+0,0x857beb38,4,232,0x89b07522,-,0x89b07522,-,2023-03-28 21:50:18.000000 UTC,-
+0,0x85849190,4,236,0x89757bcb,-,0x89757bcb,-,2023-03-28 21:50:18.000000 UTC,-
+0,0x85837b58,4,240,0x897c7e8a,-,0x897c7e8a,-,2023-03-28 21:50:18.000000 UTC,-
+0,0x858391e0,4,244,0x82a06a58,-,0x82a06a58,-,2023-03-28 21:50:18.000000 UTC,-
+0,0x85e11020,4,312,0x8f536e32,-,0x8f536e32,-,2023-03-28 21:50:18.000000 UTC,-
+0,0x85f937a8,4,424,0x8953f4e9,-,0x8953f4e9,-,2023-03-28 21:50:18.000000 UTC,-
+0,0x8601e020,4,640,0x8f757740,-,0x8f757740,-,2023-03-28 21:50:19.000000 UTC,-
+0,0x861015f8,4,1212,0x93c50005,-,0x93c50005,-,2023-03-28 21:50:19.000000 UTC,-
+0,0x861012d0,4,1216,0x93c50005,-,0x93c50005,-,2023-03-28 21:50:19.000000 UTC,-
+0,0x86102020,4,1220,0x93c506cb,-,0x93c506cb,-,2023-03-28 21:50:19.000000 UTC,-
+0,0x861817f8,4,1308,0x93ccdfc0,-,0x93ccdfc0,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86200bf0,4,1520,0x93e4c115,-,0x93e4c115,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x8623a320,4,1564,0x93e4c115,-,0x93e4c115,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x862567b0,4,1600,0x93e4c115,-,0x93e4c115,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86255020,4,1604,0x93e4c115,-,0x93e4c115,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x8624f020,4,1616,0x93e4c115,-,0x93e4c115,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86271d48,4,1636,0x93e4c115,-,0x93e4c115,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86272020,4,1640,0x93e4c115,-,0x93e4c115,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86272c10,4,1644,0x93e4c115,-,0x93e4c115,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86272388,4,1648,0x89768d18,-,0x89768d18,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86272938,4,1660,0x93e4c115,-,0x93e4c115,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x8627eb40,4,1664,0x93e4c115,-,0x93e4c115,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86283d48,4,1668,0x93e4c115,-,0x93e4c115,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86292d48,4,1672,0x93e9d7c6,-,0x93e9d7c6,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x8627e380,4,1676,0x93e9d7c6,-,0x93e9d7c6,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86292108,4,1684,0x93e9d7c6,-,0x93e9d7c6,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x858bcae8,4,1688,0x93e9d7c6,-,0x93e9d7c6,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x862749f8,4,1692,0x93e9d7c6,-,0x93e9d7c6,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86297388,4,1696,0x93e9d7c6,-,0x93e9d7c6,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x858bd778,4,1704,0x93e9d7c6,-,0x93e9d7c6,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86295020,4,1708,0x93e9d7c6,-,0x93e9d7c6,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86260d20,4,1712,0x93e9d7c6,-,0x93e9d7c6,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x862609a0,4,1716,0x93e9d7c6,-,0x93e9d7c6,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x86260348,4,1720,0x93e9d7c6,-,0x93e9d7c6,-,2023-03-28 21:50:20.000000 UTC,-
+0,0x8609a020,4,1924,0x93c50005,-,0x93c50005,-,2023-03-28 21:50:24.000000 UTC,-
+0,0x860b7ae8,4,1980,0x89768d18,-,0x89768d18,-,2023-03-28 21:50:32.000000 UTC,-
+0,0x863e43c0,4,2300,0x82a38627,-,0x82a38627,-,2023-03-28 21:51:01.000000 UTC,-
+0,0x8494bd48,4,2360,0x93c50005,-,0x93c50005,-,2023-03-28 21:51:19.000000 UTC,-
+0,0x863a81a0,4,2364,0x93c50005,-,0x93c50005,-,2023-03-28 21:51:19.000000 UTC,-
+0,0x86b4d368,4,2368,0x82a15331,-,0x82a15331,-,2023-03-28 21:51:19.000000 UTC,-
+0,0x849ad020,4,3864,0x93efff2e,-,0x93efff2e,-,2023-03-28 21:52:21.000000 UTC,-
+0,0x84ace3f8,4,3600,0x8999beb0,-,0x8999beb0,-,2023-03-28 22:04:59.000000 UTC,-
+0,0x8513a020,4,4072,0x8999beb0,-,0x8999beb0,-,2023-03-28 22:04:59.000000 UTC,-
+0,0x85136020,4,3152,0x8999beb0,-,0x8999beb0,-,2023-03-28 22:04:59.000000 UTC,-
+0,0x85132020,4,2080,0x8999beb0,-,0x8999beb0,-,2023-03-28 22:04:59.000000 UTC,-
+0,0x8512e020,4,3764,0x8999beb0,-,0x8999beb0,-,2023-03-28 22:04:59.000000 UTC,-
+0,0x8512a020,4,2688,0x8999beb0,-,0x8999beb0,-,2023-03-28 22:04:59.000000 UTC,-
+0,0x8503fd48,4,3012,0x8999beb0,-,0x8999beb0,-,2023-03-28 22:04:59.000000 UTC,-
+0,0x85011d48,4,1876,0x8999beb0,-,0x8999beb0,-,2023-03-28 22:04:59.000000 UTC,-
+0,0x84bb6ac8,4,1960,0x8999beb0,-,0x8999beb0,-,2023-03-28 22:04:59.000000 UTC,-
+0,0x8583a670,248,252,0x77307098,\\Windows\\System32\\ntdll.dll,0x4824e960,\\Windows\\System32\\smss.exe,2023-03-28 21:50:18.000000 UTC,-
+0,0x85da4638,248,300,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:18.000000 UTC,-
+0,0x85f29030,320,344,0x77307098,\\Windows\\System32\\ntdll.dll,0x75432529,\\Windows\\System32\\winsrv.dll,2023-03-28 21:50:18.000000 UTC,-
+0,0x848ac7c0,320,348,0x9108ac08,-,0x75432329,\\Windows\\System32\\winsrv.dll,2023-03-28 21:50:18.000000 UTC,-
+0,0x85f1c2f8,320,352,0x77307098,\\Windows\\System32\\ntdll.dll,0x7547499a,\\Windows\\System32\\csrsrv.dll,2023-03-28 21:50:18.000000 UTC,-
+0,0x85f16860,320,356,0x77307098,\\Windows\\System32\\ntdll.dll,0x7547390c,\\Windows\\System32\\csrsrv.dll,2023-03-28 21:50:18.000000 UTC,-
+0,0x85f1a4d0,320,384,0x77307098,\\Windows\\System32\\ntdll.dll,0x7547499a,\\Windows\\System32\\csrsrv.dll,2023-03-28 21:50:18.000000 UTC,-
+0,0x85fa3030,320,436,0x77307098,\\Windows\\System32\\ntdll.dll,0x75432879,\\Windows\\System32\\winsrv.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x85fa79a8,320,444,0x77307098,\\Windows\\System32\\ntdll.dll,0x75432879,\\Windows\\System32\\winsrv.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x85fc1168,320,492,0x77307098,\\Windows\\System32\\ntdll.dll,0x75432879,\\Windows\\System32\\winsrv.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x862feb68,320,1784,0x77307098,\\Windows\\System32\\ntdll.dll,0x7547499a,\\Windows\\System32\\csrsrv.dll,2023-03-28 21:50:21.000000 UTC,-
+0,0x85f164d8,368,372,0x910ec050,-,0x664dc8,\\Windows\\System32\\wininit.exe,2023-03-28 21:50:18.000000 UTC,-
+0,0x848c42c8,368,396,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:18.000000 UTC,2023-03-28 21:51:26.000000 UTC
+0,0x85fafc80,368,456,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x85fb05c0,368,460,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:51:26.000000 UTC
+0,0x85fd0318,368,512,0x91167be8,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x8582cc00,376,388,0x77307098,\\Windows\\System32\\ntdll.dll,0x75432529,\\Windows\\System32\\winsrv.dll,2023-03-28 21:50:18.000000 UTC,-
+0,0x8582c870,376,392,0x8ae3a6a8,-,0x75432329,\\Windows\\System32\\winsrv.dll,2023-03-28 21:50:18.000000 UTC,-
+0,0x85f95d10,376,400,0x77307098,\\Windows\\System32\\ntdll.dll,0x7547499a,\\Windows\\System32\\csrsrv.dll,2023-03-28 21:50:18.000000 UTC,-
+0,0x848c4770,376,404,0x77307098,\\Windows\\System32\\ntdll.dll,0x7547390c,\\Windows\\System32\\csrsrv.dll,2023-03-28 21:50:18.000000 UTC,-
+0,0x848bf190,376,416,0x77307098,\\Windows\\System32\\ntdll.dll,0x7547499a,\\Windows\\System32\\csrsrv.dll,2023-03-28 21:50:18.000000 UTC,-
+0,0x85fa7c90,376,440,0x77307098,\\Windows\\System32\\ntdll.dll,0x75432879,\\Windows\\System32\\winsrv.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x85fa6d48,376,448,0x91108490,-,0x75432879,\\Windows\\System32\\winsrv.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86be3630,376,1232,0x77307098,\\Windows\\System32\\ntdll.dll,0x7547499a,\\Windows\\System32\\csrsrv.dll,2023-03-28 21:50:55.000000 UTC,-
+0,0x84a34030,376,3796,0x77307098,\\Windows\\System32\\ntdll.dll,0x75432879,\\Windows\\System32\\winsrv.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x85f96030,408,412,0x8aced668,-,0x3b123b,\\Windows\\System32\\winlogon.exe,2023-03-28 21:50:18.000000 UTC,-
+0,0x86034758,408,728,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x84bc6030,408,4020,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:36.000000 UTC,-
+0,0x85fb2b58,464,468,0x85fb2d6c,-,0xc6388a,\\Windows\\System32\\services.exe,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:50:51.000000 UTC
+0,0x85fef030,464,532,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x85fd2d48,464,548,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:51:27.000000 UTC
+0,0x85fedb20,464,552,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:51:28.000000 UTC
+0,0x85ff2030,464,572,0x77307098,\\Windows\\System32\\ntdll.dll,0x74b0ee76,\\Windows\\System32\\ubpm.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x8600e4b8,464,632,0x821d7f80,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x861c2030,464,1428,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:20.000000 UTC,2023-03-28 21:52:02.000000 UTC
+0,0x86c499c8,464,2200,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:59:55.000000 UTC,-
+0,0x861f8408,464,3116,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:02:22.000000 UTC,-
+0,0x84a08398,464,3552,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:18.000000 UTC,-
+0,0x84b8b3c0,464,3584,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:43.000000 UTC,-
+0,0x84bca030,464,3064,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:43.000000 UTC,-
+0,0x8500d5f8,464,2156,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:23.000000 UTC,-
+0,0x84995ca0,464,1144,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:23.000000 UTC,-
+0,0x85115290,464,3380,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:23.000000 UTC,-
+0,0x85fc3c20,472,488,0x77307098,\\Windows\\System32\\ntdll.dll,0xa31af7,\\Windows\\System32\\lsass.exe,2023-03-28 21:50:19.000000 UTC,-
+0,0x85fc76c8,472,496,0x77307098,\\Windows\\System32\\ntdll.dll,0x751fef57,\\Windows\\System32\\lsasrv.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x85fcd398,472,500,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x85fce030,472,504,0x92f623f0,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x85fceaf0,472,508,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:52:47.000000 UTC
+0,0x85fda530,472,540,0x85fda744,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:52:47.000000 UTC
+0,0x85ff9030,472,560,0x8207d800,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x85ff2a78,472,564,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:52:47.000000 UTC
+0,0x861e14e0,472,3388,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:04.000000 UTC,-
+0,0x86b12030,472,3400,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:02:22.000000 UTC,-
+0,0x84b72a60,472,2952,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:20.000000 UTC,-
+0,0x84b0b8e0,472,3724,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:20.000000 UTC,-
+0,0x84bb3030,472,2640,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x85008850,472,2760,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x85fc2320,480,484,0x92f1ecc8,-,0xbe776a,\\Windows\\System32\\lsm.exe,2023-03-28 21:50:19.000000 UTC,-
+0,0x85ff9d48,480,556,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x8602eaf8,480,696,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x8602e780,480,700,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86030b48,480,708,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86030688,480,712,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86030170,480,716,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86006a60,480,720,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:51:48.000000 UTC
+0,0x86035238,480,736,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x85066d48,480,1516,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:42.000000 UTC,-
+0,0x86bb5268,480,940,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x85ffdc68,580,584,0x77307098,\\Windows\\System32\\ntdll.dll,0xdd2104,\\Windows\\System32\\svchost.exe,2023-03-28 21:50:19.000000 UTC,-
+0,0x85ffecd0,580,592,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:51:26.000000 UTC
+0,0x86001030,580,600,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x85fed528,580,604,0x77307098,\\Windows\\System32\\ntdll.dll,0x74a5466d,\\Windows\\System32\\gpapi.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:50:19.000000 UTC
+0,0x86004970,580,612,0x77307098,\\Windows\\System32\\ntdll.dll,0x74ab9c83,\\Windows\\System32\\umpnpmgr.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86004240,580,616,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86001448,580,620,0x92f9fe18,-,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86009ae0,580,624,0x77307098,\\Windows\\System32\\ntdll.dll,0x74a33f20,\\Windows\\System32\\umpo.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x860094c8,580,628,0x77307098,\\Windows\\System32\\ntdll.dll,0x74a31457,\\Windows\\System32\\umpo.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86011660,580,648,0x92ff63c0,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86116218,580,2252,0x92ff6390,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:52:33.000000 UTC,-
+0,0x86024528,580,1060,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:02:44.000000 UTC,-
+0,0x85064030,580,2892,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:36.000000 UTC,-
+0,0x85070030,580,3288,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:59.000000 UTC,-
+0,0x84bb46a8,580,264,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:59.000000 UTC,-
+0,0x851477e0,580,2460,0x822ad4f8,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:01.000000 UTC,-
+0,0x860221b0,660,664,0x77307098,\\Windows\\System32\\ntdll.dll,0xdd2104,\\Windows\\System32\\svchost.exe,2023-03-28 21:50:19.000000 UTC,-
+0,0x86024810,660,668,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:52:03.000000 UTC
+0,0x86025630,660,680,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86026030,660,684,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:51:28.000000 UTC
+0,0x86027030,660,688,0x8ae3bc38,-,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86024240,660,692,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86a7fac8,660,576,0x77307098,\\Windows\\System32\\ntdll.dll,0x749e3c61,\\Windows\\System32\\rpcss.dll,2023-03-28 21:56:20.000000 UTC,-
+0,0x849c3030,660,2308,0x77307098,\\Windows\\System32\\ntdll.dll,0x749e3c61,\\Windows\\System32\\rpcss.dll,2023-03-28 21:57:15.000000 UTC,-
+0,0x84993030,660,2860,0x820ba7e8,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:57:15.000000 UTC,-
+0,0x8606bc10,660,704,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:01:55.000000 UTC,-
+0,0x84aead48,660,3304,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:59.000000 UTC,-
+0,0x84a50d48,660,2128,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x8603bc90,756,760,0x77307098,\\Windows\\System32\\ntdll.dll,0xdd2104,\\Windows\\System32\\svchost.exe,2023-03-28 21:50:19.000000 UTC,-
+0,0x8603e8f8,756,764,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x8604e168,756,768,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:52:47.000000 UTC
+0,0x8604d030,756,772,0x8604d244,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:55:34.000000 UTC
+0,0x8604dd48,756,776,0x8604df5c,-,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:50:20.000000 UTC
+0,0x85f9fab0,756,784,0x9b239058,-,0x7482657c,\\Windows\\System32\\wevtsvc.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86045030,756,788,0x8bcb2478,-,0x748373fd,\\Windows\\System32\\wevtsvc.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86051738,756,800,0x77307098,\\Windows\\System32\\ntdll.dll,0x74a5466d,\\Windows\\System32\\gpapi.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:50:19.000000 UTC
+0,0x8606a330,756,892,0x77307098,\\Windows\\System32\\ntdll.dll,0x7433147c,\\Windows\\System32\\audiosrv.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86071738,756,912,0x77307098,\\Windows\\System32\\ntdll.dll,0x742b27e1,\\Windows\\System32\\MMDevAPI.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x860728a0,756,916,0x9b1b9580,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x8609cc00,756,1024,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x8609e030,756,1032,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x860a2d48,756,1056,0x77307098,\\Windows\\System32\\ntdll.dll,0x739f1444,\\Windows\\System32\\lmhsvc.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x860a5860,756,1068,0x77307098,\\Windows\\System32\\ntdll.dll,0x738f6afc,\\Windows\\System32\\dhcpcore6.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x85e267f0,756,2172,0x988b68d8,-,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:56.000000 UTC,-
+0,0x85e27978,756,2176,0x77307098,\\Windows\\System32\\ntdll.dll,0x71895224,\\Windows\\System32\\fundisc.dll,2023-03-28 21:50:56.000000 UTC,-
+0,0x8499bac8,756,3956,0x98b532e8,-,0x6f3069d2,\\Windows\\System32\\wscsvc.dll,2023-03-28 21:52:22.000000 UTC,-
+0,0x849dfd48,756,3964,0x98b40118,-,0x6f301adc,\\Windows\\System32\\wscsvc.dll,2023-03-28 21:52:22.000000 UTC,-
+0,0x861e09f8,756,3648,0x77307098,\\Windows\\System32\\ntdll.dll,0x74825c08,\\Windows\\System32\\wevtsvc.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x86258d48,756,3652,0x77307098,\\Windows\\System32\\ntdll.dll,0x74825c08,\\Windows\\System32\\wevtsvc.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84ae92d8,756,3668,0x77307098,\\Windows\\System32\\ntdll.dll,0x74825c08,\\Windows\\System32\\wevtsvc.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x860a3338,756,1992,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:59:38.000000 UTC,-
+0,0x84aa5030,756,2352,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 22:00:55.000000 UTC,-
+0,0x849c7c40,756,3384,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:02:15.000000 UTC,-
+0,0x84bfa030,756,3528,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:08.000000 UTC,-
+0,0x84bc1d48,756,2720,0x8c4cd3f0,-,0x738f3644,\\Windows\\System32\\dhcpcore6.dll,2023-03-28 22:04:46.000000 UTC,-
+0,0x86048030,792,796,0x77307098,\\Windows\\System32\\ntdll.dll,0xdd2104,\\Windows\\System32\\svchost.exe,2023-03-28 21:50:19.000000 UTC,-
+0,0x86051168,792,804,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86063d48,792,864,0x77307098,\\Windows\\System32\\ntdll.dll,0x7433147c,\\Windows\\System32\\audiosrv.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86063388,792,868,0x77307098,\\Windows\\System32\\ntdll.dll,0x742b27e1,\\Windows\\System32\\MMDevAPI.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86057ac0,792,880,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x8608b0f8,792,1008,0x77307098,\\Windows\\System32\\ntdll.dll,0x73a52e21,\\Windows\\System32\\uxsms.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x861c8d48,792,1412,0x8be67130,-,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x862aed48,792,1728,0x9b7a04f0,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:21.000000 UTC,-
+0,0x86306788,792,1772,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:21.000000 UTC,-
+0,0x861c1d48,792,1852,0x77307098,\\Windows\\System32\\ntdll.dll,0x76d8a4aa,\\Windows\\System32\\advapi32.dll,2023-03-28 21:50:55.000000 UTC,2023-03-28 21:55:55.000000 UTC
+0,0x863e4d48,792,2304,0x77307098,\\Windows\\System32\\ntdll.dll,0x7167e2b3,\\Windows\\System32\\sysmain.dll,2023-03-28 21:51:01.000000 UTC,-
+0,0x860ad9a8,792,2332,0x77307098,\\Windows\\System32\\ntdll.dll,0x71684662,\\Windows\\System32\\sysmain.dll,2023-03-28 21:51:11.000000 UTC,2023-03-28 21:51:12.000000 UTC
+0,0x849e1900,792,984,0x988214e8,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:52:39.000000 UTC,-
+0,0x849da730,792,3488,0x77307098,\\Windows\\System32\\ntdll.dll,0x6bf494dd,\\Windows\\System32\\pcasvc.dll,2023-03-28 22:04:38.000000 UTC,-
+0,0x86054d48,820,824,0x77307098,\\Windows\\System32\\ntdll.dll,0xdd2104,\\Windows\\System32\\svchost.exe,2023-03-28 21:50:19.000000 UTC,-
+0,0x86055798,820,836,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86056030,820,840,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:51:29.000000 UTC
+0,0x86056d48,820,844,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:51:28.000000 UTC
+0,0x860753b8,820,932,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x8606a680,820,936,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x8607dbe0,820,960,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86087ad0,820,988,0x86087ce4,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 22:02:13.000000 UTC
+0,0x860a84e8,820,1100,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x860b45c8,820,1104,0x91086e58,-,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x860aec00,820,1120,0x8ac08f10,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x860ba100,820,1180,0x77307098,\\Windows\\System32\\ntdll.dll,0x73d26c11,\\Windows\\System32\\gpsvc.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:50:19.000000 UTC
+0,0x860bf378,820,1188,0x77307098,\\Windows\\System32\\ntdll.dll,0x73d177a5,\\Windows\\System32\\gpsvc.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x860c6d48,820,1192,0x860c6f5c,-,0x7367792d,\\Windows\\System32\\schedsvc.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x860f9630,820,1196,0x77307098,\\Windows\\System32\\ntdll.dll,0x73142135,\\Windows\\System32\\taskcomp.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x861cc240,820,1420,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x861d6030,820,1440,0x911437e0,-,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x861ec030,820,1496,0x77307098,\\Windows\\System32\\ntdll.dll,0x76d8a4aa,\\Windows\\System32\\advapi32.dll,2023-03-28 21:50:20.000000 UTC,2023-03-28 21:56:34.000000 UTC
+0,0x861ecd48,820,1500,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x86202d48,820,1528,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x86254c40,820,1588,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x86253c00,820,1596,0x77307098,\\Windows\\System32\\ntdll.dll,0x750054aa,\\Windows\\System32\\authz.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x8636b950,820,1808,0x77307098,\\Windows\\System32\\ntdll.dll,0x709e3edd,\\Windows\\System32\\ncobjapi.dll,2023-03-28 21:50:21.000000 UTC,2023-03-28 21:52:09.000000 UTC
+0,0x8636aba0,820,1812,0x77307098,\\Windows\\System32\\ntdll.dll,0x709e3edd,\\Windows\\System32\\ncobjapi.dll,2023-03-28 21:50:21.000000 UTC,2023-03-28 21:52:09.000000 UTC
+0,0x85770d48,820,2032,0x77307098,\\Windows\\System32\\ntdll.dll,0x73d26c11,\\Windows\\System32\\gpsvc.dll,2023-03-28 21:50:41.000000 UTC,2023-03-28 21:50:41.000000 UTC
+0,0x857736b8,820,132,0x77307098,\\Windows\\System32\\ntdll.dll,0x73d177a5,\\Windows\\System32\\gpsvc.dll,2023-03-28 21:50:41.000000 UTC,-
+0,0x86b26c80,820,360,0x77307098,\\Windows\\System32\\ntdll.dll,0x73d26081,\\Windows\\System32\\gpsvc.dll,2023-03-28 21:50:41.000000 UTC,2023-03-28 21:50:41.000000 UTC
+0,0x86b86468,820,1952,0x77307098,\\Windows\\System32\\ntdll.dll,0x6f431917,\\Windows\\System32\\aelupsvc.dll,2023-03-28 21:50:43.000000 UTC,-
+0,0x86b87370,820,1944,0x9b1d8478,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:43.000000 UTC,-
+0,0x86a9ec28,820,3516,0x77307098,\\Windows\\System32\\ntdll.dll,0x708c2f39,\\Windows\\System32\\wbem\\NCProv.dll,2023-03-28 21:52:09.000000 UTC,-
+0,0x86a9e940,820,3520,0x77307098,\\Windows\\System32\\ntdll.dll,0x709e1df9,\\Windows\\System32\\ncobjapi.dll,2023-03-28 21:52:09.000000 UTC,-
+0,0x86a9e658,820,3524,0x77307098,\\Windows\\System32\\ntdll.dll,0x709e1df9,\\Windows\\System32\\ncobjapi.dll,2023-03-28 21:52:09.000000 UTC,-
+0,0x849a4af8,820,3804,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:52:21.000000 UTC,-
+0,0x85e434c0,820,3812,0x77307098,\\Windows\\System32\\ntdll.dll,0x717822c7,\\Windows\\System32\\ssdpapi.dll,2023-03-28 21:52:21.000000 UTC,2023-03-28 21:52:30.000000 UTC
+0,0x8499b7e0,820,3960,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:52:22.000000 UTC,-
+0,0x849e9c70,820,3984,0x77307098,\\Windows\\System32\\ntdll.dll,0x6f548f48,\\Windows\\System32\\esent.dll,2023-03-28 21:52:22.000000 UTC,2023-03-28 21:57:23.000000 UTC
+0,0x849b7740,820,3988,0x77307098,\\Windows\\System32\\ntdll.dll,0x6f548f48,\\Windows\\System32\\esent.dll,2023-03-28 21:52:22.000000 UTC,2023-03-28 21:57:23.000000 UTC
+0,0x864b55b0,820,2096,0x77307098,\\Windows\\System32\\ntdll.dll,0x71782831,\\Windows\\System32\\ssdpapi.dll,2023-03-28 21:52:30.000000 UTC,-
+0,0x84ad0a00,820,3136,0x77307098,\\Windows\\System32\\ntdll.dll,0x6c0181d4,\\Windows\\System32\\wuaueng.dll,2023-03-28 21:53:08.000000 UTC,-
+0,0x84a91b28,820,3880,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 21:59:55.000000 UTC,-
+0,0x84990560,820,3272,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:06.000000 UTC,-
+0,0x85061030,820,3808,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 22:04:21.000000 UTC,-
+0,0x84b794e8,820,3280,0x77307098,\\Windows\\System32\\ntdll.dll,0x73492e57,\\Windows\\System32\\mmcss.dll,2023-03-28 22:04:21.000000 UTC,-
+0,0x8607ca38,948,952,0x77307098,\\Windows\\System32\\ntdll.dll,0xdd2104,\\Windows\\System32\\svchost.exe,2023-03-28 21:50:19.000000 UTC,-
+0,0x86083728,948,956,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x8608c030,948,996,0x8ad0e0c0,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x860a69e0,948,1076,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86300688,948,1760,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:21.000000 UTC,-
+0,0x8633bd48,948,1776,0x8bc86430,-,0x712ef0e1,\\Windows\\System32\\netprofm.dll,2023-03-28 21:50:21.000000 UTC,-
+0,0x86358890,948,1824,0x86358aa4,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:21.000000 UTC,2023-03-28 21:55:34.000000 UTC
+0,0x8636f4a0,948,1832,0x77307098,\\Windows\\System32\\ntdll.dll,0x712e8f8b,\\Windows\\System32\\netprofm.dll,2023-03-28 21:50:21.000000 UTC,-
+0,0x863b9268,948,1844,0x77307098,\\Windows\\System32\\ntdll.dll,0x712e946d,\\Windows\\System32\\netprofm.dll,2023-03-28 21:50:21.000000 UTC,-
+0,0x863b7d48,948,1848,0x77307098,\\Windows\\System32\\ntdll.dll,0x712ef837,\\Windows\\System32\\netprofm.dll,2023-03-28 21:50:21.000000 UTC,-
+0,0x86b27030,948,452,0x77307098,\\Windows\\System32\\ntdll.dll,0x73bc75f9,\\Windows\\System32\\es.dll,2023-03-28 21:50:41.000000 UTC,2023-03-28 21:52:41.000000 UTC
+0,0x85e299d0,948,2180,0x77307098,\\Windows\\System32\\ntdll.dll,0x72a4e9be,\\Windows\\System32\\fdWSD.dll,2023-03-28 21:50:56.000000 UTC,-
+0,0x85e29698,948,2184,0x77307098,\\Windows\\System32\\ntdll.dll,0x72a4e9be,\\Windows\\System32\\fdWSD.dll,2023-03-28 21:50:56.000000 UTC,-
+0,0x85e29320,948,2188,0x77307098,\\Windows\\System32\\ntdll.dll,0x72a4e9be,\\Windows\\System32\\fdWSD.dll,2023-03-28 21:50:56.000000 UTC,-
+0,0x85e2a030,948,2192,0x77307098,\\Windows\\System32\\ntdll.dll,0x72a4e9be,\\Windows\\System32\\fdWSD.dll,2023-03-28 21:50:56.000000 UTC,-
+0,0x86bf1648,948,2224,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:56.000000 UTC,-
+0,0x85e31bb8,948,2232,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:56.000000 UTC,-
+0,0x85e32030,948,2240,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:56.000000 UTC,-
+0,0x8506aac8,948,2904,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:48.000000 UTC,-
+0,0x84a5c788,948,2976,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:43.000000 UTC,-
+0,0x85023030,948,1920,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x86bb6030,948,3044,0x77307098,\\Windows\\System32\\ntdll.dll,0x73bb1d65,\\Windows\\System32\\es.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x860a0d48,1036,1040,0x77307098,\\Windows\\System32\\ntdll.dll,0xdd2104,\\Windows\\System32\\svchost.exe,2023-03-28 21:50:19.000000 UTC,-
+0,0x860a14d0,1036,1044,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x8609f0f0,1036,1048,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,2023-03-28 21:51:29.000000 UTC
+0,0x860a76f0,1036,1080,0x8affcf78,-,0x73934ebb,\\Windows\\System32\\dnsrslvr.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x860ae030,1036,1088,0x77307098,\\Windows\\System32\\ntdll.dll,0x739356b7,\\Windows\\System32\\dnsrslvr.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x860ae630,1036,1092,0x77307098,\\Windows\\System32\\ntdll.dll,0x7393e035,\\Windows\\System32\\dnsrslvr.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x860a8030,1036,1096,0x8bf097b8,-,0x73935967,\\Windows\\System32\\dnsrslvr.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x861b6030,1036,1356,0x8be217d8,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x861df458,1036,1444,0x77307098,\\Windows\\System32\\ntdll.dll,0x719cd5e6,\\Windows\\System32\\nlasvc.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x861e0030,1036,1452,0x77307098,\\Windows\\System32\\ntdll.dll,0x76d8a4aa,\\Windows\\System32\\advapi32.dll,2023-03-28 21:50:20.000000 UTC,2023-03-28 21:55:20.000000 UTC
+0,0x861fcb48,1036,1460,0x8befa978,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x862e3ae8,1036,1732,0x8be68ef8,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:21.000000 UTC,-
+0,0x86332d48,1036,1840,0x8be880a0,-,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 21:50:21.000000 UTC,-
+0,0x863939b0,1036,2152,0x77307098,\\Windows\\System32\\ntdll.dll,0x71782831,\\Windows\\System32\\ssdpapi.dll,2023-03-28 21:50:55.000000 UTC,-
+0,0x84acb5e8,1036,1932,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:52:42.000000 UTC,-
+0,0x84b84a60,1036,636,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:00:20.000000 UTC,-
+0,0x84b9f938,1036,2348,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x85147d48,1036,1464,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x85072d48,1036,2516,0x77307098,\\Windows\\System32\\ntdll.dll,0x71c77a0b,\\Windows\\System32\\cryptsvc.dll,2023-03-28 22:05:00.000000 UTC,2023-03-28 22:05:01.000000 UTC
+0,0x84bcbd48,1036,3728,0x77307098,\\Windows\\System32\\ntdll.dll,0x6f548f48,\\Windows\\System32\\esent.dll,2023-03-28 22:05:01.000000 UTC,-
+0,0x86034190,1036,2744,0x77307098,\\Windows\\System32\\ntdll.dll,0x73935a75,\\Windows\\System32\\dnsrslvr.dll,2023-03-28 22:05:20.000000 UTC,-
+0,0x84a14490,1036,1416,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:21.000000 UTC,-
+0,0x85041288,1036,3636,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:21.000000 UTC,-
+0,0x8604a550,1224,1228,0x77307098,\\Windows\\System32\\ntdll.dll,0x1e738e,\\Windows\\System32\\spoolsv.exe,2023-03-28 21:50:19.000000 UTC,-
+0,0x860ff4a8,1224,1252,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86110620,1224,1256,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x86110d48,1224,1260,0x8bdba858,-,0x1e5195,\\Windows\\System32\\spoolsv.exe,2023-03-28 21:50:19.000000 UTC,-
+0,0x86b1a688,1224,292,0x77307098,\\Windows\\System32\\ntdll.dll,0x70621213,\\Windows\\System32\\usbmon.dll,2023-03-28 21:50:41.000000 UTC,-
+0,0x86b1e548,1224,288,0x77307098,\\Windows\\System32\\ntdll.dll,0x705e1448,\\Windows\\System32\\WSDMon.dll,2023-03-28 21:50:41.000000 UTC,-
+0,0x86b1f030,1224,284,0x77307098,\\Windows\\System32\\ntdll.dll,0x71895224,\\Windows\\System32\\fundisc.dll,2023-03-28 21:50:41.000000 UTC,-
+0,0x86b1f9c0,1224,280,0x77307098,\\Windows\\System32\\ntdll.dll,0x705d2f43,\\Windows\\System32\\fdPnp.dll,2023-03-28 21:50:41.000000 UTC,-
+0,0x86b1f6d8,1224,328,0x8be8d178,-,0x7189551d,\\Windows\\System32\\fundisc.dll,2023-03-28 21:50:41.000000 UTC,-
+0,0x86b20030,1224,336,0x77307098,\\Windows\\System32\\ntdll.dll,0x70693843,\\Windows\\System32\\PrintIsolationProxy.dll,2023-03-28 21:50:41.000000 UTC,-
+0,0x86b21cc8,1224,340,0x77307098,\\Windows\\System32\\ntdll.dll,0x70755a1e,\\Windows\\System32\\localspl.dll,2023-03-28 21:50:41.000000 UTC,-
+0,0x849c7578,1224,4040,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:00:41.000000 UTC,-
+0,0x86114a40,1264,1268,0x77307098,\\Windows\\System32\\ntdll.dll,0xdd2104,\\Windows\\System32\\svchost.exe,2023-03-28 21:50:19.000000 UTC,-
+0,0x86115610,1264,1272,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x861173d8,1264,1288,0x77307098,\\Windows\\System32\\ntdll.dll,0x750054aa,\\Windows\\System32\\authz.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x8611d2b8,1264,1292,0x77307098,\\Windows\\System32\\ntdll.dll,0x750054aa,\\Windows\\System32\\authz.dll,2023-03-28 21:50:19.000000 UTC,-
+0,0x861b0030,1264,1316,0x77307098,\\Windows\\System32\\ntdll.dll,0x750054aa,\\Windows\\System32\\authz.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x861b0b18,1264,1320,0x861b0d2c,-,0x71ced58b,\\Windows\\System32\\MPSSVC.dll,2023-03-28 21:50:20.000000 UTC,2023-03-28 21:50:20.000000 UTC
+0,0x85b7ad48,1264,1324,0x8bd68210,-,0x71cd4f4c,\\Windows\\System32\\MPSSVC.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x855c6030,1264,1328,0x855c6244,-,0x71cf8d52,\\Windows\\System32\\MPSSVC.dll,2023-03-28 21:50:20.000000 UTC,2023-03-28 22:00:20.000000 UTC
+0,0x861b15c0,1264,1336,0x8ad54810,-,0x71cdbd2d,\\Windows\\System32\\MPSSVC.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x861b4570,1264,1344,0x8be26558,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x861b3630,1264,1348,0x77307098,\\Windows\\System32\\ntdll.dll,0x71cebc5f,\\Windows\\System32\\MPSSVC.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x861b5d48,1264,1352,0x77307098,\\Windows\\System32\\ntdll.dll,0x71cd69c1,\\Windows\\System32\\MPSSVC.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x861b64f0,1264,1364,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x860b5990,1264,1404,0x77307098,\\Windows\\System32\\ntdll.dll,0x71c430de,\\Windows\\System32\\dps.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x8630e030,1264,1764,0x77307098,\\Windows\\System32\\ntdll.dll,0x71c48d31,\\Windows\\System32\\dps.dll,2023-03-28 21:50:21.000000 UTC,-
+0,0x864a1a60,1264,1864,0x8ae43960,-,0x708f2639,\\Windows\\System32\\wdiasqmmodule.dll,2023-03-28 21:50:22.000000 UTC,-
+0,0x86b29850,1264,1744,0x77307098,\\Windows\\System32\\ntdll.dll,0x6fc72d2f,\\Windows\\System32\\radardt.dll,2023-03-28 21:50:42.000000 UTC,-
+0,0x84b839c0,1264,1492,0x77307098,\\Windows\\System32\\ntdll.dll,0x6fc72e94,\\Windows\\System32\\radardt.dll,2023-03-28 22:00:21.000000 UTC,-
+0,0x84b31250,1264,2540,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:01:38.000000 UTC,-
+0,0x84b9b7a0,1264,2440,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:08.000000 UTC,-
+0,0x85048030,1264,1532,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:46.000000 UTC,-
+0,0x861baa60,1372,1376,0x77307098,\\Windows\\System32\\ntdll.dll,0xdd2104,\\Windows\\System32\\svchost.exe,2023-03-28 21:50:20.000000 UTC,-
+0,0x861ab560,1372,1384,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x861bb338,1372,1388,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x861bc030,1372,1392,0x8ac587d0,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x861bcd48,1372,1396,0x861bcf5c,-,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:20.000000 UTC,2023-03-28 21:50:20.000000 UTC
+0,0x861e8030,1372,1436,0x8be03798,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x8625fd48,1372,1608,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x8625e590,1372,1612,0x77307098,\\Windows\\System32\\ntdll.dll,0x71895224,\\Windows\\System32\\fundisc.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x862618c0,1372,1620,0x8c621428,-,0x7189551d,\\Windows\\System32\\fundisc.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x86263478,1372,1628,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:20.000000 UTC,-
+0,0x869bd6d8,1372,2136,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:55.000000 UTC,2023-03-28 21:50:55.000000 UTC
+0,0x85dd7b58,1372,2140,0x77307098,\\Windows\\System32\\ntdll.dll,0x726ebe51,\\Windows\\System32\\ssdpsrv.dll,2023-03-28 21:50:55.000000 UTC,-
+0,0x86163c90,1372,2144,0x77307098,\\Windows\\System32\\ntdll.dll,0x726ebd75,\\Windows\\System32\\ssdpsrv.dll,2023-03-28 21:50:55.000000 UTC,-
+0,0x849b14b0,1372,3816,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:52:21.000000 UTC,-
+0,0x86b503d0,1372,3824,0x98a85a78,-,0x6ea0cb98,\\Windows\\System32\\FntCache.dll,2023-03-28 21:52:21.000000 UTC,-
+0,0x849f3170,1372,4048,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:52:24.000000 UTC,-
+0,0x84a0ad48,1372,1828,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:00:24.000000 UTC,-
+0,0x85d76030,1372,2740,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:21.000000 UTC,-
+0,0x849da030,1372,1556,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:21.000000 UTC,-
+0,0x8506bd48,1372,1544,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:24.000000 UTC,-
+0,0x85774030,2040,2044,0x77307098,\\Windows\\System32\\ntdll.dll,0xf3234,\\Windows\\System32\\taskhost.exe,2023-03-28 21:50:41.000000 UTC,-
+0,0x857faa30,2040,136,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:41.000000 UTC,-
+0,0x857fb9a0,2040,228,0x77307098,\\Windows\\System32\\ntdll.dll,0xf73e4,\\Windows\\System32\\taskhost.exe,2023-03-28 21:50:41.000000 UTC,-
+0,0x86b12a60,2040,272,0x77307098,\\Windows\\System32\\ntdll.dll,0xf8274,\\Windows\\System32\\taskhost.exe,2023-03-28 21:50:41.000000 UTC,2023-03-28 21:50:41.000000 UTC
+0,0x86b17030,2040,276,0x8acf9580,-,0x706d22c1,\\Windows\\System32\\MsCtfMonitor.dll,2023-03-28 21:50:41.000000 UTC,-
+0,0x86b45710,2040,928,0x77307098,\\Windows\\System32\\ntdll.dll,0xf8274,\\Windows\\System32\\taskhost.exe,2023-03-28 21:50:42.000000 UTC,2023-03-28 21:50:42.000000 UTC
+0,0x86b45140,2040,1000,0x77307098,\\Windows\\System32\\ntdll.dll,0x70102ceb,\\Windows\\System32\\PlaySndSrv.dll,2023-03-28 21:50:42.000000 UTC,-
+0,0x86aa5aa8,2040,1552,0x77307098,\\Windows\\System32\\ntdll.dll,0x73c627c1,\\Windows\\System32\\winmm.dll,2023-03-28 21:50:42.000000 UTC,-
+0,0x860596f8,2040,1108,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:59.000000 UTC,-
+0,0x8606c120,2040,3340,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:06.000000 UTC,-
+0,0x86b2ca88,476,524,0x77307098,\\Windows\\System32\\ntdll.dll,0xe3542d,\\Windows\\System32\\dwm.exe,2023-03-28 21:50:42.000000 UTC,-
+0,0x86a55030,476,596,0x77307098,\\Windows\\System32\\ntdll.dll,0xe352b0,\\Windows\\System32\\dwm.exe,2023-03-28 21:50:42.000000 UTC,-
+0,0x86a55c10,476,644,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:42.000000 UTC,-
+0,0x86b2ace0,816,860,0x77307098,\\Windows\\System32\\ntdll.dll,0x4d0efa,\\Windows\\explorer.exe,2023-03-28 21:50:42.000000 UTC,-
+0,0x86b3f320,816,884,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:42.000000 UTC,-
+0,0x86b51698,816,1400,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:42.000000 UTC,-
+0,0x86b513b0,816,1424,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 21:50:42.000000 UTC,-
+0,0x86beb030,816,308,0x8233b560,-,0x76f342ed,\\Windows\\System32\\shlwapi.dll,2023-03-28 21:50:49.000000 UTC,-
+0,0x86be44e0,816,1652,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 21:50:49.000000 UTC,-
+0,0x86c27030,816,1724,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f342ed,\\Windows\\System32\\shlwapi.dll,2023-03-28 21:50:49.000000 UTC,-
+0,0x86c342d0,816,1136,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f342ed,\\Windows\\System32\\shlwapi.dll,2023-03-28 21:50:49.000000 UTC,-
+0,0x86c304d8,816,316,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f342ed,\\Windows\\System32\\shlwapi.dll,2023-03-28 21:50:49.000000 UTC,-
+0,0x86c44990,816,1172,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f342ed,\\Windows\\System32\\shlwapi.dll,2023-03-28 21:50:54.000000 UTC,-
+0,0x86c349e8,816,832,0x9b086e90,-,0x76f342ed,\\Windows\\System32\\shlwapi.dll,2023-03-28 21:50:54.000000 UTC,-
+0,0x86b8bd48,816,852,0x86b8bf5c,-,0x76f342ed,\\Windows\\System32\\shlwapi.dll,2023-03-28 21:50:54.000000 UTC,-
+0,0x861e68d8,816,872,0x98bed1d8,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:54.000000 UTC,-
+0,0x86c46030,816,1116,0x77307098,\\Windows\\System32\\ntdll.dll,0x742b27e1,\\Windows\\System32\\MMDevAPI.dll,2023-03-28 21:50:54.000000 UTC,-
+0,0x85ffc030,816,748,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f342ed,\\Windows\\System32\\shlwapi.dll,2023-03-28 21:50:55.000000 UTC,-
+0,0x861636a0,816,2148,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f342ed,\\Windows\\System32\\shlwapi.dll,2023-03-28 21:50:55.000000 UTC,-
+0,0x85d74b60,816,2160,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 21:50:56.000000 UTC,-
+0,0x863e4030,816,2292,0x91119dc8,-,0x7210268a,\\Windows\\System32\\FXSST.dll,2023-03-28 21:50:59.000000 UTC,-
+0,0x86b1f3f0,816,1168,0x77307098,\\Windows\\System32\\ntdll.dll,0x73c627c1,\\Windows\\System32\\winmm.dll,2023-03-28 21:52:49.000000 UTC,-
+0,0x8630e7d8,816,2888,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f342ed,\\Windows\\System32\\shlwapi.dll,2023-03-28 21:54:41.000000 UTC,-
+0,0x8499ed48,816,1432,0x77307098,\\Windows\\System32\\ntdll.dll,0x732e32fb,\\Windows\\System32\\rasman.dll,2023-03-28 21:55:50.000000 UTC,-
+0,0x86204818,816,1948,0x9d815a90,-,0x76f342ed,\\Windows\\System32\\shlwapi.dll,2023-03-28 21:59:55.000000 UTC,-
+0,0x84b5e9b0,816,3440,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:19.000000 UTC,-
+0,0x85033d48,816,1448,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:20.000000 UTC,-
+0,0x84b662f8,816,3140,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f342ed,\\Windows\\System32\\shlwapi.dll,2023-03-28 22:04:20.000000 UTC,-
+0,0x84bbc030,816,3124,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:20.000000 UTC,-
+0,0x84bf9d48,816,3944,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:20.000000 UTC,-
+0,0x85041d48,816,3056,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:20.000000 UTC,-
+0,0x860ff848,816,3120,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:20.000000 UTC,-
+0,0x84a14d48,816,2008,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:20.000000 UTC,-
+0,0x85050598,816,3240,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:20.000000 UTC,-
+0,0x84b8a540,816,2948,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:27.000000 UTC,-
+0,0x84a0fbc8,816,3396,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:49.000000 UTC,-
+0,0x85112460,816,1280,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:01.000000 UTC,-
+0,0x8514bd48,816,3672,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:01.000000 UTC,-
+0,0x86bfdc10,816,3840,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:01.000000 UTC,-
+0,0x85159918,816,2268,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:01.000000 UTC,-
+0,0x863a51b8,816,2404,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:01.000000 UTC,-
+0,0x86b91b30,1880,1964,0x8223bee0,-,0x2fdeb3,\\Windows\\System32\\SearchIndexer.exe,2023-03-28 21:50:48.000000 UTC,-
+0,0x86baf320,1880,2024,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:48.000000 UTC,-
+0,0x86bb6d48,1880,2004,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:48.000000 UTC,-
+0,0x86bcbbd0,1880,2012,0x77307098,\\Windows\\System32\\ntdll.dll,0x6f548f48,\\Windows\\System32\\esent.dll,2023-03-28 21:50:48.000000 UTC,-
+0,0x86bcfbc8,1880,2000,0x77307098,\\Windows\\System32\\ntdll.dll,0x6fa7b213,\\Windows\\System32\\tquery.dll,2023-03-28 21:50:48.000000 UTC,-
+0,0x86bcf190,1880,1900,0x8be21808,-,0x6f72b534,\\Windows\\System32\\mssrch.dll,2023-03-28 21:50:48.000000 UTC,-
+0,0x86bd0030,1880,1896,0x77307098,\\Windows\\System32\\ntdll.dll,0x6f727eac,\\Windows\\System32\\mssrch.dll,2023-03-28 21:50:48.000000 UTC,-
+0,0x86bd06c0,1880,1908,0x77307098,\\Windows\\System32\\ntdll.dll,0x6f6eafb9,\\Windows\\System32\\mssrch.dll,2023-03-28 21:50:48.000000 UTC,-
+0,0x86a2e8f0,1880,1904,0x77307098,\\Windows\\System32\\ntdll.dll,0x6f72a44d,\\Windows\\System32\\mssrch.dll,2023-03-28 21:50:48.000000 UTC,-
+0,0x86084ad8,1880,2676,0x77307098,\\Windows\\System32\\ntdll.dll,0x6fa7b213,\\Windows\\System32\\tquery.dll,2023-03-28 21:51:28.000000 UTC,-
+0,0x86213b80,1880,2680,0x77307098,\\Windows\\System32\\ntdll.dll,0x6fa7b213,\\Windows\\System32\\tquery.dll,2023-03-28 21:51:28.000000 UTC,-
+0,0x85d08880,1880,2108,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:52:30.000000 UTC,2023-03-28 21:56:00.000000 UTC
+0,0x8610e030,1880,3352,0x77307098,\\Windows\\System32\\ntdll.dll,0x6f6fab1a,\\Windows\\System32\\mssrch.dll,2023-03-28 21:56:28.000000 UTC,2023-03-28 21:56:28.000000 UTC
+0,0x84b31538,1880,2572,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:58:03.000000 UTC,-
+0,0x84a93510,1880,1184,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:59:08.000000 UTC,-
+0,0x85f8f030,1880,2776,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:53.000000 UTC,-
+0,0x85040d48,1880,2752,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:00.000000 UTC,-
+0,0x85055d48,1880,2696,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x85069a48,1880,2568,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:01.000000 UTC,-
+0,0x860661f0,888,752,0x77307098,\\Windows\\System32\\ntdll.dll,0x49ddaf,\\Program Files\\Windows Media Player\\wmpnetwk.exe,2023-03-28 21:50:55.000000 UTC,-
+0,0x8605a5e8,888,2052,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:55.000000 UTC,-
+0,0x86c3b670,888,2056,0x8acf3948,-,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 21:50:55.000000 UTC,-
+0,0x86c47b80,888,2060,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:55.000000 UTC,-
+0,0x86c453d8,888,2076,0x77307098,\\Windows\\System32\\ntdll.dll,0x431e49,\\Program Files\\Windows Media Player\\wmpnetwk.exe,2023-03-28 21:50:55.000000 UTC,-
+0,0x86c456c0,888,2112,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:50:55.000000 UTC,-
+0,0x869bdd48,888,2132,0x823e9498,-,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 21:50:55.000000 UTC,-
+0,0x85e2a478,888,2204,0x77307098,\\Windows\\System32\\ntdll.dll,0x717822c7,\\Windows\\System32\\ssdpapi.dll,2023-03-28 21:50:56.000000 UTC,2023-03-28 21:51:05.000000 UTC
+0,0x85e2c338,888,2212,0x77307098,\\Windows\\System32\\ntdll.dll,0x717822c7,\\Windows\\System32\\ssdpapi.dll,2023-03-28 21:50:56.000000 UTC,2023-03-28 21:51:05.000000 UTC
+0,0x85e2ed48,888,2216,0x77307098,\\Windows\\System32\\ntdll.dll,0x73fb7832,\\Windows\\winsxs\\x86_microsoft.windows.gdiplus_6595b64144ccf1df_1.1.7601.17514_none_72d18a4386696c80\\GdiPlus.dll,2023-03-28 21:50:56.000000 UTC,-
+0,0x860b31e8,888,2320,0x77307098,\\Windows\\System32\\ntdll.dll,0x71782831,\\Windows\\System32\\ssdpapi.dll,2023-03-28 21:51:05.000000 UTC,-
+0,0x861b6d48,3828,3832,0x77307098,\\Windows\\System32\\ntdll.dll,0xb1eec,\\Windows\\System32\\sppsvc.exe,2023-03-28 21:52:21.000000 UTC,-
+0,0x8499dd48,3828,3836,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:52:21.000000 UTC,-
+0,0x84970668,3828,3860,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 21:52:21.000000 UTC,-
+0,0x84b24030,3828,2416,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:59:55.000000 UTC,-
+0,0x849d3af8,3828,2280,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:55.000000 UTC,-
+0,0x85fe6030,3828,1820,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:55.000000 UTC,-
+0,0x84a42738,3828,4084,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:55.000000 UTC,-
+0,0x84988d48,3868,3872,0x77307098,\\Windows\\System32\\ntdll.dll,0xdd2104,\\Windows\\System32\\svchost.exe,2023-03-28 21:52:21.000000 UTC,-
+0,0x849ab030,3868,3888,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:52:22.000000 UTC,-
+0,0x849d09c0,3868,3892,0x98b1d060,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:52:22.000000 UTC,-
+0,0x849c64e0,3868,3896,0x849c66f4,-,0x6e8f0e8e,\\Program Files\\Windows Defender\\MpSvc.dll,2023-03-28 21:52:22.000000 UTC,2023-03-28 21:52:22.000000 UTC
+0,0x84960ad0,3868,3916,0x77307098,\\Windows\\System32\\ntdll.dll,0x6e8f7a02,\\Program Files\\Windows Defender\\MpSvc.dll,2023-03-28 21:52:22.000000 UTC,-
+0,0x849df030,3868,3920,0x77307098,\\Windows\\System32\\ntdll.dll,0x6e903418,\\Program Files\\Windows Defender\\MpSvc.dll,2023-03-28 21:52:22.000000 UTC,-
+0,0x8499b030,3868,3924,0x77307098,\\Windows\\System32\\ntdll.dll,0x6e8fb0b7,\\Program Files\\Windows Defender\\MpSvc.dll,2023-03-28 21:52:22.000000 UTC,-
+0,0x866674d8,3868,3928,0x77307098,\\Windows\\System32\\ntdll.dll,0x6e8f9d49,\\Program Files\\Windows Defender\\MpSvc.dll,2023-03-28 21:52:22.000000 UTC,-
+0,0x849e5418,3868,3968,0x77307098,\\Windows\\System32\\ntdll.dll,0x6e901f34,\\Program Files\\Windows Defender\\MpSvc.dll,2023-03-28 21:52:22.000000 UTC,-
+0,0x849e7428,3868,3972,0x77307098,\\Windows\\System32\\ntdll.dll,0x6e93ebbe,\\Program Files\\Windows Defender\\MpSvc.dll,2023-03-28 21:52:22.000000 UTC,2023-03-28 21:52:22.000000 UTC
+0,0x849dd6f0,3868,972,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:57:22.000000 UTC,-
+0,0x86772378,200,2328,0x9b1db1e0,-,0xe86dbe,\\Program Files\\Google\\Update\\1.3.36.152\\GoogleCrashHandler.exe,2023-03-28 21:53:05.000000 UTC,-
+0,0x8612ad48,200,2296,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x85ff6d48,200,1928,0x77307098,\\Windows\\System32\\ntdll.dll,0xe85c0c,\\Program Files\\Google\\Update\\1.3.36.152\\GoogleCrashHandler.exe,2023-03-28 21:53:05.000000 UTC,-
+0,0x86b66528,200,2312,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84b9c5b8,200,3232,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:45.000000 UTC,-
+0,0x86b8c030,2344,2340,0x98b0b4c8,-,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:53:05.000000 UTC,-
+0,0x864a1380,2344,3744,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x8494fd48,2344,3752,0x77307098,\\Windows\\System32\\ntdll.dll,0x139ed60,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a96408,2344,3500,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a98030,2344,3496,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84ae5030,2344,3512,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84aca6c0,2344,3480,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x86518b30,2344,3820,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a57768,2344,3848,0x9b24eb88,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84afa538,2344,3884,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x8494ed00,2344,3908,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x864d0a88,2344,3980,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a70d48,2344,3996,0x84a70f5c,-,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a9d808,2344,4024,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a32ad0,2344,4028,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x85773030,2344,4032,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a97868,2344,4004,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x86b29030,2344,4056,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a46d48,2344,420,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x849c4030,2344,2536,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a24a50,2344,568,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a2dd48,2344,296,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a48758,2344,2384,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a48470,2344,516,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x8699fd48,2344,976,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x849c1920,2344,3416,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:19.000000 UTC,-
+0,0x84a34d48,2344,2372,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:06.000000 UTC,-
+0,0x84a84470,2344,2084,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:58:20.000000 UTC,-
+0,0x8693d030,2344,2264,0x84f0c050,-,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:20.000000 UTC,-
+0,0x86177bc0,2344,2488,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:01:06.000000 UTC,-
+0,0x85fa5b28,2344,2964,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:02:51.000000 UTC,-
+0,0x84acf030,2344,3732,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:02:51.000000 UTC,-
+0,0x85067030,2344,3348,0x77307098,\\Windows\\System32\\ntdll.dll,0x742b27e1,\\Windows\\System32\\MMDevAPI.dll,2023-03-28 22:03:34.000000 UTC,-
+0,0x84a19768,2344,2656,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:59.000000 UTC,-
+0,0x8639dd48,3748,3756,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:53:05.000000 UTC,-
+0,0x862f8778,3748,3800,0x77307098,\\Windows\\System32\\ntdll.dll,0x1334400,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:53:05.000000 UTC,-
+0,0x86342680,3748,3776,0x77307098,\\Windows\\System32\\ntdll.dll,0x13ad0a0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:53:05.000000 UTC,-
+0,0x84ae8a58,3748,3780,0x77307098,\\Windows\\System32\\ntdll.dll,0x13ad0a0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a9ed48,3748,3784,0x77307098,\\Windows\\System32\\ntdll.dll,0x13ad0a0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:53:05.000000 UTC,-
+0,0x86201030,3748,3788,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x86203d48,3748,3792,0x77307098,\\Windows\\System32\\ntdll.dll,0x1354050,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:53:05.000000 UTC,-
+0,0x861f8828,3748,3772,0x77307098,\\Windows\\System32\\ntdll.dll,0x1354050,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a2bd48,3992,4036,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:53:05.000000 UTC,-
+0,0x862f7670,3992,2068,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x85772290,3992,2064,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x85e2c6b0,3992,2220,0x9b3238c0,-,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x865ccd48,3992,1816,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x849f6030,3992,2248,0x9b068ba0,-,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x85dd5a90,3992,2124,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84aa32f8,3992,2120,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x8674e7a0,3992,1488,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x849f9d48,3992,1584,0x77307098,\\Windows\\System32\\ntdll.dll,0x74e562ee,\\Windows\\System32\\mswsock.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a52800,3992,3436,0x9894f420,-,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:58:15.000000 UTC,-
+0,0x8582f6b8,3992,2700,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:59:38.000000 UTC,-
+0,0x84a19300,3992,1128,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:05:20.000000 UTC,-
+0,0x86b3e180,3992,2428,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:05:29.000000 UTC,-
+0,0x849f8500,3992,1284,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:40.000000 UTC,-
+0,0x86bca030,4044,4052,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:53:05.000000 UTC,-
+0,0x85e437a8,4044,4080,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x85e312f0,4044,4076,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84a637b0,4044,4060,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x86bc41d0,4044,2092,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:05.000000 UTC,-
+0,0x84ae4030,4044,3276,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:24.000000 UTC,-
+0,0x864f9b30,3052,2580,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:53:06.000000 UTC,-
+0,0x84a86d48,3052,3148,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:06.000000 UTC,-
+0,0x84a58800,3052,1152,0x77307098,\\Windows\\System32\\ntdll.dll,0x5dc72f30,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\vk_swiftshader.dll,2023-03-28 21:53:06.000000 UTC,-
+0,0x84a584f0,3052,1016,0x77307098,\\Windows\\System32\\ntdll.dll,0x5dc72f30,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\vk_swiftshader.dll,2023-03-28 21:53:06.000000 UTC,-
+0,0x8495f030,3052,1332,0x77307098,\\Windows\\System32\\ntdll.dll,0x5dc72f30,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\vk_swiftshader.dll,2023-03-28 21:53:06.000000 UTC,-
+0,0x8495fd48,3052,1160,0x77307098,\\Windows\\System32\\ntdll.dll,0x5dc72f30,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\vk_swiftshader.dll,2023-03-28 21:53:06.000000 UTC,-
+0,0x8495f9e8,3052,224,0x77307098,\\Windows\\System32\\ntdll.dll,0x5dc72f30,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\vk_swiftshader.dll,2023-03-28 21:53:06.000000 UTC,-
+0,0x8495f688,3052,1472,0x77307098,\\Windows\\System32\\ntdll.dll,0x5df10a10,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\vk_swiftshader.dll,2023-03-28 21:53:06.000000 UTC,-
+0,0x84965030,3052,216,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:06.000000 UTC,-
+0,0x84965d48,3052,220,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:06.000000 UTC,-
+0,0x84965a60,3052,176,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:06.000000 UTC,-
+0,0x849656c0,3052,1140,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:06.000000 UTC,-
+0,0x84ab4030,3052,2616,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:06.000000 UTC,-
+0,0x84a8bd08,3052,2484,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:06.000000 UTC,-
+0,0x84a18a60,2592,2672,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:53:24.000000 UTC,-
+0,0x84a15d48,2592,3212,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:24.000000 UTC,-
+0,0x84aa4030,2592,3216,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:24.000000 UTC,-
+0,0x84aa43e8,2592,3196,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:24.000000 UTC,-
+0,0x84a18030,2592,3192,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:24.000000 UTC,-
+0,0x84a18640,2592,3132,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:53:24.000000 UTC,-
+0,0x84a2e2d8,2592,2980,0x77307098,\\Windows\\System32\\ntdll.dll,0x742b27e1,\\Windows\\System32\\MMDevAPI.dll,2023-03-28 21:53:24.000000 UTC,-
+0,0x84aaba60,2592,3200,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:24.000000 UTC,-
+0,0x84ae25a0,2592,3208,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:53:25.000000 UTC,-
+0,0x84b53b50,2592,588,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:05:29.000000 UTC,-
+0,0x84a078d8,1568,2500,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:54:10.000000 UTC,-
+0,0x84a46030,1568,2648,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:10.000000 UTC,-
+0,0x84a0c780,1568,2612,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:10.000000 UTC,-
+0,0x84a2ba60,1568,2944,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:10.000000 UTC,-
+0,0x84a21470,1568,2912,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:10.000000 UTC,-
+0,0x84a679d0,1568,2936,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:54:10.000000 UTC,-
+0,0x84afa030,1568,3108,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:54:10.000000 UTC,-
+0,0x84a9f930,1568,2956,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:10.000000 UTC,-
+0,0x849ed9d8,1568,2932,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:10.000000 UTC,-
+0,0x84a1c478,1568,2844,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:10.000000 UTC,-
+0,0x84b45a00,1568,2836,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:11.000000 UTC,-
+0,0x849fad48,1568,2716,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:11.000000 UTC,-
+0,0x84a412f0,1568,1984,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:11.000000 UTC,-
+0,0x849ea8f0,1568,2392,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:55:15.000000 UTC,-
+0,0x84b72778,1568,2968,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:24.000000 UTC,-
+0,0x86a0e5f8,1568,3856,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:04:27.000000 UTC,-
+0,0x84a85030,2916,2832,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 21:54:11.000000 UTC,-
+0,0x84a18358,2916,2780,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:11.000000 UTC,-
+0,0x84a4da60,2916,2784,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:11.000000 UTC,-
+0,0x84a3dc28,2916,2824,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:11.000000 UTC,-
+0,0x849c58b0,2916,2816,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:11.000000 UTC,-
+0,0x84b20030,2916,1084,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:54:11.000000 UTC,-
+0,0x84acad48,2916,2808,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:54:11.000000 UTC,-
+0,0x86be3030,2916,2792,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:11.000000 UTC,-
+0,0x84a973f0,2916,2768,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:11.000000 UTC,-
+0,0x84af2030,2916,2388,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:11.000000 UTC,-
+0,0x84afad48,2916,2884,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:12.000000 UTC,-
+0,0x857ef590,2916,1788,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:12.000000 UTC,-
+0,0x84ad3a18,2916,2856,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 21:54:12.000000 UTC,-
+0,0x84b9d588,2916,2632,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:03.000000 UTC,-
+0,0x863903f8,3508,2284,0x77307098,\\Windows\\System32\\ntdll.dll,0xa76862,\\Windows\\System32\\taskeng.exe,2023-03-28 21:57:42.000000 UTC,-
+0,0x858423b8,3508,1020,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 21:57:42.000000 UTC,-
+0,0x84985348,3508,3112,0x9b1ce820,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:57:42.000000 UTC,-
+0,0x85ffe030,3508,3220,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 21:57:42.000000 UTC,-
+0,0x84b52d48,1112,2020,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 22:00:21.000000 UTC,-
+0,0x849d9ac8,1112,808,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:21.000000 UTC,-
+0,0x84b56d48,1112,1176,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:21.000000 UTC,-
+0,0x84b56a60,1112,4000,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:21.000000 UTC,-
+0,0x84b84030,1112,428,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:21.000000 UTC,-
+0,0x84b84560,1112,2660,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:21.000000 UTC,-
+0,0x84b4f030,2988,3164,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 22:00:32.000000 UTC,-
+0,0x84b5ad48,2988,324,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:32.000000 UTC,-
+0,0x86988838,2988,2396,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:32.000000 UTC,-
+0,0x84ae4490,2988,3376,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:32.000000 UTC,-
+0,0x84b62860,2988,2644,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:32.000000 UTC,-
+0,0x84b6b1c0,2988,2548,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:00:32.000000 UTC,-
+0,0x84b6dd48,2988,2828,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:00:32.000000 UTC,-
+0,0x84b6da60,2988,520,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:32.000000 UTC,-
+0,0x84b6d030,2988,3568,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:32.000000 UTC,-
+0,0x84b71030,2988,3548,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:00:32.000000 UTC,-
+0,0x85dfcd48,2988,1200,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:28.000000 UTC,-
+0,0x84ad8d48,2988,3596,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:28.000000 UTC,-
+0,0x85e2a760,2988,3592,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:28.000000 UTC,-
+0,0x8624e718,2988,3604,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:28.000000 UTC,-
+0,0x84b43670,2988,2876,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:02:35.000000 UTC,-
+0,0x84a45d48,2988,2468,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:05:42.000000 UTC,-
+0,0x84b32a60,3628,3620,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 22:01:28.000000 UTC,-
+0,0x84b6c440,3628,3612,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:28.000000 UTC,-
+0,0x86c32630,3628,2504,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:28.000000 UTC,-
+0,0x849f4d48,3628,256,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:28.000000 UTC,-
+0,0x85f8d030,3628,3024,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:28.000000 UTC,-
+0,0x8607d1e8,3628,968,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:01:28.000000 UTC,-
+0,0x86337030,3628,2512,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:01:28.000000 UTC,-
+0,0x849b9728,3628,2508,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:28.000000 UTC,-
+0,0x86bc16f8,3628,2028,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:28.000000 UTC,-
+0,0x8604d708,3628,3392,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:28.000000 UTC,-
+0,0x861f99c0,3628,3336,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:34.000000 UTC,-
+0,0x86b66c70,3628,2552,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:34.000000 UTC,-
+0,0x849a2298,3628,2728,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:34.000000 UTC,-
+0,0x84af7b00,3628,3912,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:35.000000 UTC,-
+0,0x84b56030,3628,3572,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:02:38.000000 UTC,-
+0,0x84a6d770,924,1380,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 22:01:34.000000 UTC,-
+0,0x86b8ba60,924,3700,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:34.000000 UTC,-
+0,0x86b8aae8,924,2972,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:34.000000 UTC,-
+0,0x86578508,924,1536,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:34.000000 UTC,-
+0,0x86b67d48,924,3080,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:34.000000 UTC,-
+0,0x84b68030,924,3268,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:01:34.000000 UTC,-
+0,0x849fc580,924,3740,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:01:34.000000 UTC,-
+0,0x849fea38,924,3020,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:34.000000 UTC,-
+0,0x84b1b3b8,924,2984,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:34.000000 UTC,-
+0,0x86be3aa8,924,2584,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:01:34.000000 UTC,-
+0,0x85ffa030,924,432,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:02:09.000000 UTC,-
+0,0x84a5a030,924,3172,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:02:09.000000 UTC,-
+0,0x869baae0,924,1132,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:02:09.000000 UTC,-
+0,0x84b6fa88,924,2900,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:13.000000 UTC,-
+0,0x86bcaa90,924,3300,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:04:20.000000 UTC,-
+0,0x850125c8,3712,3252,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 22:03:17.000000 UTC,-
+0,0x84b507e0,3712,3316,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:17.000000 UTC,-
+0,0x8500d030,3712,1872,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:17.000000 UTC,-
+0,0x84a14a60,3712,3248,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:17.000000 UTC,-
+0,0x84a14778,3712,2872,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:17.000000 UTC,-
+0,0x84b36030,3712,1456,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:17.000000 UTC,-
+0,0x84b36770,3712,3040,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:17.000000 UTC,-
+0,0x860bc4f8,3712,3484,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:17.000000 UTC,-
+0,0x84b78688,3712,3032,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:17.000000 UTC,-
+0,0x85027d48,3712,904,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:17.000000 UTC,-
+0,0x84b915b0,3712,2408,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:19.000000 UTC,-
+0,0x84b8dc30,3712,3256,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:19.000000 UTC,-
+0,0x84a08d48,3712,2848,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:19.000000 UTC,-
+0,0x84a2ebf0,3712,676,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:19.000000 UTC,-
+0,0x84bb64a0,2724,2708,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 22:03:20.000000 UTC,-
+0,0x84b93a48,2724,856,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:20.000000 UTC,-
+0,0x84bfabe0,2724,2336,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:20.000000 UTC,-
+0,0x85002030,2724,848,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:20.000000 UTC,-
+0,0x84a19d48,2724,3952,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:20.000000 UTC,-
+0,0x85003cb8,2724,1476,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:20.000000 UTC,-
+0,0x850263b0,2724,3204,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:20.000000 UTC,-
+0,0x84bc4280,2724,900,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:20.000000 UTC,-
+0,0x84b33250,2724,896,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:20.000000 UTC,-
+0,0x84b92908,2724,3692,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:20.000000 UTC,-
+0,0x84b5ec98,2724,528,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:20.000000 UTC,-
+0,0x84a44030,2724,3184,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:31.000000 UTC,-
+0,0x84bb2810,2724,4008,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:31.000000 UTC,-
+0,0x84b738d0,2724,2620,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:31.000000 UTC,-
+0,0x84bfa458,2724,3168,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:04:46.000000 UTC,-
+0,0x84b6c030,3768,3844,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 22:03:31.000000 UTC,-
+0,0x84a12388,3768,1148,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:31.000000 UTC,-
+0,0x84a99940,3768,1988,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:31.000000 UTC,-
+0,0x86b49d48,3768,2520,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:31.000000 UTC,-
+0,0x84b10190,3768,1028,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:31.000000 UTC,-
+0,0x86058b08,3768,2712,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:31.000000 UTC,-
+0,0x84aaad48,3768,3412,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:31.000000 UTC,-
+0,0x84b1b030,3768,3644,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:31.000000 UTC,-
+0,0x84ad3468,3768,780,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:31.000000 UTC,-
+0,0x849fbb68,3768,2960,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:31.000000 UTC,-
+0,0x8502dd48,3768,3852,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:32.000000 UTC,-
+0,0x84bf3440,3768,1340,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:32.000000 UTC,-
+0,0x8500dd48,3768,1484,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:32.000000 UTC,-
+0,0x861b3918,3768,3404,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:45.000000 UTC,-
+0,0x850147e0,3696,3640,0x77307098,\\Windows\\System32\\ntdll.dll,0x14258f0,\\Program Files\\Google\\Chrome\\Application\\chrome.exe,2023-03-28 22:03:34.000000 UTC,-
+0,0x85051d48,3696,2544,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:34.000000 UTC,-
+0,0x8503d9a0,3696,3284,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:34.000000 UTC,-
+0,0x85044030,3696,656,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:34.000000 UTC,-
+0,0x8502fd48,3696,128,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:34.000000 UTC,-
+0,0x8502fa60,3696,3088,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:34.000000 UTC,-
+0,0x85033a60,3696,2820,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:34.000000 UTC,-
+0,0x85015030,3696,2476,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:34.000000 UTC,-
+0,0x8503d030,3696,1996,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:34.000000 UTC,-
+0,0x85060a08,3696,2532,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:34.000000 UTC,-
+0,0x85054030,3696,2272,0x77307098,\\Windows\\System32\\ntdll.dll,0x5f7514e0,\\Program Files\\Google\\Chrome\\Application\\109.0.5414.120\\chrome.dll,2023-03-28 22:03:34.000000 UTC,-
+0,0x84a511d0,3260,2588,0x77307098,\\Windows\\System32\\ntdll.dll,0xd2b129,\\Windows\\System32\\SearchProtocolHost.exe,2023-03-28 22:03:59.000000 UTC,-
+0,0x86b89508,3260,2748,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:59.000000 UTC,-
+0,0x85054740,3260,2628,0x77307098,\\Windows\\System32\\ntdll.dll,0xd23485,\\Windows\\System32\\SearchProtocolHost.exe,2023-03-28 22:03:59.000000 UTC,-
+0,0x84b50b68,3260,3948,0x9b24f9c0,-,0xd22184,\\Windows\\System32\\SearchProtocolHost.exe,2023-03-28 22:03:59.000000 UTC,-
+0,0x84adc3a0,3260,3716,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:59.000000 UTC,-
+0,0x84b84d48,3260,3936,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 22:03:59.000000 UTC,-
+0,0x84ba7d48,3260,3180,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:00.000000 UTC,-
+0,0x86052c90,2996,364,0x77307098,\\Windows\\System32\\ntdll.dll,0x6a3a81,\\Windows\\System32\\SearchFilterHost.exe,2023-03-28 22:03:59.000000 UTC,-
+0,0x8501ac80,2996,2560,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:59.000000 UTC,-
+0,0x849c4350,2996,536,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:59.000000 UTC,-
+0,0x84a159e0,2996,3292,0x84ed9bd8,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:03:59.000000 UTC,-
+0,0x86254688,2996,992,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 22:03:59.000000 UTC,-
+0,0x850682c8,1124,3532,0x77307098,\\Windows\\System32\\ntdll.dll,0x56acc3,\\Windows\\System32\\audiodg.exe,2023-03-28 22:04:21.000000 UTC,-
+0,0x84991838,1124,3144,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:21.000000 UTC,-
+0,0x84a93030,1124,1156,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:21.000000 UTC,-
+0,0x84b9dd48,1124,3556,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:21.000000 UTC,-
+0,0x84bac030,1124,1796,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 22:04:21.000000 UTC,-
+0,0x84b25a88,1580,652,0x9b7a32d0,-,0xa53db0,\\Windows\\System32\\msiexec.exe,2023-03-28 22:04:43.000000 UTC,-
+0,0x85002808,1580,3244,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:43.000000 UTC,-
+0,0x861ea570,1580,2992,0x84c563d8,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:43.000000 UTC,-
+0,0x84bbdc98,1580,3236,0x77307098,\\Windows\\System32\\ntdll.dll,0xa5133b,\\Windows\\System32\\msiexec.exe,2023-03-28 22:04:43.000000 UTC,-
+0,0x84b8bd48,1580,304,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:43.000000 UTC,-
+0,0x849b4030,1580,1248,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 22:04:43.000000 UTC,-
+0,0x862923f0,1580,3004,0x77307098,\\Windows\\System32\\ntdll.dll,0x5cdab14f,\\Windows\\System32\\msi.dll,2023-03-28 22:04:57.000000 UTC,2023-03-28 22:05:01.000000 UTC
+0,0x85d74878,1580,260,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x86036be0,1580,3720,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x862082c8,1580,544,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x85070c48,1580,1236,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x8505f030,1580,3492,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x84babd48,1580,3588,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x85035d48,1580,3608,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x84bb3980,1580,3664,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x84b78a60,1580,1804,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x84b93480,1580,1632,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x84aa7580,1580,3176,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x8503e030,1580,1304,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x85044a60,1580,608,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x84987780,1580,1572,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x849da3d0,1580,3540,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:01.000000 UTC,-
+0,0x85203b60,1580,2464,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:01.000000 UTC,-
+0,0x86067030,3424,2600,0x77307098,\\Windows\\System32\\ntdll.dll,0xe9883c,\\Windows\\System32\\VSSVC.exe,2023-03-28 22:04:57.000000 UTC,-
+0,0x862149b0,3424,2260,0x84d79638,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x84b31d48,3424,3660,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x84b49388,3424,2564,0x77307098,\\Windows\\System32\\ntdll.dll,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x84a0cd48,3424,3368,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x84af6978,3424,1936,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x850333c0,3424,3632,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x84b71480,3424,2164,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x8504fa38,3424,1780,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x860a2030,3424,3932,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:59.000000 UTC,-
+0,0x85145d48,3424,4068,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:59.000000 UTC,-
+0,0x85019d48,3424,2208,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:59.000000 UTC,-
+0,0x84b8ed48,3424,2920,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:59.000000 UTC,-
+0,0x84bfd0b8,3424,3420,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:59.000000 UTC,-
+0,0x85159cb8,3424,1968,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:59.000000 UTC,-
+0,0x85006030,3424,2472,0x77307098,\\Windows\\System32\\ntdll.dll,0x771412e5,\\Windows\\System32\\msvcrt.dll,2023-03-28 22:04:59.000000 UTC,-
+0,0x850619f8,3424,3544,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:59.000000 UTC,-
+0,0x8674e1b0,4012,2636,0x77307098,\\Windows\\System32\\ntdll.dll,0xdd2104,\\Windows\\System32\\svchost.exe,2023-03-28 22:04:57.000000 UTC,-
+0,0x84978030,4012,2492,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x8503c7e8,4012,2528,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x8501e030,4012,3356,0x9b784f30,-,0x76f87587,\\Windows\\System32\\sechost.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x84b6bcd0,4012,2244,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x85089d48,4012,3624,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 22:04:57.000000 UTC,-
+0,0x84b52490,4012,2276,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:27.000000 UTC,-
+0,0x86795d48,3048,2100,0x84cdcce8,-,0x7d2392,\\Program Files\\AccessData\\FTK Imager\\FTK Imager.exe,2023-03-28 22:05:06.000000 UTC,-
+0,0x849d8458,3048,1856,0x77307098,\\Windows\\System32\\ntdll.dll,0x5c8b345e,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4940_none_50916076bcb9a742\\msvcr90.dll,2023-03-28 22:05:06.000000 UTC,-
+0,0x84b6d6a8,3048,2908,0x77307098,\\Windows\\System32\\ntdll.dll,0x772efd0f,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:06.000000 UTC,-
+0,0x84b20d48,3048,2424,0x9b067250,-,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:06.000000 UTC,-
+0,0x84af0d48,3048,2764,0x77307098,\\Windows\\System32\\ntdll.dll,0x732e32fb,\\Windows\\System32\\rasman.dll,2023-03-28 22:05:06.000000 UTC,-
+0,0x84bbd808,3048,2196,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:06.000000 UTC,-
+0,0x869bd030,3048,1004,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:06.000000 UTC,-
+0,0x84a9dd48,3048,944,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:06.000000 UTC,-
+0,0x84a23030,3048,2704,0x77307098,\\Windows\\System32\\ntdll.dll,0x5bc7e718,\\Windows\\System32\\mshtml.dll,2023-03-28 22:05:06.000000 UTC,-
+0,0x852433d8,3048,2924,0x77307098,\\Windows\\System32\\ntdll.dll,0x76fcd864,\\Windows\\System32\\ole32.dll,2023-03-28 22:05:06.000000 UTC,-
+0,0x84bc2030,3048,964,0x77307098,\\Windows\\System32\\ntdll.dll,0x73c627c1,\\Windows\\System32\\winmm.dll,2023-03-28 22:05:09.000000 UTC,-
+0,0x85072a60,3048,1560,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:14.000000 UTC,-
+0,0x84bb4d48,3048,2596,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:14.000000 UTC,-
+0,0x84bbd4e0,3048,812,0x77307098,\\Windows\\System32\\ntdll.dll,0x772f03e7,\\Windows\\System32\\ntdll.dll,2023-03-28 22:05:14.000000 UTC,-
+0,0x850344e8,3048,2896,0x77307098,\\Windows\\System32\\ntdll.dll,0x5c8b345e,\\Windows\\winsxs\\x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4940_none_50916076bcb9a742\\msvcr90.dll,2023-03-28 22:05:27.000000 UTC,-
+

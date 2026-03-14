@@ -1,0 +1,31 @@
+Ransomware Family,Configuration,Hidden Procs,Total PSSCAN,Total PSLIST,Suspicious Names
+Locky.AZ,WithVirus,0,162,164,
+W32.MyDoom.A.,WithVirus,70,70,0,"sppsvc.exe, SearchIndexer., System, svchost.exe, lsass.exe"
+GoldenEye,NoVirus,13,98,85,"RuntimeBroker., OneDriveStanda, conhost.exe, svchost.exe, taskhostw.exe"
+Win32.BlackWorm,WithVirus,1,45,44,svchost.exe
+LuckyLcoker,NoVirus,22,76,54,"SrTasks.exe, dllhost.exe, conhost.exe, notepad.exe, chrome.exe"
+WannaCry,NoVirus,4,50,46,"., P, 0,  versionScope=N, dllhost.exe"
+DLLHijacking,WithVirus,1,178,178,svchost.exe
+Win32.BlackWorm,NoVirus,2,53,51,"msiexec.exe, chrome.exe"
+WannaCry,WithVirus,2,54,52,"hs�����, '�""2, taskdl.exe"
+GoldenEye,WithVirus,2,124,122,dllhost.exe
+SporaRansomware,NoVirus,2,94,93,"RuntimeBroker., dllhost.exe"
+PowerLoader,NoVirus,2,52,50,"GoogleUpdate.e, dllhost.exe"
+LuckyLcoker,WithVirus,21,76,55,"SrTasks.exe, dllhost.exe, conhost.exe, 3_moving_block, VSSVC.exe"
+InfinityCrypt,WithVirus,1,101,100,RuntimeBroker.
+DeriaLock,WithVirus,2,176,175,"msoobe.exe, HxTsr.exe"
+GandCrab,NoVirus,3,145,142,"backgroundTask, winpmem_mini_x, cmd.exe"
+RedTail,WithVirus,1,138,138,svchost.exe
+Dharma,WithVirus,18,72,54,"chrome.exe, WmiPrvSE.exe, iexplore.exe, VSSVC.exe, GoogleUpdate.e"
+Dharma,NoVirus,2,57,55,"chrome.exe, taskeng.exe"
+W32.MyDoom.A.,NoVirus,57,57,0,"WmiPrvSE.exe, msiexec.exe, svchost.exe, regsvr32.exe, chrome.exe"
+PowerLoader,WithVirus,5,46,41,"SearchFilterHo, conhost.exe, dllhost.exe, bin2hex.exe, SearchProtocol"
+DeriaLock,NoVirus,5,165,162,"WmiPrvSE.exe, msedge.exe, svchost.exe"
+Cerber,NoVirus,0,52,52,
+DLLHijacking,NoVirus,0,125,126,
+SporaRansomware,WithVirus,1,98,97,VSSVC.exe
+Cerber,WithVirus,15,59,44,"chrome.exe, SearchFilterHo, VSSVC.exe, msiexec.exe, audiodg.exe"
+InfinityCrypt,NoVirus,0,122,122,
+RedTail,NoVirus,0,125,126,
+GandCrab,WithVirus,1,149,148,msedge.exe
+Locky.AZ,NoVirus,0,153,155,

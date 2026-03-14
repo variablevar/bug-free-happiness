@@ -1,0 +1,27 @@
+TreeDepth,Offset,FileFullPath,File output
+0,0xd40d8de64000,,Disabled
+0,0xd40d8de56000,\\REGISTRY\\MACHINE\\SYSTEM,Disabled
+0,0xd40d8deee000,\\REGISTRY\\MACHINE\\HARDWARE,Disabled
+0,0xd40d8e84d000,\\SystemRoot\\System32\\Config\\SAM,Disabled
+0,0xd40d8e84f000,\\SystemRoot\\System32\\Config\\SECURITY,Disabled
+0,0xd40d8e7dd000,\\SystemRoot\\System32\\Config\\DEFAULT,Disabled
+0,0xd40d8e856000,\\SystemRoot\\System32\\Config\\SOFTWARE,Disabled
+0,0xd40d9160f000,\\Device\\HarddiskVolume1\\Boot\\BCD,Disabled
+0,0xd40d9188a000,\\??\\C:\\Windows\\ServiceProfiles\\NetworkService\\NTUSER.DAT,Disabled
+0,0xd40d919a3000,\\??\\C:\\Windows\\ServiceProfiles\\LocalService\\NTUSER.DAT,Disabled
+0,0xd40d919d8000,\\SystemRoot\\System32\\Config\\BBI,Disabled
+0,0xd40d92cae000,\\??\\C:\\Windows\\AppCompat\\Programs\\Amcache.hve,Disabled
+0,0xd40d929c3000,\\??\\C:\\Users\\devmac\\ntuser.dat,Disabled
+0,0xd40d929c5000,\\??\\C:\\Users\\devmac\\AppData\\Local\\Microsoft\\Windows\\UsrClass.dat,Disabled
+0,0xd40d9353e000,\\??\\C:\\ProgramData\\Microsoft\\Windows\\AppRepository\\Packages\\Microsoft.Windows.StartMenuExperienceHost_10.0.19041.1023_neutral_neutral_cw5n1h2txyewy\\ActivationStore.dat,Disabled
+0,0xd40d935c6000,\\??\\C:\\Users\\devmac\\AppData\\Local\\Packages\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\Settings\\settings.dat,Disabled
+0,0xd40d9370d000,\\??\\C:\\ProgramData\\Microsoft\\Windows\\AppRepository\\Packages\\Microsoft.Windows.Search_1.14.7.19041_neutral_neutral_cw5n1h2txyewy\\ActivationStore.dat,Disabled
+0,0xd40d93709000,\\??\\C:\\Users\\devmac\\AppData\\Local\\Packages\\Microsoft.Windows.Search_cw5n1h2txyewy\\Settings\\settings.dat,Disabled
+0,0xd40d94a10000,\\REGISTRY\\A\\{E04126C8-CAFC-4F40-A154-F0092059A43B},Disabled
+0,0xd40d94c42000,\\??\\C:\\Users\\devmac\\AppData\\Local\\Packages\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\Settings\\settings.dat,Disabled
+0,0xd40d8e44a000,\\??\\C:\\ProgramData\\Microsoft\\Windows\\AppRepository\\Packages\\Microsoft.SkypeApp_14.53.77.0_x64__kzf8qxf38zg5c\\ActivationStore.dat,Disabled
+0,0xd40d970a3000,\\??\\C:\\ProgramData\\Microsoft\\Windows\\AppRepository\\Packages\\Microsoft.MicrosoftOfficeHub_18.1903.1152.0_x64__8wekyb3d8bbwe\\ActivationStore.dat,Disabled
+0,0xd40d97dd4000,\\??\\C:\\Users\\devmac\\AppData\\Local\\Packages\\Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe\\Settings\\settings.dat,Disabled
+0,0xd40d96946000,\\??\\C:\\ProgramData\\Microsoft\\Windows\\AppRepository\\Packages\\Microsoft.WindowsStore_11910.1002.5.0_x64__8wekyb3d8bbwe\\ActivationStore.dat,Disabled
+0,0xd40d95d94000,\\??\\C:\\Users\\devmac\\AppData\\Local\\Packages\\Microsoft.WindowsStore_8wekyb3d8bbwe\\Settings\\settings.dat,Disabled
+

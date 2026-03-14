@@ -1,0 +1,59 @@
+TreeDepth,PID,PPID,ImageFileName,Offset(V),Threads,Handles,SessionId,Wow64,CreateTime,ExitTime,File output
+0,544,2132,notepad.exe,0xdc038400,1,-,1,False,2023-03-28 16:36:21.000000 UTC,N/A,Disabled
+0,3192,484,NisSrv.exe,0xdc115240,6,-,0,False,2023-03-28 16:27:33.000000 UTC,N/A,Disabled
+0,3264,3176,iexplore.exe,0xdc117580,17,-,1,False,2023-03-28 16:27:33.000000 UTC,N/A,Disabled
+0,3176,2132,iexplore.exe,0xdc12ccc0,11,-,1,False,2023-03-28 16:27:33.000000 UTC,N/A,Disabled
+0,3448,564,SettingSyncHos,0xdc19dcc0,11,-,1,False,2023-03-28 16:27:33.000000 UTC,N/A,Disabled
+0,2900,484,svchost.exe,0xdc21b380,3,-,0,False,2023-03-28 16:36:18.000000 UTC,N/A,Disabled
+0,2168,768,taskhostex.exe,0xdc252040,8,-,1,False,2023-03-28 16:27:21.000000 UTC,N/A,Disabled
+0,2444,2132,RestoreOptIn.e,0xdc2ba780,0,-,1,False,2023-03-28 16:27:21.000000 UTC,2023-03-28 16:27:24.000000 UTC,Disabled
+0,2588,484,SearchIndexer.,0xdc2d1400,15,-,0,False,2023-03-28 16:27:21.000000 UTC,N/A,Disabled
+0,2940,564,RuntimeBroker.,0xdc38d780,3,-,1,False,2023-03-28 16:27:24.000000 UTC,N/A,Disabled
+0,3220,2348,chrome.exe,0xdc3ec7c0,11,-,1,False,2023-03-28 16:30:40.000000 UTC,N/A,Disabled
+0,1932,484,svchost.exe,0xdc47d300,8,-,0,False,2023-03-28 16:27:04.000000 UTC,N/A,Disabled
+0,1828,484,svchost.exe,0xdc488300,14,-,0,False,2023-03-28 16:27:03.000000 UTC,N/A,Disabled
+0,596,716,audiodg.exe,0xdc5ef740,4,-,0,False,2023-03-28 16:36:06.000000 UTC,N/A,Disabled
+0,2364,484,msiexec.exe,0xdc5fbcc0,13,-,0,False,2023-03-28 16:36:12.000000 UTC,N/A,Disabled
+0,1624,2348,chrome.exe,0xdc617cc0,11,-,1,False,2023-03-28 16:30:40.000000 UTC,N/A,Disabled
+0,1008,484,svchost.exe,0xdc63b040,15,-,0,False,2023-03-28 16:27:03.000000 UTC,N/A,Disabled
+0,1148,484,spoolsv.exe,0xdc644040,9,-,0,False,2023-03-28 16:27:03.000000 UTC,N/A,Disabled
+0,1176,484,svchost.exe,0xdc69c200,22,-,0,False,2023-03-28 16:27:03.000000 UTC,N/A,Disabled
+0,1320,484,MsMpEng.exe,0xdc704040,31,-,0,False,2023-03-28 16:27:03.000000 UTC,N/A,Disabled
+0,2132,2112,explorer.exe,0xdc787440,56,-,1,False,2023-03-28 16:27:21.000000 UTC,N/A,Disabled
+0,3836,564,WWAHost.exe,0xdc788040,32,-,1,False,2023-03-28 16:27:51.000000 UTC,N/A,Disabled
+0,896,2348,chrome.exe,0xdc7c2cc0,0,-,1,False,2023-03-28 16:38:32.000000 UTC,2023-03-28 16:38:32.000000 UTC,Disabled
+0,2116,2348,chrome.exe,0xdc7d2b40,7,-,1,False,2023-03-28 16:31:19.000000 UTC,N/A,Disabled
+0,3944,564,WSHost.exe,0xdc7d6040,6,-,1,False,2023-03-28 16:27:52.000000 UTC,N/A,Disabled
+0,564,484,svchost.exe,0xdc9643c0,9,-,0,False,2023-03-28 16:27:02.000000 UTC,N/A,Disabled
+0,608,484,svchost.exe,0xdc997cc0,7,-,0,False,2023-03-28 16:27:02.000000 UTC,N/A,Disabled
+0,716,484,svchost.exe,0xdc9a8a80,22,-,0,False,2023-03-28 16:27:02.000000 UTC,N/A,Disabled
+0,700,428,dwm.exe,0xdc9b4040,10,-,1,False,2023-03-28 16:27:02.000000 UTC,N/A,Disabled
+0,808,484,svchost.exe,0xdc9c9740,20,-,0,False,2023-03-28 16:27:02.000000 UTC,N/A,Disabled
+0,768,484,svchost.exe,0xdc9da840,48,-,0,False,2023-03-28 16:27:02.000000 UTC,N/A,Disabled
+0,888,484,svchost.exe,0xdc9ec040,20,-,0,False,2023-03-28 16:27:03.000000 UTC,N/A,Disabled
+0,2876,3744,GoogleCrashHan,0xdc9ee940,4,-,0,False,2023-03-28 16:30:40.000000 UTC,N/A,Disabled
+0,492,392,lsass.exe,0xdcbdc0c0,7,-,0,False,2023-03-28 16:27:02.000000 UTC,N/A,Disabled
+0,248,4,smss.exe,0xdd1b0040,2,-,N/A,False,2023-03-28 16:27:01.000000 UTC,N/A,Disabled
+0,340,320,csrss.exe,0xdd1d12c0,9,-,0,False,2023-03-28 16:27:02.000000 UTC,N/A,Disabled
+0,344,2348,chrome.exe,0xdd276040,13,-,1,False,2023-03-28 16:36:26.000000 UTC,N/A,Disabled
+0,3064,2348,chrome.exe,0xdd82b640,8,-,1,False,2023-03-28 16:30:40.000000 UTC,N/A,Disabled
+0,2388,2348,chrome.exe,0xdd83a180,6,-,1,False,2023-03-28 16:30:40.000000 UTC,N/A,Disabled
+0,1816,484,wmpnetwk.exe,0xdd869980,7,-,0,False,2023-03-28 16:29:04.000000 UTC,N/A,Disabled
+0,2808,484,VSSVC.exe,0xdd8bb8c0,10,-,0,False,2023-03-28 16:36:18.000000 UTC,N/A,Disabled
+0,3760,768,taskhost.exe,0xdd8dacc0,10,-,0,False,2023-03-28 16:31:03.000000 UTC,N/A,Disabled
+0,920,2348,chrome.exe,0xdd8decc0,10,-,1,False,2023-03-28 16:36:27.000000 UTC,N/A,Disabled
+0,1576,2588,SearchFilterHo,0xdd8ff700,1,-,0,False,2023-03-28 16:34:42.000000 UTC,N/A,Disabled
+0,1336,768,GoogleUpdate.e,0xdd900cc0,2,-,0,False,2023-03-28 16:33:32.000000 UTC,N/A,Disabled
+0,1508,768,taskeng.exe,0xdd94e500,0,-,0,False,2023-03-28 16:33:32.000000 UTC,2023-03-28 16:38:33.000000 UTC,Disabled
+0,2064,2588,SearchProtocol,0xdd9958c0,4,-,0,False,2023-03-28 16:30:44.000000 UTC,N/A,Disabled
+0,4012,1800,FTK Imager.exe,0xdd9b3800,17,-,1,False,2023-03-28 16:36:30.000000 UTC,N/A,Disabled
+0,3324,2348,chrome.exe,0xdd9c0480,12,-,1,False,2023-03-28 16:31:45.000000 UTC,N/A,Disabled
+0,2356,2348,chrome.exe,0xdd9decc0,13,-,1,False,2023-03-28 16:31:18.000000 UTC,N/A,Disabled
+0,1504,564,WmiPrvSE.exe,0xde31b040,4,-,0,False,2023-03-28 16:29:04.000000 UTC,N/A,Disabled
+0,2348,2032,chrome.exe,0xde384cc0,29,-,1,False,2023-03-28 16:30:40.000000 UTC,N/A,Disabled
+0,4,0,System,0xde4c2a40,96,-,N/A,False,2023-03-28 16:27:01.000000 UTC,N/A,Disabled
+0,428,384,winlogon.exe,0xde5a6040,2,-,1,False,2023-03-28 16:27:02.000000 UTC,N/A,Disabled
+0,392,320,wininit.exe,0xde5b1240,1,-,0,False,2023-03-28 16:27:02.000000 UTC,N/A,Disabled
+0,400,384,csrss.exe,0xde5b4040,11,-,1,False,2023-03-28 16:27:02.000000 UTC,N/A,Disabled
+0,484,392,services.exe,0xde5e98c0,5,-,0,False,2023-03-28 16:27:02.000000 UTC,N/A,Disabled
+
