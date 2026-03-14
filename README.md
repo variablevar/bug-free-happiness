@@ -76,13 +76,20 @@ python extract_csv.py
 Example for malfind (code injection) analysis:
 
 ```bash
-python analysis/malfind_analysis.py
-```
+# Code injection (malfind) analysis
+python code_injection_analysis.py
 
-Example for hidden process analysis:
+# Hidden process (psscan vs pslist) analysis
+python hidden_proc_analysis.py
 
-```bash
-python analysis/psscan_pslist_analysis.py
+# Suspicious file (filescan) analysis
+python filescan_analysis.py
+
+# Network IOC (netscan) analysis
+python network_analysis.py
+
+# Full corpus statistics / combined view
+python analysis_corpus.py
 ```
 
 These scripts:
