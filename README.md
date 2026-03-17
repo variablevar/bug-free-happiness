@@ -37,7 +37,7 @@ extracted_data/
 ## Requirements
 
 - Python 3.9+
-- Volatility 3 installed and in `PATH` (`vol` command) [web:50]
+- Volatility 3 installed and in `PATH` (`vol` command)
 - Recommended Python packages:
   - `pandas`
   - `numpy`
@@ -101,7 +101,7 @@ These scripts:
 
 ## Indicators of Compromise (IOCs)
 
-The analysis focuses on memory-resident IOCs commonly associated with ransomware [web:49][web:62]:
+The analysis focuses on memory-resident IOCs commonly associated with ransomware:
 
 - **Code injection**: suspicious executable pages identified by `windows.malfind`
 - **Hidden processes**: objects present in `psscan` but missing from `pslist`
@@ -112,9 +112,9 @@ The scripts are designed so you can adapt thresholds and scoring logic for your 
 
 ## Notes and Limitations
 
-- Memory images and ransomware samples are **not** included for safety and licensing reasons.
+- Memory images and ransomware samples are **not** included for safety and licensing reasons, or more likely the images size are too high  
 - Paths and naming conventions in the scripts assume a `<Family>-WithVirus` / `<Family>-NoVirus` style; adjust as needed.
-- Results depend on correct Volatility symbol resolution for each Windows build [web:51].
+- Results depend on correct Volatility symbol resolution for each Windows build.
 
 ## Academic Context
 
@@ -123,8 +123,3 @@ This repository supports an MSc Cybersecurity dissertation on **automated ransom
 - Building a labelled ransomware memory corpus
 - Automating Volatility 3 extraction at scale
 - Quantifying memory-based IOCs for ransomware detection
-
-If you use or extend this work in research, please cite Volatility 3 and relevant memory forensics literature [web:50][web:51].
-```
-
-If you tell me your planned repo name (e.g. `volatility3-ransomware-ioc`), I can tweak the title and wording to match it exactly.
