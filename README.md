@@ -2,6 +2,20 @@
 
 This project implements an automated, parallelised memory forensics pipeline using **Volatility 3** to detect ransomware activity from Windows memory dumps. It was developed as part of an MSc Cybersecurity dissertation and evaluates **24 real-world malware samples** (WithVirus/NoVirus pairs) across multiple ransomware families.
 
+## If you are here from the dashboard follow here
+
+```bash
+git clone https://github.com/variablevar/bug-free-happiness.git
+cd bug-free-happiness
+
+# optional
+python -m venv .venv
+source .venv/bin/activate
+
+pip install -r requirements.txt
+python server.py
+```
+
 ## Features
 
 - Parallel **Volatility 3** CSV extraction for large memory corpora
@@ -38,10 +52,6 @@ extracted_data/
 
 - Python 3.9+
 - Volatility 3 installed and in `PATH` (`vol` command)
-- Recommended Python packages:
-  - `pandas`
-  - `numpy`
-  - `scipy`
 
 Install Python dependencies:
 

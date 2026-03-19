@@ -1,0 +1,61 @@
+Category,Severity,PID,Process,Detail
+Hidden Process,Critical,4012,svchost.exe,PID 4012 (svchost.exe) in psscan but NOT in pslist
+Hidden Process,Critical,3768,chrome.exe,PID 3768 (chrome.exe) in psscan but NOT in pslist
+Hidden Process,Critical,3508,taskeng.exe,PID 3508 (taskeng.exe) in psscan but NOT in pslist
+Hidden Process,Critical,2996,SearchFilterHo,PID 2996 (SearchFilterHo) in psscan but NOT in pslist
+Hidden Process,Critical,3260,SearchProtocol,PID 3260 (SearchProtocol) in psscan but NOT in pslist
+Hidden Process,Critical,3696,chrome.exe,PID 3696 (chrome.exe) in psscan but NOT in pslist
+Network: External Connection,Critical,2924,mshta.exe,mshta.exe (PID 2924) → 173.222.211.130:80 [ESTABLISHED]
+Hidden Process,Critical,3628,chrome.exe,PID 3628 (chrome.exe) in psscan but NOT in pslist
+Hidden Process,Critical,1580,msiexec.exe,PID 1580 (msiexec.exe) in psscan but NOT in pslist
+Hidden Process,Critical,1112,chrome.exe,PID 1112 (chrome.exe) in psscan but NOT in pslist
+Hidden Process,Critical,2988,chrome.exe,PID 2988 (chrome.exe) in psscan but NOT in pslist
+Hidden Process,Critical,2724,chrome.exe,PID 2724 (chrome.exe) in psscan but NOT in pslist
+Hidden Process,Critical,3424,VSSVC.exe,PID 3424 (VSSVC.exe) in psscan but NOT in pslist
+Hidden Process,Critical,3712,chrome.exe,PID 3712 (chrome.exe) in psscan but NOT in pslist
+Handle: lsass Full Access,Critical,368,wininit.exe,"wininit.exe (PID 368) → lsass, GrantedAccess=0x1fffff"
+Handle: lsass Full Access,Critical,320,csrss.exe,"csrss.exe (PID 320) → lsass, GrantedAccess=0x1fffff"
+Network: External Connection,Critical,2924,mshta.exe,mshta.exe (PID 2924) → 172.67.2.88:80 [ESTABLISHED]
+Network: External Connection,Critical,2924,mshta.exe,mshta.exe (PID 2924) → 104.26.9.86:443 [ESTABLISHED]
+Network: External Connection,Critical,2924,mshta.exe,mshta.exe (PID 2924) → 192.229.221.95:80 [ESTABLISHED]
+Hidden Process,Critical,1124,audiodg.exe,PID 1124 (audiodg.exe) in psscan but NOT in pslist
+Hidden Process,Critical,924,chrome.exe,PID 924 (chrome.exe) in psscan but NOT in pslist
+Malfind: RWX Region,High,756,svchost.exe,RWX @ 0x840000  | b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb
+VAD: RWX Private No File,High,948,svchost.exe,RWX private anon VAD @ 0x8a0000-0x8a1fff in svchost.exe PID=948
+VAD: RWX Private No File,High,816,explorer.exe,RWX private anon VAD @ 0x1df0000-0x1df1fff in explorer.exe PID=816
+VAD: RWX Private No File,High,888,wmpnetwk.exe,RWX private anon VAD @ 0x2a0000-0x2a1fff in wmpnetwk.exe PID=888
+VAD: RWX Private No File,High,756,svchost.exe,RWX private anon VAD @ 0x840000-0x841fff in svchost.exe PID=756
+VAD: RWX Private No File,High,2344,chrome.exe,RWX private anon VAD @ 0x47f0000-0x47f1fff in chrome.exe PID=2344
+VAD: RWX Private No File,High,3936,SearchFilterHo,RWX private anon VAD @ 0x820000-0x85ffff in SearchFilterHo PID=3936
+Abnormal Parent-Child,High,320,csrss.exe,"csrss.exe (PID 320) parent=unknown (PPID 304), expected ['smss.exe']"
+Cmdline: LOLBin,High,2924,mshta.exe,"mshta.exe (PID 2924): ""C:\\Windows\\System32\\mshta.exe"" ""C:\\Users\\devmac\\Desktop\\_R_E_A_D___T_H_I_S___UAF3R_.hta"" "
+Abnormal Parent-Child,High,816,explorer.exe,"explorer.exe (PID 816) parent=unknown (PPID 528), expected ['userinit.exe', 'winlogon.exe']"
+Abnormal Parent-Child,High,368,wininit.exe,"wininit.exe (PID 368) parent=unknown (PPID 304), expected ['smss.exe']"
+Malfind: RWX Region,High,3936,SearchFilterHo,RWX @ 0x820000  | 6a 06 38 c4 30 f5 00 01 ee ff ee ff 00 00 00 00 a8 00 82 00 a8 00 82 00 00 00 82
+Cmdline: Temp/Public Execution,High,3748,chrome.exe,"chrome.exe (PID 3748): ""C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"" --type=crashpad-handler ""--user-data-dir=C:\\Users\\devmac\"
+Abnormal Parent-Child,High,376,csrss.exe,"csrss.exe (PID 376) parent=unknown (PPID 360), expected ['smss.exe']"
+Malfind: RWX Region,High,888,wmpnetwk.exe,RWX @ 0x2a0000  | b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb
+Malfind: RWX Region,High,816,explorer.exe,RWX @ 0x1df0000  | b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb
+Malfind: RWX Region,High,948,svchost.exe,RWX @ 0x8a0000  | b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb
+Cmdline: Temp/Public Execution,High,2356,SearchProtocol,"SearchProtocol (PID 2356): ""C:\\Windows\\system32\\SearchProtocolHost.exe"" Global\\UsGthrFltPipeMssGthrPipe4_ Global\\UsGthrCtrlFltPipeMssGthrPipe4"
+Malfind: RWX Region,High,2344,chrome.exe,RWX @ 0x47f0000  | b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 172.217.169.35:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 142.250.200.14:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 142.250.200.46:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 142.250.180.10:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 172.217.169.3:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 172.217.169.3:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 142.250.178.10:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 142.250.187.234:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 142.250.187.202:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 142.250.13.101:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 216.58.213.1:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 142.250.187.202:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 142.250.178.10:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 173.194.76.188:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 142.250.180.10:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 178.33.161.0:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 178.33.161.0:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 173.194.76.188:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 142.250.187.238:443 [ESTABLISHED]
+Network: External Connection,Medium,3992,chrome.exe,chrome.exe (PID 3992) → 172.217.16.238:443 [ESTABLISHED]
