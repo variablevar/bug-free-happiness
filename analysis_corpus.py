@@ -13,7 +13,7 @@ SAMPLES = [
     "Cerber",              "Dharma",              "InfinityCrypt",       "PowerLoader",         "W32.MyDoom",
     "DLLHijacking",        "GandCrab",            "Locky.AZ",            "RedTail",             "WannaCry",
     "DeriaLock",           "GoldenEye",           "LuckyLcoker",         "SporaRansomware",     "Win32.BlackWorm",
-]  # Add all 24
+] 
 
 def load_csv(img_dir: Path, plugin: str) -> pd.DataFrame:
     csv_file = img_dir / f"windows_{plugin.replace('.', '_')}.csv"

@@ -13,21 +13,23 @@ from typing import Dict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from fastapi import FastAPI, UploadFile, File, HTTPException, Form, Request
 from fastapi.middleware.cors import CORSMiddleware
+import starlette
 from starlette.middleware.base import BaseHTTPMiddleware
 import subprocess
 import uvicorn
 
-# 🔧 UNLIMITED UPLOAD (no multipart limits)
-class UnlimitedUploadMiddleware(BaseHTTPMiddleware):
-    async def dispatch(self, request: Request, call_next):
-        # Disable all Starlette multipart limits
-        request.state.max_fields_size = 0  # Unlimited
-        request.state.max_fields = float('inf')
+# 🔧 UNLIMITED MULTIPART MIDDLEWARE
+class UnlimitedMultipartMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: starlette.requests.Request, call_next):
+        if request.headers.get("content-type", "").startswith("multipart/form-data"):
+            # Disable ALL multipart limits
+            request.state.max_fields_size = 0  # Unlimited bytes
+            request.state.max_fields = float('inf')  # Unlimited fields
         response = await call_next(request)
         return response
 
-app = FastAPI(title="Volatility 3 CSV API")
-app.add_middleware(UnlimitedUploadMiddleware)  # ✅ No limits
+app = FastAPI(title="Vol3 Pro API")
+app.add_middleware(UnlimitedMultipartMiddleware)  # ✅ FIXED
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 PLUGINS = [
