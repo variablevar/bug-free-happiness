@@ -1,0 +1,17 @@
+{
+  "graph_attr": [
+    6.0,
+    5.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "label_signals": {
+    "behavioural_suspects_found": true,
+    "lolbin_c2_found": false,
+    "ransom_note_found": false,
+    "rwx_injections": 9,
+    "hidden_processes": 2,
+    "top_suspect_score": 6
+  }
+}

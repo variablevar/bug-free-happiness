@@ -129,7 +129,8 @@
       "Hexdump": "\n20 00 00 00 e0 ff 0f 00 0c 00 00 00 01 00 07 00  ...............\n00 42 00 30 00 70 00 60 00 50 00 c0 00 d0 00 00 .B.0.p.`.P......\n08 00 42 00 00 00 00 05 48 8b 45 20 48 89 c2 48 ..B.....H.E H..H\n8b 45 18 48 8b 00 48 89 02 48 8b 45 20 81 00 b8 .E.H..H..H.E ...",
       "Disasm": "20 00 00 00 e0 ff 0f 00 0c 00 00 00 01 00 07 00 00 42 00 30 00 70 00 60 00 50 00 c0 00 d0 00 00 08 00 42 00 00 00 00 05 48 8b 45 20 48 89 c2 48 8b 45 18 48 8b 00 48 89 02 48 8b 45 20 81 00 b8",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -146,7 +147,8 @@
       "Hexdump": "\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -163,6 +165,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -180,6 +183,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -197,6 +201,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -214,6 +219,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -231,6 +237,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -248,6 +255,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -265,6 +273,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -282,6 +291,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -299,6 +309,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -316,6 +327,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -333,6 +345,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -350,6 +363,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -367,6 +381,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -384,6 +399,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -401,6 +417,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -418,6 +435,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -435,6 +453,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -452,6 +471,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -469,6 +489,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -486,6 +507,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -503,6 +525,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -520,6 +543,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -537,6 +561,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -554,6 +579,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -571,6 +597,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -588,6 +615,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -605,6 +633,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -622,6 +651,7 @@
       "Hexdump": "\n4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 MZ..............\nb8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 ........@.......\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00 ................",
       "Disasm": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 d8 00 00 00",
       "_has_mz": true,
+      "_has_shellcode": false,
       "_severity": "Critical"
     },
     {
@@ -639,7 +669,8 @@
       "Hexdump": "\ne9 fb ff da 10 00 00 00 00 cc cc cc cc cc cc cc ................\ne9 eb 07 db 10 00 00 00 00 cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "e9 fb ff da 10 00 00 00 00 cc cc cc cc cc cc cc e9 eb 07 db 10 00 00 00 00 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -656,7 +687,8 @@
       "Hexdump": "\ne9 fb 07 2f 00 00 00 00 00 cc cc cc cc cc cc cc .../............\ne9 eb 0f 2f 00 00 00 00 00 cc cc cc cc cc cc cc .../............\ne9 db 17 2f 00 00 00 00 00 cc cc cc cc cc cc cc .../............\ne9 cb 1f 2f 00 00 00 00 00 cc cc cc cc cc cc cc .../............",
       "Disasm": "e9 fb 07 2f 00 00 00 00 00 cc cc cc cc cc cc cc e9 eb 0f 2f 00 00 00 00 00 cc cc cc cc cc cc cc e9 db 17 2f 00 00 00 00 00 cc cc cc cc cc cc cc e9 cb 1f 2f 00 00 00 00 00 cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -673,7 +705,8 @@
       "Hexdump": "\n48 89 54 24 10 48 89 4c 24 08 4c 89 44 24 18 4c H.T$.H.L$.L.D$.L\n89 4c 24 20 48 8b 41 28 48 8b 48 08 48 8b 51 50 .L$ H.A(H.H.H.QP\n48 83 e2 f8 48 8b ca 48 b8 60 00 e0 da ad 02 00 H...H..H.`......\n00 48 2b c8 48 81 f9 70 0f 00 00 76 09 48 c7 c1 .H+.H..p...v.H..",
       "Disasm": "48 89 54 24 10 48 89 4c 24 08 4c 89 44 24 18 4c 89 4c 24 20 48 8b 41 28 48 8b 48 08 48 8b 51 50 48 83 e2 f8 48 8b ca 48 b8 60 00 e0 da ad 02 00 00 48 2b c8 48 81 f9 70 0f 00 00 76 09 48 c7 c1",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -690,7 +723,8 @@
       "Hexdump": "\n48 89 54 24 10 48 89 4c 24 08 4c 89 44 24 18 4c H.T$.H.L$.L.D$.L\n89 4c 24 20 48 8b 41 28 48 8b 48 08 48 8b 51 50 .L$ H.A(H.H.H.QP\n48 83 e2 f8 48 8b ca 48 b8 60 00 d0 eb ad 02 00 H...H..H.`......\n00 48 2b c8 48 81 f9 70 0f 00 00 76 09 48 c7 c1 .H+.H..p...v.H..",
       "Disasm": "48 89 54 24 10 48 89 4c 24 08 4c 89 44 24 18 4c 89 4c 24 20 48 8b 41 28 48 8b 48 08 48 8b 51 50 48 83 e2 f8 48 8b ca 48 b8 60 00 d0 eb ad 02 00 00 48 2b c8 48 81 f9 70 0f 00 00 76 09 48 c7 c1",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -707,7 +741,8 @@
       "Hexdump": "\ne9 fb ff fd ef ff ff ff ff cc cc cc cc cc cc cc ................\ne9 eb 03 fe ef ff ff ff ff cc cc cc cc cc cc cc ................\ne9 db 0f fe ef ff ff ff ff cc cc cc cc cc cc cc ................\ne9 cb 17 fe ef ff ff ff ff cc cc cc cc cc cc cc ................",
       "Disasm": "e9 fb ff fd ef ff ff ff ff cc cc cc cc cc cc cc e9 eb 03 fe ef ff ff ff ff cc cc cc cc cc cc cc e9 db 0f fe ef ff ff ff ff cc cc cc cc cc cc cc e9 cb 17 fe ef ff ff ff ff cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -724,7 +759,8 @@
       "Hexdump": "\n48 89 54 24 10 48 89 4c 24 08 4c 89 44 24 18 4c H.T$.H.L$.L.D$.L\n89 4c 24 20 48 8b 41 28 48 8b 48 08 48 8b 51 50 .L$ H.A(H.H.H.QP\n48 83 e2 f8 48 8b ca 48 b8 60 00 2b de 9e 01 00 H...H..H.`.+....\n00 48 2b c8 48 81 f9 70 0f 00 00 76 09 48 c7 c1 .H+.H..p...v.H..",
       "Disasm": "48 89 54 24 10 48 89 4c 24 08 4c 89 44 24 18 4c 89 4c 24 20 48 8b 41 28 48 8b 48 08 48 8b 51 50 48 83 e2 f8 48 8b ca 48 b8 60 00 2b de 9e 01 00 00 48 2b c8 48 81 f9 70 0f 00 00 76 09 48 c7 c1",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -741,7 +777,8 @@
       "Hexdump": "\ne9 fb ff 08 00 00 00 00 00 cc cc cc cc cc cc cc ................\ne9 eb 27 09 00 00 00 00 00 cc cc cc cc cc cc cc ..'.............\ne9 db 4f 09 00 00 00 00 00 cc cc cc cc cc cc cc ..O.............\ne9 cb 5f 09 00 00 00 00 00 cc cc cc cc cc cc cc .._.............",
       "Disasm": "e9 fb ff 08 00 00 00 00 00 cc cc cc cc cc cc cc e9 eb 27 09 00 00 00 00 00 cc cc cc cc cc cc cc e9 db 4f 09 00 00 00 00 00 cc cc cc cc cc cc cc e9 cb 5f 09 00 00 00 00 00 cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -758,7 +795,8 @@
       "Hexdump": "\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -775,7 +813,8 @@
       "Hexdump": "\ne9 fb ff 06 00 00 00 00 00 cc cc cc cc cc cc cc ................\ne9 eb 1f 07 00 00 00 00 00 cc cc cc cc cc cc cc ................\ne9 db 27 07 00 00 00 00 00 cc cc cc cc cc cc cc ..'.............\ne9 cb 2f 07 00 00 00 00 00 cc cc cc cc cc cc cc ../.............",
       "Disasm": "e9 fb ff 06 00 00 00 00 00 cc cc cc cc cc cc cc e9 eb 1f 07 00 00 00 00 00 cc cc cc cc cc cc cc e9 db 27 07 00 00 00 00 00 cc cc cc cc cc cc cc e9 cb 2f 07 00 00 00 00 00 cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -792,7 +831,8 @@
       "Hexdump": "\n48 b8 00 00 00 80 f0 01 00 00 48 ff e0 cc cc cc H.........H.....\n48 b8 00 10 00 80 f0 01 00 00 48 ff e0 cc cc cc H.........H.....\n48 b8 00 18 00 80 f0 01 00 00 48 ff e0 cc cc cc H.........H.....\n48 b8 00 20 00 80 f0 01 00 00 48 ff e0 cc cc cc H.. ......H.....",
       "Disasm": "48 b8 00 00 00 80 f0 01 00 00 48 ff e0 cc cc cc 48 b8 00 10 00 80 f0 01 00 00 48 ff e0 cc cc cc 48 b8 00 18 00 80 f0 01 00 00 48 ff e0 cc cc cc 48 b8 00 20 00 80 f0 01 00 00 48 ff e0 cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -809,11 +849,343 @@
       "Hexdump": "\n48 89 54 24 10 48 89 4c 24 08 4c 89 44 24 18 4c H.T$.H.L$.L.D$.L\n89 4c 24 20 48 8b 41 28 48 8b 48 08 48 8b 51 50 .L$ H.A(H.H.H.QP\n48 83 e2 f8 48 8b ca 48 b8 60 00 90 fe f8 01 00 H...H..H.`......\n00 48 2b c8 48 81 f9 70 0f 00 00 76 09 48 c7 c1 .H+.H..p...v.H..",
       "Disasm": "48 89 54 24 10 48 89 4c 24 08 4c 89 44 24 18 4c 89 4c 24 20 48 8b 41 28 48 8b 48 08 48 8b 51 50 48 83 e2 f8 48 8b ca 48 b8 60 00 90 fe f8 01 00 00 48 2b c8 48 81 f9 70 0f 00 00 76 09 48 c7 c1",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     }
   ],
   "ssdt_hooks": [],
-  "network_suspicious": [],
+  "network_suspicious": [
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa38264f3bb20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50616,
+      "ForeignAddr": "104.77.161.175",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 7232,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:21.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa38268a7da20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50632,
+      "ForeignAddr": "152.199.21.175",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 6008,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:25.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa38268adfa20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50613,
+      "ForeignAddr": "104.77.161.175",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 7232,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:21.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa38268f3d010",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50376,
+      "ForeignAddr": "104.82.185.177",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 404,
+      "Owner": "SearchApp.exe",
+      "Created": "2023-03-30 20:52:25.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa38269538010",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 49923,
+      "ForeignAddr": "52.97.146.194",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 5252,
+      "Owner": "SearchApp.exe",
+      "Created": "2023-03-30 20:43:49.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa382697f0a20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50628,
+      "ForeignAddr": "152.199.21.175",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 6008,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:25.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826a076b00",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50611,
+      "ForeignAddr": "13.107.6.156",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 7232,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:21.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826a0dba20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50614,
+      "ForeignAddr": "104.77.161.175",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 7232,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:21.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826a928a60",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50372,
+      "ForeignAddr": "104.82.185.177",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 404,
+      "Owner": "SearchApp.exe",
+      "Created": "2023-03-30 20:52:24.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826b99ea20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50615,
+      "ForeignAddr": "104.77.161.175",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 7232,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:21.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826b9a1a20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50612,
+      "ForeignAddr": "192.229.221.95",
+      "ForeignPort": 80,
+      "State": "ESTABLISHED",
+      "PID": 7232,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:21.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826bdd4a20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50624,
+      "ForeignAddr": "20.190.160.22",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 6008,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:24.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826bdd5a20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50620,
+      "ForeignAddr": "23.48.165.18",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 7232,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:21.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826bfcaa20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50617,
+      "ForeignAddr": "104.77.161.175",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 7232,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:21.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826bfcba20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50618,
+      "ForeignAddr": "104.77.161.175",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 7232,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:21.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826bfcda20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50619,
+      "ForeignAddr": "23.48.165.18",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 7232,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:21.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826d30ea20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50626,
+      "ForeignAddr": "13.107.42.22",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 6008,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:24.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826d310a20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50629,
+      "ForeignAddr": "152.199.21.175",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 6008,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:25.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826d32aa20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50627,
+      "ForeignAddr": "152.199.21.175",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 6008,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:25.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826d335b60",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50631,
+      "ForeignAddr": "152.199.21.175",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 6008,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:25.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826ea93a20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50630,
+      "ForeignAddr": "152.199.21.175",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 6008,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:25.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa3826ec30a20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.52",
+      "LocalPort": 50625,
+      "ForeignAddr": "192.229.221.95",
+      "ForeignPort": 80,
+      "State": "ESTABLISHED",
+      "PID": 6008,
+      "Owner": "WWAHost.exe",
+      "Created": "2023-03-30 21:00:24.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    }
+  ],
   "cmdline_suspicious": [
     {
       "TreeDepth": 0,
@@ -1372,28 +1744,6 @@
       "Process": "System",
       "Offset": "0xa382643cb0c0",
       "HandleValue": "0x7bc",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 656",
-      "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 420,
-      "Process": "csrss.exe",
-      "Offset": "0xa382643cb0c0",
-      "HandleValue": "0x28c",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 656",
-      "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 500,
-      "Process": "wininit.exe",
-      "Offset": "0xa382643cb0c0",
-      "HandleValue": "0x160",
       "Type": "Process",
       "GrantedAccess": "0x1fffff",
       "Name": "lsass.exe Pid 656",
@@ -2227,13 +2577,34 @@
       "_severity": "High"
     }
   ],
+  "behavioural_suspects": [
+    {
+      "TreeDepth": 2,
+      "PID": 3364,
+      "PPID": 1536,
+      "ImageFileName": "explorer.exe",
+      "Offset(V)": "0xa3826a082340",
+      "Threads": 104,
+      "Handles": "-",
+      "SessionId": 2.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-30 20:43:31.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\explorer.exe",
+      "Cmd": "C:\\\\Windows\\\\Explorer.EXE",
+      "Path": "C:\\\\Windows\\\\Explorer.EXE",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    }
+  ],
   "_meta": {
-    "total_suspicious_pids": 18,
+    "total_suspicious_pids": 16,
     "suspicious_pids": [
       4,
       404,
-      420,
-      500,
       1504,
       2112,
       2376,
@@ -2248,6 +2619,21 @@
       7232,
       7520,
       8032
-    ]
+    ],
+    "graph_attr": {
+      "max_process_score": 4,
+      "attack_steps": 5,
+      "high_severity_injections": 28,
+      "lolbin_c2_connections": 0,
+      "ransom_note_signal": 0
+    },
+    "label_signals": {
+      "behavioural_suspects_found": true,
+      "lolbin_c2_found": false,
+      "ransom_note_found": false,
+      "rwx_injections": 41,
+      "hidden_processes": 2,
+      "top_suspect_score": 4
+    }
   }
 }

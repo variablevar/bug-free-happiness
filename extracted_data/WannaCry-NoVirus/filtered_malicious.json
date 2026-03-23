@@ -223,7 +223,8 @@
       "Hexdump": "\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 34 04 00 00 00 00 00 00 00 00 00 00 00 00 ..4.............\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 34 04 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -240,7 +241,8 @@
       "Hexdump": "\n41 ba 80 00 00 00 48 b8 38 a1 2d ff fe 07 00 00 A.....H.8.-.....\n48 ff 20 90 41 ba 81 00 00 00 48 b8 38 a1 2d ff H. .A.....H.8.-.\nfe 07 00 00 48 ff 20 90 41 ba 82 00 00 00 48 b8 ....H. .A.....H.\n38 a1 2d ff fe 07 00 00 48 ff 20 90 41 ba 83 00 8.-.....H. .A...",
       "Disasm": "41 ba 80 00 00 00 48 b8 38 a1 2d ff fe 07 00 00 48 ff 20 90 41 ba 81 00 00 00 48 b8 38 a1 2d ff fe 07 00 00 48 ff 20 90 41 ba 82 00 00 00 48 b8 38 a1 2d ff fe 07 00 00 48 ff 20 90 41 ba 83 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -257,7 +259,8 @@
       "Hexdump": "\n56 57 53 55 48 83 ec 28 48 8b e9 ff e2 48 83 c4 VWSUH..(H....H..\n28 5d 5b 5f 5e c3 00 00 00 00 00 00 00 00 00 00 (][_^...........\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................",
       "Disasm": "56 57 53 55 48 83 ec 28 48 8b e9 ff e2 48 83 c4 28 5d 5b 5f 5e c3 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -274,7 +277,8 @@
       "Hexdump": "\n20 00 00 00 e0 ff 07 00 0c 00 00 00 01 00 05 00  ...............\n00 42 00 50 00 30 00 70 00 60 00 00 00 00 00 00 .B.P.0.p.`......\n48 8b 45 28 c7 00 00 00 00 00 c7 40 04 00 00 00 H.E(.......@....\n00 48 8b 45 28 48 8d 40 08 48 89 c2 48 8b 45 20 .H.E(H.@.H..H.E ",
       "Disasm": "20 00 00 00 e0 ff 07 00 0c 00 00 00 01 00 05 00 00 42 00 50 00 30 00 70 00 60 00 00 00 00 00 00 48 8b 45 28 c7 00 00 00 00 00 c7 40 04 00 00 00 00 48 8b 45 28 48 8d 40 08 48 89 c2 48 8b 45 20",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -291,7 +295,8 @@
       "Hexdump": "\n20 00 00 00 e0 ff 0f 00 0c 00 00 00 01 00 05 00  ...............\n00 42 00 50 00 30 00 70 00 60 00 00 00 00 00 00 .B.P.0.p.`......\nba fc ff ff ff 03 55 20 03 55 5c b9 04 00 1a 00 ......U .U\\\\.....\n4c 8b c5 ff 95 e0 37 00 00 8b 4d 24 89 08 48 8d L.....7...M$..H.",
       "Disasm": "20 00 00 00 e0 ff 0f 00 0c 00 00 00 01 00 05 00 00 42 00 50 00 30 00 70 00 60 00 00 00 00 00 00 ba fc ff ff ff 03 55 20 03 55 5c b9 04 00 1a 00 4c 8b c5 ff 95 e0 37 00 00 8b 4d 24 89 08 48 8d",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -308,7 +313,8 @@
       "Hexdump": "\n56 57 53 55 48 83 ec 28 48 8b e9 ff e2 48 83 c4 VWSUH..(H....H..\n28 5d 5b 5f 5e c3 00 00 00 00 00 00 00 00 00 00 (][_^...........\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................",
       "Disasm": "56 57 53 55 48 83 ec 28 48 8b e9 ff e2 48 83 c4 28 5d 5b 5f 5e c3 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -325,7 +331,8 @@
       "Hexdump": "\n41 ba 80 00 00 00 48 b8 38 a1 2d ff fe 07 00 00 A.....H.8.-.....\n48 ff 20 90 41 ba 81 00 00 00 48 b8 38 a1 2d ff H. .A.....H.8.-.\nfe 07 00 00 48 ff 20 90 41 ba 82 00 00 00 48 b8 ....H. .A.....H.\n38 a1 2d ff fe 07 00 00 48 ff 20 90 41 ba 83 00 8.-.....H. .A...",
       "Disasm": "41 ba 80 00 00 00 48 b8 38 a1 2d ff fe 07 00 00 48 ff 20 90 41 ba 81 00 00 00 48 b8 38 a1 2d ff fe 07 00 00 48 ff 20 90 41 ba 82 00 00 00 48 b8 38 a1 2d ff fe 07 00 00 48 ff 20 90 41 ba 83 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -342,7 +349,8 @@
       "Hexdump": "\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 9b 06 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 9b 06 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -359,7 +367,8 @@
       "Hexdump": "\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 30 00 00 00 00 00 00 00 00 00 00 00 00 00 ..0.............\n10 00 30 00 00 00 00 00 00 00 00 00 00 00 00 00 ..0.............\n20 00 30 00 00 00 00 00 00 00 00 00 00 00 00 00  .0.............",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 30 00 00 00 00 00 00 00 00 00 00 00 00 00 10 00 30 00 00 00 00 00 00 00 00 00 00 00 00 00 20 00 30 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     }
   ],
   "ssdt_hooks": [],
@@ -377,30 +386,7 @@
     }
   ],
   "dll_suspicious": [],
-  "handle_suspicious": [
-    {
-      "TreeDepth": 0,
-      "PID": 320,
-      "Process": "csrss.exe",
-      "Offset": "0xfa80033fc770",
-      "HandleValue": "0xd8",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 476",
-      "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 368,
-      "Process": "wininit.exe",
-      "Offset": "0xfa80033fc770",
-      "HandleValue": "0xe4",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 476",
-      "_severity": "Critical"
-    }
-  ],
+  "handle_suspicious": [],
   "thread_suspicious": [],
   "vad_suspicious": [
     {
@@ -700,6 +686,93 @@
       "_severity": "High"
     }
   ],
+  "behavioural_suspects": [
+    {
+      "TreeDepth": 4,
+      "PID": 1840,
+      "PPID": 3544,
+      "ImageFileName": "GoogleUpdate.e",
+      "Offset(V)": "0xfa8003b25b30",
+      "Threads": 4,
+      "Handles": 125,
+      "SessionId": 0.0,
+      "Wow64": true,
+      "CreateTime": "2023-03-27 15:27:08.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files (x86)\\\\Google\\\\Update\\\\GoogleUpdate.exe",
+      "Cmd": "\"C:\\\\Program Files (x86)\\\\Google\\\\Update\\\\GoogleUpdate.exe\" /c",
+      "Path": "C:\\\\Program Files (x86)\\\\Google\\\\Update\\\\GoogleUpdate.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 2,
+      "PID": 2204,
+      "PPID": 468,
+      "ImageFileName": "svchost.exe",
+      "Offset(V)": "0xfa8001ab3b30",
+      "Threads": 18,
+      "Handles": 354,
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-27 15:21:43.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\svchost.exe",
+      "Cmd": "C:\\\\Windows\\\\System32\\\\svchost.exe -k secsvcs",
+      "Path": "C:\\\\Windows\\\\System32\\\\svchost.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 0,
+      "PID": 1928,
+      "PPID": 1868,
+      "ImageFileName": "explorer.exe",
+      "Offset(V)": "0xfa800386d5c0",
+      "Threads": 37,
+      "Handles": 1026,
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-27 15:19:51.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\explorer.exe",
+      "Cmd": "C:\\\\Windows\\\\Explorer.EXE",
+      "Path": "C:\\\\Windows\\\\Explorer.EXE",
+      "_suspicion_score": 7,
+      "_reasons": [
+        "rwx_injection",
+        "abnormal_parent"
+      ],
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "PID": 2588,
+      "PPID": 996,
+      "ImageFileName": "chrome.exe",
+      "Offset(V)": "0xfa80019c8920",
+      "Threads": 32,
+      "Handles": 1059,
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-27 15:22:31.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --from-installer",
+      "Path": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    }
+  ],
   "_meta": {
     "total_suspicious_pids": 13,
     "suspicious_pids": [
@@ -716,6 +789,21 @@
       2596,
       8224,
       3145728
-    ]
+    ],
+    "graph_attr": {
+      "max_process_score": 7,
+      "attack_steps": 3,
+      "high_severity_injections": 0,
+      "lolbin_c2_connections": 0,
+      "ransom_note_signal": 0
+    },
+    "label_signals": {
+      "behavioural_suspects_found": true,
+      "lolbin_c2_found": false,
+      "ransom_note_found": false,
+      "rwx_injections": 9,
+      "hidden_processes": 4,
+      "top_suspect_score": 7
+    }
   }
 }

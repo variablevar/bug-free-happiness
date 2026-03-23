@@ -1,4 +1,4 @@
 Sample: LuckyLcoker-WithVirus | label=1 | family=luckylcoker
-filter_malicious.py: OK (0.6s)
-build_graph.py: OK (3.8s)
-graph_summary.py: OK (0.7s)
+filter_malicious.py: OK (1.2s)
+build_graph.py: OK (8.3s)
+analyze_graph.py: OK (1.4s)

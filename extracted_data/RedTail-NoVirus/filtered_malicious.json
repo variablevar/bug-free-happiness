@@ -194,7 +194,8 @@
       "Hexdump": "\n56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 VWSUATAUAVAWH..(\n4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 L.<$H..H...8....\n49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e I.g(A_A^A]A\\\\][_^\nc3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 60 33 ...@.....H..H.`3",
       "Disasm": "56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e c3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 60 33",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -211,7 +212,8 @@
       "Hexdump": "\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -228,7 +230,8 @@
       "Hexdump": "\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -245,7 +248,8 @@
       "Hexdump": "\n56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 VWSUATAUAVAWH..(\n4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 L.<$H..H...8....\n49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e I.g(A_A^A]A\\\\][_^\nc3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 60 33 ...@.....H..H.`3",
       "Disasm": "56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e c3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 60 33",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -262,7 +266,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -279,7 +284,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -296,7 +302,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -313,7 +320,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -330,7 +338,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -347,7 +356,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -364,7 +374,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -381,7 +392,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -398,7 +410,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -415,7 +428,8 @@
       "Hexdump": "\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc 08 00 42 00 00 00 00 05 48 8b 45 20 48 89 c2 ...B.....H.E H..",
       "Disasm": "cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc 08 00 42 00 00 00 00 05 48 8b 45 20 48 89 c2",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -432,7 +446,8 @@
       "Hexdump": "\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc 0a 00 36 00 0a 00 01 05 48 8b 55 28 48 8b 8d ...6.....H.U(H..",
       "Disasm": "cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc 0a 00 36 00 0a 00 01 05 48 8b 55 28 48 8b 8d",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -449,7 +464,8 @@
       "Hexdump": "\n48 89 54 24 10 48 89 4c 24 08 4c 89 44 24 18 4c H.T$.H.L$.L.D$.L\n89 4c 24 20 48 8b 41 28 48 8b 48 08 48 8b 51 50 .L$ H.A(H.H.H.QP\n48 83 e2 f8 48 8b ca 48 b8 60 00 6c 93 8a 01 00 H...H..H.`.l....\n00 48 2b c8 48 81 f9 70 0f 00 00 76 09 48 c7 c1 .H+.H..p...v.H..",
       "Disasm": "48 89 54 24 10 48 89 4c 24 08 4c 89 44 24 18 4c 89 4c 24 20 48 8b 41 28 48 8b 48 08 48 8b 51 50 48 83 e2 f8 48 8b ca 48 b8 60 00 6c 93 8a 01 00 00 48 2b c8 48 81 f9 70 0f 00 00 76 09 48 c7 c1",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -466,7 +482,8 @@
       "Hexdump": "\ne9 fb ff 08 00 00 00 00 00 cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "e9 fb ff 08 00 00 00 00 00 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -483,7 +500,8 @@
       "Hexdump": "\ne9 fb ff fd ef ff ff ff ff cc cc cc cc cc cc cc ................\ne9 eb 03 fe ef ff ff ff ff cc cc cc cc cc cc cc ................\ne9 db 0f fe ef ff ff ff ff cc cc cc cc cc cc cc ................\ne9 cb 17 fe ef ff ff ff ff cc cc cc cc cc cc cc ................",
       "Disasm": "e9 fb ff fd ef ff ff ff ff cc cc cc cc cc cc cc e9 eb 03 fe ef ff ff ff ff cc cc cc cc cc cc cc e9 db 0f fe ef ff ff ff ff cc cc cc cc cc cc cc e9 cb 17 fe ef ff ff ff ff cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     }
   ],
   "ssdt_hooks": [],
@@ -1309,6 +1327,50 @@
       "_severity": "High"
     }
   ],
+  "behavioural_suspects": [
+    {
+      "TreeDepth": 2,
+      "PID": 2200,
+      "PPID": 840,
+      "ImageFileName": "MsMpEng.exe",
+      "Offset(V)": "0x920aff783080",
+      "Threads": 11,
+      "Handles": "-",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2025-06-27 14:16:22.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume4\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe\"",
+      "Path": "C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 3,
+      "PID": 5728,
+      "PPID": 1008,
+      "ImageFileName": "SearchHost.exe",
+      "Offset(V)": "0x920b0800a080",
+      "Threads": 56,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2025-06-27 14:16:35.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume4\\\\Windows\\\\SystemApps\\\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\\\SearchHost.exe",
+      "Cmd": "\"C:\\\\Windows\\\\SystemApps\\\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\\\SearchHost.exe\" -ServerName:CortanaUI.AppXstmwaab17q5s3y22tp6apqz7a45vwv65.mca",
+      "Path": "C:\\\\Windows\\\\SystemApps\\\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\\\SearchHost.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    }
+  ],
   "_meta": {
     "total_suspicious_pids": 11,
     "suspicious_pids": [
@@ -1323,6 +1385,21 @@
       5728,
       6012,
       7040
-    ]
+    ],
+    "graph_attr": {
+      "max_process_score": 4,
+      "attack_steps": 2,
+      "high_severity_injections": 0,
+      "lolbin_c2_connections": 0,
+      "ransom_note_signal": 0
+    },
+    "label_signals": {
+      "behavioural_suspects_found": true,
+      "lolbin_c2_found": false,
+      "ransom_note_found": false,
+      "rwx_injections": 18,
+      "hidden_processes": 0,
+      "top_suspect_score": 4
+    }
   }
 }

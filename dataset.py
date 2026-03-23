@@ -16,12 +16,14 @@ import numpy as np
 import torch
 from torch_geometric.data import Data, Dataset
 
+
 # ── Node type vocabulary (all types seen across the dataset) ──────────────────
 NODE_TYPES = [
     "process", "thread", "dll", "memory_region",
     "network_conn", "ip_address", "handle", "driver", "kernel"
 ]
 NODE_TYPE_IDX = {t: i for i, t in enumerate(NODE_TYPES)}
+
 
 EDGE_TYPES = [
     "spawned_by", "belongs_to", "loaded_into", "allocated_in",
@@ -30,8 +32,8 @@ EDGE_TYPES = [
 ]
 EDGE_TYPE_IDX = {t: i for i, t in enumerate(EDGE_TYPES)}
 
+
 # ── Numeric node attributes to extract (in fixed order) ──────────────────────
-# These exist on process/thread/memory nodes — missing = 0
 NUMERIC_ATTRS = [
     "pid", "ppid", "threads", "handles",
     "is_suspicious", "is_rwx", "has_mz_header",
@@ -42,17 +44,16 @@ NUMERIC_ATTRS = [
     "tid",
 ]
 
+
 def node_features(data: dict) -> list:
     """
     Build a fixed-length float feature vector for one node:
       [one-hot node_type (9 dims)] + [numeric attrs (16 dims)] = 25 dims
     """
-    # One-hot node type
     ntype = data.get("node_type", "kernel")
     oh = [0.0] * len(NODE_TYPES)
     oh[NODE_TYPE_IDX.get(ntype, len(NODE_TYPES) - 1)] = 1.0
 
-    # Numeric attrs (cast bool/None/str to float safely)
     nums = []
     for attr in NUMERIC_ATTRS:
         v = data.get(attr, 0)
@@ -69,13 +70,11 @@ def nx_to_pyg(G, label: int) -> Data:
     nodes = list(G.nodes(data=True))
     node_idx = {nid: i for i, (nid, _) in enumerate(nodes)}
 
-    # Node feature matrix  [N x F]
     x = torch.tensor(
         [node_features(data) for _, data in nodes],
         dtype=torch.float
     )
 
-    # Edge index  [2 x E]
     src_list, dst_list, edge_attr_list = [], [], []
     for u, v, edata in G.edges(data=True):
         if u in node_idx and v in node_idx:
@@ -120,16 +119,13 @@ class MalwareGraphDataset(Dataset):
             label  = int(row["label"])
             family = row.get("family", "unknown")
             pkl    = os.path.join(self.base_dir, name, "graph.pkl")
-            # ── ADD THIS ──────────────────────────────────────────────
+
             graph_feat = torch.tensor([
-                float(row.get("max_score",   0) or 0),
-                float(row.get("attack_steps",0) or 0),
-                float(row.get("injections",  0) or 0),
-                float(row.get("c2_conns",    0) or 0),
+                float(row.get("max_score",    0) or 0),
+                float(row.get("attack_steps", 0) or 0),
+                float(row.get("injections",   0) or 0),
+                float(row.get("c2_conns",     0) or 0),
             ], dtype=torch.float)
-
-            # ──────────────────────────────────────────────────────────
-
 
             if not os.path.exists(pkl):
                 print(f"  [SKIP] {name} — graph.pkl not found")
@@ -139,12 +135,12 @@ class MalwareGraphDataset(Dataset):
             with open(pkl, "rb") as f:
                 G = pickle.load(f)
 
-                pyg = nx_to_pyg(G, label)
-                pyg.name       = name
-                pyg.family     = family
-                pyg.graph_attr = graph_feat   # ← THIS LINE WAS MISSING
-                self._data_list.append(pyg)
-                ok += 1
+            pyg            = nx_to_pyg(G, label)
+            pyg.name       = name
+            pyg.family     = family
+            pyg.graph_attr = graph_feat
+            self._data_list.append(pyg)
+            ok += 1
 
         print(f"[Dataset] Loaded {ok}/{ok+fail} graphs  "
               f"(label=1: {sum(d.y.item()==1 for d in self._data_list)}  "
@@ -157,7 +153,12 @@ class MalwareGraphDataset(Dataset):
         return self._data_list[idx]
 
     def labels(self):
+        """Return list of integer labels for all graphs."""
         return [d.y.item() for d in self._data_list]
+
+    def get_labels(self):
+        """Alias for labels() — for compatibility with train.py."""
+        return self.labels()
 
     def summary(self):
         print(f"\nDataset summary ({len(self)} graphs):")

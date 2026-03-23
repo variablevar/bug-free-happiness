@@ -11,8 +11,24 @@
   "vad_suspicious": [],
   "driver_suspicious": [],
   "abnormal_parents": [],
+  "behavioural_suspects": [],
   "_meta": {
     "total_suspicious_pids": 0,
-    "suspicious_pids": []
+    "suspicious_pids": [],
+    "graph_attr": {
+      "max_process_score": 0,
+      "attack_steps": 0,
+      "high_severity_injections": 0,
+      "lolbin_c2_connections": 0,
+      "ransom_note_signal": 0
+    },
+    "label_signals": {
+      "behavioural_suspects_found": false,
+      "lolbin_c2_found": false,
+      "ransom_note_found": false,
+      "rwx_injections": 0,
+      "hidden_processes": 0,
+      "top_suspect_score": 0
+    }
   }
 }

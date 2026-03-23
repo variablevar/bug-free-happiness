@@ -98,19 +98,19 @@
     },
     {
       "TreeDepth": 3,
-      "PID": 6668,
-      "PPID": 4424,
-      "ImageFileName": "SearchProtocol",
-      "Offset(V)": "0xe10927dd9080",
-      "Threads": 6,
+      "PID": 7916,
+      "PPID": 780,
+      "ImageFileName": "backgroundTask",
+      "Offset(V)": "0xe1092e298080",
+      "Threads": 16,
       "Handles": "-",
       "SessionId": 1.0,
       "Wow64": false,
-      "CreateTime": "2023-03-29 16:45:12.000000 UTC",
+      "CreateTime": "2023-03-29 16:45:53.000000 UTC",
       "ExitTime": null,
-      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\SearchProtocolHost.exe",
-      "Cmd": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe_S-1-5-21-1293442084-3362068848-83935731-100119_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe_S-1-5-21-1293442084-3362068848-83935731-100119 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthrsvc\" \"DownLevelDaemon\"  \"1\"",
-      "Path": "C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe"
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\backgroundTaskHost.exe",
+      "Cmd": "-",
+      "Path": "-"
     },
     {
       "TreeDepth": 0,
@@ -130,6 +130,22 @@
     },
     {
       "TreeDepth": 3,
+      "PID": 6668,
+      "PPID": 4424,
+      "ImageFileName": "SearchProtocol",
+      "Offset(V)": "0xe10927dd9080",
+      "Threads": 6,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-29 16:45:12.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\SearchProtocolHost.exe",
+      "Cmd": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe_S-1-5-21-1293442084-3362068848-83935731-100119_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe_S-1-5-21-1293442084-3362068848-83935731-100119 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthrsvc\" \"DownLevelDaemon\"  \"1\"",
+      "Path": "C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe"
+    },
+    {
+      "TreeDepth": 3,
       "PID": 1836,
       "PPID": 780,
       "ImageFileName": "UserOOBEBroker",
@@ -143,22 +159,6 @@
       "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\oobe\\\\UserOOBEBroker.exe",
       "Cmd": "C:\\\\Windows\\\\System32\\\\oobe\\\\UserOOBEBroker.exe -Embedding",
       "Path": "C:\\\\Windows\\\\System32\\\\oobe\\\\UserOOBEBroker.exe"
-    },
-    {
-      "TreeDepth": 3,
-      "PID": 3788,
-      "PPID": 780,
-      "ImageFileName": "SkypeApp.exe",
-      "Offset(V)": "0xe1092e5b4080",
-      "Threads": 38,
-      "Handles": "-",
-      "SessionId": 1.0,
-      "Wow64": false,
-      "CreateTime": "2023-03-29 14:34:03.000000 UTC",
-      "ExitTime": null,
-      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\WindowsApps\\\\Microsoft.SkypeApp_14.53.77.0_x64__kzf8qxf38zg5c\\\\SkypeApp.exe",
-      "Cmd": "\"C:\\\\Program Files\\\\WindowsApps\\\\Microsoft.SkypeApp_14.53.77.0_x64__kzf8qxf38zg5c\\\\SkypeApp.exe\" -ServerName:App.AppXffn3yxqvgawq9fpmnhy90fr3y01d1t5b.mca",
-      "Path": "C:\\\\Program Files\\\\WindowsApps\\\\Microsoft.SkypeApp_14.53.77.0_x64__kzf8qxf38zg5c\\\\SkypeApp.exe"
     },
     {
       "TreeDepth": 0,
@@ -191,6 +191,22 @@
       "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\csrss.exe",
       "Cmd": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
       "Path": "C:\\\\Windows\\\\system32\\\\csrss.exe"
+    },
+    {
+      "TreeDepth": 3,
+      "PID": 3788,
+      "PPID": 780,
+      "ImageFileName": "SkypeApp.exe",
+      "Offset(V)": "0xe1092e5b4080",
+      "Threads": 38,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-29 14:34:03.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\WindowsApps\\\\Microsoft.SkypeApp_14.53.77.0_x64__kzf8qxf38zg5c\\\\SkypeApp.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\WindowsApps\\\\Microsoft.SkypeApp_14.53.77.0_x64__kzf8qxf38zg5c\\\\SkypeApp.exe\" -ServerName:App.AppXffn3yxqvgawq9fpmnhy90fr3y01d1t5b.mca",
+      "Path": "C:\\\\Program Files\\\\WindowsApps\\\\Microsoft.SkypeApp_14.53.77.0_x64__kzf8qxf38zg5c\\\\SkypeApp.exe"
     },
     {
       "TreeDepth": 4,
@@ -290,7 +306,8 @@
       "Hexdump": "\n48 89 54 24 10 48 89 4c 24 08 4c 89 44 24 18 4c H.T$.H.L$.L.D$.L\n89 4c 24 20 48 8b 41 28 48 8b 48 08 48 8b 51 50 .L$ H.A(H.H.H.QP\n48 83 e2 f8 48 8b ca 48 b8 60 00 4e 76 5e 02 00 H...H..H.`.Nv^..\n00 48 2b c8 48 81 f9 70 0f 00 00 76 09 48 c7 c1 .H+.H..p...v.H..",
       "Disasm": "48 89 54 24 10 48 89 4c 24 08 4c 89 44 24 18 4c 89 4c 24 20 48 8b 41 28 48 8b 48 08 48 8b 51 50 48 83 e2 f8 48 8b ca 48 b8 60 00 4e 76 5e 02 00 00 48 2b c8 48 81 f9 70 0f 00 00 76 09 48 c7 c1",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -307,7 +324,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -324,7 +342,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -341,7 +360,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -358,7 +378,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -375,7 +396,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -392,7 +414,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -409,7 +432,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -426,7 +450,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -443,7 +468,8 @@
       "Hexdump": "\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -460,7 +486,8 @@
       "Hexdump": "\n56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 VWSUATAUAVAWH..(\n4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 L.<$H..H...8....\n49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e I.g(A_A^A]A\\\\][_^\nc3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 d0 bb ...@.....H..H...",
       "Disasm": "56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e c3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 d0 bb",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -477,7 +504,8 @@
       "Hexdump": "\n56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 VWSUATAUAVAWH..(\n4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 L.<$H..H...8....\n49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e I.g(A_A^A]A\\\\][_^\nc3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 d0 bb ...@.....H..H...",
       "Disasm": "56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e c3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 d0 bb",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -494,11 +522,88 @@
       "Hexdump": "\n56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 VWSUATAUAVAWH..(\n4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 L.<$H..H...8....\n49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e I.g(A_A^A]A\\\\][_^\nc3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 d0 bb ...@.....H..H...",
       "Disasm": "56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e c3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 d0 bb",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     }
   ],
   "ssdt_hooks": [],
-  "network_suspicious": [],
+  "network_suspicious": [
+    {
+      "TreeDepth": 0,
+      "Offset": "0xe1092d11fb00",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.46",
+      "LocalPort": 51001,
+      "ForeignAddr": "2.17.209.139",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 7916,
+      "Owner": "backgroundTask",
+      "Created": "2023-03-29 16:45:54.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xe1092e3b7a20",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.46",
+      "LocalPort": 51000,
+      "ForeignAddr": "204.79.197.203",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 7916,
+      "Owner": "backgroundTask",
+      "Created": "2023-03-29 16:45:54.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xe1092e6b6710",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.46",
+      "LocalPort": 50971,
+      "ForeignAddr": "104.82.185.177",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 1432,
+      "Owner": "SearchApp.exe",
+      "Created": "2023-03-29 16:42:31.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xe1092e9fa7c0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.46",
+      "LocalPort": 51002,
+      "ForeignAddr": "13.89.179.8",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 1432,
+      "Owner": "SearchApp.exe",
+      "Created": "2023-03-29 16:45:59.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xe1092ef0a010",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.46",
+      "LocalPort": 50996,
+      "ForeignAddr": "2.17.209.138",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": 4380,
+      "Owner": "explorer.exe",
+      "Created": "2023-03-29 16:44:59.000000 UTC",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    }
+  ],
   "cmdline_suspicious": [
     {
       "TreeDepth": 0,
@@ -1350,28 +1455,6 @@
       "GrantedAccess": "0x1fffff",
       "Name": "lsass.exe Pid 676",
       "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 432,
-      "Process": "csrss.exe",
-      "Offset": "0xe1092ce460c0",
-      "HandleValue": "0x27c",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 676",
-      "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 508,
-      "Process": "wininit.exe",
-      "Offset": "0xe1092ce460c0",
-      "HandleValue": "0x168",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 676",
-      "_severity": "Critical"
     }
   ],
   "thread_suspicious": [],
@@ -1913,8 +1996,52 @@
       "_severity": "High"
     }
   ],
+  "behavioural_suspects": [
+    {
+      "TreeDepth": 3,
+      "PID": 7416,
+      "PPID": 780,
+      "ImageFileName": "smartscreen.ex",
+      "Offset(V)": "0xe1092e6f3080",
+      "Threads": 10,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-29 14:33:25.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\smartscreen.exe",
+      "Cmd": "C:\\\\Windows\\\\System32\\\\smartscreen.exe -Embedding",
+      "Path": "C:\\\\Windows\\\\System32\\\\smartscreen.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 2,
+      "PID": 7100,
+      "PPID": 652,
+      "ImageFileName": "MsMpEng.exe",
+      "Offset(V)": "0xe1092ef38300",
+      "Threads": 8,
+      "Handles": "-",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-29 14:43:17.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\Platform\\\\4.18.2302.7-0\\\\MsMpEng.exe",
+      "Cmd": "\"C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\platform\\\\4.18.2302.7-0\\\\MsMpEng.exe\"",
+      "Path": "C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\platform\\\\4.18.2302.7-0\\\\MsMpEng.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    }
+  ],
   "_meta": {
-    "total_suspicious_pids": 17,
+    "total_suspicious_pids": 18,
     "suspicious_pids": [
       4,
       352,
@@ -1932,7 +2059,23 @@
       7100,
       7416,
       7764,
+      7916,
       8896
-    ]
+    ],
+    "graph_attr": {
+      "max_process_score": 4,
+      "attack_steps": 5,
+      "high_severity_injections": 0,
+      "lolbin_c2_connections": 0,
+      "ransom_note_signal": 0
+    },
+    "label_signals": {
+      "behavioural_suspects_found": true,
+      "lolbin_c2_found": false,
+      "ransom_note_found": false,
+      "rwx_injections": 13,
+      "hidden_processes": 1,
+      "top_suspect_score": 4
+    }
   }
 }

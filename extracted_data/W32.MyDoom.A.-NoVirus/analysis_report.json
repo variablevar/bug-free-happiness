@@ -1,23 +1,37 @@
 {
   "meta": {
-    "tool": "analyze_graph.py v2",
+    "tool": "analyze_graph.py v3",
     "source": "/Users/user/Documents/University/datasets/extracted_data/W32.MyDoom.A.-NoVirus",
-    "version": "2.0"
+    "version": "3.0"
   },
   "summary": {
-    "nodes_total": 80,
-    "edges_total": 0,
+    "nodes_total": 86,
+    "edges_total": 7,
     "is_directed": true,
-    "suspicious_total": 0,
+    "suspicious_total": 13,
     "node_types": {
       "kernel": 1,
-      "network_conn": 79
+      "network_conn": 79,
+      "ip_address": 6
     },
-    "edge_types": {},
-    "suspicious_by_type": {}
+    "edge_types": {
+      "connects_to": 7
+    },
+    "suspicious_by_type": {
+      "network_conn": 7,
+      "ip_address": 6
+    }
   },
   "attack_chain": {
-    "steps": [],
+    "steps": [
+      {
+        "step": 3,
+        "tactic": "Command & Control",
+        "mitre": "T1071",
+        "detail": "7 ESTABLISHED C2 connection(s) to 6 unique IP(s) via svchost.exe, chrome.exe",
+        "evidence": "['142.250.187.238', '142.250.200.46', '142.251.5.188', '172.217.16.227']"
+      }
+    ],
     "overall_verdict": "LOW \u2014 No significant threats identified",
     "max_process_score": 0
   },
@@ -33,10 +47,12 @@
       "foreign_port": 80,
       "state": "ESTABLISHED",
       "owner": "svchost.exe",
-      "is_external": 0,
-      "heuristic_score": 2,
-      "severity": "LOW",
+      "is_external": true,
+      "is_lolbin_c2": false,
+      "heuristic_score": 4,
+      "severity": "MEDIUM",
       "reasons": [
+        "external-ip",
         "established",
         "http-non-browser"
       ]
@@ -49,10 +65,12 @@
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "heuristic_score": 1,
-      "severity": "LOW",
+      "is_external": true,
+      "is_lolbin_c2": false,
+      "heuristic_score": 3,
+      "severity": "MEDIUM",
       "reasons": [
+        "external-ip",
         "established"
       ]
     },
@@ -64,10 +82,12 @@
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "heuristic_score": 1,
-      "severity": "LOW",
+      "is_external": true,
+      "is_lolbin_c2": false,
+      "heuristic_score": 3,
+      "severity": "MEDIUM",
       "reasons": [
+        "external-ip",
         "established"
       ]
     },
@@ -79,10 +99,12 @@
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "heuristic_score": 1,
-      "severity": "LOW",
+      "is_external": true,
+      "is_lolbin_c2": false,
+      "heuristic_score": 3,
+      "severity": "MEDIUM",
       "reasons": [
+        "external-ip",
         "established"
       ]
     },
@@ -94,10 +116,12 @@
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "heuristic_score": 1,
-      "severity": "LOW",
+      "is_external": true,
+      "is_lolbin_c2": false,
+      "heuristic_score": 3,
+      "severity": "MEDIUM",
       "reasons": [
+        "external-ip",
         "established"
       ]
     },
@@ -109,10 +133,12 @@
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "heuristic_score": 1,
-      "severity": "LOW",
+      "is_external": true,
+      "is_lolbin_c2": false,
+      "heuristic_score": 3,
+      "severity": "MEDIUM",
       "reasons": [
+        "external-ip",
         "established"
       ]
     },
@@ -124,10 +150,12 @@
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "heuristic_score": 1,
-      "severity": "LOW",
+      "is_external": true,
+      "is_lolbin_c2": false,
+      "heuristic_score": 3,
+      "severity": "MEDIUM",
       "reasons": [
+        "external-ip",
         "established"
       ]
     },
@@ -138,8 +166,9 @@
       "foreign_addr": "34.104.35.123",
       "foreign_port": 80,
       "state": "CLOSED",
-      "owner": "-",
-      "is_external": 0,
+      "owner": "",
+      "is_external": false,
+      "is_lolbin_c2": false,
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -149,5 +178,20 @@
   ],
   "injections": [],
   "credentials": [],
-  "drivers": []
+  "drivers": [],
+  "graph_attr": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "label_signals": {
+    "behavioural_suspects_found": false,
+    "lolbin_c2_found": false,
+    "ransom_note_found": false,
+    "rwx_injections": 0,
+    "hidden_processes": 0,
+    "top_suspect_score": 0
+  }
 }

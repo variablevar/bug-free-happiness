@@ -258,7 +258,8 @@
       "Hexdump": "\n56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 VWSUATAUAVAWH..(\n4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 L.<$H..H...8....\n49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e I.g(A_A^A]A\\\\][_^\nc3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 80 61 ...@.....H..H..a",
       "Disasm": "56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e c3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 80 61",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -275,7 +276,8 @@
       "Hexdump": "\n56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 VWSUATAUAVAWH..(\n4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 L.<$H..H...8....\n49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e I.g(A_A^A]A\\\\][_^\nc3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 80 61 ...@.....H..H..a",
       "Disasm": "56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e c3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 80 61",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -292,7 +294,8 @@
       "Hexdump": "\n56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 VWSUATAUAVAWH..(\n4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 L.<$H..H...8....\n49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e I.g(A_A^A]A\\\\][_^\nc3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 80 61 ...@.....H..H..a",
       "Disasm": "56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e c3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 80 61",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -309,7 +312,8 @@
       "Hexdump": "\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc 0c 00 4e 00 0c 00 01 05 48 8b 55 28 48 8b 8d ...N.....H.U(H..",
       "Disasm": "cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc 0c 00 4e 00 0c 00 01 05 48 8b 55 28 48 8b 8d",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -326,7 +330,8 @@
       "Hexdump": "\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc 08 00 42 00 00 00 00 05 48 8b 45 20 48 89 c2 ...B.....H.E H..",
       "Disasm": "cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc 08 00 42 00 00 00 00 05 48 8b 45 20 48 89 c2",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -343,7 +348,8 @@
       "Hexdump": "\n00 00 00 00 00 00 00 00 80 79 54 74 36 02 00 00 .........yTt6...\n80 79 54 74 36 02 00 00 00 00 54 74 36 02 00 00 .yTt6.....Tt6...\ne0 0d 67 74 36 02 00 00 00 10 67 74 36 02 00 00 ..gt6.....gt6...\n00 d0 67 74 36 02 00 00 01 00 00 00 00 00 00 00 ..gt6...........",
       "Disasm": "00 00 00 00 00 00 00 00 80 79 54 74 36 02 00 00 80 79 54 74 36 02 00 00 00 00 54 74 36 02 00 00 e0 0d 67 74 36 02 00 00 00 10 67 74 36 02 00 00 00 d0 67 74 36 02 00 00 01 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -360,7 +366,8 @@
       "Hexdump": "\nd8 ff ff ff ff ff ff ff 08 00 00 00 00 00 00 00 ................\n01 00 00 00 00 00 00 00 00 02 0e 03 38 00 00 00 ............8...\n68 01 03 08 0c 00 00 00 b0 0b d2 f4 fc 7f 00 00 h...............\n00 10 cd f4 fc 7f 00 00 58 50 e4 f4 fc 7f 00 00 ........XP......",
       "Disasm": "d8 ff ff ff ff ff ff ff 08 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00 00 02 0e 03 38 00 00 00 68 01 03 08 0c 00 00 00 b0 0b d2 f4 fc 7f 00 00 00 10 cd f4 fc 7f 00 00 58 50 e4 f4 fc 7f 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -377,7 +384,8 @@
       "Hexdump": "\n00 00 00 00 00 00 00 00 78 0d 00 00 00 00 00 00 ........x.......\n0c 00 00 00 49 c7 c2 00 00 00 00 48 b8 10 e8 19 ....I......H....\nfe fc 7f 00 00 ff e0 49 c7 c2 01 00 00 00 48 b8 .......I......H.\n10 e8 19 fe fc 7f 00 00 ff e0 49 c7 c2 02 00 00 ..........I.....",
       "Disasm": "00 00 00 00 00 00 00 00 78 0d 00 00 00 00 00 00 0c 00 00 00 49 c7 c2 00 00 00 00 48 b8 10 e8 19 fe fc 7f 00 00 ff e0 49 c7 c2 01 00 00 00 48 b8 10 e8 19 fe fc 7f 00 00 ff e0 49 c7 c2 02 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     }
   ],
   "ssdt_hooks": [],
@@ -892,28 +900,6 @@
       "GrantedAccess": "0x1fffff",
       "Name": "lsass.exe Pid 872",
       "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 644,
-      "Process": "csrss.exe",
-      "Offset": "0x808e38fb9140",
-      "HandleValue": "0x264",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 872",
-      "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 716,
-      "Process": "wininit.exe",
-      "Offset": "0x808e38fb9140",
-      "HandleValue": "0x188",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 872",
-      "_severity": "Critical"
     }
   ],
   "thread_suspicious": [],
@@ -1369,6 +1355,50 @@
       "_severity": "High"
     }
   ],
+  "behavioural_suspects": [
+    {
+      "TreeDepth": 2,
+      "PID": 6880,
+      "PPID": 852,
+      "ImageFileName": "MsMpEng.exe",
+      "Offset(V)": "0x808e3d42c080",
+      "Threads": 27,
+      "Handles": "-",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2025-06-27 20:28:26.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume4\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\Platform\\\\4.18.25050.5-0\\\\MsMpEng.exe",
+      "Cmd": "\"C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\Platform\\\\4.18.25050.5-0\\\\MsMpEng.exe\"",
+      "Path": "C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\Platform\\\\4.18.25050.5-0\\\\MsMpEng.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 3,
+      "PID": 2632,
+      "PPID": 4788,
+      "ImageFileName": "powershell.exe",
+      "Offset(V)": "0x808e3d658080",
+      "Threads": 9,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2025-06-27 21:05:52.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume4\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+      "Cmd": "\"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" ",
+      "Path": "C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    }
+  ],
   "_meta": {
     "total_suspicious_pids": 15,
     "suspicious_pids": [
@@ -1387,6 +1417,21 @@
       7548,
       7948,
       9520
-    ]
+    ],
+    "graph_attr": {
+      "max_process_score": 4,
+      "attack_steps": 4,
+      "high_severity_injections": 0,
+      "lolbin_c2_connections": 0,
+      "ransom_note_signal": 0
+    },
+    "label_signals": {
+      "behavioural_suspects_found": true,
+      "lolbin_c2_found": false,
+      "ransom_note_found": false,
+      "rwx_injections": 8,
+      "hidden_processes": 1,
+      "top_suspect_score": 4
+    }
   }
 }

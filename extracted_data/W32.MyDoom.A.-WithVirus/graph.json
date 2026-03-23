@@ -6,6 +6,8 @@
     {
       "node_type": "kernel",
       "label": "KERNEL",
+      "heuristic_score": 0,
+      "is_suspicious": 0,
       "id": "kernel_system"
     },
     {
@@ -19,7 +21,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0xc7a3e0"
     },
     {
@@ -33,7 +37,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0xc7a790"
     },
     {
@@ -47,22 +53,35 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x5aa7590"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->172.217.169.36:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49359,
       "foreign_addr": "172.217.169.36",
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "is_suspicious": 0,
+      "is_external": 1,
+      "is_lolbin_c2": 0,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
       "id": "net_0x67b8280"
+    },
+    {
+      "node_type": "ip_address",
+      "label": "172.217.169.36",
+      "address": "172.217.169.36",
+      "is_external": 1,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
+      "id": "ip_172_217_169_36"
     },
     {
       "node_type": "network_conn",
@@ -75,7 +94,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x743fad0"
     },
     {
@@ -89,7 +110,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0xa3a51f0"
     },
     {
@@ -103,21 +126,25 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0xa3a5340"
     },
     {
       "node_type": "network_conn",
-      "label": "TCPv4->-:443",
+      "label": "TCPv4->:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49305,
-      "foreign_addr": "-",
+      "foreign_addr": "",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0xb4f2a20"
     },
     {
@@ -131,7 +158,9 @@
       "state": "LISTENING",
       "owner": "services.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0xcb59ef0"
     },
     {
@@ -145,7 +174,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0xcbcd010"
     },
     {
@@ -157,9 +188,11 @@
       "foreign_addr": "::",
       "foreign_port": 0,
       "state": "LISTENING",
-      "owner": "System",
+      "owner": "system",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0xcfd67f0"
     },
     {
@@ -173,7 +206,9 @@
       "state": "LISTENING",
       "owner": "services.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0xd554550"
     },
     {
@@ -186,22 +221,35 @@
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "is_suspicious": 0,
+      "is_external": 1,
+      "is_lolbin_c2": 0,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
       "id": "net_0x1fbcb250"
+    },
+    {
+      "node_type": "ip_address",
+      "label": "142.250.200.46",
+      "address": "142.250.200.46",
+      "is_external": 1,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
+      "id": "ip_142_250_200_46"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.200.42:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49345,
       "foreign_addr": "142.250.200.42",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x22047780"
     },
     {
@@ -215,7 +263,9 @@
       "state": "LISTENING",
       "owner": "lsass.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x2685f150"
     },
     {
@@ -227,9 +277,11 @@
       "foreign_addr": "::",
       "foreign_port": 0,
       "state": "LISTENING",
-      "owner": "System",
+      "owner": "system",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x27440a60"
     },
     {
@@ -243,7 +295,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x28aa8ec0"
     },
     {
@@ -256,8 +310,10 @@
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "is_suspicious": 0,
+      "is_external": 1,
+      "is_lolbin_c2": 0,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
       "id": "net_0x2eee21f0"
     },
     {
@@ -271,7 +327,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x2eee2c60"
     },
     {
@@ -285,7 +343,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x2fbeb010"
     },
     {
@@ -299,7 +359,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x305cac80"
     },
     {
@@ -311,9 +373,11 @@
       "foreign_addr": "34.104.35.123",
       "foreign_port": 80,
       "state": "CLOSED",
-      "owner": "-",
+      "owner": "",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x308c4ae0"
     },
     {
@@ -327,21 +391,25 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x31b6fec0"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->172.217.169.10:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49309,
       "foreign_addr": "172.217.169.10",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x36352010"
     },
     {
@@ -355,35 +423,41 @@
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x36dcf8c0"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->10.0.2.255:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49355,
       "foreign_addr": "10.0.2.255",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x37adf640"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->10.0.2.15:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49357,
       "foreign_addr": "10.0.2.15",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x38683630"
     },
     {
@@ -397,7 +471,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x3c11aa10"
     },
     {
@@ -411,7 +487,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x3c11acb0"
     },
     {
@@ -425,7 +503,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x3c322010"
     },
     {
@@ -439,21 +519,25 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x3f7234f0"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.180.14:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49310,
       "foreign_addr": "142.250.180.14",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x3fc3ccf0"
     },
     {
@@ -467,7 +551,9 @@
       "state": "LISTENING",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x4094c290"
     },
     {
@@ -481,7 +567,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x41c249b0"
     },
     {
@@ -493,9 +581,11 @@
       "foreign_addr": "0.0.0.0",
       "foreign_port": 0,
       "state": "LISTENING",
-      "owner": "System",
+      "owner": "system",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x48434240"
     },
     {
@@ -509,21 +599,25 @@
       "state": "LISTENING",
       "owner": "lsass.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x48604ce0"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->56.27.155.3:0",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 0,
       "foreign_addr": "56.27.155.3",
       "foreign_port": 0,
       "state": "CLOSED",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x4d964870"
     },
     {
@@ -536,9 +630,20 @@
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "is_suspicious": 0,
+      "is_external": 1,
+      "is_lolbin_c2": 0,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
       "id": "net_0x4db8ecf0"
+    },
+    {
+      "node_type": "ip_address",
+      "label": "216.58.212.202",
+      "address": "216.58.212.202",
+      "is_external": 1,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
+      "id": "ip_216_58_212_202"
     },
     {
       "node_type": "network_conn",
@@ -551,7 +656,9 @@
       "state": "LISTENING",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x50883a60"
     },
     {
@@ -565,7 +672,9 @@
       "state": "LISTENING",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x50cbbda0"
     },
     {
@@ -579,7 +688,9 @@
       "state": "LISTENING",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x51671010"
     },
     {
@@ -593,7 +704,9 @@
       "state": "LISTENING",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x51c79850"
     },
     {
@@ -607,7 +720,9 @@
       "state": "LISTENING",
       "owner": "wininit.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x51db0100"
     },
     {
@@ -621,7 +736,9 @@
       "state": "LISTENING",
       "owner": "wininit.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x51db0da0"
     },
     {
@@ -633,9 +750,11 @@
       "foreign_addr": "10.72.0.10",
       "foreign_port": 443,
       "state": "CLOSED",
-      "owner": "-",
+      "owner": "",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x51fc3930"
     },
     {
@@ -649,7 +768,9 @@
       "state": "LISTENING",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x5935daf0"
     },
     {
@@ -661,23 +782,27 @@
       "foreign_addr": "*",
       "foreign_port": 0,
       "state": "",
-      "owner": "System",
+      "owner": "system",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x59c3bcb0"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.179.238:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49332,
       "foreign_addr": "142.250.179.238",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x5ac35540"
     },
     {
@@ -690,22 +815,35 @@
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "is_suspicious": 0,
+      "is_external": 1,
+      "is_lolbin_c2": 0,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
       "id": "net_0x5ccdbcf0"
+    },
+    {
+      "node_type": "ip_address",
+      "label": "142.251.5.188",
+      "address": "142.251.5.188",
+      "is_external": 1,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
+      "id": "ip_142_251_5_188"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->172.217.169.36:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49340,
       "foreign_addr": "172.217.169.36",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x5fdd6310"
     },
     {
@@ -719,7 +857,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x604ea010"
     },
     {
@@ -733,7 +873,9 @@
       "state": "",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x60566580"
     },
     {
@@ -747,21 +889,25 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x60825470"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->216.58.213.10:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49297,
       "foreign_addr": "216.58.213.10",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x60866010"
     },
     {
@@ -775,7 +921,9 @@
       "state": "",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x609b2770"
     },
     {
@@ -789,7 +937,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x611ee610"
     },
     {
@@ -801,51 +951,59 @@
       "foreign_addr": "*",
       "foreign_port": 0,
       "state": "",
-      "owner": "System",
+      "owner": "system",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x611eeec0"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.179.227:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49356,
       "foreign_addr": "142.250.179.227",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x626a5cf0"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.180.14:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49308,
       "foreign_addr": "142.250.180.14",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x6499f740"
     },
     {
       "node_type": "network_conn",
-      "label": "TCPv4->-:443",
+      "label": "TCPv4->:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49344,
-      "foreign_addr": "-",
+      "foreign_addr": "",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x66128010"
     },
     {
@@ -858,9 +1016,20 @@
       "foreign_port": 80,
       "state": "ESTABLISHED",
       "owner": "svchost.exe",
-      "is_external": 0,
-      "is_suspicious": 0,
+      "is_external": 1,
+      "is_lolbin_c2": 0,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
       "id": "net_0x66128cf0"
+    },
+    {
+      "node_type": "ip_address",
+      "label": "34.104.35.123",
+      "address": "34.104.35.123",
+      "is_external": 1,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
+      "id": "ip_34_104_35_123"
     },
     {
       "node_type": "network_conn",
@@ -873,7 +1042,9 @@
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x662d7cf0"
     },
     {
@@ -887,7 +1058,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x697347f0"
     },
     {
@@ -901,7 +1074,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x697f7ac0"
     },
     {
@@ -915,7 +1090,9 @@
       "state": "",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x6dd451f0"
     },
     {
@@ -929,7 +1106,9 @@
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x6e09e510"
     },
     {
@@ -943,7 +1122,9 @@
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x6ea55cf0"
     },
     {
@@ -957,21 +1138,25 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x707c1650"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->172.217.169.36:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49304,
       "foreign_addr": "172.217.169.36",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x71a77cf0"
     },
     {
@@ -985,21 +1170,25 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x73f6b9c0"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.200.46:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49353,
       "foreign_addr": "142.250.200.46",
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "is_suspicious": 0,
+      "is_external": 1,
+      "is_lolbin_c2": 0,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
       "id": "net_0x747b1010"
     },
     {
@@ -1013,7 +1202,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x74efcec0"
     },
     {
@@ -1027,7 +1218,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7711d9c0"
     },
     {
@@ -1041,7 +1234,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x786360f0"
     },
     {
@@ -1055,7 +1250,9 @@
       "state": "",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7a44d5f0"
     },
     {
@@ -1069,7 +1266,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7a8391f0"
     },
     {
@@ -1083,7 +1282,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7a8396f0"
     },
     {
@@ -1097,7 +1298,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7a839ec0"
     },
     {
@@ -1111,7 +1314,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d435590"
     },
     {
@@ -1125,7 +1330,9 @@
       "state": "",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d461ec0"
     },
     {
@@ -1139,7 +1346,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d469ad0"
     },
     {
@@ -1153,7 +1362,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d48d9c0"
     },
     {
@@ -1167,7 +1378,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d493c80"
     },
     {
@@ -1181,7 +1394,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d5030f0"
     },
     {
@@ -1195,7 +1410,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d5061f0"
     },
     {
@@ -1209,7 +1426,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d5066f0"
     },
     {
@@ -1223,7 +1442,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d506ec0"
     },
     {
@@ -1237,7 +1458,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d5073e0"
     },
     {
@@ -1251,7 +1474,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d507790"
     },
     {
@@ -1265,7 +1490,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d521ec0"
     },
     {
@@ -1279,21 +1506,25 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d5279c0"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.200.46:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49419,
       "foreign_addr": "142.250.200.46",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d68ecf0"
     },
     {
@@ -1307,21 +1538,25 @@
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d6b33a0"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.179.238:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49422,
       "foreign_addr": "142.250.179.238",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d700960"
     },
     {
@@ -1335,7 +1570,9 @@
       "state": "",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d773550"
     },
     {
@@ -1349,7 +1586,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d7deec0"
     },
     {
@@ -1361,9 +1600,11 @@
       "foreign_addr": "::",
       "foreign_port": 0,
       "state": "LISTENING",
-      "owner": "System",
+      "owner": "system",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d8077f0"
     },
     {
@@ -1377,7 +1618,9 @@
       "state": "LISTENING",
       "owner": "services.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d823550"
     },
     {
@@ -1391,7 +1634,9 @@
       "state": "LISTENING",
       "owner": "services.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d828ef0"
     },
     {
@@ -1405,7 +1650,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d853010"
     },
     {
@@ -1419,7 +1666,9 @@
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d8931f0"
     },
     {
@@ -1433,7 +1682,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d893c60"
     },
     {
@@ -1447,7 +1698,9 @@
       "state": "LISTENING",
       "owner": "lsass.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d8f2ce0"
     },
     {
@@ -1461,7 +1714,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d922010"
     },
     {
@@ -1475,7 +1730,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7d95c010"
     },
     {
@@ -1489,7 +1746,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7da0a7f0"
     },
     {
@@ -1501,23 +1760,27 @@
       "foreign_addr": "::",
       "foreign_port": 0,
       "state": "LISTENING",
-      "owner": "System",
+      "owner": "system",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7da0ea60"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.179.238:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49410,
       "foreign_addr": "142.250.179.238",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7da221e0"
     },
     {
@@ -1529,9 +1792,11 @@
       "foreign_addr": "10.72.0.10",
       "foreign_port": 443,
       "state": "CLOSED",
-      "owner": "-",
+      "owner": "",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7da6e930"
     },
     {
@@ -1545,7 +1810,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7db1aec0"
     },
     {
@@ -1559,7 +1826,9 @@
       "state": "LISTENING",
       "owner": "lsass.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7db8b150"
     },
     {
@@ -1573,7 +1842,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7dbaf4f0"
     },
     {
@@ -1587,7 +1858,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7dbd59b0"
     },
     {
@@ -1599,9 +1872,11 @@
       "foreign_addr": "0.0.0.0",
       "foreign_port": 0,
       "state": "LISTENING",
-      "owner": "System",
+      "owner": "system",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7dbdf240"
     },
     {
@@ -1615,7 +1890,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7dbef650"
     },
     {
@@ -1629,7 +1906,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7dc081f0"
     },
     {
@@ -1643,7 +1922,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7dc08340"
     },
     {
@@ -1657,7 +1938,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7dc9bac0"
     },
     {
@@ -1671,7 +1954,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7dd00610"
     },
     {
@@ -1683,23 +1968,27 @@
       "foreign_addr": "*",
       "foreign_port": 0,
       "state": "",
-      "owner": "System",
+      "owner": "system",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7dd00ec0"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->56.27.155.3:0",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 0,
       "foreign_addr": "56.27.155.3",
       "foreign_port": 0,
       "state": "CLOSED",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7dd54870"
     },
     {
@@ -1713,7 +2002,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7ddba640"
     },
     {
@@ -1727,7 +2018,9 @@
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7ddd99e0"
     },
     {
@@ -1741,7 +2034,9 @@
       "state": "LISTENING",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7df4ca60"
     },
     {
@@ -1755,7 +2050,9 @@
       "state": "LISTENING",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7df4d290"
     },
     {
@@ -1769,7 +2066,9 @@
       "state": "LISTENING",
       "owner": "wininit.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7df65100"
     },
     {
@@ -1783,7 +2082,9 @@
       "state": "LISTENING",
       "owner": "wininit.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7df65da0"
     },
     {
@@ -1797,7 +2098,9 @@
       "state": "LISTENING",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7df81850"
     },
     {
@@ -1811,7 +2114,9 @@
       "state": "LISTENING",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7df83da0"
     },
     {
@@ -1825,7 +2130,9 @@
       "state": "LISTENING",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7df9faf0"
     },
     {
@@ -1839,21 +2146,25 @@
       "state": "LISTENING",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7dfab010"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.180.14:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49449,
       "foreign_addr": "142.250.180.14",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7e1dc8a0"
     },
     {
@@ -1867,21 +2178,25 @@
       "state": "",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7ea6a010"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.200.46:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49424,
       "foreign_addr": "142.250.200.46",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7ebf8780"
     },
     {
@@ -1895,7 +2210,9 @@
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7ed675d0"
     },
     {
@@ -1909,7 +2226,9 @@
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7eebb470"
     },
     {
@@ -1922,8 +2241,10 @@
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "is_suspicious": 0,
+      "is_external": 1,
+      "is_lolbin_c2": 0,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
       "id": "net_0x7efc5cf0"
     },
     {
@@ -1936,8 +2257,10 @@
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
-      "is_external": 0,
-      "is_suspicious": 0,
+      "is_external": 1,
+      "is_lolbin_c2": 0,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
       "id": "net_0x7f105cf0"
     },
     {
@@ -1949,23 +2272,27 @@
       "foreign_addr": "*",
       "foreign_port": 0,
       "state": "",
-      "owner": "System",
+      "owner": "system",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7f1b7cb0"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->172.217.169.35:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49469,
       "foreign_addr": "172.217.169.35",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fa1d620"
     },
     {
@@ -1979,7 +2306,9 @@
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fabd8c0"
     },
     {
@@ -1993,7 +2322,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fb35a10"
     },
     {
@@ -2007,7 +2338,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fb35cb0"
     },
     {
@@ -2021,7 +2354,9 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fb40470"
     },
     {
@@ -2035,21 +2370,25 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fb45010"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.179.238:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49332,
       "foreign_addr": "142.250.179.238",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fc1f540"
     },
     {
@@ -2063,7 +2402,9 @@
       "state": "",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fc27770"
     },
     {
@@ -2077,7 +2418,9 @@
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fc398b0"
     },
     {
@@ -2091,35 +2434,41 @@
       "state": "",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fcc9580"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.180.14:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49417,
       "foreign_addr": "142.250.180.14",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fcd2cf0"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->142.250.180.14:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49308,
       "foreign_addr": "142.250.180.14",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fcd3740"
     },
     {
@@ -2133,35 +2482,41 @@
       "state": "",
       "owner": "svchost.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fd45b30"
     },
     {
       "node_type": "network_conn",
       "label": "TCPv4->216.58.213.10:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49297,
       "foreign_addr": "216.58.213.10",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fd54010"
     },
     {
       "node_type": "network_conn",
-      "label": "TCPv4->-:443",
+      "label": "TCPv4->:443",
       "proto": "TCPv4",
-      "local_addr": "-",
+      "local_addr": "",
       "local_port": 49344,
-      "foreign_addr": "-",
+      "foreign_addr": "",
       "foreign_port": 443,
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fd7b010"
     },
     {
@@ -2174,8 +2529,10 @@
       "foreign_port": 80,
       "state": "ESTABLISHED",
       "owner": "svchost.exe",
-      "is_external": 0,
-      "is_suspicious": 0,
+      "is_external": 1,
+      "is_lolbin_c2": 0,
+      "is_suspicious": 1,
+      "heuristic_score": 3,
       "id": "net_0x7fd7bcf0"
     },
     {
@@ -2187,9 +2544,11 @@
       "foreign_addr": "34.104.35.123",
       "foreign_port": 80,
       "state": "CLOSED",
-      "owner": "-",
+      "owner": "",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fe54ae0"
     },
     {
@@ -2203,7 +2562,9 @@
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fe56bf0"
     },
     {
@@ -2217,9 +2578,82 @@
       "state": "CLOSED",
       "owner": "chrome.exe",
       "is_external": 0,
+      "is_lolbin_c2": 0,
       "is_suspicious": 0,
+      "heuristic_score": 0,
       "id": "net_0x7fe5b4d0"
     }
   ],
-  "links": []
+  "links": [
+    {
+      "edge_type": "connects_to",
+      "port": 443,
+      "proto": "TCPv4",
+      "source": "net_0x67b8280",
+      "target": "ip_172_217_169_36"
+    },
+    {
+      "edge_type": "connects_to",
+      "port": 443,
+      "proto": "TCPv4",
+      "source": "net_0x1fbcb250",
+      "target": "ip_142_250_200_46"
+    },
+    {
+      "edge_type": "connects_to",
+      "port": 443,
+      "proto": "TCPv4",
+      "source": "net_0x2eee21f0",
+      "target": "ip_142_250_200_46"
+    },
+    {
+      "edge_type": "connects_to",
+      "port": 443,
+      "proto": "TCPv4",
+      "source": "net_0x4db8ecf0",
+      "target": "ip_216_58_212_202"
+    },
+    {
+      "edge_type": "connects_to",
+      "port": 443,
+      "proto": "TCPv4",
+      "source": "net_0x5ccdbcf0",
+      "target": "ip_142_251_5_188"
+    },
+    {
+      "edge_type": "connects_to",
+      "port": 80,
+      "proto": "TCPv4",
+      "source": "net_0x66128cf0",
+      "target": "ip_34_104_35_123"
+    },
+    {
+      "edge_type": "connects_to",
+      "port": 443,
+      "proto": "TCPv4",
+      "source": "net_0x747b1010",
+      "target": "ip_142_250_200_46"
+    },
+    {
+      "edge_type": "connects_to",
+      "port": 443,
+      "proto": "TCPv4",
+      "source": "net_0x7efc5cf0",
+      "target": "ip_216_58_212_202"
+    },
+    {
+      "edge_type": "connects_to",
+      "port": 443,
+      "proto": "TCPv4",
+      "source": "net_0x7f105cf0",
+      "target": "ip_142_251_5_188"
+    },
+    {
+      "edge_type": "connects_to",
+      "port": 80,
+      "proto": "TCPv4",
+      "source": "net_0x7fd7bcf0",
+      "target": "ip_34_104_35_123"
+    }
+  ]
 }

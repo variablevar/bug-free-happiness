@@ -238,7 +238,8 @@
       "Hexdump": "\nb0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d\nb0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\\\...X...T\nb0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D\nb0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",
       "Disasm": "b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -255,7 +256,8 @@
       "Hexdump": "\nb0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d\nb0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\\\...X...T\nb0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D\nb0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",
       "Disasm": "b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -272,7 +274,8 @@
       "Hexdump": "\nb0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d\nb0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\\\...X...T\nb0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D\nb0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",
       "Disasm": "b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -289,7 +292,8 @@
       "Hexdump": "\nb0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d\nb0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\\\...X...T\nb0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D\nb0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",
       "Disasm": "b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -306,7 +310,8 @@
       "Hexdump": "\nb0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d\nb0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\\\...X...T\nb0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D\nb0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",
       "Disasm": "b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     }
   ],
   "ssdt_hooks": [],
@@ -324,30 +329,7 @@
     }
   ],
   "dll_suspicious": [],
-  "handle_suspicious": [
-    {
-      "TreeDepth": 0,
-      "PID": 316,
-      "Process": "csrss.exe",
-      "Offset": "0x86254318",
-      "HandleValue": "0xe8",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 472",
-      "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 364,
-      "Process": "wininit.exe",
-      "Offset": "0x86254318",
-      "HandleValue": "0xe8",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 472",
-      "_severity": "Critical"
-    }
-  ],
+  "handle_suspicious": [],
   "thread_suspicious": [],
   "vad_suspicious": [
     {
@@ -519,6 +501,114 @@
       "_severity": "High"
     }
   ],
+  "behavioural_suspects": [
+    {
+      "TreeDepth": 2,
+      "PID": 964,
+      "PPID": 456,
+      "ImageFileName": "svchost.exe",
+      "Offset(V)": "0x862f8af0",
+      "Threads": 20,
+      "Handles": "543",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 22:35:28.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\svchost.exe",
+      "Cmd": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalService",
+      "Path": "C:\\\\Windows\\\\system32\\\\svchost.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 2,
+      "PID": 932,
+      "PPID": 456,
+      "ImageFileName": "wmpnetwk.exe",
+      "Offset(V)": "0x86586a68",
+      "Threads": 10,
+      "Handles": "213",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 22:35:50.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe\"",
+      "Path": "C:\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 2,
+      "PID": 748,
+      "PPID": 456,
+      "ImageFileName": "svchost.exe",
+      "Offset(V)": "0x862b3878",
+      "Threads": 22,
+      "Handles": "497",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 22:35:28.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\svchost.exe",
+      "Cmd": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalServiceNetworkRestricted",
+      "Path": "C:\\\\Windows\\\\System32\\\\svchost.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 0,
+      "PID": 328,
+      "PPID": 120,
+      "ImageFileName": "explorer.exe",
+      "Offset(V)": "0x864e5290",
+      "Threads": 39,
+      "Handles": "1109",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 22:35:36.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\explorer.exe",
+      "Cmd": "C:\\\\Windows\\\\Explorer.EXE",
+      "Path": "C:\\\\Windows\\\\Explorer.EXE",
+      "_suspicion_score": 7,
+      "_reasons": [
+        "rwx_injection",
+        "abnormal_parent"
+      ],
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "PID": 2728,
+      "PPID": 2544,
+      "ImageFileName": "chrome.exe",
+      "Offset(V)": "0x84983c48",
+      "Threads": 32,
+      "Handles": "1161",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 22:37:34.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --from-installer",
+      "Path": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    }
+  ],
   "_meta": {
     "total_suspicious_pids": 14,
     "suspicious_pids": [
@@ -536,6 +626,21 @@
       2768,
       2848,
       3480
-    ]
+    ],
+    "graph_attr": {
+      "max_process_score": 7,
+      "attack_steps": 3,
+      "high_severity_injections": 0,
+      "lolbin_c2_connections": 0,
+      "ransom_note_signal": 0
+    },
+    "label_signals": {
+      "behavioural_suspects_found": true,
+      "lolbin_c2_found": false,
+      "ransom_note_found": false,
+      "rwx_injections": 5,
+      "hidden_processes": 5,
+      "top_suspect_score": 7
+    }
   }
 }

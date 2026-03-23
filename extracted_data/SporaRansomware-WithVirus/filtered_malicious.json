@@ -290,7 +290,8 @@
       "Hexdump": "\n00 00 40 00 80 00 00 00 89 e9 b8 d0 de 58 7b ff ..@..........X{.\nd0 ff a5 fc 36 00 00 00 00 00 00 00 00 00 00 00 ....6...........\n8b 93 38 00 00 00 8b b3 44 00 00 00 0f b7 04 4a ..8.....D......J\n8b 93 08 01 00 00 03 04 8a 8a 14 4e 80 e2 fe 89 ...........N....",
       "Disasm": "00 00 40 00 80 00 00 00 89 e9 b8 d0 de 58 7b ff d0 ff a5 fc 36 00 00 00 00 00 00 00 00 00 00 00 8b 93 38 00 00 00 8b b3 44 00 00 00 0f b7 04 4a 8b 93 08 01 00 00 03 04 8a 8a 14 4e 80 e2 fe 89",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -307,7 +308,8 @@
       "Hexdump": "\n00 00 40 00 80 00 00 00 89 e9 b8 d0 de 58 7b ff ..@..........X{.\nd0 ff a5 fc 36 00 00 00 00 00 00 00 00 00 00 00 ....6...........\n8b 93 38 00 00 00 8b b3 44 00 00 00 0f b7 04 4a ..8.....D......J\n8b 93 08 01 00 00 03 04 8a 8a 14 4e 80 e2 fe 89 ...........N....",
       "Disasm": "00 00 40 00 80 00 00 00 89 e9 b8 d0 de 58 7b ff d0 ff a5 fc 36 00 00 00 00 00 00 00 00 00 00 00 8b 93 38 00 00 00 8b b3 44 00 00 00 0f b7 04 4a 8b 93 08 01 00 00 03 04 8a 8a 14 4e 80 e2 fe 89",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -324,7 +326,8 @@
       "Hexdump": "\n08 00 42 00 00 00 00 05 8b 45 14 89 c2 8b 45 10 ..B......E....E.\n8b 08 8b 40 04 89 0a 89 42 04 8b 45 14 81 00 a0 ...@....B..E....\n00 00 00 8d 45 08 89 c2 8b 45 14 8b 08 89 0a 8b ....E....E......\n45 14 89 c2 8b 45 08 8b 00 89 02 c7 42 04 00 00 E....E......B...",
       "Disasm": "08 00 42 00 00 00 00 05 8b 45 14 89 c2 8b 45 10 8b 08 8b 40 04 89 0a 89 42 04 8b 45 14 81 00 a0 00 00 00 8d 45 08 89 c2 8b 45 14 8b 08 89 0a 8b 45 14 89 c2 8b 45 08 8b 00 89 02 c7 42 04 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -341,7 +344,8 @@
       "Hexdump": "\n09 00 34 00 09 00 01 05 8b 55 18 8b 4d 54 8d 54 ..4......U..MT.T\n0a fc 89 d6 b9 04 00 1a 00 ff 95 6c 37 00 00 8b ...........l7...\n4d 1c 89 08 83 45 18 fc 8d 45 1c 8b 4d 18 89 08 M....E...E..M...\n81 6d 18 9c 02 00 00 9f 0f 90 c0 66 89 45 38 8d .m.........f.E8.",
       "Disasm": "09 00 34 00 09 00 01 05 8b 55 18 8b 4d 54 8d 54 0a fc 89 d6 b9 04 00 1a 00 ff 95 6c 37 00 00 8b 4d 1c 89 08 83 45 18 fc 8d 45 1c 8b 4d 18 89 08 81 6d 18 9c 02 00 00 9f 0f 90 c0 66 89 45 38 8d",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -358,7 +362,8 @@
       "Hexdump": "\n55 8b ec 81 fc 9c c9 70 0b 7f 1c 6a 00 6a 00 68 U......p...j.j.h\n28 5b 33 0b 68 9c 09 00 00 e8 b2 47 60 51 0f 1f ([3.h......G`Q..\n00 0f 1f 40 00 66 90 6a 00 8d 64 24 c8 57 56 53 ...@.f.j..d$.WVS\nb8 30 37 14 10 8b 08 83 e9 01 72 04 89 08 eb 06 .07.......r.....",
       "Disasm": "55 8b ec 81 fc 9c c9 70 0b 7f 1c 6a 00 6a 00 68 28 5b 33 0b 68 9c 09 00 00 e8 b2 47 60 51 0f 1f 00 0f 1f 40 00 66 90 6a 00 8d 64 24 c8 57 56 53 b8 30 37 14 10 8b 08 83 e9 01 72 04 89 08 eb 06",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -375,7 +380,8 @@
       "Hexdump": "\n55 8b ec 8b 45 08 8b 40 14 8b 40 04 8b 48 30 83 U...E..@..@..H0.\ne1 f8 8b c1 2d 38 00 e0 0d 3d b8 0f 00 00 76 07 ....-8...=....v.\nb9 05 00 00 00 cd 29 8d 45 08 50 b8 70 c7 11 5e ......).E.P.p..^\nff e1 cc cc cc cc cc cc ff d0 e9 b1 0f 00 00 cc ................",
       "Disasm": "55 8b ec 8b 45 08 8b 40 14 8b 40 04 8b 48 30 83 e1 f8 8b c1 2d 38 00 e0 0d 3d b8 0f 00 00 76 07 b9 05 00 00 00 cd 29 8d 45 08 50 b8 70 c7 11 5e ff e1 cc cc cc cc cc cc ff d0 e9 b1 0f 00 00 cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -392,7 +398,8 @@
       "Hexdump": "\n55 8b ec 81 fc 64 c9 70 0b 7f 22 6a 00 6a 00 68 U....d.p..\"j.j.h\n28 5b 33 0b 68 64 09 00 00 e8 b2 47 46 4f 0f 1f ([3.hd.....GFO..\n00 0f 1f 40 00 0f 1f 40 00 0f 1f 40 00 6a 00 8d ...@...@...@.j..\n64 24 e8 57 56 53 b8 b0 59 a6 0e 8b 08 83 e9 01 d$.WVS..Y.......",
       "Disasm": "55 8b ec 81 fc 64 c9 70 0b 7f 22 6a 00 6a 00 68 28 5b 33 0b 68 64 09 00 00 e8 b2 47 46 4f 0f 1f 00 0f 1f 40 00 0f 1f 40 00 0f 1f 40 00 6a 00 8d 64 24 e8 57 56 53 b8 b0 59 a6 0e 8b 08 83 e9 01",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -409,7 +416,8 @@
       "Hexdump": "\ne9 fb ff fb ff cc cc cc cc cc cc cc cc cc cc cc ................\ne9 eb 01 fc ff cc cc cc cc cc cc cc cc cc cc cc ................\ne9 db 0f fc ff cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "e9 fb ff fb ff cc cc cc cc cc cc cc cc cc cc cc e9 eb 01 fc ff cc cc cc cc cc cc cc cc cc cc cc e9 db 0f fc ff cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -426,7 +434,8 @@
       "Hexdump": "\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -443,7 +452,8 @@
       "Hexdump": "\ne9 fb ff 06 00 cc cc cc cc cc cc cc cc cc cc cc ................\ne9 eb 03 07 00 cc cc cc cc cc cc cc cc cc cc cc ................\ne9 db 17 07 00 cc cc cc cc cc cc cc cc cc cc cc ................\ne9 cb 2f 07 00 cc cc cc cc cc cc cc cc cc cc cc ../.............",
       "Disasm": "e9 fb ff 06 00 cc cc cc cc cc cc cc cc cc cc cc e9 eb 03 07 00 cc cc cc cc cc cc cc cc cc cc cc e9 db 17 07 00 cc cc cc cc cc cc cc cc cc cc cc e9 cb 2f 07 00 cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -460,7 +470,8 @@
       "Hexdump": "\n55 8b ec 81 fc 64 c9 b0 04 7f 14 6a 00 6a 00 68 U....d.....j.j.h\n10 03 03 0a 68 64 09 00 00 e8 b2 47 bf 4e 90 6a ....hd.....G.N.j\n00 8d 64 24 f8 57 56 53 b8 70 ba ef 0e 8b 08 83 ..d$.WVS.p......\ne9 01 72 04 89 08 eb 06 55 e8 62 79 95 4e 55 e8 ..r.....U.by.NU.",
       "Disasm": "55 8b ec 81 fc 64 c9 b0 04 7f 14 6a 00 6a 00 68 10 03 03 0a 68 64 09 00 00 e8 b2 47 bf 4e 90 6a 00 8d 64 24 f8 57 56 53 b8 70 ba ef 0e 8b 08 83 e9 01 72 04 89 08 eb 06 55 e8 62 79 95 4e 55 e8",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -477,7 +488,8 @@
       "Hexdump": "\n55 8b ec 8b 45 08 8b 40 14 8b 40 04 8b 48 30 83 U...E..@..@..H0.\ne1 f8 8b c1 2d 38 00 aa 04 3d b8 0f 00 00 76 07 ....-8...=....v.\nb9 05 00 00 00 cd 29 8d 45 08 50 b8 70 c7 11 5e ......).E.P.p..^\nff e1 cc cc cc cc cc cc ff d0 e9 b1 0f 00 00 cc ................",
       "Disasm": "55 8b ec 8b 45 08 8b 40 14 8b 40 04 8b 48 30 83 e1 f8 8b c1 2d 38 00 aa 04 3d b8 0f 00 00 76 07 b9 05 00 00 00 cd 29 8d 45 08 50 b8 70 c7 11 5e ff e1 cc cc cc cc cc cc ff d0 e9 b1 0f 00 00 cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -494,11 +506,478 @@
       "Hexdump": "\ne9 fb ff 16 00 cc cc cc cc cc cc cc cc cc cc cc ................\ne9 eb 01 17 00 cc cc cc cc cc cc cc cc cc cc cc ................\ne9 db 1f 17 00 cc cc cc cc cc cc cc cc cc cc cc ................\ne9 cb 27 17 00 cc cc cc cc cc cc cc cc cc cc cc ..'.............",
       "Disasm": "e9 fb ff 16 00 cc cc cc cc cc cc cc cc cc cc cc e9 eb 01 17 00 cc cc cc cc cc cc cc cc cc cc cc e9 db 1f 17 00 cc cc cc cc cc cc cc cc cc cc cc e9 cb 27 17 00 cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     }
   ],
   "ssdt_hooks": [],
-  "network_suspicious": [],
+  "network_suspicious": [
+    {
+      "TreeDepth": 0,
+      "Offset": "0x845e8650",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50468,
+      "ForeignAddr": "142.250.178.14",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x84cdcc58",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50475,
+      "ForeignAddr": "172.217.16.225",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x84e8b650",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50468,
+      "ForeignAddr": "142.250.178.14",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x89384890",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50494,
+      "ForeignAddr": "20.189.173.12",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x8fb42008",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50476,
+      "ForeignAddr": "172.217.169.13",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x95473650",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50484,
+      "ForeignAddr": "142.250.200.14",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x97f83c18",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50201,
+      "ForeignAddr": "172.217.169.10",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x9d8f3c98",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 49673,
+      "ForeignAddr": "20.90.156.32",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x9d922c58",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50472,
+      "ForeignAddr": "142.250.200.14",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x9d9ab7b0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50473,
+      "ForeignAddr": "172.217.169.46",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x9fa0fc90",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50491,
+      "ForeignAddr": "13.107.42.12",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x9fb58c58",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50475,
+      "ForeignAddr": "172.217.16.225",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa1a4a650",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50477,
+      "ForeignAddr": "142.250.187.202",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa1a4fb10",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50211,
+      "ForeignAddr": "172.217.169.10",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa4ca1b10",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50465,
+      "ForeignAddr": "172.217.16.238",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa4da0790",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50202,
+      "ForeignAddr": "142.250.180.14",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa4daec98",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50469,
+      "ForeignAddr": "142.250.200.42",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa9124650",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50492,
+      "ForeignAddr": "13.107.42.12",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xa91e4c18",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50451,
+      "ForeignAddr": "185.199.111.133",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xaccb55f0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50471,
+      "ForeignAddr": "142.250.187.195",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xaccb8ad0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 49712,
+      "ForeignAddr": "20.90.153.243",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xaccc0c90",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50479,
+      "ForeignAddr": "142.250.200.4",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xaccd3c90",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50481,
+      "ForeignAddr": "172.217.16.238",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xacdf0c58",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50474,
+      "ForeignAddr": "142.250.200.14",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xad06cb10",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50466,
+      "ForeignAddr": "216.58.212.227",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xad096910",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50470,
+      "ForeignAddr": "142.250.187.195",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xad117c58",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50433,
+      "ForeignAddr": "172.217.16.234",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xad18dc58",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50213,
+      "ForeignAddr": "142.250.200.3",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xaea1a650",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50447,
+      "ForeignAddr": "185.199.111.133",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xaeb7cc90",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50480,
+      "ForeignAddr": "142.250.200.3",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xaeb83c90",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.47",
+      "LocalPort": 50483,
+      "ForeignAddr": "142.250.178.14",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    }
+  ],
   "cmdline_suspicious": [
     {
       "TreeDepth": 0,
@@ -1357,28 +1836,6 @@
       "GrantedAccess": "0x1fffff",
       "Name": "lsass.exe Pid 692",
       "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 448,
-      "Process": "csrss.exe",
-      "Offset": "0x9546c800",
-      "HandleValue": "0x274",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 692",
-      "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 524,
-      "Process": "wininit.exe",
-      "Offset": "0x9546c800",
-      "HandleValue": "0x168",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 692",
-      "_severity": "Critical"
     }
   ],
   "thread_suspicious": [],
@@ -1722,6 +2179,92 @@
       "_severity": "High"
     }
   ],
+  "behavioural_suspects": [
+    {
+      "TreeDepth": 2,
+      "PID": 2100,
+      "PPID": 668,
+      "ImageFileName": "MsMpEng.exe",
+      "Offset(V)": "0x9d85c040",
+      "Threads": 8,
+      "Handles": "-",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-29 15:18:18.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\Platform\\\\4.18.2302.7-0\\\\MsMpEng.exe",
+      "Cmd": "\"C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\platform\\\\4.18.2302.7-0\\\\MsMpEng.exe\"",
+      "Path": "C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\platform\\\\4.18.2302.7-0\\\\MsMpEng.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 3,
+      "PID": 2360,
+      "PPID": 860,
+      "ImageFileName": "smartscreen.ex",
+      "Offset(V)": "0x893837c0",
+      "Threads": 9,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-29 17:19:31.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\smartscreen.exe",
+      "Cmd": "C:\\\\Windows\\\\System32\\\\smartscreen.exe -Embedding",
+      "Path": "C:\\\\Windows\\\\System32\\\\smartscreen.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 3,
+      "PID": 1212,
+      "PPID": 860,
+      "ImageFileName": "SearchApp.exe",
+      "Offset(V)": "0xa1ac6680",
+      "Threads": 53,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-29 15:18:29.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\SystemApps\\\\Microsoft.Windows.Search_cw5n1h2txyewy\\\\SearchApp.exe",
+      "Cmd": "\"C:\\\\Windows\\\\SystemApps\\\\Microsoft.Windows.Search_cw5n1h2txyewy\\\\SearchApp.exe\" -ServerName:CortanaUI.AppX8z9r6jm96hw4bsbneegw0kyxx296wr9t.mca",
+      "Path": "C:\\\\Windows\\\\SystemApps\\\\Microsoft.Windows.Search_cw5n1h2txyewy\\\\SearchApp.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 3,
+      "PID": 880,
+      "PPID": 860,
+      "ImageFileName": "SearchApp.exe",
+      "Offset(V)": "0xa90f1040",
+      "Threads": 35,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-29 16:56:47.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\SystemApps\\\\Microsoft.Windows.Search_cw5n1h2txyewy\\\\SearchApp.exe",
+      "Cmd": "\"C:\\\\Windows\\\\SystemApps\\\\Microsoft.Windows.Search_cw5n1h2txyewy\\\\SearchApp.exe\" -ServerName:ShellFeedsUI.AppX88fpyyrd21w8wqe62wzsjh5agex7tf1e.mca",
+      "Path": "C:\\\\Windows\\\\SystemApps\\\\Microsoft.Windows.Search_cw5n1h2txyewy\\\\SearchApp.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    }
+  ],
   "_meta": {
     "total_suspicious_pids": 17,
     "suspicious_pids": [
@@ -1742,6 +2285,21 @@
       6392,
       7500,
       7700
-    ]
+    ],
+    "graph_attr": {
+      "max_process_score": 4,
+      "attack_steps": 5,
+      "high_severity_injections": 0,
+      "lolbin_c2_connections": 0,
+      "ransom_note_signal": 0
+    },
+    "label_signals": {
+      "behavioural_suspects_found": true,
+      "lolbin_c2_found": false,
+      "ransom_note_found": false,
+      "rwx_injections": 13,
+      "hidden_processes": 1,
+      "top_suspect_score": 4
+    }
   }
 }

@@ -1,86 +1,6 @@
 {
   "suspicious_processes": [
     {
-      "TreeDepth": 2,
-      "PID": 3264,
-      "PPID": 3176,
-      "ImageFileName": "iexplore.exe",
-      "Offset(V)": "0x86b17580",
-      "Threads": 17,
-      "Handles": "-",
-      "SessionId": 1.0,
-      "Wow64": false,
-      "CreateTime": "2023-03-28 16:27:33.000000 UTC",
-      "ExitTime": null,
-      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe",
-      "Cmd": "\"C:\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe\" SCODEF:3176 CREDAT:267777 /prefetch:2",
-      "Path": "C:\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe"
-    },
-    {
-      "TreeDepth": 3,
-      "PID": 1336,
-      "PPID": 768,
-      "ImageFileName": "GoogleUpdate.e",
-      "Offset(V)": "0x85300cc0",
-      "Threads": 2,
-      "Handles": "-",
-      "SessionId": 0.0,
-      "Wow64": false,
-      "CreateTime": "2023-03-28 16:33:32.000000 UTC",
-      "ExitTime": null,
-      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Google\\\\Update\\\\GoogleUpdate.exe",
-      "Cmd": "\"C:\\\\Program Files\\\\Google\\\\Update\\\\GoogleUpdate.exe\" /c",
-      "Path": "C:\\\\Program Files\\\\Google\\\\Update\\\\GoogleUpdate.exe"
-    },
-    {
-      "TreeDepth": 1,
-      "PID": 3176,
-      "PPID": 2132,
-      "ImageFileName": "iexplore.exe",
-      "Offset(V)": "0x86b2ccc0",
-      "Threads": 11,
-      "Handles": "-",
-      "SessionId": 1.0,
-      "Wow64": false,
-      "CreateTime": "2023-03-28 16:27:33.000000 UTC",
-      "ExitTime": null,
-      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe",
-      "Cmd": "\"C:\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe\" ",
-      "Path": "C:\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe"
-    },
-    {
-      "TreeDepth": 2,
-      "PID": 1320,
-      "PPID": 484,
-      "ImageFileName": "MsMpEng.exe",
-      "Offset(V)": "0x86504040",
-      "Threads": 31,
-      "Handles": "-",
-      "SessionId": 0.0,
-      "Wow64": false,
-      "CreateTime": "2023-03-28 16:27:03.000000 UTC",
-      "ExitTime": null,
-      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe",
-      "Cmd": "\"C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe\"",
-      "Path": "C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe"
-    },
-    {
-      "TreeDepth": 3,
-      "PID": 3944,
-      "PPID": 564,
-      "ImageFileName": "WSHost.exe",
-      "Offset(V)": "0x865d6040",
-      "Threads": 6,
-      "Handles": "-",
-      "SessionId": 1.0,
-      "Wow64": false,
-      "CreateTime": "2023-03-28 16:27:52.000000 UTC",
-      "ExitTime": null,
-      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\WinStore\\\\WSHost.exe",
-      "Cmd": "C:\\\\Windows\\\\WinStore\\\\WSHost.exe -Embedding",
-      "Path": "C:\\\\Windows\\\\WinStore\\\\WSHost.exe"
-    },
-    {
       "TreeDepth": 0,
       "PID": 392,
       "PPID": 320,
@@ -95,22 +15,6 @@
       "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\wininit.exe",
       "Cmd": "wininit.exe",
       "Path": "C:\\\\Windows\\\\system32\\\\wininit.exe"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 2348,
-      "PPID": 2032,
-      "ImageFileName": "chrome.exe",
-      "Offset(V)": "0x84984cc0",
-      "Threads": 29,
-      "Handles": "-",
-      "SessionId": 1.0,
-      "Wow64": false,
-      "CreateTime": "2023-03-28 16:30:40.000000 UTC",
-      "ExitTime": null,
-      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
-      "Cmd": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --from-installer",
-      "Path": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe"
     },
     {
       "TreeDepth": 0,
@@ -145,22 +49,6 @@
       "Path": "C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe"
     },
     {
-      "TreeDepth": 0,
-      "PID": 2132,
-      "PPID": 2112,
-      "ImageFileName": "explorer.exe",
-      "Offset(V)": "0x86587440",
-      "Threads": 56,
-      "Handles": "-",
-      "SessionId": 1.0,
-      "Wow64": false,
-      "CreateTime": "2023-03-28 16:27:21.000000 UTC",
-      "ExitTime": null,
-      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\explorer.exe",
-      "Cmd": "C:\\\\Windows\\\\Explorer.EXE",
-      "Path": "C:\\\\Windows\\\\Explorer.EXE"
-    },
-    {
       "TreeDepth": 1,
       "PID": 3220,
       "PPID": 2348,
@@ -175,6 +63,134 @@
       "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
       "Cmd": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --type=gpu-process --gpu-preferences=UAAAAAAAAADgAAAYAAAAAAAAAAAAAAAAAABgAAAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAASAAAAAAAAAAYAAAAAgAAABAAAAAAAAAAGAAAAAAAAAAQAAAAAAAAAAAAAAAOAAAAEAAAAAAAAAABAAAADgAAAAgAAAAAAAAACAAAAAAAAAA= --mojo-platform-channel-handle=1284 --field-trial-handle=1336,i,18035339428632871234,3716210804801803659,131072 /prefetch:2",
       "Path": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe"
+    },
+    {
+      "TreeDepth": 2,
+      "PID": 1816,
+      "PPID": 484,
+      "ImageFileName": "wmpnetwk.exe",
+      "Offset(V)": "0x85269980",
+      "Threads": 7,
+      "Handles": "-",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:29:04.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe\"",
+      "Path": "C:\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe"
+    },
+    {
+      "TreeDepth": 2,
+      "PID": 1320,
+      "PPID": 484,
+      "ImageFileName": "MsMpEng.exe",
+      "Offset(V)": "0x86504040",
+      "Threads": 31,
+      "Handles": "-",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:27:03.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe\"",
+      "Path": "C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe"
+    },
+    {
+      "TreeDepth": 0,
+      "PID": 2348,
+      "PPID": 2032,
+      "ImageFileName": "chrome.exe",
+      "Offset(V)": "0x84984cc0",
+      "Threads": 29,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:30:40.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --from-installer",
+      "Path": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe"
+    },
+    {
+      "TreeDepth": 3,
+      "PID": 1336,
+      "PPID": 768,
+      "ImageFileName": "GoogleUpdate.e",
+      "Offset(V)": "0x85300cc0",
+      "Threads": 2,
+      "Handles": "-",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:33:32.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Google\\\\Update\\\\GoogleUpdate.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Google\\\\Update\\\\GoogleUpdate.exe\" /c",
+      "Path": "C:\\\\Program Files\\\\Google\\\\Update\\\\GoogleUpdate.exe"
+    },
+    {
+      "TreeDepth": 1,
+      "PID": 3064,
+      "PPID": 2348,
+      "ImageFileName": "chrome.exe",
+      "Offset(V)": "0x8522b640",
+      "Threads": 8,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:30:40.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --type=crashpad-handler \"--user-data-dir=C:\\\\Users\\\\Mark\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler \"--database=C:\\\\Users\\\\Mark\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\\\\Crashpad\" \"--metrics-dir=C:\\\\Users\\\\Mark\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\" --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win32 --annotation=prod=Chrome --annotation=ver=109.0.5414.129 --initial-client-data=0x8c,0x90,0x94,0x68,0x98,0x6d0b8b38,0x6d0b8b48,0x6d0b8b54",
+      "Path": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe"
+    },
+    {
+      "TreeDepth": 2,
+      "PID": 2364,
+      "PPID": 484,
+      "ImageFileName": "msiexec.exe",
+      "Offset(V)": "0x867fbcc0",
+      "Threads": 13,
+      "Handles": "-",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:36:12.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\msiexec.exe",
+      "Cmd": "C:\\\\Windows\\\\system32\\\\msiexec.exe /V",
+      "Path": "C:\\\\Windows\\\\system32\\\\msiexec.exe"
+    },
+    {
+      "TreeDepth": 2,
+      "PID": 3264,
+      "PPID": 3176,
+      "ImageFileName": "iexplore.exe",
+      "Offset(V)": "0x86b17580",
+      "Threads": 17,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:27:33.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe\" SCODEF:3176 CREDAT:267777 /prefetch:2",
+      "Path": "C:\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe"
+    },
+    {
+      "TreeDepth": 0,
+      "PID": 2132,
+      "PPID": 2112,
+      "ImageFileName": "explorer.exe",
+      "Offset(V)": "0x86587440",
+      "Threads": 56,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:27:21.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\explorer.exe",
+      "Cmd": "C:\\\\Windows\\\\Explorer.EXE",
+      "Path": "C:\\\\Windows\\\\Explorer.EXE"
     },
     {
       "TreeDepth": 3,
@@ -209,52 +225,52 @@
       "Path": "C:\\\\Windows\\\\system32\\\\csrss.exe"
     },
     {
-      "TreeDepth": 2,
-      "PID": 1816,
-      "PPID": 484,
-      "ImageFileName": "wmpnetwk.exe",
-      "Offset(V)": "0x85269980",
-      "Threads": 7,
-      "Handles": "-",
-      "SessionId": 0.0,
-      "Wow64": false,
-      "CreateTime": "2023-03-28 16:29:04.000000 UTC",
-      "ExitTime": null,
-      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe",
-      "Cmd": "\"C:\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe\"",
-      "Path": "C:\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe"
-    },
-    {
       "TreeDepth": 1,
-      "PID": 3064,
-      "PPID": 2348,
-      "ImageFileName": "chrome.exe",
-      "Offset(V)": "0x8522b640",
-      "Threads": 8,
+      "PID": 3176,
+      "PPID": 2132,
+      "ImageFileName": "iexplore.exe",
+      "Offset(V)": "0x86b2ccc0",
+      "Threads": 11,
       "Handles": "-",
       "SessionId": 1.0,
       "Wow64": false,
-      "CreateTime": "2023-03-28 16:30:40.000000 UTC",
+      "CreateTime": "2023-03-28 16:27:33.000000 UTC",
       "ExitTime": null,
-      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
-      "Cmd": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --type=crashpad-handler \"--user-data-dir=C:\\\\Users\\\\Mark\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler \"--database=C:\\\\Users\\\\Mark\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\\\\Crashpad\" \"--metrics-dir=C:\\\\Users\\\\Mark\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\" --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=Win32 --annotation=prod=Chrome --annotation=ver=109.0.5414.129 --initial-client-data=0x8c,0x90,0x94,0x68,0x98,0x6d0b8b38,0x6d0b8b48,0x6d0b8b54",
-      "Path": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe"
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe\" ",
+      "Path": "C:\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe"
     },
     {
-      "TreeDepth": 2,
-      "PID": 2364,
-      "PPID": 484,
-      "ImageFileName": "msiexec.exe",
-      "Offset(V)": "0x867fbcc0",
-      "Threads": 13,
+      "TreeDepth": 3,
+      "PID": 3944,
+      "PPID": 564,
+      "ImageFileName": "WSHost.exe",
+      "Offset(V)": "0x865d6040",
+      "Threads": 6,
       "Handles": "-",
-      "SessionId": 0.0,
+      "SessionId": 1.0,
       "Wow64": false,
-      "CreateTime": "2023-03-28 16:36:12.000000 UTC",
+      "CreateTime": "2023-03-28 16:27:52.000000 UTC",
       "ExitTime": null,
-      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\msiexec.exe",
-      "Cmd": "C:\\\\Windows\\\\system32\\\\msiexec.exe /V",
-      "Path": "C:\\\\Windows\\\\system32\\\\msiexec.exe"
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\WinStore\\\\WSHost.exe",
+      "Cmd": "C:\\\\Windows\\\\WinStore\\\\WSHost.exe -Embedding",
+      "Path": "C:\\\\Windows\\\\WinStore\\\\WSHost.exe"
+    },
+    {
+      "TreeDepth": 3,
+      "PID": 3448,
+      "PPID": 564,
+      "ImageFileName": "SettingSyncHos",
+      "Offset(V)": "0x86b9dcc0",
+      "Threads": 11,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:27:33.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\SettingSyncHost.exe",
+      "Cmd": "\"C:\\\\Windows\\\\System32\\\\SettingSyncHost.exe\" -Embedding",
+      "Path": "C:\\\\Windows\\\\System32\\\\SettingSyncHost.exe"
     }
   ],
   "hidden_processes": [
@@ -305,7 +321,8 @@
       "Hexdump": "\n09 00 34 00 09 00 01 05 8b 55 18 8b 4d 54 8d 54 ..4......U..MT.T\n0a fc b9 04 00 1a 00 ff 95 48 37 00 00 8b 4d 1c .........H7...M.\n89 08 81 45 18 fc ff ff ff 8d 45 1c 8b 4d 18 89 ...E......E..M..\n08 81 6d 18 94 02 00 00 9f 0f 90 c0 66 89 45 38 ..m.........f.E8",
       "Disasm": "09 00 34 00 09 00 01 05 8b 55 18 8b 4d 54 8d 54 0a fc b9 04 00 1a 00 ff 95 48 37 00 00 8b 4d 1c 89 08 81 45 18 fc ff ff ff 8d 45 1c 8b 4d 18 89 08 81 6d 18 94 02 00 00 9f 0f 90 c0 66 89 45 38",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -322,7 +339,8 @@
       "Hexdump": "\n08 00 42 00 00 00 00 05 8b 45 14 89 c2 8b 45 10 ..B......E....E.\n8b 08 8b 40 04 89 0a 89 42 04 8b 45 14 81 00 88 ...@....B..E....\n00 00 00 8d 45 08 89 c2 8b 45 14 8b 08 89 0a 8b ....E....E......\n45 14 89 c2 8b 45 08 8b 00 89 02 c7 42 04 00 00 E....E......B...",
       "Disasm": "08 00 42 00 00 00 00 05 8b 45 14 89 c2 8b 45 10 8b 08 8b 40 04 89 0a 89 42 04 8b 45 14 81 00 88 00 00 00 8d 45 08 89 c2 8b 45 14 8b 08 89 0a 8b 45 14 89 c2 8b 45 08 8b 00 89 02 c7 42 04 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -339,7 +357,8 @@
       "Hexdump": "\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -356,7 +375,8 @@
       "Hexdump": "\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 b1 03 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 b1 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -373,7 +393,8 @@
       "Hexdump": "\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 c5 0b 00 00 00 00 00 00 00 00 00 00 00 00 ................\n10 00 c5 0b 00 00 00 00 00 00 00 00 00 00 00 00 ................\n20 00 c5 0b 00 00 00 00 00 00 00 00 00 00 00 00  ...............",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 c5 0b 00 00 00 00 00 00 00 00 00 00 00 00 10 00 c5 0b 00 00 00 00 00 00 00 00 00 00 00 00 20 00 c5 0b 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -390,7 +411,8 @@
       "Hexdump": "\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 95 05 00 00 00 00 00 00 00 00 00 00 00 00 ................\n10 00 95 05 00 00 00 00 00 00 00 00 00 00 00 00 ................\n20 00 95 05 00 00 00 00 00 00 00 00 00 00 00 00  ...............",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 95 05 00 00 00 00 00 00 00 00 00 00 00 00 10 00 95 05 00 00 00 00 00 00 00 00 00 00 00 00 20 00 95 05 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -407,7 +429,8 @@
       "Hexdump": "\n00 00 00 00 16 00 00 00 00 00 ae 00 ff ff ff 3f ...............?\nc4 01 89 00 09 00 00 00 20 00 00 00 00 00 00 00 ........ .......\nd0 60 b1 00 20 00 00 00 c8 07 89 00 a0 18 ae 00 .`.. ...........\n00 00 89 00 ff ff ff 3f c4 01 89 00 13 00 00 00 .......?........",
       "Disasm": "00 00 00 00 16 00 00 00 00 00 ae 00 ff ff ff 3f c4 01 89 00 09 00 00 00 20 00 00 00 00 00 00 00 d0 60 b1 00 20 00 00 00 c8 07 89 00 a0 18 ae 00 00 00 89 00 ff ff ff 3f c4 01 89 00 13 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -424,7 +447,8 @@
       "Hexdump": "\n28 d0 8c 00 dd 17 6a 77 20 d0 8c 00 00 00 00 00 (.....jw .......\n8c d0 8c 00 00 00 00 00 00 00 00 00 70 d0 8c 00 ............p...\nae e2 6e 77 b0 d0 8c 00 ca 00 00 00 c4 d2 8c 00 ..nw............\n54 78 6c 77 00 00 2d 00 00 00 00 00 f0 fb 30 00 Txlw..-.......0.",
       "Disasm": "28 d0 8c 00 dd 17 6a 77 20 d0 8c 00 00 00 00 00 8c d0 8c 00 00 00 00 00 00 00 00 00 70 d0 8c 00 ae e2 6e 77 b0 d0 8c 00 ca 00 00 00 c4 d2 8c 00 54 78 6c 77 00 00 2d 00 00 00 00 00 f0 fb 30 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -441,7 +465,8 @@
       "Hexdump": "\n54 13 cf 6f 80 00 00 00 79 12 cf 6f 18 30 cf 6f T..o....y..o.0.o\n30 f0 8c 00 05 13 cf 6f 30 13 cf 6f 34 13 cf 6f 0......o0..o4..o\nc0 10 cf 6f 00 00 00 00 00 00 00 00 00 00 8d 00 ...o............\n90 f0 8c 00 00 10 00 00 00 00 00 00 6c f0 8c 00 ............l...",
       "Disasm": "54 13 cf 6f 80 00 00 00 79 12 cf 6f 18 30 cf 6f 30 f0 8c 00 05 13 cf 6f 30 13 cf 6f 34 13 cf 6f c0 10 cf 6f 00 00 00 00 00 00 00 00 00 00 8d 00 90 f0 8c 00 00 10 00 00 00 00 00 00 6c f0 8c 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -458,7 +483,8 @@
       "Hexdump": "\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 1b 09 00 00 00 00 00 00 00 00 00 00 00 00 ................\n10 00 1b 09 00 00 00 00 00 00 00 00 00 00 00 00 ................\n20 00 1b 09 00 00 00 00 00 00 00 00 00 00 00 00  ...............",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 1b 09 00 00 00 00 00 00 00 00 00 00 00 00 10 00 1b 09 00 00 00 00 00 00 00 00 00 00 00 00 20 00 1b 09 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -475,7 +501,8 @@
       "Hexdump": "\n00 00 00 00 00 00 00 00 84 e0 9f 01 70 e5 9f 01 ............p...\na4 e4 9f 01 51 27 03 5b 00 00 00 00 0e 00 00 00 ....Q'.[........\n69 53 03 5b 70 e5 9f 01 08 e5 9f 01 78 53 03 5b iS.[p.......xS.[\n00 00 00 00 7e e5 9f 01 00 04 00 00 0e 00 00 00 ....~...........",
       "Disasm": "00 00 00 00 00 00 00 00 84 e0 9f 01 70 e5 9f 01 a4 e4 9f 01 51 27 03 5b 00 00 00 00 0e 00 00 00 69 53 03 5b 70 e5 9f 01 08 e5 9f 01 78 53 03 5b 00 00 00 00 7e e5 9f 01 00 04 00 00 0e 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -492,7 +519,8 @@
       "Hexdump": "\nc6 d5 6a 77 e0 e5 9f 01 f0 e1 ad 00 3c 00 00 00 ..jw........<...\n88 e5 9f 01 f0 e1 ad 00 41 d6 6a 77 00 00 00 00 ........A.jw....\nf0 e1 ad 00 d0 1f 68 77 00 00 00 00 00 00 00 00 ......hw........\nb0 e1 9f 01 54 e5 9f 01 22 00 00 00 44 00 00 01 ....T...\"...D...",
       "Disasm": "c6 d5 6a 77 e0 e5 9f 01 f0 e1 ad 00 3c 00 00 00 88 e5 9f 01 f0 e1 ad 00 41 d6 6a 77 00 00 00 00 f0 e1 ad 00 d0 1f 68 77 00 00 00 00 00 00 00 00 b0 e1 9f 01 54 e5 9f 01 22 00 00 00 44 00 00 01",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -509,11 +537,58 @@
       "Hexdump": "\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     }
   ],
   "ssdt_hooks": [],
-  "network_suspicious": [],
+  "network_suspicious": [
+    {
+      "TreeDepth": 0,
+      "Offset": "0xdbe63788",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.44",
+      "LocalPort": 49345,
+      "ForeignAddr": "20.90.156.32",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "2132",
+      "Owner": "explorer.exe",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xdc2daa00",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.44",
+      "LocalPort": 49165,
+      "ForeignAddr": "20.90.152.133",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "2132",
+      "Owner": "explorer.exe",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xdd923578",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.44",
+      "LocalPort": 49418,
+      "ForeignAddr": "13.107.42.12",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "3448",
+      "Owner": "SettingSyncHos",
+      "Created": "-",
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    }
+  ],
   "cmdline_suspicious": [
     {
       "TreeDepth": 0,
@@ -567,30 +642,7 @@
     }
   ],
   "dll_suspicious": [],
-  "handle_suspicious": [
-    {
-      "TreeDepth": 0,
-      "PID": 340,
-      "Process": "csrss.exe",
-      "Offset": "0x861dc0c0",
-      "HandleValue": "0x10c",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 492",
-      "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 392,
-      "Process": "wininit.exe",
-      "Offset": "0x861dc0c0",
-      "HandleValue": "0x108",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 492",
-      "_severity": "Critical"
-    }
-  ],
+  "handle_suspicious": [],
   "thread_suspicious": [],
   "vad_suspicious": [
     {
@@ -906,8 +958,180 @@
       "_severity": "High"
     }
   ],
+  "behavioural_suspects": [
+    {
+      "TreeDepth": 2,
+      "PID": 1320,
+      "PPID": 484,
+      "ImageFileName": "MsMpEng.exe",
+      "Offset(V)": "0x86504040",
+      "Threads": 31,
+      "Handles": "-",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:27:03.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe\"",
+      "Path": "C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 3,
+      "PID": 596,
+      "PPID": 716,
+      "ImageFileName": "audiodg.exe",
+      "Offset(V)": "0x867ef740",
+      "Threads": 4,
+      "Handles": "-",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:36:06.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\audiodg.exe",
+      "Cmd": "C:\\\\Windows\\\\system32\\\\AUDIODG.EXE 0xa10",
+      "Path": "C:\\\\Windows\\\\system32\\\\AUDIODG.EXE",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 2,
+      "PID": 1816,
+      "PPID": 484,
+      "ImageFileName": "wmpnetwk.exe",
+      "Offset(V)": "0x85269980",
+      "Threads": 7,
+      "Handles": "-",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:29:04.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe\"",
+      "Path": "C:\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 3,
+      "PID": 3944,
+      "PPID": 564,
+      "ImageFileName": "WSHost.exe",
+      "Offset(V)": "0x865d6040",
+      "Threads": 6,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:27:52.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\WinStore\\\\WSHost.exe",
+      "Cmd": "C:\\\\Windows\\\\WinStore\\\\WSHost.exe -Embedding",
+      "Path": "C:\\\\Windows\\\\WinStore\\\\WSHost.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 0,
+      "PID": 2132,
+      "PPID": 2112,
+      "ImageFileName": "explorer.exe",
+      "Offset(V)": "0x86587440",
+      "Threads": 56,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:27:21.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\explorer.exe",
+      "Cmd": "C:\\\\Windows\\\\Explorer.EXE",
+      "Path": "C:\\\\Windows\\\\Explorer.EXE",
+      "_suspicion_score": 7,
+      "_reasons": [
+        "rwx_injection",
+        "abnormal_parent"
+      ],
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 1,
+      "PID": 3176,
+      "PPID": 2132,
+      "ImageFileName": "iexplore.exe",
+      "Offset(V)": "0x86b2ccc0",
+      "Threads": 11,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:27:33.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe\" ",
+      "Path": "C:\\\\Program Files\\\\Internet Explorer\\\\iexplore.exe",
+      "_suspicion_score": 6,
+      "_reasons": [
+        "rwx_injection",
+        "suspicious_cmdline"
+      ],
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "PID": 2348,
+      "PPID": 2032,
+      "ImageFileName": "chrome.exe",
+      "Offset(V)": "0x84984cc0",
+      "Threads": 29,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:30:40.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --from-installer",
+      "Path": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 1,
+      "PID": 3220,
+      "PPID": 2348,
+      "ImageFileName": "chrome.exe",
+      "Offset(V)": "0x869ec7c0",
+      "Threads": 11,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 16:30:40.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --type=gpu-process --gpu-preferences=UAAAAAAAAADgAAAYAAAAAAAAAAAAAAAAAABgAAAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAASAAAAAAAAAAYAAAAAgAAABAAAAAAAAAAGAAAAAAAAAAQAAAAAAAAAAAAAAAOAAAAEAAAAAAAAAABAAAADgAAAAgAAAAAAAAACAAAAAAAAAA= --mojo-platform-channel-handle=1284 --field-trial-handle=1336,i,18035339428632871234,3716210804801803659,131072 /prefetch:2",
+      "Path": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    }
+  ],
   "_meta": {
-    "total_suspicious_pids": 18,
+    "total_suspicious_pids": 19,
     "suspicious_pids": [
       340,
       392,
@@ -926,7 +1150,23 @@
       3176,
       3220,
       3264,
+      3448,
       3944
-    ]
+    ],
+    "graph_attr": {
+      "max_process_score": 7,
+      "attack_steps": 4,
+      "high_severity_injections": 0,
+      "lolbin_c2_connections": 0,
+      "ransom_note_signal": 0
+    },
+    "label_signals": {
+      "behavioural_suspects_found": true,
+      "lolbin_c2_found": false,
+      "ransom_note_found": false,
+      "rwx_injections": 13,
+      "hidden_processes": 2,
+      "top_suspect_score": 7
+    }
   }
 }

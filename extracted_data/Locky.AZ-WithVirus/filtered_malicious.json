@@ -338,7 +338,8 @@
       "Hexdump": "\n56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 VWSUATAUAVAWH..(\n4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 L.<$H..H...8....\n49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e I.g(A_A^A]A\\\\][_^\nc3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 d0 bb ...@.....H..H...",
       "Disasm": "56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e c3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 d0 bb",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -355,7 +356,8 @@
       "Hexdump": "\n56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 VWSUATAUAVAWH..(\n4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 L.<$H..H...8....\n49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e I.g(A_A^A]A\\\\][_^\nc3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 d0 bb ...@.....H..H...",
       "Disasm": "56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e c3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 d0 bb",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -372,7 +374,8 @@
       "Hexdump": "\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................\n__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ ................",
       "Disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -389,7 +392,8 @@
       "Hexdump": "\n56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 VWSUATAUAVAWH..(\n4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 L.<$H..H...8....\n49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e I.g(A_A^A]A\\\\][_^\nc3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 d0 bb ...@.....H..H...",
       "Disasm": "56 57 53 55 41 54 41 55 41 56 41 57 48 83 ec 28 4c 8d 3c 24 48 8b e9 48 8d b1 98 38 00 00 ff e2 49 8d 67 28 41 5f 41 5e 41 5d 41 5c 5d 5b 5f 5e c3 00 00 40 00 80 00 00 00 48 89 e9 48 b8 d0 bb",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -406,7 +410,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -423,7 +428,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -440,7 +446,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -457,7 +464,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -474,7 +482,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -491,7 +500,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -508,7 +518,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -525,7 +536,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -542,7 +554,8 @@
       "Hexdump": "\n55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 UH.,$H.. H..H.I.\nff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc ..H.e.].........\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................",
       "Disasm": "55 48 8d 2c 24 48 83 ec 20 48 8b 01 48 8b 49 08 ff d0 48 8d 65 00 5d c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -559,7 +572,8 @@
       "Hexdump": "\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc 08 00 42 00 00 00 00 05 48 8b 45 20 48 89 c2 ...B.....H.E H..",
       "Disasm": "cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc 08 00 42 00 00 00 00 05 48 8b 45 20 48 89 c2",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -576,7 +590,8 @@
       "Hexdump": "\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc 0c 00 4e 00 0c 00 01 05 48 8b 55 28 48 8b 8d ...N.....H.U(H..",
       "Disasm": "cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc 0c 00 4e 00 0c 00 01 05 48 8b 55 28 48 8b 8d",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -593,7 +608,8 @@
       "Hexdump": "\n00 00 00 00 a8 3f e2 04 a8 3f e2 04 00 00 e2 04 .....?...?......\n98 08 6c 00 00 10 6c 00 00 e0 6c 00 01 00 00 00 ..l...l...l.....\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n04 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 ................",
       "Disasm": "00 00 00 00 a8 3f e2 04 a8 3f e2 04 00 00 e2 04 98 08 6c 00 00 10 6c 00 00 e0 6c 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -610,7 +626,8 @@
       "Hexdump": "\nec ff ff ff 04 00 00 00 01 00 00 00 00 02 0e 03 ................\n1c 00 00 00 68 01 d9 07 0c 00 00 00 60 ae 8a 73 ....h.......`..s\n00 10 83 73 08 93 95 73 a4 3d 83 73 4c ee 05 00 ...s...s.=.sL...\n00 00 00 00 40 80 40 7f 60 80 40 7f 00 00 00 00 ....@.@.`.@.....",
       "Disasm": "ec ff ff ff 04 00 00 00 01 00 00 00 00 02 0e 03 1c 00 00 00 68 01 d9 07 0c 00 00 00 60 ae 8a 73 00 10 83 73 08 93 95 73 a4 3d 83 73 4c ee 05 00 00 00 00 00 40 80 40 7f 60 80 40 7f 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -627,7 +644,8 @@
       "Hexdump": "\n00 00 00 00 97 19 00 00 00 00 00 00 0c 00 00 00 ................\nb8 00 00 00 00 e9 da 29 94 f5 b8 01 00 00 00 e9 .......)........\nd0 29 94 f5 b8 02 00 00 00 e9 c6 29 94 f5 b8 03 .).........)....\n00 00 00 e9 bc 29 94 f5 b8 04 00 00 00 e9 b2 29 .....).........)",
       "Disasm": "00 00 00 00 97 19 00 00 00 00 00 00 0c 00 00 00 b8 00 00 00 00 e9 da 29 94 f5 b8 01 00 00 00 e9 d0 29 94 f5 b8 02 00 00 00 e9 c6 29 94 f5 b8 03 00 00 00 e9 bc 29 94 f5 b8 04 00 00 00 e9 b2 29",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -644,7 +662,8 @@
       "Hexdump": "\n00 00 00 00 a8 3f c1 05 a8 3f c1 05 00 00 c1 05 .....?...?......\n98 08 28 01 00 10 28 01 00 e0 28 01 01 00 00 00 ..(...(...(.....\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n04 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 ................",
       "Disasm": "00 00 00 00 a8 3f c1 05 a8 3f c1 05 00 00 c1 05 98 08 28 01 00 10 28 01 00 e0 28 01 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -661,7 +680,8 @@
       "Hexdump": "\nec ff ff ff 04 00 00 00 01 00 00 00 00 02 0e 03 ................\n1c 00 00 00 68 01 d9 07 0c 00 00 00 60 ae 8a 73 ....h.......`..s\n00 10 83 73 08 93 95 73 a4 3d 83 73 4c ee 05 00 ...s...s.=.sL...\n00 00 00 00 40 80 40 7f 60 80 40 7f 00 00 00 00 ....@.@.`.@.....",
       "Disasm": "ec ff ff ff 04 00 00 00 01 00 00 00 00 02 0e 03 1c 00 00 00 68 01 d9 07 0c 00 00 00 60 ae 8a 73 00 10 83 73 08 93 95 73 a4 3d 83 73 4c ee 05 00 00 00 00 00 40 80 40 7f 60 80 40 7f 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -678,7 +698,8 @@
       "Hexdump": "\n00 00 00 00 97 19 00 00 00 00 00 00 0c 00 00 00 ................\nb8 00 00 00 00 e9 da 29 94 f5 b8 01 00 00 00 e9 .......)........\nd0 29 94 f5 b8 02 00 00 00 e9 c6 29 94 f5 b8 03 .).........)....\n00 00 00 e9 bc 29 94 f5 b8 04 00 00 00 e9 b2 29 .....).........)",
       "Disasm": "00 00 00 00 97 19 00 00 00 00 00 00 0c 00 00 00 b8 00 00 00 00 e9 da 29 94 f5 b8 01 00 00 00 e9 d0 29 94 f5 b8 02 00 00 00 e9 c6 29 94 f5 b8 03 00 00 00 e9 bc 29 94 f5 b8 04 00 00 00 e9 b2 29",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -695,7 +716,8 @@
       "Hexdump": "\n00 00 00 00 a8 3f ab 05 a8 3f ab 05 00 00 ab 05 .....?...?......\n98 08 c9 07 00 10 c9 07 00 e0 c9 07 01 00 00 00 ................\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................\n04 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 ................",
       "Disasm": "00 00 00 00 a8 3f ab 05 a8 3f ab 05 00 00 ab 05 98 08 c9 07 00 10 c9 07 00 e0 c9 07 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -712,7 +734,8 @@
       "Hexdump": "\nec ff ff ff 04 00 00 00 01 00 00 00 00 02 0e 03 ................\n1c 00 00 00 68 01 d9 07 0c 00 00 00 60 ae 8a 73 ....h.......`..s\n00 10 83 73 08 93 95 73 a4 3d 83 73 4c ee 05 00 ...s...s.=.sL...\n00 00 00 00 40 80 08 7f 60 80 08 7f 00 00 00 00 ....@...`.......",
       "Disasm": "ec ff ff ff 04 00 00 00 01 00 00 00 00 02 0e 03 1c 00 00 00 68 01 d9 07 0c 00 00 00 60 ae 8a 73 00 10 83 73 08 93 95 73 a4 3d 83 73 4c ee 05 00 00 00 00 00 40 80 08 7f 60 80 08 7f 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -729,11 +752,283 @@
       "Hexdump": "\n00 00 00 00 97 19 00 00 00 00 00 00 0c 00 00 00 ................\nb8 00 00 00 00 e9 da 29 cc f5 b8 01 00 00 00 e9 .......)........\nd0 29 cc f5 b8 02 00 00 00 e9 c6 29 cc f5 b8 03 .).........)....\n00 00 00 e9 bc 29 cc f5 b8 04 00 00 00 e9 b2 29 .....).........)",
       "Disasm": "00 00 00 00 97 19 00 00 00 00 00 00 0c 00 00 00 b8 00 00 00 00 e9 da 29 cc f5 b8 01 00 00 00 e9 d0 29 cc f5 b8 02 00 00 00 e9 c6 29 cc f5 b8 03 00 00 00 e9 bc 29 cc f5 b8 04 00 00 00 e9 b2 29",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     }
   ],
   "ssdt_hooks": [],
-  "network_suspicious": [],
+  "network_suspicious": [
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad3d05aa0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49941,
+      "ForeignAddr": "68.219.88.225",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad62bf4e0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49933,
+      "ForeignAddr": "20.140.147.204",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad64f7010",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49799,
+      "ForeignAddr": "20.90.152.133",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad6ac9ae0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49929,
+      "ForeignAddr": "192.229.221.95",
+      "ForeignPort": 80,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad6b43010",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49731,
+      "ForeignAddr": "172.217.169.10",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad70347d0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49932,
+      "ForeignAddr": "13.107.238.64",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad71f8010",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49937,
+      "ForeignAddr": "20.190.159.73",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad7255010",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49952,
+      "ForeignAddr": "140.82.121.4",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad7263520",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49942,
+      "ForeignAddr": "104.116.253.39",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad72beae0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49928,
+      "ForeignAddr": "13.107.21.200",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad73078e0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49950,
+      "ForeignAddr": "8.238.164.254",
+      "ForeignPort": 80,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad74d0ab0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49931,
+      "ForeignAddr": "204.79.197.254",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad7514010",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49935,
+      "ForeignAddr": "23.48.165.34",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad758d9a0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49936,
+      "ForeignAddr": "13.107.21.200",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad76e1630",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49927,
+      "ForeignAddr": "204.79.197.222",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad77df010",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49943,
+      "ForeignAddr": "52.113.194.132",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad7877270",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49791,
+      "ForeignAddr": "20.90.152.133",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xc10ad8197aa0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.55",
+      "LocalPort": 49949,
+      "ForeignAddr": "142.250.178.10",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    }
+  ],
   "cmdline_suspicious": [
     {
       "TreeDepth": 0,
@@ -1173,28 +1468,6 @@
       "Process": "System",
       "Offset": "0xc10ad3d39080",
       "HandleValue": "0x6ec",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 832",
-      "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 588,
-      "Process": "csrss.exe",
-      "Offset": "0xc10ad3d39080",
-      "HandleValue": "0x26c",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 832",
-      "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 660,
-      "Process": "wininit.exe",
-      "Offset": "0xc10ad3d39080",
-      "HandleValue": "0x1b0",
       "Type": "Process",
       "GrantedAccess": "0x1fffff",
       "Name": "lsass.exe Pid 832",
@@ -1910,6 +2183,92 @@
       "_severity": "High"
     }
   ],
+  "behavioural_suspects": [
+    {
+      "TreeDepth": 2,
+      "PID": 3040,
+      "PPID": 804,
+      "ImageFileName": "MsMpEng.exe",
+      "Offset(V)": "0xc10ad4744080",
+      "Threads": 15,
+      "Handles": "-",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-31 20:33:45.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume4\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe\"",
+      "Path": "C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 3,
+      "PID": 2180,
+      "PPID": 4120,
+      "ImageFileName": "InfinityCrypt.",
+      "Offset(V)": "0xc10ad9ad90c0",
+      "Threads": 10,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": true,
+      "CreateTime": "2023-03-31 21:12:16.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume4\\\\Users\\\\User\\\\Downloads\\\\InfinityCrypt.exe",
+      "Cmd": "\"C:\\\\Users\\\\User\\\\Downloads\\\\InfinityCrypt.exe\" ",
+      "Path": "C:\\\\Users\\\\User\\\\Downloads\\\\InfinityCrypt.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 3,
+      "PID": 3696,
+      "PPID": 4120,
+      "ImageFileName": "InfinityCrypt.",
+      "Offset(V)": "0xc10ad834d080",
+      "Threads": 11,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": true,
+      "CreateTime": "2023-03-31 21:08:57.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume4\\\\Users\\\\User\\\\Downloads\\\\InfinityCrypt.exe",
+      "Cmd": "\"C:\\\\Users\\\\User\\\\Downloads\\\\InfinityCrypt.exe\" ",
+      "Path": "C:\\\\Users\\\\User\\\\Downloads\\\\InfinityCrypt.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 3,
+      "PID": 3388,
+      "PPID": 4120,
+      "ImageFileName": "InfinityCrypt.",
+      "Offset(V)": "0xc10ad97cf080",
+      "Threads": 13,
+      "Handles": "-",
+      "SessionId": 1.0,
+      "Wow64": true,
+      "CreateTime": "2023-03-31 21:10:19.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume4\\\\Users\\\\User\\\\Downloads\\\\InfinityCrypt.exe",
+      "Cmd": "\"C:\\\\Users\\\\User\\\\Downloads\\\\InfinityCrypt.exe\" ",
+      "Path": "C:\\\\Users\\\\User\\\\Downloads\\\\InfinityCrypt.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    }
+  ],
   "_meta": {
     "total_suspicious_pids": 20,
     "suspicious_pids": [
@@ -1933,6 +2292,21 @@
       6760,
       6792,
       8300
-    ]
+    ],
+    "graph_attr": {
+      "max_process_score": 4,
+      "attack_steps": 4,
+      "high_severity_injections": 0,
+      "lolbin_c2_connections": 0,
+      "ransom_note_signal": 0
+    },
+    "label_signals": {
+      "behavioural_suspects_found": true,
+      "lolbin_c2_found": false,
+      "ransom_note_found": false,
+      "rwx_injections": 24,
+      "hidden_processes": 0,
+      "top_suspect_score": 4
+    }
   }
 }

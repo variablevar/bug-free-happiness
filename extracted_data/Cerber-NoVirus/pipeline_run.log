@@ -1,4 +1,4 @@
 Sample: Cerber-NoVirus | label=0 | family=cerber
-filter_malicious.py: OK (0.7s)
-build_graph.py: OK (2.6s)
-graph_summary.py: OK (0.5s)
+filter_malicious.py: OK (0.6s)
+build_graph.py: OK (2.4s)
+analyze_graph.py: OK (0.5s)

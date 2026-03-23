@@ -436,7 +436,8 @@
       "Hexdump": "\nb0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d\nb0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\\\...X...T\nb0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D\nb0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",
       "Disasm": "b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -453,7 +454,8 @@
       "Hexdump": "\nb0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d\nb0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\\\...X...T\nb0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D\nb0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",
       "Disasm": "b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -470,7 +472,8 @@
       "Hexdump": "\nb0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d\nb0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\\\...X...T\nb0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D\nb0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",
       "Disasm": "b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -487,7 +490,8 @@
       "Hexdump": "\nb0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d\nb0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\\\...X...T\nb0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D\nb0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",
       "Disasm": "b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -504,7 +508,8 @@
       "Hexdump": "\nb0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 ...p...l...h...d\nb0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 ...`...\\\\...X...T\nb0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 ...P...L...H...D\nb0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34 ...@...<...8...4",
       "Disasm": "b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb 58 b0 07 eb 54 b0 08 eb 50 b0 09 eb 4c b0 0a eb 48 b0 0b eb 44 b0 0c eb 40 b0 0d eb 3c b0 0e eb 38 b0 0f eb 34",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -521,11 +526,73 @@
       "Hexdump": "\n6a 06 38 c4 30 f5 00 01 ee ff ee ff 00 00 00 00 j.8.0...........\na8 00 82 00 a8 00 82 00 00 00 82 00 00 00 82 00 ................\n40 00 00 00 88 05 82 00 00 00 86 00 3f 00 00 00 @...........?...\n01 00 00 00 00 00 00 00 f0 0f 82 00 f0 0f 82 00 ................",
       "Disasm": "6a 06 38 c4 30 f5 00 01 ee ff ee ff 00 00 00 00 a8 00 82 00 a8 00 82 00 00 00 82 00 00 00 82 00 40 00 00 00 88 05 82 00 00 00 86 00 3f 00 00 00 01 00 00 00 00 00 00 00 f0 0f 82 00 f0 0f 82 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     }
   ],
   "ssdt_hooks": [],
-  "network_suspicious": [],
+  "network_suspicious": [
+    {
+      "TreeDepth": 0,
+      "Offset": "0x7d8486a8",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.15",
+      "LocalPort": 49681,
+      "ForeignAddr": "173.222.211.130",
+      "ForeignPort": 80,
+      "State": "ESTABLISHED",
+      "PID": "2924",
+      "Owner": "mshta.exe",
+      "Created": "-",
+      "_is_lolbin_c2": true,
+      "_severity": "Critical"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x7e5bc610",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.15",
+      "LocalPort": 49682,
+      "ForeignAddr": "192.229.221.95",
+      "ForeignPort": 80,
+      "State": "ESTABLISHED",
+      "PID": "2924",
+      "Owner": "mshta.exe",
+      "Created": "-",
+      "_is_lolbin_c2": true,
+      "_severity": "Critical"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x7fc07df8",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.15",
+      "LocalPort": 49680,
+      "ForeignAddr": "104.26.9.86",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "2924",
+      "Owner": "mshta.exe",
+      "Created": "-",
+      "_is_lolbin_c2": true,
+      "_severity": "Critical"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0x7fdcbda8",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.15",
+      "LocalPort": 49675,
+      "ForeignAddr": "172.67.2.88",
+      "ForeignPort": 80,
+      "State": "ESTABLISHED",
+      "PID": "2924",
+      "Owner": "mshta.exe",
+      "Created": "-",
+      "_is_lolbin_c2": true,
+      "_severity": "Critical"
+    }
+  ],
   "cmdline_suspicious": [
     {
       "TreeDepth": 0,
@@ -559,30 +626,7 @@
     }
   ],
   "dll_suspicious": [],
-  "handle_suspicious": [
-    {
-      "TreeDepth": 0,
-      "PID": 320,
-      "Process": "csrss.exe",
-      "Offset": "0x85fbe3f8",
-      "HandleValue": "0xd4",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 472",
-      "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 368,
-      "Process": "wininit.exe",
-      "Offset": "0x85fbe3f8",
-      "HandleValue": "0xf0",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 472",
-      "_severity": "Critical"
-    }
-  ],
+  "handle_suspicious": [],
   "thread_suspicious": [],
   "vad_suspicious": [
     {
@@ -770,6 +814,157 @@
       "_severity": "High"
     }
   ],
+  "behavioural_suspects": [
+    {
+      "TreeDepth": 3,
+      "PID": 3936,
+      "PPID": 1880,
+      "ImageFileName": "SearchFilterHo",
+      "Offset(V)": "0x85023900",
+      "Threads": 5,
+      "Handles": "83",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 22:16:55.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\SearchFilterHost.exe",
+      "Cmd": "\"C:\\\\Windows\\\\system32\\\\SearchFilterHost.exe\" 0 516 520 528 65536 524 ",
+      "Path": "C:\\\\Windows\\\\system32\\\\SearchFilterHost.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 2,
+      "PID": 756,
+      "PPID": 464,
+      "ImageFileName": "svchost.exe",
+      "Offset(V)": "0x86037868",
+      "Threads": 23,
+      "Handles": "511",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 21:50:19.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\svchost.exe",
+      "Cmd": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalServiceNetworkRestricted",
+      "Path": "C:\\\\Windows\\\\System32\\\\svchost.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 2,
+      "PID": 948,
+      "PPID": 464,
+      "ImageFileName": "svchost.exe",
+      "Offset(V)": "0x8607c1d8",
+      "Threads": 18,
+      "Handles": "532",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 21:50:19.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\svchost.exe",
+      "Cmd": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalService",
+      "Path": "C:\\\\Windows\\\\system32\\\\svchost.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 2,
+      "PID": 888,
+      "PPID": 464,
+      "ImageFileName": "wmpnetwk.exe",
+      "Offset(V)": "0x86c0a030",
+      "Threads": 10,
+      "Handles": "214",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 21:50:55.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe\"",
+      "Path": "C:\\\\Program Files\\\\Windows Media Player\\\\wmpnetwk.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 0,
+      "PID": 816,
+      "PPID": 528,
+      "ImageFileName": "explorer.exe",
+      "Offset(V)": "0x86b2f878",
+      "Threads": 49,
+      "Handles": "1181",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 21:50:42.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\explorer.exe",
+      "Cmd": "C:\\\\Windows\\\\Explorer.EXE",
+      "Path": "C:\\\\Windows\\\\Explorer.EXE",
+      "_suspicion_score": 7,
+      "_reasons": [
+        "rwx_injection",
+        "abnormal_parent"
+      ],
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "PID": 2344,
+      "PPID": 3656,
+      "ImageFileName": "chrome.exe",
+      "Offset(V)": "0x860125b8",
+      "Threads": 33,
+      "Handles": "1127",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 21:53:05.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --from-installer",
+      "Path": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    },
+    {
+      "TreeDepth": 0,
+      "PID": 2924,
+      "PPID": 3080,
+      "ImageFileName": "mshta.exe",
+      "Offset(V)": "0x84ab1cb0",
+      "Threads": 16,
+      "Handles": "455",
+      "SessionId": 1.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-28 22:16:54.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume2\\\\Windows\\\\System32\\\\mshta.exe",
+      "Cmd": "\"C:\\\\Windows\\\\System32\\\\mshta.exe\" \"C:\\\\Users\\\\devmac\\\\Desktop\\\\_R_E_A_D___T_H_I_S___UAF3R_.hta\" ",
+      "Path": "C:\\\\Windows\\\\System32\\\\mshta.exe",
+      "_suspicion_score": 6,
+      "_reasons": [
+        "lolbin_network",
+        "suspicious_cmdline"
+      ],
+      "_severity": "High"
+    }
+  ],
   "_meta": {
     "total_suspicious_pids": 27,
     "suspicious_pids": [
@@ -800,6 +995,21 @@
       3768,
       3936,
       4012
-    ]
+    ],
+    "graph_attr": {
+      "max_process_score": 7,
+      "attack_steps": 4,
+      "high_severity_injections": 0,
+      "lolbin_c2_connections": 4,
+      "ransom_note_signal": 0
+    },
+    "label_signals": {
+      "behavioural_suspects_found": true,
+      "lolbin_c2_found": true,
+      "ransom_note_found": false,
+      "rwx_injections": 6,
+      "hidden_processes": 15,
+      "top_suspect_score": 7
+    }
   }
 }

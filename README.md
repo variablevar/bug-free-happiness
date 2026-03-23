@@ -50,7 +50,7 @@ extracted_data/
 
 ## Requirements
 
-- Python 3.9+
+- Python 3.10+
 - Volatility 3 installed and in `PATH` (`vol` command)
 
 Install Python dependencies:

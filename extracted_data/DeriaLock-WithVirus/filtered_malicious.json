@@ -369,7 +369,8 @@
       "Hexdump": "\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................",
       "Disasm": "cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     },
     {
       "TreeDepth": 0,
@@ -386,11 +387,133 @@
       "Hexdump": "\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc ................\ncc 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ................",
       "Disasm": "cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc cc 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
       "_has_mz": false,
-      "_severity": "High"
+      "_has_shellcode": false,
+      "_severity": "Medium"
     }
   ],
   "ssdt_hooks": [],
-  "network_suspicious": [],
+  "network_suspicious": [
+    {
+      "TreeDepth": 0,
+      "Offset": "0xe78f1749f010",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.54",
+      "LocalPort": 51142,
+      "ForeignAddr": "142.250.187.238",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xe78f1812daa0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.54",
+      "LocalPort": 51939,
+      "ForeignAddr": "142.250.200.3",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xe78f181b0a70",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.54",
+      "LocalPort": 49687,
+      "ForeignAddr": "20.90.153.243",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xe78f193d5520",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.54",
+      "LocalPort": 50819,
+      "ForeignAddr": "142.250.187.202",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xe78f194f7830",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.54",
+      "LocalPort": 49797,
+      "ForeignAddr": "20.90.153.243",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xe78f1ab03aa0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.54",
+      "LocalPort": 51901,
+      "ForeignAddr": "34.237.73.95",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xe78f1c0f2aa0",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.54",
+      "LocalPort": 50775,
+      "ForeignAddr": "20.90.156.32",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    },
+    {
+      "TreeDepth": 0,
+      "Offset": "0xe78f2a61a010",
+      "Proto": "TCPv4",
+      "LocalAddr": "10.0.2.54",
+      "LocalPort": 51940,
+      "ForeignAddr": "142.250.187.234",
+      "ForeignPort": 443,
+      "State": "ESTABLISHED",
+      "PID": "-",
+      "Owner": "-",
+      "Created": null,
+      "_is_lolbin_c2": false,
+      "_severity": "High"
+    }
+  ],
   "cmdline_suspicious": [
     {
       "TreeDepth": 0,
@@ -1232,17 +1355,6 @@
       "GrantedAccess": "0x1fffff",
       "Name": "lsass.exe Pid 828",
       "_severity": "Critical"
-    },
-    {
-      "TreeDepth": 0,
-      "PID": 588,
-      "Process": "csrss.exe",
-      "Offset": "0xe78f171c6080",
-      "HandleValue": "0x258",
-      "Type": "Process",
-      "GrantedAccess": "0x1fffff",
-      "Name": "lsass.exe Pid 828",
-      "_severity": "Critical"
     }
   ],
   "thread_suspicious": [],
@@ -1448,6 +1560,29 @@
       "_severity": "High"
     }
   ],
+  "behavioural_suspects": [
+    {
+      "TreeDepth": 2,
+      "PID": 3372,
+      "PPID": 804,
+      "ImageFileName": "MsMpEng.exe",
+      "Offset(V)": "0xe78f17b450c0",
+      "Threads": 11,
+      "Handles": "-",
+      "SessionId": 0.0,
+      "Wow64": false,
+      "CreateTime": "2023-03-30 16:21:51.000000 UTC",
+      "ExitTime": null,
+      "Audit": "\\\\Device\\\\HarddiskVolume3\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe",
+      "Cmd": "\"C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe\"",
+      "Path": "C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe",
+      "_suspicion_score": 4,
+      "_reasons": [
+        "rwx_injection"
+      ],
+      "_severity": "Medium"
+    }
+  ],
   "_meta": {
     "total_suspicious_pids": 22,
     "suspicious_pids": [
@@ -1473,6 +1608,21 @@
       8780,
       8884,
       9208
-    ]
+    ],
+    "graph_attr": {
+      "max_process_score": 4,
+      "attack_steps": 5,
+      "high_severity_injections": 0,
+      "lolbin_c2_connections": 0,
+      "ransom_note_signal": 0
+    },
+    "label_signals": {
+      "behavioural_suspects_found": true,
+      "lolbin_c2_found": false,
+      "ransom_note_found": false,
+      "rwx_injections": 2,
+      "hidden_processes": 2,
+      "top_suspect_score": 4
+    }
   }
 }
