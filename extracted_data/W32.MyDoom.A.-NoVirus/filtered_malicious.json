@@ -1,0 +1,18 @@
+{
+  "suspicious_processes": [],
+  "hidden_processes": [],
+  "malfind_regions": [],
+  "ssdt_hooks": [],
+  "network_suspicious": [],
+  "cmdline_suspicious": [],
+  "dll_suspicious": [],
+  "handle_suspicious": [],
+  "thread_suspicious": [],
+  "vad_suspicious": [],
+  "driver_suspicious": [],
+  "abnormal_parents": [],
+  "_meta": {
+    "total_suspicious_pids": 0,
+    "suspicious_pids": []
+  }
+}

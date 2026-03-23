@@ -1,2 +1,3 @@
 memory_dumps/*
 vol_output/*
+.venv

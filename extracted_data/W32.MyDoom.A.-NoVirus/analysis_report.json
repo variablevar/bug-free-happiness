@@ -1,0 +1,153 @@
+{
+  "meta": {
+    "tool": "analyze_graph.py v2",
+    "source": "/Users/user/Documents/University/datasets/extracted_data/W32.MyDoom.A.-NoVirus",
+    "version": "2.0"
+  },
+  "summary": {
+    "nodes_total": 80,
+    "edges_total": 0,
+    "is_directed": true,
+    "suspicious_total": 0,
+    "node_types": {
+      "kernel": 1,
+      "network_conn": 79
+    },
+    "edge_types": {},
+    "suspicious_by_type": {}
+  },
+  "attack_chain": {
+    "steps": [],
+    "overall_verdict": "LOW \u2014 No significant threats identified",
+    "max_process_score": 0
+  },
+  "entry_points": [],
+  "processes": [],
+  "hidden_processes": [],
+  "network": [
+    {
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49289,
+      "foreign_addr": "34.104.35.123",
+      "foreign_port": 80,
+      "state": "ESTABLISHED",
+      "owner": "svchost.exe",
+      "is_external": 0,
+      "heuristic_score": 2,
+      "severity": "LOW",
+      "reasons": [
+        "established",
+        "http-non-browser"
+      ]
+    },
+    {
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49359,
+      "foreign_addr": "142.250.187.238",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "owner": "chrome.exe",
+      "is_external": 0,
+      "heuristic_score": 1,
+      "severity": "LOW",
+      "reasons": [
+        "established"
+      ]
+    },
+    {
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49353,
+      "foreign_addr": "142.250.200.46",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "owner": "chrome.exe",
+      "is_external": 0,
+      "heuristic_score": 1,
+      "severity": "LOW",
+      "reasons": [
+        "established"
+      ]
+    },
+    {
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49360,
+      "foreign_addr": "172.217.16.227",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "owner": "chrome.exe",
+      "is_external": 0,
+      "heuristic_score": 1,
+      "severity": "LOW",
+      "reasons": [
+        "established"
+      ]
+    },
+    {
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49361,
+      "foreign_addr": "172.217.16.227",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "owner": "chrome.exe",
+      "is_external": 0,
+      "heuristic_score": 1,
+      "severity": "LOW",
+      "reasons": [
+        "established"
+      ]
+    },
+    {
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49287,
+      "foreign_addr": "216.58.212.202",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "owner": "chrome.exe",
+      "is_external": 0,
+      "heuristic_score": 1,
+      "severity": "LOW",
+      "reasons": [
+        "established"
+      ]
+    },
+    {
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49294,
+      "foreign_addr": "142.251.5.188",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "owner": "chrome.exe",
+      "is_external": 0,
+      "heuristic_score": 1,
+      "severity": "LOW",
+      "reasons": [
+        "established"
+      ]
+    },
+    {
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49240,
+      "foreign_addr": "34.104.35.123",
+      "foreign_port": 80,
+      "state": "CLOSED",
+      "owner": "-",
+      "is_external": 0,
+      "heuristic_score": 1,
+      "severity": "LOW",
+      "reasons": [
+        "http-non-browser"
+      ]
+    }
+  ],
+  "injections": [],
+  "credentials": [],
+  "drivers": []
+}

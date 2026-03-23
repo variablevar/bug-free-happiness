@@ -1,0 +1,4 @@
+Sample: WannaCry-NoVirus | label=0 | family=wannacry
+filter_malicious.py: OK (0.9s)
+build_graph.py: OK (3.5s)
+graph_summary.py: OK (0.6s)

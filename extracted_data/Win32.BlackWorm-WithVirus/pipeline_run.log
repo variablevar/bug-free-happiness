@@ -1,0 +1,4 @@
+Sample: Win32.BlackWorm-WithVirus | label=1 | family=win32.blackworm
+filter_malicious.py: OK (0.8s)
+build_graph.py: OK (2.5s)
+graph_summary.py: OK (0.4s)

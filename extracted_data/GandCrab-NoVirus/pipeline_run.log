@@ -1,0 +1,4 @@
+Sample: GandCrab-NoVirus | label=0 | family=gandcrab
+filter_malicious.py: OK (0.8s)
+build_graph.py: OK (6.3s)
+graph_summary.py: OK (0.9s)

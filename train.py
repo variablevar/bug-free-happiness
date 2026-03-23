@@ -1,164 +1,171 @@
 #!/usr/bin/env python3
 """
-🏆 ULTIMATE Dataset Builder + Trainer
-Extracts 60+ MAXIMUM features from ALL 14 Volatility CSVs using your EXACT schemas
-Trains XGBoost + outputs production model for FastAPI
-Run: python ultimate_pipeline.py
+train.py
+5-fold cross-validation training + evaluation for malware GNN classifier.
+
+Usage:
+    python train.py extracted_data/dataset_manifest.csv
+    python train.py extracted_data/dataset_manifest.csv --model sage
+    python train.py extracted_data/dataset_manifest.csv --epochs 100 --hidden 128
 """
 
-import pandas as pd
+import os, sys, argparse, json
 import numpy as np
-import xgboost as xgb
-from pathlib import Path
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import cross_val_score, StratifiedKFold
-from sklearn.metrics import classification_report
-import joblib
-import warnings
-warnings.filterwarnings('ignore')
+import torch
+import torch.nn.functional as F
+from torch_geometric.loader import DataLoader
+from sklearn.model_selection import StratifiedKFold
+from sklearn.metrics import (accuracy_score, f1_score,
+                              roc_auc_score, confusion_matrix)
+
+from dataset import MalwareGraphDataset
+from model import GINMalwareClassifier, SAGEMalwareClassifier
 
 
-def safe_read_csv(csv_path: Path):
-    if not csv_path.exists() or csv_path.stat().st_size < 50:
-        return pd.DataFrame()
-    try:
-        return pd.read_csv(csv_path, on_bad_lines='skip', low_memory=False)
-    except:
-        return pd.DataFrame()
+def train_epoch(model, loader, optimiser, device):
+    model.train()
+    total_loss = 0
+    for batch in loader:
+        batch = batch.to(device)
+        optimiser.zero_grad()
+        out  = model(batch.x, batch.edge_index, batch.batch)
+        loss = F.cross_entropy(out, batch.y)
+        loss.backward()
+        optimiser.step()
+        total_loss += loss.item()
+    return total_loss / len(loader)
 
-def safe_agg(df, col, agg='count'):
-    if df.empty or col not in df.columns:
-        return 0
-    try:
-        return int(df[col].count())
-    except:
-        return 0
 
-def safe_sum(df, col):
-    if df.empty or col not in df.columns:
-        return 0
-    try:
-        return int(pd.to_numeric(df[col], errors='coerce').sum())
-    except:
-        return 0
+@torch.no_grad()
+def evaluate(model, loader, device):
+    model.eval()
+    preds, probs, labels = [], [], []
+    for batch in loader:
+        batch  = batch.to(device)
+        out    = model(batch.x, batch.edge_index, batch.batch)
+        prob   = F.softmax(out, dim=1)[:, 1].cpu().numpy()
+        pred   = out.argmax(dim=1).cpu().numpy()
+        label  = batch.y.cpu().numpy()
+        preds.extend(pred)
+        probs.extend(prob)
+        labels.extend(label)
 
-def safe_str_count(df, col, pattern):
-    if df.empty or col not in df.columns:
-        return 0
-    try:
-        return int(df[col].astype(str).str.contains(pattern, case=False, na=False, regex=True).sum())
-    except:
-        return 0
+    acc = accuracy_score(labels, preds)
+    f1  = f1_score(labels, preds, zero_division=0)
+    auc = roc_auc_score(labels, probs) if len(set(labels)) > 1 else 0.0
+    cm  = confusion_matrix(labels, preds)
+    return acc, f1, auc, cm
 
-def extract_max_features(folder_path: Path) -> dict:
-    """🚀 60+ features from ALL 14 CSVs"""
-    path = Path(folder_path)
-    feats = {'label': 1 if 'WithVirus' in folder_path.name else 0, 'family': folder_path.name.split('-')[0]}
-    
-    # CORE: Processes (pslist/psscan/pstree/cmdline)
-    pslist = safe_read_csv(path / 'windows_pslist.csv')
-    psscan = safe_read_csv(path / 'windows_psscan.csv')
-    pstree = safe_read_csv(path / 'windows_pstree.csv')
-    cmdline = safe_read_csv(path / 'windows_cmdline.csv')
-    
-    feats.update({
-        'pslist_n': len(pslist), 'psscan_n': len(psscan), 'pstree_n': len(pstree), 'cmdline_n': len(cmdline),
-        'hidden_procs': max(0, len(psscan) - len(pslist)),
-        'pslist_threads_mean': safe_sum(pslist, 'Threads') / max(1, len(pslist)),
-        'pslist_handles_mean': safe_sum(pslist, 'Handles') / max(1, len(pslist)),
-        'cmdline_suspicious': safe_str_count(cmdline, 'Args', r'(powershell|certutil|bitsadmin)'),
-    })
-    
-    # INJECTIONS: malfind + vad
-    malfind = safe_read_csv(path / 'windows_malfind.csv')
-    vad = safe_read_csv(path / 'windows_vadinfo.csv')
-    feats.update({
-        'malfind_n': len(malfind), 'malfind_private_total': safe_sum(malfind, 'PrivateMemory'),
-        'malfind_commit_total': safe_sum(malfind, 'CommitCharge'),
-        'vad_n': len(vad), 'vad_private_total': safe_sum(vad, 'PrivateMemory'),
-        'injection_ratio': len(malfind) / max(1, len(pslist)),
-    })
-    
-    # NETWORK: C2 detection
-    netscan = safe_read_csv(path / 'windows_netscan.csv')
-    feats.update({
-        'netscan_n': len(netscan),
-        'netscan_tcp': safe_agg(netscan, 'Proto', lambda x: safe_str_count(netscan, 'Proto', 'TCP')),
-        'netscan_remote': safe_str_count(netscan, 'ForeignAddr', r'\d{1,3}\.\d{1,3}'),
-        'netscan_suspicious': safe_str_count(netscan, 'State', 'ESTABLISHED|TIME_WAIT'),
-    })
-    
-    # FILES + RANSOMWARE
-    filescan = safe_read_csv(path / 'windows_filescan.csv')
-    feats['filescan_n'] = len(filescan)
-    feats['ransom_files'] = safe_str_count(filescan, 'Name', r'\.(crypt|locky|encrypted|readme|bitcoin)')
-    
-    # HANDLES + MUTEX
-    handles = safe_read_csv(path / 'windows_handles.csv')
-    feats.update({
-        'handles_n': len(handles),
-        'handles_mutant': safe_str_count(handles, 'Type', 'Mutant'),
-        'handles_file': safe_str_count(handles, 'Type', 'File'),
-        'handles_process': safe_str_count(handles, 'Type', 'Process'),
-    })
-    
-    # DLL + DRIVERS + THREADS
-    dlllist = safe_read_csv(path / 'windows_dlllist.csv')
-    drivers = safe_read_csv(path / 'windows_driverscan.csv')
-    threads = safe_read_csv(path / 'windows_threads.csv')
-    feats.update({
-        'dll_n': len(dlllist), 'dll_loadcount_mean': safe_sum(dlllist, 'LoadCount') / max(1, len(dlllist)),
-        'drivers_n': len(drivers),
-        'threads_n': len(threads),
-    })
-    
-    # SSDT + Registry (hooks/persistence)
-    ssdt = safe_read_csv(path / 'windows_ssdt.csv')
-    reg = safe_read_csv(path / 'windows_registry_hivelist.csv')
-    feats.update({
-        'ssdt_n': len(ssdt),  # Hooked syscalls
-        'registry_hives_n': len(reg),
-    })
-    
-    # Suspicious processes (Ch6.3)
-    susp = ['svchost.exe', 'lsass.exe', 'rundll32.exe', 'powershell.exe']
-    if not pslist.empty and 'ImageFileName' in pslist.columns:
-        ps_counts = pslist['ImageFileName'].astype(str).str.lower().value_counts()
-        for proc in susp:
-            feats[f'{proc.lower().replace(".", "_")}_n'] = int(ps_counts.get(proc.lower(), 0))
-    
-    return feats
 
-def main():
-    extracted_dir = Path('extracted_data')
-    all_feats = []
-    
-    print("🔥 Extracting 60+ features from ALL 14 CSVs...")
-    for folder in sorted(extracted_dir.iterdir()):
-        if folder.is_dir() and (folder / 'windows_pslist.csv').exists():
-            print(f"✅ {folder.name}")
-            feats = extract_max_features(folder)
-            all_feats.append(feats)
-    
-    df = pd.DataFrame(all_feats).fillna(0)
-    df.to_csv('ultimate_dataset.csv', index=False)
-    print(f"📊 Ultimate dataset: {len(df)} x {len(df.columns)-2} features")
-    
-    # TRAIN PRODUCTION MODEL
-    X = df.select_dtypes(include=np.number).drop('label', axis=1, errors='ignore')
-    y = df['label']
-    
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)
-    
-    model = xgb.XGBClassifier(n_estimators=100, max_depth=4, scale_pos_weight=1, random_state=42)
-    cv_f1 = cross_val_score(model, X_scaled, y, cv=5, scoring='f1_macro').mean()
-    
-    model.fit(X_scaled, y)
-    joblib.dump({'model': model, 'scaler': scaler, 'features': X.columns.tolist()}, 'ultimate_ransomware_model.pkl')
-    
-    print(f"\n🎯 CV F1: {cv_f1:.3f} | Model saved: ultimate_ransomware_model.pkl")
-    print("📈 Top features:", pd.DataFrame({'feature': X.columns, 'imp': model.feature_importances_}).sort_values('imp', ascending=False).head()['feature'].tolist())
+def run(args):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"[Train] Device: {device}")
 
-if __name__ == '__main__':
-    main()
+    # Load dataset
+    ds      = MalwareGraphDataset(args.manifest)
+    labels  = ds.labels()
+    in_dim  = ds[0].x.size(1)
+    n       = len(ds)
+    print(f"[Train] {n} graphs  |  feature dim={in_dim}  |  model={args.model.upper()}")
+
+    skf     = StratifiedKFold(n_splits=args.folds, shuffle=True, random_state=42)
+    indices = np.arange(n)
+
+    fold_results = []
+
+    for fold, (train_idx, test_idx) in enumerate(skf.split(indices, labels), 1):
+        print(f"\n── Fold {fold}/{args.folds} "
+              f"(train={len(train_idx)}, test={len(test_idx)}) ──")
+
+        train_ds = [ds[i] for i in train_idx]
+        test_ds  = [ds[i] for i in test_idx]
+
+        train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True)
+        test_loader  = DataLoader(test_ds,  batch_size=args.batch_size, shuffle=False)
+
+        # Build model
+        if args.model == "sage":
+            model = SAGEMalwareClassifier(in_dim, hidden=args.hidden,
+                                          layers=args.layers, dropout=args.dropout)
+        else:
+            model = GINMalwareClassifier(in_dim, hidden=args.hidden,
+                                         layers=args.layers, dropout=args.dropout)
+        model = model.to(device)
+
+        optimiser = torch.optim.Adam(model.parameters(), lr=args.lr,
+                                     weight_decay=args.weight_decay)
+        scheduler = torch.optim.lr_scheduler.StepLR(optimiser, step_size=30, gamma=0.5)
+
+        best_f1, best_state = 0.0, None
+        for epoch in range(1, args.epochs + 1):
+            loss = train_epoch(model, train_loader, optimiser, device)
+            scheduler.step()
+            if epoch % 10 == 0 or epoch == args.epochs:
+                acc, f1, auc, _ = evaluate(model, test_loader, device)
+                print(f"  Epoch {epoch:>3}  loss={loss:.4f}  "
+                      f"acc={acc:.3f}  f1={f1:.3f}  auc={auc:.3f}")
+                if f1 >= best_f1:
+                    best_f1    = f1
+                    best_state = {k: v.clone() for k, v in model.state_dict().items()}
+
+        # Final eval with best weights
+        model.load_state_dict(best_state)
+        acc, f1, auc, cm = evaluate(model, test_loader, device)
+        print(f"  Best → acc={acc:.3f}  f1={f1:.3f}  auc={auc:.3f}")
+        print(f"  Confusion matrix:\n{cm}")
+
+        fold_results.append({"fold": fold, "acc": acc, "f1": f1, "auc": auc})
+
+        # Per-sample predictions for this fold
+        model.eval()
+        with torch.no_grad():
+            for data in test_ds:
+                b = data.to(device)
+                out  = model(b.x, b.edge_index,
+                             torch.zeros(b.num_nodes, dtype=torch.long, device=device))
+                pred = out.argmax(dim=1).item()
+                prob = F.softmax(out, dim=1)[0, 1].item()
+                status = "✅" if pred == b.y.item() else "❌"
+                print(f"    {status} {data.name:<35} "
+                      f"pred={pred} true={b.y.item()} prob={prob:.3f}")
+
+    # ── Summary ───────────────────────────────────────────────────────────────
+    print("\n" + "="*60)
+    print(f"  {args.folds}-FOLD CV RESULTS ({args.model.upper()})")
+    print("="*60)
+    accs = [r["acc"] for r in fold_results]
+    f1s  = [r["f1"]  for r in fold_results]
+    aucs = [r["auc"] for r in fold_results]
+    print(f"  Accuracy : {np.mean(accs):.3f} ± {np.std(accs):.3f}")
+    print(f"  F1       : {np.mean(f1s):.3f} ± {np.std(f1s):.3f}")
+    print(f"  AUC-ROC  : {np.mean(aucs):.3f} ± {np.std(aucs):.3f}")
+    print("="*60)
+
+    # Save results
+    out_path = f"results_{args.model}_{args.folds}fold.json"
+    with open(out_path, "w") as f:
+        json.dump({
+            "model": args.model, "folds": args.folds,
+            "epochs": args.epochs, "hidden": args.hidden,
+            "mean_acc": np.mean(accs), "std_acc": np.std(accs),
+            "mean_f1":  np.mean(f1s),  "std_f1":  np.std(f1s),
+            "mean_auc": np.mean(aucs), "std_auc": np.std(aucs),
+            "fold_results": fold_results,
+        }, f, indent=2)
+    print(f"  Results saved → {out_path}")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("manifest", help="Path to dataset_manifest.csv")
+    parser.add_argument("--model",        default="gin",  choices=["gin", "sage"])
+    parser.add_argument("--folds",        type=int,   default=5)
+    parser.add_argument("--epochs",       type=int,   default=100)
+    parser.add_argument("--hidden",       type=int,   default=64)
+    parser.add_argument("--layers",       type=int,   default=3)
+    parser.add_argument("--dropout",      type=float, default=0.3)
+    parser.add_argument("--lr",           type=float, default=1e-3)
+    parser.add_argument("--weight-decay", type=float, default=1e-4)
+    parser.add_argument("--batch-size",   type=int,   default=8)
+    args = parser.parse_args()
+    run(args)

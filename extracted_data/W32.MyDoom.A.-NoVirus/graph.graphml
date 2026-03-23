@@ -1,0 +1,1119 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d14" for="edge" attr.name="proto" attr.type="string"/>
+<key id="d13" for="edge" attr.name="port" attr.type="long"/>
+<key id="d12" for="edge" attr.name="edge_type" attr.type="string"/>
+<key id="d11" for="node" attr.name="address" attr.type="string"/>
+<key id="d10" for="node" attr.name="is_suspicious" attr.type="boolean"/>
+<key id="d9" for="node" attr.name="is_external" attr.type="boolean"/>
+<key id="d8" for="node" attr.name="owner" attr.type="string"/>
+<key id="d7" for="node" attr.name="state" attr.type="string"/>
+<key id="d6" for="node" attr.name="foreign_port" attr.type="long"/>
+<key id="d5" for="node" attr.name="foreign_addr" attr.type="string"/>
+<key id="d4" for="node" attr.name="local_port" attr.type="long"/>
+<key id="d3" for="node" attr.name="local_addr" attr.type="string"/>
+<key id="d2" for="node" attr.name="proto" attr.type="string"/>
+<key id="d1" for="node" attr.name="label" attr.type="string"/>
+<key id="d0" for="node" attr.name="node_type" attr.type="string"/>
+<graph edgedefault="directed"><node id="kernel_system">
+  <data key="d0">kernel</data>
+  <data key="d1">KERNEL</data>
+</node>
+<node id="net_0x7d435590">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">127.0.0.1</data>
+  <data key="d4">1900</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d446280">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→142.250.187.238:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49359</data>
+  <data key="d5">142.250.187.238</data>
+  <data key="d6">443</data>
+  <data key="d7">ESTABLISHED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">True</data>
+  <data key="d10">True</data>
+</node>
+<node id="ip_142_250_187_238">
+  <data key="d0">ip_address</data>
+  <data key="d1">142.250.187.238</data>
+  <data key="d11">142.250.187.238</data>
+  <data key="d9">True</data>
+</node>
+<node id="net_0x7d469ad0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">63158</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d4721f0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49635</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d48d9c0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::1</data>
+  <data key="d4">63157</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d493c80">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">fe80::7c90:904d:467a:91f4</data>
+  <data key="d4">1900</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d5030f0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">3702</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d5061f0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">3702</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d5066f0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">3702</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d506ec0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">3702</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d5073e0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">63161</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d507790">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">63160</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d521ec0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">0</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d5279c0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">0</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d546010">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→142.250.200.46:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49353</data>
+  <data key="d5">142.250.200.46</data>
+  <data key="d6">443</data>
+  <data key="d7">ESTABLISHED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">True</data>
+  <data key="d10">True</data>
+</node>
+<node id="ip_142_250_200_46">
+  <data key="d0">ip_address</data>
+  <data key="d1">142.250.200.46</data>
+  <data key="d11">142.250.200.46</data>
+  <data key="d9">True</data>
+</node>
+<node id="net_0x7d6e7250">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→172.217.16.227:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49360</data>
+  <data key="d5">172.217.16.227</data>
+  <data key="d6">443</data>
+  <data key="d7">ESTABLISHED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">True</data>
+  <data key="d10">True</data>
+</node>
+<node id="ip_172_217_16_227">
+  <data key="d0">ip_address</data>
+  <data key="d1">172.217.16.227</data>
+  <data key="d11">172.217.16.227</data>
+  <data key="d9">True</data>
+</node>
+<node id="net_0x7d7deec0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">1900</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d8077f0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv6→:::0</data>
+  <data key="d2">TCPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">445</data>
+  <data key="d5">::</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">System</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d823550">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv6→:::0</data>
+  <data key="d2">TCPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">49155</data>
+  <data key="d5">::</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">services.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d828ef0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→0.0.0.0:0</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">49155</data>
+  <data key="d5">0.0.0.0</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">services.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d848cf0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→172.217.16.234:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">-</data>
+  <data key="d4">49310</data>
+  <data key="d5">172.217.16.234</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d853010">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">3702</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d8931f0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→172.217.16.227:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49361</data>
+  <data key="d5">172.217.16.227</data>
+  <data key="d6">443</data>
+  <data key="d7">ESTABLISHED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">True</data>
+  <data key="d10">True</data>
+</node>
+<node id="net_0x7d893c60">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">0</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d8f2ce0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv6→:::0</data>
+  <data key="d2">TCPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">49156</data>
+  <data key="d5">::</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">lsass.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d922010">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">5355</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7d95c010">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">3702</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7da0a7f0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">5355</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7da0ea60">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv6→:::0</data>
+  <data key="d2">TCPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">5357</data>
+  <data key="d5">::</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">System</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7db1aec0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">51716</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7db8b150">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→0.0.0.0:0</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">49156</data>
+  <data key="d5">0.0.0.0</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">lsass.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7dbaf4f0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">127.0.0.1</data>
+  <data key="d4">51501</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7dbcf2b0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→142.250.200.3:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49288</data>
+  <data key="d5">142.250.200.3</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">-</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7dbd59b0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">51715</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7dbdf240">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→0.0.0.0:0</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">139</data>
+  <data key="d5">0.0.0.0</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">System</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7dbef650">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">3702</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7dc081f0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">127.0.0.1</data>
+  <data key="d4">63159</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7dc08340">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">fe80::7c90:904d:467a:91f4</data>
+  <data key="d4">63156</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7dc9bac0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::1</data>
+  <data key="d4">1900</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7dd00610">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">3702</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7dd00ec0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">138</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">System</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7dd3dcf0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→172.217.16.227:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49348</data>
+  <data key="d5">172.217.16.227</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7dd54870">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→56.27.155.3:0</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">-</data>
+  <data key="d4">0</data>
+  <data key="d5">56.27.155.3</data>
+  <data key="d6">0</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7de93cf0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→172.217.16.227:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49358</data>
+  <data key="d5">172.217.16.227</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7df4ca60">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→0.0.0.0:0</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">135</data>
+  <data key="d5">0.0.0.0</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7df4d290">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv6→:::0</data>
+  <data key="d2">TCPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">135</data>
+  <data key="d5">::</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7df65100">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv6→:::0</data>
+  <data key="d2">TCPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">49152</data>
+  <data key="d5">::</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">wininit.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7df65da0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→0.0.0.0:0</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">49152</data>
+  <data key="d5">0.0.0.0</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">wininit.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7df81850">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→0.0.0.0:0</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">49154</data>
+  <data key="d5">0.0.0.0</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7df83da0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv6→:::0</data>
+  <data key="d2">TCPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">49154</data>
+  <data key="d5">::</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7df9faf0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→0.0.0.0:0</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">49153</data>
+  <data key="d5">0.0.0.0</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7dfab010">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv6→:::0</data>
+  <data key="d2">TCPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">49153</data>
+  <data key="d5">::</data>
+  <data key="d6">0</data>
+  <data key="d7">LISTENING</data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7e254640">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→172.217.16.238:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49355</data>
+  <data key="d5">172.217.16.238</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7e8fe5f0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">63162</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7eb35310">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→142.250.187.238:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49340</data>
+  <data key="d5">142.250.187.238</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7ebf8780">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→172.217.169.67:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">-</data>
+  <data key="d4">49345</data>
+  <data key="d5">172.217.169.67</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7ec47510">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→172.217.16.227:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49347</data>
+  <data key="d5">172.217.16.227</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7eccf630">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→172.217.169.35:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49357</data>
+  <data key="d5">172.217.169.35</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7efc5cf0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→216.58.212.202:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49287</data>
+  <data key="d5">216.58.212.202</data>
+  <data key="d6">443</data>
+  <data key="d7">ESTABLISHED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">True</data>
+  <data key="d10">True</data>
+</node>
+<node id="ip_216_58_212_202">
+  <data key="d0">ip_address</data>
+  <data key="d1">216.58.212.202</data>
+  <data key="d11">216.58.212.202</data>
+  <data key="d9">True</data>
+</node>
+<node id="net_0x7f105cf0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→142.251.5.188:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49294</data>
+  <data key="d5">142.251.5.188</data>
+  <data key="d6">443</data>
+  <data key="d7">ESTABLISHED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">True</data>
+  <data key="d10">True</data>
+</node>
+<node id="ip_142_251_5_188">
+  <data key="d0">ip_address</data>
+  <data key="d1">142.251.5.188</data>
+  <data key="d11">142.251.5.188</data>
+  <data key="d9">True</data>
+</node>
+<node id="net_0x7f1b7cb0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">137</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">System</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fabd8c0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→142.250.200.14:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">-</data>
+  <data key="d4">49313</data>
+  <data key="d5">142.250.200.14</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fb06010">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→142.250.200.14:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">-</data>
+  <data key="d4">49309</data>
+  <data key="d5">142.250.200.14</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fb35a10">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">0</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fb35cb0">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">0</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fb40470">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">123</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fb45010">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">123</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fc1f540">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→142.250.179.226:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">-</data>
+  <data key="d4">49332</data>
+  <data key="d5">142.250.179.226</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fc27770">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv4→*:0</data>
+  <data key="d2">UDPv4</data>
+  <data key="d3">0.0.0.0</data>
+  <data key="d4">5353</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fcb8cf0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→142.250.187.238:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49304</data>
+  <data key="d5">142.250.187.238</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fcc9580">
+  <data key="d0">network_conn</data>
+  <data key="d1">UDPv6→*:0</data>
+  <data key="d2">UDPv6</data>
+  <data key="d3">::</data>
+  <data key="d4">5353</data>
+  <data key="d5">*</data>
+  <data key="d6">0</data>
+  <data key="d7"></data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fcd3740">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→172.217.16.234:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">-</data>
+  <data key="d4">49308</data>
+  <data key="d5">172.217.16.234</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fd0a540">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→-:0</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">16.113.156.2</data>
+  <data key="d4">0</data>
+  <data key="d5">-</data>
+  <data key="d6">0</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">-</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fd50cf0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→142.250.200.3:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49356</data>
+  <data key="d5">142.250.200.3</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fd54010">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→142.250.179.238:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">-</data>
+  <data key="d4">49297</data>
+  <data key="d5">142.250.179.238</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fd7b010">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→142.250.200.1:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">-</data>
+  <data key="d4">49344</data>
+  <data key="d5">142.250.200.1</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7fd7bcf0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→34.104.35.123:80</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49289</data>
+  <data key="d5">34.104.35.123</data>
+  <data key="d6">80</data>
+  <data key="d7">ESTABLISHED</data>
+  <data key="d8">svchost.exe</data>
+  <data key="d9">True</data>
+  <data key="d10">True</data>
+</node>
+<node id="ip_34_104_35_123">
+  <data key="d0">ip_address</data>
+  <data key="d1">34.104.35.123</data>
+  <data key="d11">34.104.35.123</data>
+  <data key="d9">True</data>
+</node>
+<node id="net_0x7fe54ae0">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→34.104.35.123:80</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">10.0.2.15</data>
+  <data key="d4">49240</data>
+  <data key="d5">34.104.35.123</data>
+  <data key="d6">80</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">-</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<node id="net_0x7ff70a20">
+  <data key="d0">network_conn</data>
+  <data key="d1">TCPv4→142.250.180.14:443</data>
+  <data key="d2">TCPv4</data>
+  <data key="d3">-</data>
+  <data key="d4">49305</data>
+  <data key="d5">142.250.180.14</data>
+  <data key="d6">443</data>
+  <data key="d7">CLOSED</data>
+  <data key="d8">chrome.exe</data>
+  <data key="d9">False</data>
+  <data key="d10">False</data>
+</node>
+<edge source="net_0x7d446280" target="ip_142_250_187_238">
+  <data key="d12">connects_to</data>
+  <data key="d13">443</data>
+  <data key="d14">TCPv4</data>
+</edge>
+<edge source="net_0x7d546010" target="ip_142_250_200_46">
+  <data key="d12">connects_to</data>
+  <data key="d13">443</data>
+  <data key="d14">TCPv4</data>
+</edge>
+<edge source="net_0x7d6e7250" target="ip_172_217_16_227">
+  <data key="d12">connects_to</data>
+  <data key="d13">443</data>
+  <data key="d14">TCPv4</data>
+</edge>
+<edge source="net_0x7d8931f0" target="ip_172_217_16_227">
+  <data key="d12">connects_to</data>
+  <data key="d13">443</data>
+  <data key="d14">TCPv4</data>
+</edge>
+<edge source="net_0x7efc5cf0" target="ip_216_58_212_202">
+  <data key="d12">connects_to</data>
+  <data key="d13">443</data>
+  <data key="d14">TCPv4</data>
+</edge>
+<edge source="net_0x7f105cf0" target="ip_142_251_5_188">
+  <data key="d12">connects_to</data>
+  <data key="d13">443</data>
+  <data key="d14">TCPv4</data>
+</edge>
+<edge source="net_0x7fd7bcf0" target="ip_34_104_35_123">
+  <data key="d12">connects_to</data>
+  <data key="d13">80</data>
+  <data key="d14">TCPv4</data>
+</edge>
+</graph></graphml>

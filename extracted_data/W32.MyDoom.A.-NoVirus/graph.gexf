@@ -1,0 +1,1232 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2026-03-20">
+    <creator>NetworkX 3.6.1</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <attributes mode="static" class="edge">
+      <attribute id="11" title="edge_type" type="string" />
+      <attribute id="12" title="port" type="long" />
+      <attribute id="13" title="proto" type="string" />
+    </attributes>
+    <attributes mode="static" class="node">
+      <attribute id="0" title="node_type" type="string" />
+      <attribute id="1" title="proto" type="string" />
+      <attribute id="2" title="local_addr" type="string" />
+      <attribute id="3" title="local_port" type="long" />
+      <attribute id="4" title="foreign_addr" type="string" />
+      <attribute id="5" title="foreign_port" type="long" />
+      <attribute id="6" title="state" type="string" />
+      <attribute id="7" title="owner" type="string" />
+      <attribute id="8" title="is_external" type="boolean" />
+      <attribute id="9" title="is_suspicious" type="boolean" />
+      <attribute id="10" title="address" type="string" />
+    </attributes>
+    <nodes>
+      <node id="kernel_system" label="KERNEL">
+        <attvalues>
+          <attvalue for="0" value="kernel" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d435590" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="127.0.0.1" />
+          <attvalue for="3" value="1900" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d446280" label="TCPv4→142.250.187.238:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49359" />
+          <attvalue for="4" value="142.250.187.238" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="ESTABLISHED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="true" />
+        </attvalues>
+      </node>
+      <node id="ip_142_250_187_238" label="142.250.187.238">
+        <attvalues>
+          <attvalue for="0" value="ip_address" />
+          <attvalue for="10" value="142.250.187.238" />
+          <attvalue for="8" value="true" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d469ad0" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="63158" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d4721f0" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49635" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d48d9c0" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::1" />
+          <attvalue for="3" value="63157" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d493c80" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="fe80::7c90:904d:467a:91f4" />
+          <attvalue for="3" value="1900" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d5030f0" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="3702" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d5061f0" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="3702" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d5066f0" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="3702" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d506ec0" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="3702" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d5073e0" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="63161" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d507790" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="63160" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d521ec0" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d5279c0" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d546010" label="TCPv4→142.250.200.46:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49353" />
+          <attvalue for="4" value="142.250.200.46" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="ESTABLISHED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="true" />
+        </attvalues>
+      </node>
+      <node id="ip_142_250_200_46" label="142.250.200.46">
+        <attvalues>
+          <attvalue for="0" value="ip_address" />
+          <attvalue for="10" value="142.250.200.46" />
+          <attvalue for="8" value="true" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d6e7250" label="TCPv4→172.217.16.227:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49360" />
+          <attvalue for="4" value="172.217.16.227" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="ESTABLISHED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="true" />
+        </attvalues>
+      </node>
+      <node id="ip_172_217_16_227" label="172.217.16.227">
+        <attvalues>
+          <attvalue for="0" value="ip_address" />
+          <attvalue for="10" value="172.217.16.227" />
+          <attvalue for="8" value="true" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d7deec0" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="1900" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d8077f0" label="TCPv6→:::0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="445" />
+          <attvalue for="4" value="::" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="System" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d823550" label="TCPv6→:::0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="49155" />
+          <attvalue for="4" value="::" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="services.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d828ef0" label="TCPv4→0.0.0.0:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="49155" />
+          <attvalue for="4" value="0.0.0.0" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="services.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d848cf0" label="TCPv4→172.217.16.234:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="-" />
+          <attvalue for="3" value="49310" />
+          <attvalue for="4" value="172.217.16.234" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d853010" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="3702" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d8931f0" label="TCPv4→172.217.16.227:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49361" />
+          <attvalue for="4" value="172.217.16.227" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="ESTABLISHED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="true" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d893c60" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d8f2ce0" label="TCPv6→:::0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="49156" />
+          <attvalue for="4" value="::" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="lsass.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d922010" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="5355" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7d95c010" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="3702" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7da0a7f0" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="5355" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7da0ea60" label="TCPv6→:::0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="5357" />
+          <attvalue for="4" value="::" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="System" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7db1aec0" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="51716" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7db8b150" label="TCPv4→0.0.0.0:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="49156" />
+          <attvalue for="4" value="0.0.0.0" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="lsass.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7dbaf4f0" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="127.0.0.1" />
+          <attvalue for="3" value="51501" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7dbcf2b0" label="TCPv4→142.250.200.3:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49288" />
+          <attvalue for="4" value="142.250.200.3" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="-" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7dbd59b0" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="51715" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7dbdf240" label="TCPv4→0.0.0.0:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="139" />
+          <attvalue for="4" value="0.0.0.0" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="System" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7dbef650" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="3702" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7dc081f0" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="127.0.0.1" />
+          <attvalue for="3" value="63159" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7dc08340" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="fe80::7c90:904d:467a:91f4" />
+          <attvalue for="3" value="63156" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7dc9bac0" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::1" />
+          <attvalue for="3" value="1900" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7dd00610" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="3702" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7dd00ec0" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="138" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="System" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7dd3dcf0" label="TCPv4→172.217.16.227:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49348" />
+          <attvalue for="4" value="172.217.16.227" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7dd54870" label="TCPv4→56.27.155.3:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="-" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="56.27.155.3" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7de93cf0" label="TCPv4→172.217.16.227:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49358" />
+          <attvalue for="4" value="172.217.16.227" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7df4ca60" label="TCPv4→0.0.0.0:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="135" />
+          <attvalue for="4" value="0.0.0.0" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7df4d290" label="TCPv6→:::0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="135" />
+          <attvalue for="4" value="::" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7df65100" label="TCPv6→:::0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="49152" />
+          <attvalue for="4" value="::" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="wininit.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7df65da0" label="TCPv4→0.0.0.0:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="49152" />
+          <attvalue for="4" value="0.0.0.0" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="wininit.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7df81850" label="TCPv4→0.0.0.0:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="49154" />
+          <attvalue for="4" value="0.0.0.0" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7df83da0" label="TCPv6→:::0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="49154" />
+          <attvalue for="4" value="::" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7df9faf0" label="TCPv4→0.0.0.0:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="49153" />
+          <attvalue for="4" value="0.0.0.0" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7dfab010" label="TCPv6→:::0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="49153" />
+          <attvalue for="4" value="::" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="LISTENING" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7e254640" label="TCPv4→172.217.16.238:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49355" />
+          <attvalue for="4" value="172.217.16.238" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7e8fe5f0" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="63162" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7eb35310" label="TCPv4→142.250.187.238:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49340" />
+          <attvalue for="4" value="142.250.187.238" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7ebf8780" label="TCPv4→172.217.169.67:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="-" />
+          <attvalue for="3" value="49345" />
+          <attvalue for="4" value="172.217.169.67" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7ec47510" label="TCPv4→172.217.16.227:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49347" />
+          <attvalue for="4" value="172.217.16.227" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7eccf630" label="TCPv4→172.217.169.35:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49357" />
+          <attvalue for="4" value="172.217.169.35" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7efc5cf0" label="TCPv4→216.58.212.202:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49287" />
+          <attvalue for="4" value="216.58.212.202" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="ESTABLISHED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="true" />
+        </attvalues>
+      </node>
+      <node id="ip_216_58_212_202" label="216.58.212.202">
+        <attvalues>
+          <attvalue for="0" value="ip_address" />
+          <attvalue for="10" value="216.58.212.202" />
+          <attvalue for="8" value="true" />
+        </attvalues>
+      </node>
+      <node id="net_0x7f105cf0" label="TCPv4→142.251.5.188:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49294" />
+          <attvalue for="4" value="142.251.5.188" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="ESTABLISHED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="true" />
+        </attvalues>
+      </node>
+      <node id="ip_142_251_5_188" label="142.251.5.188">
+        <attvalues>
+          <attvalue for="0" value="ip_address" />
+          <attvalue for="10" value="142.251.5.188" />
+          <attvalue for="8" value="true" />
+        </attvalues>
+      </node>
+      <node id="net_0x7f1b7cb0" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="137" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="System" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fabd8c0" label="TCPv4→142.250.200.14:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="-" />
+          <attvalue for="3" value="49313" />
+          <attvalue for="4" value="142.250.200.14" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fb06010" label="TCPv4→142.250.200.14:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="-" />
+          <attvalue for="3" value="49309" />
+          <attvalue for="4" value="142.250.200.14" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fb35a10" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fb35cb0" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fb40470" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="123" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fb45010" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="123" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fc1f540" label="TCPv4→142.250.179.226:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="-" />
+          <attvalue for="3" value="49332" />
+          <attvalue for="4" value="142.250.179.226" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fc27770" label="UDPv4→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv4" />
+          <attvalue for="2" value="0.0.0.0" />
+          <attvalue for="3" value="5353" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fcb8cf0" label="TCPv4→142.250.187.238:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49304" />
+          <attvalue for="4" value="142.250.187.238" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fcc9580" label="UDPv6→*:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="UDPv6" />
+          <attvalue for="2" value="::" />
+          <attvalue for="3" value="5353" />
+          <attvalue for="4" value="*" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fcd3740" label="TCPv4→172.217.16.234:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="-" />
+          <attvalue for="3" value="49308" />
+          <attvalue for="4" value="172.217.16.234" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fd0a540" label="TCPv4→-:0">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="16.113.156.2" />
+          <attvalue for="3" value="0" />
+          <attvalue for="4" value="-" />
+          <attvalue for="5" value="0" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="-" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fd50cf0" label="TCPv4→142.250.200.3:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49356" />
+          <attvalue for="4" value="142.250.200.3" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fd54010" label="TCPv4→142.250.179.238:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="-" />
+          <attvalue for="3" value="49297" />
+          <attvalue for="4" value="142.250.179.238" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fd7b010" label="TCPv4→142.250.200.1:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="-" />
+          <attvalue for="3" value="49344" />
+          <attvalue for="4" value="142.250.200.1" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fd7bcf0" label="TCPv4→34.104.35.123:80">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49289" />
+          <attvalue for="4" value="34.104.35.123" />
+          <attvalue for="5" value="80" />
+          <attvalue for="6" value="ESTABLISHED" />
+          <attvalue for="7" value="svchost.exe" />
+          <attvalue for="8" value="true" />
+          <attvalue for="9" value="true" />
+        </attvalues>
+      </node>
+      <node id="ip_34_104_35_123" label="34.104.35.123">
+        <attvalues>
+          <attvalue for="0" value="ip_address" />
+          <attvalue for="10" value="34.104.35.123" />
+          <attvalue for="8" value="true" />
+        </attvalues>
+      </node>
+      <node id="net_0x7fe54ae0" label="TCPv4→34.104.35.123:80">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="10.0.2.15" />
+          <attvalue for="3" value="49240" />
+          <attvalue for="4" value="34.104.35.123" />
+          <attvalue for="5" value="80" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="-" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+      <node id="net_0x7ff70a20" label="TCPv4→142.250.180.14:443">
+        <attvalues>
+          <attvalue for="0" value="network_conn" />
+          <attvalue for="1" value="TCPv4" />
+          <attvalue for="2" value="-" />
+          <attvalue for="3" value="49305" />
+          <attvalue for="4" value="142.250.180.14" />
+          <attvalue for="5" value="443" />
+          <attvalue for="6" value="CLOSED" />
+          <attvalue for="7" value="chrome.exe" />
+          <attvalue for="8" value="false" />
+          <attvalue for="9" value="false" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="net_0x7d446280" target="ip_142_250_187_238" id="0">
+        <attvalues>
+          <attvalue for="11" value="connects_to" />
+          <attvalue for="12" value="443" />
+          <attvalue for="13" value="TCPv4" />
+        </attvalues>
+      </edge>
+      <edge source="net_0x7d546010" target="ip_142_250_200_46" id="1">
+        <attvalues>
+          <attvalue for="11" value="connects_to" />
+          <attvalue for="12" value="443" />
+          <attvalue for="13" value="TCPv4" />
+        </attvalues>
+      </edge>
+      <edge source="net_0x7d6e7250" target="ip_172_217_16_227" id="2">
+        <attvalues>
+          <attvalue for="11" value="connects_to" />
+          <attvalue for="12" value="443" />
+          <attvalue for="13" value="TCPv4" />
+        </attvalues>
+      </edge>
+      <edge source="net_0x7d8931f0" target="ip_172_217_16_227" id="3">
+        <attvalues>
+          <attvalue for="11" value="connects_to" />
+          <attvalue for="12" value="443" />
+          <attvalue for="13" value="TCPv4" />
+        </attvalues>
+      </edge>
+      <edge source="net_0x7efc5cf0" target="ip_216_58_212_202" id="4">
+        <attvalues>
+          <attvalue for="11" value="connects_to" />
+          <attvalue for="12" value="443" />
+          <attvalue for="13" value="TCPv4" />
+        </attvalues>
+      </edge>
+      <edge source="net_0x7f105cf0" target="ip_142_251_5_188" id="5">
+        <attvalues>
+          <attvalue for="11" value="connects_to" />
+          <attvalue for="12" value="443" />
+          <attvalue for="13" value="TCPv4" />
+        </attvalues>
+      </edge>
+      <edge source="net_0x7fd7bcf0" target="ip_34_104_35_123" id="6">
+        <attvalues>
+          <attvalue for="11" value="connects_to" />
+          <attvalue for="12" value="80" />
+          <attvalue for="13" value="TCPv4" />
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>
