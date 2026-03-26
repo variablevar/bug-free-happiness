@@ -1,19 +1,60 @@
+# MalVol — Ransomware Detection via Memory Forensics & Graph Neural Networks
+
+> **MSc Cybersecurity Dissertation Project**
+> Automated ransomware detection from Windows memory dumps using Volatility 3 forensics and Graph Neural Networks (GIN / GraphSAGE).
 
 ---
 
-## Dataset Manifest Format
+## Overview
 
-`extracted_data/dataset_manifest.csv` must contain:
+MalVol is an end-to-end pipeline that:
 
-| Column | Description |
-|---|---|
-| `folder` | Sample directory name (e.g. `WannaCry-WithVirus`) |
-| `label` | `1` = malware, `0` = benign |
-| `family` | Malware family name (e.g. `WannaCry`) |
-| `max_score` | Peak heuristic score from graph\_summary.py |
-| `attack_steps` | Number of attack chain steps detected |
-| `injections` | Count of malfind RWX regions |
-| `c2_conns` | Count of external ESTABLISHED connections |
+1. **Extracts** forensic artefacts from Windows memory dumps using **Volatility 3** (pslist, psscan, malfind, filescan, netscan, and 12+ more plugins)
+2. **Analyses** memory-resident Indicators of Compromise (IOCs) — code injection, hidden processes, suspicious files, C2 network activity
+3. **Builds** a heterogeneous OS behavioural graph per sample (processes, DLLs, network connections, files as nodes)
+4. **Trains** a Graph Neural Network (GIN or GraphSAGE) on the resulting graphs to classify samples as **malware** or **benign**
+5. **Scores** new samples in real time via a heuristic engine mapped to MITRE ATT&CK tactics
+
+The project evaluates **24 real-world malware samples** across multiple ransomware families (e.g. WannaCry) in WithVirus / NoVirus paired dumps.
+
+---
+
+## Repository Structure
+
+```text
+bug-free-happiness/
+├── auto_vol.py               # Parallel Volatility 3 extraction over all memory dumps
+├── analysis_corpus.py        # Full corpus statistics & combined IOC view
+├── analyze_graph.py          # Graph-level analysis and visualisation
+├── build_dataset.py          # Construct dataset_manifest.csv from extracted_data/
+├── build_graph.py            # Build heterogeneous behavioural graphs (PyG format)
+├── code_injection_analysis.py# malfind RWX / MZ header IOC analysis
+├── hidden_proc_analysis.py   # psscan vs pslist hidden process detection
+├── filescan_analysis.py      # Suspicious file staging detection
+├── network_analysis.py       # Non-standard / C2 network connection analysis
+├── filter_malicious.py       # Per-sample malicious artefact filtering & scoring
+├── memory_triage.py          # High-level triage across dump corpus
+├── dataset.py                # PyG Dataset class wrapping extracted graphs
+├── model.py                  # GIN and GraphSAGE model definitions
+├── train.py                  # 5-fold cross-validated training loop
+├── test_train.py             # Unit tests for training pipeline
+├── script.py                 # Utility / batch processing script
+├── server.py                 # Flask/FastAPI server (dashboard backend)
+├── socket_server.py          # WebSocket server for live scoring
+├── results_gin_5fold.json    # GIN baseline 5-fold CV results
+├── requirements.txt          # Python dependencies
+├── PIPELINE_README.md        # Quick-start guide for the dashboard flow
+└── extracted_data/           # Volatility CSVs per sample (not included — see below)
+    └── <Family>-WithVirus/
+        ├── windows_pslist.csv
+        ├── windows_psscan.csv
+        ├── windows_malfind.csv
+        ├── windows_filescan.csv
+        └── ...
+    └── <Family>-NoVirus/
+```
+
+> ⚠️ Memory images and ransomware samples are **not included** for safety and licensing reasons. Raw dumps are too large to ship in a repository.
 
 ---
 
@@ -24,33 +65,92 @@ git clone https://github.com/variablevar/bug-free-happiness.git
 cd bug-free-happiness
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install torch torch-geometric pandas numpy scikit-learn
+pip install -r requirements.txt
 ```
 
-Volatility 3 is required for the data extraction scripts:
+Volatility 3 must be installed and available as the `vol` command:
+
 ```bash
 pip install volatility3
 ```
 
----
+### Quick Start (Dashboard)
 
-## Usage
-
-### Full pipeline (from memory dump)
 ```bash
-# Step 1 — triage each dump folder
-python filter_malicious.py extracted_data/WannaCry-WithVirus/
-
-# Step 2 — build graph
-python build_graph.py extracted_data/WannaCry-WithVirus/
-
-# Step 3 — behavioural heuristics
-python graph_summary.py extracted_data/WannaCry-WithVirus/
+python server.py
 ```
 
-### Training
+Then open the dashboard in your browser. See [PIPELINE_README.md](PIPELINE_README.md) for full dashboard instructions.
+
+---
+
+## Pipeline
+
+### Step 1 — Volatility 3 Extraction
+
+Place Windows memory images in `memory_dumps/` following the naming convention:
+
+```text
+memory_dumps/
+    WannaCry-WithVirus.mem
+    WannaCry-NoVirus.mem
+    ...
+```
+
+Run parallel extraction across all dumps (17+ plugins):
+
 ```bash
-# GIN (default)
+python auto_vol.py
+```
+
+This writes per-sample CSVs into `extracted_data/<Family>-WithVirus/` and `extracted_data/<Family>-NoVirus/`.
+
+### Step 2 — IOC Analysis
+
+Run individual analysis scripts to compute IOC metrics per sample and per family:
+
+```bash
+python code_injection_analysis.py    # Code injection (malfind RWX + MZ header)
+python hidden_proc_analysis.py       # Hidden processes (psscan vs pslist)
+python filescan_analysis.py          # Suspicious file staging
+python network_analysis.py           # C2-like network connections
+python analysis_corpus.py            # Full corpus combined view
+```
+
+Each script outputs clean CSVs and Markdown-ready tables suitable for reports or papers.
+
+### Step 3 — Graph Construction
+
+Build heterogeneous behavioural graphs (PyTorch Geometric format):
+
+```bash
+python build_graph.py extracted_data/WannaCry-WithVirus/
+```
+
+Processes, DLLs, network connections, and files become nodes; edges encode relationships (parent–child, loaded-by, connected-to, wrote).
+
+### Step 4 — Dataset Manifest
+
+```bash
+python build_dataset.py
+```
+
+Produces `extracted_data/dataset_manifest.csv`:
+
+| Column | Description |
+|---|---|
+| `folder` | Sample directory name (e.g. `WannaCry-WithVirus`) |
+| `label` | `1` = malware, `0` = benign |
+| `family` | Malware family name |
+| `max_score` | Peak heuristic score |
+| `attack_steps` | Number of attack chain steps detected |
+| `injections` | Count of malfind RWX regions |
+| `c2_conns` | Count of external ESTABLISHED connections |
+
+### Step 5 — Train GNN
+
+```bash
+# GIN (default, 5-fold CV)
 python train.py extracted_data/dataset_manifest.csv
 
 # GraphSAGE
@@ -70,7 +170,8 @@ for seed in 0 1 2; do
 done
 ```
 
-### CLI Reference
+#### CLI Reference
+
 | Argument | Default | Description |
 |---|---|---|
 | `manifest` | — | Path to `dataset_manifest.csv` |
@@ -88,22 +189,9 @@ done
 
 ---
 
-## Results (MalVol-25, seed=42)
+## Behavioural Heuristics (MITRE ATT&CK)
 
-| Model | Accuracy | F1 | AUC-ROC |
-|---|---|---|---|
-| GIN (v2, baseline) | 0.633 ± 0.163 | 0.743 ± 0.093 | 0.644 ± 0.269 |
-| GIN (v3, weighted + clipped + graph\_attr) | TBD | TBD | TBD |
-| GraphSAGE | TBD | TBD | TBD |
-
-> ⚠️ Dataset contains 30 samples (15 malware / 15 benign). Metrics have high variance
-> by design — run multiple seeds and average for reliable reporting.
-
----
-
-## Behavioural Heuristics (graph_summary.py)
-
-The heuristic engine scores each graph across 5 dimensions:
+The heuristic engine in `filter_malicious.py` scores each graph across 5 MITRE ATT&CK dimensions:
 
 | Tactic | MITRE | Signal |
 |---|---|---|
@@ -117,12 +205,35 @@ Verdict levels: `CRITICAL` · `HIGH` · `MEDIUM` · `LOW`
 
 ---
 
+## Results (MalVol-25, seed=42)
+
+| Model | Accuracy | F1 | AUC-ROC |
+|---|---|---|---|
+| GIN (v2, baseline) | 0.633 ± 0.163 | 0.743 ± 0.093 | 0.644 ± 0.269 |
+| GIN (v3, weighted + clipped + graph_attr) | TBD | TBD | TBD |
+| GraphSAGE | TBD | TBD | TBD |
+
+> ⚠️ Dataset contains 30 samples (15 malware / 15 benign). Metrics have high variance by design — run multiple seeds and average for reliable reporting.
+
+---
+
+## Indicators of Compromise (IOCs)
+
+The pipeline detects four categories of memory-resident IOCs:
+
+- **Code injection** — suspicious executable memory regions identified by `windows.malfind` (RWX pages with MZ headers)
+- **Hidden processes** — objects in `psscan` not visible in `pslist`, indicating process hiding/rootkit behaviour
+- **Suspicious file staging** — executables and payloads discovered via `windows.filescan`
+- **Non-standard network activity** — outbound C2-like connections identified via `windows.netscan`
+
+---
+
 ## Limitations
 
 - **Small dataset (30 samples)** — results have high variance; aim for 60–100+ for reliable CV
-- **Node features are shallow** — one-hot + numeric; future work: pretrained embeddings on Windows API/DLL names
-- **No family-aware splitting** — `WithVirus`/`NoVirus` pairs from the same family may leak across folds
-- **CPU only tested** — CUDA path untested but implemented
+- **Shallow node features** — one-hot + numeric; future work: pretrained embeddings on Windows API/DLL names
+- **No family-aware splitting** — WithVirus/NoVirus pairs from the same family may leak across folds
+- **CPU only tested** — CUDA path is implemented but untested
 
 ---
 
@@ -144,3 +255,14 @@ Verdict levels: `CRITICAL` · `HIGH` · `MEDIUM` · `LOW`
 - [ ] Combined FCG + behavioural graph (process nodes carry code-structure subgraph)
 - [ ] Explainability: GNNExplainer to identify which nodes/edges drive classification
 - [ ] Real-time scoring: integrate with live Volatility memory acquisition
+
+---
+
+## Academic Context
+
+This repository supports an **MSc Cybersecurity dissertation** on automated ransomware detection using Volatility 3 memory forensics, focusing on:
+
+- Building a labelled ransomware memory corpus (MalVol-25)
+- Automating Volatility 3 extraction at scale across 17+ plugins
+- Quantifying memory-based IOCs for ransomware detection
+- Applying Graph Neural Networks to heterogeneous OS behavioural graphs
