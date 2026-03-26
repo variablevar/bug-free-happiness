@@ -1,135 +1,146 @@
-# Automated Ransomware Detection with Volatility 3
 
-This project implements an automated, parallelised memory forensics pipeline using **Volatility 3** to detect ransomware activity from Windows memory dumps. It was developed as part of an MSc Cybersecurity dissertation and evaluates **24 real-world malware samples** (WithVirus/NoVirus pairs) across multiple ransomware families.
+---
 
-## If you are here from the dashboard follow here
+## Dataset Manifest Format
+
+`extracted_data/dataset_manifest.csv` must contain:
+
+| Column | Description |
+|---|---|
+| `folder` | Sample directory name (e.g. `WannaCry-WithVirus`) |
+| `label` | `1` = malware, `0` = benign |
+| `family` | Malware family name (e.g. `WannaCry`) |
+| `max_score` | Peak heuristic score from graph\_summary.py |
+| `attack_steps` | Number of attack chain steps detected |
+| `injections` | Count of malfind RWX regions |
+| `c2_conns` | Count of external ESTABLISHED connections |
+
+---
+
+## Installation
 
 ```bash
 git clone https://github.com/variablevar/bug-free-happiness.git
 cd bug-free-happiness
-
-# optional
 python -m venv .venv
-source .venv/bin/activate
-
-pip install -r requirements.txt
-python server.py
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install torch torch-geometric pandas numpy scikit-learn
 ```
 
-## Features
-
-- Parallel **Volatility 3** CSV extraction for large memory corpora
-- Support for 17+ Windows plugins (e.g. `pslist`, `psscan`, `malfind`, `filescan`, `netscan`)
-- Automated IOC extraction and comparison for:
-  - Code injection (`malfind`)
-  - Hidden processes (`psscan` vs `pslist`)
-  - Suspicious file staging (`filescan`)
-  - Non-standard network activity (`netscan`)
-- WithVirus vs NoVirus differential analysis
-- Export of clean CSVs and Markdown-ready tables for reports
-
-## Repository Structure,
-
-Typical data layout (not included in this repo):
-
-```text
-memory_dumps/
-└── <Family>-WithVirus.raw / .mem / .dmp
-└── <Family>-NoVirus.raw   / .mem / .dmp
-
-extracted_data/
-└── <Family>-WithVirus/
-    ├── windows_pslist.csv
-    ├── windows_psscan.csv
-    ├── windows_malfind.csv
-    ├── windows_filescan.csv
-    └── ...
-└── <Family>-NoVirus/
-    └── ...
-```
-
-## Requirements
-
-- Python 3.10+
-- Volatility 3 installed and in `PATH` (`vol` command)
-
-Install Python dependencies:
-
+Volatility 3 is required for the data extraction scripts:
 ```bash
-pip install -r requirements.txt
+pip install volatility3
 ```
 
+---
 
 ## Usage
 
-### 1. Prepare memory dumps
-
-Place your Windows memory images in:
-
-```text
-memory_dumps/
-    sample1-WithVirus.mem
-    sample1-NoVirus.mem
-    ...
-```
-
-### 2. Run Volatility 3 extraction
-
-This will run all configured plugins over all dumps in parallel and write CSVs to `extracted_data/`:
-
+### Full pipeline (from memory dump)
 ```bash
-python auto_vol.py
+# Step 1 — triage each dump folder
+python filter_malicious.py extracted_data/WannaCry-WithVirus/
+
+# Step 2 — build graph
+python build_graph.py extracted_data/WannaCry-WithVirus/
+
+# Step 3 — behavioural heuristics
+python graph_summary.py extracted_data/WannaCry-WithVirus/
 ```
 
-### 3. Run IOC analysis scripts
-
-Example for malfind (code injection) analysis:
-
+### Training
 ```bash
-# Code injection (malfind) analysis
-python code_injection_analysis.py
+# GIN (default)
+python train.py extracted_data/dataset_manifest.csv
 
-# Hidden process (psscan vs pslist) analysis
-python hidden_proc_analysis.py
+# GraphSAGE
+python train.py extracted_data/dataset_manifest.csv --model sage
 
-# Suspicious file (filescan) analysis
-python filescan_analysis.py
+# Custom hyperparameters
+python train.py extracted_data/dataset_manifest.csv \
+    --epochs 200 --hidden 128 --layers 3 \
+    --batch-size 4 --lr 1e-3 --dropout 0.3
 
-# Network IOC (netscan) analysis
-python network_analysis.py
+# Save best checkpoint per fold
+python train.py extracted_data/dataset_manifest.csv --save-model
 
-# Full corpus statistics / combined view
-python analysis_corpus.py
+# Multiple seeds for reliable results
+for seed in 0 1 2; do
+  python train.py extracted_data/dataset_manifest.csv --seed $seed
+done
 ```
 
-These scripts:
+### CLI Reference
+| Argument | Default | Description |
+|---|---|---|
+| `manifest` | — | Path to `dataset_manifest.csv` |
+| `--model` | `gin` | `gin` or `sage` |
+| `--folds` | `5` | Number of CV folds |
+| `--epochs` | `200` | Training epochs per fold |
+| `--hidden` | `64` | Hidden dimension |
+| `--layers` | `3` | GNN layers |
+| `--dropout` | `0.3` | Dropout rate |
+| `--lr` | `1e-3` | Learning rate |
+| `--weight-decay` | `1e-4` | Adam weight decay |
+| `--batch-size` | `4` | Batch size |
+| `--seed` | `42` | Random seed |
+| `--save-model` | `False` | Save best checkpoint per fold |
 
-- Load the real CSVs from `extracted_data/`
-- Compute IOC metrics per sample and per family
-- Perform basic statistics (mean, standard deviation, t-test, effect size)
-- Export CSVs and Markdown tables ready for reports/papers
+---
 
-## Indicators of Compromise (IOCs)
+## Results (MalVol-25, seed=42)
 
-The analysis focuses on memory-resident IOCs commonly associated with ransomware:
+| Model | Accuracy | F1 | AUC-ROC |
+|---|---|---|---|
+| GIN (v2, baseline) | 0.633 ± 0.163 | 0.743 ± 0.093 | 0.644 ± 0.269 |
+| GIN (v3, weighted + clipped + graph\_attr) | TBD | TBD | TBD |
+| GraphSAGE | TBD | TBD | TBD |
 
-- **Code injection**: suspicious executable pages identified by `windows.malfind`
-- **Hidden processes**: objects present in `psscan` but missing from `pslist`
-- **Suspicious files**: executables and payloads found via `windows.filescan`
-- **Non-standard ports**: outbound C2-like connections via `windows.netscan`
+> ⚠️ Dataset contains 30 samples (15 malware / 15 benign). Metrics have high variance
+> by design — run multiple seeds and average for reliable reporting.
 
-The scripts are designed so you can adapt thresholds and scoring logic for your own datasets.
+---
 
-## Notes and Limitations
+## Behavioural Heuristics (graph_summary.py)
 
-- Memory images and ransomware samples are **not** included for safety and licensing reasons, or more likely the images size are too high  
-- Paths and naming conventions in the scripts assume a `<Family>-WithVirus` / `<Family>-NoVirus` style; adjust as needed.
-- Results depend on correct Volatility symbol resolution for each Windows build.
+The heuristic engine scores each graph across 5 dimensions:
 
-## Academic Context
+| Tactic | MITRE | Signal |
+|---|---|---|
+| Initial Access / Execution | T1218, T1566 | LOLBin usage, script extensions in args |
+| Defense Evasion / Injection | T1055 | malfind RWX + MZ header, shared shellcode stub |
+| Command & Control | T1071 | ESTABLISHED connections to external IPs |
+| Credential Access | T1003.001 | Full LSASS handle access (0x1fffff) |
+| Execution / Impact | T1486 | High-score processes, ransomware note args |
 
-This repository supports an MSc Cybersecurity dissertation on **automated ransomware detection using Volatility 3 memory forensics**, focusing on:
+Verdict levels: `CRITICAL` · `HIGH` · `MEDIUM` · `LOW`
 
-- Building a labelled ransomware memory corpus
-- Automating Volatility 3 extraction at scale
-- Quantifying memory-based IOCs for ransomware detection
+---
+
+## Limitations
+
+- **Small dataset (30 samples)** — results have high variance; aim for 60–100+ for reliable CV
+- **Node features are shallow** — one-hot + numeric; future work: pretrained embeddings on Windows API/DLL names
+- **No family-aware splitting** — `WithVirus`/`NoVirus` pairs from the same family may leak across folds
+- **CPU only tested** — CUDA path untested but implemented
+
+---
+
+## Related Work
+
+| Paper | Method | Difference |
+|---|---|---|
+| MDGraph (Expert Systems 2024) | doc2vec + GraphSAGE on FCG | Code structure graph; requires binary |
+| ProcGCN (PMC 2024) | BoW + DGCNN on FCG from process dump | Single-process FCG; requires IDA Pro |
+| **This work** | GIN/SAGE on heterogeneous OS behavioural graph | System-wide runtime artefacts; no binary needed |
+
+---
+
+## Future Work
+
+- [ ] Expand dataset to 100+ samples
+- [ ] Add pretrained DLL/process name embeddings as node features
+- [ ] Family-aware stratified splitting to prevent leakage
+- [ ] Combined FCG + behavioural graph (process nodes carry code-structure subgraph)
+- [ ] Explainability: GNNExplainer to identify which nodes/edges drive classification
+- [ ] Real-time scoring: integrate with live Volatility memory acquisition
