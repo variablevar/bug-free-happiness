@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """
-train.py  v3
+train.py  v4
 5-fold cross-validation training + evaluation for malware GNN classifier.
 
-Changes vs v2:
-  - batch_size reduced default: 8 → 4  (only 3 batches/epoch was too few)
-  - scheduler patience: 10 → 20        (was decaying LR too aggressively)
-  - epochs default: 100 → 200          (more time to converge on tiny dataset)
-  - class-weighted cross-entropy        (prevents collapse to predict-all-1)
-  - gradient clipping                   (fixes explosive loss at epoch 10)
-  - mean aggregation hint in kwargs     (passed through to model if supported)
-  - per-fold train loss + val metrics printed every 20 epochs (less noise)
+Changes vs v3:
+  - Added --model gat option wiring to GATMalwareClassifier
+  - GAT-specific kwargs: --heads (default 4)
+  - GAT default hidden reduced to 32 (prevents overfit on small dataset)
+  - build_model() updated to handle gat branch
+  - All other logic unchanged — GAT is a drop-in addition
 
 Usage:
     python train.py extracted_data/dataset_manifest.csv
+    python train.py extracted_data/dataset_manifest.csv --model gat
+    python train.py extracted_data/dataset_manifest.csv --model gat --heads 4 --hidden 32 --layers 3
     python train.py extracted_data/dataset_manifest.csv --model sage
-    python train.py extracted_data/dataset_manifest.csv --epochs 200 --hidden 128
+    python train.py extracted_data/dataset_manifest.csv --model gin --epochs 200 --hidden 128
     python train.py extracted_data/dataset_manifest.csv --save-model --seed 0
 """
 
@@ -29,7 +29,7 @@ from sklearn.metrics import (accuracy_score, f1_score,
                               roc_auc_score, confusion_matrix)
 
 from dataset import MalwareGraphDataset
-from model   import GINMalwareClassifier, SAGEMalwareClassifier
+from model   import GINMalwareClassifier, SAGEMalwareClassifier, GATMalwareClassifier
 
 
 # ── Training helpers ──────────────────────────────────────────────────────────
@@ -41,10 +41,8 @@ def train_epoch(model, loader, optimiser, device, class_weights):
         batch = batch.to(device)
         optimiser.zero_grad()
 
-        # FIX: pass graph_attr from batch if it exists
         graph_attr = getattr(batch, "graph_attr", None)
         if graph_attr is not None:
-            # DataLoader stacks graph_attr into [B, 4] automatically
             graph_attr = graph_attr.view(-1, 4).to(device)
 
         out  = model(batch.x, batch.edge_index, batch.batch,
@@ -89,17 +87,30 @@ def evaluate(model, loader, device):
 
 
 def build_model(args, in_dim, device):
-    kwargs = dict(in_channels=in_dim, hidden=args.hidden,
-                  layers=args.layers, dropout=args.dropout)
-    if args.model == "sage":
-        m = SAGEMalwareClassifier(**kwargs)
-    else:
-        m = GINMalwareClassifier(**kwargs)
+    if args.model == "gat":
+        # GAT uses smaller hidden to avoid overfitting on 30-sample dataset
+        hidden = args.hidden if args.hidden != 64 else 32
+        m = GATMalwareClassifier(
+            in_channels=in_dim,
+            hidden=hidden,
+            layers=args.layers,
+            heads=args.heads,
+            dropout=args.dropout,
+        )
+    elif args.model == "sage":
+        m = SAGEMalwareClassifier(
+            in_channels=in_dim, hidden=args.hidden,
+            layers=args.layers, dropout=args.dropout
+        )
+    else:  # gin (default)
+        m = GINMalwareClassifier(
+            in_channels=in_dim, hidden=args.hidden,
+            layers=args.layers, dropout=args.dropout
+        )
     return m.to(device)
 
 
 def compute_class_weights(labels, device):
-    """Inverse-frequency weights so the minority class isn't ignored."""
     counts  = np.bincount(labels)
     total   = len(labels)
     weights = torch.tensor(
@@ -131,7 +142,6 @@ def run(args):
     print(f"[Train] Device : {device}")
     print(f"[Train] Seed   : {args.seed}")
 
-    # ── Load dataset ──────────────────────────────────────────────────────────
     ds = MalwareGraphDataset(args.manifest)
     n  = len(ds)
     if n == 0:
@@ -149,9 +159,10 @@ def run(args):
     label_counts = dict(zip(*np.unique(labels, return_counts=True)))
     print(f"[Train] Graphs    : {n}  |  feature dim={in_dim}")
     print(f"[Train] Model     : {args.model.upper()}")
+    if args.model == "gat":
+        print(f"[Train] GAT heads : {args.heads}")
     print(f"[Train] Label dist: {label_counts}")
 
-    # FIX: class weights computed once from full dataset label distribution
     class_weights = compute_class_weights(labels, device)
     print(f"[Train] Class weights: {class_weights.tolist()}")
 
@@ -179,7 +190,6 @@ def run(args):
         train_ds = [ds[i] for i in train_idx]
         test_ds  = [ds[i] for i in test_idx]
 
-        # FIX: batch_size=4 → 6 batches/epoch instead of 3
         train_loader = DataLoader(train_ds, batch_size=args.batch_size,
                                   shuffle=True)
         test_loader  = DataLoader(test_ds,  batch_size=args.batch_size,
@@ -188,8 +198,6 @@ def run(args):
         model     = build_model(args, in_dim, device)
         optimiser = torch.optim.Adam(model.parameters(), lr=args.lr,
                                      weight_decay=args.weight_decay)
-
-        # FIX: patience=20 — stops LR halving after only ~2 bad epochs
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
             optimiser, mode="max", factor=0.5, patience=20, min_lr=1e-5
         )
@@ -203,7 +211,6 @@ def run(args):
             acc, f1, auc, _ = evaluate(model, test_loader, device)
             scheduler.step(f1)
 
-            # FIX: print every 20 epochs to reduce noise (was every 10)
             if epoch % 20 == 0 or epoch == args.epochs:
                 print(f"  Epoch {epoch:>3}  loss={loss:.4f}  "
                       f"acc={acc:.3f}  f1={f1:.3f}  auc={auc:.3f}  "
@@ -214,7 +221,6 @@ def run(args):
                 best_state = {k: v.clone()
                               for k, v in model.state_dict().items()}
 
-        # Final eval with best weights
         model.load_state_dict(best_state)
         acc, f1, auc, cm = evaluate(model, test_loader, device)
         print(f"  Best → acc={acc:.3f}  f1={f1:.3f}  auc={auc:.3f}")
@@ -227,7 +233,6 @@ def run(args):
 
         fold_results.append({"fold": fold, "acc": acc, "f1": f1, "auc": auc})
 
-        # Per-sample predictions
         model.eval()
         with torch.no_grad():
             for data in test_ds:
@@ -236,7 +241,7 @@ def run(args):
                                         device=device)
                 graph_attr = getattr(data, "graph_attr", None)
                 if graph_attr is not None:
-                    graph_attr = graph_attr.unsqueeze(0).to(device)  # [1, 4]
+                    graph_attr = graph_attr.unsqueeze(0).to(device)
 
                 out  = model(data.x, data.edge_index, batch_vec,
                              graph_attr=graph_attr)
@@ -248,7 +253,6 @@ def run(args):
                 print(f"    {status} {str(name):<35} "
                       f"pred={pred} true={true} prob={prob:.3f}")
 
-    # ── Summary ───────────────────────────────────────────────────────────────
     print("\n" + "=" * 60)
     print(f"  {args.folds}-FOLD CV RESULTS ({args.model.upper()})")
     print("=" * 60)
@@ -267,6 +271,7 @@ def run(args):
             "folds":        args.folds,
             "epochs":       args.epochs,
             "hidden":       args.hidden,
+            "heads":        getattr(args, "heads", None),
             "seed":         args.seed,
             "batch_size":   args.batch_size,
             "timestamp":    datetime.datetime.utcnow().isoformat(),
@@ -290,11 +295,14 @@ if __name__ == "__main__":
         description="5-fold CV training for MalVol-25 GNN classifier"
     )
     parser.add_argument("manifest",       help="Path to dataset_manifest.csv")
-    parser.add_argument("--model",        default="gin", choices=["gin", "sage"])
+    parser.add_argument("--model",        default="gin",
+                        choices=["gin", "sage", "gat"])
     parser.add_argument("--folds",        type=int,   default=5)
     parser.add_argument("--epochs",       type=int,   default=200)
     parser.add_argument("--hidden",       type=int,   default=64)
     parser.add_argument("--layers",       type=int,   default=3)
+    parser.add_argument("--heads",        type=int,   default=4,
+                        help="Number of attention heads (GAT only)")
     parser.add_argument("--dropout",      type=float, default=0.3)
     parser.add_argument("--lr",           type=float, default=1e-3)
     parser.add_argument("--weight-decay", type=float, default=1e-4,
