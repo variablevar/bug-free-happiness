@@ -205,18 +205,6 @@ Verdict levels: `CRITICAL` · `HIGH` · `MEDIUM` · `LOW`
 
 ---
 
-## Results (MalVol-25, seed=42)
-
-| Model | Accuracy | F1 | AUC-ROC |
-|---|---|---|---|
-| GIN (v2, baseline) | 0.633 ± 0.163 | 0.743 ± 0.093 | 0.644 ± 0.269 |
-| GIN (v3, weighted + clipped + graph_attr) | TBD | TBD | TBD |
-| GraphSAGE | TBD | TBD | TBD |
-
-> ⚠️ Dataset contains 30 samples (15 malware / 15 benign). Metrics have high variance by design — run multiple seeds and average for reliable reporting.
-
----
-
 ## Indicators of Compromise (IOCs)
 
 The pipeline detects four categories of memory-resident IOCs:
