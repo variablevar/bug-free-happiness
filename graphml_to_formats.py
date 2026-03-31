@@ -1,27 +1,29 @@
 #!/usr/bin/env python3
 """
-graphml_to_formats.py
-=====================
-Reconstruct graph.json and graph.pkl from graph.graphml for every
-sub-directory inside a given root directory.
+rebuild_pkl.py  (formerly graphml_to_formats.py)
+================================================
+Reconstruct graph.pkl (and optionally re-validate graph.json) from the
+existing graph.json written by build_graph.py for every sub-directory
+inside a given root directory.
 
-Useful when the JSON/pickle files are missing or corrupted but the
-GraphML files are intact.
+Why graph.json, not graph.graphml?
+  build_graph.py writes graph.json and graph.pkl only.
+  graph.graphml is never produced by the pipeline, so reading it yields
+  an empty graph.  The authoritative serialised graph is graph.json
+  (node-link format, edges under key "links").
 
 Usage
 -----
-    python graphml_to_formats.py <root_dir>
-    python graphml_to_formats.py extracted_data_augmented/ --workers 8
-    python graphml_to_formats.py extracted_data/ --dry-run
+    python rebuild_pkl.py <root_dir>
+    python rebuild_pkl.py extracted_data_augmented/ --workers 8
+    python rebuild_pkl.py extracted_data/ --dry-run
 
-For each sub-directory that contains a graph.graphml file the script:
-  1. Reads graph.graphml  → NetworkX DiGraph
-  2. Writes graph.json    (node-link format, overwrites if present)
-  3. Writes graph.pkl     (pickle, overwrites if present)
+For each sub-directory that contains a graph.json file the script:
+  1. Reads  graph.json  → NetworkX DiGraph (via node_link_graph)
+  2. Sanity-checks: warns if the loaded graph has 0 nodes
+  3. Writes graph.pkl   (overwrites if present)
 
-Files that already exist are silently overwritten.
-The --workers flag controls how many threads run in parallel
-(default: number of CPUs on the machine).
+The --workers flag controls parallel threads (default: CPU count).
 """
 
 import argparse
@@ -34,13 +36,13 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import networkx as nx
+from networkx.readwrite import json_graph
 
-# Thread-safe print lock
+# Thread-safe print
 _print_lock = threading.Lock()
 
 
 def tprint(*args, **kwargs):
-    """Thread-safe print."""
     with _print_lock:
         print(*args, **kwargs)
 
@@ -49,52 +51,46 @@ def tprint(*args, **kwargs):
 # Core per-directory logic
 # ---------------------------------------------------------------------------
 
-def graphml_to_nx(graphml_path: Path) -> nx.DiGraph:
-    """Read a GraphML file and return a NetworkX DiGraph."""
-    G = nx.read_graphml(str(graphml_path))
+def json_to_nx(json_path: Path) -> nx.DiGraph:
+    """Load a node-link graph.json and return a NetworkX DiGraph."""
+    with open(json_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    # node_link_graph accepts both 'edges' and 'links' as the edge key
+    G = json_graph.node_link_graph(data, directed=True, multigraph=False, edges="links")
     if not isinstance(G, nx.DiGraph):
         G = nx.DiGraph(G)
     return G
 
 
-def nx_to_json(G: nx.DiGraph) -> dict:
-    """Serialise to node-link JSON dict (edges stored under key 'links')."""
-    return nx.node_link_data(G, edges="links")
-
-
 def process_dir(sample_dir: Path, dry_run: bool = False) -> tuple[str, str]:
     """
     Process one sample directory.
-    Returns (name, status) where status is 'ok', 'skipped', or 'error:<msg>'.
+    Returns (name, status) where status is:
+      'ok'           — graph.pkl written successfully
+      'ok:empty'     — written but graph had 0 nodes (warns)
+      'skipped'      — no graph.json found
+      'error:<msg>'  — something went wrong
     """
-    name = sample_dir.name
-    graphml_path = sample_dir / "graph.graphml"
-
-    if not graphml_path.exists():
-        return name, "skipped"
-
-    try:
-        G = graphml_to_nx(graphml_path)
-    except Exception as exc:
-        return name, f"error:read:{exc}"
-
+    name      = sample_dir.name
     json_path = sample_dir / "graph.json"
     pkl_path  = sample_dir / "graph.pkl"
 
-    if dry_run:
-        json_tag = "(would overwrite)" if json_path.exists() else "(would create)"
-        pkl_tag  = "(would overwrite)" if pkl_path.exists()  else "(would create)"
-        tprint(f"  [dry-run] {name}")
-        tprint(f"            graph.json {json_tag}")
-        tprint(f"            graph.pkl  {pkl_tag}")
-        return name, "ok"
+    if not json_path.exists():
+        return name, "skipped"
 
     try:
-        graph_data = nx_to_json(G)
-        with open(json_path, "w", encoding="utf-8") as f:
-            json.dump(graph_data, f, indent=2)
+        G = json_to_nx(json_path)
     except Exception as exc:
-        return name, f"error:json:{exc}"
+        return name, f"error:read:{exc}"
+
+    empty = G.number_of_nodes() == 0
+
+    if dry_run:
+        pkl_tag = "(would overwrite)" if pkl_path.exists() else "(would create)"
+        node_info = f"{G.number_of_nodes()} nodes, {G.number_of_edges()} edges"
+        tprint(f"  [dry-run] {name}")
+        tprint(f"            graph.pkl {pkl_tag}  [{node_info}]{'  ⚠ EMPTY' if empty else ''}")
+        return name, "ok:empty" if empty else "ok"
 
     try:
         with open(pkl_path, "wb") as f:
@@ -102,7 +98,7 @@ def process_dir(sample_dir: Path, dry_run: bool = False) -> tuple[str, str]:
     except Exception as exc:
         return name, f"error:pkl:{exc}"
 
-    return name, "ok"
+    return name, "ok:empty" if empty else "ok"
 
 
 # ---------------------------------------------------------------------------
@@ -126,7 +122,7 @@ def run(root: Path, workers: int, dry_run: bool = False) -> None:
         f"found in {root}  — using {workers} worker thread(s)  [{mode}]\n"
     )
 
-    ok = skipped = errors = 0
+    ok = skipped = errors = empty_warns = 0
     counter = 0
     total = len(sub_dirs)
 
@@ -141,14 +137,19 @@ def run(root: Path, workers: int, dry_run: bool = False) -> None:
                 ok += 1
                 if not dry_run:
                     tprint(f"  [✓] {name}  ({counter}/{total})")
+            elif status == "ok:empty":
+                ok += 1
+                empty_warns += 1
+                tprint(f"  [⚠] {name}  graph has 0 nodes — graph.json may be corrupt  ({counter}/{total})")
             elif status == "skipped":
                 skipped += 1
-                tprint(f"  [–] {name}  (no graph.graphml — skipped)  ({counter}/{total})")
+                tprint(f"  [–] {name}  (no graph.json — skipped)  ({counter}/{total})")
             else:
                 errors += 1
                 tprint(f"  [!] {name}  {status}  ({counter}/{total})")
 
-    print(f"\n[+] Done — {ok} converted, {skipped} skipped, {errors} errors")
+    print(f"\n[+] Done — {ok} rebuilt, {skipped} skipped, {errors} errors"
+          + (f", {empty_warns} empty-graph warning(s)" if empty_warns else ""))
     if errors:
         sys.exit(1)
 
@@ -159,12 +160,12 @@ def run(root: Path, workers: int, dry_run: bool = False) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Rebuild graph.json and graph.pkl from graph.graphml "
-                    "for every sub-directory in a root directory."
+        description="Rebuild graph.pkl from graph.json for every sub-directory "
+                    "in a root directory."
     )
     parser.add_argument(
         "root_dir",
-        help="Root directory whose sub-directories contain graph.graphml files"
+        help="Root directory whose sub-directories contain graph.json files"
     )
     parser.add_argument(
         "--workers", "-w",
