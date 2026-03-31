@@ -36,8 +36,10 @@ D  benign_variant  — Strip all malware indicators → label 0
 Usage
 -----
     python augment_dataset.py [--variants N] [--noise FLOAT] [--drop FLOAT]
+                              [--workers N] [--skip-existing]
 
-Defaults: 10 variants per strategy, noise=0.10, drop=0.10
+Defaults: 10 variants per strategy, noise=0.10, drop=0.10,
+          workers=os.cpu_count(), skip-existing=False
 """
 
 import argparse
@@ -47,7 +49,8 @@ import os
 import pickle
 import random
 import re
-import xml.etree.ElementTree as ET
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import networkx as nx
@@ -56,12 +59,16 @@ import networkx as nx
 # Constants
 # ---------------------------------------------------------------------------
 
-EXTRACTED_DATA_DIR   = Path("extracted_data")
-AUGMENTED_DATA_DIR   = Path("extracted_data_augmented")
-MANIFEST_PATH        = Path("augmented_manifest.csv")
+EXTRACTED_DATA_DIR  = Path("extracted_data")
+AUGMENTED_DATA_DIR  = Path("extracted_data_augmented")
+MANIFEST_PATH       = Path("augmented_manifest.csv")
 
-VIRUS_KEYWORD        = "WithVirus"
-BENIGN_KEYWORD       = "NoVirus"
+VIRUS_KEYWORD       = "WithVirus"
+BENIGN_KEYWORD      = "NoVirus"
+
+# Files that must all be present for a folder to be considered complete
+EXPECTED_FILES = {"graph.json", "graph.graphml", "graph.gexf",
+                  "graph.pkl", "graph_attr.json"}
 
 PROTECTED_PROCESS_NAMES = {
     "System", "smss.exe", "csrss.exe", "wininit.exe", "winlogon.exe",
@@ -73,52 +80,65 @@ MALWARE_PROCESS_NAMES = {
     "gandcrab.exe", "dharma.exe", "spora.exe",
 }
 
-# XML 1.0 legal character pattern — keep only these
-# https://www.w3.org/TR/xml/#charsets
+# XML 1.0 legal character range — https://www.w3.org/TR/xml/#charsets
 _XML_LEGAL = re.compile(
     r"[^\x09\x0A\x0D\x20-\uD7FF\uE000-\uFFFD\U00010000-\U0010FFFF]"
 )
 
+# Thread-safe print lock
+_print_lock = threading.Lock()
+
+
+def tprint(*args, **kwargs) -> None:
+    """Thread-safe print."""
+    with _print_lock:
+        print(*args, **kwargs)
+
+
 # ---------------------------------------------------------------------------
-# XML sanitisation helper
+# XML sanitisation
 # ---------------------------------------------------------------------------
 
 def _sanitise_str(value: str) -> str:
-    """Strip null bytes and XML 1.0 illegal control characters from a string."""
+    """Strip null bytes and XML 1.0 illegal control characters."""
     return _XML_LEGAL.sub("", value)
 
 
 def sanitise_graph_for_xml(G: nx.DiGraph) -> nx.DiGraph:
-    """
-    Return a copy of G with all string node/edge attributes sanitised so that
-    lxml can serialise them to GraphML / GEXF without raising ValueError.
-    Cleans: null bytes (\x00), and any other XML 1.0 illegal code points.
-    """
+    """Return a copy of G with string attributes safe for lxml serialisation."""
     G2 = G.copy()
-
     for _, data in G2.nodes(data=True):
-        for key, val in list(data.items()):
-            if isinstance(val, str):
-                data[key] = _sanitise_str(val)
-
+        for k, v in list(data.items()):
+            if isinstance(v, str):
+                data[k] = _sanitise_str(v)
     for _, _, data in G2.edges(data=True):
-        for key, val in list(data.items()):
-            if isinstance(val, str):
-                data[key] = _sanitise_str(val)
-
+        for k, v in list(data.items()):
+            if isinstance(v, str):
+                data[k] = _sanitise_str(v)
     return G2
 
 
 # ---------------------------------------------------------------------------
-# Augmentation functions  (all operate on the node-link JSON dict)
+# Skip-existing helper
+# ---------------------------------------------------------------------------
+
+def is_complete(out_dir: Path) -> bool:
+    """Return True if out_dir already contains all 5 expected output files."""
+    if not out_dir.is_dir():
+        return False
+    existing = {f.name for f in out_dir.iterdir() if f.is_file()}
+    return EXPECTED_FILES.issubset(existing)
+
+
+# ---------------------------------------------------------------------------
+# Augmentation functions
 # ---------------------------------------------------------------------------
 
 def augment_feature_noise(G_data: dict, noise_level: float = 0.10,
                           seed: int = 0) -> dict:
-    """Strategy A — add Gaussian noise to numeric process/thread features."""
+    """Strategy A — Gaussian noise on threads / handles / heuristic_score."""
     rng = random.Random(seed)
     G2  = copy.deepcopy(G_data)
-
     for node in G2["nodes"]:
         ntype = node.get("node_type")
         if ntype == "process":
@@ -143,7 +163,6 @@ def augment_drop_nodes(G_data: dict, drop_frac: float = 0.10,
     """Strategy B — drop a fraction of non-critical benign nodes."""
     rng = random.Random(seed)
     G2  = copy.deepcopy(G_data)
-
     removable_ids = set()
     for node in G2["nodes"]:
         ntype = node.get("node_type")
@@ -156,10 +175,8 @@ def augment_drop_nodes(G_data: dict, drop_frac: float = 0.10,
         elif ntype == "thread":
             if node.get("is_suspicious", 0) == 0:
                 removable_ids.add(node["id"])
-
     k = max(1, int(len(removable_ids) * drop_frac))
     to_remove = set(rng.sample(sorted(removable_ids), k))
-
     G2["nodes"] = [n for n in G2["nodes"] if n["id"] not in to_remove]
     G2["links"] = [l for l in G2.get("links", [])
                    if l["source"] not in to_remove
@@ -172,45 +189,38 @@ def augment_drop_edges(G_data: dict, drop_frac: float = 0.10,
     """Strategy C — drop a fraction of non-critical edges."""
     rng = random.Random(seed)
     G2  = copy.deepcopy(G_data)
-
     critical_ids = set()
     for node in G2["nodes"]:
         if (node.get("is_suspicious", 0) == 1
                 or node.get("node_type") == "kernel"
                 or node.get("name", "") in MALWARE_PROCESS_NAMES):
             critical_ids.add(node["id"])
-
     safe_indices = [
         i for i, l in enumerate(G2.get("links", []))
         if l["source"] not in critical_ids
         and l["target"] not in critical_ids
     ]
-
     k = max(1, int(len(safe_indices) * drop_frac))
     to_drop = set(rng.sample(safe_indices, min(k, len(safe_indices))))
-
     G2["links"] = [l for i, l in enumerate(G2.get("links", []))
                    if i not in to_drop]
     return G2
 
 
 def make_benign_variant(G_data: dict, seed: int = 0) -> dict:
-    """Strategy D — strip all malware indicators → label 0 benign sample."""
+    """Strategy D — strip malware indicators → label 0."""
     rng = random.Random(seed)
     G2  = copy.deepcopy(G_data)
-
     malware_ids = {
         node["id"] for node in G2["nodes"]
         if node.get("name", "").lower() in {n.lower() for n in MALWARE_PROCESS_NAMES}
         or node.get("suspicion_reasons", "[]") not in ("[]", "", None)
            and node.get("heuristic_score", 0) >= 6
     }
-
     G2["nodes"] = [n for n in G2["nodes"] if n["id"] not in malware_ids]
     G2["links"] = [l for l in G2.get("links", [])
                    if l["source"] not in malware_ids
                    and l["target"] not in malware_ids]
-
     for node in G2["nodes"]:
         node["is_suspicious"]     = 0
         node["heuristic_score"]   = 0
@@ -219,58 +229,41 @@ def make_benign_variant(G_data: dict, seed: int = 0) -> dict:
             node["threads"] = max(1, node["threads"] + rng.randint(-1, 2))
         if "handles" in node:
             node["handles"] = max(0, node["handles"] + rng.randint(-15, 15))
-
     return G2
 
 
 # ---------------------------------------------------------------------------
-# Format conversion helpers
+# Format conversion & writing
 # ---------------------------------------------------------------------------
 
 def json_data_to_nx(G_data: dict) -> nx.DiGraph:
-    """
-    Convert node-link JSON dict → NetworkX DiGraph.
-
-    edges="links" preserves current behaviour (your graph.json stores edges
-    under the key "links") and silences the FutureWarning introduced in
-    NetworkX 3.4 about the default changing to edges="edges" in NX 3.6.
-    """
-    G = nx.node_link_graph(G_data, directed=True, multigraph=False,
-                           edges="links")
-    return G
+    """Node-link JSON dict → NetworkX DiGraph (edges='links' silences FutureWarning)."""
+    return nx.node_link_graph(G_data, directed=True, multigraph=False,
+                              edges="links")
 
 
 def write_all_formats(G_data: dict, out_dir: Path, graph_attr: dict) -> None:
     """Write graph.json / .graphml / .gexf / .pkl / graph_attr.json."""
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    # JSON (node-link) — written directly from the dict, no sanitisation needed
     with open(out_dir / "graph.json", "w", encoding="utf-8") as f:
         json.dump(G_data, f, indent=2)
 
-    # graph_attr.json
     with open(out_dir / "graph_attr.json", "w", encoding="utf-8") as f:
         json.dump(graph_attr, f, indent=2)
 
-    # NetworkX object (built from raw data for pickle — preserves all bytes)
     G_nx = json_data_to_nx(G_data)
 
-    # Pickle — uses raw G_nx, no sanitisation needed
     with open(out_dir / "graph.pkl", "wb") as f:
         pickle.dump(G_nx, f, protocol=pickle.HIGHEST_PROTOCOL)
 
-    # XML-based formats require sanitised strings — strip null bytes / ctrl chars
     G_xml = sanitise_graph_for_xml(G_nx)
-
-    # GraphML
     nx.write_graphml(G_xml, str(out_dir / "graph.graphml"))
-
-    # GEXF
     nx.write_gexf(G_xml, str(out_dir / "graph.gexf"))
 
 
 # ---------------------------------------------------------------------------
-# Derive label from folder name
+# Label helper
 # ---------------------------------------------------------------------------
 
 def label_from_folder(folder_name: str) -> int:
@@ -282,15 +275,90 @@ def label_from_folder(folder_name: str) -> int:
 
 
 # ---------------------------------------------------------------------------
+# Per-sample worker  (called inside each thread)
+# ---------------------------------------------------------------------------
+
+def process_sample(
+    sample_dir: Path,
+    strategies: list,
+    variants: int,
+    noise: float,
+    skip_existing: bool,
+) -> tuple[list[str], int, int]:
+    """
+    Generate all augmented variants for a single source sample.
+
+    Returns (manifest_rows, generated_count, skipped_count).
+    """
+    sample_name = sample_dir.name
+    base_label  = label_from_folder(sample_name)
+
+    with open(sample_dir / "graph.json", encoding="utf-8") as f:
+        base_graph = json.load(f)
+
+    graph_attr: dict = {}
+    graph_attr_path = sample_dir / "graph_attr.json"
+    if graph_attr_path.exists():
+        with open(graph_attr_path, encoding="utf-8") as f:
+            graph_attr = json.load(f)
+
+    manifest_rows: list[str] = []
+    generated = 0
+    skipped   = 0
+
+    for strategy_tag, strategy_fn, extra_kwargs in strategies:
+        is_benign_strategy = strategy_tag == "aug_benign"
+
+        for seed in range(variants):
+            aug_name = f"{sample_name}__{strategy_tag}_{seed:02d}"
+            out_dir  = AUGMENTED_DATA_DIR / aug_name
+
+            if skip_existing and is_complete(out_dir):
+                skipped += 1
+                aug_label = 0 if is_benign_strategy else base_label
+                manifest_rows.append(
+                    f"{aug_name},{sample_name},{strategy_tag},{aug_label},{seed},{out_dir}"
+                )
+                continue
+
+            kwargs = {"seed": seed, **extra_kwargs}
+            if strategy_tag == "aug_noise" and "noise_level" not in kwargs:
+                kwargs["noise_level"] = noise
+
+            aug_graph = strategy_fn(base_graph, **kwargs)
+            aug_label = 0 if is_benign_strategy else base_label
+
+            aug_attr = copy.deepcopy(graph_attr)
+            aug_attr["label"]    = aug_label
+            aug_attr["strategy"] = strategy_tag
+            aug_attr["source"]   = sample_name
+            aug_attr["seed"]     = seed
+
+            write_all_formats(aug_graph, out_dir, aug_attr)
+
+            manifest_rows.append(
+                f"{aug_name},{sample_name},{strategy_tag},{aug_label},{seed},{out_dir}"
+            )
+            generated += 1
+
+    status = f"  [✓] {sample_name}  "\
+             f"({generated} generated, {skipped} skipped)"
+    tprint(status)
+    return manifest_rows, generated, skipped
+
+
+# ---------------------------------------------------------------------------
 # Main runner
 # ---------------------------------------------------------------------------
 
-def run(variants: int = 10, noise: float = 0.10, drop: float = 0.10) -> None:
+def run(
+    variants: int      = 10,
+    noise: float       = 0.10,
+    drop: float        = 0.10,
+    workers: int       = None,
+    skip_existing: bool = False,
+) -> None:
     AUGMENTED_DATA_DIR.mkdir(exist_ok=True)
-
-    manifest_rows = [
-        "aug_sample_name,source_sample,strategy,label,aug_index,out_path"
-    ]
 
     sample_dirs = sorted([
         d for d in EXTRACTED_DATA_DIR.iterdir()
@@ -298,10 +366,14 @@ def run(variants: int = 10, noise: float = 0.10, drop: float = 0.10) -> None:
     ])
 
     if not sample_dirs:
-        print(f"[!] No sample directories with graph.json found under {EXTRACTED_DATA_DIR}/")
+        print(f"[!] No sample directories with graph.json found under "
+              f"{EXTRACTED_DATA_DIR}/")
         return
 
-    print(f"[+] Found {len(sample_dirs)} sample(s) in {EXTRACTED_DATA_DIR}/")
+    n_workers = workers or os.cpu_count() or 4
+    print(f"[+] Found {len(sample_dirs)} sample(s) — "
+          f"using {n_workers} worker thread(s) "
+          f"({'skip existing' if skip_existing else 'overwrite existing'})")
 
     strategies = [
         ("aug_noise",     augment_feature_noise, {}),
@@ -310,54 +382,37 @@ def run(variants: int = 10, noise: float = 0.10, drop: float = 0.10) -> None:
         ("aug_benign",    make_benign_variant,   {}),
     ]
 
-    total = 0
-    for sample_dir in sample_dirs:
-        sample_name  = sample_dir.name
-        base_label   = label_from_folder(sample_name)
+    all_manifest_rows: list[str] = [
+        "aug_sample_name,source_sample,strategy,label,aug_index,out_path"
+    ]
+    total_generated = 0
+    total_skipped   = 0
 
-        with open(sample_dir / "graph.json", encoding="utf-8") as f:
-            base_graph = json.load(f)
+    with ThreadPoolExecutor(max_workers=n_workers) as pool:
+        futures = {
+            pool.submit(
+                process_sample,
+                sample_dir, strategies, variants, noise, skip_existing
+            ): sample_dir.name
+            for sample_dir in sample_dirs
+        }
 
-        graph_attr_path = sample_dir / "graph_attr.json"
-        graph_attr = {}
-        if graph_attr_path.exists():
-            with open(graph_attr_path, encoding="utf-8") as f:
-                graph_attr = json.load(f)
-
-        for strategy_tag, strategy_fn, extra_kwargs in strategies:
-            is_benign_strategy = strategy_tag == "aug_benign"
-
-            for seed in range(variants):
-                aug_name = f"{sample_name}__{strategy_tag}_{seed:02d}"
-                out_dir  = AUGMENTED_DATA_DIR / aug_name
-
-                kwargs = {"seed": seed, **extra_kwargs}
-                if "noise_level" not in kwargs and strategy_tag == "aug_noise":
-                    kwargs["noise_level"] = noise
-
-                aug_graph = strategy_fn(base_graph, **kwargs)
-                aug_label = 0 if is_benign_strategy else base_label
-
-                aug_attr = copy.deepcopy(graph_attr)
-                aug_attr["label"]    = aug_label
-                aug_attr["strategy"] = strategy_tag
-                aug_attr["source"]   = sample_name
-                aug_attr["seed"]     = seed
-
-                write_all_formats(aug_graph, out_dir, aug_attr)
-
-                manifest_rows.append(
-                    f"{aug_name},{sample_name},{strategy_tag},"
-                    f"{aug_label},{seed},{out_dir}"
-                )
-                total += 1
-
-        print(f"  [✓] {sample_name}  ({len(strategies) * variants} variants generated)")
+        for future in as_completed(futures):
+            sample_name = futures[future]
+            try:
+                rows, generated, skipped = future.result()
+                all_manifest_rows.extend(rows)
+                total_generated += generated
+                total_skipped   += skipped
+            except Exception as exc:
+                tprint(f"  [!] {sample_name} failed: {exc}")
 
     with open(MANIFEST_PATH, "w", encoding="utf-8") as f:
-        f.write("\n".join(manifest_rows))
+        f.write("\n".join(all_manifest_rows))
 
-    print(f"\n[+] Done — {total} augmented graphs written to {AUGMENTED_DATA_DIR}/")
+    print(f"\n[+] Done — {total_generated} generated, "
+          f"{total_skipped} skipped — "
+          f"{total_generated + total_skipped} total variants")
     print(f"[+] Manifest saved → {MANIFEST_PATH}")
 
 
@@ -381,5 +436,19 @@ if __name__ == "__main__":
         "--drop", type=float, default=0.10,
         help="Drop fraction for drop_nodes / drop_edges strategies (default: 0.10)"
     )
+    parser.add_argument(
+        "--workers", type=int, default=None,
+        help="Number of parallel worker threads (default: os.cpu_count())"
+    )
+    parser.add_argument(
+        "--skip-existing", action="store_true",
+        help="Skip any output folder that already contains all 5 expected files"
+    )
     args = parser.parse_args()
-    run(variants=args.variants, noise=args.noise, drop=args.drop)
+    run(
+        variants      = args.variants,
+        noise         = args.noise,
+        drop          = args.drop,
+        workers       = args.workers,
+        skip_existing = args.skip_existing,
+    )
