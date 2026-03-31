@@ -46,6 +46,7 @@ import json
 import os
 import pickle
 import random
+import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -59,22 +60,54 @@ EXTRACTED_DATA_DIR   = Path("extracted_data")
 AUGMENTED_DATA_DIR   = Path("extracted_data_augmented")
 MANIFEST_PATH        = Path("augmented_manifest.csv")
 
-# Folders whose name contains these strings are labelled malware (1)
-# Everything else (NoVirus) is labelled benign (0).
 VIRUS_KEYWORD        = "WithVirus"
 BENIGN_KEYWORD       = "NoVirus"
 
-# Process names that must never be removed (system critical + known malware)
 PROTECTED_PROCESS_NAMES = {
     "System", "smss.exe", "csrss.exe", "wininit.exe", "winlogon.exe",
     "services.exe", "lsass.exe", "lsm.exe",
 }
 
-# Known malware process names — always kept when augmenting malware samples
 MALWARE_PROCESS_NAMES = {
     "cerber.exe", "mshta.exe", "wannacry.exe", "locky.exe",
     "gandcrab.exe", "dharma.exe", "spora.exe",
 }
+
+# XML 1.0 legal character pattern — keep only these
+# https://www.w3.org/TR/xml/#charsets
+_XML_LEGAL = re.compile(
+    r"[^\x09\x0A\x0D\x20-\uD7FF\uE000-\uFFFD\U00010000-\U0010FFFF]"
+)
+
+# ---------------------------------------------------------------------------
+# XML sanitisation helper
+# ---------------------------------------------------------------------------
+
+def _sanitise_str(value: str) -> str:
+    """Strip null bytes and XML 1.0 illegal control characters from a string."""
+    return _XML_LEGAL.sub("", value)
+
+
+def sanitise_graph_for_xml(G: nx.DiGraph) -> nx.DiGraph:
+    """
+    Return a copy of G with all string node/edge attributes sanitised so that
+    lxml can serialise them to GraphML / GEXF without raising ValueError.
+    Cleans: null bytes (\x00), and any other XML 1.0 illegal code points.
+    """
+    G2 = G.copy()
+
+    for _, data in G2.nodes(data=True):
+        for key, val in list(data.items()):
+            if isinstance(val, str):
+                data[key] = _sanitise_str(val)
+
+    for _, _, data in G2.edges(data=True):
+        for key, val in list(data.items()):
+            if isinstance(val, str):
+                data[key] = _sanitise_str(val)
+
+    return G2
+
 
 # ---------------------------------------------------------------------------
 # Augmentation functions  (all operate on the node-link JSON dict)
@@ -140,7 +173,6 @@ def augment_drop_edges(G_data: dict, drop_frac: float = 0.10,
     rng = random.Random(seed)
     G2  = copy.deepcopy(G_data)
 
-    # Collect IDs of nodes we must not sever
     critical_ids = set()
     for node in G2["nodes"]:
         if (node.get("is_suspicious", 0) == 1
@@ -167,7 +199,6 @@ def make_benign_variant(G_data: dict, seed: int = 0) -> dict:
     rng = random.Random(seed)
     G2  = copy.deepcopy(G_data)
 
-    # Find malware node IDs
     malware_ids = {
         node["id"] for node in G2["nodes"]
         if node.get("name", "").lower() in {n.lower() for n in MALWARE_PROCESS_NAMES}
@@ -213,7 +244,7 @@ def write_all_formats(G_data: dict, out_dir: Path, graph_attr: dict) -> None:
     """Write graph.json / .graphml / .gexf / .pkl / graph_attr.json."""
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    # JSON (node-link)
+    # JSON (node-link) — written directly from the dict, no sanitisation needed
     with open(out_dir / "graph.json", "w", encoding="utf-8") as f:
         json.dump(G_data, f, indent=2)
 
@@ -221,18 +252,21 @@ def write_all_formats(G_data: dict, out_dir: Path, graph_attr: dict) -> None:
     with open(out_dir / "graph_attr.json", "w", encoding="utf-8") as f:
         json.dump(graph_attr, f, indent=2)
 
-    # NetworkX object
+    # NetworkX object (built from raw data for pickle — preserves all bytes)
     G_nx = json_data_to_nx(G_data)
 
-    # GraphML
-    nx.write_graphml(G_nx, str(out_dir / "graph.graphml"))
-
-    # GEXF
-    nx.write_gexf(G_nx, str(out_dir / "graph.gexf"))
-
-    # Pickle
+    # Pickle — uses raw G_nx, no sanitisation needed
     with open(out_dir / "graph.pkl", "wb") as f:
         pickle.dump(G_nx, f, protocol=pickle.HIGHEST_PROTOCOL)
+
+    # XML-based formats require sanitised strings — strip null bytes / ctrl chars
+    G_xml = sanitise_graph_for_xml(G_nx)
+
+    # GraphML
+    nx.write_graphml(G_xml, str(out_dir / "graph.graphml"))
+
+    # GEXF
+    nx.write_gexf(G_xml, str(out_dir / "graph.gexf"))
 
 
 # ---------------------------------------------------------------------------
@@ -244,7 +278,6 @@ def label_from_folder(folder_name: str) -> int:
         return 1
     if BENIGN_KEYWORD in folder_name:
         return 0
-    # Fallback: assume malware if unknown
     return 1
 
 
@@ -285,7 +318,6 @@ def run(variants: int = 10, noise: float = 0.10, drop: float = 0.10) -> None:
         with open(sample_dir / "graph.json", encoding="utf-8") as f:
             base_graph = json.load(f)
 
-        # Load graph_attr if present
         graph_attr_path = sample_dir / "graph_attr.json"
         graph_attr = {}
         if graph_attr_path.exists():
@@ -299,18 +331,13 @@ def run(variants: int = 10, noise: float = 0.10, drop: float = 0.10) -> None:
                 aug_name = f"{sample_name}__{strategy_tag}_{seed:02d}"
                 out_dir  = AUGMENTED_DATA_DIR / aug_name
 
-                # Build kwargs
                 kwargs = {"seed": seed, **extra_kwargs}
                 if "noise_level" not in kwargs and strategy_tag == "aug_noise":
                     kwargs["noise_level"] = noise
 
-                # Apply augmentation
                 aug_graph = strategy_fn(base_graph, **kwargs)
-
-                # Label: benign strategy always → 0; otherwise inherit source
                 aug_label = 0 if is_benign_strategy else base_label
 
-                # Update graph_attr with augmented label
                 aug_attr = copy.deepcopy(graph_attr)
                 aug_attr["label"]    = aug_label
                 aug_attr["strategy"] = strategy_tag
@@ -327,7 +354,6 @@ def run(variants: int = 10, noise: float = 0.10, drop: float = 0.10) -> None:
 
         print(f"  [✓] {sample_name}  ({len(strategies) * variants} variants generated)")
 
-    # Write manifest
     with open(MANIFEST_PATH, "w", encoding="utf-8") as f:
         f.write("\n".join(manifest_rows))
 
