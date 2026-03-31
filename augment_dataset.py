@@ -160,7 +160,12 @@ def augment_feature_noise(G_data: dict, noise_level: float = 0.10,
 
 def augment_drop_nodes(G_data: dict, drop_frac: float = 0.10,
                        seed: int = 0) -> dict:
-    """Strategy B — drop a fraction of non-critical benign nodes."""
+    """
+    Strategy B — drop a fraction of non-critical benign nodes.
+
+    Sparse-graph safe: if the removable pool has fewer items than k,
+    we drop all of them (or return unmodified if the pool is empty).
+    """
     rng = random.Random(seed)
     G2  = copy.deepcopy(G_data)
     removable_ids = set()
@@ -175,8 +180,14 @@ def augment_drop_nodes(G_data: dict, drop_frac: float = 0.10,
         elif ntype == "thread":
             if node.get("is_suspicious", 0) == 0:
                 removable_ids.add(node["id"])
-    k = max(1, int(len(removable_ids) * drop_frac))
-    to_remove = set(rng.sample(sorted(removable_ids), k))
+
+    if not removable_ids:
+        return G2  # nothing safe to drop — return graph unchanged
+
+    pool = sorted(removable_ids)
+    k    = min(max(1, int(len(pool) * drop_frac)), len(pool))  # never exceed pool size
+    to_remove = set(rng.sample(pool, k))
+
     G2["nodes"] = [n for n in G2["nodes"] if n["id"] not in to_remove]
     G2["links"] = [l for l in G2.get("links", [])
                    if l["source"] not in to_remove
@@ -186,7 +197,11 @@ def augment_drop_nodes(G_data: dict, drop_frac: float = 0.10,
 
 def augment_drop_edges(G_data: dict, drop_frac: float = 0.10,
                        seed: int = 0) -> dict:
-    """Strategy C — drop a fraction of non-critical edges."""
+    """
+    Strategy C — drop a fraction of non-critical edges.
+
+    Sparse-graph safe: if no safe edges exist, return graph unchanged.
+    """
     rng = random.Random(seed)
     G2  = copy.deepcopy(G_data)
     critical_ids = set()
@@ -195,13 +210,19 @@ def augment_drop_edges(G_data: dict, drop_frac: float = 0.10,
                 or node.get("node_type") == "kernel"
                 or node.get("name", "") in MALWARE_PROCESS_NAMES):
             critical_ids.add(node["id"])
+
     safe_indices = [
         i for i, l in enumerate(G2.get("links", []))
         if l["source"] not in critical_ids
         and l["target"] not in critical_ids
     ]
-    k = max(1, int(len(safe_indices) * drop_frac))
-    to_drop = set(rng.sample(safe_indices, min(k, len(safe_indices))))
+
+    if not safe_indices:
+        return G2  # no droppable edges — return graph unchanged
+
+    k       = min(max(1, int(len(safe_indices) * drop_frac)), len(safe_indices))
+    to_drop = set(rng.sample(safe_indices, k))
+
     G2["links"] = [l for i, l in enumerate(G2.get("links", []))
                    if i not in to_drop]
     return G2
@@ -352,10 +373,10 @@ def process_sample(
 # ---------------------------------------------------------------------------
 
 def run(
-    variants: int      = 10,
-    noise: float       = 0.10,
-    drop: float        = 0.10,
-    workers: int       = None,
+    variants: int       = 10,
+    noise: float        = 0.10,
+    drop: float         = 0.10,
+    workers: int        = None,
     skip_existing: bool = False,
 ) -> None:
     AUGMENTED_DATA_DIR.mkdir(exist_ok=True)
