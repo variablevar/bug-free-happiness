@@ -1,16 +1,13 @@
 #!/usr/bin/env python3
 """
-train.py  v3
+train.py  v4
 5-fold cross-validation training + evaluation for malware GNN classifier.
 
-Changes vs v2:
-  - batch_size reduced default: 8 → 4  (only 3 batches/epoch was too few)
-  - scheduler patience: 10 → 20        (was decaying LR too aggressively)
-  - epochs default: 100 → 200          (more time to converge on tiny dataset)
-  - class-weighted cross-entropy        (prevents collapse to predict-all-1)
-  - gradient clipping                   (fixes explosive loss at epoch 10)
-  - mean aggregation hint in kwargs     (passed through to model if supported)
-  - per-fold train loss + val metrics printed every 20 epochs (less noise)
+Changes vs v3:
+  - GROUP-AWARE fold splitting (StratifiedGroupKFold) so augmented variants
+    of the same source sample are NEVER split across train/test folds.
+    Source name is parsed from data.name by stripping the __aug_* suffix.
+    This eliminates the data-leakage issue present in v3.
 
 Usage:
     python train.py extracted_data/dataset_manifest.csv
@@ -19,17 +16,33 @@ Usage:
     python train.py extracted_data/dataset_manifest.csv --save-model --seed 0
 """
 
-import os, sys, argparse, json, datetime
+import os, sys, argparse, json, datetime, re
 import numpy as np
 import torch
 import torch.nn.functional as F
 from torch_geometric.loader import DataLoader
-from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.metrics import (accuracy_score, f1_score,
                               roc_auc_score, confusion_matrix)
 
 from dataset import MalwareGraphDataset
 from model   import GINMalwareClassifier, SAGEMalwareClassifier
+
+
+# ── Source-name extraction ────────────────────────────────────────────────────
+
+_AUG_SUFFIX = re.compile(r"__aug_[a-z]+_\d+$")
+
+def source_of(name: str) -> str:
+    """
+    Strip the augmentation suffix to get the original source sample name.
+
+    Examples:
+      "Cerber-WithVirus__aug_noise_03"      → "Cerber-WithVirus"
+      "W32.MyDoom.A.-NoVirus__aug_benign_00" → "W32.MyDoom.A.-NoVirus"
+      "Cerber-WithVirus"                     → "Cerber-WithVirus"  (passthrough)
+    """
+    return _AUG_SUFFIX.sub("", str(name))
 
 
 # ── Training helpers ──────────────────────────────────────────────────────────
@@ -41,10 +54,8 @@ def train_epoch(model, loader, optimiser, device, class_weights):
         batch = batch.to(device)
         optimiser.zero_grad()
 
-        # FIX: pass graph_attr from batch if it exists
         graph_attr = getattr(batch, "graph_attr", None)
         if graph_attr is not None:
-            # DataLoader stacks graph_attr into [B, 4] automatically
             graph_attr = graph_attr.view(-1, 4).to(device)
 
         out  = model(batch.x, batch.edge_index, batch.batch,
@@ -127,7 +138,8 @@ def run(args):
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device("mps"  if torch.backends.mps.is_available() else
+                          "cuda" if torch.cuda.is_available() else "cpu")
     print(f"[Train] Device : {device}")
     print(f"[Train] Seed   : {args.seed}")
 
@@ -138,7 +150,7 @@ def run(args):
         print("[ERROR] Dataset is empty — check manifest path and sample folders.")
         sys.exit(1)
 
-    labels = ds.get_labels()
+    labels = np.array(ds.get_labels())
 
     first = ds[0]
     if first.x is None or first.x.dim() < 2:
@@ -146,32 +158,59 @@ def run(args):
         sys.exit(1)
     in_dim = first.x.size(1)
 
+    # ── Build group array: one group ID per source sample ─────────────────────
+    # Each augmented variant maps back to its original source via source_of().
+    # StratifiedGroupKFold guarantees all variants of a source stay together.
+    names  = [str(ds[i].name) for i in range(n)]
+    groups = np.array([source_of(name) for name in names])
+
+    unique_sources   = sorted(set(groups))
+    n_sources        = len(unique_sources)
+    source_label_map = {}  # source → label (for reporting)
+    for name, label in zip(names, labels):
+        src = source_of(name)
+        source_label_map[src] = int(label)
+
     label_counts = dict(zip(*np.unique(labels, return_counts=True)))
     print(f"[Train] Graphs    : {n}  |  feature dim={in_dim}")
+    print(f"[Train] Sources   : {n_sources} unique source samples")
     print(f"[Train] Model     : {args.model.upper()}")
     print(f"[Train] Label dist: {label_counts}")
+    print(f"[Train] Split     : StratifiedGroupKFold — groups=source sample names")
 
-    # FIX: class weights computed once from full dataset label distribution
     class_weights = compute_class_weights(labels, device)
     print(f"[Train] Class weights: {class_weights.tolist()}")
 
-    if n < args.folds:
-        print(f"[WARN] Only {n} samples but --folds={args.folds}; "
-              f"reducing to {n} folds.")
-        args.folds = n
+    if n_sources < args.folds:
+        print(f"[WARN] Only {n_sources} unique sources but --folds={args.folds}; "
+              f"reducing to {n_sources} folds.")
+        args.folds = n_sources
 
-    skf          = StratifiedKFold(n_splits=args.folds, shuffle=True,
+    # StratifiedGroupKFold: stratify by label, constrain by source group
+    sgkf    = StratifiedGroupKFold(n_splits=args.folds, shuffle=True,
                                    random_state=args.seed)
-    indices      = np.arange(n)
+    indices = np.arange(n)
+
     fold_results = []
 
     for fold, (train_idx, test_idx) in enumerate(
-            skf.split(indices, labels), 1):
+            sgkf.split(indices, labels, groups=groups), 1):
+
+        # Verify no source leakage
+        train_sources = set(groups[train_idx])
+        test_sources  = set(groups[test_idx])
+        leaked = train_sources & test_sources
+        if leaked:
+            # Should never happen — but loud warning if it does
+            print(f"  [LEAK WARNING] {len(leaked)} source(s) appear in "
+                  f"both train and test: {leaked}")
 
         print(f"\n── Fold {fold}/{args.folds} "
-              f"(train={len(train_idx)}, test={len(test_idx)}) ──")
+              f"(train={len(train_idx)}, test={len(test_idx)}) "
+              f"[{len(train_sources)} train-sources / "
+              f"{len(test_sources)} test-sources] ──")
 
-        test_labels = [labels[i] for i in test_idx]
+        test_labels = labels[test_idx]
         if len(set(test_labels)) < 2:
             print(f"  [WARN] Test fold has only class {set(test_labels)} — "
                   f"AUC/F1 unreliable for this fold")
@@ -179,7 +218,6 @@ def run(args):
         train_ds = [ds[i] for i in train_idx]
         test_ds  = [ds[i] for i in test_idx]
 
-        # FIX: batch_size=4 → 6 batches/epoch instead of 3
         train_loader = DataLoader(train_ds, batch_size=args.batch_size,
                                   shuffle=True)
         test_loader  = DataLoader(test_ds,  batch_size=args.batch_size,
@@ -188,8 +226,6 @@ def run(args):
         model     = build_model(args, in_dim, device)
         optimiser = torch.optim.Adam(model.parameters(), lr=args.lr,
                                      weight_decay=args.weight_decay)
-
-        # FIX: patience=20 — stops LR halving after only ~2 bad epochs
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
             optimiser, mode="max", factor=0.5, patience=20, min_lr=1e-5
         )
@@ -203,7 +239,6 @@ def run(args):
             acc, f1, auc, _ = evaluate(model, test_loader, device)
             scheduler.step(f1)
 
-            # FIX: print every 20 epochs to reduce noise (was every 10)
             if epoch % 20 == 0 or epoch == args.epochs:
                 print(f"  Epoch {epoch:>3}  loss={loss:.4f}  "
                       f"acc={acc:.3f}  f1={f1:.3f}  auc={auc:.3f}  "
@@ -219,13 +254,15 @@ def run(args):
         acc, f1, auc, cm = evaluate(model, test_loader, device)
         print(f"  Best → acc={acc:.3f}  f1={f1:.3f}  auc={auc:.3f}")
         print(f"  Confusion matrix:\n{cm}")
+        print(f"  Test sources : {sorted(test_sources)}")
 
         if args.save_model:
             ckpt = f"model_{args.model}_fold{fold}.pt"
             torch.save(best_state, ckpt)
             print(f"  Saved checkpoint → {ckpt}")
 
-        fold_results.append({"fold": fold, "acc": acc, "f1": f1, "auc": auc})
+        fold_results.append({"fold": fold, "acc": acc, "f1": f1, "auc": auc,
+                              "test_sources": sorted(test_sources)})
 
         # Per-sample predictions
         model.eval()
@@ -236,7 +273,7 @@ def run(args):
                                         device=device)
                 graph_attr = getattr(data, "graph_attr", None)
                 if graph_attr is not None:
-                    graph_attr = graph_attr.unsqueeze(0).to(device)  # [1, 4]
+                    graph_attr = graph_attr.unsqueeze(0).to(device)
 
                 out  = model(data.x, data.edge_index, batch_vec,
                              graph_attr=graph_attr)
@@ -245,7 +282,7 @@ def run(args):
                 name = getattr(data, "name", f"graph_{id(data)}")
                 true = data.y.item()
                 status = "✅" if pred == true else "❌"
-                print(f"    {status} {str(name):<35} "
+                print(f"    {status} {str(name):<50} "
                       f"pred={pred} true={true} prob={prob:.3f}")
 
     # ── Summary ───────────────────────────────────────────────────────────────
@@ -272,6 +309,8 @@ def run(args):
             "timestamp":    datetime.datetime.utcnow().isoformat(),
             "git_hash":     git_hash(),
             "class_weights": class_weights.tolist(),
+            "split_strategy": "StratifiedGroupKFold",
+            "n_unique_sources": n_sources,
             "mean_acc":     float(np.mean(accs)),
             "std_acc":      float(np.std(accs)),
             "mean_f1":      float(np.mean(f1s)),
