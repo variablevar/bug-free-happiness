@@ -197,8 +197,15 @@ def make_benign_variant(G_data: dict, seed: int = 0) -> dict:
 # ---------------------------------------------------------------------------
 
 def json_data_to_nx(G_data: dict) -> nx.DiGraph:
-    """Convert node-link JSON dict → NetworkX DiGraph."""
-    G = nx.node_link_graph(G_data, directed=True, multigraph=False)
+    """
+    Convert node-link JSON dict → NetworkX DiGraph.
+
+    edges="links" preserves current behaviour (your graph.json stores edges
+    under the key "links") and silences the FutureWarning introduced in
+    NetworkX 3.4 about the default changing to edges="edges" in NX 3.6.
+    """
+    G = nx.node_link_graph(G_data, directed=True, multigraph=False,
+                           edges="links")
     return G
 
 
