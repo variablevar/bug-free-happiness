@@ -5,14 +5,10 @@ Graph Augmentation — Strategy 1 for the ransomware GNN dissertation.
 
 Reads every sample folder under `extracted_data/` that contains a
 `graph.json` file, applies four augmentation strategies, and writes each
-augmented variant as a new sub-directory under `extracted_data_augmented/`
-mirroring the exact file layout of the originals:
+augmented variant as a new sub-directory under `extracted_data_augmented/`:
 
     extracted_data_augmented/
         <SampleName>__aug_noise_00/
-            graph.json
-            graph.graphml
-            graph.gexf
             graph.pkl
             graph_attr.json
         <SampleName>__aug_dropnodes_00/
@@ -48,7 +44,6 @@ import json
 import os
 import pickle
 import random
-import re
 import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
@@ -63,12 +58,11 @@ EXTRACTED_DATA_DIR  = Path("extracted_data")
 AUGMENTED_DATA_DIR  = Path("extracted_data_augmented")
 MANIFEST_PATH       = Path("augmented_manifest.csv")
 
-VIRUS_KEYWORD       = "WithVirus"
-BENIGN_KEYWORD      = "NoVirus"
+VIRUS_KEYWORD  = "WithVirus"
+BENIGN_KEYWORD = "NoVirus"
 
-# Files that must all be present for a folder to be considered complete
-EXPECTED_FILES = {"graph.json", "graph.graphml", "graph.gexf",
-                  "graph.pkl", "graph_attr.json"}
+# Only these two files are required per output folder
+EXPECTED_FILES = {"graph.pkl", "graph_attr.json"}
 
 PROTECTED_PROCESS_NAMES = {
     "System", "smss.exe", "csrss.exe", "wininit.exe", "winlogon.exe",
@@ -85,11 +79,6 @@ MALWARE_PROCESS_NAMES = {
 # flag-reset rather than node deletion (see make_benign_variant).
 MIN_VIABLE_NODES = 10
 
-# XML 1.0 legal character range — https://www.w3.org/TR/xml/#charsets
-_XML_LEGAL = re.compile(
-    r"[^\x09\x0A\x0D\x20-\uD7FF\uE000-\uFFFD\U00010000-\U0010FFFF]"
-)
-
 # Thread-safe print lock
 _print_lock = threading.Lock()
 
@@ -101,34 +90,11 @@ def tprint(*args, **kwargs) -> None:
 
 
 # ---------------------------------------------------------------------------
-# XML sanitisation
-# ---------------------------------------------------------------------------
-
-def _sanitise_str(value: str) -> str:
-    """Strip null bytes and XML 1.0 illegal control characters."""
-    return _XML_LEGAL.sub("", value)
-
-
-def sanitise_graph_for_xml(G: nx.DiGraph) -> nx.DiGraph:
-    """Return a copy of G with string attributes safe for lxml serialisation."""
-    G2 = G.copy()
-    for _, data in G2.nodes(data=True):
-        for k, v in list(data.items()):
-            if isinstance(v, str):
-                data[k] = _sanitise_str(v)
-    for _, _, data in G2.edges(data=True):
-        for k, v in list(data.items()):
-            if isinstance(v, str):
-                data[k] = _sanitise_str(v)
-    return G2
-
-
-# ---------------------------------------------------------------------------
 # Skip-existing helper
 # ---------------------------------------------------------------------------
 
 def is_complete(out_dir: Path) -> bool:
-    """Return True if out_dir already contains all 5 expected output files."""
+    """Return True if out_dir already contains all expected output files."""
     if not out_dir.is_dir():
         return False
     existing = {f.name for f in out_dir.iterdir() if f.is_file()}
@@ -196,10 +162,10 @@ def augment_drop_nodes(G_data: dict, drop_frac: float = 0.10,
                 removable_ids.add(node["id"])
 
     if not removable_ids:
-        return G2  # nothing safe to drop — return graph unchanged
+        return G2
 
     pool = sorted(removable_ids)
-    k    = min(max(1, int(len(pool) * drop_frac)), len(pool))  # never exceed pool size
+    k    = min(max(1, int(len(pool) * drop_frac)), len(pool))
     to_remove = set(rng.sample(pool, k))
 
     G2["nodes"] = [n for n in G2["nodes"] if n["id"] not in to_remove]
@@ -232,7 +198,7 @@ def augment_drop_edges(G_data: dict, drop_frac: float = 0.10,
     ]
 
     if not safe_indices:
-        return G2  # no droppable edges — return graph unchanged
+        return G2
 
     k       = min(max(1, int(len(safe_indices) * drop_frac)), len(safe_indices))
     to_drop = set(rng.sample(safe_indices, k))
@@ -246,47 +212,28 @@ def make_benign_variant(G_data: dict, seed: int = 0) -> dict:
     """
     Strategy D — strip confirmed malware-exe nodes only → label 0.
 
-    Previous behaviour also removed nodes with heuristic_score >= 6, which
-    wiped the vast majority of nodes in families like WannaCry (where nearly
-    every process is flagged), producing degenerate 1-node graphs that
-    caused the GIN to output constant embeddings.
-
-    Fix
-    ---
-    * Only delete nodes whose *name* matches MALWARE_PROCESS_NAMES (exact
-      malware executables).  High heuristic_score nodes are kept but have
-      their suspicion flags soft-reset instead.
-    * After deletion, if the surviving graph has fewer than MIN_VIABLE_NODES
-      nodes, skip deletion entirely and only soft-reset flags — guaranteeing
-      a structurally rich graph in all cases.
+    Only deletes nodes whose name matches MALWARE_PROCESS_NAMES.
+    If deletion would leave fewer than MIN_VIABLE_NODES nodes, skips
+    deletion and only soft-resets suspicion flags instead.
     """
     rng = random.Random(seed)
     G2  = copy.deepcopy(G_data)
 
-    # Identify only confirmed malware-exe nodes for deletion
     malware_ids = {
         node["id"] for node in G2["nodes"]
         if node.get("name", "").lower() in {n.lower() for n in MALWARE_PROCESS_NAMES}
     }
 
-    # Check viability *before* committing to deletion
     surviving_count = sum(
         1 for n in G2["nodes"] if n["id"] not in malware_ids
     )
 
     if surviving_count >= MIN_VIABLE_NODES:
-        # Safe to remove confirmed malware exe nodes
         G2["nodes"] = [n for n in G2["nodes"] if n["id"] not in malware_ids]
         G2["links"] = [l for l in G2.get("links", [])
                        if l["source"] not in malware_ids
                        and l["target"] not in malware_ids]
-    else:
-        # Graph would become degenerate — keep all nodes, just reset flags
-        # (covers families like WannaCry where no node matches the exe list
-        # by name but the graph is heavily flagged via heuristics)
-        pass
 
-    # Soft-reset all suspicion flags on remaining nodes
     for node in G2["nodes"]:
         node["is_suspicious"]     = 0
         node["heuristic_score"]   = 0
@@ -304,17 +251,16 @@ def make_benign_variant(G_data: dict, seed: int = 0) -> dict:
 # ---------------------------------------------------------------------------
 
 def json_data_to_nx(G_data: dict) -> nx.DiGraph:
-    """Node-link JSON dict → NetworkX DiGraph (edges='links' silences FutureWarning)."""
+    """Node-link JSON dict → NetworkX DiGraph."""
     return nx.node_link_graph(G_data, directed=True, multigraph=False,
                               edges="links")
 
 
-def write_all_formats(G_data: dict, out_dir: Path, graph_attr: dict) -> None:
-    """Write graph.json / .graphml / .gexf / .pkl / graph_attr.json.
+def write_pkl(G_data: dict, out_dir: Path, graph_attr: dict) -> None:
+    """Write graph.pkl + graph_attr.json only.
 
-    Raises ValueError if the graph is degenerate (< MIN_VIABLE_NODES nodes
-    or 0 edges) so the worker thread surfaces it as a visible [!] warning
-    instead of silently writing a broken stub file.
+    Raises ValueError if the graph is degenerate so the worker thread
+    surfaces it as a visible [!] warning instead of a silent stub.
     """
     n_nodes = _graph_node_count(G_data)
     n_edges = len(G_data.get("links", []))
@@ -322,30 +268,22 @@ def write_all_formats(G_data: dict, out_dir: Path, graph_attr: dict) -> None:
     if n_nodes < MIN_VIABLE_NODES:
         raise ValueError(
             f"Degenerate graph: only {n_nodes} node(s) after augmentation "
-            f"(minimum is {MIN_VIABLE_NODES}). Source may need inspection."
+            f"(minimum is {MIN_VIABLE_NODES})."
         )
     if n_edges == 0:
         raise ValueError(
             f"Degenerate graph: 0 edges after augmentation "
-            f"({n_nodes} nodes present). Source may need inspection."
+            f"({n_nodes} nodes present)."
         )
 
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    with open(out_dir / "graph.json", "w", encoding="utf-8") as f:
-        json.dump(G_data, f, indent=2)
-
-    with open(out_dir / "graph_attr.json", "w", encoding="utf-8") as f:
-        json.dump(graph_attr, f, indent=2)
-
     G_nx = json_data_to_nx(G_data)
-
     with open(out_dir / "graph.pkl", "wb") as f:
         pickle.dump(G_nx, f, protocol=pickle.HIGHEST_PROTOCOL)
 
-    G_xml = sanitise_graph_for_xml(G_nx)
-    nx.write_graphml(G_xml, str(out_dir / "graph.graphml"))
-    nx.write_gexf(G_xml, str(out_dir / "graph.gexf"))
+    with open(out_dir / "graph_attr.json", "w", encoding="utf-8") as f:
+        json.dump(graph_attr, f, indent=2)
 
 
 # ---------------------------------------------------------------------------
@@ -420,15 +358,14 @@ def process_sample(
             aug_attr["source"]   = sample_name
             aug_attr["seed"]     = seed
 
-            write_all_formats(aug_graph, out_dir, aug_attr)
+            write_pkl(aug_graph, out_dir, aug_attr)
 
             manifest_rows.append(
                 f"{aug_name},{sample_name},{strategy_tag},{aug_label},{seed},{out_dir}"
             )
             generated += 1
 
-    status = f"  [✓] {sample_name}  "\
-             f"({generated} generated, {skipped} skipped)"
+    status = f"  [✓] {sample_name}  ({generated} generated, {skipped} skipped)"
     tprint(status)
     return manifest_rows, generated, skipped
 
@@ -528,7 +465,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--skip-existing", action="store_true",
-        help="Skip any output folder that already contains all 5 expected files"
+        help="Skip any output folder that already contains graph.pkl + graph_attr.json"
     )
     args = parser.parse_args()
     run(
