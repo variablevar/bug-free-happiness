@@ -63,7 +63,7 @@
         "step": 3,
         "tactic": "Command & Control",
         "mitre": "T1071",
-        "detail": "19 ESTABLISHED C2 connection(s) to 15 unique IP(s) via msedge.exe, onedrive.exe, searchapp.exe, svchost.exe",
+        "detail": "19 ESTABLISHED C2 connection(s) to 15 unique IP(s) via onedrive.exe, searchapp.exe, msedge.exe, svchost.exe",
         "evidence": "['104.82.185.177', '13.107.237.254', '142.250.179.229', '142.250.180.14']"
       },
       {

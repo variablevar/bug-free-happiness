@@ -1,4 +1,4 @@
 Sample: GoldenEye-WithVirus | label=1 | family=goldeneye
-filter_malicious.py: OK (1.4s)
-build_graph.py: OK (12.3s)
-analyze_graph.py: OK (2.1s)
+filter_malicious.py: OK (0.9s)
+build_graph.py: OK (7.3s)
+analyze_graph.py: OK (1.2s)

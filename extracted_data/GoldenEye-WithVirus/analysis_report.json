@@ -56,14 +56,14 @@
         "step": 2,
         "tactic": "Defense Evasion / Process Injection",
         "mitre": "T1055",
-        "detail": "Shellcode in 5 process(es): smartscreen.ex, MsMpEng.exe, WWAHost.exe, SearchApp.exe, explorer.exe",
+        "detail": "Shellcode in 5 process(es): smartscreen.ex, SearchApp.exe, explorer.exe, WWAHost.exe, MsMpEng.exe",
         "evidence": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00"
       },
       {
         "step": 3,
         "tactic": "Command & Control",
         "mitre": "T1071",
-        "detail": "34 ESTABLISHED C2 connection(s) to 19 unique IP(s) via wwahost.exe, msedge.exe, searchapp.exe, onedrive.exe, svchost.exe",
+        "detail": "34 ESTABLISHED C2 connection(s) to 19 unique IP(s) via svchost.exe, searchapp.exe, onedrive.exe, wwahost.exe, msedge.exe",
         "evidence": "['104.103.251.71', '104.77.161.175', '104.82.185.177', '13.107.42.12']"
       },
       {

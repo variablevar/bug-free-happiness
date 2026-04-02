@@ -56,14 +56,14 @@
         "step": 2,
         "tactic": "Defense Evasion / Process Injection",
         "mitre": "T1055",
-        "detail": "Shellcode in 2 process(es): smartscreen.ex, MsMpEng.exe",
+        "detail": "Shellcode in 2 process(es): MsMpEng.exe, smartscreen.ex",
         "evidence": "e9 fb 07 07 00 00 00 00 00 cc cc cc cc cc cc cc e9 eb 0f 07 00 00 00 00 00 cc cc"
       },
       {
         "step": 3,
         "tactic": "Command & Control",
         "mitre": "T1071",
-        "detail": "6 ESTABLISHED C2 connection(s) to 5 unique IP(s) via svchost.exe, msedge.exe, searchapp.exe",
+        "detail": "6 ESTABLISHED C2 connection(s) to 5 unique IP(s) via msedge.exe, searchapp.exe, svchost.exe",
         "evidence": "['142.250.200.10', '20.90.153.243', '204.79.197.200', '204.79.197.222']"
       },
       {

@@ -52,7 +52,7 @@
         "step": 2,
         "tactic": "Defense Evasion / Process Injection",
         "mitre": "T1055",
-        "detail": "Shellcode in 6 process(es): chrome.exe, wmpnetwk.exe, SearchFilterHo, explorer.exe, svchost.exe, GoogleCrashHan",
+        "detail": "Shellcode in 6 process(es): chrome.exe, explorer.exe, wmpnetwk.exe, SearchFilterHo, svchost.exe, GoogleCrashHan",
         "evidence": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"
       },
       {

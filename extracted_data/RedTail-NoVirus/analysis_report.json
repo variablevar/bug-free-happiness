@@ -5,7 +5,7 @@
     "version": "3.0"
   },
   "summary": {
-    "nodes_total": 18476,
+    "nodes_total": 18477,
     "edges_total": 22062,
     "is_directed": true,
     "suspicious_total": 204,
@@ -13,7 +13,7 @@
       "kernel": 1,
       "process": 126,
       "thread": 1237,
-      "dll": 1338,
+      "dll": 1339,
       "memory_region": 15653,
       "driver": 121
     },

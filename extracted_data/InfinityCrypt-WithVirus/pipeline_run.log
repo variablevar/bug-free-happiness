@@ -1,4 +1,4 @@
 Sample: InfinityCrypt-WithVirus | label=1 | family=infinitycrypt
-filter_malicious.py: OK (1.3s)
-build_graph.py: OK (9.8s)
-analyze_graph.py: OK (1.8s)
+filter_malicious.py: OK (0.8s)
+build_graph.py: OK (5.1s)
+analyze_graph.py: OK (1.1s)

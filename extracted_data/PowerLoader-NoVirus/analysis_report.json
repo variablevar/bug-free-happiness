@@ -52,14 +52,14 @@
         "step": 2,
         "tactic": "Defense Evasion / Process Injection",
         "mitre": "T1055",
-        "detail": "Shellcode in 5 process(es): wmpnetwk.exe, mscorsvw.exe, SearchFilterHo, svchost.exe, explorer.exe",
+        "detail": "Shellcode in 5 process(es): SearchFilterHo, wmpnetwk.exe, svchost.exe, explorer.exe, mscorsvw.exe",
         "evidence": "b0 00 eb 70 b0 01 eb 6c b0 02 eb 68 b0 03 eb 64 b0 04 eb 60 b0 05 eb 5c b0 06 eb"
       },
       {
         "step": 3,
         "tactic": "Command & Control",
         "mitre": "T1071",
-        "detail": "39 ESTABLISHED C2 connection(s) to 29 unique IP(s) via chrome.exe, svchost.exe",
+        "detail": "39 ESTABLISHED C2 connection(s) to 29 unique IP(s) via svchost.exe, chrome.exe",
         "evidence": "['108.177.15.188', '142.250.178.10', '142.250.178.14', '142.250.178.3']"
       },
       {

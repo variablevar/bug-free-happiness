@@ -1,4 +1,4 @@
 Sample: RedTail-WithVirus | label=1 | family=redtail
-filter_malicious.py: OK (1.3s)
-build_graph.py: OK (10.0s)
-analyze_graph.py: OK (1.8s)
+filter_malicious.py: OK (0.9s)
+build_graph.py: OK (6.4s)
+analyze_graph.py: OK (1.3s)

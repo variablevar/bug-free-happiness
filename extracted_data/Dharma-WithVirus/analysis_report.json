@@ -52,14 +52,14 @@
         "step": 2,
         "tactic": "Defense Evasion / Process Injection",
         "mitre": "T1055",
-        "detail": "Shellcode in 6 process(es): audiodg.exe, WSHost.exe, explorer.exe, wmpnetwk.exe, chrome.exe, MsMpEng.exe",
+        "detail": "Shellcode in 6 process(es): chrome.exe, audiodg.exe, explorer.exe, WSHost.exe, wmpnetwk.exe, MsMpEng.exe",
         "evidence": "09 00 34 00 09 00 01 05 8b 55 18 8b 4d 54 8d 54 0a fc b9 04 00 1a 00 ff 95 48 37"
       },
       {
         "step": 3,
         "tactic": "Command & Control",
         "mitre": "T1071",
-        "detail": "50 ESTABLISHED C2 connection(s) to 30 unique IP(s) via explorer.exe, settingsynchos, livecomm.exe, chrome.exe, svchost.exe",
+        "detail": "50 ESTABLISHED C2 connection(s) to 30 unique IP(s) via chrome.exe, svchost.exe, explorer.exe, settingsynchos, livecomm.exe",
         "evidence": "['108.177.15.188', '13.107.42.12', '140.82.114.22', '140.82.121.6']"
       },
       {

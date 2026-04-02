@@ -52,7 +52,7 @@
         "step": 2,
         "tactic": "Defense Evasion / Process Injection",
         "mitre": "T1055",
-        "detail": "Shellcode in 4 process(es): explorer.exe, svchost.exe, GoogleUpdate.e, chrome.exe",
+        "detail": "Shellcode in 4 process(es): svchost.exe, explorer.exe, GoogleUpdate.e, chrome.exe",
         "evidence": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"
       },
       {

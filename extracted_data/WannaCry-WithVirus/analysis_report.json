@@ -52,14 +52,14 @@
         "step": 2,
         "tactic": "Defense Evasion / Process Injection",
         "mitre": "T1055",
-        "detail": "Shellcode in 4 process(es): chrome.exe, SearchFilterHo, svchost.exe, explorer.exe",
+        "detail": "Shellcode in 4 process(es): svchost.exe, SearchFilterHo, chrome.exe, explorer.exe",
         "evidence": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"
       },
       {
         "step": 3,
         "tactic": "Command & Control",
         "mitre": "T1071",
-        "detail": "3 ESTABLISHED C2 connection(s) to 3 unique IP(s) via chrome.exe, svchost.exe",
+        "detail": "3 ESTABLISHED C2 connection(s) to 3 unique IP(s) via svchost.exe, chrome.exe",
         "evidence": "['142.250.200.10', '142.251.5.188', '8.238.164.254']"
       },
       {

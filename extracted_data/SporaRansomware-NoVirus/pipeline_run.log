@@ -1,4 +1,4 @@
 Sample: SporaRansomware-NoVirus | label=0 | family=sporaransomware
-filter_malicious.py: OK (1.3s)
-build_graph.py: OK (10.1s)
-analyze_graph.py: OK (1.8s)
+filter_malicious.py: OK (1.0s)
+build_graph.py: OK (5.9s)
+analyze_graph.py: OK (1.1s)

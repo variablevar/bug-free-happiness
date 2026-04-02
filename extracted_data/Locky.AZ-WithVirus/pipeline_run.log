@@ -1,4 +1,4 @@
 Sample: Locky.AZ-WithVirus | label=1 | family=locky.az
-filter_malicious.py: OK (1.4s)
-build_graph.py: OK (12.1s)
-analyze_graph.py: OK (2.0s)
+filter_malicious.py: OK (1.0s)
+build_graph.py: OK (6.2s)
+analyze_graph.py: OK (1.1s)

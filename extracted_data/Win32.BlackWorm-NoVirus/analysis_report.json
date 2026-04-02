@@ -52,7 +52,7 @@
         "step": 2,
         "tactic": "Defense Evasion / Process Injection",
         "mitre": "T1055",
-        "detail": "Shellcode in 7 process(es): svchost.exe, SearchFilterHo, mscorsvw.exe, explorer.exe, GoogleUpdate.e, wmpnetwk.exe, chrome.exe",
+        "detail": "Shellcode in 7 process(es): explorer.exe, GoogleUpdate.e, wmpnetwk.exe, chrome.exe, SearchFilterHo, mscorsvw.exe, svchost.exe",
         "evidence": "41 ba 80 00 00 00 48 b8 38 a1 8c ff fe 07 00 00 48 ff 20 90 41 ba 81 00 00 00 48"
       },
       {

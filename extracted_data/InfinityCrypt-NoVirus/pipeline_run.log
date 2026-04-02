@@ -1,4 +1,4 @@
 Sample: InfinityCrypt-NoVirus | label=0 | family=infinitycrypt
-filter_malicious.py: OK (1.3s)
-build_graph.py: OK (9.9s)
-analyze_graph.py: OK (1.7s)
+filter_malicious.py: OK (0.9s)
+build_graph.py: OK (5.6s)
+analyze_graph.py: OK (0.9s)
