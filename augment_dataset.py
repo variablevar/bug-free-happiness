@@ -31,7 +31,7 @@ Strategies
 A  feature_noise   — Gaussian noise on threads/handles/heuristic_score
 B  drop_nodes      — Remove a fraction of benign non-system process/thread nodes
 C  drop_edges      — Remove a fraction of non-critical edges
-D  benign_variant  — Strip all malware indicators → label 0
+D  benign_variant  — Strip confirmed malware-exe nodes → label 0
 
 Usage
 -----
@@ -79,6 +79,11 @@ MALWARE_PROCESS_NAMES = {
     "cerber.exe", "mshta.exe", "wannacry.exe", "locky.exe",
     "gandcrab.exe", "dharma.exe", "spora.exe",
 }
+
+# Minimum number of nodes a graph must have after augmentation.
+# Graphs that fall below this after benign-stripping are recovered via
+# flag-reset rather than node deletion (see make_benign_variant).
+MIN_VIABLE_NODES = 10
 
 # XML 1.0 legal character range — https://www.w3.org/TR/xml/#charsets
 _XML_LEGAL = re.compile(
@@ -128,6 +133,15 @@ def is_complete(out_dir: Path) -> bool:
         return False
     existing = {f.name for f in out_dir.iterdir() if f.is_file()}
     return EXPECTED_FILES.issubset(existing)
+
+
+# ---------------------------------------------------------------------------
+# Graph size helper
+# ---------------------------------------------------------------------------
+
+def _graph_node_count(G_data: dict) -> int:
+    """Return the number of nodes in a node-link dict."""
+    return len(G_data.get("nodes", []))
 
 
 # ---------------------------------------------------------------------------
@@ -229,19 +243,50 @@ def augment_drop_edges(G_data: dict, drop_frac: float = 0.10,
 
 
 def make_benign_variant(G_data: dict, seed: int = 0) -> dict:
-    """Strategy D — strip malware indicators → label 0."""
+    """
+    Strategy D — strip confirmed malware-exe nodes only → label 0.
+
+    Previous behaviour also removed nodes with heuristic_score >= 6, which
+    wiped the vast majority of nodes in families like WannaCry (where nearly
+    every process is flagged), producing degenerate 1-node graphs that
+    caused the GIN to output constant embeddings.
+
+    Fix
+    ---
+    * Only delete nodes whose *name* matches MALWARE_PROCESS_NAMES (exact
+      malware executables).  High heuristic_score nodes are kept but have
+      their suspicion flags soft-reset instead.
+    * After deletion, if the surviving graph has fewer than MIN_VIABLE_NODES
+      nodes, skip deletion entirely and only soft-reset flags — guaranteeing
+      a structurally rich graph in all cases.
+    """
     rng = random.Random(seed)
     G2  = copy.deepcopy(G_data)
+
+    # Identify only confirmed malware-exe nodes for deletion
     malware_ids = {
         node["id"] for node in G2["nodes"]
         if node.get("name", "").lower() in {n.lower() for n in MALWARE_PROCESS_NAMES}
-        or node.get("suspicion_reasons", "[]") not in ("[]", "", None)
-           and node.get("heuristic_score", 0) >= 6
     }
-    G2["nodes"] = [n for n in G2["nodes"] if n["id"] not in malware_ids]
-    G2["links"] = [l for l in G2.get("links", [])
-                   if l["source"] not in malware_ids
-                   and l["target"] not in malware_ids]
+
+    # Check viability *before* committing to deletion
+    surviving_count = sum(
+        1 for n in G2["nodes"] if n["id"] not in malware_ids
+    )
+
+    if surviving_count >= MIN_VIABLE_NODES:
+        # Safe to remove confirmed malware exe nodes
+        G2["nodes"] = [n for n in G2["nodes"] if n["id"] not in malware_ids]
+        G2["links"] = [l for l in G2.get("links", [])
+                       if l["source"] not in malware_ids
+                       and l["target"] not in malware_ids]
+    else:
+        # Graph would become degenerate — keep all nodes, just reset flags
+        # (covers families like WannaCry where no node matches the exe list
+        # by name but the graph is heavily flagged via heuristics)
+        pass
+
+    # Soft-reset all suspicion flags on remaining nodes
     for node in G2["nodes"]:
         node["is_suspicious"]     = 0
         node["heuristic_score"]   = 0
@@ -250,6 +295,7 @@ def make_benign_variant(G_data: dict, seed: int = 0) -> dict:
             node["threads"] = max(1, node["threads"] + rng.randint(-1, 2))
         if "handles" in node:
             node["handles"] = max(0, node["handles"] + rng.randint(-15, 15))
+
     return G2
 
 
@@ -264,7 +310,26 @@ def json_data_to_nx(G_data: dict) -> nx.DiGraph:
 
 
 def write_all_formats(G_data: dict, out_dir: Path, graph_attr: dict) -> None:
-    """Write graph.json / .graphml / .gexf / .pkl / graph_attr.json."""
+    """Write graph.json / .graphml / .gexf / .pkl / graph_attr.json.
+
+    Raises ValueError if the graph is degenerate (< MIN_VIABLE_NODES nodes
+    or 0 edges) so the worker thread surfaces it as a visible [!] warning
+    instead of silently writing a broken stub file.
+    """
+    n_nodes = _graph_node_count(G_data)
+    n_edges = len(G_data.get("links", []))
+
+    if n_nodes < MIN_VIABLE_NODES:
+        raise ValueError(
+            f"Degenerate graph: only {n_nodes} node(s) after augmentation "
+            f"(minimum is {MIN_VIABLE_NODES}). Source may need inspection."
+        )
+    if n_edges == 0:
+        raise ValueError(
+            f"Degenerate graph: 0 edges after augmentation "
+            f"({n_nodes} nodes present). Source may need inspection."
+        )
+
     out_dir.mkdir(parents=True, exist_ok=True)
 
     with open(out_dir / "graph.json", "w", encoding="utf-8") as f:
