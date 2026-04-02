@@ -19,6 +19,9 @@ Changes vs v2:
   - Per-sample output flushed to terminal as soon as it finishes
   - --skip-existing still works (skips individual steps per sample)
   - Dry-run unchanged
+  - collect_stats reads graph.pkl (nx.DiGraph) for node/edge counts
+    instead of parsing graph.json — faster and always in sync with the
+    actual graph object used by the ML pipeline
 
 Usage:
   python build_dataset.py
@@ -29,7 +32,7 @@ Usage:
   python build_dataset.py ./extracted_data --only filter graph --workers 6
 """
 
-import os, sys, subprocess, json, csv, time, argparse, threading
+import os, sys, subprocess, json, csv, time, argparse, threading, pickle
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
@@ -87,16 +90,19 @@ def collect_stats(folder):
         "graph_attr": "",
         "label_signals_top": "",
     }
-    gp = os.path.join(folder, "graph.json")
-    if os.path.exists(gp):
+
+    # graph.pkl → node/edge count  (load the nx.DiGraph directly)
+    pp = os.path.join(folder, "graph.pkl")
+    if os.path.exists(pp):
         try:
-            with open(gp) as f:
-                gdata = json.load(f)
-            stats["nodes"] = len(gdata.get("nodes", []))
-            stats["edges"] = len(gdata.get("links", []))
+            with open(pp, "rb") as f:
+                G = pickle.load(f)
+            stats["nodes"] = G.number_of_nodes()
+            stats["edges"] = G.number_of_edges()
         except Exception:
             pass
 
+    # graph_attr.json → 5-element tensor + label_signals
     ap = os.path.join(folder, "graph_attr.json")
     if os.path.exists(ap):
         try:
@@ -110,6 +116,7 @@ def collect_stats(folder):
         except Exception:
             pass
 
+    # analysis_report.json → heuristic scores, chain, C2
     rp = os.path.join(folder, "analysis_report.json")
     if os.path.exists(rp):
         try:
@@ -130,6 +137,7 @@ def collect_stats(folder):
             stats["verdict"] = chain.get("overall_verdict", "")[:80]
         except Exception:
             stats["verdict"] = "parse_error"
+
     return stats
 
 
@@ -161,7 +169,7 @@ def process_sample(job, scripts, skip, run_steps):
     total  = job["total"]
 
     log    = [f"Sample: {name} | label={label} | family={family}"]
-    lines  = []          # collected output lines, printed atomically
+    lines  = []
     lines.append(f"[{idx:02d}/{total}] {name}  label={label}  family={family}")
 
     existing = check_outputs(folder)
@@ -334,9 +342,9 @@ def main():
     print(f"  Skip exist : {skip}")
     print(f"{'='*65}\n")
 
-    manifest_rows = [None] * len(jobs)   # pre-allocate; fill by index
+    manifest_rows = [None] * len(jobs)
     print_lock    = threading.Lock()
-    done_counter  = [0]                  # mutable int inside list (thread-safe w/ lock)
+    done_counter  = [0]
     total_start   = time.time()
 
     def submit(job):
@@ -345,12 +353,11 @@ def main():
         with print_lock:
             done_counter[0] += 1
             done = done_counter[0]
-            # Flush all lines for this sample atomically so output is not garbled
             for line in lines:
                 print(line)
             bar = progress_bar(done, len(jobs), elapsed)
             print(f"  {bar}\n")
-        return job["idx"] - 1, row   # (slot_index, row)
+        return job["idx"] - 1, row
 
     with ThreadPoolExecutor(max_workers=n_workers) as pool:
         futures = {pool.submit(submit, job): job for job in jobs}
@@ -362,7 +369,6 @@ def main():
                 job = futures[fut]
                 with print_lock:
                     print(f"  [❌ EXCEPTION] {job['name']}: {exc}")
-                # Build a minimal failure row so manifest doesn't have None
                 manifest_rows[job["idx"] - 1] = {
                     "sample_id":  f"{job['idx']:02d}",
                     "folder":     job["name"],
