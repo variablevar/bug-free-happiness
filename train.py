@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """
-train.py  v4
+train.py  v5
 5-fold cross-validation training + evaluation for malware GNN classifier.
 
-Changes vs v3:
-  - GROUP-AWARE fold splitting (StratifiedGroupKFold) so augmented variants
-    of the same source sample are NEVER split across train/test folds.
-    Source name is parsed from data.name by stripping the __aug_* suffix.
-    This eliminates the data-leakage issue present in v3.
+Changes vs v4:
+  - Per-sample evaluation loop now calls data.clone().to(device) instead of
+    data.to(device), preventing in-place GPU mutation of shared dataset objects
+    that caused a CPU/CUDA tensor mix in subsequent fold DataLoaders.
 
 Usage:
     python train.py extracted_data/dataset_manifest.csv
@@ -265,10 +264,14 @@ def run(args):
                               "test_sources": sorted(test_sources)})
 
         # Per-sample predictions
+        # IMPORTANT: use data.clone() so we never mutate the shared dataset
+        # objects in-place. Without this, data.to(device) would move the
+        # tensors permanently to GPU, causing a CPU/CUDA mix when the same
+        # object is re-used in a subsequent fold's DataLoader.
         model.eval()
         with torch.no_grad():
             for data in test_ds:
-                data      = data.to(device)
+                data      = data.clone().to(device)          # ← cloned here
                 batch_vec = torch.zeros(data.x.size(0), dtype=torch.long,
                                         device=device)
                 graph_attr = getattr(data, "graph_attr", None)
