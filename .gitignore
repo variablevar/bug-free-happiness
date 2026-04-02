@@ -1,3 +1,4 @@
 memory_dumps/*
 vol_output/*
+extracted_data_augmented/*
 .venv

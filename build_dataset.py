@@ -39,9 +39,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # ── Label inference ──────────────────────────────────────────────────────
 def infer_label(folder_name):
     name = os.path.basename(folder_name)
-    if name.endswith("-WithVirus"):
+    if "-WithVirus"in name:
         return 1, name.replace("-WithVirus", "").lower()
-    if name.endswith("-NoVirus"):
+    if "-NoVirus"in name:
         return 0, name.replace("-NoVirus", "").lower()
     return -1, name.lower()
 
@@ -244,7 +244,7 @@ def process_sample(job, scripts, skip, run_steps):
 
     ok_all = row["filter_ok"] and row["graph_ok"] and row["analyze_ok"]
     lines.append(
-        f"  {'\u2705' if ok_all else '\u26a0\ufe0f '} "
+        f"  {('✅' if ok_all else '⚠️')} "
         f"nodes={stats['nodes']} edges={stats['edges']} "
         f"max_score={stats['max_score']} c2={stats['c2_conns']}"
     )
