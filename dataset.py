@@ -1,32 +1,14 @@
 #!/usr/bin/env python3
 """
-dataset.py  v2
+dataset.py  v3
 ==============
-Key fixes vs v1:
+Fix vs v2:
+  - graph_attr stored as shape [1, 14] instead of [14].
+    PyG DataLoader concatenates tensors along dim-0, so [1,14] per graph
+    correctly stacks to [B, 14].  A plain [14] was being concatenated to
+    [B*14] and then mis-shaped inside model.forward().
 
-1. REMOVED noisy identifier features
-   pid, ppid, tid  → randomly assigned by OS on every run, zero signal
-   start           → raw virtual memory address (e.g. 0x7FF800000000), pure noise
-
-2. LOG-SCALED all byte/count features
-   private_memory, commit_charge, size  → log1p so they sit in [0, ~35]
-   instead of [0, 1e12].  Prevents gradient domination.
-
-3. ADDED semantic node features
-   n_injected_into   : how many times this node appears as injection target
-   n_connects_to     : outbound C2-style connections
-   n_connects_from   : inbound connection count
-   degree_in / degree_out : structural role of the node
-
-4. ADDED edge-type distribution as extra graph-level features (graph_attr)
-   The 10 edge-type counts (log1p-scaled) are appended to the 4 manifest
-   attrs, giving graph_attr dim = 14.  Edge type is where the real signal
-   lives: injected_into and connects_to edges are the fingerprint of a
-   co-executing virus.
-
-5. GRAPH_ATTR_DIM updated to 14 — must match model.py GRAPH_ATTR_DIM.
-   model.py is imported nowhere in this file; callers must keep them in sync
-   (train.py reads ds[0].graph_attr.size(0) automatically).
+All other feature engineering is unchanged from v2.
 """
 
 import os
@@ -38,7 +20,7 @@ import pandas as pd
 import torch
 from torch_geometric.data import Data, Dataset
 
-# ── Vocabularies ──────────────────────────────────────────────────────────────
+# ── Vocabularies ───────────────────────────────────────────────────────────
 NODE_TYPES = [
     "process", "thread", "dll", "memory_region",
     "network_conn", "ip_address", "handle", "driver", "kernel",
@@ -53,17 +35,15 @@ EDGE_TYPES = [
 EDGE_TYPE_IDX  = {t: i for i, t in enumerate(EDGE_TYPES)}
 N_EDGE_TYPES   = len(EDGE_TYPES)
 
-# ── Feature layout ────────────────────────────────────────────────────────────
+# ── Feature layout ───────────────────────────────────────────────────────────
 #  [0:9]   one-hot node type          (9 dims)
-#  [9:16]  semantic numeric attrs     (7 dims)   ← no PID/addr/TID
+#  [9:16]  semantic numeric attrs     (7 dims)
 #  [16:21] per-node edge-role counts  (5 dims)
-#  total = 21 dims
 NODE_FEAT_DIM = 9 + 7 + 5   # = 21
 
 # Graph-level attrs: 4 manifest cols + 10 edge-type log-counts = 14
 GRAPH_ATTR_DIM = 4 + N_EDGE_TYPES   # = 14
 
-# Minimum viable graph
 MIN_NODES = 10
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -76,13 +56,9 @@ def _log1p(v) -> float:
 
 
 def _build_per_node_edge_roles(G):
-    """
-    Returns dicts: node → count for each of the five edge roles we care about.
-    Computed once per graph and passed into node_features().
-    """
-    n_injected_into  = {}   # node is target of injection
-    n_connects_to    = {}   # node initiates C2 connection
-    n_connects_from  = {}   # node receives connection
+    n_injected_into  = {}
+    n_connects_to    = {}
+    n_connects_from  = {}
     degree_out       = {}
     degree_in        = {}
 
@@ -103,27 +79,20 @@ def _build_per_node_edge_roles(G):
 def node_features(nid, data: dict,
                   n_injected_into, n_connects_to, n_connects_from,
                   degree_out, degree_in) -> list:
-    """
-    21-dimensional node feature vector:
-      [one-hot type (9)] + [semantic numerics (7)] + [edge-role counts (5)]
-    """
-    # 1. One-hot node type
     ntype = data.get("node_type", "kernel")
     oh = [0.0] * len(NODE_TYPES)
     oh[NODE_TYPE_IDX.get(ntype, len(NODE_TYPES) - 1)] = 1.0
 
-    # 2. Semantic numeric attrs (log-scaled where appropriate)
     nums = [
-        float(data.get("is_suspicious",  0) or 0),   # binary flag
-        float(data.get("is_rwx",         0) or 0),   # binary flag
-        float(data.get("has_mz_header",  0) or 0),   # binary flag
-        float(data.get("is_external",    0) or 0),   # binary flag
-        _log1p(data.get("private_memory", 0)),        # bytes → log
-        _log1p(data.get("commit_charge",  0)),        # bytes → log
-        _log1p(data.get("load_count",     0)),        # count → log
+        float(data.get("is_suspicious",  0) or 0),
+        float(data.get("is_rwx",         0) or 0),
+        float(data.get("has_mz_header",  0) or 0),
+        float(data.get("is_external",    0) or 0),
+        _log1p(data.get("private_memory", 0)),
+        _log1p(data.get("commit_charge",  0)),
+        _log1p(data.get("load_count",     0)),
     ]
 
-    # 3. Per-node edge-role counts (log-scaled)
     roles = [
         _log1p(n_injected_into.get(nid,  0)),
         _log1p(n_connects_to.get(nid,    0)),
@@ -136,11 +105,6 @@ def node_features(nid, data: dict,
 
 
 def _edge_type_distribution(G) -> list:
-    """
-    Returns a 10-dim vector: log1p count of each edge type in the graph.
-    This is appended to graph_attr so the classifier sees the global
-    edge-type fingerprint directly (GNN pooling can miss rare edge types).
-    """
     counts = [0] * N_EDGE_TYPES
     for _, _, edata in G.edges(data=True):
         etype = edata.get("edge_type", "spawned_by")
@@ -150,11 +114,6 @@ def _edge_type_distribution(G) -> list:
 
 
 def nx_to_pyg(G, label: int) -> Data:
-    """
-    Convert NetworkX DiGraph → PyG Data.
-
-    Raises ValueError for degenerate graphs (< MIN_NODES or 0 edges).
-    """
     n_nodes = G.number_of_nodes()
     n_edges = G.number_of_edges()
 
@@ -167,7 +126,6 @@ def nx_to_pyg(G, label: int) -> Data:
             f"Degenerate graph: 0 edges ({n_nodes} nodes). Skipping."
         )
 
-    # Pre-compute per-node edge roles (one pass over edges)
     n_inj, n_cto, n_cfr, d_out, d_in = _build_per_node_edge_roles(G)
 
     nodes     = list(G.nodes(data=True))
@@ -203,18 +161,19 @@ def nx_to_pyg(G, label: int) -> Data:
     )
 
 
-# ── Dataset class ─────────────────────────────────────────────────────────────
+# ── Dataset class ─────────────────────────────────────────────────────────────────
 
 class MalwareGraphDataset(Dataset):
     """
-    Reads manifest CSV, loads graph.pkl files, returns PyG Data objects.
+    graph_attr shape: [1, 14] per sample.
+      PyG DataLoader cats along dim-0 → [B, 14] in a batch.
 
-    graph_attr dim = 14:
-      [0]   max_score      (manifest)
-      [1]   attack_steps   (manifest)
-      [2]   injections     (manifest)
-      [3]   c2_conns       (manifest)
-      [4:14] log1p edge-type counts (10 dims, one per EDGE_TYPES entry)
+    graph_attr layout:
+      [0]    max_score      (manifest)
+      [1]    attack_steps   (manifest)
+      [2]    injections     (manifest)
+      [3]    c2_conns       (manifest)
+      [4:14] log1p edge-type counts (10 dims)
     """
 
     def __init__(self, manifest_csv: str, base_dir: str = None):
@@ -253,18 +212,18 @@ class MalwareGraphDataset(Dataset):
                 fail += 1
                 continue
 
-            # Graph-level features: 4 manifest + 10 edge-type distribution
             manifest_feats = [
                 float(row.get("max_score",    0) or 0),
                 float(row.get("attack_steps", 0) or 0),
                 float(row.get("injections",   0) or 0),
                 float(row.get("c2_conns",     0) or 0),
             ]
-            edge_dist_feats = _edge_type_distribution(G)  # 10 dims, log1p
+            edge_dist_feats = _edge_type_distribution(G)  # 10 dims
 
+            # Shape [1, 14] so DataLoader stacks to [B, 14] — not [B*14]
             pyg.graph_attr = torch.tensor(
-                manifest_feats + edge_dist_feats, dtype=torch.float
-            )
+                [manifest_feats + edge_dist_feats], dtype=torch.float
+            )  # [1, 14]
             pyg.name   = name
             pyg.family = family
             self._data_list.append(pyg)
@@ -296,15 +255,14 @@ class MalwareGraphDataset(Dataset):
             return
         print(f"\nDataset summary ({len(self)} graphs):")
         print(f"  Node feature dim  : {self._data_list[0].x.size(1)}   (expect {NODE_FEAT_DIM})")
-        print(f"  Graph attr dim    : {self._data_list[0].graph_attr.size(0)}  (expect {GRAPH_ATTR_DIM})")
+        print(f"  Graph attr dim    : {self._data_list[0].graph_attr.shape}  (expect [1, {GRAPH_ATTR_DIM}])")
         for d in self._data_list:
             print(
                 f"  {d.name:<45} "
                 f"nodes={d.num_nodes:<6} "
                 f"edges={d.edge_index.size(1):<6} "
                 f"label={d.y.item()}  "
-                f"x_mean={d.x.mean().item():.3f}  "
-                f"graph_attr={d.graph_attr.tolist()}"
+                f"graph_attr={d.graph_attr.squeeze().tolist()}"
             )
 
 
