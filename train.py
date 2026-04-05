@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-train.py  v5
+train.py  v6
 5-fold cross-validation training + evaluation for malware GNN classifier.
 
-Changes vs v4:
-  - Per-sample evaluation loop now calls data.clone().to(device) instead of
-    data.to(device), preventing in-place GPU mutation of shared dataset objects
-    that caused a CPU/CUDA tensor mix in subsequent fold DataLoaders.
+Changes vs v5:
+  - Integrated evaluate_stats.py: log_prediction() is called for every
+    per-sample prediction, and run_stats() is called once after all folds
+    to print t-test / Wilcoxon / Shapiro-Wilk results on per-source accuracy.
 
 Usage:
     python train.py extracted_data/dataset_manifest.csv
@@ -24,11 +24,12 @@ from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.metrics import (accuracy_score, f1_score,
                               roc_auc_score, confusion_matrix)
 
-from dataset import MalwareGraphDataset
-from model   import GINMalwareClassifier, SAGEMalwareClassifier
+from dataset        import MalwareGraphDataset
+from model          import GINMalwareClassifier, SAGEMalwareClassifier
+from evaluate_stats import log_prediction, run_stats
 
 
-# ── Source-name extraction ────────────────────────────────────────────────────
+# ── Source-name extraction ───────────────────────────────────────────────────
 
 _AUG_SUFFIX = re.compile(r"__aug_[a-z]+_\d+$")
 
@@ -44,7 +45,7 @@ def source_of(name: str) -> str:
     return _AUG_SUFFIX.sub("", str(name))
 
 
-# ── Training helpers ──────────────────────────────────────────────────────────
+# ── Training helpers ──────────────────────────────────────────────────────
 
 def train_epoch(model, loader, optimiser, device, class_weights):
     model.train()
@@ -119,7 +120,7 @@ def compute_class_weights(labels, device):
     return weights
 
 
-# ── Git hash for result provenance ────────────────────────────────────────────
+# ── Git hash for result provenance ──────────────────────────────────────────────
 def git_hash():
     try:
         import subprocess
@@ -131,7 +132,7 @@ def git_hash():
         return "unknown"
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
+# ── Main ─────────────────────────────────────────────────────────────
 
 def run(args):
     torch.manual_seed(args.seed)
@@ -142,7 +143,7 @@ def run(args):
     print(f"[Train] Device : {device}")
     print(f"[Train] Seed   : {args.seed}")
 
-    # ── Load dataset ──────────────────────────────────────────────────────────
+    # ── Load dataset ─────────────────────────────────────────────────────
     ds = MalwareGraphDataset(args.manifest)
     n  = len(ds)
     if n == 0:
@@ -158,14 +159,12 @@ def run(args):
     in_dim = first.x.size(1)
 
     # ── Build group array: one group ID per source sample ─────────────────────
-    # Each augmented variant maps back to its original source via source_of().
-    # StratifiedGroupKFold guarantees all variants of a source stay together.
     names  = [str(ds[i].name) for i in range(n)]
     groups = np.array([source_of(name) for name in names])
 
     unique_sources   = sorted(set(groups))
     n_sources        = len(unique_sources)
-    source_label_map = {}  # source → label (for reporting)
+    source_label_map = {}
     for name, label in zip(names, labels):
         src = source_of(name)
         source_label_map[src] = int(label)
@@ -185,7 +184,6 @@ def run(args):
               f"reducing to {n_sources} folds.")
         args.folds = n_sources
 
-    # StratifiedGroupKFold: stratify by label, constrain by source group
     sgkf    = StratifiedGroupKFold(n_splits=args.folds, shuffle=True,
                                    random_state=args.seed)
     indices = np.arange(n)
@@ -195,12 +193,10 @@ def run(args):
     for fold, (train_idx, test_idx) in enumerate(
             sgkf.split(indices, labels, groups=groups), 1):
 
-        # Verify no source leakage
         train_sources = set(groups[train_idx])
         test_sources  = set(groups[test_idx])
         leaked = train_sources & test_sources
         if leaked:
-            # Should never happen — but loud warning if it does
             print(f"  [LEAK WARNING] {len(leaked)} source(s) appear in "
                   f"both train and test: {leaked}")
 
@@ -248,7 +244,6 @@ def run(args):
                 best_state = {k: v.clone()
                               for k, v in model.state_dict().items()}
 
-        # Final eval with best weights
         model.load_state_dict(best_state)
         acc, f1, auc, cm = evaluate(model, test_loader, device)
         print(f"  Best → acc={acc:.3f}  f1={f1:.3f}  auc={auc:.3f}")
@@ -263,15 +258,12 @@ def run(args):
         fold_results.append({"fold": fold, "acc": acc, "f1": f1, "auc": auc,
                               "test_sources": sorted(test_sources)})
 
-        # Per-sample predictions
-        # IMPORTANT: use data.clone() so we never mutate the shared dataset
-        # objects in-place. Without this, data.to(device) would move the
-        # tensors permanently to GPU, causing a CPU/CUDA mix when the same
-        # object is re-used in a subsequent fold's DataLoader.
+        # ── Per-sample predictions + log for statistical tests ───────────────
+        # data.clone() prevents in-place GPU mutation of shared dataset objects.
         model.eval()
         with torch.no_grad():
             for data in test_ds:
-                data      = data.clone().to(device)          # ← cloned here
+                data      = data.clone().to(device)
                 batch_vec = torch.zeros(data.x.size(0), dtype=torch.long,
                                         device=device)
                 graph_attr = getattr(data, "graph_attr", None)
@@ -284,11 +276,20 @@ def run(args):
                 prob = F.softmax(out, dim=1)[0, 1].item()
                 name = getattr(data, "name", f"graph_{id(data)}")
                 true = data.y.item()
+
+                # ── Log for statistical analysis ───────────────────────────
+                log_prediction(
+                    source=source_of(str(name)),
+                    pred=int(pred),
+                    true=int(true),
+                    prob=float(prob),
+                )
+
                 status = "✅" if pred == true else "❌"
                 print(f"    {status} {str(name):<50} "
                       f"pred={pred} true={true} prob={prob:.3f}")
 
-    # ── Summary ───────────────────────────────────────────────────────────────
+    # ── Summary ───────────────────────────────────────────────────────────
     print("\n" + "=" * 60)
     print(f"  {args.folds}-FOLD CV RESULTS ({args.model.upper()})")
     print("=" * 60)
@@ -299,6 +300,9 @@ def run(args):
     print(f"  F1       : {np.mean(f1s):.3f} ± {np.std(f1s):.3f}")
     print(f"  AUC-ROC  : {np.mean(aucs):.3f} ± {np.std(aucs):.3f}")
     print("=" * 60)
+
+    # ── Statistical tests on per-source accuracy (across all folds) ────────
+    run_stats()
 
     out_path = f"results_{args.model}_{args.folds}fold.json"
     with open(out_path, "w") as f:
@@ -325,7 +329,7 @@ def run(args):
     print(f"  Results saved → {out_path}")
 
 
-# ── CLI ───────────────────────────────────────────────────────────────────────
+# ── CLI ───────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
