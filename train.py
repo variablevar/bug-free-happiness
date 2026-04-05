@@ -1,25 +1,14 @@
 #!/usr/bin/env python3
 """
-train.py  v7
-5-fold CV  →  Leave-One-Source-Out (LOSO) cross-validation.
-
-Changes vs v6:
-  - StratifiedGroupKFold replaced with LeaveOneGroupOut (LOSO).
-    Each fold trains on 29 sources, tests on 1.  30 folds total.
-    This is the standard honest evaluation for small forensic datasets.
-  - Default epochs lowered to 300 (sufficient for small model).
-  - Default hidden=16, layers=2, dropout=0.5 (right-sized for 30 graphs).
-  - --folds CLI arg removed (LOSO determines fold count automatically).
-  - evaluate_stats.run_stats() still called after all folds.
-
-Usage:
-    python train.py extracted_data/dataset_manifest.csv
-    python train.py extracted_data/dataset_manifest.csv --model sage
-    python train.py extracted_data/dataset_manifest.csv --hidden 16 --layers 2
-    python train.py extracted_data/dataset_manifest.csv --save-model --seed 0
+train.py  v8
+Changes vs v7:
+  - Removed all hardcoded .view(-1, 4) on graph_attr.
+    graph_attr is now 14-dim (dataset.py v2); let PyG DataLoader
+    batch it automatically and pass it through as-is.
+  - MalwareGraphDataset now receives optional base_dir from args.
 """
 
-import os, sys, argparse, json, datetime, re
+import os, sys, argparse, json, datetime, re, types
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -51,8 +40,7 @@ def train_epoch(model, loader, optimiser, device, class_weights):
         optimiser.zero_grad()
 
         graph_attr = getattr(batch, "graph_attr", None)
-        if graph_attr is not None:
-            graph_attr = graph_attr.view(-1, 4).to(device)
+        # PyG DataLoader already batches graph_attr to [B, attr_dim] — no reshape needed
 
         out  = model(batch.x, batch.edge_index, batch.batch,
                      graph_attr=graph_attr)
@@ -72,8 +60,7 @@ def evaluate(model, loader, device):
         batch = batch.to(device)
 
         graph_attr = getattr(batch, "graph_attr", None)
-        if graph_attr is not None:
-            graph_attr = graph_attr.view(-1, 4).to(device)
+        # No reshape — already [B, attr_dim] from DataLoader
 
         out   = model(batch.x, batch.edge_index, batch.batch,
                       graph_attr=graph_attr)
@@ -138,7 +125,8 @@ def run(args):
     print(f"[Train] Seed   : {args.seed}")
 
     # ── Load dataset ──────────────────────────────────────────────────────────
-    ds = MalwareGraphDataset(args.manifest)
+    base_dir = getattr(args, "base_dir", None)
+    ds = MalwareGraphDataset(args.manifest, base_dir=base_dir)
     n  = len(ds)
     if n == 0:
         print("[ERROR] Dataset is empty.")
@@ -152,6 +140,8 @@ def run(args):
         sys.exit(1)
     in_dim = first.x.size(1)
 
+    graph_attr_dim = first.graph_attr.size(0) if hasattr(first, "graph_attr") else 0
+
     names  = [str(ds[i].name) for i in range(n)]
     groups = np.array([source_of(name) for name in names])
 
@@ -159,10 +149,10 @@ def run(args):
     n_sources      = len(unique_sources)
 
     label_counts = dict(zip(*np.unique(labels, return_counts=True)))
-    print(f"[Train] Graphs    : {n}  |  feature dim={in_dim}")
-    print(f"[Train] Sources   : {n_sources} unique — LOSO ({n_sources} folds)")
-    print(f"[Train] Model     : {args.model.upper()}  hidden={args.hidden}  layers={args.layers}")
-    print(f"[Train] Label dist: {label_counts}")
+    print(f"[Train] Graphs      : {n}  |  node_feat={in_dim}  graph_attr={graph_attr_dim}")
+    print(f"[Train] Sources     : {n_sources} unique — LOSO ({n_sources} folds)")
+    print(f"[Train] Model       : {args.model.upper()}  hidden={args.hidden}  layers={args.layers}")
+    print(f"[Train] Label dist  : {label_counts}")
 
     class_weights = compute_class_weights(labels, device)
     print(f"[Train] Class weights: {class_weights.tolist()}")
@@ -172,12 +162,12 @@ def run(args):
     indices = np.arange(n)
 
     fold_results = []
-    n_folds      = n_sources  # one fold per source
+    n_folds      = n_sources
 
     for fold, (train_idx, test_idx) in enumerate(
             logo.split(indices, labels, groups=groups), 1):
 
-        test_source = groups[test_idx][0]   # exactly one source per fold
+        test_source = groups[test_idx][0]
         test_label  = int(labels[test_idx[0]])
 
         print(f"\n── Fold {fold:>2}/{n_folds}  "
@@ -205,8 +195,6 @@ def run(args):
         for epoch in range(1, args.epochs + 1):
             loss = train_epoch(model, train_loader, optimiser, device,
                                class_weights)
-            # Use training acc to drive scheduler (test set is 1 sample —
-            # single-sample AUC is meaningless for scheduling)
             train_acc, train_f1, _, _ = evaluate(model, train_loader, device)
             scheduler.step(train_f1)
 
@@ -228,9 +216,12 @@ def run(args):
             data      = test_ds[0].clone().to(device)
             batch_vec = torch.zeros(data.x.size(0), dtype=torch.long,
                                     device=device)
+            # graph_attr is [attr_dim] on a single Data object; unsqueeze to [1, attr_dim]
             graph_attr = getattr(data, "graph_attr", None)
             if graph_attr is not None:
-                graph_attr = graph_attr.unsqueeze(0).to(device)
+                if graph_attr.dim() == 1:
+                    graph_attr = graph_attr.unsqueeze(0)   # [1, 14]
+                graph_attr = graph_attr.to(device)
 
             out  = model(data.x, data.edge_index, batch_vec,
                          graph_attr=graph_attr)
@@ -266,7 +257,6 @@ def run(args):
     n_correct = sum(r["correct"] for r in fold_results)
     loso_acc  = n_correct / n_folds
 
-    # Separate by class
     mal_folds = [r for r in fold_results if r["true_label"] == 1]
     ben_folds = [r for r in fold_results if r["true_label"] == 0]
     mal_acc   = sum(r["correct"] for r in mal_folds) / max(len(mal_folds), 1)
@@ -282,10 +272,8 @@ def run(args):
           f"({sum(r['correct'] for r in ben_folds)}/{len(ben_folds)})")
     print("=" * 60)
 
-    # ── Statistical tests ─────────────────────────────────────────────────────
     run_stats()
 
-    # ── Save JSON ─────────────────────────────────────────────────────────────
     out_path = f"results_{args.model}_loso.json"
     with open(out_path, "w") as f:
         json.dump({
@@ -313,19 +301,22 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="LOSO CV training for MalVol-25 GNN classifier"
     )
-    parser.add_argument("manifest",       help="Path to dataset_manifest.csv")
-    parser.add_argument("--model",        default="gin", choices=["gin", "sage"])
-    parser.add_argument("--epochs",       type=int,   default=300)
-    parser.add_argument("--hidden",       type=int,   default=16)
-    parser.add_argument("--layers",       type=int,   default=2)
-    parser.add_argument("--dropout",      type=float, default=0.5)
-    parser.add_argument("--lr",           type=float, default=1e-3)
-    parser.add_argument("--weight-decay", type=float, default=1e-4,
+    parser.add_argument("manifest",        help="Path to dataset_manifest.csv")
+    parser.add_argument("--base-dir",      default=None, dest="base_dir",
+                        help="Base directory containing graph.pkl folders "
+                             "(defaults to dirname of manifest)")
+    parser.add_argument("--model",         default="gin", choices=["gin", "sage"])
+    parser.add_argument("--epochs",        type=int,   default=300)
+    parser.add_argument("--hidden",        type=int,   default=16)
+    parser.add_argument("--layers",        type=int,   default=2)
+    parser.add_argument("--dropout",       type=float, default=0.5)
+    parser.add_argument("--lr",            type=float, default=1e-3)
+    parser.add_argument("--weight-decay",  type=float, default=1e-4,
                         dest="weight_decay")
-    parser.add_argument("--batch-size",   type=int,   default=8,
+    parser.add_argument("--batch-size",    type=int,   default=8,
                         dest="batch_size")
-    parser.add_argument("--seed",         type=int,   default=42)
-    parser.add_argument("--save-model",   action="store_true",
+    parser.add_argument("--seed",          type=int,   default=42)
+    parser.add_argument("--save-model",    action="store_true",
                         dest="save_model")
     args = parser.parse_args()
     run(args)
