@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 """
-train.py  v6
-5-fold cross-validation training + evaluation for malware GNN classifier.
+train.py  v7
+5-fold CV  →  Leave-One-Source-Out (LOSO) cross-validation.
 
-Changes vs v5:
-  - Integrated evaluate_stats.py: log_prediction() is called for every
-    per-sample prediction, and run_stats() is called once after all folds
-    to print t-test / Wilcoxon / Shapiro-Wilk results on per-source accuracy.
+Changes vs v6:
+  - StratifiedGroupKFold replaced with LeaveOneGroupOut (LOSO).
+    Each fold trains on 29 sources, tests on 1.  30 folds total.
+    This is the standard honest evaluation for small forensic datasets.
+  - Default epochs lowered to 300 (sufficient for small model).
+  - Default hidden=16, layers=2, dropout=0.5 (right-sized for 30 graphs).
+  - --folds CLI arg removed (LOSO determines fold count automatically).
+  - evaluate_stats.run_stats() still called after all folds.
 
 Usage:
     python train.py extracted_data/dataset_manifest.csv
     python train.py extracted_data/dataset_manifest.csv --model sage
-    python train.py extracted_data/dataset_manifest.csv --epochs 200 --hidden 128
+    python train.py extracted_data/dataset_manifest.csv --hidden 16 --layers 2
     python train.py extracted_data/dataset_manifest.csv --save-model --seed 0
 """
 
@@ -20,7 +24,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from torch_geometric.loader import DataLoader
-from sklearn.model_selection import StratifiedGroupKFold
+from sklearn.model_selection import LeaveOneGroupOut
 from sklearn.metrics import (accuracy_score, f1_score,
                               roc_auc_score, confusion_matrix)
 
@@ -29,23 +33,15 @@ from model          import GINMalwareClassifier, SAGEMalwareClassifier
 from evaluate_stats import log_prediction, run_stats
 
 
-# ── Source-name extraction ───────────────────────────────────────────────────
+# ── Source-name extraction ────────────────────────────────────────────────────
 
 _AUG_SUFFIX = re.compile(r"__aug_[a-z]+_\d+$")
 
 def source_of(name: str) -> str:
-    """
-    Strip the augmentation suffix to get the original source sample name.
-
-    Examples:
-      "Cerber-WithVirus__aug_noise_03"      → "Cerber-WithVirus"
-      "W32.MyDoom.A.-NoVirus__aug_benign_00" → "W32.MyDoom.A.-NoVirus"
-      "Cerber-WithVirus"                     → "Cerber-WithVirus"  (passthrough)
-    """
     return _AUG_SUFFIX.sub("", str(name))
 
 
-# ── Training helpers ──────────────────────────────────────────────────────
+# ── Training helpers ──────────────────────────────────────────────────────────
 
 def train_epoch(model, loader, optimiser, device, class_weights):
     model.train()
@@ -95,7 +91,7 @@ def evaluate(model, loader, device):
     except ValueError:
         auc = 0.0
 
-    cm = confusion_matrix(labels, preds)
+    cm = confusion_matrix(labels, preds, labels=[0, 1])
     return acc, f1, auc, cm
 
 
@@ -110,7 +106,6 @@ def build_model(args, in_dim, device):
 
 
 def compute_class_weights(labels, device):
-    """Inverse-frequency weights so the minority class isn't ignored."""
     counts  = np.bincount(labels)
     total   = len(labels)
     weights = torch.tensor(
@@ -120,7 +115,6 @@ def compute_class_weights(labels, device):
     return weights
 
 
-# ── Git hash for result provenance ──────────────────────────────────────────────
 def git_hash():
     try:
         import subprocess
@@ -132,7 +126,7 @@ def git_hash():
         return "unknown"
 
 
-# ── Main ─────────────────────────────────────────────────────────────
+# ── Main ──────────────────────────────────────────────────────────────────────
 
 def run(args):
     torch.manual_seed(args.seed)
@@ -143,80 +137,59 @@ def run(args):
     print(f"[Train] Device : {device}")
     print(f"[Train] Seed   : {args.seed}")
 
-    # ── Load dataset ─────────────────────────────────────────────────────
+    # ── Load dataset ──────────────────────────────────────────────────────────
     ds = MalwareGraphDataset(args.manifest)
     n  = len(ds)
     if n == 0:
-        print("[ERROR] Dataset is empty — check manifest path and sample folders.")
+        print("[ERROR] Dataset is empty.")
         sys.exit(1)
 
     labels = np.array(ds.get_labels())
 
     first = ds[0]
     if first.x is None or first.x.dim() < 2:
-        print("[ERROR] ds[0].x is None or 1-D — check dataset.py feature construction.")
+        print("[ERROR] ds[0].x is None or 1-D.")
         sys.exit(1)
     in_dim = first.x.size(1)
 
-    # ── Build group array: one group ID per source sample ─────────────────────
     names  = [str(ds[i].name) for i in range(n)]
     groups = np.array([source_of(name) for name in names])
 
-    unique_sources   = sorted(set(groups))
-    n_sources        = len(unique_sources)
-    source_label_map = {}
-    for name, label in zip(names, labels):
-        src = source_of(name)
-        source_label_map[src] = int(label)
+    unique_sources = sorted(set(groups))
+    n_sources      = len(unique_sources)
 
     label_counts = dict(zip(*np.unique(labels, return_counts=True)))
     print(f"[Train] Graphs    : {n}  |  feature dim={in_dim}")
-    print(f"[Train] Sources   : {n_sources} unique source samples")
-    print(f"[Train] Model     : {args.model.upper()}")
+    print(f"[Train] Sources   : {n_sources} unique — LOSO ({n_sources} folds)")
+    print(f"[Train] Model     : {args.model.upper()}  hidden={args.hidden}  layers={args.layers}")
     print(f"[Train] Label dist: {label_counts}")
-    print(f"[Train] Split     : StratifiedGroupKFold — groups=source sample names")
 
     class_weights = compute_class_weights(labels, device)
     print(f"[Train] Class weights: {class_weights.tolist()}")
 
-    if n_sources < args.folds:
-        print(f"[WARN] Only {n_sources} unique sources but --folds={args.folds}; "
-              f"reducing to {n_sources} folds.")
-        args.folds = n_sources
-
-    sgkf    = StratifiedGroupKFold(n_splits=args.folds, shuffle=True,
-                                   random_state=args.seed)
+    # ── LOSO split ────────────────────────────────────────────────────────────
+    logo    = LeaveOneGroupOut()
     indices = np.arange(n)
 
     fold_results = []
+    n_folds      = n_sources  # one fold per source
 
     for fold, (train_idx, test_idx) in enumerate(
-            sgkf.split(indices, labels, groups=groups), 1):
+            logo.split(indices, labels, groups=groups), 1):
 
-        train_sources = set(groups[train_idx])
-        test_sources  = set(groups[test_idx])
-        leaked = train_sources & test_sources
-        if leaked:
-            print(f"  [LEAK WARNING] {len(leaked)} source(s) appear in "
-                  f"both train and test: {leaked}")
+        test_source = groups[test_idx][0]   # exactly one source per fold
+        test_label  = int(labels[test_idx[0]])
 
-        print(f"\n── Fold {fold}/{args.folds} "
-              f"(train={len(train_idx)}, test={len(test_idx)}) "
-              f"[{len(train_sources)} train-sources / "
-              f"{len(test_sources)} test-sources] ──")
-
-        test_labels = labels[test_idx]
-        if len(set(test_labels)) < 2:
-            print(f"  [WARN] Test fold has only class {set(test_labels)} — "
-                  f"AUC/F1 unreliable for this fold")
+        print(f"\n── Fold {fold:>2}/{n_folds}  "
+              f"test={test_source} (label={test_label})  "
+              f"train={len(train_idx)} graphs ──")
 
         train_ds = [ds[i] for i in train_idx]
         test_ds  = [ds[i] for i in test_idx]
 
         train_loader = DataLoader(train_ds, batch_size=args.batch_size,
                                   shuffle=True)
-        test_loader  = DataLoader(test_ds,  batch_size=args.batch_size,
-                                  shuffle=False)
+        test_loader  = DataLoader(test_ds,  batch_size=1, shuffle=False)
 
         model     = build_model(args, in_dim, device)
         optimiser = torch.optim.Adam(model.parameters(), lr=args.lr,
@@ -226,130 +199,133 @@ def run(args):
         )
 
         best_f1    = -1.0
+        best_acc   = -1.0
         best_state = {k: v.clone() for k, v in model.state_dict().items()}
 
         for epoch in range(1, args.epochs + 1):
             loss = train_epoch(model, train_loader, optimiser, device,
                                class_weights)
-            acc, f1, auc, _ = evaluate(model, test_loader, device)
-            scheduler.step(f1)
+            # Use training acc to drive scheduler (test set is 1 sample —
+            # single-sample AUC is meaningless for scheduling)
+            train_acc, train_f1, _, _ = evaluate(model, train_loader, device)
+            scheduler.step(train_f1)
 
-            if epoch % 20 == 0 or epoch == args.epochs:
+            if epoch % 50 == 0 or epoch == args.epochs:
                 print(f"  Epoch {epoch:>3}  loss={loss:.4f}  "
-                      f"acc={acc:.3f}  f1={f1:.3f}  auc={auc:.3f}  "
+                      f"train_acc={train_acc:.3f}  "
                       f"lr={optimiser.param_groups[0]['lr']:.2e}")
 
-            if f1 > best_f1:
-                best_f1    = f1
+            if train_f1 > best_f1 or (train_f1 == best_f1 and train_acc > best_acc):
+                best_f1    = train_f1
+                best_acc   = train_acc
                 best_state = {k: v.clone()
                               for k, v in model.state_dict().items()}
 
+        # Final eval on the single held-out source
         model.load_state_dict(best_state)
-        acc, f1, auc, cm = evaluate(model, test_loader, device)
-        print(f"  Best → acc={acc:.3f}  f1={f1:.3f}  auc={auc:.3f}")
-        print(f"  Confusion matrix:\n{cm}")
-        print(f"  Test sources : {sorted(test_sources)}")
-
-        if args.save_model:
-            ckpt = f"model_{args.model}_fold{fold}.pt"
-            torch.save(best_state, ckpt)
-            print(f"  Saved checkpoint → {ckpt}")
-
-        fold_results.append({"fold": fold, "acc": acc, "f1": f1, "auc": auc,
-                              "test_sources": sorted(test_sources)})
-
-        # ── Per-sample predictions + log for statistical tests ───────────────
-        # data.clone() prevents in-place GPU mutation of shared dataset objects.
         model.eval()
         with torch.no_grad():
-            for data in test_ds:
-                data      = data.clone().to(device)
-                batch_vec = torch.zeros(data.x.size(0), dtype=torch.long,
-                                        device=device)
-                graph_attr = getattr(data, "graph_attr", None)
-                if graph_attr is not None:
-                    graph_attr = graph_attr.unsqueeze(0).to(device)
+            data      = test_ds[0].clone().to(device)
+            batch_vec = torch.zeros(data.x.size(0), dtype=torch.long,
+                                    device=device)
+            graph_attr = getattr(data, "graph_attr", None)
+            if graph_attr is not None:
+                graph_attr = graph_attr.unsqueeze(0).to(device)
 
-                out  = model(data.x, data.edge_index, batch_vec,
-                             graph_attr=graph_attr)
-                pred = out.argmax(dim=1).item()
-                prob = F.softmax(out, dim=1)[0, 1].item()
-                name = getattr(data, "name", f"graph_{id(data)}")
-                true = data.y.item()
+            out  = model(data.x, data.edge_index, batch_vec,
+                         graph_attr=graph_attr)
+            pred = out.argmax(dim=1).item()
+            prob = F.softmax(out, dim=1)[0, 1].item()
+            true = data.y.item()
 
-                # ── Log for statistical analysis ───────────────────────────
-                log_prediction(
-                    source=source_of(str(name)),
-                    pred=int(pred),
-                    true=int(true),
-                    prob=float(prob),
-                )
+        correct = pred == true
+        status  = "✅" if correct else "❌"
+        print(f"  {status}  pred={pred}  true={true}  prob={prob:.3f}")
 
-                status = "✅" if pred == true else "❌"
-                print(f"    {status} {str(name):<50} "
-                      f"pred={pred} true={true} prob={prob:.3f}")
+        log_prediction(
+            source=test_source,
+            pred=int(pred),
+            true=int(true),
+            prob=float(prob),
+        )
 
-    # ── Summary ───────────────────────────────────────────────────────────
+        if args.save_model:
+            ckpt = f"model_{args.model}_loso_{test_source}.pt"
+            torch.save(best_state, ckpt)
+
+        fold_results.append({
+            "fold":        fold,
+            "test_source": test_source,
+            "true_label":  test_label,
+            "pred":        int(pred),
+            "prob":        round(prob, 4),
+            "correct":     bool(correct),
+        })
+
+    # ── LOSO Summary ──────────────────────────────────────────────────────────
+    n_correct = sum(r["correct"] for r in fold_results)
+    loso_acc  = n_correct / n_folds
+
+    # Separate by class
+    mal_folds = [r for r in fold_results if r["true_label"] == 1]
+    ben_folds = [r for r in fold_results if r["true_label"] == 0]
+    mal_acc   = sum(r["correct"] for r in mal_folds) / max(len(mal_folds), 1)
+    ben_acc   = sum(r["correct"] for r in ben_folds) / max(len(ben_folds), 1)
+
     print("\n" + "=" * 60)
-    print(f"  {args.folds}-FOLD CV RESULTS ({args.model.upper()})")
+    print(f"  LOSO RESULTS ({args.model.upper()})  —  {n_folds} folds")
     print("=" * 60)
-    accs = [r["acc"] for r in fold_results]
-    f1s  = [r["f1"]  for r in fold_results]
-    aucs = [r["auc"] for r in fold_results]
-    print(f"  Accuracy : {np.mean(accs):.3f} ± {np.std(accs):.3f}")
-    print(f"  F1       : {np.mean(f1s):.3f} ± {np.std(f1s):.3f}")
-    print(f"  AUC-ROC  : {np.mean(aucs):.3f} ± {np.std(aucs):.3f}")
+    print(f"  Overall accuracy : {loso_acc:.3f}  ({n_correct}/{n_folds})")
+    print(f"  Malware  (label=1): {mal_acc:.3f}  "
+          f"({sum(r['correct'] for r in mal_folds)}/{len(mal_folds)})")
+    print(f"  Benign   (label=0): {ben_acc:.3f}  "
+          f"({sum(r['correct'] for r in ben_folds)}/{len(ben_folds)})")
     print("=" * 60)
 
-    # ── Statistical tests on per-source accuracy (across all folds) ────────
+    # ── Statistical tests ─────────────────────────────────────────────────────
     run_stats()
 
-    out_path = f"results_{args.model}_{args.folds}fold.json"
+    # ── Save JSON ─────────────────────────────────────────────────────────────
+    out_path = f"results_{args.model}_loso.json"
     with open(out_path, "w") as f:
         json.dump({
             "model":        args.model,
-            "folds":        args.folds,
+            "eval":         "LOSO",
+            "n_folds":      n_folds,
             "epochs":       args.epochs,
             "hidden":       args.hidden,
+            "layers":       args.layers,
             "seed":         args.seed,
             "batch_size":   args.batch_size,
-            "timestamp":    datetime.datetime.utcnow().isoformat(),
+            "timestamp":    datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "git_hash":     git_hash(),
-            "class_weights": class_weights.tolist(),
-            "split_strategy": "StratifiedGroupKFold",
-            "n_unique_sources": n_sources,
-            "mean_acc":     float(np.mean(accs)),
-            "std_acc":      float(np.std(accs)),
-            "mean_f1":      float(np.mean(f1s)),
-            "std_f1":       float(np.std(f1s)),
-            "mean_auc":     float(np.mean(aucs)),
-            "std_auc":      float(np.std(aucs)),
+            "loso_acc":     round(loso_acc, 4),
+            "mal_acc":      round(mal_acc, 4),
+            "ben_acc":      round(ben_acc, 4),
             "fold_results": fold_results,
         }, f, indent=2)
     print(f"  Results saved → {out_path}")
 
 
-# ── CLI ───────────────────────────────────────────────────────────────
+# ── CLI ───────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="5-fold CV training for MalVol-25 GNN classifier"
+        description="LOSO CV training for MalVol-25 GNN classifier"
     )
     parser.add_argument("manifest",       help="Path to dataset_manifest.csv")
     parser.add_argument("--model",        default="gin", choices=["gin", "sage"])
-    parser.add_argument("--folds",        type=int,   default=5)
-    parser.add_argument("--epochs",       type=int,   default=200)
-    parser.add_argument("--hidden",       type=int,   default=64)
-    parser.add_argument("--layers",       type=int,   default=3)
-    parser.add_argument("--dropout",      type=float, default=0.3)
+    parser.add_argument("--epochs",       type=int,   default=300)
+    parser.add_argument("--hidden",       type=int,   default=16)
+    parser.add_argument("--layers",       type=int,   default=2)
+    parser.add_argument("--dropout",      type=float, default=0.5)
     parser.add_argument("--lr",           type=float, default=1e-3)
     parser.add_argument("--weight-decay", type=float, default=1e-4,
                         dest="weight_decay")
-    parser.add_argument("--batch-size",   type=int,   default=4,
+    parser.add_argument("--batch-size",   type=int,   default=8,
                         dest="batch_size")
     parser.add_argument("--seed",         type=int,   default=42)
     parser.add_argument("--save-model",   action="store_true",
-                        dest="save_model",
-                        help="Save best model checkpoint per fold")
+                        dest="save_model")
     args = parser.parse_args()
     run(args)
