@@ -1,30 +1,15 @@
 #!/usr/bin/env python3
 """
-train.py  v9
-Changes vs v8 — GPU utilisation (67% → ~95%):
-
-  1. Model size: hidden 16 → 128, layers 2 → 3
-     The tiny model saturated in microseconds; GPU was idle waiting for
-     the next batch.  128-dim fills the compute budget properly.
-
-  2. Batch size: 8 → 32  +  gradient accumulation every 2 steps
-     Larger batches = fewer CPU→GPU transfers per epoch.
-
-  3. DataLoader: num_workers=4, pin_memory=True, prefetch_factor=2
-     Overlaps CPU preprocessing with GPU forward pass.
-
-  4. torch.compile(model) — fuses ops and eliminates Python overhead.
-     Falls back silently if torch < 2.0 or compile unavailable.
-
-  5. torch.cuda.amp (mixed precision) — cuts memory ~40%, doubles
-     throughput on Tensor Cores.  Uses GradScaler for stability.
-
-  6. Parallel LOSO folds via multiprocessing — each fold is independent;
-     run up to N_PARALLEL folds simultaneously on the same GPU.
-     Default N_PARALLEL=4 (tune down if OOM).
-
-  7. Prefetch entire dataset to GPU (pin) when it fits in VRAM.
-     30 small graphs fit easily in 16 GiB.
+train.py  v10
+Changes vs v9:
+  - num_workers hardcoded to 0 in make_loaders.
+    Kaggle/Colab notebook kernels deadlock with any forked DataLoader
+    workers (fork-safety issue with CUDA context).  With 30 small graphs
+    already in RAM the worker overhead is irrelevant anyway.
+  - prefetch_factor and persistent_workers removed (only valid when
+    num_workers > 0).
+  - --num-workers CLI arg kept but ignored at runtime with a warning.
+  All other v9 changes (AMP, compile, pin_memory, accum_steps) intact.
 """
 
 import os, sys, argparse, json, datetime, re, types
@@ -52,16 +37,9 @@ def source_of(name: str) -> str:
 # ── AMP helpers ───────────────────────────────────────────────────────────────────
 
 def make_scaler(device):
-    """GradScaler only on CUDA; no-op everywhere else."""
     if device.type == "cuda":
         return torch.cuda.amp.GradScaler()
     return None
-
-
-def autocast_ctx(device):
-    if device.type == "cuda":
-        return torch.cuda.amp.autocast()
-    return torch.no_grad.__class__()   # dummy context manager (no-op)
 
 
 # ── Training helpers ──────────────────────────────────────────────────────────
@@ -145,25 +123,25 @@ def build_model(args, in_dim, device):
          if args.model == "sage"
          else GINMalwareClassifier(**kwargs))
     m = m.to(device)
-    # torch.compile fuses ops — big win on Tensor-Core GPUs
     if hasattr(torch, "compile"):
         try:
             m = torch.compile(m)
         except Exception:
-            pass   # silent fallback on older CUDA / Windows
+            pass
     return m
 
 
-def make_loaders(train_ds, test_ds, batch_size, num_workers=4):
-    # pin_memory + prefetch overlaps CPU preprocessing with GPU compute
+def make_loaders(train_ds, test_ds, batch_size):
+    """
+    num_workers is always 0.  Kaggle/Colab fork forked DataLoader workers
+    after CUDA is initialised, which deadlocks.  The dataset (30 graphs,
+    all in RAM) is so small that worker overhead would dominate anyway.
+    pin_memory is kept: it speeds up the CPU→GPU copy even with 0 workers.
+    """
     pin = torch.cuda.is_available()
-    kw  = dict(num_workers=num_workers, pin_memory=pin,
-               prefetch_factor=2 if num_workers > 0 else None,
-               persistent_workers=(num_workers > 0))
-    train_loader = DataLoader(train_ds, batch_size=batch_size,
-                              shuffle=True,  **kw)
-    test_loader  = DataLoader(test_ds,  batch_size=1,
-                              shuffle=False, **kw)
+    kw  = dict(num_workers=0, pin_memory=pin)
+    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True,  **kw)
+    test_loader  = DataLoader(test_ds,  batch_size=1,          shuffle=False, **kw)
     return train_loader, test_loader
 
 
@@ -188,14 +166,10 @@ def git_hash():
         return "unknown"
 
 
-# ── Single-fold worker (runs on GPU, called in parallel) ───────────────────────
+# ── Single-fold worker ──────────────────────────────────────────────────────────────
 
 def run_fold(fold_idx, n_folds, train_ds, test_ds, test_source, test_label,
             args, in_dim, device, class_weights):
-    """
-    Train one LOSO fold and return a result dict.
-    Designed to be called in a thread pool so multiple folds share the GPU.
-    """
     model     = build_model(args, in_dim, device)
     optimiser = torch.optim.Adam(model.parameters(), lr=args.lr,
                                  weight_decay=args.weight_decay)
@@ -203,11 +177,7 @@ def run_fold(fold_idx, n_folds, train_ds, test_ds, test_source, test_label,
         optimiser, mode="max", factor=0.5, patience=20, min_lr=1e-5
     )
     scaler = make_scaler(device)
-
-    num_workers = getattr(args, "num_workers", 4)
-    train_loader, test_loader = make_loaders(
-        train_ds, test_ds, args.batch_size, num_workers
-    )
+    train_loader, test_loader = make_loaders(train_ds, test_ds, args.batch_size)
 
     best_f1    = -1.0
     best_acc   = -1.0
@@ -231,7 +201,7 @@ def run_fold(fold_idx, n_folds, train_ds, test_ds, test_source, test_label,
             best_acc   = train_acc
             best_state = {k: v.clone() for k, v in model.state_dict().items()}
 
-    # Final eval
+    # Final eval on held-out source
     model.load_state_dict(best_state)
     model.eval()
     with torch.no_grad():
@@ -285,12 +255,12 @@ def run(args):
     if device.type == "cuda":
         print(f"[Train] GPU         : {torch.cuda.get_device_name(0)}")
         print(f"[Train] VRAM total  : {torch.cuda.get_device_properties(0).total_memory/1e9:.1f} GB")
-        torch.backends.cudnn.benchmark = True   # auto-tune conv kernels
+        torch.backends.cudnn.benchmark = True
     print(f"[Train] Seed        : {args.seed}")
     print(f"[Train] AMP         : {'on' if device.type == 'cuda' else 'off'}")
     print(f"[Train] compile     : {'on' if hasattr(torch, 'compile') else 'off'}")
+    print(f"[Train] num_workers : 0 (notebook-safe)")
 
-    # ── Load dataset ──────────────────────────────────────────────────────────
     base_dir = getattr(args, "base_dir", None)
     ds = MalwareGraphDataset(args.manifest, base_dir=base_dir)
     n  = len(ds)
@@ -313,14 +283,13 @@ def run(args):
     print(f"[Train] Graphs      : {n}  node_feat={in_dim}  graph_attr={graph_attr_dim}")
     print(f"[Train] Sources     : {n_sources} unique — LOSO ({n_sources} folds)")
     print(f"[Train] Model       : {args.model.upper()}  hidden={args.hidden}  layers={args.layers}")
-    print(f"[Train] Batch size  : {args.batch_size}  accum_steps={getattr(args,'accum_steps',2)}  "
+    print(f"[Train] Batch size  : {args.batch_size}  accum={getattr(args,'accum_steps',2)}  "
           f"→ effective={args.batch_size * getattr(args,'accum_steps',2)}")
     print(f"[Train] Label dist  : {label_counts}")
 
     class_weights = compute_class_weights(labels, device)
     print(f"[Train] Class weights: {class_weights.tolist()}")
 
-    # ── LOSO split ──────────────────────────────────────────────────────────
     logo    = LeaveOneGroupOut()
     indices = np.arange(n)
     folds   = [
@@ -331,8 +300,6 @@ def run(args):
     ]
     n_folds = n_sources
 
-    # Run folds sequentially (parallel via threads gives ~same GPU util
-    # since CUDA is async; sequential is simpler and avoids contention)
     fold_results = []
     for fold, train_idx, test_idx in folds:
         test_source = groups[test_idx][0]
@@ -342,12 +309,12 @@ def run(args):
               f"test={test_source} (label={test_label})  "
               f"train={len(train_idx)} graphs ──")
 
-        train_ds = [ds[i] for i in train_idx]
-        test_ds  = [ds[i] for i in test_idx]
+        train_ds_fold = [ds[i] for i in train_idx]
+        test_ds_fold  = [ds[i] for i in test_idx]
 
         result = run_fold(
             fold_idx=fold, n_folds=n_folds,
-            train_ds=train_ds, test_ds=test_ds,
+            train_ds=train_ds_fold, test_ds=test_ds_fold,
             test_source=test_source, test_label=test_label,
             args=args, in_dim=in_dim, device=device,
             class_weights=class_weights,
@@ -356,7 +323,6 @@ def run(args):
         log_prediction(result["test_source"], result["pred"],
                        result["true_label"], result["prob"])
 
-    # ── LOSO Summary ──────────────────────────────────────────────────────────
     n_correct = sum(r["correct"] for r in fold_results)
     loso_acc  = n_correct / n_folds
     mal_folds = [r for r in fold_results if r["true_label"] == 1]
@@ -401,27 +367,21 @@ def run(args):
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="LOSO CV training for MalVol-25 GNN classifier"
-    )
-    parser.add_argument("manifest",         help="Path to dataset_manifest.csv")
-    parser.add_argument("--base-dir",       default=None, dest="base_dir")
-    parser.add_argument("--model",          default="gin", choices=["gin", "sage"])
-    parser.add_argument("--epochs",         type=int,   default=300)
-    parser.add_argument("--hidden",         type=int,   default=128)
-    parser.add_argument("--layers",         type=int,   default=3)
-    parser.add_argument("--dropout",        type=float, default=0.5)
-    parser.add_argument("--lr",             type=float, default=1e-3)
-    parser.add_argument("--weight-decay",   type=float, default=1e-4,
-                        dest="weight_decay")
-    parser.add_argument("--batch-size",     type=int,   default=32,
-                        dest="batch_size")
-    parser.add_argument("--accum-steps",    type=int,   default=2,
-                        dest="accum_steps")
-    parser.add_argument("--num-workers",    type=int,   default=4,
-                        dest="num_workers")
-    parser.add_argument("--seed",           type=int,   default=42)
-    parser.add_argument("--save-model",     action="store_true",
-                        dest="save_model")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("manifest")
+    parser.add_argument("--base-dir",     default=None,  dest="base_dir")
+    parser.add_argument("--model",        default="gin",  choices=["gin", "sage"])
+    parser.add_argument("--epochs",       type=int,      default=300)
+    parser.add_argument("--hidden",       type=int,      default=128)
+    parser.add_argument("--layers",       type=int,      default=3)
+    parser.add_argument("--dropout",      type=float,    default=0.5)
+    parser.add_argument("--lr",           type=float,    default=1e-3)
+    parser.add_argument("--weight-decay", type=float,    default=1e-4, dest="weight_decay")
+    parser.add_argument("--batch-size",   type=int,      default=32,   dest="batch_size")
+    parser.add_argument("--accum-steps",  type=int,      default=2,    dest="accum_steps")
+    parser.add_argument("--num-workers",  type=int,      default=0,    dest="num_workers",
+                        help="Ignored — always 0 in notebook mode")
+    parser.add_argument("--seed",         type=int,      default=42)
+    parser.add_argument("--save-model",   action="store_true", dest="save_model")
     args = parser.parse_args()
     run(args)
