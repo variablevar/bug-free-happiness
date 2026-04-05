@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-train.py  v8
-Changes vs v7:
-  - Removed all hardcoded .view(-1, 4) on graph_attr.
-    graph_attr is now 14-dim (dataset.py v2); let PyG DataLoader
-    batch it automatically and pass it through as-is.
-  - MalwareGraphDataset now receives optional base_dir from args.
+train.py  v9
+Fix vs v8:
+  - graph_attr per Data object is [1, 14] (dataset.py v3).
+    * graph_attr_dim log now reads .shape[-1] so it prints 14, not 1.
+    * Single-graph eval block: squeeze dim-0 first so unsqueeze(0) gives
+      [1, 14] not [1, 1, 14] which broke the lazy head in model.py.
 """
 
 import os, sys, argparse, json, datetime, re, types
@@ -40,7 +40,7 @@ def train_epoch(model, loader, optimiser, device, class_weights):
         optimiser.zero_grad()
 
         graph_attr = getattr(batch, "graph_attr", None)
-        # PyG DataLoader already batches graph_attr to [B, attr_dim] — no reshape needed
+        # DataLoader stacks [1,14] tensors along dim-0 → [B, 14]. No reshape needed.
 
         out  = model(batch.x, batch.edge_index, batch.batch,
                      graph_attr=graph_attr)
@@ -60,7 +60,7 @@ def evaluate(model, loader, device):
         batch = batch.to(device)
 
         graph_attr = getattr(batch, "graph_attr", None)
-        # No reshape — already [B, attr_dim] from DataLoader
+        # DataLoader already gives [B, 14] — no reshape needed.
 
         out   = model(batch.x, batch.edge_index, batch.batch,
                       graph_attr=graph_attr)
@@ -140,7 +140,12 @@ def run(args):
         sys.exit(1)
     in_dim = first.x.size(1)
 
-    graph_attr_dim = first.graph_attr.size(0) if hasattr(first, "graph_attr") else 0
+    # graph_attr is [1, 14] per sample — read last dim for the true feature count
+    graph_attr_dim = (
+        first.graph_attr.shape[-1]
+        if hasattr(first, "graph_attr") and first.graph_attr is not None
+        else 0
+    )
 
     names  = [str(ds[i].name) for i in range(n)]
     groups = np.array([source_of(name) for name in names])
@@ -209,19 +214,19 @@ def run(args):
                 best_state = {k: v.clone()
                               for k, v in model.state_dict().items()}
 
-        # Final eval on the single held-out source
+        # ── Final eval on the single held-out source ────────────────────────────
         model.load_state_dict(best_state)
         model.eval()
         with torch.no_grad():
             data      = test_ds[0].clone().to(device)
             batch_vec = torch.zeros(data.x.size(0), dtype=torch.long,
                                     device=device)
-            # graph_attr is [attr_dim] on a single Data object; unsqueeze to [1, attr_dim]
+
             graph_attr = getattr(data, "graph_attr", None)
             if graph_attr is not None:
-                if graph_attr.dim() == 1:
-                    graph_attr = graph_attr.unsqueeze(0)   # [1, 14]
-                graph_attr = graph_attr.to(device)
+                # dataset.py stores [1, 14]; squeeze to [14] then unsqueeze to [1, 14]
+                # This avoids a double-unsqueeze producing [1, 1, 14].
+                graph_attr = graph_attr.squeeze(0).unsqueeze(0).to(device)  # [1, 14]
 
             out  = model(data.x, data.edge_index, batch_vec,
                          graph_attr=graph_attr)
