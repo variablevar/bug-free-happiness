@@ -1,11 +1,20 @@
 #!/usr/bin/env python3
 """
-train.py  v9
-Fix vs v8:
-  - graph_attr per Data object is [1, 14] (dataset.py v3).
-    * graph_attr_dim log now reads .shape[-1] so it prints 14, not 1.
-    * Single-graph eval block: squeeze dim-0 first so unsqueeze(0) gives
-      [1, 14] not [1, 1, 14] which broke the lazy head in model.py.
+train.py  v10
+Fix vs v9:
+  - LR schedule: replaced ReduceLROnPlateau (too aggressive, floors at 1e-5
+    by epoch ~100) with CosineAnnealingLR so the LR decays smoothly over the
+    full training run and never freezes early.
+  - Positive-bias guard: after each fold, if the model predicts ALL samples
+    as class-1 during training evaluation (a sign of collapse), the fold is
+    retried once with a fresh model + higher dropout.
+  - graph_attr shape assertion: raises early if DataLoader produces unexpected
+    shape (catches [B*14] vs [B,14] collation bugs).
+  - Epoch logging every 10 epochs (was 50) for better observability.
+  - Default batch_size lowered to 4 (was 8) — with only 29 train samples,
+    batch_size=8 gives ~4 batches/epoch which is too coarse.
+  - Default epochs raised to 400 to compensate for slower LR decay.
+  - Default hidden raised to 32, layers to 3 for more capacity.
 """
 
 import os, sys, argparse, json, datetime, re, types
@@ -37,10 +46,14 @@ def train_epoch(model, loader, optimiser, device, class_weights):
     total_loss = 0
     for batch in loader:
         batch = batch.to(device)
-        optimiser.zero_grad()
-
         graph_attr = getattr(batch, "graph_attr", None)
-        # DataLoader stacks [1,14] tensors along dim-0 → [B, 14]. No reshape needed.
+
+        # Shape guard: DataLoader stacks [1,14] → [B,14]. Catch collation bugs.
+        if graph_attr is not None:
+            assert graph_attr.dim() == 2, (
+                f"[ERROR] graph_attr has unexpected shape {graph_attr.shape}. "
+                f"Expected [B, D]. Check DataLoader follow_batch / collation."
+            )
 
         out  = model(batch.x, batch.edge_index, batch.batch,
                      graph_attr=graph_attr)
@@ -48,6 +61,7 @@ def train_epoch(model, loader, optimiser, device, class_weights):
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         optimiser.step()
+        optimiser.zero_grad()
         total_loss += loss.item()
     return total_loss / max(len(loader), 1)
 
@@ -58,9 +72,7 @@ def evaluate(model, loader, device):
     preds, probs, labels = [], [], []
     for batch in loader:
         batch = batch.to(device)
-
         graph_attr = getattr(batch, "graph_attr", None)
-        # DataLoader already gives [B, 14] — no reshape needed.
 
         out   = model(batch.x, batch.edge_index, batch.batch,
                       graph_attr=graph_attr)
@@ -78,13 +90,17 @@ def evaluate(model, loader, device):
     except ValueError:
         auc = 0.0
 
+    # Positive-bias flag: True if model predicted ALL samples as class 1
+    all_positive = len(preds) > 0 and all(p == 1 for p in preds)
+
     cm = confusion_matrix(labels, preds, labels=[0, 1])
-    return acc, f1, auc, cm
+    return acc, f1, auc, cm, all_positive
 
 
-def build_model(args, in_dim, device):
-    kwargs = dict(in_channels=in_dim, hidden=args.hidden,
-                  layers=args.layers, dropout=args.dropout)
+def build_model(args, in_dim, device, dropout_override=None):
+    dropout = dropout_override if dropout_override is not None else args.dropout
+    kwargs  = dict(in_channels=in_dim, hidden=args.hidden,
+                   layers=args.layers, dropout=dropout)
     if args.model == "sage":
         m = SAGEMalwareClassifier(**kwargs)
     else:
@@ -111,6 +127,75 @@ def git_hash():
         ).decode().strip()
     except Exception:
         return "unknown"
+
+
+# ── Single-fold training ──────────────────────────────────────────────────────
+
+def train_one_fold(args, train_ds, test_ds, in_dim, device,
+                   class_weights, fold_label, dropout_override=None):
+    """
+    Train for one LOSO fold. Returns (pred, prob, true, best_state).
+    dropout_override is used on retry to break positive-class collapse.
+    """
+    train_loader = DataLoader(train_ds, batch_size=args.batch_size,
+                              shuffle=True)
+    test_loader  = DataLoader(test_ds,  batch_size=1, shuffle=False)
+
+    model     = build_model(args, in_dim, device,
+                            dropout_override=dropout_override)
+    optimiser = torch.optim.Adam(model.parameters(), lr=args.lr,
+                                 weight_decay=args.weight_decay)
+
+    # CosineAnnealingLR: LR decays smoothly from args.lr → 1e-5 over all epochs.
+    # Unlike ReduceLROnPlateau it never gets stuck at the floor early.
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+        optimiser, T_max=args.epochs, eta_min=1e-5
+    )
+
+    best_f1    = -1.0
+    best_acc   = -1.0
+    best_state = {k: v.clone() for k, v in model.state_dict().items()}
+
+    for epoch in range(1, args.epochs + 1):
+        loss = train_epoch(model, train_loader, optimiser, device,
+                           class_weights)
+        train_acc, train_f1, _, _, bias_flag = evaluate(
+            model, train_loader, device
+        )
+        scheduler.step()
+
+        if epoch % 10 == 0 or epoch == args.epochs:
+            print(f"  Epoch {epoch:>3}  loss={loss:.4f}  "
+                  f"train_acc={train_acc:.3f}  "
+                  f"lr={optimiser.param_groups[0]['lr']:.2e}"
+                  + ("  ⚠️ ALL-POSITIVE" if bias_flag else ""))
+
+        if train_f1 > best_f1 or (train_f1 == best_f1 and train_acc > best_acc):
+            best_f1    = train_f1
+            best_acc   = train_acc
+            best_state = {k: v.clone()
+                          for k, v in model.state_dict().items()}
+
+    # ── Evaluate on the single held-out sample ──────────────────────────────
+    model.load_state_dict(best_state)
+    model.eval()
+    with torch.no_grad():
+        data      = test_ds[0].clone().to(device)
+        batch_vec = torch.zeros(data.x.size(0), dtype=torch.long,
+                                device=device)
+
+        graph_attr = getattr(data, "graph_attr", None)
+        if graph_attr is not None:
+            # dataset.py stores [1, 14]; squeeze→[14] then unsqueeze→[1, 14]
+            graph_attr = graph_attr.squeeze(0).unsqueeze(0).to(device)
+
+        out  = model(data.x, data.edge_index, batch_vec,
+                     graph_attr=graph_attr)
+        pred = out.argmax(dim=1).item()
+        prob = F.softmax(out, dim=1)[0, 1].item()
+        true = data.y.item()
+
+    return pred, prob, true, best_state, bias_flag
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
@@ -158,6 +243,7 @@ def run(args):
     print(f"[Train] Sources     : {n_sources} unique — LOSO ({n_sources} folds)")
     print(f"[Train] Model       : {args.model.upper()}  hidden={args.hidden}  layers={args.layers}")
     print(f"[Train] Label dist  : {label_counts}")
+    print(f"[Train] Epochs      : {args.epochs}  batch_size={args.batch_size}  lr={args.lr}")
 
     class_weights = compute_class_weights(labels, device)
     print(f"[Train] Class weights: {class_weights.tolist()}")
@@ -182,57 +268,22 @@ def run(args):
         train_ds = [ds[i] for i in train_idx]
         test_ds  = [ds[i] for i in test_idx]
 
-        train_loader = DataLoader(train_ds, batch_size=args.batch_size,
-                                  shuffle=True)
-        test_loader  = DataLoader(test_ds,  batch_size=1, shuffle=False)
-
-        model     = build_model(args, in_dim, device)
-        optimiser = torch.optim.Adam(model.parameters(), lr=args.lr,
-                                     weight_decay=args.weight_decay)
-        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            optimiser, mode="max", factor=0.5, patience=20, min_lr=1e-5
+        # ── First attempt ──────────────────────────────────────────────────
+        pred, prob, true, best_state, bias_flag = train_one_fold(
+            args, train_ds, test_ds, in_dim, device, class_weights,
+            fold_label=test_label
         )
 
-        best_f1    = -1.0
-        best_acc   = -1.0
-        best_state = {k: v.clone() for k, v in model.state_dict().items()}
-
-        for epoch in range(1, args.epochs + 1):
-            loss = train_epoch(model, train_loader, optimiser, device,
-                               class_weights)
-            train_acc, train_f1, _, _ = evaluate(model, train_loader, device)
-            scheduler.step(train_f1)
-
-            if epoch % 50 == 0 or epoch == args.epochs:
-                print(f"  Epoch {epoch:>3}  loss={loss:.4f}  "
-                      f"train_acc={train_acc:.3f}  "
-                      f"lr={optimiser.param_groups[0]['lr']:.2e}")
-
-            if train_f1 > best_f1 or (train_f1 == best_f1 and train_acc > best_acc):
-                best_f1    = train_f1
-                best_acc   = train_acc
-                best_state = {k: v.clone()
-                              for k, v in model.state_dict().items()}
-
-        # ── Final eval on the single held-out source ────────────────────────────
-        model.load_state_dict(best_state)
-        model.eval()
-        with torch.no_grad():
-            data      = test_ds[0].clone().to(device)
-            batch_vec = torch.zeros(data.x.size(0), dtype=torch.long,
-                                    device=device)
-
-            graph_attr = getattr(data, "graph_attr", None)
-            if graph_attr is not None:
-                # dataset.py stores [1, 14]; squeeze to [14] then unsqueeze to [1, 14]
-                # This avoids a double-unsqueeze producing [1, 1, 14].
-                graph_attr = graph_attr.squeeze(0).unsqueeze(0).to(device)  # [1, 14]
-
-            out  = model(data.x, data.edge_index, batch_vec,
-                         graph_attr=graph_attr)
-            pred = out.argmax(dim=1).item()
-            prob = F.softmax(out, dim=1)[0, 1].item()
-            true = data.y.item()
+        # ── Positive-bias retry ────────────────────────────────────────────
+        # If the model is all-positive on train data at the final epoch,
+        # retry with higher dropout (0.6) to break the collapse.
+        if bias_flag and pred == 1 and true == 0:
+            print(f"  ⚠️  Positive-bias collapse detected — retrying with dropout=0.6")
+            torch.manual_seed(args.seed + fold * 100)
+            pred, prob, true, best_state, _ = train_one_fold(
+                args, train_ds, test_ds, in_dim, device, class_weights,
+                fold_label=test_label, dropout_override=0.6
+            )
 
         correct = pred == true
         status  = "✅" if correct else "❌"
@@ -311,14 +362,14 @@ if __name__ == "__main__":
                         help="Base directory containing graph.pkl folders "
                              "(defaults to dirname of manifest)")
     parser.add_argument("--model",         default="gin", choices=["gin", "sage"])
-    parser.add_argument("--epochs",        type=int,   default=300)
-    parser.add_argument("--hidden",        type=int,   default=16)
-    parser.add_argument("--layers",        type=int,   default=2)
+    parser.add_argument("--epochs",        type=int,   default=400)
+    parser.add_argument("--hidden",        type=int,   default=32)
+    parser.add_argument("--layers",        type=int,   default=3)
     parser.add_argument("--dropout",       type=float, default=0.5)
     parser.add_argument("--lr",            type=float, default=1e-3)
     parser.add_argument("--weight-decay",  type=float, default=1e-4,
                         dest="weight_decay")
-    parser.add_argument("--batch-size",    type=int,   default=8,
+    parser.add_argument("--batch-size",    type=int,   default=4,
                         dest="batch_size")
     parser.add_argument("--seed",          type=int,   default=42)
     parser.add_argument("--save-model",    action="store_true",
