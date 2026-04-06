@@ -1,20 +1,10 @@
 #!/usr/bin/env python3
 """
-train.py  v10
-Fix vs v9:
-  - LR schedule: replaced ReduceLROnPlateau (too aggressive, floors at 1e-5
-    by epoch ~100) with CosineAnnealingLR so the LR decays smoothly over the
-    full training run and never freezes early.
-  - Positive-bias guard: after each fold, if the model predicts ALL samples
-    as class-1 during training evaluation (a sign of collapse), the fold is
-    retried once with a fresh model + higher dropout.
-  - graph_attr shape assertion: raises early if DataLoader produces unexpected
-    shape (catches [B*14] vs [B,14] collation bugs).
-  - Epoch logging every 10 epochs (was 50) for better observability.
-  - Default batch_size lowered to 4 (was 8) — with only 29 train samples,
-    batch_size=8 gives ~4 batches/epoch which is too coarse.
-  - Default epochs raised to 400 to compensate for slower LR decay.
-  - Default hidden raised to 32, layers to 3 for more capacity.
+train.py  v11
+Fix vs v10:
+  - Removed batch_size from args entirely. It was missing from the
+    SimpleNamespace used in the Kaggle notebook, causing AttributeError.
+    DataLoader now uses a hardcoded TRAIN_BATCH_SIZE = 4 constant.
 """
 
 import os, sys, argparse, json, datetime, re, types
@@ -29,6 +19,10 @@ from sklearn.metrics import (accuracy_score, f1_score,
 from dataset        import MalwareGraphDataset
 from model          import GINMalwareClassifier, SAGEMalwareClassifier
 from evaluate_stats import log_prediction, run_stats
+
+# Hardcoded — with ~29 train samples, batch_size=4 gives ~7 batches/epoch.
+# Not exposed as a CLI arg to avoid the SimpleNamespace AttributeError.
+TRAIN_BATCH_SIZE = 4
 
 
 # ── Source-name extraction ────────────────────────────────────────────────────
@@ -134,10 +128,10 @@ def git_hash():
 def train_one_fold(args, train_ds, test_ds, in_dim, device,
                    class_weights, fold_label, dropout_override=None):
     """
-    Train for one LOSO fold. Returns (pred, prob, true, best_state).
+    Train for one LOSO fold. Returns (pred, prob, true, best_state, bias_flag).
     dropout_override is used on retry to break positive-class collapse.
     """
-    train_loader = DataLoader(train_ds, batch_size=args.batch_size,
+    train_loader = DataLoader(train_ds, batch_size=TRAIN_BATCH_SIZE,
                               shuffle=True)
     test_loader  = DataLoader(test_ds,  batch_size=1, shuffle=False)
 
@@ -146,8 +140,7 @@ def train_one_fold(args, train_ds, test_ds, in_dim, device,
     optimiser = torch.optim.Adam(model.parameters(), lr=args.lr,
                                  weight_decay=args.weight_decay)
 
-    # CosineAnnealingLR: LR decays smoothly from args.lr → 1e-5 over all epochs.
-    # Unlike ReduceLROnPlateau it never gets stuck at the floor early.
+    # CosineAnnealingLR: decays smoothly lr → 1e-5 over all epochs.
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
         optimiser, T_max=args.epochs, eta_min=1e-5
     )
@@ -243,7 +236,7 @@ def run(args):
     print(f"[Train] Sources     : {n_sources} unique — LOSO ({n_sources} folds)")
     print(f"[Train] Model       : {args.model.upper()}  hidden={args.hidden}  layers={args.layers}")
     print(f"[Train] Label dist  : {label_counts}")
-    print(f"[Train] Epochs      : {args.epochs}  batch_size={args.batch_size}  lr={args.lr}")
+    print(f"[Train] Epochs      : {args.epochs}  batch_size={TRAIN_BATCH_SIZE}  lr={args.lr}")
 
     class_weights = compute_class_weights(labels, device)
     print(f"[Train] Class weights: {class_weights.tolist()}")
@@ -265,23 +258,23 @@ def run(args):
               f"test={test_source} (label={test_label})  "
               f"train={len(train_idx)} graphs ──")
 
-        train_ds = [ds[i] for i in train_idx]
-        test_ds  = [ds[i] for i in test_idx]
+        train_ds_fold = [ds[i] for i in train_idx]
+        test_ds_fold  = [ds[i] for i in test_idx]
 
         # ── First attempt ──────────────────────────────────────────────────
         pred, prob, true, best_state, bias_flag = train_one_fold(
-            args, train_ds, test_ds, in_dim, device, class_weights,
+            args, train_ds_fold, test_ds_fold, in_dim, device, class_weights,
             fold_label=test_label
         )
 
         # ── Positive-bias retry ────────────────────────────────────────────
-        # If the model is all-positive on train data at the final epoch,
-        # retry with higher dropout (0.6) to break the collapse.
+        # If the model is all-positive on training data AND predicted wrong on
+        # a benign sample, retry once with higher dropout to break the collapse.
         if bias_flag and pred == 1 and true == 0:
             print(f"  ⚠️  Positive-bias collapse detected — retrying with dropout=0.6")
             torch.manual_seed(args.seed + fold * 100)
             pred, prob, true, best_state, _ = train_one_fold(
-                args, train_ds, test_ds, in_dim, device, class_weights,
+                args, train_ds_fold, test_ds_fold, in_dim, device, class_weights,
                 fold_label=test_label, dropout_override=0.6
             )
 
@@ -296,7 +289,7 @@ def run(args):
             prob=float(prob),
         )
 
-        if args.save_model:
+        if getattr(args, "save_model", False):
             ckpt = f"model_{args.model}_loso_{test_source}.pt"
             torch.save(best_state, ckpt)
 
@@ -340,7 +333,7 @@ def run(args):
             "hidden":       args.hidden,
             "layers":       args.layers,
             "seed":         args.seed,
-            "batch_size":   args.batch_size,
+            "batch_size":   TRAIN_BATCH_SIZE,
             "timestamp":    datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "git_hash":     git_hash(),
             "loso_acc":     round(loso_acc, 4),
@@ -369,8 +362,6 @@ if __name__ == "__main__":
     parser.add_argument("--lr",            type=float, default=1e-3)
     parser.add_argument("--weight-decay",  type=float, default=1e-4,
                         dest="weight_decay")
-    parser.add_argument("--batch-size",    type=int,   default=4,
-                        dest="batch_size")
     parser.add_argument("--seed",          type=int,   default=42)
     parser.add_argument("--save-model",    action="store_true",
                         dest="save_model")
