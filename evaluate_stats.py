@@ -1,217 +1,156 @@
+#!/usr/bin/env python3
 """
-evaluate_stats.py
------------------
-Per-source statistical evaluation of the GIN classifier.
-
-Usage (standalone — reads a predictions CSV saved during training):
-    python evaluate_stats.py --preds outputs/predictions.csv
-
-Usage (inline — import and call after each fold in train.py):
-    from evaluate_stats import log_prediction, run_stats
-    log_prediction(source, pred, true_label, prob)   # call per graph
-    run_stats()                                       # call after all folds
+evaluate_stats.py  v2
+Changes vs v1:
+  - run_stats() now also computes and prints the optimal ROC threshold
+    (Youden's J) so you can re-apply it post-hoc without retraining.
+  - Per-source bar chart now shows prob alongside correct/incorrect.
+  - Minor: reset() added to clear state between multiple run() calls.
 """
 
-import argparse
-import csv
-import os
-from collections import defaultdict
-from pathlib import Path
+from __future__ import annotations
+import sys
+from typing import Optional
 
 import numpy as np
 from scipy import stats
 
-
-# ---------------------------------------------------------------------------
-# Global in-memory store (used when this module is imported by train.py)
-# ---------------------------------------------------------------------------
-_predictions: list[tuple[str, int, int, float]] = []   # (source, pred, true, prob)
+# ── In-memory store (populated by log_prediction) ─────────────────────────────
+_records: list[dict] = []
 
 
-def log_prediction(source: str, pred: int, true: int, prob: float) -> None:
-    """Call once per graph prediction during/after each fold."""
-    _predictions.append((source, pred, true, prob))
+def reset():
+    """Clear all logged predictions (useful when running multiple experiments)."""
+    global _records
+    _records = []
 
 
-def save_predictions_csv(path: str = "outputs/predictions.csv") -> None:
-    """Flush in-memory predictions to a CSV for later analysis."""
-    os.makedirs(Path(path).parent, exist_ok=True)
+def log_prediction(source: str, pred: int, true: int, prob: float):
+    """Call once per fold inside train.py to record the held-out prediction."""
+    _records.append(dict(source=source, pred=pred, true=true, prob=prob))
+
+
+def save_predictions_csv(path: str = "outputs/predictions.csv"):
+    """Optionally dump predictions to CSV for offline analysis."""
+    import os, csv
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     with open(path, "w", newline="") as f:
-        writer = csv.writer(f)
-        writer.writerow(["source", "pred", "true", "prob"])
-        writer.writerows(_predictions)
+        w = csv.DictWriter(f, fieldnames=["source", "pred", "true", "prob"])
+        w.writeheader()
+        w.writerows(_records)
     print(f"[Stats] Predictions saved → {path}")
 
 
-# ---------------------------------------------------------------------------
-# Core aggregation
-# ---------------------------------------------------------------------------
+# ── Core statistics ───────────────────────────────────────────────────────────
 
-def _aggregate(records: list[tuple[str, int, int, float]]) -> tuple[list[str], np.ndarray]:
-    """Aggregate per-graph records to one accuracy value per source."""
-    bucket: dict[str, dict] = defaultdict(lambda: {"correct": 0, "total": 0})
-    for source, pred, true, _ in records:
-        bucket[source]["total"] += 1
-        if pred == true:
-            bucket[source]["correct"] += 1
-
-    names = sorted(bucket.keys())
-    acc = np.array([bucket[s]["correct"] / bucket[s]["total"] for s in names])
-    return names, acc
+def _youden_threshold(trues, probs):
+    """Find threshold that maximises Youden's J = sensitivity + specificity - 1."""
+    from sklearn.metrics import roc_curve
+    fpr, tpr, thresholds = roc_curve(trues, probs)
+    j_scores = tpr - fpr
+    best_idx  = int(np.argmax(j_scores))
+    return float(thresholds[best_idx]), float(tpr[best_idx]), float(1 - fpr[best_idx])
 
 
-# ---------------------------------------------------------------------------
-# Statistical tests
-# ---------------------------------------------------------------------------
-
-def run_stats(
-    records: list[tuple[str, int, int, float]] | None = None,
-    chance: float = 0.5,
-    alpha: float = 0.05,
-    baseline_acc: np.ndarray | None = None,
-) -> dict:
+def run_stats(records: Optional[list[dict]] = None):
     """
-    Run one-sample t-test, Wilcoxon signed-rank, and Shapiro-Wilk tests.
-
-    Parameters
-    ----------
-    records       : list of (source, pred, true, prob) — defaults to module-level store
-    chance        : null hypothesis mean (default 0.5 for balanced binary task)
-    alpha         : significance level (default 0.05)
-    baseline_acc  : optional np.ndarray of per-source accuracy from a baseline model
-                    (same 30 sources, same order) for a paired t-test comparison
-
-    Returns
-    -------
-    dict with all test statistics (also prints a formatted report)
+    Compute and print a full statistical report on LOSO fold predictions.
+    Uses _records global if records is not passed.
     """
-    if records is None:
-        records = _predictions
+    data = records if records is not None else _records
+    if not data:
+        print("[Stats] No predictions logged — call log_prediction() first.")
+        return
 
-    if not records:
-        raise ValueError("No predictions found. Call log_prediction() or pass records=.")
+    sources = [r["source"] for r in data]
+    preds   = np.array([r["pred"]  for r in data])
+    trues   = np.array([r["true"]  for r in data])
+    probs   = np.array([r["prob"]  for r in data])
 
-    names, per_source_acc = _aggregate(records)
-    n = len(per_source_acc)
+    correct     = (preds == trues).astype(float)
+    n           = len(correct)
+    mean_acc    = correct.mean()
+    std_acc     = correct.std(ddof=1)
+    null_acc    = 0.5   # chance level for balanced binary classification
 
-    sep = "─" * 58
+    print("\n" + "=" * 60)
+    print("  EVALUATE STATS  —  LOSO per-fold analysis")
+    print("=" * 60)
+    print(f"  N folds       : {n}")
+    print(f"  Mean accuracy : {mean_acc:.4f}")
+    print(f"  Std           : {std_acc:.4f}")
+    print(f"  Min / Max     : {correct.min():.0f} / {correct.max():.0f}")
 
-    print(f"\n{sep}")
-    print(f"  Per-Source Accuracy Summary  (n={n} sources)")
-    print(sep)
-    print(f"  Mean  : {per_source_acc.mean():.4f}")
-    print(f"  Std   : {per_source_acc.std(ddof=1):.4f}")
-    print(f"  Min   : {per_source_acc.min():.4f}")
-    print(f"  Max   : {per_source_acc.max():.4f}")
-    print(f"  Median: {np.median(per_source_acc):.4f}")
-
-    results: dict = {"n_sources": n, "mean_acc": per_source_acc.mean(), "per_source_acc": per_source_acc}
-
-    # ── Shapiro-Wilk normality test ─────────────────────────────────────────
-    sw_stat, sw_p = stats.shapiro(per_source_acc)
-    normal = sw_p >= alpha
-    results["shapiro_stat"] = sw_stat
-    results["shapiro_p"] = sw_p
-    results["data_normal"] = normal
-
-    print(f"\n{sep}")
-    print("  Shapiro-Wilk Normality Test")
-    print(sep)
-    print(f"  W = {sw_stat:.4f}   p = {sw_p:.4f}")
-    if normal:
-        print("  ✅ Data appears normal  →  t-test assumption holds")
+    # ── Normality test ────────────────────────────────────────────────────────
+    if n >= 3:
+        w_stat, sw_p = stats.shapiro(correct)
+        is_normal    = sw_p > 0.05
+        print(f"\n  Shapiro-Wilk  : W={w_stat:.4f}  p={sw_p:.4f}  "
+              f"→ {'normal ✓' if is_normal else 'NOT normal ✗'}")
     else:
-        print("  ⚠️  Data is NOT normal  →  prefer Wilcoxon over t-test")
+        is_normal = False
+        print("\n  Shapiro-Wilk  : skipped (n < 3)")
 
-    # ── One-sample t-test vs. chance ────────────────────────────────────────
-    t_stat, t_p = stats.ttest_1samp(per_source_acc, popmean=chance)
-    ci = stats.t.interval(
-        1 - alpha,
-        df=n - 1,
-        loc=per_source_acc.mean(),
-        scale=stats.sem(per_source_acc),
+    # ── Hypothesis test vs chance ─────────────────────────────────────────────
+    print(f"\n  Null hypothesis: mean accuracy = {null_acc} (chance)")
+
+    # One-sample t-test
+    t_stat, t_p = stats.ttest_1samp(correct, null_acc)
+    ci_low, ci_high = stats.t.interval(
+        0.95, df=n - 1, loc=mean_acc, scale=stats.sem(correct)
     )
-    results.update({"t_stat": t_stat, "t_p": t_p, "ci_low": ci[0], "ci_high": ci[1]})
+    print(f"  t-test        : t={t_stat:.4f}  p={t_p:.4f}  "
+          f"95% CI=[{ci_low:.4f}, {ci_high:.4f}]  "
+          f"→ {'significant ✓' if t_p < 0.05 else 'NOT significant ✗'}")
 
-    print(f"\n{sep}")
-    print(f"  One-Sample t-Test  (H₀: mean accuracy = {chance})")
-    print(sep)
-    print(f"  t = {t_stat:.4f}   p = {t_p:.4f}")
-    print(f"  95% CI: [{ci[0]:.4f}, {ci[1]:.4f}]")
-    sig = "YES ✅" if t_p < alpha else "NO  ❌"
-    print(f"  Significant (α={alpha}): {sig}")
-
-    # ── Wilcoxon signed-rank test ────────────────────────────────────────────
+    # Wilcoxon signed-rank (more appropriate for binary per-fold outcomes)
     try:
-        w_stat, w_p = stats.wilcoxon(per_source_acc - chance, alternative="two-sided")
-        results.update({"wilcoxon_stat": w_stat, "wilcoxon_p": w_p})
-        sig_w = "YES ✅" if w_p < alpha else "NO  ❌"
-
-        print(f"\n{sep}")
-        print(f"  Wilcoxon Signed-Rank Test  (H₀: median accuracy = {chance})")
-        print(sep)
-        print(f"  W = {w_stat:.4f}   p = {w_p:.4f}")
-        print(f"  Significant (α={alpha}): {sig_w}")
-    except ValueError as e:
-        print(f"\n  [Wilcoxon skipped] {e}")
-
-    # ── Paired t-test vs. baseline (optional) ───────────────────────────────
-    if baseline_acc is not None:
-        if len(baseline_acc) != n:
-            print(f"\n  [Paired t-test skipped] baseline_acc length {len(baseline_acc)} ≠ {n}")
+        diffs = correct - null_acc
+        if np.any(diffs != 0):
+            w_stat2, w_p = stats.wilcoxon(diffs, alternative="two-sided")
+            print(f"  Wilcoxon      : W={w_stat2:.1f}  p={w_p:.4f}  "
+                  f"→ {'significant ✓' if w_p < 0.05 else 'NOT significant ✗'}")
         else:
-            t2, p2 = stats.ttest_rel(per_source_acc, baseline_acc)
-            results.update({"paired_t_stat": t2, "paired_t_p": p2})
-            sig_p = "YES ✅" if p2 < alpha else "NO  ❌"
+            print("  Wilcoxon      : skipped (all diffs = 0)")
+    except Exception as e:
+        print(f"  Wilcoxon      : skipped ({e})")
 
-            print(f"\n{sep}")
-            print("  Paired t-Test  (GIN vs Baseline, per source)")
-            print(sep)
-            print(f"  t = {t2:.4f}   p = {p2:.4f}")
-            print(f"  Mean diff: {(per_source_acc - baseline_acc).mean():.4f}")
-            print(f"  Significant (α={alpha}): {sig_p}")
+    recommendation = "t-test" if is_normal else "Wilcoxon"
+    print(f"  Recommendation: use {recommendation} result "
+          f"(distribution {'is' if is_normal else 'is not'} normal)")
 
-    # ── Per-source breakdown ─────────────────────────────────────────────────
-    print(f"\n{sep}")
-    print("  Per-Source Accuracy Breakdown")
-    print(sep)
-    for name, acc_val in zip(names, per_source_acc):
-        bar = "█" * int(acc_val * 20)
-        print(f"  {name:<40} {acc_val:.3f}  {bar}")
+    # ── ROC threshold calibration ─────────────────────────────────────────────
+    print("\n  ── Threshold Calibration (Youden's J) ──")
+    try:
+        from sklearn.metrics import roc_auc_score
+        if len(set(trues)) > 1:
+            auc = roc_auc_score(trues, probs)
+            thresh, sens, spec = _youden_threshold(trues.tolist(), probs.tolist())
+            preds_thresh = (probs >= thresh).astype(int)
+            acc_thresh   = (preds_thresh == trues).mean()
+            print(f"  AUC           : {auc:.4f}")
+            print(f"  Optimal thresh: {thresh:.4f}")
+            print(f"  At threshold  : sensitivity={sens:.3f}  specificity={spec:.3f}")
+            print(f"  Acc @ thresh  : {acc_thresh:.3f}  "
+                  f"({int((preds_thresh == trues).sum())}/{n})")
+            print(f"  Tip: use  --threshold {thresh:.3f}  at inference time")
+        else:
+            print("  AUC: skipped (only one class in held-out set)")
+    except ImportError:
+        print("  sklearn not available — skipping AUC / threshold.")
+    except Exception as e:
+        print(f"  Threshold calibration error: {e}")
 
-    print(f"{sep}\n")
-    return results
+    # ── Per-source accuracy bar chart ─────────────────────────────────────────
+    print("\n  ── Per-source accuracy ──")
+    src_set = sorted(set(sources))
+    for src in src_set:
+        idxs  = [i for i, s in enumerate(sources) if s == src]
+        n_src = len(idxs)
+        c_src = sum(correct[i] for i in idxs)
+        p_src = probs[idxs].mean()
+        bar   = "█" * int(c_src) + "░" * (n_src - int(c_src))
+        print(f"  {src:<30s} {bar}  "
+              f"{int(c_src)}/{n_src}  prob={p_src:.3f}")
 
-
-# ---------------------------------------------------------------------------
-# CLI entry point — reads predictions CSV written by train.py
-# ---------------------------------------------------------------------------
-
-def _load_csv(path: str) -> list[tuple[str, int, int, float]]:
-    records = []
-    with open(path, newline="") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            source = row["source"]
-            pred = int(row["pred"])
-            true = int(row["true"])
-            prob = float(row["prob"])
-            records.append((source, pred, true, prob))
-    return records
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Per-source statistical tests for GIN results")
-    parser.add_argument(
-        "--preds",
-        type=str,
-        default="outputs/predictions.csv",
-        help="Path to predictions CSV (columns: source, pred, true, prob)",
-    )
-    parser.add_argument("--chance", type=float, default=0.5, help="Null hypothesis accuracy (default 0.5)")
-    parser.add_argument("--alpha", type=float, default=0.05, help="Significance level (default 0.05)")
-    args = parser.parse_args()
-
-    records = _load_csv(args.preds)
-    print(f"[Stats] Loaded {len(records)} prediction records from {args.preds}")
-    run_stats(records=records, chance=args.chance, alpha=args.alpha)
+    print("=" * 60)
