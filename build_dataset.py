@@ -4,9 +4,10 @@ build_dataset.py  v3  (MalVol-25 aware — threaded)
 
 Loops over all sample folders inside extracted_data/,
 runs the full pipeline on each sample in parallel:
-  1. filter_malicious.py  → filtered_malicious.json
-  2. build_graph.py       → graph.json / graph.pkl / graph_attr.json
-  3. analyze_graph.py     → analysis_report.json
+  1. ensure graph.pkl exists (bootstrap build_graph.py if needed)
+  2. filter_malicious.py  → filtered_malicious.json
+  3. build_graph.py       → graph.json / graph.pkl / graph_attr.json
+  4. analyze_graph.py     → analysis_report.json
 
 Also produces:
   extracted_data/dataset_manifest.csv   ← label table for GNN training
@@ -15,7 +16,8 @@ Changes vs v2:
   - ThreadPoolExecutor: all samples processed in parallel
   - --workers N flag (default: 4)
   - Thread-safe progress bar + manifest collection via Lock
-  - Steps within a sample stay sequential (filter → graph → analyze)
+  - Steps within a sample stay sequential with dependency safety:
+    ensure-graph → filter → graph → analyze
   - Per-sample output flushed to terminal as soon as it finishes
   - --skip-existing still works (skips individual steps per sample)
   - Dry-run unchanged
@@ -154,6 +156,24 @@ def progress_bar(done, total, elapsed, bar_width=28):
     return f"[{bar}] {done}/{total} ({pct*100:.0f}%){eta}"
 
 
+def uncertainty_flags(row):
+    """
+    Mark likely false-positive benign samples for manual review.
+    Ground-truth labels are preserved; this only adds curation metadata.
+    """
+    reasons = []
+    label = row.get("label", -1)
+    verdict = str(row.get("verdict", ""))
+    max_score = row.get("max_score", -1)
+
+    if label == 0 and (verdict.startswith("HIGH") or verdict.startswith("CRITICAL")):
+        reasons.append("benign_with_high_or_critical_verdict")
+    if label == 0 and isinstance(max_score, (int, float)) and max_score >= 10:
+        reasons.append("benign_with_high_process_score")
+
+    return bool(reasons), "|".join(reasons)
+
+
 # ── Per-sample worker ────────────────────────────────────────────────────────
 def process_sample(job, scripts, skip, run_steps):
     """
@@ -183,6 +203,18 @@ def process_sample(job, scripts, skip, run_steps):
         "analyze_ok": False,
         "error":      "",
     }
+
+    # Ensure graph.pkl exists before filtering. filter_malicious.py requires it.
+    graph_missing = not existing["graph.pkl"]
+    if "filter" in run_steps and graph_missing:
+        ok, _, err, t = run_script(scripts["graph"], folder)
+        mark = "✅" if ok else "❌"
+        lines.append(f"  [RUN]  build_graph.py (bootstrap) ... {mark} ({t}s)")
+        log.append(f"build_graph.py (bootstrap): {'OK' if ok else 'FAIL'} ({t}s)")
+        if not ok and err:
+            log.append(f"  STDERR: {err[:400]}")
+            row["error"] += f"graph_bootstrap:{err[:80]} "
+        existing = check_outputs(folder)
 
     # ─ Step 1: filter_malicious.py ──────────────────────────────────────────
     if "filter" in run_steps:
@@ -240,6 +272,9 @@ def process_sample(job, scripts, skip, run_steps):
 
     stats = collect_stats(folder)
     row.update(stats)
+    uncertain, uncertain_reason = uncertainty_flags(row)
+    row["uncertain"] = uncertain
+    row["uncertain_reason"] = uncertain_reason
     write_run_log(folder, log)
 
     ok_all = row["filter_ok"] and row["graph_ok"] and row["analyze_ok"]
@@ -382,6 +417,8 @@ def main():
                     "attack_steps": -1, "injections": -1, "c2_conns": -1,
                     "verdict": "exception",
                     "graph_attr": "", "label_signals_top": "",
+                    "uncertain": True,
+                    "uncertain_reason": "pipeline_exception",
                 }
 
     # ─ Write manifest CSV ────────────────────────────────────────────────
@@ -392,6 +429,7 @@ def main():
         "max_score", "attack_steps", "injections", "c2_conns",
         "verdict",
         "graph_attr", "label_signals_top",
+        "uncertain", "uncertain_reason",
         "filter_ok", "graph_ok", "analyze_ok", "error",
     ]
     with open(manifest_path, "w", newline="", encoding="utf-8") as f:
@@ -407,12 +445,14 @@ def main():
     clean    = [r for r in rows if r["label"] == 0]
     unknown  = [r for r in rows if r["label"] == -1]
     failed   = [r for r in rows if not (r["filter_ok"] and r["graph_ok"] and r["analyze_ok"])]
+    uncertain_rows = [r for r in rows if r.get("uncertain")]
 
     print(f"{'='*65}")
     print(f"  DATASET BUILD COMPLETE  ({elapsed}s total, {n_workers} workers)")
     print(f"{'='*65}")
     print(f"  Samples total     : {len(rows)}")
     print(f"  Fully successful  : {ok_count}/{len(rows)}")
+    print(f"  Uncertain samples : {len(uncertain_rows)}")
     print(f"  Malware (label=1) : {len(malware)}")
     print(f"  Clean   (label=0) : {len(clean)}")
     if unknown:

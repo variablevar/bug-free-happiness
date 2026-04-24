@@ -24,6 +24,7 @@ from sklearn.metrics import (accuracy_score, f1_score,
 from dataset        import MalwareGraphDataset
 from model          import GINMalwareClassifier, SAGEMalwareClassifier
 from evaluate_stats import log_prediction, run_stats
+from utils.schema   import EXPECTED_GRAPH_ATTR_DIM
 
 # Hardcoded — with ~29 train samples, batch_size=4 gives ~7 batches/epoch.
 TRAIN_BATCH_SIZE = 4
@@ -75,6 +76,62 @@ def build_augmented_dataset(ds_list, n_aug: int = 1) -> list:
     return augmented
 
 
+def _label_of(data: Data) -> int:
+    y = getattr(data, "y", None)
+    if y is None:
+        return -1
+    if hasattr(y, "item"):
+        return int(y.item())
+    return int(y)
+
+
+def build_benign_augmented_dataset(
+    ds_list,
+    target_ratio: float = 1.0,
+    edge_drop_p: float = 0.05,
+    feat_mask_p: float = 0.05,
+    max_copies_per_sample: int = 50,
+) -> list:
+    """
+    Oversample benign class via graph augmentation until:
+      benign_count >= target_ratio * malware_count
+
+    Notes:
+      - If there are 0 benign samples in a fold, no benign augmentation is possible.
+      - Uses gentler perturbation defaults than generic augmentation.
+    """
+    if target_ratio <= 0:
+        return list(ds_list)
+
+    base = list(ds_list)
+    benign = [d for d in base if _label_of(d) == 0]
+    malware = [d for d in base if _label_of(d) == 1]
+    benign_count = len(benign)
+    malware_count = len(malware)
+
+    if benign_count == 0 or malware_count == 0:
+        return base
+
+    target_benign = int(np.ceil(target_ratio * malware_count))
+    if benign_count >= target_benign:
+        return base
+
+    needed = target_benign - benign_count
+    generated = []
+    idx = 0
+    while len(generated) < needed:
+        src = benign[idx % benign_count]
+        generated.append(
+            augment_graph(src, edge_drop_p=edge_drop_p, feat_mask_p=feat_mask_p)
+        )
+        idx += 1
+        # safety brake against accidental runaway loops
+        if idx > benign_count * max_copies_per_sample:
+            break
+
+    return base + generated
+
+
 # ── Training helpers ──────────────────────────────────────────────────────────
 
 def train_epoch(model, loader, optimiser, device, class_weights):
@@ -88,6 +145,10 @@ def train_epoch(model, loader, optimiser, device, class_weights):
             assert graph_attr.dim() == 2, (
                 f"[ERROR] graph_attr has unexpected shape {graph_attr.shape}. "
                 f"Expected [B, D]."
+            )
+            assert graph_attr.size(1) == EXPECTED_GRAPH_ATTR_DIM, (
+                f"[ERROR] graph_attr feature dim {graph_attr.size(1)} "
+                f"!= expected {EXPECTED_GRAPH_ATTR_DIM}."
             )
 
         out  = model(batch.x, batch.edge_index, batch.batch,
@@ -177,6 +238,21 @@ def train_one_fold(args, train_ds, test_ds, in_dim, device,
     """
     Train for one LOSO fold. Returns (pred, prob, true, best_state, bias_flag).
     """
+    # Optionally oversample benign class first.
+    if getattr(args, "augment_benign", False):
+        before = len(train_ds)
+        train_ds = build_benign_augmented_dataset(
+            train_ds,
+            target_ratio=args.benign_target_ratio,
+            edge_drop_p=args.benign_edge_drop,
+            feat_mask_p=args.benign_feat_mask,
+        )
+        after = len(train_ds)
+        if after > before:
+            print(f"  [Augment-benign] train graphs: {before} -> {after}")
+        else:
+            print("  [Augment-benign] skipped (fold has no benign sample to augment)")
+
     # Optionally augment training data
     if getattr(args, "augment", False):
         train_ds = build_augmented_dataset(train_ds, n_aug=1)
@@ -244,13 +320,16 @@ def run(args):
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
 
-    device = torch.device("mps"  if torch.backends.mps.is_available() else
-                          "cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"[Train] Device : {device}")
     print(f"[Train] Seed   : {args.seed}")
 
     base_dir = getattr(args, "base_dir", None)
-    ds = MalwareGraphDataset(args.manifest, base_dir=base_dir)
+    ds = MalwareGraphDataset(
+        args.manifest,
+        base_dir=base_dir,
+        include_uncertain=args.include_uncertain,
+    )
     n  = len(ds)
     if n == 0:
         print("[ERROR] Dataset is empty.")
@@ -285,7 +364,9 @@ def run(args):
     print(f"[Train] Label dist  : {label_counts}")
     print(f"[Train] Epochs      : {args.epochs}  batch_size={TRAIN_BATCH_SIZE}  lr={args.lr}")
     print(f"[Train] Augment     : {getattr(args, 'augment', False)}")
+    print(f"[Train] Augment benign: {getattr(args, 'augment_benign', False)}")
     print(f"[Train] Benign boost: {benign_boost}x")
+    print(f"[Train] Include uncertain: {args.include_uncertain}")
 
     class_weights = compute_class_weights(labels, device,
                                           benign_boost=benign_boost)
@@ -402,7 +483,7 @@ if __name__ == "__main__":
     parser.add_argument("--base-dir",      default=None, dest="base_dir",
                         help="Base directory containing graph.pkl folders")
     parser.add_argument("--model",         default="gin", choices=["gin", "sage"])
-    parser.add_argument("--epochs",        type=int,   default=400)
+    parser.add_argument("--epochs",        type=int,   default=120)
     parser.add_argument("--hidden",        type=int,   default=16,
                         help="GNN hidden dim (default 16; was 32)")
     parser.add_argument("--layers",        type=int,   default=2,
@@ -416,8 +497,23 @@ if __name__ == "__main__":
                         dest="save_model")
     parser.add_argument("--augment",       action="store_true",
                         help="Double training set per fold via edge-drop + feature-mask augmentation")
+    parser.add_argument("--augment-benign", action="store_true",
+                        dest="augment_benign",
+                        help="Oversample benign class per fold using graph augmentation")
+    parser.add_argument("--benign-target-ratio", type=float, default=1.0,
+                        dest="benign_target_ratio",
+                        help="Target benign:malware ratio after benign augmentation (default 1.0)")
+    parser.add_argument("--benign-edge-drop", type=float, default=0.05,
+                        dest="benign_edge_drop",
+                        help="Edge drop probability for benign augmentation (default 0.05)")
+    parser.add_argument("--benign-feat-mask", type=float, default=0.05,
+                        dest="benign_feat_mask",
+                        help="Feature mask probability for benign augmentation (default 0.05)")
     parser.add_argument("--benign-boost",  type=float, default=2.0,
                         dest="benign_boost",
                         help="Extra weight multiplier for benign class (default 2.0)")
+    parser.add_argument("--include-uncertain", action="store_true",
+                        dest="include_uncertain",
+                        help="Include manifest rows marked uncertain (default: excluded)")
     args = parser.parse_args()
     run(args)

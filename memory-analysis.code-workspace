@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": ".",
+			"name": "datasets"
+		},
+		{
+			"path": "../volatility-3-dashboard",
+			"name": "volatility-3-dashboard"
+		}
+	],
+	"settings": {
+		"python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+	}
+}

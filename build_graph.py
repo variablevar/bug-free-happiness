@@ -28,24 +28,14 @@ import os, sys, json, glob, pickle, re, math
 import pandas as pd
 import networkx as nx
 from networkx.readwrite import json_graph
-
-PRIVATE_IP = re.compile(
-    r"^(10\.|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.|127\.|::1|0\.0\.0\.0|\*)"
+from utils.rules import (
+    PRIVATE_IP_RE as PRIVATE_IP,
+    LOLBIN_NET,
+    LSASS_WHITELIST,
+    HIGH_ACCESS_MASKS as HIGH_ACCESS,
 )
+
 SHELLCODE_EB_RE = re.compile(r"(eb\s+[0-9a-f]{2}\s+){3,}", re.IGNORECASE)
-
-LOLBIN_NET = {
-    "mshta.exe","wscript.exe","cscript.exe","regsvr32.exe","rundll32.exe",
-    "msiexec.exe","certutil.exe","powershell.exe","cmd.exe","bitsadmin.exe",
-    "wmic.exe","installutil.exe","regasm.exe","regsvcs.exe","msbuild.exe",
-}
-
-LSASS_WHITELIST = {
-    "csrss.exe","wininit.exe","lsass.exe","werfault.exe","services.exe",
-    "winlogon.exe","taskmgr.exe","msmpeng.exe",
-}
-
-HIGH_ACCESS = {"0x1fffff","0x1f0fff","0x143a"}
 
 _BAD_XML = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
 

@@ -1,0 +1,4 @@
+dump_id,process_count,malfind_rows,suspicious_files,hidden_procs,hidden_names_preview
+d7d9e05d-6b89-403f-8afe-d4a1539b2a45,52,7,734,2,"hs�����, '�""2, taskdl.exe"
+e046d2da-4910-441f-8eea-f1d8f4c000e7,85,8,1299,13,"RuntimeBroker., OneDriveStanda, conhost.exe, svchost.exe, taskhostw.exe"
+e4ebf6bf-aadd-48d3-802c-21eaf6505846,41,5,1551,5,"SearchFilterHo, conhost.exe, dllhost.exe, bin2hex.exe, SearchProtocol"

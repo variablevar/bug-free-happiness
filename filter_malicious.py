@@ -25,30 +25,21 @@ Output:
 
 import os, sys, re, json, math, pickle
 import networkx as nx
+from utils.parsing import safe_int, safe_str
+from utils.graph_io import load_graph_from_path
+from utils.rules import (
+    PRIVATE_IP_RE as PRIVATE_IP,
+    LOLBIN_NET,
+    LSASS_WHITELIST,
+    HIGH_ACCESS_MASKS,
+)
 
 
 # ── Constants ─────────────────────────────────────────────────────────────────
-PRIVATE_IP = re.compile(
-    r"^(10\.|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.|127\.|::1|0\.0\.0\.0|\*|-$)"
-)
-
 LEGIT_NET_OWNERS = {
     "chrome.exe", "firefox.exe", "msedge.exe", "iexplore.exe",
     "svchost.exe", "system", "dns.exe", "msmpeng.exe", "onedrive.exe",
     "microsoftedgeupdate.exe", "wuauclt.exe", "taskhostw.exe",
-}
-
-LOLBIN_NET = {
-    "mshta.exe", "wscript.exe", "cscript.exe", "regsvr32.exe",
-    "rundll32.exe", "msiexec.exe", "certutil.exe", "powershell.exe",
-    "cmd.exe", "bitsadmin.exe", "wmic.exe", "installutil.exe",
-    "regasm.exe", "regsvcs.exe", "msbuild.exe", "cmstp.exe",
-}
-
-LSASS_WHITELIST = {
-    "csrss.exe", "wininit.exe", "lsass.exe", "werfault.exe",
-    "services.exe", "winlogon.exe", "taskmgr.exe", "msmpeng.exe",
-    "msseces.exe", "antimalware service executable",
 }
 
 LEGIT_SSDT = {"ntoskrnl", "win32k"}
@@ -62,8 +53,6 @@ EXPECTED_PARENTS = {
     "svchost.exe":  ["services.exe"],
     "explorer.exe": ["userinit.exe", "winlogon.exe"],
 }
-
-HIGH_ACCESS_MASKS = {"0x1fffff", "0x1f0fff", "0x143a"}
 
 RANSOM_NOTE_RE = re.compile(
     r"readme|recover|decrypt|ransom|creadthis|help_recover|how_to|your_files",
@@ -88,13 +77,6 @@ SEV_HIGH            = 6
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
-def safe_int(v, default=0):
-    try: return int(v)
-    except Exception: return default
-
-def safe_str(v):
-    return "" if (v is None or (isinstance(v, float) and math.isnan(v))) else str(v)
-
 def clean(obj):
     if isinstance(obj, dict):
         return {k: clean(v) for k, v in obj.items()}
@@ -108,18 +90,11 @@ def nodes_of_type(G, t):
     return [(n, d) for n, d in G.nodes(data=True) if d.get("node_type") == t]
 
 def load_graph(path):
-    if os.path.isdir(path):
-        candidate = os.path.join(path, "graph.pkl")
-        if not os.path.exists(candidate):
-            print(f"[ERROR] graph.pkl not found in {path}"); sys.exit(1)
-        path = candidate
-    if not os.path.exists(path):
-        print(f"[ERROR] Not found: {path}"); sys.exit(1)
-    with open(path, "rb") as f:
-        G = pickle.load(f)
-    if not isinstance(G, nx.Graph):
-        print("[ERROR] Pickle does not contain a NetworkX graph."); sys.exit(1)
-    return G, os.path.dirname(os.path.abspath(path))
+    try:
+        return load_graph_from_path(path)
+    except (FileNotFoundError, TypeError) as exc:
+        print(f"[ERROR] {exc}")
+        sys.exit(1)
 
 
 # ── Behaviour-based process scorer ────────────────────────────────────────────

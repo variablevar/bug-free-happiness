@@ -22,29 +22,38 @@ The project evaluates **24 real-world malware samples** across multiple ransomwa
 ## Repository Structure
 
 ```text
-bug-free-happiness/
-├── auto_vol.py               # Parallel Volatility 3 extraction over all memory dumps
-├── analysis_corpus.py        # Full corpus statistics & combined IOC view
-├── analyze_graph.py          # Graph-level analysis and visualisation
-├── build_dataset.py          # Construct dataset_manifest.csv from extracted_data/
-├── build_graph.py            # Build heterogeneous behavioural graphs (PyG format)
-├── code_injection_analysis.py# malfind RWX / MZ header IOC analysis
-├── hidden_proc_analysis.py   # psscan vs pslist hidden process detection
-├── filescan_analysis.py      # Suspicious file staging detection
-├── network_analysis.py       # Non-standard / C2 network connection analysis
-├── filter_malicious.py       # Per-sample malicious artefact filtering & scoring
-├── memory_triage.py          # High-level triage across dump corpus
-├── dataset.py                # PyG Dataset class wrapping extracted graphs
-├── model.py                  # GIN and GraphSAGE model definitions
-├── train.py                  # 5-fold cross-validated training loop
-├── test_train.py             # Unit tests for training pipeline
-├── script.py                 # Utility / batch processing script
-├── server.py                 # Flask/FastAPI server (dashboard backend)
-├── socket_server.py          # WebSocket server for live scoring
-├── results_gin_5fold.json    # GIN baseline 5-fold CV results
+datasets/
+├── README.md                 # Project guide and runbook
 ├── requirements.txt          # Python dependencies
-├── PIPELINE_README.md        # Quick-start guide for the dashboard flow
-└── extracted_data/           # Volatility CSVs per sample (not included — see below)
+├── auto_vol.py               # Volatility extraction pipeline
+├── build_graph.py            # Build heterogeneous behavioural graph
+├── filter_malicious.py       # IOC scoring from graph artifacts
+├── analyze_graph.py          # Attack-chain and report generation
+├── build_dataset.py          # Per-sample orchestration + manifest build
+├── dataset.py                # PyG dataset wrapper
+├── model.py                  # GNN model definitions
+├── train.py                  # LOSO training/evaluation
+├── parity_checks.py          # Contract/parity validation helper
+├── graphml_to_formats.py     # Graph format conversion utilities
+├── memory_triage.py          # Corpus triage helper
+├── server.py                 # API server
+├── socket_server.py          # Socket service
+├── scripts/
+│   ├── ioc/
+│   │   ├── analysis_corpus.py
+│   │   ├── code_injection_analysis.py
+│   │   ├── hidden_proc_analysis.py
+│   │   ├── filescan_analysis.py
+│   │   └── network_analysis.py
+│   └── tools/
+│       └── csvs.py
+├── ioc_analysis/             # Shared IOC helper modules
+├── utils/                    # Shared parsing/rules/schema utilities
+├── docs/                     # Contracts and documentation
+├── memory_dumps/             # Input dumps (local only)
+├── extracted_data/           # Per-sample extracted artifacts
+├── extracted_csvs/           # Intermediate extraction artifacts
+└── outputs/                  # Analysis/training outputs
     └── <Family>-WithVirus/
         ├── windows_pslist.csv
         ├── windows_psscan.csv
@@ -55,6 +64,19 @@ bug-free-happiness/
 ```
 
 > ⚠️ Memory images and ransomware samples are **not included** for safety and licensing reasons. Raw dumps are too large to ship in a repository.
+
+### Root Hygiene Policy
+
+Only required source/config/runtime directories should live at repo root.
+Do not keep cache or transient files in root.
+
+- Ignored/transient: `__pycache__/`, `*.pyc`, `.ipynb_checkpoints/`
+- Generated outputs: `output/`, `outputs/`, `extracted_csvs/`, `extracted_data/`
+- If root looks noisy, run:
+
+```bash
+find . -type d -name "__pycache__" -prune -exec rm -rf {} + && find . -type f -name "*.pyc" -delete
+```
 
 ---
 
@@ -110,14 +132,16 @@ This writes per-sample CSVs into `extracted_data/<Family>-WithVirus/` and `extra
 Run individual analysis scripts to compute IOC metrics per sample and per family:
 
 ```bash
-python code_injection_analysis.py    # Code injection (malfind RWX + MZ header)
-python hidden_proc_analysis.py       # Hidden processes (psscan vs pslist)
-python filescan_analysis.py          # Suspicious file staging
-python network_analysis.py           # C2-like network connections
-python analysis_corpus.py            # Full corpus combined view
+python scripts/ioc/code_injection_analysis.py    # Code injection (malfind RWX + MZ header)
+python scripts/ioc/hidden_proc_analysis.py       # Hidden processes (psscan vs pslist)
+python scripts/ioc/filescan_analysis.py          # Suspicious file staging
+python scripts/ioc/network_analysis.py           # C2-like network connections
+python scripts/ioc/analysis_corpus.py            # Full corpus combined view
 ```
 
 Each script outputs clean CSVs and Markdown-ready tables suitable for reports or papers.
+They now share reusable helpers under `ioc_analysis/` for dataset traversal, pairing,
+and CSV/plugin loading, so metric logic stays focused and maintainable.
 
 ### Step 3 — Graph Construction
 
@@ -146,6 +170,11 @@ Produces `extracted_data/dataset_manifest.csv`:
 | `attack_steps` | Number of attack chain steps detected |
 | `injections` | Count of malfind RWX regions |
 | `c2_conns` | Count of external ESTABLISHED connections |
+| `uncertain` | `True` when a benign-labelled sample has strong malicious heuristic signals |
+| `uncertain_reason` | Pipe-separated reasons for uncertainty (for manual triage) |
+
+By default, uncertain samples are excluded from training so heuristic false positives
+in benign captures do not poison labels.
 
 ### Step 5 — Train GNN
 
@@ -163,6 +192,13 @@ python train.py extracted_data/dataset_manifest.csv \
 
 # Save best checkpoint per fold
 python train.py extracted_data/dataset_manifest.csv --save-model
+
+# Include uncertain rows from manifest (off by default)
+python train.py extracted_data/dataset_manifest.csv --include-uncertain
+
+# Benign-focused augmentation (helps class imbalance when benign exists in train fold)
+python train.py extracted_data/dataset_manifest.csv --model sage \
+    --augment-benign --benign-target-ratio 1.0
 
 # Multiple seeds for reliable results
 for seed in 0 1 2; do
@@ -186,6 +222,11 @@ done
 | `--batch-size` | `4` | Batch size |
 | `--seed` | `42` | Random seed |
 | `--save-model` | `False` | Save best checkpoint per fold |
+| `--include-uncertain` | `False` | Include uncertain manifest rows in training |
+| `--augment-benign` | `False` | Oversample benign class using graph augmentation |
+| `--benign-target-ratio` | `1.0` | Target benign:malware ratio after benign augmentation |
+| `--benign-edge-drop` | `0.05` | Edge drop probability for benign augmentation |
+| `--benign-feat-mask` | `0.05` | Feature mask probability for benign augmentation |
 
 ---
 

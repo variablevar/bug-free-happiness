@@ -25,6 +25,8 @@ Output:
 import json, sys, os, collections, math, pickle
 from networkx.readwrite import json_graph
 import networkx as nx
+from utils.graph_io import load_graph_from_path
+from utils.rules import HIGH_ACCESS_MASKS
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -51,8 +53,6 @@ SUSPICIOUS_PARENTS = {
     "svchost.exe":  {"explorer.exe","cmd.exe","powershell.exe"},
     "services.exe": {"cmd.exe","powershell.exe","explorer.exe"},
 }
-
-HIGH_ACCESS_MASKS = {"0x1fffff","0x1f0fff","0x143a"}
 
 ENCODED_PATTERNS = [
     "-enc","-encodedcommand","frombase64","invoke-expression",
@@ -92,18 +92,11 @@ def nodes_of_type(G, t):
 
 def load_graph(path):
     """Accept a graph.pkl file or a sample folder containing graph.pkl."""
-    if os.path.isdir(path):
-        candidate = os.path.join(path, "graph.pkl")
-        if not os.path.exists(candidate):
-            print(f"[ERROR] graph.pkl not found in {path}"); sys.exit(1)
-        path = candidate
-    if not os.path.exists(path):
-        print(f"[ERROR] Not found: {path}"); sys.exit(1)
-    with open(path, "rb") as f:
-        G = pickle.load(f)
-    if not isinstance(G, nx.Graph):
-        print(f"[ERROR] Pickle does not contain a NetworkX graph."); sys.exit(1)
-    return G, os.path.dirname(os.path.abspath(path))
+    try:
+        return load_graph_from_path(path)
+    except (FileNotFoundError, TypeError) as exc:
+        print(f"[ERROR] {exc}")
+        sys.exit(1)
 
 def load_graph_attr(folder):
     """Load graph_attr.json written by build_graph.py v2."""

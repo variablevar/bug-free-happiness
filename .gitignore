@@ -1,4 +1,13 @@
 memory_dumps/*
+upload_sessions/*
 vol_output/*
 extracted_data_augmented/*
+extracted_csvs/*
+output/*
+upload_sessions/*
+notebook/*
 .venv
+__pycache__/
+**/__pycache__/
+*.pyc
+.ipynb_checkpoints/

@@ -19,6 +19,7 @@ import numpy as np
 import pandas as pd
 import torch
 from torch_geometric.data import Data, Dataset
+from utils.schema import EXPECTED_GRAPH_ATTR_DIM
 
 # ── Vocabularies ───────────────────────────────────────────────────────────
 NODE_TYPES = [
@@ -176,20 +177,34 @@ class MalwareGraphDataset(Dataset):
       [4:14] log1p edge-type counts (10 dims)
     """
 
-    def __init__(self, manifest_csv: str, base_dir: str = None):
+    def __init__(self, manifest_csv: str, base_dir: str = None, include_uncertain: bool = False):
         super().__init__()
         self.manifest  = pd.read_csv(manifest_csv)
         self.base_dir  = base_dir or os.path.dirname(manifest_csv)
+        self.include_uncertain = include_uncertain
         self._data_list: list[Data] = []
         self._load_all()
 
+    @staticmethod
+    def _as_bool(value) -> bool:
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, (int, float)):
+            return value != 0
+        return str(value).strip().lower() in {"1", "true", "yes", "y"}
+
     def _load_all(self) -> None:
-        ok = fail = 0
+        ok = fail = skipped_uncertain = 0
 
         for _, row in self.manifest.iterrows():
             name   = str(row["folder"])
             label  = int(row["label"])
             family = row.get("family", "unknown")
+            uncertain = self._as_bool(row.get("uncertain", False))
+            if uncertain and not self.include_uncertain:
+                print(f"  [SKIP] {name} — marked uncertain in manifest")
+                skipped_uncertain += 1
+                continue
             pkl    = os.path.join(self.base_dir, name, "graph.pkl")
 
             if not os.path.exists(pkl):
@@ -219,10 +234,16 @@ class MalwareGraphDataset(Dataset):
                 float(row.get("c2_conns",     0) or 0),
             ]
             edge_dist_feats = _edge_type_distribution(G)  # 10 dims
+            merged_graph_attr = manifest_feats + edge_dist_feats
+            if len(merged_graph_attr) != EXPECTED_GRAPH_ATTR_DIM:
+                raise ValueError(
+                    f"Invalid graph_attr length for {name}: "
+                    f"{len(merged_graph_attr)} != {EXPECTED_GRAPH_ATTR_DIM}"
+                )
 
             # Shape [1, 14] so DataLoader stacks to [B, 14] — not [B*14]
             pyg.graph_attr = torch.tensor(
-                [manifest_feats + edge_dist_feats], dtype=torch.float
+                [merged_graph_attr], dtype=torch.float
             )  # [1, 14]
             pyg.name   = name
             pyg.family = family
@@ -234,6 +255,8 @@ class MalwareGraphDataset(Dataset):
             f"(label=1: {sum(d.y.item() == 1 for d in self._data_list)}  "
             f"label=0: {sum(d.y.item() == 0 for d in self._data_list)})"
         )
+        if skipped_uncertain:
+            print(f"[Dataset] {skipped_uncertain} uncertain sample(s) excluded.")
         if fail:
             print(f"[Dataset] {fail} sample(s) skipped.")
 
