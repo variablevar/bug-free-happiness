@@ -32,7 +32,8 @@ It is the stability reference for safe refactors.
   - Producer: `build_graph.py`
   - Consumers: `build_dataset.py`, `analyze_graph.py`
   - Contract keys:
-    - `graph_attr` (list[float], len=5)
+    - `graph_attr` (list[float], len=5) — legacy tensor aligned with the first five summary scalars
+    - `graph_attr_map` (dict) — full expanded graph-level attributes from filter/triage (`_meta.graph_attr`)
     - `label_signals` (dict)
 
 - `analysis_report.json`
@@ -54,7 +55,9 @@ It is the stability reference for safe refactors.
     - identity: `sample_id`, `folder`, `label`, `family`
     - graph stats: `nodes`, `edges`
     - signals: `max_score`, `attack_steps`, `injections`, `c2_conns`, `verdict`
-    - attrs: `graph_attr`, `label_signals_top`
+    - attrs: `graph_attr`, `label_signals_top`, `label_signals_json`
+    - typed signals: `signal_behavioural_suspects_found`, `signal_lolbin_c2_found`, `signal_ransom_note_found`, `signal_rwx_injections`, `signal_hidden_processes`, `signal_top_suspect_score`, `signal_triage_confidence`, `signal_stage_coverage_score`, `signal_lineage_depth_p95`, `signal_nonrwx_exec_count`, `signal_credential_access_count`, `signal_num_attack_motifs`
+    - triage: `uncertain`, `uncertain_reason`
     - pipeline health: `filter_ok`, `graph_ok`, `analyze_ok`, `error`
 
 ## Canonical Step Orchestration
