@@ -574,19 +574,21 @@ def save_graph(G, folder, graph_attr_meta, label_signals):
         pickle.dump(G, f)
     print(f"  [PKL]    {pkl_path}  ({os.path.getsize(pkl_path)/1024:.1f} KB)")
 
-    # graph_attr.json — ready for dataset.py to read directly
-    # Maps to: torch.tensor([max_process_score, attack_steps,
-    #                         high_severity_injections, lolbin_c2_connections,
-    #                         ransom_note_signal], dtype=torch.float)
+    # graph_attr.json — ready for dataset.py/analyze_graph.py to read directly
+    # Keep `graph_attr` tensor (legacy 5-dim contract) and also persist full
+    # expanded graph-level attributes from filter_malicious._meta.graph_attr.
     ga_path = os.path.join(folder, "graph_attr.json")
+    graph_attr_map = dict(graph_attr_meta or {})
+    graph_attr_tensor = [
+        float(graph_attr_map.get("max_process_score",       0)),
+        float(graph_attr_map.get("attack_steps",            0)),
+        float(graph_attr_map.get("high_severity_injections",0)),
+        float(graph_attr_map.get("lolbin_c2_connections",   0)),
+        float(graph_attr_map.get("ransom_note_signal",      0)),
+    ]
     ga_out = {
-        "graph_attr": [
-            float(graph_attr_meta.get("max_process_score",       0)),
-            float(graph_attr_meta.get("attack_steps",            0)),
-            float(graph_attr_meta.get("high_severity_injections",0)),
-            float(graph_attr_meta.get("lolbin_c2_connections",   0)),
-            float(graph_attr_meta.get("ransom_note_signal",      0)),
-        ],
+        "graph_attr": graph_attr_tensor,
+        "graph_attr_map": graph_attr_map,
         "label_signals": label_signals,
     }
     with open(ga_path, "w") as f:

@@ -28,6 +28,7 @@ Changes vs v2:
 Usage:
   python build_dataset.py
   python build_dataset.py ./extracted_data
+  python build_dataset.py ./extracted_csvs --labels-csv ./0/labels.csv --workers 8
   python build_dataset.py ./extracted_data --workers 8
   python build_dataset.py ./extracted_data --skip-existing --workers 12
   python build_dataset.py ./extracted_data --dry-run
@@ -46,6 +47,69 @@ def infer_label(folder_name):
     if "-NoVirus"in name:
         return 0, name.replace("-NoVirus", "").lower()
     return -1, name.lower()
+
+
+def load_explicit_label_rows(labels_csv_path, base_dir):
+    """
+    CSV columns: folder (basename under base_dir), label (0/1), optional family.
+    Duplicate folder values abort. Rows missing on disk are skipped with a warning.
+    Returns sorted list of (abs_folder_path, label:int, family:str).
+    """
+    base_dir = os.path.abspath(base_dir)
+    if not os.path.isfile(labels_csv_path):
+        print(f"[ERROR] --labels-csv not found: {labels_csv_path}")
+        sys.exit(1)
+
+    seen = {}
+    rows_raw = []
+    with open(labels_csv_path, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        if not reader.fieldnames:
+            print("[ERROR] --labels-csv has no header row")
+            sys.exit(1)
+        fields = {h.strip().lower(): h for h in reader.fieldnames if h}
+        if "folder" not in fields or "label" not in fields:
+            print("[ERROR] --labels-csv must include columns: folder, label")
+            sys.exit(1)
+        fk_folder = fields["folder"]
+        fk_label = fields["label"]
+        fk_family = fields.get("family")
+        for lineno, row in enumerate(reader, start=2):
+            if not row:
+                continue
+            folder = str(row.get(fk_folder, "") or "").strip()
+            if not folder:
+                continue
+            if folder in seen:
+                print(
+                    f"[ERROR] Duplicate folder in --labels-csv: {folder!r} "
+                    f"(lines {seen[folder]} and {lineno}); remove duplicates."
+                )
+                sys.exit(1)
+            seen[folder] = lineno
+            try:
+                label = int(row.get(fk_label, ""))
+            except (TypeError, ValueError):
+                print(f"[WARN]  line {lineno}: bad label for {folder!r}, skipped")
+                continue
+            fam = "unknown"
+            if fk_family:
+                fam = str(row.get(fk_family, "") or "").strip() or "unknown"
+            rows_raw.append((folder, label, fam, lineno))
+
+    resolved = []
+    for folder, label, fam, lineno in rows_raw:
+        abs_path = os.path.join(base_dir, folder)
+        if not os.path.isdir(abs_path):
+            print(
+                f"[WARN]  --labels-csv line {lineno}: folder {folder!r} "
+                f"not found under {base_dir}, skipped"
+            )
+            continue
+        resolved.append((abs_path, label, fam))
+
+    resolved.sort(key=lambda x: os.path.basename(x[0]).lower())
+    return resolved
 
 
 # ── Run a script ────────────────────────────────────────────────────────────
@@ -91,6 +155,19 @@ def collect_stats(folder):
         "verdict": "no_report",
         "graph_attr": "",
         "label_signals_top": "",
+        "label_signals_json": "",
+        "signal_behavioural_suspects_found": 0,
+        "signal_lolbin_c2_found": 0,
+        "signal_ransom_note_found": 0,
+        "signal_rwx_injections": 0,
+        "signal_hidden_processes": 0,
+        "signal_top_suspect_score": 0,
+        "signal_triage_confidence": 0.0,
+        "signal_stage_coverage_score": 0.0,
+        "signal_lineage_depth_p95": 0,
+        "signal_nonrwx_exec_count": 0,
+        "signal_credential_access_count": 0,
+        "signal_num_attack_motifs": 0,
     }
 
     # graph.pkl → node/edge count  (load the nx.DiGraph directly)
@@ -112,9 +189,22 @@ def collect_stats(folder):
                 ga = json.load(f)
             stats["graph_attr"] = str(ga.get("graph_attr", []))
             ls = ga.get("label_signals", {})
+            stats["label_signals_json"] = json.dumps(ls, sort_keys=True)
             stats["label_signals_top"] = " ".join(
                 f"{k}={v}" for k, v in list(ls.items())[:4]
             )
+            stats["signal_behavioural_suspects_found"] = int(ls.get("behavioural_suspects_found", 0))
+            stats["signal_lolbin_c2_found"] = int(ls.get("lolbin_c2_found", 0))
+            stats["signal_ransom_note_found"] = int(ls.get("ransom_note_found", 0))
+            stats["signal_rwx_injections"] = int(ls.get("rwx_injections", 0))
+            stats["signal_hidden_processes"] = int(ls.get("hidden_processes", 0))
+            stats["signal_top_suspect_score"] = int(ls.get("top_suspect_score", 0))
+            stats["signal_triage_confidence"] = float(ls.get("triage_confidence", 0.0))
+            stats["signal_stage_coverage_score"] = float(ls.get("stage_coverage_score", 0.0))
+            stats["signal_lineage_depth_p95"] = int(ls.get("lineage_depth_p95", 0))
+            stats["signal_nonrwx_exec_count"] = int(ls.get("nonrwx_exec_count", 0))
+            stats["signal_credential_access_count"] = int(ls.get("credential_access_count", 0))
+            stats["signal_num_attack_motifs"] = int(ls.get("num_attack_motifs", 0))
         except Exception:
             pass
 
@@ -307,6 +397,17 @@ def main():
                         help="Run only specific step(s): filter graph analyze")
     parser.add_argument("--workers", type=int, default=4,
                         help="Number of parallel worker threads (default: 4)")
+    parser.add_argument(
+        "--labels-csv",
+        default=None,
+        dest="labels_csv",
+        help=(
+            "Optional CSV with columns folder,label[,family]. "
+            "Only those basenames under base_dir are processed; label/family come "
+            "from the file (not infer_label). Duplicate folder values abort. "
+            "CSV rows pointing at missing folders are skipped with a warning."
+        ),
+    )
     args = parser.parse_args()
 
     base_dir   = os.path.abspath(args.base_dir)
@@ -330,30 +431,50 @@ def main():
     if not os.path.isdir(base_dir):
         print(f"[ERROR] Not found: {base_dir}"); sys.exit(1)
 
-    sample_dirs = sorted([
-        os.path.join(base_dir, d)
-        for d in os.listdir(base_dir)
-        if os.path.isdir(os.path.join(base_dir, d))
-    ])
-    if not sample_dirs:
-        print(f"[ERROR] No subfolders in: {base_dir}"); sys.exit(1)
+    if args.labels_csv:
+        labels_csv = os.path.abspath(args.labels_csv)
+        explicit = load_explicit_label_rows(labels_csv, base_dir)
+        if not explicit:
+            print("[ERROR] --labels-csv produced no valid sample folders"); sys.exit(1)
+        sample_dirs = [p for p, _, _ in explicit]
+        jobs = [
+            {
+                "folder": f,
+                "name":   os.path.basename(f),
+                "label":  lab,
+                "family": fam,
+                "idx":    i,
+                "total":  len(sample_dirs),
+            }
+            for i, (f, lab, fam) in enumerate(explicit, 1)
+        ]
+    else:
+        sample_dirs = sorted([
+            os.path.join(base_dir, d)
+            for d in os.listdir(base_dir)
+            if os.path.isdir(os.path.join(base_dir, d))
+        ])
+        if not sample_dirs:
+            print(f"[ERROR] No subfolders in: {base_dir}"); sys.exit(1)
 
-    jobs = [
-        {
-            "folder": f,
-            "name":   os.path.basename(f),
-            "label":  infer_label(f)[0],
-            "family": infer_label(f)[1],
-            "idx":    i,
-            "total":  len(sample_dirs),
-        }
-        for i, f in enumerate(sample_dirs, 1)
-    ]
+        jobs = [
+            {
+                "folder": f,
+                "name":   os.path.basename(f),
+                "label":  infer_label(f)[0],
+                "family": infer_label(f)[1],
+                "idx":    i,
+                "total":  len(sample_dirs),
+            }
+            for i, f in enumerate(sample_dirs, 1)
+        ]
 
     # ─ Dry run ────────────────────────────────────────────────────────────
     if args.dry_run:
         print(f"\n{'='*65}")
         print(f"  DRY RUN — {len(jobs)} samples in: {base_dir}")
+        if args.labels_csv:
+            print(f"  Labels  : explicit {os.path.abspath(args.labels_csv)}")
         print(f"  Steps   : {sorted(run_steps)}")
         print(f"  Workers : {n_workers}")
         print(f"{'='*65}")
@@ -373,6 +494,8 @@ def main():
     print(f"\n{'='*65}")
     print(f"  BUILD DATASET v3 — {len(jobs)} samples  [{n_workers} workers]")
     print(f"  Base       : {base_dir}")
+    if args.labels_csv:
+        print(f"  Labels CSV : {os.path.abspath(args.labels_csv)}")
     print(f"  Steps      : {sorted(run_steps)}")
     print(f"  Skip exist : {skip}")
     print(f"{'='*65}\n")
@@ -416,7 +539,19 @@ def main():
                     "nodes": -1, "edges": -1, "max_score": -1,
                     "attack_steps": -1, "injections": -1, "c2_conns": -1,
                     "verdict": "exception",
-                    "graph_attr": "", "label_signals_top": "",
+                    "graph_attr": "", "label_signals_top": "", "label_signals_json": "",
+                    "signal_behavioural_suspects_found": 0,
+                    "signal_lolbin_c2_found": 0,
+                    "signal_ransom_note_found": 0,
+                    "signal_rwx_injections": 0,
+                    "signal_hidden_processes": 0,
+                    "signal_top_suspect_score": 0,
+                    "signal_triage_confidence": 0.0,
+                    "signal_stage_coverage_score": 0.0,
+                    "signal_lineage_depth_p95": 0,
+                    "signal_nonrwx_exec_count": 0,
+                    "signal_credential_access_count": 0,
+                    "signal_num_attack_motifs": 0,
                     "uncertain": True,
                     "uncertain_reason": "pipeline_exception",
                 }
@@ -428,7 +563,19 @@ def main():
         "nodes", "edges",
         "max_score", "attack_steps", "injections", "c2_conns",
         "verdict",
-        "graph_attr", "label_signals_top",
+        "graph_attr", "label_signals_top", "label_signals_json",
+        "signal_behavioural_suspects_found",
+        "signal_lolbin_c2_found",
+        "signal_ransom_note_found",
+        "signal_rwx_injections",
+        "signal_hidden_processes",
+        "signal_top_suspect_score",
+        "signal_triage_confidence",
+        "signal_stage_coverage_score",
+        "signal_lineage_depth_p95",
+        "signal_nonrwx_exec_count",
+        "signal_credential_access_count",
+        "signal_num_attack_motifs",
         "uncertain", "uncertain_reason",
         "filter_ok", "graph_ok", "analyze_ok", "error",
     ]

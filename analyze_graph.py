@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 """
-analyze_graph.py  v3  (MalVol-25 aware — behaviour-based, 0-day ready)
+analyze_graph.py  v4  (MalVol-25 aware — behaviour-based, 0-day ready)
+
+v4:
+  - C2 attack-chain step: emphasize unique external IPs vs raw socket rows; verdict uses unique IPs
+  - LSASS credential rows: CRITICAL only when full access and holder not SYSTEM/lsass
+  - Injection heuristic: fixed +5 once per process (not len(regions)*3)
+  - Process rows: lineage_depth, norm_score; benign anchors + masquerading + UTF-8 clean_str
+  - Entry points: Office → LOLBin signal; graph_attr_extra in report; console C2 summary
 
 Fixes vs v2:
   - session_id key (was "session")
@@ -81,6 +88,14 @@ def safe_int(v, default=0):
     try: return int(v)
     except Exception: return default
 
+
+def clean_str(s):
+    """UTF-8 safe string for paths, cmdlines, disasm (PyG / JSON friendly)."""
+    if s is None:
+        return ""
+    return str(s).encode("utf-8", errors="ignore").decode("utf-8")
+
+
 def label_severity(score):
     if score >= 12: return "CRITICAL"
     if score >= 7:  return "HIGH"
@@ -89,6 +104,23 @@ def label_severity(score):
 
 def nodes_of_type(G, t):
     return [(n, d) for n, d in G.nodes(data=True) if d.get("node_type") == t]
+
+
+def get_depth(G, node, max_depth=10):
+    """How many process-parent hops to root (shallow = typical shell; deep = odd chains)."""
+    depth = 0
+    current = node
+    while depth < max_depth:
+        preds = [
+            p for p in G.predecessors(current)
+            if G.nodes[p].get("node_type") == "process"
+        ]
+        if not preds:
+            break
+        current = preds[0]
+        depth += 1
+    return depth
+
 
 def load_graph(path):
     """Accept a graph.pkl file or a sample folder containing graph.pkl."""
@@ -119,11 +151,26 @@ def heuristic_process(n, d, G, pid_to_name):
                    if d.get("suspicion_reasons","").strip("[]") else [])
     reasons = [r for r in reasons if r]   # drop empty strings
 
-    name   = str(d.get("label","")).lower()
-    args   = str(d.get("args","")).lower()
-    path   = str(d.get("path","")).lower()
+    name   = clean_str(d.get("label", "")).lower()
+    args   = clean_str(d.get("args", "")).lower()
+    path   = clean_str(d.get("path", "")).lower()
     ppid   = safe_int(d.get("ppid", 0))
     parent = pid_to_name.get(ppid, "").lower()
+
+    # Known benign anchors (reduce FP, improve separation for classifiers)
+    if "chrome.exe" in name and "google" in path:
+        score -= 2
+        reasons.append("known-benign-browser")
+    if "explorer.exe" in name and parent == "winlogon.exe":
+        score -= 2
+        reasons.append("normal-shell-parent")
+
+    # Process masquerading (system name, non-system32 path)
+    path_norm = path.replace("\\", "/")
+    if any(sysname in name for sysname in ("svchost.exe", "lsass.exe", "explorer.exe")):
+        if path_norm and not path_norm.startswith("c:/windows/system32"):
+            score += 6
+            reasons.append("process-masquerading")
 
     # LOLBin
     if any(lb in name for lb in LOLBINS) and "lolbin" not in reasons:
@@ -163,14 +210,21 @@ def heuristic_process(n, d, G, pid_to_name):
                  if G.nodes[nb].get("is_external")
                  and G.nodes[nb].get("node_type") == "network_conn"]
     if ext_conns and not any("c2-conn" in r for r in reasons):
-        score += len(ext_conns); reasons.append(f"{len(ext_conns)}x-c2-conn")
+        uniq_ip = {
+            G.nodes[nb].get("foreign_addr") or ""
+            for nb in ext_conns
+        }
+        uniq_ip.discard("")
+        score += max(1, len(uniq_ip))
+        reasons.append(f"{len(uniq_ip)}-unique-ip-c2-conn")
 
-    # Injected memory (malfind → this process)
+    # Injected memory (malfind → this process) — fixed cost, not per-region linear
     inj = [nb for nb in G.predecessors(n)
            if G.nodes[nb].get("node_type") == "memory_region"
            and G.nodes[nb].get("source") == "malfind"]
     if inj and not any("injected-mem" in r for r in reasons):
-        score += len(inj) * 3; reasons.append(f"{len(inj)}x-injected-mem")
+        score += 5
+        reasons.append("injected-mem")
 
     # Unexpected lsass handle
     sus_handles = [nb for nb in G.predecessors(n)
@@ -203,7 +257,7 @@ def heuristic_process(n, d, G, pid_to_name):
            for c in children) and "spawned-lolbin-child" not in reasons:
         score += 2; reasons.append("spawned-lolbin-child")
 
-    return score, reasons
+    return max(0, score), reasons
 
 
 def heuristic_memory(d):
@@ -211,7 +265,7 @@ def heuristic_memory(d):
     prot   = str(d.get("protection",""))
     src    = str(d.get("source",""))
     has_mz = bool(d.get("has_mz_header", False))  # may be int 0/1 or bool
-    disasm = str(d.get("disasm","")).lower()
+    disasm = clean_str(d.get("disasm", "")).lower()
     private= safe_int(d.get("private_memory", 0))
     fname  = str(d.get("backing_file","")).strip()
 
@@ -234,7 +288,7 @@ def heuristic_network(d):
     score = 0; reasons = []
     state  = str(d.get("state",""))
     fport  = safe_int(d.get("foreign_port", 0))
-    owner  = str(d.get("owner","")).lower()
+    owner  = clean_str(d.get("owner", "")).lower()
 
     if safe_int(d.get("is_external", 0)):
         score += 2; reasons.append("external-ip")
@@ -285,7 +339,7 @@ def analyze_processes(G):
         score, reasons = heuristic_process(n, d, G, pid_to_name)
         rows.append({
             "node_id":            n,
-            "name":               d.get("label",""),
+            "name":               clean_str(d.get("label", "")),
             "pid":                safe(d.get("pid")),
             "ppid":               safe(d.get("ppid")),
             "parent_name":        pid_to_name.get(safe_int(d.get("ppid",0)), "?"),
@@ -293,16 +347,21 @@ def analyze_processes(G):
             "wow64":              bool(safe_int(d.get("wow64",0))),
             "in_pslist":          bool(safe_int(d.get("in_pslist",1))),
             "in_psscan":          bool(safe_int(d.get("in_psscan",1))),
-            "create_time":        d.get("create_time",""),
-            "args":               d.get("args",""),
-            "path":               d.get("path",""),
+            "create_time":        clean_str(d.get("create_time", "")),
+            "args":               clean_str(d.get("args", "")),
+            "path":               clean_str(d.get("path", "")),
             "degree_in":          G.in_degree(n),
             "degree_out":         G.out_degree(n),
+            "lineage_depth":      get_depth(G, n),
             "is_suspicious_flag": bool(safe_int(d.get("is_suspicious",0))),
             "heuristic_score":    score,
             "severity":           label_severity(score),
             "reasons":            reasons,
         })
+    max_hs = max((r["heuristic_score"] for r in rows), default=1)
+    denom = max(max_hs, 1)
+    for r in rows:
+        r["norm_score"] = r["heuristic_score"] / denom
     return sorted(rows, key=lambda x: x["heuristic_score"], reverse=True)
 
 
@@ -327,12 +386,20 @@ def analyze_entry_points(G):
                    for _, d in nodes_of_type(G, "process")}
     results = []
     for n, d in nodes_of_type(G, "process"):
-        name  = str(d.get("label","")).lower()
-        args  = str(d.get("args","")).lower()
+        name  = clean_str(d.get("label", "")).lower()
+        args  = clean_str(d.get("args", "")).lower()
+        ppid  = safe_int(d.get("ppid", 0))
+        parent = pid_to_name.get(ppid, "").lower()
         score = 0; signals = []
 
         if any(lb in name for lb in LOLBINS):
             score += 2; signals.append("lolbin")
+
+        if parent in ("winword.exe", "excel.exe", "outlook.exe") and any(
+            lb in name for lb in LOLBINS
+        ):
+            score += 4
+            signals.append("office-spawned-lolbin")
 
         has_ext_net = any(
             safe_int(G.nodes[nb].get("is_external", 0))
@@ -354,15 +421,15 @@ def analyze_entry_points(G):
 
         if score >= 2:
             results.append({
-                "name":        d.get("label",""),
+                "name":        clean_str(d.get("label", "")),
                 "pid":         safe(d.get("pid")),
                 "ppid":        safe(d.get("ppid")),
                 "parent":      pid_to_name.get(safe_int(d.get("ppid",0)), "?"),
                 "entry_score": score,
                 "signals":     signals,
                 "severity":    label_severity(score * 2),
-                "args":        d.get("args",""),
-                "create_time": d.get("create_time",""),
+                "args":        clean_str(d.get("args", "")),
+                "create_time": clean_str(d.get("create_time", "")),
             })
     return sorted(results, key=lambda x: x["entry_score"], reverse=True)
 
@@ -416,7 +483,7 @@ def analyze_injections(G):
                 "backing_file":    d.get("backing_file",""),
                 "has_mz_header":   bool(safe_int(d.get("has_mz_header",0))),
                 "has_shellcode":   bool(safe_int(d.get("has_shellcode",0))),
-                "disasm":          str(d.get("disasm",""))[:120],
+                "disasm":          clean_str(d.get("disasm", ""))[:120],
                 "source":          d.get("source",""),
                 "heuristic_score": score,
                 "severity":        label_severity(score),
@@ -434,16 +501,34 @@ def analyze_credentials(G):
         access  = str(d.get("granted_access","")).lower().strip()
         pid     = safe_int(d.get("pid",0))
         is_full = access in HIGH_ACCESS_MASKS
+        target_lower = str(d.get("name", "")).lower()
+        is_lsass_target = "lsass" in target_lower
+        holder_name = pid_to_name.get(pid, "").lower()
+        is_system_holder = holder_name in ("system", "lsass.exe")
+
+        if is_lsass_target and is_full:
+            severity = "CRITICAL" if not is_system_holder else "HIGH"
+            reason = (
+                "Suspicious full LSASS access — possible credential dumping"
+                if not is_system_holder
+                else "Legitimate or elevated LSASS access"
+            )
+        elif is_full:
+            severity = "CRITICAL"
+            reason = "Full process access to sensitive target"
+        else:
+            severity = "HIGH"
+            reason = "Elevated handle access"
+
         results.append({
-            "holder_process": pid_to_name.get(pid, "?"),
+            "holder_process": clean_str(pid_to_name.get(pid, "?")),
             "holder_pid":     safe(d.get("pid")),
-            "target":         d.get("name",""),
-            "handle_type":    d.get("handle_type",""),
+            "target":         clean_str(d.get("name", "")),
+            "handle_type":    clean_str(d.get("handle_type", "")),
             "granted_access": access,
             "is_full_access": is_full,
-            "severity":       "CRITICAL" if is_full else "HIGH",
-            "reason":         "Full process access to lsass — T1003 credential dumping"
-                              if is_full else "Elevated lsass access",
+            "severity":       severity,
+            "reason":         reason,
         })
     return results
 
@@ -498,18 +583,22 @@ def analyze_attack_chain(G, processes, entry_points, injections,
             "evidence": injections[0].get("disasm","")[:80] if injections else "",
         })
 
-    # Step 3 — C2
+    # Step 3 — C2 (count unique destinations, not raw socket rows)
     c2 = [n for n in network
           if safe_int(n.get("is_external",0)) and n.get("state") == "ESTABLISHED"]
+    unique_ips = {n.get("foreign_addr") or "" for n in c2}
+    unique_ips.discard("")
+    owners = {clean_str(n.get("owner", "")) for n in c2 if n.get("owner")}
     if c2:
+        owner_str = ", ".join(sorted(owners))[:220] if owners else "(unknown)"
+        ip_sample = sorted(str(ip) for ip in unique_ips)[:4]
         steps.append({
             "step":     3,
             "tactic":   "Command & Control",
             "mitre":    "T1071",
-            "detail":   f"{len(c2)} ESTABLISHED C2 connection(s) to "
-                        f"{len({n['foreign_addr'] for n in c2})} unique IP(s) "
-                        f"via {', '.join({n['owner'] for n in c2})}",
-            "evidence": str(sorted({n['foreign_addr'] for n in c2})[:4]),
+            "detail":   f"{len(unique_ips)} unique external C2 IP(s) "
+                        f"({len(c2)} socket row(s)) via {owner_str}",
+            "evidence": str(ip_sample),
         })
 
     # Step 4 — Credential Access
@@ -546,9 +635,9 @@ def analyze_attack_chain(G, processes, entry_points, injections,
             })
             break
 
-    # Verdict
+    # Verdict (C2 = at least one distinct external IP in ESTABLISHED state)
     has_injection  = len(injected_procs) > 0
-    has_c2         = len(c2) > 0
+    has_c2         = len(unique_ips) > 0
     has_creds      = len(credentials) > 0
     has_hidden     = any(safe_int(d.get("in_pslist",1)) == 0
                          for _, d in G.nodes(data=True)
@@ -591,18 +680,26 @@ def main():
     credentials = analyze_credentials(G)
     chain       = analyze_attack_chain(G, processes, entry_pts,
                                        injections, credentials, network)
+    hidden_list = analyze_hidden(G)
+    graph_attr_extra = {
+        "num_processes":   len(nodes_of_type(G, "process")),
+        "num_network":     len(nodes_of_type(G, "network_conn")),
+        "num_injections":  len([i for i in injections if i.get("source") == "malfind"]),
+        "num_credentials": len(credentials),
+        "num_hidden":      len(hidden_list),
+    }
 
     report = {
         "meta":             {
-            "tool":    "analyze_graph.py v3",
+            "tool":    "analyze_graph.py v4",
             "source":  path,
-            "version": "3.0",
+            "version": "4.0",
         },
         "summary":          analyze_summary(G),
         "attack_chain":     chain,
         "entry_points":     entry_pts,
         "processes":        processes,
-        "hidden_processes": analyze_hidden(G),
+        "hidden_processes": hidden_list,
         "network":          network,
         "injections":       injections,
         "credentials":      credentials,
@@ -610,6 +707,7 @@ def main():
         # graph_attr tensor for dataset.py — 5 floats ready to use
         "graph_attr":       graph_attr.get("graph_attr", [0.0]*5),
         "label_signals":    graph_attr.get("label_signals", {}),
+        "graph_attr_extra": graph_attr_extra,
     }
 
     out_path = os.path.join(out_dir, "analysis_report.json")
@@ -626,11 +724,12 @@ def main():
         print(f"  Entry    : {entry_pts[0]['name']} (score {entry_pts[0]['entry_score']})")
     inj_procs = {i['process_name'] for i in injections if i.get('source') == 'malfind'}
     print(f"  Injected : {len(inj_procs)} process(es) — {', '.join(list(inj_procs)[:3])}")
-    c2_count = len([n for n in network
-                    if safe_int(n.get('is_external',0)) and n.get('state') == 'ESTABLISHED'])
-    print(f"  C2 conns : {c2_count}")
+    c2_rows = [n for n in network
+               if safe_int(n.get("is_external", 0)) and n.get("state") == "ESTABLISHED"]
+    c2_unique = len({n.get("foreign_addr") or "" for n in c2_rows} - {""})
+    print(f"  C2       : {c2_unique} unique IP(s), {len(c2_rows)} ESTABLISHED row(s)")
     print(f"  Creds    : {'YES — ' + str(len(credentials)) + ' handle(s)' if credentials else 'None detected'}")
-    print(f"  Hidden   : {len(analyze_hidden(G))} process(es)")
+    print(f"  Hidden   : {len(hidden_list)} process(es)")
     print(f"  graph_attr tensor: {graph_attr.get('graph_attr')}")
     print(f"{'='*w}")
     print(f"\n[✅] Report: {out_path}")

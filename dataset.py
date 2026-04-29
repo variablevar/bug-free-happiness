@@ -11,9 +11,11 @@ Fix vs v2:
 All other feature engineering is unchanged from v2.
 """
 
+import json
 import os
 import math
 import pickle
+import re
 
 import numpy as np
 import pandas as pd
@@ -42,8 +44,12 @@ N_EDGE_TYPES   = len(EDGE_TYPES)
 #  [16:21] per-node edge-role counts  (5 dims)
 NODE_FEAT_DIM = 9 + 7 + 5   # = 21
 
-# Graph-level attrs: 4 manifest cols + 10 edge-type log-counts = 14
-GRAPH_ATTR_DIM = 4 + N_EDGE_TYPES   # = 14
+# Graph-level attrs:
+#   4  base manifest counts
+#   8  additional manifest/derived risk signals
+#   10 edge-type log-counts
+# = 22 dims total
+GRAPH_ATTR_DIM = 12 + N_EDGE_TYPES   # = 22
 
 MIN_NODES = 10
 
@@ -114,6 +120,29 @@ def _edge_type_distribution(G) -> list:
     return [math.log1p(c) for c in counts]
 
 
+def _safe_float(value, default: float = 0.0) -> float:
+    try:
+        if value is None:
+            return default
+        if isinstance(value, str) and not value.strip():
+            return default
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _extract_int_from_text(text: str, key: str, default: int = 0) -> int:
+    if not text:
+        return default
+    match = re.search(rf"{re.escape(key)}\s*=\s*(-?\d+)", str(text))
+    if not match:
+        return default
+    try:
+        return int(match.group(1))
+    except ValueError:
+        return default
+
+
 def nx_to_pyg(G, label: int) -> Data:
     n_nodes = G.number_of_nodes()
     n_edges = G.number_of_edges()
@@ -166,22 +195,50 @@ def nx_to_pyg(G, label: int) -> Data:
 
 class MalwareGraphDataset(Dataset):
     """
-    graph_attr shape: [1, 14] per sample.
-      PyG DataLoader cats along dim-0 → [B, 14] in a batch.
+    graph_attr shape: [1, 22] per sample.
+      PyG DataLoader cats along dim-0 → [B, 22] in a batch.
 
     graph_attr layout:
       [0]    max_score      (manifest)
       [1]    attack_steps   (manifest)
       [2]    injections     (manifest)
       [3]    c2_conns       (manifest)
-      [4:14] log1p edge-type counts (10 dims)
+      [4]    log1p(nodes)
+      [5]    log1p(edges)
+      [6]    graph_density
+      [7]    behavioural_suspects_found
+      [8]    lolbin_c2_found
+      [9]    ransom_note_found
+      [10]   log1p(rwx_injections)
+      [11]   triage_confidence
+      [12:22] log1p edge-type counts (10 dims)
     """
 
-    def __init__(self, manifest_csv: str, base_dir: str = None, include_uncertain: bool = False):
+    RISK_LEVEL_MAP = {
+        "LOW": 0,
+        "MEDIUM": 1,
+        "HIGH": 2,
+        "CRITICAL": 3,
+    }
+
+    def __init__(
+        self,
+        manifest_csv: str,
+        base_dir: str = None,
+        include_uncertain: bool = False,
+        include_unknown: bool = False,
+        target: str = "label",
+    ):
         super().__init__()
         self.manifest  = pd.read_csv(manifest_csv)
         self.base_dir  = base_dir or os.path.dirname(manifest_csv)
         self.include_uncertain = include_uncertain
+        self.include_unknown = include_unknown
+        self.target = str(target).strip().lower()
+        if self.target not in {"label", "risk"}:
+            raise ValueError(
+                f"Invalid target '{target}'. Expected one of: label, risk."
+            )
         self._data_list: list[Data] = []
         self._load_all()
 
@@ -205,6 +262,10 @@ class MalwareGraphDataset(Dataset):
                 print(f"  [SKIP] {name} — marked uncertain in manifest")
                 skipped_uncertain += 1
                 continue
+            if label < 0 and not self.include_unknown:
+                print(f"  [SKIP] {name} — unknown label={label}")
+                skipped_uncertain += 1
+                continue
             pkl    = os.path.join(self.base_dir, name, "graph.pkl")
 
             if not os.path.exists(pkl):
@@ -221,17 +282,65 @@ class MalwareGraphDataset(Dataset):
                 continue
 
             try:
-                pyg = nx_to_pyg(G, label)
+                target_label = self._row_target(row, default_label=label)
+                pyg = nx_to_pyg(G, target_label)
             except ValueError as exc:
                 print(f"  [SKIP] {name} — {exc}")
                 fail += 1
                 continue
 
+            nodes = _safe_float(row.get("nodes", 0), default=0.0)
+            edges = _safe_float(row.get("edges", 0), default=0.0)
+            max_edges = max(nodes * (nodes - 1.0), 1.0)
+            density = min(max(edges / max_edges, 0.0), 1.0)
+
+            label_signals = {}
+            raw_label_signals_json = row.get("label_signals_json", "")
+            if isinstance(raw_label_signals_json, str) and raw_label_signals_json.strip():
+                try:
+                    label_signals = json.loads(raw_label_signals_json)
+                except json.JSONDecodeError:
+                    label_signals = {}
+            label_signals_top = str(row.get("label_signals_top", ""))
+
+            behavioural_suspects_found = (
+                _safe_float(row.get("signal_behavioural_suspects_found", 0), default=0.0)
+                if "signal_behavioural_suspects_found" in row
+                else float("behavioural_suspects_found=True" in label_signals_top)
+            )
+            lolbin_c2_found = (
+                _safe_float(row.get("signal_lolbin_c2_found", 0), default=0.0)
+                if "signal_lolbin_c2_found" in row
+                else float("lolbin_c2_found=True" in label_signals_top)
+            )
+            ransom_note_found = (
+                _safe_float(row.get("signal_ransom_note_found", 0), default=0.0)
+                if "signal_ransom_note_found" in row
+                else float("ransom_note_found=True" in label_signals_top)
+            )
+            rwx_injections = (
+                _safe_float(row.get("signal_rwx_injections", 0), default=0.0)
+                if "signal_rwx_injections" in row
+                else float(_extract_int_from_text(label_signals_top, "rwx_injections", 0))
+            )
+            triage_conf = (
+                _safe_float(row.get("signal_triage_confidence", 0), default=0.0)
+                if "signal_triage_confidence" in row
+                else _safe_float(label_signals.get("triage_confidence", 0), default=0.0)
+            )
             manifest_feats = [
-                float(row.get("max_score",    0) or 0),
-                float(row.get("attack_steps", 0) or 0),
-                float(row.get("injections",   0) or 0),
-                float(row.get("c2_conns",     0) or 0),
+                _safe_float(row.get("max_score", 0), default=0.0),
+                _safe_float(row.get("attack_steps", 0), default=0.0),
+                _safe_float(row.get("injections", 0), default=0.0),
+                _safe_float(row.get("c2_conns", 0), default=0.0),
+                _log1p(nodes),
+                _log1p(edges),
+                density,
+                float(behavioural_suspects_found),
+                float(lolbin_c2_found),
+                float(ransom_note_found),
+                _log1p(rwx_injections),
+                max(0.0, min(1.0, triage_conf)),
             ]
             edge_dist_feats = _edge_type_distribution(G)  # 10 dims
             merged_graph_attr = manifest_feats + edge_dist_feats
@@ -241,10 +350,10 @@ class MalwareGraphDataset(Dataset):
                     f"{len(merged_graph_attr)} != {EXPECTED_GRAPH_ATTR_DIM}"
                 )
 
-            # Shape [1, 14] so DataLoader stacks to [B, 14] — not [B*14]
+            # Shape [1, 22] so DataLoader stacks to [B, 22] — not [B*22]
             pyg.graph_attr = torch.tensor(
                 [merged_graph_attr], dtype=torch.float
-            )  # [1, 14]
+            )  # [1, 22]
             pyg.name   = name
             pyg.family = family
             self._data_list.append(pyg)
@@ -252,13 +361,29 @@ class MalwareGraphDataset(Dataset):
 
         print(
             f"[Dataset] Loaded {ok}/{ok + fail} graphs  "
-            f"(label=1: {sum(d.y.item() == 1 for d in self._data_list)}  "
-            f"label=0: {sum(d.y.item() == 0 for d in self._data_list)})"
+            f"(target={self.target})"
         )
+        if self._data_list:
+            values, counts = np.unique([d.y.item() for d in self._data_list], return_counts=True)
+            dist = ", ".join(f"class={int(v)}: {int(c)}" for v, c in zip(values, counts))
+            print(f"[Dataset] Class distribution: {dist}")
         if skipped_uncertain:
-            print(f"[Dataset] {skipped_uncertain} uncertain sample(s) excluded.")
+            print(f"[Dataset] {skipped_uncertain} uncertain/unknown sample(s) excluded.")
         if fail:
             print(f"[Dataset] {fail} sample(s) skipped.")
+
+    def _row_target(self, row, default_label: int) -> int:
+        if self.target == "label":
+            return int(default_label)
+
+        verdict = str(row.get("verdict", "")).strip().upper()
+        if not verdict:
+            raise ValueError("Missing verdict for risk target")
+
+        prefix = verdict.split("—", 1)[0].strip()
+        if prefix not in self.RISK_LEVEL_MAP:
+            raise ValueError(f"Unsupported verdict '{verdict}' for risk target")
+        return self.RISK_LEVEL_MAP[prefix]
 
     def len(self) -> int:
         return len(self._data_list)

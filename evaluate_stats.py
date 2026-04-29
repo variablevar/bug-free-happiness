@@ -52,9 +52,14 @@ def _youden_threshold(trues, probs):
     return float(thresholds[best_idx]), float(tpr[best_idx]), float(1 - fpr[best_idx])
 
 
-def run_stats(records: Optional[list[dict]] = None):
+def run_stats(
+    records: Optional[list[dict]] = None,
+    target: str = "label",
+    num_classes: int = 2,
+    cv_mode: str = "loso",
+):
     """
-    Compute and print a full statistical report on LOSO fold predictions.
+    Compute and print a statistical report on held-out CV predictions.
     Uses _records global if records is not passed.
     """
     data = records if records is not None else _records
@@ -74,12 +79,38 @@ def run_stats(records: Optional[list[dict]] = None):
     null_acc    = 0.5   # chance level for balanced binary classification
 
     print("\n" + "=" * 60)
-    print("  EVALUATE STATS  —  LOSO per-fold analysis")
+    print("  EVALUATE STATS  —  held-out predictions")
     print("=" * 60)
-    print(f"  N folds       : {n}")
+    print(f"  CV mode       : {cv_mode}")
+    print(f"  N predictions : {n}")
     print(f"  Mean accuracy : {mean_acc:.4f}")
     print(f"  Std           : {std_acc:.4f}")
     print(f"  Min / Max     : {correct.min():.0f} / {correct.max():.0f}")
+
+    if target == "risk" or num_classes > 2:
+        from sklearn.metrics import f1_score, balanced_accuracy_score, confusion_matrix
+
+        macro_f1 = f1_score(trues, preds, average="macro", zero_division=0)
+        bal_acc = balanced_accuracy_score(trues, preds)
+        cm = confusion_matrix(trues, preds, labels=list(range(num_classes)))
+
+        print(f"  Macro F1      : {macro_f1:.4f}")
+        print(f"  Balanced Acc  : {bal_acc:.4f}")
+        print("\n  ── Per-class recall ──")
+        for cls in range(num_classes):
+            denom = cm[cls].sum()
+            rec = (cm[cls, cls] / denom) if denom > 0 else 0.0
+            print(f"  Class {cls:<2} recall : {rec:.4f}  ({cm[cls, cls]}/{denom})")
+
+        print("\n  ── Confusion matrix (rows=true, cols=pred) ──")
+        for i in range(num_classes):
+            row = " ".join(f"{int(v):>4}" for v in cm[i])
+            print(f"  class {i}: {row}")
+
+        print("\n  ── Threshold Calibration ──")
+        print("  skipped (multiclass target)")
+        print("=" * 60)
+        return
 
     # ── Normality test ────────────────────────────────────────────────────────
     if n >= 3:

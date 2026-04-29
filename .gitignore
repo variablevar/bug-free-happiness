@@ -11,3 +11,16 @@ __pycache__/
 **/__pycache__/
 *.pyc
 .ipynb_checkpoints/
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+*.bz2
+*.xz
+*.lzma
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.lzma
+.DS_Store
