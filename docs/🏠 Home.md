@@ -8,7 +8,7 @@ Welcome to the MalVol Obsidian vault. Use this as your navigation hub.
 
 - [[Overview]] — What this project does and why
 - [[Pipeline]] — Step-by-step data & training pipeline
-- [[Models]] — GNN architecture (GIN & GraphSAGE)
+- [[Models]] — GNN backbones (GIN, GraphSAGE, GAT, GINE)
 - [[IOCs]] — Indicators of Compromise explained
 - [[Results]] — Current benchmark results
 - [[Future Work]] — Planned improvements
