@@ -8,7 +8,7 @@ MalVol detects four categories of memory-resident IOCs, mapped to MITRE ATT&CK:
 
 ## 1. Code Injection
 
-**Script:** `code_injection_analysis.py`  
+**Script:** `scripts/ioc/code_injection_analysis.py`  
 **Volatility plugin:** `windows.malfind`  
 **MITRE:** T1055 — Process Injection
 
@@ -18,7 +18,7 @@ Detects suspicious executable memory regions with RWX permissions and MZ headers
 
 ## 2. Hidden Processes
 
-**Script:** `hidden_proc_analysis.py`  
+**Script:** `scripts/ioc/hidden_proc_analysis.py`  
 **Volatility plugins:** `windows.psscan` vs `windows.pslist`  
 **MITRE:** T1564 — Hide Artefacts
 
@@ -28,7 +28,7 @@ Processes visible in `psscan` (raw pool scanning) but absent from `pslist` (walk
 
 ## 3. Suspicious File Staging
 
-**Script:** `filescan_analysis.py`  
+**Script:** `scripts/ioc/filescan_analysis.py`  
 **Volatility plugin:** `windows.filescan`  
 **MITRE:** T1486 — Data Encrypted for Impact
 
@@ -38,7 +38,7 @@ Scans for executables and payloads in unusual paths (Temp, AppData, ProgramData)
 
 ## 4. Non-Standard Network Activity
 
-**Script:** `network_analysis.py`  
+**Script:** `scripts/ioc/network_analysis.py`  
 **Volatility plugin:** `windows.netscan`  
 **MITRE:** T1071 — Application Layer Protocol (C2)
 
