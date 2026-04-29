@@ -1,7 +1,7 @@
 # MalVol — Ransomware Detection via Memory Forensics & Graph Neural Networks
 
-> **MSc Cybersecurity Dissertation Project**
-> Automated ransomware detection from Windows memory dumps using Volatility 3 forensics and Graph Neural Networks (GIN / GraphSAGE).
+> **MSc Cybersecurity Dissertation Project**  
+> Automated ransomware detection from Windows memory dumps using Volatility 3 forensics and graph neural networks (GIN, GraphSAGE, GAT, GINE).
 
 ---
 
@@ -9,70 +9,54 @@
 
 MalVol is an end-to-end pipeline that:
 
-1. **Extracts** forensic artefacts from Windows memory dumps using **Volatility 3** (pslist, psscan, malfind, filescan, netscan, and 12+ more plugins)
-2. **Analyses** memory-resident Indicators of Compromise (IOCs) — code injection, hidden processes, suspicious files, C2 network activity
-3. **Builds** a heterogeneous OS behavioural graph per sample (processes, DLLs, network connections, files as nodes)
-4. **Trains** a Graph Neural Network (GIN or GraphSAGE) on the resulting graphs to classify samples as **malware** or **benign**
-5. **Scores** new samples in real time via a heuristic engine mapped to MITRE ATT&CK tactics
+1. **Extracts** forensic artefacts from Windows memory dumps using **Volatility 3** (pslist, psscan, malfind, filescan, netscan, and many more plugins).
+2. **Analyses** memory-resident Indicators of Compromise (IOCs): code injection, hidden processes, suspicious files, C2-style network activity.
+3. **Scores** each sample with a rule-based triage engine (`filter_malicious.py`) that reads the behavioural graph (`graph.pkl`) and writes `filtered_malicious.json`.
+4. **Rebuilds** the graph with enrichment (`build_graph.py`): `graph.pkl`, `graph.json`, and `graph_attr.json` (legacy 5-float `graph_attr` plus full `graph_attr_map`).
+5. **Analyses** attack chains and reports (`analyze_graph.py` → `analysis_report.json`).
+6. **Trains** a graph-level classifier (`train.py`) with **leave-one-group-out** or **stratified group** cross-validation.
 
-The project evaluates **24 real-world malware samples** across multiple ransomware families (e.g. WannaCry) in WithVirus / NoVirus paired dumps.
+The dissertation corpus (MalVol-25) is on the order of tens of paired WithVirus / NoVirus samples; exact counts depend on your local `memory_dumps/` and manifest.
 
 ---
 
-## Repository Structure
+## Repository structure
 
 ```text
 datasets/
-├── README.md                 # Project guide and runbook
-├── requirements.txt          # Python dependencies
-├── auto_vol.py               # Volatility extraction pipeline
-├── build_graph.py            # Build heterogeneous behavioural graph
-├── filter_malicious.py       # IOC scoring from graph artifacts
-├── analyze_graph.py          # Attack-chain and report generation
-├── build_dataset.py          # Per-sample orchestration + manifest build
-├── dataset.py                # PyG dataset wrapper
-├── model.py                  # GNN model definitions
-├── train.py                  # LOSO training/evaluation
-├── parity_checks.py          # Contract/parity validation helper
-├── graphml_to_formats.py     # Graph format conversion utilities
-├── memory_triage.py          # Corpus triage helper
-├── server.py                 # API server
-├── socket_server.py          # Socket service
-├── scripts/
-│   ├── ioc/
-│   │   ├── analysis_corpus.py
-│   │   ├── code_injection_analysis.py
-│   │   ├── hidden_proc_analysis.py
-│   │   ├── filescan_analysis.py
-│   │   └── network_analysis.py
-│   └── tools/
-│       └── csvs.py
-├── ioc_analysis/             # Shared IOC helper modules
-├── utils/                    # Shared parsing/rules/schema utilities
-├── docs/                     # Contracts and documentation
-├── memory_dumps/             # Input dumps (local only)
-├── extracted_data/           # Per-sample extracted artifacts
-├── extracted_csvs/           # Intermediate extraction artifacts
-└── outputs/                  # Analysis/training outputs
-    └── <Family>-WithVirus/
-        ├── windows_pslist.csv
-        ├── windows_psscan.csv
-        ├── windows_malfind.csv
-        ├── windows_filescan.csv
-        └── ...
-    └── <Family>-NoVirus/
+├── README.md
+├── requirements.txt
+├── auto_vol.py
+├── build_graph.py
+├── filter_malicious.py
+├── analyze_graph.py
+├── build_dataset.py
+├── dataset.py
+├── model.py
+├── train.py
+├── evaluate.py
+├── parity_checks.py
+├── graphml_to_formats.py
+├── memory_triage.py
+├── server.py
+├── socket_server.py
+├── scripts/ioc/          # IOC corpus scripts
+├── scripts/tools/
+├── ioc_analysis/
+├── utils/
+├── docs/                 # Obsidian notes + pipeline_contracts.md
+├── notebook/             # e.g. train.ipynb (Colab-friendly)
+├── memory_dumps/         # local only
+├── extracted_data/
+├── extracted_csvs/
+└── outputs/
 ```
 
-> ⚠️ Memory images and ransomware samples are **not included** for safety and licensing reasons. Raw dumps are too large to ship in a repository.
+Memory images and malware binaries are **not** shipped in the repo. Use Git LFS or local storage for `.mem` files.
 
-### Root Hygiene Policy
+### Root hygiene
 
-Only required source/config/runtime directories should live at repo root.
-Do not keep cache or transient files in root.
-
-- Ignored/transient: `__pycache__/`, `*.pyc`, `.ipynb_checkpoints/`
-- Generated outputs: `output/`, `outputs/`, `extracted_csvs/`, `extracted_data/`
-- If root looks noisy, run:
+Ignored or generated paths include `__pycache__/`, `extracted_data/`, `extracted_csvs/`, `outputs/`. To clear bytecode:
 
 ```bash
 find . -type d -name "__pycache__" -prune -exec rm -rf {} + && find . -type f -name "*.pyc" -delete
@@ -86,212 +70,187 @@ find . -type d -name "__pycache__" -prune -exec rm -rf {} + && find . -type f -n
 git clone https://github.com/variablevar/bug-free-happiness.git
 cd bug-free-happiness
 python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Volatility 3 must be installed and available as the `vol` command:
+Install Volatility 3 so the `vol` CLI is available (see [Volatility 3](https://github.com/volatilityfoundation/volatility3)).
 
-```bash
-pip install volatility3
-```
-
-### Quick Start (Dashboard)
+### Dashboard (optional)
 
 ```bash
 python server.py
 ```
 
-Then open the dashboard in your browser. See [PIPELINE_README.md](PIPELINE_README.md) for full dashboard instructions.
+Then open the app in the browser. For a narrative of stages and scripts, see [docs/Pipeline.md](docs/Pipeline.md) and [docs/pipeline_contracts.md](docs/pipeline_contracts.md).
 
 ---
 
 ## Pipeline
 
-### Step 1 — Volatility 3 Extraction
+### Step 1 — Volatility extraction
 
-Place Windows memory images in `memory_dumps/` following the naming convention:
-
-```text
-memory_dumps/
-    WannaCry-WithVirus.mem
-    WannaCry-NoVirus.mem
-    ...
-```
-
-Run parallel extraction across all dumps (17+ plugins):
+Place memory images under `memory_dumps/`, then:
 
 ```bash
 python auto_vol.py
 ```
 
-This writes per-sample CSVs into `extracted_data/<Family>-WithVirus/` and `extracted_data/<Family>-NoVirus/`.
+Per-sample plugin CSVs land under `extracted_data/<SampleName>/`.
 
-### Step 2 — IOC Analysis
-
-Run individual analysis scripts to compute IOC metrics per sample and per family:
+### Step 2 — IOC analysis (optional reporting)
 
 ```bash
-python scripts/ioc/code_injection_analysis.py    # Code injection (malfind RWX + MZ header)
-python scripts/ioc/hidden_proc_analysis.py       # Hidden processes (psscan vs pslist)
-python scripts/ioc/filescan_analysis.py          # Suspicious file staging
-python scripts/ioc/network_analysis.py           # C2-like network connections
-python scripts/ioc/analysis_corpus.py            # Full corpus combined view
+python scripts/ioc/code_injection_analysis.py
+python scripts/ioc/hidden_proc_analysis.py
+python scripts/ioc/filescan_analysis.py
+python scripts/ioc/network_analysis.py
+python scripts/ioc/analysis_corpus.py
 ```
 
-Each script outputs clean CSVs and Markdown-ready tables suitable for reports or papers.
-They now share reusable helpers under `ioc_analysis/` for dataset traversal, pairing,
-and CSV/plugin loading, so metric logic stays focused and maintainable.
+Shared helpers live under `ioc_analysis/`.
 
-### Step 3 — Graph Construction
+### Step 3–5 — Filter, graph, analyse (per sample)
 
-Build heterogeneous behavioural graphs (PyTorch Geometric format):
+`build_dataset.py` orchestrates a stable order (see `docs/pipeline_contracts.md`):
+
+1. Ensure `graph.pkl` exists (bootstrap via `build_graph.py` if needed).
+2. Run `filter_malicious.py` on `graph.pkl` → `filtered_malicious.json`.
+3. Run `build_graph.py` again to persist graphs and `graph_attr.json`.
+4. Run `analyze_graph.py` → `analysis_report.json`.
+
+For a **single** folder after extraction:
 
 ```bash
 python build_graph.py extracted_data/WannaCry-WithVirus/
+python filter_malicious.py extracted_data/WannaCry-WithVirus/
+python build_graph.py extracted_data/WannaCry-WithVirus/
+python analyze_graph.py extracted_data/WannaCry-WithVirus/
 ```
 
-Processes, DLLs, network connections, and files become nodes; edges encode relationships (parent–child, loaded-by, connected-to, wrote).
-
-### Step 4 — Dataset Manifest
+Full corpus + manifest:
 
 ```bash
 python build_dataset.py
 ```
 
-Produces `extracted_data/dataset_manifest.csv`:
+Manifest path defaults to `extracted_data/dataset_manifest.csv` (or the base you pass in).
 
-| Column | Description |
-|---|---|
-| `folder` | Sample directory name (e.g. `WannaCry-WithVirus`) |
-| `label` | `1` = malware, `0` = benign |
-| `family` | Malware family name |
-| `max_score` | Peak heuristic score |
-| `attack_steps` | Number of attack chain steps detected |
-| `injections` | Count of malfind RWX regions |
-| `c2_conns` | Count of external ESTABLISHED connections |
-| `uncertain` | `True` when a benign-labelled sample has strong malicious heuristic signals |
-| `uncertain_reason` | Pipe-separated reasons for uncertainty (for manual triage) |
+### Manifest columns (high level)
 
-By default, uncertain samples are excluded from training so heuristic false positives
-in benign captures do not poison labels.
+Besides `sample_id`, `folder`, `label` (`1` malware, `0` benign, `-1` unknown), `family`, graph counts, verdict-style fields (`max_score`, `attack_steps`, …), the manifest includes:
 
-### Step 5 — Train GNN
+- `graph_attr` — JSON list of graph-level floats consumed by `dataset.py` (dimension matches the loader).
+- `label_signals_top`, `label_signals_json` — serialised triage / label signals for inspection and tooling.
+- Typed `signal_*` columns (counts / scores) for spreadsheets and ablations.
+- `uncertain`, `uncertain_reason` — rows you may want to hold out of training (default in `dataset.py`).
+- `filter_ok`, `graph_ok`, `analyze_ok`, `error` — pipeline health.
+
+Training excludes `uncertain` rows and `label=-1` unless you pass `--include-uncertain` / `--include-unknown` to `train.py` or `evaluate.py`. If you include unknown labels while using binary cross-entropy on `label`, ensure your training code does not assume only `{0,1}` (e.g. remap or use a third class).
+
+---
+
+## Training and evaluation
+
+Training uses **grouped** cross-validation (not IID shuffled folds):
+
+- `--cv loso` — leave-one-group-out (default). Groups default to sample folder names (`--group-by source`).
+- `--cv stratified_group` — `StratifiedGroupKFold` with `--n-splits` (default 5), useful with `--group-by family` to reduce family leakage.
+
+Internal training batches use a fixed small batch size in code (there is **no** `--batch-size` on `train.py`). **`evaluate.py`** accepts `--batch-size` for inference.
+
+Examples:
 
 ```bash
-# GIN (default, 5-fold CV)
+# Default: GIN, LOSO, 120 epochs, hidden 16, 2 layers, dropout 0.5
 python train.py extracted_data/dataset_manifest.csv
 
-# GraphSAGE
 python train.py extracted_data/dataset_manifest.csv --model sage
+python train.py extracted_data/dataset_manifest.csv --model gat --hidden 32 --gat-heads 4
+python train.py extracted_data/dataset_manifest.csv --model gine --edge-emb-dim 8
 
-# Custom hyperparameters
+# Stratified folds by family
 python train.py extracted_data/dataset_manifest.csv \
-    --epochs 200 --hidden 128 --layers 3 \
-    --batch-size 4 --lr 1e-3 --dropout 0.3
+  --cv stratified_group --group-by family --n-splits 5
 
-# Save best checkpoint per fold
+# Validation holdout inside each outer train split (model selection)
+python train.py extracted_data/dataset_manifest.csv --val-fraction 0.15
+
 python train.py extracted_data/dataset_manifest.csv --save-model
-
-# Include uncertain rows from manifest (off by default)
 python train.py extracted_data/dataset_manifest.csv --include-uncertain
-
-# Benign-focused augmentation (helps class imbalance when benign exists in train fold)
-python train.py extracted_data/dataset_manifest.csv --model sage \
-    --augment-benign --benign-target-ratio 1.0
-
-# Multiple seeds for reliable results
-for seed in 0 1 2; do
-  python train.py extracted_data/dataset_manifest.csv --seed $seed
-done
+python train.py extracted_data/dataset_manifest.csv --label-smoothing 0.05
 ```
 
-#### CLI Reference
+Evaluate a saved checkpoint (flags must match the architecture used at train time):
+
+```bash
+python evaluate.py extracted_data/dataset_manifest.csv outputs/best_fold0.pt \
+  --model gin --predictions-csv preds.csv --output-json eval.json
+```
+
+### `train.py` CLI (summary)
 
 | Argument | Default | Description |
-|---|---|---|
+|----------|---------|-------------|
 | `manifest` | — | Path to `dataset_manifest.csv` |
-| `--model` | `gin` | `gin` or `sage` |
-| `--folds` | `5` | Number of CV folds |
-| `--epochs` | `200` | Training epochs per fold |
-| `--hidden` | `64` | Hidden dimension |
-| `--layers` | `3` | GNN layers |
-| `--dropout` | `0.3` | Dropout rate |
+| `--base-dir` | manifest dir | Root containing per-sample folders |
+| `--model` | `gin` | `gin`, `sage`, `gat`, `gine` |
+| `--gat-heads` | `4` | GAT heads (`--hidden` must be divisible) |
+| `--edge-emb-dim` | `8` | GINE edge-type embedding dim |
+| `--target` | `label` | `label` or `risk` |
+| `--epochs` | `120` | Epochs per outer fold |
+| `--hidden` | `16` | Hidden dimension |
+| `--layers` | `2` | Message-passing layers |
+| `--dropout` | `0.5` | Dropout |
 | `--lr` | `1e-3` | Learning rate |
-| `--weight-decay` | `1e-4` | Adam weight decay |
-| `--batch-size` | `4` | Batch size |
-| `--seed` | `42` | Random seed |
-| `--save-model` | `False` | Save best checkpoint per fold |
-| `--include-uncertain` | `False` | Include uncertain manifest rows in training |
-| `--augment-benign` | `False` | Oversample benign class using graph augmentation |
-| `--benign-target-ratio` | `1.0` | Target benign:malware ratio after benign augmentation |
-| `--benign-edge-drop` | `0.05` | Edge drop probability for benign augmentation |
-| `--benign-feat-mask` | `0.05` | Feature mask probability for benign augmentation |
+| `--weight-decay` | `1e-4` | AdamW weight decay |
+| `--cv` | `loso` | `loso` or `stratified_group` |
+| `--n-splits` | `5` | Folds for `stratified_group` |
+| `--group-by` | `source` | `source` (folder) or `family` |
+| `--val-fraction` | `0` | Fraction of outer-train graphs for validation |
+| `--label-smoothing` | `0` | CE label smoothing |
+| `--save-model` | off | Save best checkpoint per fold |
+| `--include-uncertain` | off | Include uncertain manifest rows |
+| `--include-unknown` | off | Include `label=-1` |
+| `--augment` / `--augment-benign` | off | Graph augmentation options |
+| `--benign-*` | see `--help` | Benign oversampling / loss weighting |
+
+Run `python train.py --help` for the full list.
 
 ---
 
-## Behavioural Heuristics (MITRE ATT&CK)
+## Notebooks
 
-The heuristic engine in `filter_malicious.py` scores each graph across 5 MITRE ATT&CK dimensions:
-
-| Tactic | MITRE | Signal |
-|---|---|---|
-| Initial Access / Execution | T1218, T1566 | LOLBin usage, script extensions in args |
-| Defense Evasion / Injection | T1055 | malfind RWX + MZ header, shared shellcode stub |
-| Command & Control | T1071 | ESTABLISHED connections to external IPs |
-| Credential Access | T1003.001 | Full LSASS handle access (0x1fffff) |
-| Execution / Impact | T1486 | High-score processes, ransomware note args |
-
-Verdict levels: `CRITICAL` · `HIGH` · `MEDIUM` · `LOW`
+`notebook/train.ipynb` is set up for local runs and Google Colab (install cell, optional Drive mount, path to manifest). Point `ROOT` at this repo before `pip install -r requirements.txt`.
 
 ---
 
-## Indicators of Compromise (IOCs)
+## Behavioural heuristics (MITRE-style)
 
-The pipeline detects four categories of memory-resident IOCs:
-
-- **Code injection** — suspicious executable memory regions identified by `windows.malfind` (RWX pages with MZ headers)
-- **Hidden processes** — objects in `psscan` not visible in `pslist`, indicating process hiding/rootkit behaviour
-- **Suspicious file staging** — executables and payloads discovered via `windows.filescan`
-- **Non-standard network activity** — outbound C2-like connections identified via `windows.netscan`
+`filter_malicious.py` combines process- and graph-level signals (injections, C2-style edges, credential access patterns, staging, ransomware-note style indicators, lineage and stage coverage, benign-context discounts, etc.). Full logic lives in the script and in `_meta` sections of `filtered_malicious.json` / `graph_attr.json`.
 
 ---
 
 ## Limitations
 
-- **Small dataset (30 samples)** — results have high variance; aim for 60–100+ for reliable CV
-- **Shallow node features** — one-hot + numeric; future work: pretrained embeddings on Windows API/DLL names
-- **No family-aware splitting** — WithVirus/NoVirus pairs from the same family may leak across folds
-- **CPU only tested** — CUDA path is implemented but untested
+- **Small N** — metrics vary sharply between seeds and splits; report mean ± std over seeds where possible.
+- **Group leakage** — default LOSO groups by folder; use `--cv stratified_group --group-by family` when families repeat across folders.
+- **Heuristic vs label noise** — benign captures with strong signals are flagged `uncertain`; default training drops them unless `--include-uncertain`.
+- **Features** — node features are hand-engineered categoricals and numerics; embeddings are future work.
 
 ---
 
-## Related Work
+## Related work (high level)
 
-| Paper | Method | Difference |
-|---|---|---|
-| MDGraph (Expert Systems 2024) | doc2vec + GraphSAGE on FCG | Code structure graph; requires binary |
-| ProcGCN (PMC 2024) | BoW + DGCNN on FCG from process dump | Single-process FCG; requires IDA Pro |
-| **This work** | GIN/SAGE on heterogeneous OS behavioural graph | System-wide runtime artefacts; no binary needed |
-
----
-
-## Future Work
-
-- [ ] Expand dataset to 100+ samples
-- [ ] Add pretrained DLL/process name embeddings as node features
-- [ ] Family-aware stratified splitting to prevent leakage
-- [ ] Combined FCG + behavioural graph (process nodes carry code-structure subgraph)
-- [ ] Explainability: GNNExplainer to identify which nodes/edges drive classification
-- [ ] Real-time scoring: integrate with live Volatility memory acquisition
+| Work | Idea | Contrast |
+|------|------|----------|
+| MDGraph-style FCG methods | Code / document features on static graphs | MalVol uses **runtime** memory artefacts, not disassembly of a single binary |
+| ProcGCN-style process graphs | Often single-process or static | MalVol builds a **system-wide** heterogeneous behavioural graph from Volatility |
 
 ---
 
-## Academic Context
+## Academic context
 
-This repository supports an **MSc Cybersecurity dissertation** on automated ransomware detection using Volatility 3 memory forensics, focusing on:
+This repository supports dissertation work on: MalVol-25-style corpora, automated Volatility extraction, IOC quantification, and GNNs on heterogeneous OS behaviour graphs.
 
-- Building a labelled ransomware memory corpus (MalVol-25)
-- Automating Volatility 3 extraction at scale across 17+ plugins
-- Quantifying memory-based IOCs for ransomware detection
-- Applying Graph Neural Networks to heterogeneous OS behavioural graphs
+Further reading in-repo: [docs/Overview.md](docs/Overview.md), [docs/Models.md](docs/Models.md), [docs/Pipeline.md](docs/Pipeline.md), [docs/pipeline_contracts.md](docs/pipeline_contracts.md).
