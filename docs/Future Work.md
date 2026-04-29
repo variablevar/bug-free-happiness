@@ -5,7 +5,7 @@ tags: #future #improvements #roadmap
 ## Short Term
 
 - [ ] **Expand dataset to 100+ samples** — most critical improvement; will dramatically reduce CV variance
-- [ ] **Family-aware stratified splitting** — prevent WithVirus/NoVirus pairs from the same family leaking across folds
+- [x] **Family-aware grouped CV (train.py)** — use `--cv stratified_group --group-by family` (still validate on held-out families; expand N for stable estimates)
 - [ ] **CUDA testing** — GPU path is implemented but untested; needed for larger datasets
 
 ## Medium Term
