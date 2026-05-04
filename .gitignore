@@ -1,4 +1,5 @@
 memory_dumps/*
+benign_dumps/
 upload_sessions/*
 vol_output/*
 extracted_data_augmented/*
@@ -7,6 +8,7 @@ output/*
 upload_sessions/*
 notebook/*
 .venv
+.venv_docx
 __pycache__/
 **/__pycache__/
 *.pyc

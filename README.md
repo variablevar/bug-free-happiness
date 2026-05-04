@@ -136,6 +136,8 @@ python build_dataset.py
 
 Manifest path defaults to `extracted_data/dataset_manifest.csv` (or the base you pass in).
 
+For folders that are not named `…-WithVirus` / `…-NoVirus` (e.g. BCCC benign dumps under `extracted_csvs/`), set manifest labels with `--default-label-for-unmatched 0` or a `--labels-csv` with `folder,label[,family]`; see `python build_dataset.py --help`.
+
 ### Manifest columns (high level)
 
 Besides `sample_id`, `folder`, `label` (`1` malware, `0` benign, `-1` unknown), `family`, graph counts, verdict-style fields (`max_score`, `attack_steps`, …), the manifest includes:
@@ -143,10 +145,10 @@ Besides `sample_id`, `folder`, `label` (`1` malware, `0` benign, `-1` unknown), 
 - `graph_attr` — JSON list of graph-level floats consumed by `dataset.py` (dimension matches the loader).
 - `label_signals_top`, `label_signals_json` — serialised triage / label signals for inspection and tooling.
 - Typed `signal_*` columns (counts / scores) for spreadsheets and ablations.
-- `uncertain`, `uncertain_reason` — rows you may want to hold out of training (default in `dataset.py`).
+- `uncertain`, `uncertain_reason` — heuristic curation flags; training includes these rows by default (`dataset.py` / `train.py`). Use `train.py --exclude-uncertain` to drop them.
 - `filter_ok`, `graph_ok`, `analyze_ok`, `error` — pipeline health.
 
-Training excludes `uncertain` rows and `label=-1` unless you pass `--include-uncertain` / `--include-unknown` to `train.py` or `evaluate.py`. If you include unknown labels while using binary cross-entropy on `label`, ensure your training code does not assume only `{0,1}` (e.g. remap or use a third class).
+Training includes `uncertain` rows by default. Rows with `label=-1` are still excluded unless you pass `--include-unknown` to `train.py` or `evaluate.py`. If you include unknown labels while using binary cross-entropy on `label`, ensure your training code does not assume only `{0,1}` (e.g. remap or use a third class).
 
 ---
 
@@ -177,7 +179,8 @@ python train.py extracted_data/dataset_manifest.csv \
 python train.py extracted_data/dataset_manifest.csv --val-fraction 0.15
 
 python train.py extracted_data/dataset_manifest.csv --save-model
-python train.py extracted_data/dataset_manifest.csv --include-uncertain
+python train.py extracted_data/dataset_manifest.csv
+python train.py extracted_data/dataset_manifest.csv --exclude-uncertain
 python train.py extracted_data/dataset_manifest.csv --label-smoothing 0.05
 ```
 
@@ -210,10 +213,11 @@ python evaluate.py extracted_data/dataset_manifest.csv outputs/best_fold0.pt \
 | `--val-fraction` | `0` | Fraction of outer-train graphs for validation |
 | `--label-smoothing` | `0` | CE label smoothing |
 | `--save-model` | off | Save best checkpoint per fold |
-| `--include-uncertain` | off | Include uncertain manifest rows |
+| `--exclude-uncertain` | off | Drop manifest rows flagged `uncertain` |
 | `--include-unknown` | off | Include `label=-1` |
 | `--augment` / `--augment-benign` | off | Graph augmentation options |
-| `--benign-*` | see `--help` | Benign oversampling / loss weighting |
+| `--benign-boost` | `1.0` | Extra loss weight on benign class (`>1` enables; default off) |
+| `--benign-*` (other) | see `--help` | Benign oversampling augmentation |
 
 Run `python train.py --help` for the full list.
 
@@ -235,7 +239,7 @@ Run `python train.py --help` for the full list.
 
 - **Small N** — metrics vary sharply between seeds and splits; report mean ± std over seeds where possible.
 - **Group leakage** — default LOSO groups by folder; use `--cv stratified_group --group-by family` when families repeat across folders.
-- **Heuristic vs label noise** — benign captures with strong signals are flagged `uncertain`; default training drops them unless `--include-uncertain`.
+- **Heuristic vs label noise** — benign captures with strong signals may be flagged `uncertain`; training includes them by default; use `--exclude-uncertain` to hold out.
 - **Features** — node features are hand-engineered categoricals and numerics; embeddings are future work.
 
 ---

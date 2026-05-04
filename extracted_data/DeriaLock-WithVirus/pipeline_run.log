@@ -1,4 +1,4 @@
 Sample: DeriaLock-WithVirus | label=1 | family=derialock
-filter_malicious.py: OK (0.9s)
-build_graph.py: OK (6.6s)
-analyze_graph.py: OK (1.4s)
+SKIP filter_malicious.py
+SKIP build_graph.py
+SKIP analyze_graph.py

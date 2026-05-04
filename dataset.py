@@ -225,7 +225,7 @@ class MalwareGraphDataset(Dataset):
         self,
         manifest_csv: str,
         base_dir: str = None,
-        include_uncertain: bool = False,
+        include_uncertain: bool = True,
         include_unknown: bool = False,
         target: str = "label",
     ):

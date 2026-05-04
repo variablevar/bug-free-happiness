@@ -1,4 +1,4 @@
 Sample: GandCrab-WithVirus | label=1 | family=gandcrab
-filter_malicious.py: OK (0.9s)
-build_graph.py: OK (7.0s)
-analyze_graph.py: OK (1.2s)
+SKIP filter_malicious.py
+SKIP build_graph.py
+SKIP analyze_graph.py

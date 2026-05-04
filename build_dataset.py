@@ -33,6 +33,15 @@ Usage:
   python build_dataset.py ./extracted_data --skip-existing --workers 12
   python build_dataset.py ./extracted_data --dry-run
   python build_dataset.py ./extracted_data --only filter graph --workers 6
+
+  Benign BCCC-style folders (no -WithVirus/-NoVirus in name) default to label 0:
+  python build_dataset.py ./extracted_csvs --default-label-for-unmatched 0 --skip-existing --workers 8
+
+  Labels only from CSV (no suffix inference on folder names):
+  python build_dataset.py ./extracted_csvs --labels-csv ./labels.csv
+
+  Same-directory samples all one class (suffix inference off); requires default or use --labels-csv:
+  python build_dataset.py ./all_benign --no-malvol-suffix-inference --default-label-for-unmatched 0
 """
 
 import os, sys, subprocess, json, csv, time, argparse, threading, pickle
@@ -47,6 +56,31 @@ def infer_label(folder_name):
     if "-NoVirus"in name:
         return 0, name.replace("-NoVirus", "").lower()
     return -1, name.lower()
+
+
+def resolve_label_family(
+    folder_path,
+    *,
+    use_suffix_inference,
+    default_label_unmatched,
+    default_unmatched_family,
+):
+    """
+    Returns (label, family). Suffix inference uses -WithVirus/-NoVirus on basename.
+    If label is still -1 and default_label_unmatched is set, apply that label;
+    family becomes default_unmatched_family if set, else basename lower.
+    """
+    base = os.path.basename(folder_path)
+    base_l = base.lower()
+    if use_suffix_inference:
+        lab, fam = infer_label(folder_path)
+    else:
+        lab, fam = -1, base_l
+    if lab == -1 and default_label_unmatched is not None:
+        lab = default_label_unmatched
+        if default_unmatched_family:
+            fam = default_unmatched_family.strip() or base_l
+    return lab, fam
 
 
 def load_explicit_label_rows(labels_csv_path, base_dir):
@@ -408,7 +442,55 @@ def main():
             "CSV rows pointing at missing folders are skipped with a warning."
         ),
     )
+    parser.add_argument(
+        "--default-label-for-unmatched",
+        type=int,
+        default=None,
+        metavar="N",
+        help=(
+            "When scanning subfolders (no --labels-csv), if a folder name does not "
+            "match -WithVirus/-NoVirus (or suffix inference is off), use label N "
+            "instead of -1. N must be -1, 0, or 1. Typical: 0 for known-benign BCCC dumps."
+        ),
+    )
+    parser.add_argument(
+        "--default-unmatched-family",
+        default=None,
+        metavar="NAME",
+        help=(
+            "Used with --default-label-for-unmatched when the inferred label was -1: "
+            "set family column to this string; default is the folder basename (lower)."
+        ),
+    )
+    parser.add_argument(
+        "--no-malvol-suffix-inference",
+        action="store_true",
+        help=(
+            "Do not infer label/family from -WithVirus/-NoVirus in folder names. "
+            "Without --labels-csv you must pass --default-label-for-unmatched "
+            "(all scanned folders get that label). Do not use on mixed MalVol+BCCC "
+            "trees unless every sample is listed in --labels-csv."
+        ),
+    )
     args = parser.parse_args()
+
+    if args.default_label_for_unmatched is not None and args.default_label_for_unmatched not in (
+        -1,
+        0,
+        1,
+    ):
+        print("[ERROR] --default-label-for-unmatched must be -1, 0, or 1")
+        sys.exit(1)
+    if args.default_unmatched_family and args.default_label_for_unmatched is None:
+        print("[ERROR] --default-unmatched-family requires --default-label-for-unmatched")
+        sys.exit(1)
+    if args.no_malvol_suffix_inference and not args.labels_csv:
+        if args.default_label_for_unmatched is None:
+            print(
+                "[ERROR] --no-malvol-suffix-inference without --labels-csv requires "
+                "--default-label-for-unmatched (every folder would otherwise be label -1)."
+            )
+            sys.exit(1)
 
     base_dir   = os.path.abspath(args.base_dir)
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -430,6 +512,10 @@ def main():
 
     if not os.path.isdir(base_dir):
         print(f"[ERROR] Not found: {base_dir}"); sys.exit(1)
+
+    use_suffix = not args.no_malvol_suffix_inference
+    def_lab = args.default_label_for_unmatched
+    def_fam = args.default_unmatched_family
 
     if args.labels_csv:
         labels_csv = os.path.abspath(args.labels_csv)
@@ -457,17 +543,24 @@ def main():
         if not sample_dirs:
             print(f"[ERROR] No subfolders in: {base_dir}"); sys.exit(1)
 
-        jobs = [
-            {
-                "folder": f,
-                "name":   os.path.basename(f),
-                "label":  infer_label(f)[0],
-                "family": infer_label(f)[1],
-                "idx":    i,
-                "total":  len(sample_dirs),
-            }
-            for i, f in enumerate(sample_dirs, 1)
-        ]
+        jobs = []
+        for i, f in enumerate(sample_dirs, 1):
+            lab, fam = resolve_label_family(
+                f,
+                use_suffix_inference=use_suffix,
+                default_label_unmatched=def_lab,
+                default_unmatched_family=def_fam,
+            )
+            jobs.append(
+                {
+                    "folder": f,
+                    "name":   os.path.basename(f),
+                    "label":  lab,
+                    "family": fam,
+                    "idx":    i,
+                    "total":  len(sample_dirs),
+                }
+            )
 
     # ─ Dry run ────────────────────────────────────────────────────────────
     if args.dry_run:
@@ -475,6 +568,15 @@ def main():
         print(f"  DRY RUN — {len(jobs)} samples in: {base_dir}")
         if args.labels_csv:
             print(f"  Labels  : explicit {os.path.abspath(args.labels_csv)}")
+        else:
+            print(
+                f"  Suffix inference (-WithVirus/-NoVirus): "
+                f"{'on' if use_suffix else 'off (--no-malvol-suffix-inference)'}"
+            )
+            if def_lab is not None:
+                print(f"  Default label for unmatched names : {def_lab}")
+                if def_fam:
+                    print(f"  Default family for those          : {def_fam!r}")
         print(f"  Steps   : {sorted(run_steps)}")
         print(f"  Workers : {n_workers}")
         print(f"{'='*65}")
@@ -496,6 +598,15 @@ def main():
     print(f"  Base       : {base_dir}")
     if args.labels_csv:
         print(f"  Labels CSV : {os.path.abspath(args.labels_csv)}")
+    else:
+        print(
+            f"  Suffix inference : "
+            f"{'on (-WithVirus/-NoVirus)' if use_suffix else 'off'}"
+        )
+        if def_lab is not None:
+            print(f"  Default label (unmatched names): {def_lab}")
+            if def_fam:
+                print(f"  Default family (unmatched)     : {def_fam}")
     print(f"  Steps      : {sorted(run_steps)}")
     print(f"  Skip exist : {skip}")
     print(f"{'='*65}\n")
@@ -604,6 +715,8 @@ def main():
     print(f"  Clean   (label=0) : {len(clean)}")
     if unknown:
         print(f"  Unknown (label=-1): {len(unknown)}  ← manually label in manifest")
+    elif def_lab is not None and not args.labels_csv:
+        print(f"  Unknown (label=-1): 0  (unmatched names used --default-label-for-unmatched={def_lab})")
     print(f"  Manifest          : {manifest_path}")
     print(f"\n  Per-sample outputs (inside each folder):")
     print(f"    filtered_malicious.json")

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-train.py  v15
-Changes vs v14:
-  - --model gat | gine; --gat-heads, --edge-emb-dim; forward passes edge_attr for GINE.
-  - --include-unknown for manifests containing label=-1 rows.
-Prior v14: --val-fraction, --label-smoothing.
+train.py  v16
+Changes vs v15:
+  - Manifest rows marked uncertain are included by default; use --exclude-uncertain to drop them.
+  - Benign class weight multiplier defaults to 1.0 (no boost); use --benign-boost >1 if needed.
+Prior v15: --model gat | gine; --include-unknown; --val-fraction, --label-smoothing.
 """
 
 import os, sys, argparse, json, datetime, re, copy
@@ -310,19 +310,18 @@ def build_model(args, in_dim, device, num_classes: int = 2, dropout_override=Non
     return m.to(device)
 
 
-def compute_class_weights(labels, device, num_classes: int, benign_boost: float = 2.0):
+def compute_class_weights(labels, device, num_classes: int, benign_boost: float = 1.0):
     """
-    Inverse-frequency weights with an additional `benign_boost` multiplier on
-    the benign class (label=0) to counter positive-bias collapse.
-    benign_boost=2.0 means benign misclassifications cost twice as much.
+    Inverse-frequency class weights. Optional benign_boost (>1) multiplies the
+    benign class (label=0) for imbalanced small corpora; default 1.0 = off.
     """
     counts  = np.bincount(labels, minlength=num_classes)
     counts[counts == 0] = 1
     total   = len(labels)
     weights = np.array([total / (len(counts) * c) for c in counts],
                        dtype=np.float32)
-    if num_classes == 2:
-        weights[0] *= benign_boost          # extra penalty for missing benign
+    if num_classes == 2 and benign_boost != 1.0:
+        weights[0] *= benign_boost
     weights = torch.tensor(weights, dtype=torch.float, device=device)
     return weights
 
@@ -566,7 +565,7 @@ def run(args):
     n_groups        = len(unique_groups)
 
     label_counts = dict(zip(*np.unique(labels, return_counts=True)))
-    benign_boost = getattr(args, "benign_boost", 2.0)
+    benign_boost = getattr(args, "benign_boost", 1.0)
 
     fold_splits = build_cv_splits(
         args.cv, n, labels, groups, args.n_splits, args.seed,
@@ -604,9 +603,9 @@ def run(args):
     print(f"[Train] Epochs      : {args.epochs}  batch_size={TRAIN_BATCH_SIZE}  lr={args.lr}")
     print(f"[Train] Augment     : {getattr(args, 'augment', False)}")
     print(f"[Train] Augment benign: {getattr(args, 'augment_benign', False)}")
-    if num_classes == 2:
+    if num_classes == 2 and benign_boost != 1.0:
         print(f"[Train] Benign boost: {benign_boost}x")
-    print(f"[Train] Include uncertain: {args.include_uncertain}")
+    print(f"[Train] Include uncertain: {args.include_uncertain}  (use --exclude-uncertain to drop)")
     print(f"[Train] Include unknown  : {args.include_unknown}")
     vf = float(getattr(args, "val_fraction", 0.0) or 0.0)
     ls = float(getattr(args, "label_smoothing", 0.0) or 0.0)
@@ -615,7 +614,7 @@ def run(args):
 
     print(
         "[Train] Class weights: computed per outer fold from training labels only "
-        "(inverse frequency; benign_boost only when num_classes==2)"
+        "(inverse frequency; optional benign_boost when num_classes==2 and boost≠1)"
     )
 
     fold_results: list[dict] = []
@@ -813,12 +812,12 @@ if __name__ == "__main__":
     parser.add_argument("--benign-feat-mask", type=float, default=0.05,
                         dest="benign_feat_mask",
                         help="Feature mask probability for benign augmentation (default 0.05)")
-    parser.add_argument("--benign-boost",  type=float, default=2.0,
+    parser.add_argument("--benign-boost",  type=float, default=1.0,
                         dest="benign_boost",
-                        help="Extra weight multiplier for benign class (default 2.0)")
-    parser.add_argument("--include-uncertain", action="store_true",
-                        dest="include_uncertain",
-                        help="Include manifest rows marked uncertain (default: excluded)")
+                        help="Extra weight multiplier for benign class (default 1.0 = disabled)")
+    parser.add_argument("--exclude-uncertain", action="store_true",
+                        dest="exclude_uncertain",
+                        help="Exclude manifest rows marked uncertain (default: include all)")
     parser.add_argument("--include-unknown", action="store_true",
                         dest="include_unknown",
                         help="Include rows with label=-1 (default: excluded)")
@@ -868,4 +867,5 @@ if __name__ == "__main__":
         help="Cross-entropy label smoothing (0–0.2; default 0). Can reduce overconfident logits.",
     )
     args = parser.parse_args()
+    args.include_uncertain = not getattr(args, "exclude_uncertain", False)
     run(args)

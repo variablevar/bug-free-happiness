@@ -224,8 +224,8 @@ if __name__ == "__main__":
     parser.add_argument("--threshold", type=float, default=0.5,
                         help="Decision threshold for positive class")
     parser.add_argument("--batch-size", type=int, default=8, dest="batch_size")
-    parser.add_argument("--include-uncertain", action="store_true", dest="include_uncertain",
-                        help="Include manifest rows marked uncertain")
+    parser.add_argument("--exclude-uncertain", action="store_true", dest="exclude_uncertain",
+                        help="Exclude manifest rows marked uncertain (default: include all)")
     parser.add_argument("--include-unknown", action="store_true", dest="include_unknown",
                         help="Include rows with label=-1")
     parser.add_argument("--predictions-csv", default=None, dest="predictions_csv",
@@ -234,4 +234,6 @@ if __name__ == "__main__":
                         help="Optional path to save full evaluation results JSON")
     parser.add_argument("--device", default=None,
                         help="Force device (e.g. cpu, cuda). Defaults to auto")
-    main(parser.parse_args())
+    args = parser.parse_args()
+    args.include_uncertain = not getattr(args, "exclude_uncertain", False)
+    main(args)
