@@ -145,81 +145,111 @@ Besides `sample_id`, `folder`, `label` (`1` malware, `0` benign, `-1` unknown), 
 - `graph_attr` — JSON list of graph-level floats consumed by `dataset.py` (dimension matches the loader).
 - `label_signals_top`, `label_signals_json` — serialised triage / label signals for inspection and tooling.
 - Typed `signal_*` columns (counts / scores) for spreadsheets and ablations.
-- `uncertain`, `uncertain_reason` — heuristic curation flags; training includes these rows by default (`dataset.py` / `train.py`). Use `train.py --exclude-uncertain` to drop them.
+- `uncertain`, `uncertain_reason` — heuristic curation flags; one-class trainers include these rows by default. Use `--exclude-uncertain` on train commands to drop them.
 - `filter_ok`, `graph_ok`, `analyze_ok`, `error` — pipeline health.
 
-Training includes `uncertain` rows by default. Rows with `label=-1` are still excluded unless you pass `--include-unknown` to `train.py` or `evaluate.py`. If you include unknown labels while using binary cross-entropy on `label`, ensure your training code does not assume only `{0,1}` (e.g. remap or use a third class).
+Training includes `uncertain` rows by default. Rows with `label=-1` are excluded from both one-class trainers.
 
 ---
 
-## Training and evaluation
+## Two-model analysis stack
 
-Training uses **grouped** cross-validation (not IID shuffled folds):
+This repository now uses an explainability-first stack instead of one binary classifier:
 
-- `--cv loso` — leave-one-group-out (default). Groups default to sample folder names (`--group-by source`).
-- `--cv stratified_group` — `StratifiedGroupKFold` with `--n-splits` (default 5), useful with `--group-by family` to reduce family leakage.
+- **Model A: malware one-class GNN** (`train_malware_model.py`) outputs `malware_pattern_score`.
+- **Model B: benign one-class GNN** (`train_benign_model.py`) outputs `benign_conformity_score`.
+- **Fusion analyzer** (`analyze_two_model.py`) combines both into a triage state and model-derived evidence.
 
-Internal training batches use a fixed small batch size in code (there is **no** `--batch-size` on `train.py`). **`evaluate.py`** accepts `--batch-size` for inference.
-
-Examples:
-
-```bash
-# Default: GIN, LOSO, 120 epochs, hidden 16, 2 layers, dropout 0.5
-python train.py extracted_data/dataset_manifest.csv
-
-python train.py extracted_data/dataset_manifest.csv --model sage
-python train.py extracted_data/dataset_manifest.csv --model gat --hidden 32 --gat-heads 4
-python train.py extracted_data/dataset_manifest.csv --model gine --edge-emb-dim 8
-
-# Stratified folds by family
-python train.py extracted_data/dataset_manifest.csv \
-  --cv stratified_group --group-by family --n-splits 5
-
-# Validation holdout inside each outer train split (model selection)
-python train.py extracted_data/dataset_manifest.csv --val-fraction 0.15
-
-python train.py extracted_data/dataset_manifest.csv --save-model
-python train.py extracted_data/dataset_manifest.csv
-python train.py extracted_data/dataset_manifest.csv --exclude-uncertain
-python train.py extracted_data/dataset_manifest.csv --label-smoothing 0.05
-```
-
-Evaluate a saved checkpoint (flags must match the architecture used at train time):
+### Train the two models
 
 ```bash
-python evaluate.py extracted_data/dataset_manifest.csv outputs/best_fold0.pt \
-  --model gin --predictions-csv preds.csv --output-json eval.json
+# Train both models with one command (wrapper)
+python train.py extracted_csvs/dataset_manifest.csv
+
+# Or train each model separately
+python train_malware_model.py extracted_csvs/dataset_manifest.csv \
+  --hidden 32 --layers 2 --out-dim 64 --epochs 120
+
+python train_benign_model.py extracted_csvs/dataset_manifest.csv \
+  --hidden 32 --layers 2 --out-dim 64 --epochs 120
 ```
 
-### `train.py` CLI (summary)
+Artifacts are written under `outputs/` by default:
 
-| Argument | Default | Description |
-|----------|---------|-------------|
-| `manifest` | — | Path to `dataset_manifest.csv` |
-| `--base-dir` | manifest dir | Root containing per-sample folders |
-| `--model` | `gin` | `gin`, `sage`, `gat`, `gine` |
-| `--gat-heads` | `4` | GAT heads (`--hidden` must be divisible) |
-| `--edge-emb-dim` | `8` | GINE edge-type embedding dim |
-| `--target` | `label` | `label` or `risk` |
-| `--epochs` | `120` | Epochs per outer fold |
-| `--hidden` | `16` | Hidden dimension |
-| `--layers` | `2` | Message-passing layers |
-| `--dropout` | `0.5` | Dropout |
-| `--lr` | `1e-3` | Learning rate |
-| `--weight-decay` | `1e-4` | AdamW weight decay |
-| `--cv` | `loso` | `loso` or `stratified_group` |
-| `--n-splits` | `5` | Folds for `stratified_group` |
-| `--group-by` | `source` | `source` (folder) or `family` |
-| `--val-fraction` | `0` | Fraction of outer-train graphs for validation |
-| `--label-smoothing` | `0` | CE label smoothing |
-| `--save-model` | off | Save best checkpoint per fold |
-| `--exclude-uncertain` | off | Drop manifest rows flagged `uncertain` |
-| `--include-unknown` | off | Include `label=-1` |
-| `--augment` / `--augment-benign` | off | Graph augmentation options |
-| `--benign-boost` | `1.0` | Extra loss weight on benign class (`>1` enables; default off) |
-| `--benign-*` (other) | see `--help` | Benign oversampling augmentation |
+- `outputs/malware_model.pt`
+- `outputs/malware_model_meta.json`
+- `outputs/benign_model.pt`
+- `outputs/benign_model_meta.json`
 
-Run `python train.py --help` for the full list.
+### Run fused analysis
+
+```bash
+python evaluate.py extracted_csvs/dataset_manifest.csv
+
+# equivalent direct command:
+python analyze_two_model.py extracted_csvs/dataset_manifest.csv \
+  --malware-model outputs/malware_model.pt \
+  --benign-model outputs/benign_model.pt \
+  --output-json outputs/two_model_analysis.json
+```
+
+Per-sample JSON includes:
+
+- `malware_pattern_score`
+- `benign_conformity_score`
+- `delta_score`
+- `triage_state` (`likely_malicious`, `needs_analyst_review`, `anomalous_unknown`, `likely_benign`)
+- `confidence_split`
+- `reasoning_types`:
+  - `execution_chain_anomaly`
+  - `memory_injection_evidence`
+  - `credential_access_evidence`
+  - `network_c2_evidence`
+  - `benign_admin_tooling_likelihood`
+- `behavioral_findings`
+- `malware_model_evidence` (top nodes, edge pairs, top graph attributes, distance)
+- `benign_model_evidence` (top nodes, edge pairs, top graph attributes, distance)
+- `narrative`
+
+Use `python train.py --help`, `python train_malware_model.py --help`, and
+`python analyze_two_model.py --help` for full options.
+
+---
+
+## Binary GNN baseline (separability)
+
+Use this path to force direct malware-vs-benign separation and reduce ambiguity.
+
+```bash
+# Train binary GNN + calibration artifacts
+python train_binary_model.py extracted_csvs/dataset_manifest.csv \
+  --base-dir extracted_csvs \
+  --epochs 120 \
+  --hidden 32 --layers 2 --edge-emb-dim 16 \
+  --val-fraction 0.2 \
+  --target-recall 0.90 --target-specificity 0.90 \
+  --output-model outputs/binary_model.pt \
+  --output-meta outputs/binary_model_meta.json
+
+# Analyze with calibrated probabilities and 4-state triage
+python analyze_binary_model.py extracted_csvs/dataset_manifest.csv \
+  --base-dir extracted_csvs \
+  --model outputs/binary_model.pt \
+  --output-json outputs/binary_analysis.json
+```
+
+Binary output states:
+
+- `likely_malicious` (`p_malware >= threshold_high`)
+- `likely_benign` (`p_malware <= threshold_low`)
+- `high_risk_ambiguous` (between thresholds + risky signals present)
+- `low_risk_ambiguous` (between thresholds without risky signals)
+
+Calibration + separability metrics are written in `outputs/binary_model_meta.json`:
+
+- temperature scaling (`temperature`, `val_nll_before`, `val_nll_after`)
+- calibration quality (`val_brier_*`, `val_ece_*`)
+- class separation (`val_ks`, `val_auroc`)
 
 ---
 

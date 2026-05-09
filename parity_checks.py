@@ -32,6 +32,13 @@ MANIFEST_REQUIRED_COLUMNS = (
     "folder",
     "label",
     "family",
+    "benign_subtype",
+    "label_source",
+    "label_version",
+    "reviewer_id",
+    "reviewed_at",
+    "feedback_state",
+    "curated_label",
     "nodes",
     "edges",
     "max_score",
@@ -46,6 +53,8 @@ MANIFEST_REQUIRED_COLUMNS = (
     "analyze_ok",
     "error",
 )
+
+ALLOWED_LABEL_VERSIONS = {"v1"}
 
 
 def fail(message):
@@ -111,8 +120,13 @@ def check_manifest(base_dir):
     with open(manifest_path, "r", encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle)
         missing = [c for c in MANIFEST_REQUIRED_COLUMNS if c not in reader.fieldnames]
+        rows = list(reader)
     if missing:
         return fail(f"manifest missing columns: {missing}")
+    for i, row in enumerate(rows, start=2):
+        lv = str(row.get("label_version", "")).strip()
+        if lv and lv not in ALLOWED_LABEL_VERSIONS:
+            return fail(f"manifest label_version not allowed at line {i}: {lv}")
 
     print("[OK] manifest columns verified")
     return 0

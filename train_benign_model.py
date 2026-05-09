@@ -1,0 +1,154 @@
+#!/usr/bin/env python3
+"""Train benign one-class GNN model using benign samples only."""
+
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+import json
+import os
+from pathlib import Path
+
+import torch
+
+from dataset import MalwareGraphDataset, merge_manifest_csv_files
+from analysis_schema import SCHEMA_VERSION
+from one_class_gnn import train_one_class
+
+
+def run(args):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"[BenignModel] Device: {device}")
+
+    manifest_path = args.manifest
+    merged_tmp = None
+    extra_manifests = [x.strip() for x in str(getattr(args, "extra_manifest", "") or "").split(",") if x.strip()]
+    if extra_manifests:
+        manifest_path = merge_manifest_csv_files(args.manifest, extra_manifests)
+        merged_tmp = manifest_path
+        print(f"[BenignModel] Merged {len(extra_manifests)} extra manifest(s) → {manifest_path}")
+    try:
+        ds = MalwareGraphDataset(
+            manifest_path,
+            base_dir=args.base_dir,
+            include_uncertain=not args.exclude_uncertain,
+            include_unknown=False,
+            require_train_eligible=not args.disable_strict_train_filter,
+            target="label",
+        )
+    finally:
+        if merged_tmp and merged_tmp != os.path.abspath(args.manifest) and os.path.isfile(merged_tmp):
+            try:
+                os.remove(merged_tmp)
+            except OSError:
+                pass
+    benign_ds = [ds[i] for i in range(len(ds)) if int(ds[i].y.item()) == 0]
+    if len(benign_ds) < 10:
+        raise SystemExit("[ERROR] Need at least 10 benign samples for one-class benign model")
+
+    art = train_one_class(
+        benign_ds,
+        device,
+        hidden=args.hidden,
+        layers=args.layers,
+        dropout=args.dropout,
+        edge_emb_dim=args.edge_emb_dim,
+        out_dim=args.out_dim,
+        epochs=args.epochs,
+        batch_size=args.batch_size,
+        lr=args.lr,
+        weight_decay=args.weight_decay,
+        radius_quantile=args.radius_quantile,
+        seed=args.seed,
+        contrastive_weight=args.contrastive_weight,
+        radius_min=args.radius_min,
+        radius_max=args.radius_max,
+    )
+
+    payload = {
+        "model_type": "benign_baseline_one_class_gnn",
+        "state_dict": art.state_dict,
+        "center": art.center,
+        "radius": art.radius,
+        "in_channels": art.in_channels,
+        "graph_attr_dim": art.graph_attr_dim,
+        "hidden": art.hidden,
+        "layers": art.layers,
+        "dropout": art.dropout,
+        "edge_emb_dim": art.edge_emb_dim,
+        "out_dim": art.out_dim,
+        "schema_version": SCHEMA_VERSION,
+        "trained_at_utc": datetime.now(timezone.utc).isoformat(),
+    }
+    out_model = Path(args.output_model)
+    out_model.parent.mkdir(parents=True, exist_ok=True)
+    torch.save(payload, out_model)
+
+    meta = {
+        "model_type": payload["model_type"],
+        "manifest": args.manifest,
+        "extra_manifest_csvs": extra_manifests,
+        "base_dir": args.base_dir,
+        "exclude_uncertain": args.exclude_uncertain,
+        "strict_train_filter": (not args.disable_strict_train_filter),
+        "n_benign_train": len(benign_ds),
+        "seed": args.seed,
+        "hidden": args.hidden,
+        "layers": args.layers,
+        "dropout": args.dropout,
+        "edge_emb_dim": args.edge_emb_dim,
+        "out_dim": args.out_dim,
+        "epochs": args.epochs,
+        "batch_size": args.batch_size,
+        "lr": args.lr,
+        "weight_decay": args.weight_decay,
+        "radius_quantile": args.radius_quantile,
+        "radius_min": args.radius_min,
+        "radius_max": args.radius_max,
+        "contrastive_weight": args.contrastive_weight,
+        "radius": art.radius,
+        "schema_version": SCHEMA_VERSION,
+        "trained_at_utc": datetime.now(timezone.utc).isoformat(),
+    }
+    out_meta = Path(args.output_meta)
+    out_meta.parent.mkdir(parents=True, exist_ok=True)
+    out_meta.write_text(json.dumps(meta, indent=2), encoding="utf-8")
+    print(f"[BenignModel] saved: {out_model}")
+    print(f"[BenignModel] meta : {out_meta}")
+
+
+if __name__ == "__main__":
+    p = argparse.ArgumentParser(description="Train benign one-class GNN model")
+    p.add_argument("manifest", help="Path to dataset_manifest.csv")
+    p.add_argument("--base-dir", default=None, dest="base_dir")
+    p.add_argument("--exclude-uncertain", action="store_true", dest="exclude_uncertain")
+    p.add_argument(
+        "--disable-strict-train-filter",
+        action="store_true",
+        dest="disable_strict_train_filter",
+        help="Allow rows with train_eligible=false (default strict filter keeps them out).",
+    )
+    p.add_argument("--hidden", type=int, default=32)
+    p.add_argument("--layers", type=int, default=2)
+    p.add_argument("--dropout", type=float, default=0.4)
+    p.add_argument("--edge-emb-dim", type=int, default=16, dest="edge_emb_dim")
+    p.add_argument("--out-dim", type=int, default=64, dest="out_dim")
+    p.add_argument("--epochs", type=int, default=120)
+    p.add_argument("--batch-size", type=int, default=4, dest="batch_size")
+    p.add_argument("--lr", type=float, default=3e-4)
+    p.add_argument("--weight-decay", type=float, default=1e-4, dest="weight_decay")
+    p.add_argument("--radius-quantile", type=float, default=0.9, dest="radius_quantile")
+    p.add_argument("--radius-min", type=float, default=1e-3, dest="radius_min")
+    p.add_argument("--radius-max", type=float, default=25.0, dest="radius_max")
+    p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--contrastive-weight", type=float, default=0.10, dest="contrastive_weight")
+    p.add_argument("--output-model", default="outputs/benign_model.pt", dest="output_model")
+    p.add_argument("--output-meta", default="outputs/benign_model_meta.json", dest="output_meta")
+    p.add_argument(
+        "--extra-manifest",
+        default="",
+        dest="extra_manifest",
+        help="Comma-separated extra manifest CSV paths merged after primary (dedupe by folder; primary wins).",
+    )
+    run(p.parse_args())
+

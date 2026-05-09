@@ -44,8 +44,41 @@ Usage:
   python build_dataset.py ./all_benign --no-malvol-suffix-inference --default-label-for-unmatched 0
 """
 
-import os, sys, subprocess, json, csv, time, argparse, threading, pickle
+import os, sys, subprocess, json, csv, time, argparse, threading, pickle, re
+
+from utils.graph_motif_signals import graph_differentiation_signals
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
+
+def _count_benign_hubs_graph(G):
+    return sum(
+        1
+        for _, d in G.nodes(data=True)
+        if str(d.get("node_type")) == "process" and int(d.get("benign_high_volume_hub", 0) or 0) == 1
+    )
+
+
+def _count_rwx_thread_context_graph(G):
+    procs = set()
+    for u, v, ed in G.edges(data=True):
+        if ed.get("edge_type") != "injected_into":
+            continue
+        if str(G.nodes[u].get("node_type", "")) != "memory_region":
+            continue
+        if int(G.nodes[u].get("is_rwx", 0) or 0) != 1:
+            continue
+        procs.add(v)
+    if not procs:
+        return 0
+    n = 0
+    for u, v, ed in G.edges(data=True):
+        if ed.get("edge_type") != "belongs_to":
+            continue
+        if str(G.nodes[u].get("node_type", "")) != "thread":
+            continue
+        if v in procs:
+            n += 1
+    return n
 
 
 # ── Label inference ──────────────────────────────────────────────────────
@@ -83,11 +116,39 @@ def resolve_label_family(
     return lab, fam
 
 
+def _infer_benign_subtype(folder_name: str, label: int) -> str:
+    if int(label) != 0:
+        return ""
+    n = str(folder_name).lower()
+    if any(k in n for k in ("admin", "security", "sysinternals", "defender", "monitor", "av", "edr")):
+        return "admin_security_tool"
+    return "clean_software"
+
+
+def _is_hash_like_name(name: str) -> bool:
+    token = re.sub(r"[^A-Fa-f0-9]", "", str(name))
+    return len(token) >= 32 and bool(re.fullmatch(r"[A-Fa-f0-9]+", token))
+
+
+def _label_quality_flags(job: dict) -> tuple[bool, list[str]]:
+    name_l = str(job.get("name", "")).lower()
+    family_l = str(job.get("family", "")).lower()
+    source = str(job.get("label_source", "")).lower()
+    reasons: list[str] = []
+    if source == "name_inference":
+        if "timeout" in name_l or "timeout" in family_l:
+            reasons.append("timeout_derived_label")
+        if _is_hash_like_name(name_l) or _is_hash_like_name(family_l):
+            reasons.append("hash_derived_label")
+    return bool(reasons), reasons
+
+
 def load_explicit_label_rows(labels_csv_path, base_dir):
     """
-    CSV columns: folder (basename under base_dir), label (0/1), optional family.
+    CSV columns: folder (basename under base_dir), label (0/1), optional family,
+    optional benign_subtype.
     Duplicate folder values abort. Rows missing on disk are skipped with a warning.
-    Returns sorted list of (abs_folder_path, label:int, family:str).
+    Returns sorted list of (abs_folder_path, label:int, family:str, benign_subtype:str).
     """
     base_dir = os.path.abspath(base_dir)
     if not os.path.isfile(labels_csv_path):
@@ -108,6 +169,7 @@ def load_explicit_label_rows(labels_csv_path, base_dir):
         fk_folder = fields["folder"]
         fk_label = fields["label"]
         fk_family = fields.get("family")
+        fk_benign_subtype = fields.get("benign_subtype")
         for lineno, row in enumerate(reader, start=2):
             if not row:
                 continue
@@ -129,10 +191,15 @@ def load_explicit_label_rows(labels_csv_path, base_dir):
             fam = "unknown"
             if fk_family:
                 fam = str(row.get(fk_family, "") or "").strip() or "unknown"
-            rows_raw.append((folder, label, fam, lineno))
+            benign_subtype = ""
+            if fk_benign_subtype:
+                benign_subtype = str(row.get(fk_benign_subtype, "") or "").strip()
+            if not benign_subtype:
+                benign_subtype = _infer_benign_subtype(folder, label)
+            rows_raw.append((folder, label, fam, benign_subtype, lineno))
 
     resolved = []
-    for folder, label, fam, lineno in rows_raw:
+    for folder, label, fam, benign_subtype, lineno in rows_raw:
         abs_path = os.path.join(base_dir, folder)
         if not os.path.isdir(abs_path):
             print(
@@ -140,7 +207,7 @@ def load_explicit_label_rows(labels_csv_path, base_dir):
                 f"not found under {base_dir}, skipped"
             )
             continue
-        resolved.append((abs_path, label, fam))
+        resolved.append((abs_path, label, fam, benign_subtype))
 
     resolved.sort(key=lambda x: os.path.basename(x[0]).lower())
     return resolved
@@ -202,6 +269,26 @@ def collect_stats(folder):
         "signal_nonrwx_exec_count": 0,
         "signal_credential_access_count": 0,
         "signal_num_attack_motifs": 0,
+        "signal_temporal_chain_count": 0,
+        "signal_api_semantic_count": 0,
+        "signal_persistence_count": 0,
+        "signal_privilege_escalation_count": 0,
+        "signal_parent_child_anomaly_count": 0,
+        "signal_svchost_lineage_anomaly_count": 0,
+        "signal_svchost_cmdline_anomaly_count": 0,
+        "signal_dll_trust_anomaly_count": 0,
+        "signal_service_orphan_count": 0,
+        "signal_lolbin_chain_count": 0,
+        "signal_c2_relation_pattern_count": 0,
+        "signal_motif_ransom_decryptor_log": 0.0,
+        "signal_motif_tor_tasksvc_log": 0.0,
+        "signal_motif_hex_image_name_log": 0.0,
+        "signal_motif_memory_per_process_log": 0.0,
+        "signal_motif_lolbin_path_log": 0.0,
+        "signal_motif_injection_path_log": 0.0,
+        "signal_motif_persistence_path_log": 0.0,
+        "signal_benign_high_volume_hub_count": 0,
+        "signal_rwx_thread_context_count": 0,
     }
 
     # graph.pkl → node/edge count  (load the nx.DiGraph directly)
@@ -212,6 +299,31 @@ def collect_stats(folder):
                 G = pickle.load(f)
             stats["nodes"] = G.number_of_nodes()
             stats["edges"] = G.number_of_edges()
+            edge_counts = {}
+            for _, _, ed in G.edges(data=True):
+                et = str(ed.get("edge_type", ""))
+                edge_counts[et] = edge_counts.get(et, 0) + 1
+            stats["signal_temporal_chain_count"] = int(edge_counts.get("temporal_execution_chain", 0))
+            stats["signal_api_semantic_count"] = int(edge_counts.get("api_semantic_activity", 0))
+            stats["signal_persistence_count"] = int(edge_counts.get("persistence_behavior", 0))
+            stats["signal_privilege_escalation_count"] = int(edge_counts.get("privilege_escalation_indicator", 0))
+            stats["signal_parent_child_anomaly_count"] = int(edge_counts.get("parent_child_anomaly", 0))
+            stats["signal_svchost_lineage_anomaly_count"] = int(edge_counts.get("svchost_lineage_anomaly", 0))
+            stats["signal_svchost_cmdline_anomaly_count"] = int(edge_counts.get("svchost_cmdline_anomaly", 0))
+            stats["signal_dll_trust_anomaly_count"] = int(edge_counts.get("dll_trust_anomaly", 0))
+            stats["signal_service_orphan_count"] = int(edge_counts.get("service_orphan", 0))
+            stats["signal_lolbin_chain_count"] = int(edge_counts.get("lolbin_execution_chain", 0))
+            stats["signal_c2_relation_pattern_count"] = int(edge_counts.get("c2_relation_pattern", 0))
+            m = graph_differentiation_signals(G)
+            stats["signal_motif_ransom_decryptor_log"] = float(m[0])
+            stats["signal_motif_tor_tasksvc_log"] = float(m[1])
+            stats["signal_motif_hex_image_name_log"] = float(m[2])
+            stats["signal_motif_memory_per_process_log"] = float(m[3])
+            stats["signal_motif_lolbin_path_log"] = float(m[4])
+            stats["signal_motif_injection_path_log"] = float(m[5])
+            stats["signal_motif_persistence_path_log"] = float(m[6])
+            stats["signal_benign_high_volume_hub_count"] = int(_count_benign_hubs_graph(G))
+            stats["signal_rwx_thread_context_count"] = int(_count_rwx_thread_context_graph(G))
         except Exception:
             pass
 
@@ -282,20 +394,20 @@ def progress_bar(done, total, elapsed, bar_width=28):
 
 def uncertainty_flags(row):
     """
-    Mark likely false-positive benign samples for manual review.
-    Ground-truth labels are preserved; this only adds curation metadata.
+    Mark manifest uncertainty for label-quality or pipeline integrity reasons.
     """
     reasons = []
-    label = row.get("label", -1)
-    verdict = str(row.get("verdict", ""))
-    max_score = row.get("max_score", -1)
+    if not bool(row.get("filter_ok", False)):
+        reasons.append("filter_failed")
+    if not bool(row.get("graph_ok", False)):
+        reasons.append("graph_failed")
+    if not bool(row.get("analyze_ok", False)):
+        reasons.append("analyze_failed")
 
-    if label == 0 and (verdict.startswith("HIGH") or verdict.startswith("CRITICAL")):
-        reasons.append("benign_with_high_or_critical_verdict")
-    if label == 0 and isinstance(max_score, (int, float)) and max_score >= 10:
-        reasons.append("benign_with_high_process_score")
-
-    return bool(reasons), "|".join(reasons)
+    quality_reasons = str(row.get("label_quality_reason", "")).strip()
+    if quality_reasons:
+        reasons.append(quality_reasons)
+    return bool(reasons), "|".join([r for r in reasons if r])
 
 
 # ── Per-sample worker ────────────────────────────────────────────────────────
@@ -309,12 +421,16 @@ def process_sample(job, scripts, skip, run_steps):
     name   = job["name"]
     label  = job["label"]
     family = job["family"]
+    benign_subtype = job.get("benign_subtype", "")
     idx    = job["idx"]
     total  = job["total"]
 
-    log    = [f"Sample: {name} | label={label} | family={family}"]
+    log    = [f"Sample: {name} | label={label} | family={family} | benign_subtype={benign_subtype}"]
     lines  = []
-    lines.append(f"[{idx:02d}/{total}] {name}  label={label}  family={family}")
+    lines.append(
+        f"[{idx:02d}/{total}] {name}  label={label}  family={family}  "
+        f"benign_subtype={benign_subtype or '-'}"
+    )
 
     existing = check_outputs(folder)
     row = {
@@ -322,6 +438,16 @@ def process_sample(job, scripts, skip, run_steps):
         "folder":     name,
         "label":      label,
         "family":     family,
+        "benign_subtype": benign_subtype,
+        "label_source": job.get("label_source", "inferred"),
+        "label_version": job.get("label_version", "v1"),
+        "reviewer_id": job.get("reviewer_id", ""),
+        "reviewed_at": job.get("reviewed_at", ""),
+        "feedback_state": job.get("feedback_state", "unreviewed"),
+        "curated_label": job.get("curated_label", ""),
+        "label_quality_flag": bool(job.get("label_quality_flag", False)),
+        "label_quality_reason": str(job.get("label_quality_reason", "")),
+        "train_eligible": bool(job.get("train_eligible", True)),
         "filter_ok":  False,
         "graph_ok":   False,
         "analyze_ok": False,
@@ -472,6 +598,14 @@ def main():
             "trees unless every sample is listed in --labels-csv."
         ),
     )
+    parser.add_argument(
+        "--allow-timeout-hash-labels",
+        action="store_true",
+        help=(
+            "Allow timeout/hash-derived labels from name-inference into training eligibility. "
+            "Default: excluded from training via train_eligible=false."
+        ),
+    )
     args = parser.parse_args()
 
     if args.default_label_for_unmatched is not None and args.default_label_for_unmatched not in (
@@ -529,10 +663,17 @@ def main():
                 "name":   os.path.basename(f),
                 "label":  lab,
                 "family": fam,
+                "benign_subtype": benign_subtype,
+                "label_source": "labels_csv",
+                "label_version": "v1",
+                "reviewer_id": "",
+                "reviewed_at": "",
+                "feedback_state": "unreviewed",
+                "curated_label": "",
                 "idx":    i,
                 "total":  len(sample_dirs),
             }
-            for i, (f, lab, fam) in enumerate(explicit, 1)
+            for i, (f, lab, fam, benign_subtype) in enumerate(explicit, 1)
         ]
     else:
         sample_dirs = sorted([
@@ -557,10 +698,23 @@ def main():
                     "name":   os.path.basename(f),
                     "label":  lab,
                     "family": fam,
+                    "benign_subtype": _infer_benign_subtype(os.path.basename(f), lab),
+                    "label_source": "name_inference",
+                    "label_version": "v1",
+                    "reviewer_id": "",
+                    "reviewed_at": "",
+                    "feedback_state": "unreviewed",
+                    "curated_label": "",
                     "idx":    i,
                     "total":  len(sample_dirs),
                 }
             )
+
+    for job in jobs:
+        flagged, reasons = _label_quality_flags(job)
+        job["label_quality_flag"] = flagged
+        job["label_quality_reason"] = "|".join(reasons)
+        job["train_eligible"] = not (flagged and not args.allow_timeout_hash_labels)
 
     # ─ Dry run ────────────────────────────────────────────────────────────
     if args.dry_run:
@@ -643,6 +797,16 @@ def main():
                     "folder":     job["name"],
                     "label":      job["label"],
                     "family":     job["family"],
+                    "benign_subtype": job.get("benign_subtype", ""),
+                    "label_source": job.get("label_source", "inferred"),
+                    "label_version": job.get("label_version", "v1"),
+                    "reviewer_id": job.get("reviewer_id", ""),
+                    "reviewed_at": job.get("reviewed_at", ""),
+                    "feedback_state": job.get("feedback_state", "unreviewed"),
+                    "curated_label": job.get("curated_label", ""),
+                    "label_quality_flag": bool(job.get("label_quality_flag", False)),
+                    "label_quality_reason": str(job.get("label_quality_reason", "")),
+                    "train_eligible": bool(job.get("train_eligible", True)),
                     "filter_ok":  False,
                     "graph_ok":   False,
                     "analyze_ok": False,
@@ -663,6 +827,26 @@ def main():
                     "signal_nonrwx_exec_count": 0,
                     "signal_credential_access_count": 0,
                     "signal_num_attack_motifs": 0,
+                    "signal_temporal_chain_count": 0,
+                    "signal_api_semantic_count": 0,
+                    "signal_persistence_count": 0,
+                    "signal_privilege_escalation_count": 0,
+                    "signal_parent_child_anomaly_count": 0,
+                    "signal_svchost_lineage_anomaly_count": 0,
+                    "signal_svchost_cmdline_anomaly_count": 0,
+                    "signal_dll_trust_anomaly_count": 0,
+                    "signal_service_orphan_count": 0,
+                    "signal_lolbin_chain_count": 0,
+                    "signal_c2_relation_pattern_count": 0,
+                    "signal_motif_ransom_decryptor_log": 0.0,
+                    "signal_motif_tor_tasksvc_log": 0.0,
+                    "signal_motif_hex_image_name_log": 0.0,
+                    "signal_motif_memory_per_process_log": 0.0,
+                    "signal_motif_lolbin_path_log": 0.0,
+                    "signal_motif_injection_path_log": 0.0,
+                    "signal_motif_persistence_path_log": 0.0,
+                    "signal_benign_high_volume_hub_count": 0,
+                    "signal_rwx_thread_context_count": 0,
                     "uncertain": True,
                     "uncertain_reason": "pipeline_exception",
                 }
@@ -671,6 +855,8 @@ def main():
     manifest_path = os.path.join(base_dir, "dataset_manifest.csv")
     fieldnames = [
         "sample_id", "folder", "label", "family",
+        "benign_subtype", "label_source", "label_version", "reviewer_id", "reviewed_at", "feedback_state", "curated_label",
+        "label_quality_flag", "label_quality_reason", "train_eligible",
         "nodes", "edges",
         "max_score", "attack_steps", "injections", "c2_conns",
         "verdict",
@@ -687,6 +873,26 @@ def main():
         "signal_nonrwx_exec_count",
         "signal_credential_access_count",
         "signal_num_attack_motifs",
+        "signal_temporal_chain_count",
+        "signal_api_semantic_count",
+        "signal_persistence_count",
+        "signal_privilege_escalation_count",
+        "signal_parent_child_anomaly_count",
+        "signal_svchost_lineage_anomaly_count",
+        "signal_svchost_cmdline_anomaly_count",
+        "signal_dll_trust_anomaly_count",
+        "signal_service_orphan_count",
+        "signal_lolbin_chain_count",
+        "signal_c2_relation_pattern_count",
+        "signal_motif_ransom_decryptor_log",
+        "signal_motif_tor_tasksvc_log",
+        "signal_motif_hex_image_name_log",
+        "signal_motif_memory_per_process_log",
+        "signal_motif_lolbin_path_log",
+        "signal_motif_injection_path_log",
+        "signal_motif_persistence_path_log",
+        "signal_benign_high_volume_hub_count",
+        "signal_rwx_thread_context_count",
         "uncertain", "uncertain_reason",
         "filter_ok", "graph_ok", "analyze_ok", "error",
     ]

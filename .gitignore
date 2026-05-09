@@ -4,8 +4,10 @@ upload_sessions/*
 vol_output/*
 extracted_data_augmented/*
 extracted_csvs/*
+!extracted_csvs/manifest_hard_benign.example.csv
 output/*
-upload_sessions/*
+backup/
+outputs/
 notebook/*
 .venv
 .venv_docx

@@ -42,6 +42,10 @@ LEGIT_NET_OWNERS = {
     "svchost.exe", "system", "dns.exe", "msmpeng.exe", "onedrive.exe",
     "microsoftedgeupdate.exe", "wuauclt.exe", "taskhostw.exe",
 }
+POPULAR_SYSTEM_NAMES = {"chrome.exe", "svchost.exe", "explorer.exe"}
+TRUSTED_SIGNED_HOSTS = {"svchost.exe", "lsass.exe", "services.exe", "explorer.exe", "winlogon.exe"}
+DUAL_USE_ADMIN_TOOLS = {"psexec.exe", "wmic.exe", "powershell.exe", "schtasks.exe", "cmd.exe"}
+OFFICE_PARENT_NAMES = {"winword.exe", "excel.exe", "outlook.exe"}
 
 LEGIT_SSDT = {"ntoskrnl", "win32k"}
 
@@ -97,6 +101,11 @@ RULE_WEIGHTS = {
     "windows_update_profile": -1.5,
     "av_expected_activity": -1.5,
     "svchost_expected_service_net": -1.0,
+    "service_user_boundary_cross": 3.0,
+    "untrusted_dll_in_trusted_host": 3.5,
+    "office_lolbin_temporal_chain": 4.0,
+    "dual_use_tool_with_corroboration": 2.5,
+    "popularity_only_activity": -2.5,
 }
 
 STAGE_ORDER = [
@@ -270,9 +279,13 @@ def main():
     # ── Build pid → name map from process nodes ───────────────────────────────
     pid_to_name = {}
     ppid_map = {}
+    pid_to_args = {}
+    pid_to_session = {}
     for _, d in nodes_of_type(G, "process"):
         pid_to_name[safe_int(d.get("pid", 0))] = safe_str(d.get("label", "")).lower()
         ppid_map[safe_int(d.get("pid", 0))] = safe_int(d.get("ppid", 0))
+        pid_to_args[safe_int(d.get("pid", 0))] = safe_str(d.get("args", "")).lower()
+        pid_to_session[safe_int(d.get("pid", 0))] = safe_str(d.get("session_id", ""))
 
     def add_hit(pid, rule_id, stage, evidence, confidence=1.0, quality=1.0):
         pid = safe_int(pid, 0)
@@ -392,6 +405,24 @@ def main():
             abnormal_pids_set.add(pid)
             suspicious_pids.add(pid)
             add_hit(pid, "abnormal_parent", "initial_execution", f"{parent}->{name}", 0.9, 1.0)
+
+        # Service-host vs user-space trust boundary abuse:
+        # svchost should primarily stay in session 0 and service lineage.
+        if name == "svchost.exe":
+            session_id = safe_str(d.get("session_id", ""))
+            parent_name = parent
+            session_num = safe_int(session_id, 0)
+            session_risky = session_num > 1
+            parent_risky = parent_name not in {"", "services.exe", "svchost.exe", "wininit.exe"}
+            if session_risky or parent_risky:
+                add_hit(
+                    pid,
+                    "service_user_boundary_cross",
+                    "initial_execution",
+                    f"svchost session={session_id or '-'} parent={parent_name or '?'}",
+                    0.85,
+                    1.0,
+                )
 
     # ── 6. Suspicious network connections ────────────────────────────────────
     net_lolbin_pids_local = set()
@@ -533,6 +564,18 @@ def main():
                 "_severity":    "High",
             })
             suspicious_pids.add(pid)
+            host_name = pid_to_name.get(pid, "")
+            if host_name in TRUSTED_SIGNED_HOSTS:
+                # Unsigned DLL trust is not always available, use non-system path
+                # loaded into trusted signed hosts as a strong proxy.
+                add_hit(
+                    pid,
+                    "untrusted_dll_in_trusted_host",
+                    "memory_manipulation",
+                    f"{host_name}:{dll_path[:120]}",
+                    0.85,
+                    1.0,
+                )
 
     # ── 12. Behaviour-based process scoring (0-day ready) ────────────────────
     seen_scored = set()
@@ -546,8 +589,24 @@ def main():
         if len(uniq_ips) >= 3 and pid not in net_lolbin_pids_local:
             add_hit(pid, "slow_beacon_profile", "c2_or_lateral", f"unique_ips={len(uniq_ips)}", 0.7, 0.8)
 
-        # benign context discounts with guardrails
+        # Temporal/lineage pattern: Office -> LOLBin -> rundll32 style chains.
         pname = pid_to_name.get(pid, "")
+        ppid = ppid_map.get(pid, 0)
+        parent_name = pid_to_name.get(ppid, "")
+        gppid = ppid_map.get(ppid, 0)
+        grandparent_name = pid_to_name.get(gppid, "")
+        if pname in {"powershell.exe", "cmd.exe", "rundll32.exe", "regsvr32.exe"}:
+            if parent_name in OFFICE_PARENT_NAMES or grandparent_name in OFFICE_PARENT_NAMES:
+                add_hit(
+                    pid,
+                    "office_lolbin_temporal_chain",
+                    "initial_execution",
+                    f"{grandparent_name or '?'}->{parent_name or '?'}->{pname}",
+                    0.9,
+                    1.0,
+                )
+
+        # benign context discounts with guardrails
         if pname in {"chrome.exe", "firefox.exe", "msedge.exe"} and len(uniq_ips) >= 2:
             add_hit(pid, "browser_expected_traffic", "c2_or_lateral", pname, 1.0, 1.0)
         if pname in {"msmpeng.exe"} and pid not in malfind_pids_set:
@@ -556,6 +615,43 @@ def main():
             add_hit(pid, "windows_update_profile", "c2_or_lateral", pname, 1.0, 1.0)
         if pname == "svchost.exe" and pid not in malfind_pids_set:
             add_hit(pid, "svchost_expected_service_net", "c2_or_lateral", pname, 1.0, 1.0)
+
+        if pname in DUAL_USE_ADMIN_TOOLS:
+            current_rules = {h.rule_id for h in pid_hits.get(pid, [])}
+            high_signal = {
+                "rwx_injection",
+                "reflective_pe_like",
+                "nonrwx_exec_private",
+                "lsass_full_access",
+                "service_user_boundary_cross",
+                "office_lolbin_temporal_chain",
+            }
+            if current_rules.intersection(high_signal):
+                add_hit(
+                    pid,
+                    "dual_use_tool_with_corroboration",
+                    "initial_execution",
+                    f"{pname}+{sorted(current_rules.intersection(high_signal))[:2]}",
+                    0.85,
+                    1.0,
+                )
+
+        # Anti-popularity guard: if a popular process only has weak network-ish signals,
+        # down-weight to avoid centrality/popularity learning.
+        if pname in POPULAR_SYSTEM_NAMES:
+            current_rules = {h.rule_id for h in pid_hits.get(pid, [])}
+            weak_only = current_rules.issubset(
+                {
+                    "rare_external_network",
+                    "slow_beacon_profile",
+                    "browser_expected_traffic",
+                    "svchost_expected_service_net",
+                    "windows_update_profile",
+                    "av_expected_activity",
+                }
+            )
+            if current_rules and weak_only:
+                add_hit(pid, "popularity_only_activity", "c2_or_lateral", pname, 1.0, 1.0)
 
         score, reasons, confidence = score_process(pid, pid_hits)
         if score >= SUSPICION_THRESHOLD:
@@ -686,6 +782,15 @@ def main():
         "proc_degree_zmax": round(float(proc_degree_zmax), 6),
         "proc_betweenness_p95": round(float(proc_betweenness_p95), 6),
         "num_attack_motifs": motif_proc_mem_thread,
+        "service_boundary_violations": sum(
+            1 for hs in pid_hits.values() for h in hs if h.rule_id == "service_user_boundary_cross"
+        ),
+        "temporal_chain_signals": sum(
+            1 for hs in pid_hits.values() for h in hs if h.rule_id == "office_lolbin_temporal_chain"
+        ),
+        "trusted_host_dll_anomalies": sum(
+            1 for hs in pid_hits.values() for h in hs if h.rule_id == "untrusted_dll_in_trusted_host"
+        ),
     })
 
     label_signals = {
@@ -701,6 +806,9 @@ def main():
         "nonrwx_exec_count":          len(result["vad_suspicious"]),
         "credential_access_count":    len(result["handle_suspicious"]),
         "num_attack_motifs":          motif_proc_mem_thread,
+        "service_boundary_violations": int(graph_attr["service_boundary_violations"]),
+        "temporal_chain_signals":      int(graph_attr["temporal_chain_signals"]),
+        "trusted_host_dll_anomalies":  int(graph_attr["trusted_host_dll_anomalies"]),
     }
 
     result["_meta"] = {

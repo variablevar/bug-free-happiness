@@ -36,6 +36,117 @@ from utils.rules import (
 )
 
 SHELLCODE_EB_RE = re.compile(r"(eb\s+[0-9a-f]{2}\s+){3,}", re.IGNORECASE)
+PERSISTENCE_HINTS = ("startup", "\\run", "/run", "scheduledtask", "taskcache", "services")
+PRIV_ESC_CMD_HINTS = ("-enc", "bypass", "runas", "token", "sekurlsa", "mimikatz", "procdump")
+SYSTEM_PARENT_NAMES = {"smss.exe", "wininit.exe", "services.exe", "lsass.exe", "svchost.exe", "explorer.exe"}
+LOL_BIN_CHAIN = {"powershell.exe", "cmd.exe", "rundll32.exe", "regsvr32.exe", "mshta.exe", "wscript.exe", "cscript.exe"}
+
+# Parents considered normal for svchost.exe (reduce lineage FP vs services-only rule).
+SVCHOST_OK_PARENTS = SYSTEM_PARENT_NAMES | {
+    "msmpeng.exe",
+    "securityhealthservice.exe",
+    "securityhealthsystray.exe",
+    "runtimebroker.exe",
+    "sihost.exe",
+    "taskhostw.exe",
+    "fontdrvhost.exe",
+    "dwm.exe",
+}
+
+# Known-good svchost.exe -k bundles (substring after -k); suppress cmdline anomaly when matched.
+SVCHOST_KNOWN_K_FRAGMENTS = (
+    "netsvcs",
+    "rpcss",
+    "localservice",
+    "networkservice",
+    "dcomlaunch",
+    "termservice",
+    "imgsvc",
+    "wscsvc",
+    "iphlpsvc",
+    "schedule",
+    "audioendpoint",
+    "plugplay",
+    "power",
+    "samss",
+    "gpsvc",
+    "winmgmt",
+    "dotnetsvc",
+    "iumsvc",
+    "appmodel",
+    "unistacksvcgroup",
+    "wsappx",
+    "clipboardsvcgroup",
+    "devicesflowsvcgroup",
+)
+
+# High-volume legitimate processes (browsers, IDEs, shells) — used to skip injection-intent edges and mark hubs.
+BENIGN_HUB_PROCESS_NAMES = frozenset(
+    {
+        "chrome.exe",
+        "msedge.exe",
+        "firefox.exe",
+        "brave.exe",
+        "opera.exe",
+        "code.exe",
+        "devenv.exe",
+        "vbcscompiler.exe",
+        "powershell_ise.exe",
+        "pwsh.exe",
+        "dotnet.exe",
+        "searchhost.exe",
+        "phoneexperiencehost.exe",
+        "onedrive.exe",
+        "teams.exe",
+        "outlook.exe",
+        "winword.exe",
+        "excel.exe",
+        "powerpnt.exe",
+    }
+)
+
+
+def _svchost_known_service_bundle(args_txt: str) -> bool:
+    m = re.search(r"-k\s+(\S+)", args_txt, flags=re.IGNORECASE)
+    if not m:
+        return False
+    bundle = m.group(1).lower().strip("\\/")
+    return any(frag in bundle for frag in SVCHOST_KNOWN_K_FRAGMENTS)
+
+
+def _dll_semantic_trust_anomaly(path: str) -> int:
+    """Stronger than path-empty: user/temp paths always; exclude typical signed system locations."""
+    pl = (path or "").lower()
+    if not pl.strip():
+        return 0
+    if any(x in pl for x in ("\\users\\", "\\appdata\\", "\\temp\\", "\\public\\")):
+        return 1
+    if "\\windows\\system32\\" in pl or "\\windows\\syswow64\\" in pl:
+        return 0
+    if "\\program files\\" in pl or "\\program files (x86)\\" in pl:
+        return 0
+    if re.match(r"^[a-z]:\\", pl) and not pl.startswith("c:\\windows"):
+        return 1
+    return 0
+
+
+def _mark_benign_volume_hubs(G):
+    """Tag normal high-traffic processes with expected parents (reduces hub-as-malware narrative)."""
+    ok_parents = SVCHOST_OK_PARENTS | {"explorer.exe"}
+    for nid, d in G.nodes(data=True):
+        if str(d.get("node_type")) != "process":
+            continue
+        name = safe_str(d.get("name", "")).lower()
+        if name not in BENIGN_HUB_PROCESS_NAMES:
+            continue
+        parent_names = []
+        for _, p, ed in G.out_edges(nid, data=True):
+            if ed.get("edge_type") == "spawned_by" and G.has_node(p):
+                parent_names.append(safe_str(G.nodes[p].get("name", "")).lower())
+        if not parent_names:
+            continue
+        if any(p in ok_parents for p in parent_names):
+            G.nodes[nid]["benign_high_volume_hub"] = 1
 
 _BAD_XML = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
 
@@ -83,6 +194,24 @@ def safe_float(v, default=0.0):
         return default if (math.isnan(f) or math.isinf(f)) else f
     except Exception: return default
 
+
+def cmdline_semantic_flags(cmd: str) -> dict:
+    s = (cmd or "").lower()
+    return {
+        "api_semantic_exec": int(any(k in s for k in ("powershell", "cmd.exe", "wscript", "cscript", "rundll32", "regsvr32"))),
+        "api_semantic_net": int(any(k in s for k in ("http", "https", "socket", "invoke-webrequest", "downloadstring", "bitsadmin"))),
+        "api_semantic_persist": int(any(k in s for k in PERSISTENCE_HINTS)),
+        "api_semantic_cred": int(any(k in s for k in ("lsass", "sam ", "securityaccountmanager", "sekurlsa", "cred"))),
+        "api_semantic_priv": int(any(k in s for k in PRIV_ESC_CMD_HINTS)),
+    }
+
+
+def is_base64_like(s: str) -> bool:
+    if not s:
+        return False
+    t = re.sub(r"[^A-Za-z0-9+/=]", "", s)
+    return len(t) >= 40 and (len(t) % 4 == 0)
+
 def col(df, candidates):
     """Return first matching column (case-insensitive fallback)."""
     for c in candidates:
@@ -100,6 +229,7 @@ def mem_node(vpn, pid):   return f"mem_{pid}_{vpn}"
 def net_node(offset):     return f"net_{offset}"
 def ip_node(addr):        return f"ip_{re.sub(r'[.:]','_',addr)}"
 def drv_node(name):       return f"driver_{hash(name) & 0xFFFFFF}"
+def svc_node(name):       return f"service_{hash(name) & 0xFFFFFF}"
 KERNEL_NODE = "kernel_system"
 
 # ── NaN-safe JSON encoder ─────────────────────────────────────────────────────
@@ -149,6 +279,7 @@ def build(folder):
     threads = load(folder, "windows_threads*.csv")
     vadinfo = load(folder, "windows_vadinfo*.csv")
     drvscan = load(folder, "windows_driverscan*.csv")
+    svcscan = load(folder, "windows_svcscan*.csv")
 
     # ── Load filtered_malicious.json ──────────────────────────────────────────
     mal_path = os.path.join(folder, "filtered_malicious.json")
@@ -192,12 +323,14 @@ def build(folder):
     #             SessionId, Wow64, CreateTime, ExitTime
     proc_df  = pslist if not pslist.empty else pstree
     pid_to_row = {}
+    pid_to_name = {}
 
     for _, r in proc_df.iterrows():
         try: pid = int(r["PID"])
         except Exception: continue
 
         pid_to_row[pid] = r
+        pid_to_name[pid] = safe_str(r.get("ImageFileName", "")).lower()
         nid     = pid_node(pid)
         is_sus  = pid in suspicious_pids
         sus_inf = pid_suspicion.get(pid, {"score": 0, "reasons": []})
@@ -232,7 +365,36 @@ def build(folder):
                 except Exception: continue
                 nid = pid_node(pid)
                 if G.has_node(nid):
-                    G.nodes[nid]["args"] = safe_str(r.get(args_col, ""), maxlen=300)
+                    args_txt = safe_str(r.get(args_col, ""), maxlen=300)
+                    G.nodes[nid]["args"] = args_txt
+                    sem = cmdline_semantic_flags(args_txt)
+                    for k, v in sem.items():
+                        G.nodes[nid][k] = v
+                    if sem["api_semantic_net"] or sem["api_semantic_exec"]:
+                        G.add_edge(nid, KERNEL_NODE, edge_type="api_semantic_activity", api_semantic_score=sum(sem.values()))
+                    if sem["api_semantic_persist"]:
+                        G.add_edge(nid, KERNEL_NODE, edge_type="persistence_behavior", api_semantic_persist=1)
+                    if sem["api_semantic_priv"]:
+                        G.add_edge(nid, KERNEL_NODE, edge_type="privilege_escalation_indicator", api_semantic_priv=1)
+                    pname = safe_str(G.nodes[nid].get("name", "")).lower()
+                    if pname == "svchost.exe":
+                        has_k = bool(re.search(r"\s-k\s+\S+", args_txt, flags=re.IGNORECASE))
+                        has_p = bool(re.search(r"\s-p(\s|$)", args_txt, flags=re.IGNORECASE))
+                        has_temp_path = int(any(x in args_txt.lower() for x in ("\\temp\\", "\\users\\", "\\appdata\\")))
+                        has_encoded = int("-enc" in args_txt.lower() or is_base64_like(args_txt))
+                        known_bundle = _svchost_known_service_bundle(args_txt)
+                        cmd_anom = int((not has_k) or (not has_p) or has_temp_path or has_encoded)
+                        if known_bundle and has_k and has_p and not has_temp_path and not has_encoded:
+                            cmd_anom = 0
+                        G.nodes[nid]["svchost_cmdline_anomaly"] = cmd_anom
+                        if cmd_anom:
+                            G.add_edge(
+                                nid,
+                                KERNEL_NODE,
+                                edge_type="svchost_cmdline_anomaly",
+                                has_encoded=has_encoded,
+                                has_temp_path=has_temp_path,
+                            )
 
     # ── Process → Process (spawned_by) ────────────────────────────────────────
     for pid, r in pid_to_row.items():
@@ -249,6 +411,20 @@ def build(folder):
         except Exception:
             delta = 0.0
         G.add_edge(src, dst, edge_type="spawned_by", time_delta_seconds=round(delta, 2))
+        # Temporal intent edge: child process starts close to parent create-time.
+        if abs(delta) <= 60.0:
+            G.add_edge(src, dst, edge_type="temporal_near_creation", time_delta_seconds=round(delta, 2))
+        if 0.0 <= delta <= 10.0:
+            G.add_edge(src, dst, edge_type="temporal_execution_chain", time_delta_seconds=round(delta, 2))
+        child_name = safe_str(r.get("ImageFileName", "")).lower()
+        parent_name = safe_str(pid_to_row.get(ppid, {}).get("ImageFileName", "") if pid_to_row.get(ppid) is not None else "").lower()
+        anomaly = int(parent_name != "" and parent_name not in SYSTEM_PARENT_NAMES and child_name in {"lsass.exe", "services.exe", "winlogon.exe"})
+        if anomaly == 1:
+            G.add_edge(src, dst, edge_type="parent_child_anomaly", parent_name=parent_name, child_name=child_name)
+        if child_name == "svchost.exe" and parent_name not in SVCHOST_OK_PARENTS:
+            G.add_edge(src, dst, edge_type="svchost_lineage_anomaly", parent_name=parent_name)
+        if child_name == "svchost.exe" and parent_name in LOL_BIN_CHAIN:
+            G.add_edge(src, dst, edge_type="lolbin_execution_chain", parent_name=parent_name)
 
     # ── Thread nodes ──────────────────────────────────────────────────────────
     # threads columns: PID, TID, StartAddress, StartPath, Win32StartAddress,
@@ -314,6 +490,11 @@ def build(folder):
                     path_suspicious = int(sus),
                     path_empty      = int(path == ""),
                 )
+                if any(h in path.lower() for h in PERSISTENCE_HINTS):
+                    G.add_edge(pnid, nid, edge_type="persistence_behavior", persistence_hint=1)
+                dll_trust_anom = _dll_semantic_trust_anomaly(path)
+                if dll_trust_anom:
+                    G.add_edge(pnid, nid, edge_type="dll_trust_anomaly", user_writable_path=1)
 
     # ── VAD memory regions ────────────────────────────────────────────────────
     # vadinfo columns: PID, Process, Start VPN, End VPN, Tag, Protection,
@@ -386,6 +567,8 @@ def build(folder):
                 source          = "malfind",
             )
             pnid = pid_node(pid)
+            pimg = pid_to_name.get(pid, "")
+            skip_intent = pimg in BENIGN_HUB_PROCESS_NAMES
             if G.has_node(pnid):
                 G.add_edge(nid, pnid,
                     edge_type      = "injected_into",
@@ -393,6 +576,9 @@ def build(folder):
                     has_shellcode  = int(has_shellcode),
                     is_rwx         = 1,
                 )
+                # Semantic intent edge for process-level injection behavior.
+                if not skip_intent:
+                    G.add_edge(pnid, nid, edge_type="intent_injection", has_shellcode=int(has_shellcode))
 
     # ── Network connections ───────────────────────────────────────────────────
     # netscan columns: Offset, Proto, LocalAddr, LocalPort, ForeignAddr,
@@ -452,6 +638,16 @@ def build(folder):
                     port      = fport,
                     proto     = proto,
                 )
+                # Semantic intent edge: process directly tied to suspicious C2 endpoint.
+                try:
+                    pid = int(r["PID"])
+                    pnid = pid_node(pid)
+                    if G.has_node(pnid):
+                        G.add_edge(pnid, ip_nid, edge_type="intent_c2", is_lolbin_c2=int(is_lolbin_c2))
+                        if is_ext and fport not in {53, 80, 123, 135, 137, 138, 139, 443, 445, 3389}:
+                            G.add_edge(pnid, ip_nid, edge_type="c2_relation_pattern", uncommon_port=fport)
+                except Exception:
+                    pass
 
     # ── Handle nodes (unexpected lsass access) ────────────────────────────────
     # handles columns: PID, Offset, Type, Name, GrantedAccess, HandleValue
@@ -504,6 +700,16 @@ def build(folder):
                                 granted_access = access,
                                 is_full_access = int(access == "0x1fffff"),
                             )
+                            # Semantic intent edge: suspicious process targeting LSASS.
+                            if G.has_node(pnid):
+                                G.add_edge(
+                                    pnid,
+                                    target,
+                                    edge_type="intent_credential_access",
+                                    is_full_access=int(access == "0x1fffff"),
+                                )
+                                if access == "0x1fffff":
+                                    G.add_edge(pnid, KERNEL_NODE, edge_type="privilege_escalation_indicator", full_access_handle=1)
                         break
 
     # ── Driver nodes ──────────────────────────────────────────────────────────
@@ -538,6 +744,38 @@ def build(folder):
                 edge_type        = "loaded_in_kernel",
                 has_service_key  = int(svckey != ""),
             )
+
+    # ── Service nodes and service↔PID correlation ────────────────────────────
+    if not svcscan.empty:
+        svc_name_c = col(svcscan, ["ServiceName", "Name", "DisplayName"])
+        pid_c = col(svcscan, ["PID", "Pid", "ProcessId"])
+        if svc_name_c and pid_c:
+            for _, r in svcscan.iterrows():
+                svc_name = safe_str(r.get(svc_name_c, ""))
+                if svc_name == "":
+                    continue
+                snid = svc_node(svc_name)
+                if not G.has_node(snid):
+                    G.add_node(
+                        snid,
+                        node_type="service",
+                        label=svc_name,
+                        service_name=svc_name,
+                        is_suspicious=0,
+                        heuristic_score=0,
+                    )
+                pid = safe_int(r.get(pid_c, -1), default=-1)
+                if pid > 0:
+                    pnid = pid_node(pid)
+                    if G.has_node(pnid):
+                        G.add_edge(snid, pnid, edge_type="service_hosts")
+                        pname = safe_str(G.nodes[pnid].get("name", "")).lower()
+                        if pname == "svchost.exe":
+                            G.add_edge(pnid, snid, edge_type="service_correlation_ok")
+                    else:
+                        G.add_edge(snid, KERNEL_NODE, edge_type="service_orphan", orphan_pid=pid)
+
+    _mark_benign_volume_hubs(G)
 
     # ── Summary ───────────────────────────────────────────────────────────────
     print(f"\n[OK] Graph: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")

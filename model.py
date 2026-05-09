@@ -19,10 +19,10 @@ Typical deployment story
 
 Tensor contract (matches `MalwareGraphDataset` in `dataset.py`)
 -----------------------------------------------------------------
-- `x`: node features, last dim **21** (type one-hot + numeric flags + role counts).
+- `x`: node features, last dim **31** (type one-hot + numeric flags + role counts).
 - `edge_index`: `[2, E]` PyG COO.
 - `batch`: batch vector for `global_*_pool`.
-- `graph_attr`: `[B, 22]` (or omitted → zeros); see `EXPECTED_GRAPH_ATTR_DIM`.
+- `graph_attr`: `[B, D]` (or omitted → zeros); see `EXPECTED_GRAPH_ATTR_DIM` in `utils/schema.py`.
 - `edge_attr`: optional `[E]` long indices of edge type; **required** for
   `GINEMalwareClassifier` (typed relations).
 
@@ -309,7 +309,7 @@ class GINEMalwareClassifier(nn.Module):
             nn.Linear(self.hidden, self.num_classes),
         ).to(device)
 
-    def forward(
+    def encode_graph(
         self,
         x: torch.Tensor,
         edge_index: torch.Tensor,
@@ -335,7 +335,22 @@ class GINEMalwareClassifier(nn.Module):
         if graph_attr is None:
             graph_attr = _zeros_graph_attr(gnn_vec.size(0), gnn_vec.device)
 
-        if self._head is None:
-            self._build_head(gnn_vec.size(1) + graph_attr.size(1), gnn_vec.device)
+        return torch.cat([gnn_vec, graph_attr], dim=1)
 
-        return self._head(torch.cat([gnn_vec, graph_attr], dim=1))
+    def forward(
+        self,
+        x: torch.Tensor,
+        edge_index: torch.Tensor,
+        batch: torch.Tensor,
+        graph_attr: torch.Tensor | None = None,
+        edge_attr: torch.Tensor | None = None,
+        *,
+        return_embedding: bool = False,
+    ) -> torch.Tensor | tuple[torch.Tensor, torch.Tensor]:
+        emb = self.encode_graph(x, edge_index, batch, graph_attr=graph_attr, edge_attr=edge_attr)
+        if self._head is None:
+            self._build_head(emb.size(1), emb.device)
+        logits = self._head(emb)
+        if return_embedding:
+            return logits, emb
+        return logits

@@ -1,0 +1,2 @@
+sample_id,folder,label,family,benign_subtype,label_source,label_version,reviewer_id,reviewed_at,feedback_state,curated_label,train_eligible,uncertain,uncertain_reason
+99,REPLACE_WITH_PIPELINE_OUTPUT_FOLDER,0,hard_benign,admin_tool,memory_capture,manual_v1,,,unreviewed,,True,False

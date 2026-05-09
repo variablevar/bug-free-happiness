@@ -21,6 +21,7 @@ import numpy as np
 import pandas as pd
 import torch
 from torch_geometric.data import Data, Dataset
+from utils.graph_motif_signals import MOTIF_FEATURE_COUNT, graph_differentiation_signals
 from utils.schema import EXPECTED_GRAPH_ATTR_DIM
 
 # ── Vocabularies ───────────────────────────────────────────────────────────
@@ -34,22 +35,29 @@ EDGE_TYPES = [
     "spawned_by", "belongs_to", "loaded_into", "allocated_in",
     "injected_into", "connects_from", "connects_to",
     "owned_by", "points_to", "loaded_in_kernel",
+    "intent_c2", "intent_injection", "intent_credential_access", "temporal_near_creation",
+    "temporal_execution_chain", "api_semantic_activity", "parent_child_anomaly",
+    "persistence_behavior", "privilege_escalation_indicator",
+    "svchost_lineage_anomaly", "svchost_cmdline_anomaly", "dll_trust_anomaly",
+    "c2_relation_pattern", "service_hosts", "service_correlation_ok", "service_orphan",
+    "lolbin_execution_chain",
 ]
 EDGE_TYPE_IDX  = {t: i for i, t in enumerate(EDGE_TYPES)}
 N_EDGE_TYPES   = len(EDGE_TYPES)
 
 # ── Feature layout ───────────────────────────────────────────────────────────
 #  [0:9]   one-hot node type          (9 dims)
-#  [9:16]  semantic numeric attrs     (7 dims)
-#  [16:21] per-node edge-role counts  (5 dims)
-NODE_FEAT_DIM = 9 + 7 + 5   # = 21
+#  [9:19]  semantic/context attrs     (10 dims)
+#  [19:30] per-node edge-role counts  (11 dims)
+NODE_FEAT_DIM = 9 + 11 + 11
 
 # Graph-level attrs:
 #   4  base manifest counts
-#   8  additional manifest/derived risk signals
-#   10 edge-type log-counts
-# = 22 dims total
-GRAPH_ATTR_DIM = 12 + N_EDGE_TYPES   # = 22
+#   23 additional manifest/derived risk signals (includes hub / RWX–thread context logs)
+#   N edge-type log-counts
+#   MOTIF_FEATURE_COUNT graph-derived differentiation tail (see graph_motif_signals)
+# = (27 + N_EDGE_TYPES + MOTIF_FEATURE_COUNT) dims total
+GRAPH_ATTR_DIM = 27 + N_EDGE_TYPES + MOTIF_FEATURE_COUNT
 
 MIN_NODES = 10
 
@@ -68,6 +76,12 @@ def _build_per_node_edge_roles(G):
     n_connects_from  = {}
     degree_out       = {}
     degree_in        = {}
+    n_persistence    = {}
+    n_cred_access    = {}
+    n_priv_esc       = {}
+    n_svchost_anom   = {}
+    n_service_mismatch = {}
+    n_c2_pattern = {}
 
     for u, v, edata in G.edges(data=True):
         etype = edata.get("edge_type", "")
@@ -79,16 +93,42 @@ def _build_per_node_edge_roles(G):
             n_connects_to[u]   = n_connects_to.get(u, 0)   + 1
         elif etype == "connects_from":
             n_connects_from[u] = n_connects_from.get(u, 0) + 1
+        elif etype == "persistence_behavior":
+            n_persistence[u] = n_persistence.get(u, 0) + 1
+        elif etype == "intent_credential_access":
+            n_cred_access[u] = n_cred_access.get(u, 0) + 1
+        elif etype == "privilege_escalation_indicator":
+            n_priv_esc[u] = n_priv_esc.get(u, 0) + 1
+        elif etype in {"svchost_lineage_anomaly", "svchost_cmdline_anomaly"}:
+            n_svchost_anom[u] = n_svchost_anom.get(u, 0) + 1
+        elif etype in {"service_orphan", "service_hosts"}:
+            n_service_mismatch[u] = n_service_mismatch.get(u, 0) + 1
+        elif etype in {"c2_relation_pattern", "intent_c2"}:
+            n_c2_pattern[u] = n_c2_pattern.get(u, 0) + 1
 
-    return n_injected_into, n_connects_to, n_connects_from, degree_out, degree_in
+    return (
+        n_injected_into, n_connects_to, n_connects_from, degree_out, degree_in,
+        n_persistence, n_cred_access, n_priv_esc, n_svchost_anom, n_service_mismatch, n_c2_pattern
+    )
 
 
 def node_features(nid, data: dict,
                   n_injected_into, n_connects_to, n_connects_from,
-                  degree_out, degree_in) -> list:
+                  degree_out, degree_in, n_persistence, n_cred_access, n_priv_esc,
+                  n_svchost_anom, n_service_mismatch, n_c2_pattern) -> list:
     ntype = data.get("node_type", "kernel")
     oh = [0.0] * len(NODE_TYPES)
     oh[NODE_TYPE_IDX.get(ntype, len(NODE_TYPES) - 1)] = 1.0
+
+    pname = str(data.get("name", data.get("label", ""))).lower()
+    is_svchost = float(pname == "svchost.exe")
+    is_powershell = float("powershell" in pname)
+    is_noisy_trusted = float(pname in {"svchost.exe", "explorer.exe", "chrome.exe", "lsass.exe"})
+    hub_benign = float(int(data.get("benign_high_volume_hub", 0) or 0))
+    session_id = str(data.get("session_id", ""))
+    boundary_cross_risk = float(is_svchost > 0 and session_id not in {"", "0"})
+    net_base = 20.0 if is_svchost > 0 else (4.0 if is_powershell > 0 else 8.0)
+    normalized_net_pressure = _log1p(n_connects_to.get(nid, 0) / net_base)
 
     nums = [
         float(data.get("is_suspicious",  0) or 0),
@@ -98,17 +138,79 @@ def node_features(nid, data: dict,
         _log1p(data.get("private_memory", 0)),
         _log1p(data.get("commit_charge",  0)),
         _log1p(data.get("load_count",     0)),
+        is_svchost,
+        is_powershell,
+        normalized_net_pressure + boundary_cross_risk + (0.25 * is_noisy_trusted),
+        hub_benign,
     ]
 
     roles = [
         _log1p(n_injected_into.get(nid,  0)),
         _log1p(n_connects_to.get(nid,    0)),
         _log1p(n_connects_from.get(nid,  0)),
-        _log1p(degree_out.get(nid,       0)),
-        _log1p(degree_in.get(nid,        0)),
+        0.5 * _log1p(degree_out.get(nid,       0)),
+        0.5 * _log1p(degree_in.get(nid,        0)),
+        _log1p(n_persistence.get(nid,    0)),
+        _log1p(n_cred_access.get(nid,    0)),
+        _log1p(n_priv_esc.get(nid,       0)),
+        _log1p(n_svchost_anom.get(nid,   0)),
+        _log1p(n_service_mismatch.get(nid, 0)),
+        _log1p(n_c2_pattern.get(nid, 0)),
     ]
 
     return oh + nums + roles
+
+
+def count_benign_high_volume_hubs(G) -> int:
+    """Processes tagged in build_graph as benign_high_volume_hub (expected-parent browsers/IDEs)."""
+    return sum(
+        1
+        for _, d in G.nodes(data=True)
+        if str(d.get("node_type")) == "process" and int(d.get("benign_high_volume_hub", 0) or 0) == 1
+    )
+
+
+def count_rwx_thread_context(G) -> int:
+    """Threads belonging to a process that has an RWX malfind injected_into edge (semantic bridge)."""
+    procs = set()
+    for u, v, ed in G.edges(data=True):
+        if ed.get("edge_type") != "injected_into":
+            continue
+        if str(G.nodes[u].get("node_type", "")) != "memory_region":
+            continue
+        if int(G.nodes[u].get("is_rwx", 0) or 0) != 1:
+            continue
+        procs.add(v)
+    if not procs:
+        return 0
+    n = 0
+    for u, v, ed in G.edges(data=True):
+        if ed.get("edge_type") != "belongs_to":
+            continue
+        if str(G.nodes[u].get("node_type", "")) != "thread":
+            continue
+        if v in procs:
+            n += 1
+    return n
+
+
+def merge_manifest_csv_files(primary_csv: str, extra_csvs: list[str]) -> str:
+    """Concatenate manifest CSVs; on duplicate folder, keep the primary manifest row."""
+    import tempfile
+
+    frames = [pd.read_csv(os.path.abspath(primary_csv))]
+    for p in extra_csvs:
+        ap = os.path.abspath(str(p).strip())
+        if ap and os.path.isfile(ap):
+            frames.append(pd.read_csv(ap))
+    merged = pd.concat(frames, ignore_index=True)
+    if "folder" in merged.columns:
+        merged = merged.drop_duplicates(subset=["folder"], keep="first")
+    out_dir = os.path.dirname(os.path.abspath(primary_csv)) or "."
+    fd, path = tempfile.mkstemp(prefix="merged_manifest_", suffix=".csv", dir=out_dir)
+    os.close(fd)
+    merged.to_csv(path, index=False)
+    return path
 
 
 def _edge_type_distribution(G) -> list:
@@ -156,13 +258,15 @@ def nx_to_pyg(G, label: int) -> Data:
             f"Degenerate graph: 0 edges ({n_nodes} nodes). Skipping."
         )
 
-    n_inj, n_cto, n_cfr, d_out, d_in = _build_per_node_edge_roles(G)
+    n_inj, n_cto, n_cfr, d_out, d_in, n_persist, n_cred, n_priv, n_sv_anom, n_svc_mis, n_c2_pat = _build_per_node_edge_roles(G)
 
     nodes     = list(G.nodes(data=True))
     node_idx  = {nid: i for i, (nid, _) in enumerate(nodes)}
 
     x = torch.tensor(
-        [node_features(nid, data, n_inj, n_cto, n_cfr, d_out, d_in)
+        [node_features(
+            nid, data, n_inj, n_cto, n_cfr, d_out, d_in, n_persist, n_cred, n_priv, n_sv_anom, n_svc_mis, n_c2_pat
+        )
          for nid, data in nodes],
         dtype=torch.float,
     )
@@ -195,8 +299,8 @@ def nx_to_pyg(G, label: int) -> Data:
 
 class MalwareGraphDataset(Dataset):
     """
-    graph_attr shape: [1, 22] per sample.
-      PyG DataLoader cats along dim-0 → [B, 22] in a batch.
+    graph_attr shape: [1, GRAPH_ATTR_DIM] per sample.
+      PyG DataLoader cats along dim-0 → [B, GRAPH_ATTR_DIM] in a batch.
 
     graph_attr layout:
       [0]    max_score      (manifest)
@@ -211,7 +315,23 @@ class MalwareGraphDataset(Dataset):
       [9]    ransom_note_found
       [10]   log1p(rwx_injections)
       [11]   triage_confidence
-      [12:22] log1p edge-type counts (10 dims)
+      [12]   benign_clean_software_flag
+      [13]   benign_admin_or_security_tool_flag
+      [14]   signal_temporal_chain_count
+      [15]   signal_api_semantic_count
+      [16]   signal_persistence_count
+      [17]   signal_credential_access_count_manifest
+      [18]   signal_privilege_escalation_count
+      [19]   signal_svchost_lineage_anomaly_count
+      [20]   signal_svchost_cmdline_anomaly_count
+      [21]   signal_dll_trust_anomaly_count
+      [22]   signal_service_orphan_count
+      [23]   signal_lolbin_chain_count
+      [24]   signal_c2_relation_pattern_count
+      [25]   log1p(benign_high_volume_hub process count)
+      [26]   log1p(RWX malfind process ↔ thread context count)
+      [27:54]  log1p edge-type counts (N_EDGE_TYPES)
+      [54:61]  motif tail (see utils/graph_motif_signals.graph_differentiation_signals)
     """
 
     RISK_LEVEL_MAP = {
@@ -227,6 +347,7 @@ class MalwareGraphDataset(Dataset):
         base_dir: str = None,
         include_uncertain: bool = True,
         include_unknown: bool = False,
+        require_train_eligible: bool = False,
         target: str = "label",
     ):
         super().__init__()
@@ -234,10 +355,11 @@ class MalwareGraphDataset(Dataset):
         self.base_dir  = base_dir or os.path.dirname(manifest_csv)
         self.include_uncertain = include_uncertain
         self.include_unknown = include_unknown
+        self.require_train_eligible = require_train_eligible
         self.target = str(target).strip().lower()
-        if self.target not in {"label", "risk"}:
+        if self.target not in {"label", "risk", "curated_label"}:
             raise ValueError(
-                f"Invalid target '{target}'. Expected one of: label, risk."
+                f"Invalid target '{target}'. Expected one of: label, risk, curated_label."
             )
         self._data_list: list[Data] = []
         self._load_all()
@@ -258,8 +380,13 @@ class MalwareGraphDataset(Dataset):
             label  = int(row["label"])
             family = row.get("family", "unknown")
             uncertain = self._as_bool(row.get("uncertain", False))
+            train_eligible = self._as_bool(row.get("train_eligible", True))
             if uncertain and not self.include_uncertain:
                 print(f"  [SKIP] {name} — marked uncertain in manifest")
+                skipped_uncertain += 1
+                continue
+            if self.require_train_eligible and not train_eligible:
+                print(f"  [SKIP] {name} — train_eligible=false (strict training filter)")
                 skipped_uncertain += 1
                 continue
             if label < 0 and not self.include_unknown:
@@ -328,6 +455,36 @@ class MalwareGraphDataset(Dataset):
                 if "signal_triage_confidence" in row
                 else _safe_float(label_signals.get("triage_confidence", 0), default=0.0)
             )
+            signal_temporal_chain_count = _safe_float(row.get("signal_temporal_chain_count", 0), default=0.0)
+            signal_api_semantic_count = _safe_float(row.get("signal_api_semantic_count", 0), default=0.0)
+            signal_persistence_count = _safe_float(row.get("signal_persistence_count", 0), default=0.0)
+            signal_credential_access_count_manifest = _safe_float(row.get("signal_credential_access_count", 0), default=0.0)
+            signal_privilege_escalation_count = _safe_float(row.get("signal_privilege_escalation_count", 0), default=0.0)
+            signal_svchost_lineage_anomaly_count = _safe_float(row.get("signal_svchost_lineage_anomaly_count", 0), default=0.0)
+            signal_svchost_cmdline_anomaly_count = _safe_float(row.get("signal_svchost_cmdline_anomaly_count", 0), default=0.0)
+            signal_dll_trust_anomaly_count = _safe_float(row.get("signal_dll_trust_anomaly_count", 0), default=0.0)
+            signal_service_orphan_count = _safe_float(row.get("signal_service_orphan_count", 0), default=0.0)
+            signal_lolbin_chain_count = _safe_float(row.get("signal_lolbin_chain_count", 0), default=0.0)
+            signal_c2_relation_pattern_count = _safe_float(row.get("signal_c2_relation_pattern_count", 0), default=0.0)
+            benign_hub_n = count_benign_high_volume_hubs(G)
+            rwx_thread_n = count_rwx_thread_context(G)
+            benign_subtype = str(row.get("benign_subtype", "") or "").strip().lower()
+            benign_clean_software_flag = float(
+                benign_subtype in {"clean_software", "clean-software", "clean"}
+            )
+            benign_admin_or_security_tool_flag = float(
+                benign_subtype in {
+                    "admin_tool",
+                    "admin-security-tool",
+                    "admin_security_tool",
+                    "security_tool",
+                }
+            )
+
+            # Soft downweight weak shared structural/noisy injection channels.
+            density_weighted = 0.35 * density
+            benign_injection_damp = 0.5 if benign_clean_software_flag > 0.5 else 1.0
+            rwx_injections_weighted = _log1p(rwx_injections * benign_injection_damp)
             manifest_feats = [
                 _safe_float(row.get("max_score", 0), default=0.0),
                 _safe_float(row.get("attack_steps", 0), default=0.0),
@@ -335,25 +492,41 @@ class MalwareGraphDataset(Dataset):
                 _safe_float(row.get("c2_conns", 0), default=0.0),
                 _log1p(nodes),
                 _log1p(edges),
-                density,
+                density_weighted,
                 float(behavioural_suspects_found),
                 float(lolbin_c2_found),
                 float(ransom_note_found),
-                _log1p(rwx_injections),
+                rwx_injections_weighted,
                 max(0.0, min(1.0, triage_conf)),
+                benign_clean_software_flag,
+                benign_admin_or_security_tool_flag,
+                _log1p(signal_temporal_chain_count),
+                _log1p(signal_api_semantic_count),
+                _log1p(signal_persistence_count),
+                _log1p(signal_credential_access_count_manifest),
+                _log1p(signal_privilege_escalation_count),
+                _log1p(signal_svchost_lineage_anomaly_count),
+                _log1p(signal_svchost_cmdline_anomaly_count),
+                _log1p(signal_dll_trust_anomaly_count),
+                _log1p(signal_service_orphan_count),
+                _log1p(signal_lolbin_chain_count),
+                _log1p(signal_c2_relation_pattern_count),
+                _log1p(benign_hub_n),
+                _log1p(rwx_thread_n),
             ]
-            edge_dist_feats = _edge_type_distribution(G)  # 10 dims
-            merged_graph_attr = manifest_feats + edge_dist_feats
+            edge_dist_feats = _edge_type_distribution(G)
+            motif_tail = graph_differentiation_signals(G)
+            merged_graph_attr = manifest_feats + edge_dist_feats + motif_tail
             if len(merged_graph_attr) != EXPECTED_GRAPH_ATTR_DIM:
                 raise ValueError(
                     f"Invalid graph_attr length for {name}: "
                     f"{len(merged_graph_attr)} != {EXPECTED_GRAPH_ATTR_DIM}"
                 )
 
-            # Shape [1, 22] so DataLoader stacks to [B, 22] — not [B*22]
+            # Shape [1, GRAPH_ATTR_DIM] so DataLoader stacks to [B, GRAPH_ATTR_DIM]
             pyg.graph_attr = torch.tensor(
                 [merged_graph_attr], dtype=torch.float
-            )  # [1, 22]
+            )
             pyg.name   = name
             pyg.family = family
             self._data_list.append(pyg)
@@ -374,6 +547,15 @@ class MalwareGraphDataset(Dataset):
 
     def _row_target(self, row, default_label: int) -> int:
         if self.target == "label":
+            return int(default_label)
+        if self.target == "curated_label":
+            curated = row.get("curated_label", "")
+            feedback_state = str(row.get("feedback_state", "")).strip().lower()
+            try:
+                if str(curated).strip() != "" and feedback_state in {"approved", "validated"}:
+                    return int(curated)
+            except (TypeError, ValueError):
+                pass
             return int(default_label)
 
         verdict = str(row.get("verdict", "")).strip().upper()

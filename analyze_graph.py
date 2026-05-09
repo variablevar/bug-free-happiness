@@ -73,6 +73,9 @@ RANSOM_PATTERNS = [
 
 # Processes that legitimately have no backing path
 NO_PATH_OK = {"system", "registry"}
+POPULAR_PROCESS_NAMES = {"svchost.exe", "explorer.exe", "chrome.exe"}
+SERVICE_HOST_NAMES = {"svchost.exe", "services.exe", "lsass.exe", "winlogon.exe"}
+TRUSTED_HOST_NAMES = {"svchost.exe", "services.exe", "lsass.exe", "explorer.exe", "winlogon.exe"}
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -209,13 +212,22 @@ def heuristic_process(n, d, G, pid_to_name):
     ext_conns = [nb for nb in G.predecessors(n)
                  if G.nodes[nb].get("is_external")
                  and G.nodes[nb].get("node_type") == "network_conn"]
+    ext_conn_count = len(ext_conns)
+    if "svchost.exe" in name:
+        expected_conn_base = 20.0
+    elif "powershell.exe" in name:
+        expected_conn_base = 2.0
+    else:
+        expected_conn_base = 6.0
+    normalized_net_pressure = ext_conn_count / expected_conn_base
     if ext_conns and not any("c2-conn" in r for r in reasons):
         uniq_ip = {
             G.nodes[nb].get("foreign_addr") or ""
             for nb in ext_conns
         }
         uniq_ip.discard("")
-        score += max(1, len(uniq_ip))
+        # Normalize by process class so svchost baseline does not dominate.
+        score += max(1, int(round(len(uniq_ip) * max(0.5, normalized_net_pressure))))
         reasons.append(f"{len(uniq_ip)}-unique-ip-c2-conn")
 
     # Injected memory (malfind → this process) — fixed cost, not per-region linear
@@ -249,6 +261,15 @@ def heuristic_process(n, d, G, pid_to_name):
         tag = f"high-in-degree{in_deg}"
         if not any("high-in-degree" in r for r in reasons):
             score += 2; reasons.append(tag)
+
+    # Anti-popularity correction: central/high-degree popular processes are
+    # down-weighted unless they also show stronger memory/credential signals.
+    has_strong_signal = any(
+        k in reasons for k in ["injected-mem", "lsass-full-access", "hidden-process", "process-masquerading"]
+    )
+    if name in POPULAR_PROCESS_NAMES and not has_strong_signal and in_deg > 25:
+        score = max(0, score - 2)
+        reasons.append("popularity-dampened")
 
     # Spawned a LOLBin child
     children = [G.nodes[nb] for nb in G.successors(n)
@@ -553,6 +574,52 @@ def analyze_drivers(G):
     return sorted(results, key=lambda x: x["heuristic_score"], reverse=True)
 
 
+def analyze_behavioral_clarity_metrics(G, processes):
+    proc_by_pid = {safe_int(p.get("pid", 0)): p for p in processes if p.get("pid") is not None}
+    service_user_boundary_violations = 0
+    office_lolbin_chain_count = 0
+    trusted_host_dll_anomalies = 0
+    dual_use_admin_tool_count = 0
+
+    # service/user boundary + temporal office->lolbin lineage
+    for _, d in nodes_of_type(G, "process"):
+        pid = safe_int(d.get("pid", 0))
+        if pid <= 0:
+            continue
+        name = clean_str(d.get("label", "")).lower()
+        parent_name = proc_by_pid.get(safe_int(d.get("ppid", 0)), {}).get("name", "")
+        parent_name = clean_str(parent_name).lower()
+        session_id = clean_str(d.get("session_id", ""))
+        if name == "svchost.exe" and (session_id not in {"", "0"} or parent_name in {"explorer.exe", "cmd.exe", "powershell.exe"}):
+            service_user_boundary_violations += 1
+        if name in {"powershell.exe", "cmd.exe", "rundll32.exe", "regsvr32.exe"} and parent_name in {"winword.exe", "excel.exe", "outlook.exe"}:
+            office_lolbin_chain_count += 1
+        if name in {"psexec.exe", "wmic.exe", "powershell.exe", "schtasks.exe", "cmd.exe"}:
+            dual_use_admin_tool_count += 1
+
+    # trusted host + suspicious DLL path
+    for _, d in nodes_of_type(G, "dll"):
+        dll_path = clean_str(d.get("path", "")).lower()
+        if not dll_path:
+            continue
+        if not any(x in dll_path for x in ("\\users\\", "\\temp\\", "\\appdata\\", "/users/", "/temp/", "/appdata/")):
+            continue
+        pid = safe_int(d.get("pid", 0))
+        host = proc_by_pid.get(pid, {}).get("name", "")
+        host = clean_str(host).lower()
+        if host in TRUSTED_HOST_NAMES:
+            trusted_host_dll_anomalies += 1
+
+    popularity_dampened = sum(1 for p in processes if "popularity-dampened" in p.get("reasons", []))
+    return {
+        "service_user_boundary_violations": service_user_boundary_violations,
+        "office_lolbin_chain_count": office_lolbin_chain_count,
+        "trusted_host_dll_anomalies": trusted_host_dll_anomalies,
+        "dual_use_admin_tool_count": dual_use_admin_tool_count,
+        "popularity_dampened_processes": popularity_dampened,
+    }
+
+
 def analyze_attack_chain(G, processes, entry_points, injections,
                           credentials, network):
     steps = []
@@ -688,6 +755,7 @@ def main():
         "num_credentials": len(credentials),
         "num_hidden":      len(hidden_list),
     }
+    graph_attr_extra.update(analyze_behavioral_clarity_metrics(G, processes))
 
     report = {
         "meta":             {
