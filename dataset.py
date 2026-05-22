@@ -245,6 +245,65 @@ def _extract_int_from_text(text: str, key: str, default: int = 0) -> int:
         return default
 
 
+def _compact_node_metadata(nid, data: dict) -> dict:
+    """Small JSON-safe node context for model evidence (avoid bulky blobs)."""
+    keys = (
+        "node_type",
+        "label",
+        "name",
+        "pid",
+        "tid",
+        "path",
+        "owner",
+        "image",
+        "start_vpn",
+        "end_vpn",
+        "protection",
+        "is_suspicious",
+        "heuristic_score",
+    )
+    out = {"graph_node_id": str(nid)}
+    for k in keys:
+        v = data.get(k)
+        if v is None or v == "":
+            continue
+        if isinstance(v, (int, float, bool)):
+            out[k] = v
+        else:
+            out[k] = str(v)[:240]
+    return out
+
+
+def _compact_edge_metadata(edge_idx: int, u, v, edata: dict, node_idx: dict) -> dict:
+    keys = (
+        "edge_type",
+        "time_delta_seconds",
+        "parent_name",
+        "child_name",
+        "has_shellcode",
+        "has_mz_header",
+        "is_rwx",
+        "user_writable_path",
+        "persistence_hint",
+    )
+    out = {
+        "edge_index": int(edge_idx),
+        "src": int(node_idx[u]),
+        "dst": int(node_idx[v]),
+        "src_graph_node_id": str(u),
+        "dst_graph_node_id": str(v),
+    }
+    for k in keys:
+        v0 = edata.get(k)
+        if v0 is None or v0 == "":
+            continue
+        if isinstance(v0, (int, float, bool)):
+            out[k] = v0
+        else:
+            out[k] = str(v0)[:160]
+    return out
+
+
 def nx_to_pyg(G, label: int) -> Data:
     n_nodes = G.number_of_nodes()
     n_edges = G.number_of_edges()
@@ -271,9 +330,12 @@ def nx_to_pyg(G, label: int) -> Data:
         dtype=torch.float,
     )
 
+    node_metadata = [_compact_node_metadata(nid, data) for nid, data in nodes]
+    edge_metadata = []
     src_list, dst_list, edge_attr_list = [], [], []
     for u, v, edata in G.edges(data=True):
         if u in node_idx and v in node_idx:
+            edge_metadata.append(_compact_edge_metadata(len(edge_metadata), u, v, edata, node_idx))
             src_list.append(node_idx[u])
             dst_list.append(node_idx[v])
             etype = edata.get("edge_type", "spawned_by")
@@ -286,13 +348,16 @@ def nx_to_pyg(G, label: int) -> Data:
         edge_index = torch.zeros((2, 0), dtype=torch.long)
         edge_attr  = torch.zeros(0,      dtype=torch.long)
 
-    return Data(
+    data = Data(
         x=x,
         edge_index=edge_index,
         edge_attr=edge_attr,
         y=torch.tensor([label], dtype=torch.long),
         num_nodes=x.size(0),
     )
+    data.node_metadata = node_metadata
+    data.edge_metadata = edge_metadata
+    return data
 
 
 # ── Dataset class ─────────────────────────────────────────────────────────────────

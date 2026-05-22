@@ -1,0 +1,168 @@
+\chapter{Literature Review}
+
+\section{Malware Detection}
+
+Malware remains a persistent threat to individuals, businesses, and critical infrastructure. Attackers use packed binaries, living-off-the-land techniques, credential theft, ransomware, and memory-resident methods to evade traditional defences. Public guidance from CISA and related bodies emphasises layered detection, incident response preparation, and malware analysis tradecraft \cite{cisa2023stopransomware}, \cite{cisa2026advisories}.
+
+Malware detection has moved from simple signature matching to more behaviour-based and learning-based approaches. Signature methods can be fast, but they often fail when malware changes its hash, packs itself, or uses obfuscation \cite{santos2009ngrams}. Behaviour-based approaches study actions such as process creation, API use, file activity, persistence, network communication, and memory injection. These methods are more useful when malware changes its surface form but keeps similar behaviour.
+
+Christodorescu et al.\ introduced semantics-aware malware detection to reason about program meaning rather than raw bytes alone \cite{christodorescu2005semantics}. Moser et al.\ showed that static analysis alone has clear limits for packed or obfuscated malware \cite{moser2007limits}. These findings explain why modern work often combines multiple evidence layers instead of relying on one technique.
+
+Dynamic malware analysis is useful because it observes behaviour during execution. Egele et al.\ describe how automated dynamic analysis systems can record system calls, network traffic, and other runtime events \cite{egele2012survey}. Bayer et al.\ show that malware behaviour can be clustered and compared using runtime profiles \cite{bayer2009scalable}. Willems et al.\ discuss automated dynamic malware analysis using sandbox environments \cite{willems2007cwsandbox}. Yin et al.\ present Panorama, which captures system-wide information flow for malware detection and analysis \cite{yin2007panorama}. These ideas support the approach used in this dissertation because memory forensics also studies runtime state.
+
+However, dynamic analysis can be limited by sandbox evasion, environment differences, and incomplete execution. Memory forensics gives a different evidence layer. It can capture live runtime objects and artefacts that may not exist on disk. This is useful for malware that hides itself or runs only in memory.
+
+Ucci et al.\ provide a broad survey of machine learning techniques for malware analysis \cite{ucci2019survey}. Their review shows that feature design, label quality, and evaluation design are often more important than the choice of classifier. This dissertation follows that lesson by focusing on graph representation and reproducible artefacts before claiming strong detection performance.
+
+\section{Static, Dynamic, and Memory-Based Analysis}
+
+Table~\ref{tab:analysis_comparison} compares three common analysis layers. Each layer has strengths, but none is sufficient alone for difficult malware cases.
+
+\begin{table}[htbp]
+\centering
+\caption{Comparison of malware analysis layers relevant to this project.}
+\label{tab:analysis_comparison}
+\begin{tabular}{p{2.2cm}p{3.2cm}p{2cm}p{2.2cm}p{3.2cm}}
+\toprule
+\textbf{Layer} & \textbf{Typical data} & \textbf{Uses graph?} & \textbf{Explainability} & \textbf{Main limitation} \\
+\midrule
+Static & Bytecode, CFG, API calls & Often & Medium & Packing and obfuscation \\
+Dynamic & Syscalls, files, network & Sometimes & Medium & Sandbox evasion \\
+Memory & Processes, VAD, sockets & Rare in prior work & High potential & Noisy baselines, scale \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Static analysis is efficient for known patterns, but attackers can change file structure while keeping malicious runtime behaviour. Dynamic analysis observes execution, yet it may miss behaviour that appears only in specific host states. Memory forensics captures volatile state at one point in time. Ligh et al.\ explain that memory analysis can reveal artefacts not available from disk alone \cite{ligh2014art}. This project uses memory forensics as the primary evidence source and then converts artefacts into graphs for learning.
+
+\section{Memory Forensics}
+
+Memory forensics is the analysis of volatile memory. It is important because memory can contain processes, handles, command lines, loaded modules, sockets, registry artefacts, injected pages, encryption keys, and other evidence. NIST recommends forensic techniques as part of incident response and evidence handling \cite{nist2006sp80086}. NIST also provides guidance for security incident handling in operational environments \cite{nist2012sp80061}.
+
+Volatility is a common framework for memory forensics. Volatility 3 is a modern rewrite of the framework and supports many plugins for Windows, Linux, and macOS memory analysis \cite{volatility3docs}, \cite{volatility3github}. In this project, Volatility 3 is used to extract Windows artefacts such as \texttt{pslist}, \texttt{psscan}, \texttt{pstree}, \texttt{malfind}, \texttt{netscan}, \texttt{cmdline}, \texttt{dlllist}, \texttt{handles}, \texttt{threads}, \texttt{vadinfo}, \texttt{filescan}, \texttt{driverscan}, \texttt{ssdt}, and registry hive information.
+
+Case and Richard discuss the future direction of memory forensics research and highlight the need for scalable, repeatable workflows \cite{case2017memory}. Garfinkel also argues that digital forensics research must improve reproducibility and validation over the next decade \cite{garfinkel2010digital}. These points motivate the manifest-based pipeline used in this dissertation.
+
+Memory forensics is not simple. Symbol tables, plugin differences, large dump sizes, and noisy outputs can affect results. Therefore, this project includes a pipeline that stores outputs, checks artefacts, builds graphs, and records dataset-level metadata.
+
+Analysts must also understand acquisition effects. A memory image captured too late may miss short-lived processes. An image captured during heavy system load may contain many benign artefacts that look suspicious in isolation. These practical constraints are one reason why graph-level uncertainty reporting is included in the project design.
+
+Compared with disk forensics, memory forensics is closer to runtime behaviour. Compared with sandbox logs, memory forensics can show state that malware tried to hide after execution. The dissertation uses this middle layer as the primary evidence source because it matches the project's Windows memory dump data.
+
+\section{Windows Memory Artefacts and Internals}
+
+Windows is a widely deployed operating system with complex kernel and user-mode internals. Forensic analysts commonly examine processes, threads, VAD trees, loaded modules, network connections, and kernel structures when investigating compromise. The Volatility plugin set used in this project reflects common investigative questions: what was running, what was connected, what was injected, and what kernel objects were present at capture time.
+
+Windows memory contains many object types that are useful for malware detection. Process lists show visible processes. Pool scans can show hidden or terminated process traces. Command-line artefacts can show suspicious execution. DLL lists can show unusual module loading. Memory regions can show executable or writable pages. Network scans can show active connections. Handles can show process ownership and access behaviour.
+
+Russinovich et al.\ describe Windows internals in detail, including process management, memory management, and I/O subsystems \cite{russinovich2017internals1}, \cite{russinovich2021internals2}. Microsoft documentation also provides practical reference material for analysts \cite{microsoft2026windowsinternals}. This background helps explain why memory snapshots contain rich relational structure rather than isolated records.
+
+The important point is that these artefacts are connected. A suspicious process may have injected memory, unusual DLL paths, many handles, and network activity. A graph can join these signals into one structure. This is why the dissertation uses graph construction instead of only table-based analysis.
+
+Graziano et al.\ study hypervisor memory forensics and show that memory analysis can extend beyond standard host snapshots \cite{graziano2013hypervisor}. Although this project focuses on Windows user-mode and kernel artefacts from standard dumps, that work supports the broader claim that memory evidence remains central in advanced threat analysis.
+
+\section{Standards, Frameworks, and Incident Response Context}
+
+Digital investigations must follow sound evidence handling. ISO/IEC 27037 provides guidelines for identification, collection, acquisition, and preservation of digital evidence \cite{iso2012digital}. Casey discusses digital evidence and computer crime from a forensic science perspective \cite{casey2011digital}. Carrier provides detailed file system forensic analysis methods \cite{carrier2005filesystem}. These sources do not define malware models directly, but they justify careful artefact management in this project.
+
+The MITRE ATT\&CK framework documents adversary tactics and techniques in a structured way \cite{mitre2026enterprise}. Techniques such as process injection (T1055) and data encrypted for impact (T1486) are relevant to memory-forensics findings \cite{mitre2026t1055}, \cite{mitre2026t1486}. The project maps some graph edge types to these ideas so that model inputs are easier to interpret during analyst review.
+
+\section{Graph Representation Learning}
+
+Graphs are used when relationships are as important as individual records. In a graph, nodes represent entities and edges represent relationships. Graph representation learning tries to learn useful vector representations from graph structure and node attributes. Hamilton gives a broad introduction to graph representation learning and its use in machine learning \cite{hamilton2020graph}.
+
+Before GNNs became common, methods such as DeepWalk and node2vec learned embeddings from random walks on graphs \cite{perozzi2014deepwalk}, \cite{grover2016node2vec}. Mikolov et al.\ introduced efficient word embedding methods that influenced later graph embedding work \cite{mikolov2013word}. These methods show that structure can be converted into vectors, but they do not always use node attributes or edge types as flexibly as modern GNNs.
+
+Graph neural networks extend deep learning to graph data. Kipf and Welling introduced a graph convolutional network for semi-supervised learning on graphs \cite{kipf2017gcn}. Hamilton, Ying, and Leskovec introduced GraphSAGE, which learns inductive node representations by aggregating neighbourhood information \cite{hamilton2017graphsage}. Velickovic et al.\ introduced graph attention networks, where attention weights are used for neighbouring nodes \cite{velickovic2018gat}. Xu et al.\ introduced the Graph Isomorphism Network and studied the expressive power of GNNs \cite{xu2019gin}. Fey and Lenssen describe practical graph learning with PyTorch Geometric \cite{fey2019pyg}. These models support the idea that structure can improve learning.
+
+This project uses GNN ideas for graph-level malware detection. The model does not classify one node only. It scores the whole memory snapshot graph.
+
+\subsection{Message passing intuition}
+
+In message-passing GNNs, each node updates its representation using messages from neighbours. After several layers, a node representation can reflect multi-hop structure. For memory graphs, this means a process node can be influenced by connected memory regions, DLLs, and network objects. Graph-level pooling then aggregates node information into a snapshot-level embedding.
+
+The choice of backbone involves trade-offs. GIN is strong for discriminative graph classification. GraphSAGE supports inductive settings. GAT adds attention weights to neighbours. GINE is attractive for this project because edge types are informative and should not be collapsed into unlabeled edges. The implementation therefore emphasises GINE-style models for binary and one-class paths.
+
+\subsection{Limitations of GNNs in security applications}
+
+GNNs are not a default win for forensic malware detection. Several structural limits apply.
+
+\textbf{Oversmoothing and depth.} Deep message-passing stacks can make node representations indistinguishable, reducing discriminative power on large graphs \cite{rusch2023oversmoothing}, \cite{chen2022gnnsurvey}. Memory snapshots with tens of thousands of nodes are therefore sensitive to layer count and pooling choices.
+
+\textbf{Scalability.} Full-graph training on large memory graphs is memory-intensive. Subsampling, pooling, or graph coarsening may be required, which can remove rare but important artefacts (for example a single injected region).
+
+\textbf{Explainability gaps.} Post-hoc explainers (GNNExplainer, SHAP) help, but they do not guarantee faithful forensic narratives \cite{ying2019gnnexplainer}, \cite{lundberg2017shap}. This project mitigates the gap with rule-derived attributes and explicit evidence JSON, not with explanation methods alone.
+
+\textbf{Adversarial manipulation.} Attackers can perturb graph structure or features---for example by hiding processes, splitting activity across benign parents, or injecting decoy edges \cite{jin2022adversarialgnn}, \cite{dai2023adversarial}. A model trained on laboratory families may not resist adaptive evasion.
+
+GNNs do not remove the need for sound data collection. Incomplete plugin output yields incomplete graphs. Noisy labels induce spurious correlations. These limits motivate grouped evaluation and uncertainty reporting in Chapter~\ref{ch:evaluation}.
+
+\subsection{Dataset leakage and evaluation validity}
+
+Sommer and Paxson argue that security machine-learning papers often overstate results because train and test distributions overlap or because labels do not reflect deployment base rates \cite{sommer2010outside}. In malware research, family-level leakage is common: variants from the same family share packers, C2 patterns, or host profiles. Random row splits can inflate metrics when WithVirus and NoVirus pairs from one family appear in both train and test.
+
+This dissertation uses \texttt{family} as the grouping key for StratifiedGroupKFold, matching the paired-folder structure of the corpus. Even with grouped splits, $n{=}30$ yields high variance; metrics should be reported with fold detail and interpreted as feasibility evidence, not operational guarantees \cite{apruzzese2023sok}.
+
+\subsection{Adversarial machine learning in malware detection}
+
+Ucci et al.\ survey ML for malware analysis and note that feature design and evaluation matter as much as model choice \cite{ucci2019survey}. Apruzzese et al.\ emphasise that real attackers may avoid gradient-based attacks yet still evade detectors through distribution shift, label noise, and concept drift \cite{apruzzese2023sok}. Pierazzi et al.\ show that many published defences fail under realistic threat models \cite{pierazzi2020intriguing}.
+
+For memory-forensics graphs, adversarial risk includes both ML evasion and forensic anti-analysis (process hiding, timestomping, memory wiping). A graph model may appear accurate on paired lab folders while failing on enterprise baselines with security tools and administrative noise---the uncertain benign rows in this project's manifest illustrate that overlap \cite{zhan2022graphmalwaresurvey}.
+
+\section{Ransomware and Memory-Resident Behaviour}
+
+Several families in the project corpus are ransomware-related (for example WannaCry, Cerber, GandCrab, and Locky variants). Ransomware often combines encryption behaviour with process injection and network activity. MITRE technique T1486 (data encrypted for impact) is relevant when interpreting ransom-note signals and high-impact process scores \cite{mitre2026t1486}.
+
+Memory forensics can capture pre-encryption activity that disk-only analysis misses. However, ransomware detection from memory is still difficult because benign administrative tools and security software can produce overlapping indicators. This supports the dissertation's focus on triage and evidence rather than automatic blocking.
+
+\section{Graph-Based Malware Detection}
+
+Graph-based malware detection has been studied in several forms. Some work uses function call graphs, control-flow graphs, or API-call graphs from binaries. Other work uses system-call graphs or process interaction graphs. Rieck et al.\ learn and classify malware behaviour from dynamic analysis traces \cite{rieck2008learning}. Arp et al.\ present DREBIN, an explainable Android malware detection approach based on structural features \cite{arp2014drebin}. These approaches show that graph structure can capture behaviour that simple strings or hashes cannot.
+
+This dissertation differs from static binary graph work because it builds graphs from memory-forensics artefacts. The graph represents a whole Windows system snapshot, not only one executable file. This matters because malware behaviour often appears through interactions between many system objects. A single malicious file may be hidden, but its process, memory, network, and handle relationships can still be visible.
+
+\section{Anomaly Detection and One-Class Learning}
+
+Anomaly detection treats deviant behaviour as rare events in a background distribution. In network security, Sommer and Paxson argued that ML evaluation must reflect operational base rates and adversarial adaptation \cite{sommer2010outside}. In malware analysis, anomaly detection can support finding previously unseen families when training data does not cover all future threats.
+
+Malware datasets are often imbalanced and incomplete. It can be hard to collect enough clean and malicious examples for every family. One-class learning is useful in this setting because a model can learn the shape of one class and measure how closely a new sample fits it. Ruff et al.\ introduced Deep SVDD for deep one-class classification \cite{ruff2018deep}. Pang et al.\ provide a review of deep anomaly detection methods \cite{pang2021deep}.
+
+Sommer and Paxson warn that machine learning for intrusion detection must account for distribution shift and evaluation pitfalls \cite{sommer2010outside}. Axelsson discusses the base-rate fallacy and its effect on detection difficulty \cite{axelsson1999base}. These papers are important for this dissertation because memory-forensics datasets often contain rare events and noisy benign baselines.
+
+This project includes a two-model analysis design. One model learns malware conformity and another model learns benign conformity. The outputs are combined with heuristic risk signals. This design is useful because it can show uncertain cases instead of forcing every sample into a simple binary decision.
+
+\section{Evaluation Metrics in Security Machine Learning}
+
+Security papers often report accuracy, precision, recall, F1, ROC-AUC, and false-positive rates. Davis and Goadrich explain relationships between precision-recall and ROC views \cite{davis2006roc}. In imbalanced settings, accuracy alone can be misleading because most samples may be benign. The base-rate fallacy literature shows why rare-event detection is difficult even with reasonable classifiers \cite{axelsson1999base}.
+
+For this dissertation, precision and recall are still relevant, but they must be interpreted with label noise and family leakage in mind. A high recall on a small validation fold may not generalise to new families. A low false-positive rate on clean enterprise hosts is often more important in operations than a small F1 gain on a lab corpus.
+
+Calibration is a separate issue. Even when discrimination is good, probability outputs may be overconfident \cite{guo2017calibration}. That is why the project discusses calibrated probabilities and ambiguous states in the binary analysis path.
+
+\section{Explainability and Calibration}
+
+Cybersecurity models should be explainable because analysts need to justify decisions. A model that returns only a probability may not be enough for incident response. Doshi-Velez and Kim argue that interpretability should be treated as an important research problem \cite{doshi2017interpretable}. Ying et al.\ introduced GNNExplainer to explain predictions from graph neural networks \cite{ying2019gnnexplainer}. Ribeiro et al.\ propose LIME for explaining classifier predictions \cite{ribeiro2016why}. Lundberg and Lee introduce SHAP as a unified approach to model interpretation \cite{lundberg2017shap}. Shrikumar et al.\ describe DeepLIFT for feature importance propagation \cite{shrikumar2017deeplift}. Although this project does not fully implement all of these tools, it preserves evidence fields such as important graph attributes, top nodes, and important edge pairs.
+
+Calibration is also important. Guo et al.\ showed that modern neural networks can be miscalibrated \cite{guo2017calibration}. Davis and Goadrich explain the relationship between precision-recall and ROC curves \cite{davis2006roc}. A model may be accurate but still overconfident. This is risky in malware detection. The project therefore includes calibrated probability fields and ambiguity states in the binary analysis path.
+
+\section{Research Gap}
+
+The literature shows strong work in memory forensics, malware analysis, graph learning, and anomaly detection. However, there is still a gap between memory-forensics artefact extraction and graph-based deep learning with analyst-readable evidence. Many studies focus on static binaries or isolated runtime logs. Few studies provide a full pipeline that includes extraction, graph construction, dataset manifests, graph-level learning, uncertainty reporting, and optional operational scanning in one reproducible project.
+
+This dissertation contributes by joining Volatility 3 extraction, heterogeneous graph construction, graph-level GNN learning, uncertainty handling, and operational reporting in one applied project. The next chapters describe how the pipeline was designed, implemented, and evaluated on the available memory-forensics corpus.
+
+\section{Machine Learning Tooling for Security Research}
+
+Several general-purpose libraries support the implementation side of this work. PyTorch provides the core deep learning framework \cite{paszke2019pytorch}. PyTorch Geometric extends it for graph data \cite{fey2019pyg}, \cite{pygdocs2026}. Scikit-learn remains a common baseline toolkit for tabular malware features \cite{pedregosa2011sklearn}. Pandas, NumPy, and NetworkX support data processing and graph construction \cite{mckinney2010pandas}, \cite{harris2020numpy}, \cite{hagberg2008networkx}.
+
+FastAPI is used in the project server layer for HTTP-based orchestration \cite{fastapi2026docs}. While framework choice is not the research contribution, these tools reduce engineering friction and make the pipeline easier to reproduce.
+
+\section{Synthesis for This Dissertation}
+
+The literature review suggests four design principles for this project.
+
+\textbf{First}, memory evidence is relational and should be stored as a graph rather than only as isolated plugin tables. \textbf{Second}, learning methods must handle small, noisy datasets and report uncertainty openly. \textbf{Third}, explainability is not optional in security operations; evidence fields should accompany scores. \textbf{Fourth}, reproducibility requires manifests, contracts, and versioned artefacts.
+
+Chapter~\ref{ch:methodology} translates these principles into a concrete methodology. Chapter~\ref{ch:design} and Chapter~\ref{ch:implementation} describe the system realisation. Chapter~\ref{ch:evaluation} tests the claims against project data and discusses limitations without overstating detection performance.
+
+Finally, the literature review highlights a simple practical lesson: in memory-forensics ML, data engineering and evaluation design are not supporting tasks. They are core research contributions. The novelty of this dissertation is therefore not only the GNN classifier choice. It is the end-to-end connection between Volatility artefacts, heterogeneous graphs, manifest governance, and explainable outputs in one reproducible system.

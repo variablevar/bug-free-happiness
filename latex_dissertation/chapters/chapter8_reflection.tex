@@ -1,0 +1,47 @@
+\chapter{Reflection}
+
+\section{Project Learning}
+
+This project improved my understanding of both memory forensics and machine learning. At the start, the work looked like a malware detection task. During development, it became clear that data representation was the most important part. If the memory artefacts are not extracted and organised correctly, the model cannot learn useful patterns.
+
+I also learned that dissertation scope must match the evidence. The project contains ransomware families, but the research topic is broader: graph-based malware detection from Windows memory forensics. Keeping this focus improved the clarity of the writing and the evaluation.
+
+\section{Technical Reflection}
+
+The most difficult technical challenge was joining many Volatility outputs into one stable graph. Each plugin gives different columns and different levels of detail. The graph builder had to handle missing files, different object types, and noisy evidence. This taught me that cybersecurity machine learning depends strongly on data engineering \cite{sculley2015debt}.
+
+Another challenge was uncertainty. Some NoVirus samples had suspicious features and HIGH or CRITICAL verdicts. Instead of ignoring this, the project records uncertainty in the manifest. This is a more honest approach and fits real forensic work, where evidence is often mixed.
+
+Graph-size variation was also difficult for training. A graph with fewer than 200 nodes and a graph with more than 25,000 nodes appear in the same dataset. This required careful batching and realistic expectations about model stability on small data.
+
+\section{Research Reflection}
+
+The project also improved my research writing. The correct dissertation topic is broader than ransomware. Rewriting the work around graph-based deep learning made the argument stronger and more accurate. It also helped separate the dataset examples from the main research contribution.
+
+Working with IEEE-style references improved my literature discipline. Each major claim should be linked to prior work or to project artefacts. This is similar to forensic reporting, where each conclusion should be linked to evidence.
+
+\section{Professional Reflection}
+
+This project is relevant to digital forensics, incident response, malware analysis, and security engineering. It helped me understand how a research prototype can be designed for practical analyst use. The most valuable lesson is that detection tools should explain their evidence and limitations clearly \cite{doshi2017interpretable}, \cite{case2017memory}.
+
+If this system were deployed in a SOC environment, I would present it as a triage assistant. Analysts would still validate important cases manually. The tool would help them prioritise which memory dumps deserve deeper review.
+
+\section{Closing Reflection}
+
+The project shows that good cybersecurity research needs both technical implementation and careful communication. A model is not enough by itself. The data pipeline, graph design, evidence output, uncertainty handling, and documentation all matter. This learning will be useful for future work in malware analysis and defensive security.
+
+I would advise future students on similar projects to lock artefact contracts early, publish a manifest for every experiment, and report uncertain labels openly. These habits improve trust in the final dissertation and in the underlying code.
+
+\section{Skills Developed}
+
+Through this project I developed practical skills in Volatility-based artefact interpretation, graph schema design, PyTorch Geometric modelling, and technical writing for dual audiences (academic examiners and security practitioners). I also learned to use manifests and JSON evidence files as first-class research outputs, not as secondary logs.
+
+\section{What I Would Do Differently}
+
+If starting again, I would collect more clean benign baselines from known-good enterprise images and document acquisition timing for every dump. I would also archive trained checkpoints with manifest version IDs from the first successful training run. That would make Chapter~\ref{ch:evaluation} stronger because model metrics could be reported alongside corpus statistics.
+
+Finally, I would add automated grouped cross-validation scripts earlier in the project. This would reduce the risk of optimistic results when related family folders leak between train and test splits.
+
+\section{Personal Outcome}
+
+Completing this dissertation improved my confidence in building end-to-end security research systems. I now understand that writing, implementation, and evaluation must be planned together. A strong model without manifests, contracts, and evidence outputs would not meet the needs of forensic practitioners. That lesson will guide my approach in future cyber security roles and research projects.

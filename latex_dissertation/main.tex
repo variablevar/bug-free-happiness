@@ -1,0 +1,55 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{microtype}
+\hyphenation{artefacts malware forensics Volatility heterogeneous}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{cite}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{xurl}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue,
+  pdftitle={Graph-Based Deep Learning for Malware Detection Using Windows Memory Forensics},
+  pdfauthor={VIRAJ RAJESHBHAI CHUDASAMA}
+}
+
+\onehalfspacing
+\setcounter{tocdepth}{2}
+
+\begin{document}
+
+\input{chapters/front_matter}
+\tableofcontents
+\clearpage
+
+\input{chapters/chapter1_introduction.tex}
+\input{chapters/chapter2_literature_review.tex}
+\input{chapters/chapter3_research_methodology.tex}
+\input{chapters/chapter4_system_design.tex}
+\input{chapters/chapter5_implementation.tex}
+\input{chapters/chapter6_evaluation_and_discussion.tex}
+\input{chapters/chapter7_conclusion_and_future_work.tex}
+\input{chapters/chapter8_reflection.tex}
+
+\input{chapters/appendices}
+
+\nocite{*}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

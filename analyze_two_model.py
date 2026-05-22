@@ -27,6 +27,7 @@ from analyze_binary_model import _apply_feature_group_weights, build_model, expl
 from calibration import apply_temperature
 from dataset import MalwareGraphDataset
 from fusion import ensemble_score, final_triage, heuristic_risk_score
+from utils.inference_align import align_pyg_data_to_binary_checkpoint
 from one_class_gnn import build_model_from_payload, explain_graph, score_graph
 
 
@@ -299,7 +300,8 @@ def run(args):
         reasons = _reasoning_types(malware_score, benign_score, malware_evd, benign_evd)
         findings = _build_findings(malware_evd, benign_evd)
 
-        d = data.to(device)
+        data_bin = align_pyg_data_to_binary_checkpoint(data, binary_payload)
+        d = data_bin.to(device)
         batch = torch.zeros(d.x.size(0), dtype=torch.long, device=device)
         t_bin = float(binary_payload.get("temperature", 1.0))
         lc = float(getattr(args, "logit_clip", 0.0) or 0.0)
@@ -442,6 +444,7 @@ def run(args):
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     print(f"[Analyze] wrote {out_path} ({len(out)} samples)")
+    return payload
 
 
 if __name__ == "__main__":

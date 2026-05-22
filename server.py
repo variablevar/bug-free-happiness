@@ -801,6 +801,44 @@ async def run_dump_triage(dump_id: str):
     return {"success": True, "dump_id": dump_id, "findings": findings}
 
 
+@app.post("/api/v1/dumps/{dump_id}/model-scan")
+async def run_dump_model_scan(dump_id: str, request: Request):
+    """
+    Run GNN inference on one upload_sessions folder (requires graph.pkl).
+
+    Optional JSON body: mode (two_model|binary), binary_model, benign_model,
+    malware_model (paths), mc_samples (int, default 2 in wrapper).
+    Defaults: MODEL_* env or datasets/outputs/*.pt
+    """
+    try:
+        session_dir = _session_dir_for_dump(dump_id)
+    except ValueError:
+        raise HTTPException(400, "invalid dump_id")
+    if not session_dir.is_dir():
+        raise HTTPException(404, "dump not found")
+    if not (session_dir / "graph.pkl").is_file():
+        raise HTTPException(
+            400,
+            "graph.pkl not found for this session; complete the graph pipeline first",
+        )
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+    if not isinstance(body, dict):
+        body = {}
+
+    from model_scan import run_upload_session_model_scan
+
+    payload_out = run_upload_session_model_scan(session_dir, body)
+    if not payload_out.get("success"):
+        raise HTTPException(
+            status_code=400,
+            detail=str(payload_out.get("error", "model_scan reported failure")),
+        )
+    return payload_out
+
+
 @app.post("/api/v1/ioc/run")
 async def run_ioc_script(payload: Dict[str, Any] = Body(...)):
     """Run IOC metrics over upload_sessions/ (dashboard dumps). Optional dump_id = one session."""

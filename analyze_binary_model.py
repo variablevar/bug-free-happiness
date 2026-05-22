@@ -17,6 +17,8 @@ from calibration import apply_temperature
 from dataset import MalwareGraphDataset
 from fusion import ensemble_score, final_triage, heuristic_risk_score
 from model import GINEMalwareClassifier
+from utils.evidence_metadata import enrich_edge, enrich_node
+from utils.inference_align import align_pyg_data_to_binary_checkpoint
 
 GRAPH_ATTR_NAMES = [
     "max_score",
@@ -193,20 +195,18 @@ def explain_binary(model, data, device, payload: dict) -> dict:
 
     node_sal = (d.x.grad * d.x).abs().sum(dim=1).detach().cpu().numpy()
     top_idx = np.argsort(-node_sal)[:5]
-    top_nodes = [{"node_id": int(i), "importance": float(node_sal[i])} for i in top_idx]
+    top_nodes = [enrich_node(d, int(i), float(node_sal[i])) for i in top_idx]
 
     edge_pairs = []
     if d.edge_index is not None and d.edge_index.size(1) > 0:
         src = d.edge_index[0].detach().cpu().numpy()
         dst = d.edge_index[1].detach().cpu().numpy()
-        node_imp = {x["node_id"]: x["importance"] for x in top_nodes}
         scores = []
-        for u, v in zip(src.tolist(), dst.tolist()):
-            s = node_imp.get(int(u), 0.0) + node_imp.get(int(v), 0.0)
-            if s > 0:
-                scores.append((s, int(u), int(v)))
+        for edge_i, (u, v) in enumerate(zip(src.tolist(), dst.tolist())):
+            s = float(node_sal[int(u)]) + float(node_sal[int(v)])
+            scores.append((s, int(edge_i), int(u), int(v)))
         scores.sort(reverse=True)
-        edge_pairs = [{"src": u, "dst": v, "importance": s} for s, u, v in scores[:5]]
+        edge_pairs = [enrich_edge(d, edge_i, u, v, s) for s, edge_i, u, v in scores[:5]]
 
     top_graph_attrs = []
     grad_src = None
@@ -271,7 +271,7 @@ def run(args):
 
     samples = []
     for i in range(len(ds)):
-        data = ds[i]
+        data = align_pyg_data_to_binary_checkpoint(ds[i], payload)
         folder = str(getattr(data, "name", f"{i:03d}"))
         d = data.to(device)
         batch = torch.zeros(d.x.size(0), dtype=torch.long, device=device)
@@ -301,7 +301,7 @@ def run(args):
                 ens_probs.append(float(pb[0, 1]))
         p_mal_raw = float(probs_raw[0, 1])
         p_mal = float(np.mean(ens_probs))
-        evidence = explain_binary(model, data, device, payload)
+        evidence = explain_binary(model, data, device, payload)  # data already aligned to payload
         tags = _reasoning_tags(evidence["top_graph_attrs"])
         high_risk = any(
             x.get("feature_name")
@@ -424,6 +424,7 @@ def run(args):
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(payload_out, indent=2), encoding="utf-8")
     print(f"[BinaryAnalyze] wrote {out} ({len(samples)} samples)")
+    return payload_out
 
 
 if __name__ == "__main__":

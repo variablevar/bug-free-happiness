@@ -1,0 +1,148 @@
+\contentsline {chapter}{Declaration}{1}{chapter*.1}%
+\contentsline {chapter}{Abstract}{2}{chapter*.2}%
+\contentsline {chapter}{\numberline {1}Introduction}{8}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Background}{8}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Motivation}{9}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Problem Statement}{9}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Research Aim}{10}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Key Definitions}{10}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Primary Expected Contribution}{10}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Research Objectives}{10}{section.1.7}%
+\contentsline {section}{\numberline {1.8}Research Questions}{11}{section.1.8}%
+\contentsline {section}{\numberline {1.9}Contributions Preview}{11}{section.1.9}%
+\contentsline {section}{\numberline {1.10}Scope}{12}{section.1.10}%
+\contentsline {section}{\numberline {1.11}Dissertation Structure}{12}{section.1.11}%
+\contentsline {section}{\numberline {1.12}Context: Memory Forensics in Incident Response}{12}{section.1.12}%
+\contentsline {section}{\numberline {1.13}Expected Outcomes}{13}{section.1.13}%
+\contentsline {chapter}{\numberline {2}Literature Review}{14}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Malware Detection}{14}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Static, Dynamic, and Memory-Based Analysis}{15}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Memory Forensics}{15}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Windows Memory Artefacts and Internals}{16}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Standards, Frameworks, and Incident Response Context}{17}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Graph Representation Learning}{17}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Message passing intuition}{18}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Limitations of GNNs in security applications}{18}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}Dataset leakage and evaluation validity}{19}{subsection.2.6.3}%
+\contentsline {subsection}{\numberline {2.6.4}Adversarial machine learning in malware detection}{19}{subsection.2.6.4}%
+\contentsline {section}{\numberline {2.7}Ransomware and Memory-Resident Behaviour}{19}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Graph-Based Malware Detection}{20}{section.2.8}%
+\contentsline {section}{\numberline {2.9}Anomaly Detection and One-Class Learning}{20}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Evaluation Metrics in Security Machine Learning}{21}{section.2.10}%
+\contentsline {section}{\numberline {2.11}Explainability and Calibration}{21}{section.2.11}%
+\contentsline {section}{\numberline {2.12}Research Gap}{21}{section.2.12}%
+\contentsline {section}{\numberline {2.13}Machine Learning Tooling for Security Research}{22}{section.2.13}%
+\contentsline {section}{\numberline {2.14}Synthesis for This Dissertation}{22}{section.2.14}%
+\contentsline {chapter}{\numberline {3}Research Methodology}{23}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Research Design}{23}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Data Sources}{23}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Volatility 3 Extraction}{24}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Graph Construction Method}{25}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Feature Engineering}{26}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Model Methodology}{26}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Evaluation Method}{27}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Ethics}{28}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Data Collection and Sample Selection}{28}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Labelling Policy and Uncertainty Handling}{28}{section.3.10}%
+\contentsline {section}{\numberline {3.11}Detailed Feature Groups}{29}{section.3.11}%
+\contentsline {section}{\numberline {3.12}Training and Validation Protocol}{29}{section.3.12}%
+\contentsline {section}{\numberline {3.13}Threats to Validity}{29}{section.3.13}%
+\contentsline {section}{\numberline {3.14}Research Timeline and Artefact Milestones}{30}{section.3.14}%
+\contentsline {section}{\numberline {3.15}Relation to \texttt {docs.md} and Code Contracts}{30}{section.3.15}%
+\contentsline {chapter}{\numberline {4}System Design}{31}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Overview}{31}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Extraction Layer}{31}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Graph Layer}{31}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Triage and Graph Attributes}{33}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Dataset Manifest Design}{33}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Model Stack}{34}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Evidence Design}{34}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Interface Between Triage Rules and Learning}{35}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Dashboard and Operational Integration}{35}{section.4.9}%
+\contentsline {section}{\numberline {4.10}Design Rationale by Layer}{35}{section.4.10}%
+\contentsline {subsection}{\numberline {4.10.1}Why separate extraction and learning}{35}{subsection.4.10.1}%
+\contentsline {subsection}{\numberline {4.10.2}Why use both rules and GNNs}{35}{subsection.4.10.2}%
+\contentsline {subsection}{\numberline {4.10.3}Why graph-level classification}{36}{subsection.4.10.3}%
+\contentsline {section}{\numberline {4.11}Failure Handling and Health Flags}{36}{section.4.11}%
+\contentsline {section}{\numberline {4.12}Security and Privacy Considerations in Design}{36}{section.4.12}%
+\contentsline {chapter}{\numberline {5}Implementation}{37}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Development Environment}{37}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Main Repository Components}{37}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Extraction and graph build}{38}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Dataset and model code}{38}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Data Contracts}{38}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Node and Edge Implementation}{39}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Why GINE and What Alternatives Were Considered}{39}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Why GINE over untyped convolutions}{39}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Why graph-level classification, not node labels}{39}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Supported backbones and expected trade-offs}{40}{subsection.5.5.3}%
+\contentsline {subsection}{\numberline {5.5.4}What did not work well in practice}{40}{subsection.5.5.4}%
+\contentsline {section}{\numberline {5.6}GNN Implementation}{40}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Training configuration}{41}{subsection.5.6.1}%
+\contentsline {section}{\numberline {5.7}Evidence and Inference Implementation}{41}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Implementation Challenges}{42}{section.5.8}%
+\contentsline {section}{\numberline {5.9}Reproducibility}{42}{section.5.9}%
+\contentsline {section}{\numberline {5.10}Per-Module Implementation Notes}{42}{section.5.10}%
+\contentsline {subsection}{\numberline {5.10.1}\texttt {build\_graph.py}}{42}{subsection.5.10.1}%
+\contentsline {subsection}{\numberline {5.10.2}\texttt {filter\_malicious.py}}{42}{subsection.5.10.2}%
+\contentsline {subsection}{\numberline {5.10.3}\texttt {analyze\_graph.py}}{43}{subsection.5.10.3}%
+\contentsline {subsection}{\numberline {5.10.4}\texttt {dataset.py} and training scripts}{43}{subsection.5.10.4}%
+\contentsline {subsection}{\numberline {5.10.5}\texttt {server.py} and \texttt {model\_scan.py}}{43}{subsection.5.10.5}%
+\contentsline {section}{\numberline {5.11}Hyperparameters and Training Defaults}{43}{section.5.11}%
+\contentsline {section}{\numberline {5.12}Performance and Resource Considerations}{44}{section.5.12}%
+\contentsline {section}{\numberline {5.13}Testing and Validation During Development}{44}{section.5.13}%
+\contentsline {chapter}{\numberline {6}Evaluation and Discussion}{45}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Central Empirical Finding}{45}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Proof-of-Concept Scope}{46}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Descriptive Corpus Statistics}{46}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Rule-Based Triage Analysis}{47}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Quantitative Machine Learning Evaluation}{49}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}GNN backbone comparison (StratifiedGroupKFold by family)}{49}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Tabular baselines (manifest graph-level features)}{49}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.3}Cross-validation protocol}{49}{subsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.5.4}Evaluation figures (placeholders until predictions exist)}{49}{subsection.6.5.4}%
+\contentsline {section}{\numberline {6.6}Failure Cases and Edge Families}{50}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}W32.MyDoom.A. pair (very small graphs)}{50}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Cerber pair (similar scale, divergent C2 counts)}{50}{subsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.6.3}GoldenEye pair (high injection on both rows)}{50}{subsection.6.6.3}%
+\contentsline {subsection}{\numberline {6.6.4}WannaCry case study}{50}{subsection.6.6.4}%
+\contentsline {subsection}{\numberline {6.6.5}When a GNN may not help}{51}{subsection.6.6.5}%
+\contentsline {section}{\numberline {6.7}Binary and Two-Model Paths}{51}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Explainability}{52}{section.6.8}%
+\contentsline {section}{\numberline {6.9}What Results Prove and Do Not Prove}{52}{section.6.9}%
+\contentsline {section}{\numberline {6.10}Limitations}{52}{section.6.10}%
+\contentsline {section}{\numberline {6.11}Practical Value}{53}{section.6.11}%
+\contentsline {section}{\numberline {6.12}Summary}{53}{section.6.12}%
+\contentsline {chapter}{\numberline {7}Conclusion and Future Work}{54}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Conclusion}{54}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Answers to Research Questions}{54}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Reflection on the Research Aim}{55}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Contributions}{55}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Future Work}{55}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Implications for Practice}{56}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Final Statement}{56}{section.7.7}%
+\contentsline {chapter}{\numberline {8}Reflection}{57}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Project Learning}{57}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Technical Reflection}{57}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Research Reflection}{58}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Professional Reflection}{58}{section.8.4}%
+\contentsline {section}{\numberline {8.5}Closing Reflection}{58}{section.8.5}%
+\contentsline {section}{\numberline {8.6}Skills Developed}{58}{section.8.6}%
+\contentsline {section}{\numberline {8.7}What I Would Do Differently}{59}{section.8.7}%
+\contentsline {section}{\numberline {8.8}Personal Outcome}{59}{section.8.8}%
+\contentsline {chapter}{\numberline {A}Project Artefacts and Reproducibility}{60}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Project Artefact Map}{60}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Manifest Column Glossary}{60}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Core Plugin Set}{61}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Reproducibility Commands}{61}{section.A.4}%
+\contentsline {section}{\numberline {A.5}Acronyms}{62}{section.A.5}%
+\contentsline {section}{\numberline {A.6}Manifest Excerpt (First Five Rows)}{62}{section.A.6}%
+\contentsline {section}{\numberline {A.7}Figure Generation}{62}{section.A.7}%
+\contentsline {chapter}{\numberline {B}Dataset Statistics Summary}{63}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Label and uncertainty counts}{63}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Graph size ranges}{63}{section.B.2}%
+\contentsline {section}{\numberline {B.3}Families represented}{63}{section.B.3}%
+\contentsline {section}{\numberline {B.4}Interpretation notes}{64}{section.B.4}%
+\contentsline {section}{\numberline {B.5}Recommended Reporting Checklist for Future Experiments}{64}{section.B.5}%
+\contentsline {chapter}{\numberline {C}Glossary of Key Terms}{65}{appendix.C}%
+\contentsline {chapter}{\numberline {D}Volatility Plugin Notes (Extended)}{66}{appendix.D}%

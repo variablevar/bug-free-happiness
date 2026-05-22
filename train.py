@@ -1,256 +1,164 @@
 #!/usr/bin/env python3
-"""Train both one-class GNN models in sequence."""
-
-import argparse
-import subprocess
-import sys
-
-
-def run_cmd(cmd: list[str]) -> int:
-    print("[TrainStack] Running:", " ".join(cmd))
-    return subprocess.call(cmd)
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Train malware + benign one-class GNN stack")
-    parser.add_argument("manifest", help="Path to dataset_manifest.csv")
-    parser.add_argument("--base-dir", default=None, dest="base_dir")
-    parser.add_argument("--exclude-uncertain", action="store_true", dest="exclude_uncertain")
-    args, passthrough = parser.parse_known_args()
-
-    py = sys.executable
-    common = [args.manifest]
-    if args.base_dir:
-        common += ["--base-dir", args.base_dir]
-    if args.exclude_uncertain:
-        common += ["--exclude-uncertain"]
-
-    rc = run_cmd([py, "train_malware_model.py", *common, *passthrough])
-    if rc != 0:
-        return rc
-
-    rc = run_cmd([py, "train_benign_model.py", *common, *passthrough])
-    if rc != 0:
-        return rc
-
-    print("[TrainStack] Done.")
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
-
-#!/usr/bin/env python3
-"""Train both one-class GNN models in sequence."""
-
-import argparse
-import subprocess
-import sys
-
-
-def run_cmd(cmd: list[str]) -> int:
-    print("[TrainStack] Running:", " ".join(cmd))
-    return subprocess.call(cmd)
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Train malware + benign one-class GNN stack")
-    parser.add_argument("manifest", help="Path to dataset_manifest.csv")
-    parser.add_argument("--base-dir", default=None, dest="base_dir")
-    parser.add_argument("--exclude-uncertain", action="store_true", dest="exclude_uncertain")
-    args, passthrough = parser.parse_known_args()
-
-    py = sys.executable
-    common = [args.manifest]
-    if args.base_dir:
-        common += ["--base-dir", args.base_dir]
-    if args.exclude_uncertain:
-        common += ["--exclude-uncertain"]
-
-    rc = run_cmd([py, "train_malware_model.py", *common, *passthrough])
-    if rc != 0:
-        return rc
-    rc = run_cmd([py, "train_benign_model.py", *common, *passthrough])
-    if rc != 0:
-        return rc
-    print("[TrainStack] Done.")
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
-
-#!/usr/bin/env python3
 """
-Two-model training wrapper.
-
-Runs malware-only training and benign-only training in sequence.
-There is intentionally no mode selector.
+train.py  v15
+Changes vs v14:
+  - --model gat | gine; --gat-heads, --edge-emb-dim; forward passes edge_attr for GINE.
+  - --include-unknown for manifests containing label=-1 rows.
+Prior v14: --val-fraction, --label-smoothing.
 """
 
-import argparse
-import subprocess
-import sys
+import os, sys, argparse, json, datetime, re, copy
+import numpy as np
+import torch
+import torch.nn.functional as F
+from torch_geometric.loader import DataLoader
+from torch_geometric.data import Data
+from sklearn.model_selection import (
+    LeaveOneGroupOut,
+    StratifiedGroupKFold,
+    train_test_split,
+)
+from sklearn.metrics import (accuracy_score, f1_score,
+                              roc_auc_score, confusion_matrix)
+
+from dataset        import MalwareGraphDataset
+from model import (
+    GINMalwareClassifier,
+    SAGEMalwareClassifier,
+    GATMalwareClassifier,
+    GINEMalwareClassifier,
+)
+from evaluate_stats import log_prediction, run_stats
+from utils.schema   import EXPECTED_GRAPH_ATTR_DIM
+
+# Hardcoded — with ~29 train samples, batch_size=4 gives ~7 batches/epoch.
+TRAIN_BATCH_SIZE = 4
 
 
-def run_cmd(cmd: list[str]) -> int:
-    print("[TrainStack] Running:", " ".join(cmd))
-    return subprocess.call(cmd)
+# ── Source-name extraction ────────────────────────────────────────────────────
+
+_AUG_SUFFIX = re.compile(r"__aug_[a-z]+_\d+$")
+
+def source_of(name: str) -> str:
+    return _AUG_SUFFIX.sub("", str(name))
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Train two-model analysis stack")
-    parser.add_argument("manifest", help="Path to dataset_manifest.csv")
-    parser.add_argument("--exclude-uncertain", action="store_true", dest="exclude_uncertain")
-    args, passthrough = parser.parse_known_args()
-
-    py = sys.executable
-    common = [args.manifest]
-    if args.exclude_uncertain:
-        common += ["--exclude-uncertain"]
-
-    rc = run_cmd([py, "train_malware_model.py", *common, *passthrough])
-    if rc != 0:
-        raise SystemExit(rc)
-
-    rc = run_cmd([py, "train_benign_model.py", *common, *passthrough])
-    if rc != 0:
-        raise SystemExit(rc)
-
-    print("[TrainStack] Done.")
+def build_cv_groups(ds, n: int, names: list[str], group_by: str) -> np.ndarray:
+    """Group id per sample: by graph folder name (source) or malware family."""
+    group_by = str(group_by).strip().lower()
+    if group_by == "family":
+        return np.array(
+            [
+                str(getattr(ds[i], "family", None) or "unknown").strip().lower()
+                for i in range(n)
+            ],
+            dtype=object,
+        )
+    if group_by == "source":
+        return np.array([source_of(names[i]) for i in range(n)], dtype=object)
+    raise ValueError(f"Invalid --group-by: {group_by} (use source or family)")
 
 
-if __name__ == "__main__":
-    main()
+def build_cv_splits(
+    cv: str,
+    n: int,
+    labels: np.ndarray,
+    groups: np.ndarray,
+    n_splits: int,
+    seed: int,
+) -> list[tuple[np.ndarray, np.ndarray]]:
+    """
+    Return list of (train_idx, test_idx) for one full CV pass.
+    cv=loso: LeaveOneGroupOut (one held-out group per split).
+    cv=stratified_group: StratifiedGroupKFold (balanced classes, no group leakage).
+    """
+    indices = np.arange(n)
+    cv = str(cv).strip().lower()
+    if cv == "loso":
+        logo = LeaveOneGroupOut()
+        return list(logo.split(indices, labels, groups=groups))
 
-#!/usr/bin/env python3
-"""
-Two-model training wrapper.
+    if cv == "stratified_group":
+        n_unique_groups = len(np.unique(groups))
+        if n_unique_groups < 2:
+            print(
+                "[ERROR] stratified_group CV needs at least 2 distinct groups "
+                "(try --group-by source)."
+            )
+            sys.exit(1)
+        k = int(n_splits)
+        k = max(2, min(k, n_unique_groups))
+        last_err = None
+        for attempt in range(k, 1, -1):
+            try:
+                sgkf = StratifiedGroupKFold(
+                    n_splits=attempt,
+                    shuffle=True,
+                    random_state=seed,
+                )
+                splits = list(sgkf.split(indices, labels, groups=groups))
+                if splits:
+                    return splits
+            except ValueError as exc:
+                last_err = exc
+                continue
+        print(
+            f"[ERROR] StratifiedGroupKFold could not build splits "
+            f"(last error: {last_err}). Try --cv loso or fewer classes / more groups."
+        )
+        sys.exit(1)
 
-Runs malware-only training and benign-only training in sequence.
-There is intentionally no mode selector.
-"""
-
-import argparse
-import subprocess
-import sys
-
-
-def run_cmd(cmd: list[str]) -> int:
-    print("[TrainStack] Running:", " ".join(cmd))
-    return subprocess.call(cmd)
-
-
-def main():
-    parser = argparse.ArgumentParser(description="Train two-model analysis stack")
-    parser.add_argument("manifest", help="Path to dataset_manifest.csv")
-    parser.add_argument("--exclude-uncertain", action="store_true", dest="exclude_uncertain")
-    args, passthrough = parser.parse_known_args()
-
-    py = sys.executable
-    common = [args.manifest]
-    if args.exclude_uncertain:
-        common += ["--exclude-uncertain"]
-
-    rc = run_cmd([py, "train_malware_model.py", *common, *passthrough])
-    if rc != 0:
-        raise SystemExit(rc)
-
-    rc = run_cmd([py, "train_benign_model.py", *common, *passthrough])
-    if rc != 0:
-        raise SystemExit(rc)
-
-    print("[TrainStack] Done.")
-
-
-if __name__ == "__main__":
-    main()
-
-#!/usr/bin/env python3
-"""
-Two-model training wrapper.
-
-Runs malware-only training and benign-only training in sequence.
-There is intentionally no mode selector.
-"""
-
-import argparse
-import subprocess
-import sys
+    raise ValueError(f"Invalid --cv: {cv} (use loso or stratified_group)")
 
 
-def run_cmd(cmd: list[str]) -> int:
-    print("[TrainStack] Running:", " ".join(cmd))
-    return subprocess.call(cmd)
+# ── Graph augmentation ────────────────────────────────────────────────────────
+
+def augment_graph(data: Data, edge_drop_p: float = 0.15,
+                  feat_mask_p: float = 0.10) -> Data:
+    """
+    Returns a new Data object with:
+      - random edge dropping (edge_drop_p fraction removed)
+      - random feature masking (feat_mask_p fraction zeroed)
+    Graph-level attributes (graph_attr, y, name) are copied unchanged.
+    """
+    aug = copy.deepcopy(data)
+
+    # Edge drop
+    if aug.edge_index is not None and aug.edge_index.size(1) > 0:
+        n_edges  = aug.edge_index.size(1)
+        keep     = torch.rand(n_edges) >= edge_drop_p
+        aug.edge_index = aug.edge_index[:, keep]
+        ea = getattr(aug, "edge_attr", None)
+        if ea is not None and ea.size(0) == n_edges:
+            aug.edge_attr = ea[keep]
+
+    # Feature mask
+    if aug.x is not None:
+        mask = torch.rand_like(aug.x) >= feat_mask_p
+        aug.x = aug.x * mask.float()
+
+    return aug
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Train two-model analysis stack")
-    parser.add_argument("manifest", help="Path to dataset_manifest.csv")
-    parser.add_argument("--exclude-uncertain", action="store_true", dest="exclude_uncertain")
-    args, passthrough = parser.parse_known_args()
-
-    py = sys.executable
-    common = [args.manifest]
-    if args.exclude_uncertain:
-        common += ["--exclude-uncertain"]
-
-    rc = run_cmd([py, "train_malware_model.py", *common, *passthrough])
-    if rc != 0:
-        raise SystemExit(rc)
-
-    rc = run_cmd([py, "train_benign_model.py", *common, *passthrough])
-    if rc != 0:
-        raise SystemExit(rc)
-
-    print("[TrainStack] Done.")
+def build_augmented_dataset(ds_list, n_aug: int = 1) -> list:
+    """
+    For each graph in ds_list, add n_aug augmented copies.
+    Returns original + augmented graphs.
+    """
+    augmented = list(ds_list)
+    for data in ds_list:
+        for _ in range(n_aug):
+            augmented.append(augment_graph(data))
+    return augmented
 
 
-if __name__ == "__main__":
-    main()
-
-#!/usr/bin/env python3
-"""
-Two-model training wrapper.
-
-Runs malware-only training and benign-only training in sequence.
-There is intentionally no mode selector.
-"""
-
-import argparse
-import subprocess
-import sys
-
-
-def run_cmd(cmd: list[str]) -> int:
-    print("[TrainStack] Running:", " ".join(cmd))
-    return subprocess.call(cmd)
-
-
-def main():
-    parser = argparse.ArgumentParser(description="Train two-model analysis stack")
-    parser.add_argument("manifest", help="Path to dataset_manifest.csv")
-    parser.add_argument("--exclude-uncertain", action="store_true", dest="exclude_uncertain")
-    args, passthrough = parser.parse_known_args()
-
-    py = sys.executable
-    common = [args.manifest]
-    if args.exclude_uncertain:
-        common += ["--exclude-uncertain"]
-
-    rc = run_cmd([py, "train_malware_model.py", *common, *passthrough])
-    if rc != 0:
-        raise SystemExit(rc)
-
-    rc = run_cmd([py, "train_benign_model.py", *common, *passthrough])
-    if rc != 0:
-        raise SystemExit(rc)
-
-    print("[TrainStack] Done.")
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+def _label_of(data: Data) -> int:
+    y = getattr(data, "y", None)
+    if y is None:
+        return -1
+    if hasattr(y, "item"):
+        return int(y.item())
+    return int(y)
 
 
 def build_benign_augmented_dataset(
@@ -402,18 +310,19 @@ def build_model(args, in_dim, device, num_classes: int = 2, dropout_override=Non
     return m.to(device)
 
 
-def compute_class_weights(labels, device, num_classes: int, benign_boost: float = 1.0):
+def compute_class_weights(labels, device, num_classes: int, benign_boost: float = 2.0):
     """
-    Inverse-frequency class weights. Optional benign_boost (>1) multiplies the
-    benign class (label=0) for imbalanced small corpora; default 1.0 = off.
+    Inverse-frequency weights with an additional `benign_boost` multiplier on
+    the benign class (label=0) to counter positive-bias collapse.
+    benign_boost=2.0 means benign misclassifications cost twice as much.
     """
     counts  = np.bincount(labels, minlength=num_classes)
     counts[counts == 0] = 1
     total   = len(labels)
     weights = np.array([total / (len(counts) * c) for c in counts],
                        dtype=np.float32)
-    if num_classes == 2 and benign_boost != 1.0:
-        weights[0] *= benign_boost
+    if num_classes == 2:
+        weights[0] *= benign_boost          # extra penalty for missing benign
     weights = torch.tensor(weights, dtype=torch.float, device=device)
     return weights
 
@@ -530,9 +439,6 @@ def train_one_fold(
     best_f1    = -1.0
     best_acc   = -1.0
     best_state = {k: v.clone() for k, v in model.state_dict().items()}
-    es_patience = int(getattr(args, "early_stop_patience", 0) or 0)
-    es_min_ep   = int(getattr(args, "early_stop_min_epochs", 40) or 0)
-    stalled     = 0
 
     for epoch in range(1, args.epochs + 1):
         loss = train_epoch(
@@ -552,18 +458,6 @@ def train_one_fold(
             pick_f1, pick_acc = train_f1, train_acc
         scheduler.step()
 
-        improved = (pick_f1 > best_f1) or (
-            abs(pick_f1 - best_f1) < 1e-9 and pick_acc > best_acc
-        )
-        if improved:
-            best_f1 = pick_f1
-            best_acc = pick_acc
-            best_state = {k: v.clone()
-                          for k, v in model.state_dict().items()}
-            stalled = 0
-        else:
-            stalled += 1
-
         if epoch % 10 == 0 or epoch == args.epochs:
             msg = (
                 f"  Epoch {epoch:>3}  loss={loss:.4f}  "
@@ -575,17 +469,11 @@ def train_one_fold(
                 msg += f"  val_acc={val_acc:.3f}  val_f1={val_f1:.3f}"
             print(msg)
 
-        if (
-            val_loader is not None
-            and es_patience > 0
-            and epoch >= es_min_ep
-            and stalled >= es_patience
-        ):
-            print(
-                f"  [Early-stop] no improvement in val score for {es_patience} epochs "
-                f"(epoch {epoch}, best val_f1={best_f1:.3f})"
-            )
-            break
+        if pick_f1 > best_f1 or (pick_f1 == best_f1 and pick_acc > best_acc):
+            best_f1    = pick_f1
+            best_acc   = pick_acc
+            best_state = {k: v.clone()
+                          for k, v in model.state_dict().items()}
 
     # ── Evaluate on all held-out graphs in this fold ────────────────────────────
     model.load_state_dict(best_state)
@@ -678,7 +566,7 @@ def run(args):
     n_groups        = len(unique_groups)
 
     label_counts = dict(zip(*np.unique(labels, return_counts=True)))
-    benign_boost = getattr(args, "benign_boost", 1.0)
+    benign_boost = getattr(args, "benign_boost", 2.0)
 
     fold_splits = build_cv_splits(
         args.cv, n, labels, groups, args.n_splits, args.seed,
@@ -716,24 +604,18 @@ def run(args):
     print(f"[Train] Epochs      : {args.epochs}  batch_size={TRAIN_BATCH_SIZE}  lr={args.lr}")
     print(f"[Train] Augment     : {getattr(args, 'augment', False)}")
     print(f"[Train] Augment benign: {getattr(args, 'augment_benign', False)}")
-    if num_classes == 2 and benign_boost != 1.0:
+    if num_classes == 2:
         print(f"[Train] Benign boost: {benign_boost}x")
-    print(f"[Train] Include uncertain: {args.include_uncertain}  (use --exclude-uncertain to drop)")
+    print(f"[Train] Include uncertain: {args.include_uncertain}")
     print(f"[Train] Include unknown  : {args.include_unknown}")
     vf = float(getattr(args, "val_fraction", 0.0) or 0.0)
     ls = float(getattr(args, "label_smoothing", 0.0) or 0.0)
     print(f"[Train] Val fraction   : {vf}  (checkpoint by val acc/F1 if >0)")
-    es_p = int(getattr(args, "early_stop_patience", 0) or 0)
-    if es_p > 0 and vf > 0:
-        print(
-            f"[Train] Early stop     : patience={es_p}  min_epochs="
-            f"{int(getattr(args, 'early_stop_min_epochs', 40) or 0)}"
-        )
     print(f"[Train] Label smooth   : {ls}")
 
     print(
         "[Train] Class weights: computed per outer fold from training labels only "
-        "(inverse frequency; optional benign_boost when num_classes==2 and boost≠1)"
+        "(inverse frequency; benign_boost only when num_classes==2)"
     )
 
     fold_results: list[dict] = []
@@ -931,12 +813,12 @@ if __name__ == "__main__":
     parser.add_argument("--benign-feat-mask", type=float, default=0.05,
                         dest="benign_feat_mask",
                         help="Feature mask probability for benign augmentation (default 0.05)")
-    parser.add_argument("--benign-boost",  type=float, default=1.0,
+    parser.add_argument("--benign-boost",  type=float, default=2.0,
                         dest="benign_boost",
-                        help="Extra weight multiplier for benign class (default 1.0 = disabled)")
-    parser.add_argument("--exclude-uncertain", action="store_true",
-                        dest="exclude_uncertain",
-                        help="Exclude manifest rows marked uncertain (default: include all)")
+                        help="Extra weight multiplier for benign class (default 2.0)")
+    parser.add_argument("--include-uncertain", action="store_true",
+                        dest="include_uncertain",
+                        help="Include manifest rows marked uncertain (default: excluded)")
     parser.add_argument("--include-unknown", action="store_true",
                         dest="include_unknown",
                         help="Include rows with label=-1 (default: excluded)")
@@ -985,34 +867,5 @@ if __name__ == "__main__":
         dest="label_smoothing",
         help="Cross-entropy label smoothing (0–0.2; default 0). Can reduce overconfident logits.",
     )
-    parser.add_argument(
-        "--early-stop-patience",
-        type=int,
-        default=0,
-        dest="early_stop_patience",
-        metavar="N",
-        help=(
-            "Stop training after N epochs without val improvement (requires --val-fraction > 0). "
-            "0 = disabled (default). Try 20–30 with --val-fraction 0.15."
-        ),
-    )
-    parser.add_argument(
-        "--early-stop-min-epochs",
-        type=int,
-        default=40,
-        dest="early_stop_min_epochs",
-        metavar="M",
-        help="Minimum epochs before early stopping can trigger (default 40).",
-    )
     args = parser.parse_args()
-    args.include_uncertain = not getattr(args, "exclude_uncertain", False)
-    if int(getattr(args, "early_stop_patience", 0) or 0) > 0 and float(
-        getattr(args, "val_fraction", 0.0) or 0.0
-    ) <= 0.0:
-        print(
-            "[WARN] --early-stop-patience is ignored without --val-fraction > 0 "
-            "(no validation split to monitor)."
-        )
-    import warnings
-    warnings.filterwarnings("ignore")
     run(args)

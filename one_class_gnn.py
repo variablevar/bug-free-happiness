@@ -15,6 +15,8 @@ from torch_geometric.loader import DataLoader
 from torch_geometric.nn import GINEConv, global_add_pool, global_max_pool, global_mean_pool
 
 from dataset import N_EDGE_TYPES
+from utils.evidence_metadata import enrich_edge, enrich_node
+from utils.inference_align import align_pyg_data_to_oneclass_model
 from utils.schema import EXPECTED_GRAPH_ATTR_DIM
 
 
@@ -42,6 +44,7 @@ class OneClassGINE(nn.Module):
         self.dropout = dropout
         self.edge_emb = nn.Embedding(N_EDGE_TYPES, edge_emb_dim)
         self.graph_attr_dim = graph_attr_dim
+        self.expected_node_in = int(in_channels)
 
         self.convs = nn.ModuleList()
         self.bns = nn.ModuleList()
@@ -278,7 +281,7 @@ def score_graph(
     if force_eval:
         model.eval()
     with torch.no_grad():
-        d = data.to(device)
+        d = align_pyg_data_to_oneclass_model(data, model).to(device)
         batch = torch.zeros(d.x.size(0), dtype=torch.long, device=device)
         z = model(d.x, d.edge_index, batch, getattr(d, "graph_attr", None), getattr(d, "edge_attr", None))
         d2 = float(torch.sum((z[0] - center) ** 2).item())
@@ -296,7 +299,7 @@ def explain_graph(
     top_k_graph_attrs: int = 5,
 ) -> dict:
     model.eval()
-    d = data.clone().to(device)
+    d = align_pyg_data_to_oneclass_model(data, model).clone().to(device)
     d.x = d.x.detach().requires_grad_(True)
     graph_attr = getattr(d, "graph_attr", None)
     if graph_attr is not None:
@@ -309,10 +312,7 @@ def explain_graph(
 
     node_sal = (d.x.grad * d.x).abs().sum(dim=1).detach().cpu().numpy()
     node_order = np.argsort(-node_sal)
-    top_nodes = [
-        {"node_id": int(i), "importance": float(node_sal[i])}
-        for i in node_order[: max(1, top_k_nodes)]
-    ]
+    top_nodes = [enrich_node(d, int(i), float(node_sal[i])) for i in node_order[: max(1, top_k_nodes)]]
 
     graph_attr_top = []
     if graph_attr is not None and graph_attr.grad is not None:
@@ -325,16 +325,17 @@ def explain_graph(
 
     edge_pairs = []
     if d.edge_index is not None and d.edge_index.size(1) > 0:
-        node_imp = {int(x["node_id"]): float(x["importance"]) for x in top_nodes}
         src = d.edge_index[0].detach().cpu().numpy()
         dst = d.edge_index[1].detach().cpu().numpy()
         scores = []
-        for u, v in zip(src.tolist(), dst.tolist()):
-            score = node_imp.get(int(u), 0.0) + node_imp.get(int(v), 0.0)
-            if score > 0:
-                scores.append((score, int(u), int(v)))
+        for edge_i, (u, v) in enumerate(zip(src.tolist(), dst.tolist())):
+            score = float(node_sal[int(u)]) + float(node_sal[int(v)])
+            scores.append((score, int(edge_i), int(u), int(v)))
         scores.sort(reverse=True)
-        edge_pairs = [{"src": u, "dst": v, "importance": s} for s, u, v in scores[: max(1, top_k_nodes)]]
+        edge_pairs = [
+            enrich_edge(d, edge_i, u, v, s)
+            for s, edge_i, u, v in scores[: max(1, top_k_nodes)]
+        ]
 
     return {
         "distance": float(dist.detach().cpu().item()),

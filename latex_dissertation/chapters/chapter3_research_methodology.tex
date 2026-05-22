@@ -1,0 +1,236 @@
+\chapter{Research Methodology}
+\label{ch:methodology}
+
+\section{Research Design}
+
+This project follows an applied experimental design. It uses an existing implementation and its artefacts as the basis for dissertation writing. The method is not only theoretical. It includes a working pipeline that extracts, transforms, trains, evaluates, and reports on Windows memory-forensics data.
+
+The research philosophy is pragmatic. The goal is to build a reproducible system that connects forensic extraction with graph learning. The evaluation therefore uses real project artefacts (CSVs, graphs, manifests, and analysis JSON files) rather than synthetic-only benchmarks.
+
+The research process has five stages:
+
+\begin{enumerate}
+\item Collect or prepare Windows memory dump folders.
+\item Extract memory artefacts using Volatility 3 plugins.
+\item Build heterogeneous behaviour graphs from extracted CSV files.
+\item Train and analyse graph neural network models.
+\item Interpret results with evidence, uncertainty, and limitations.
+\end{enumerate}
+
+Each stage produces files with defined contracts. This reduces silent errors and supports repeatability \cite{goodman2016reproducibility}.
+
+\section{Data Sources}
+
+The main dataset is stored under the project \texttt{extracted\_data} folder. The dataset manifest contains 30 rows. These rows represent malware-labelled and benign-labelled graph samples. The manifest includes fields such as sample ID, folder, label, family, node count, edge count, maximum score, attack steps, injection counts, C2 connection counts, verdict, graph attributes, label signals, uncertainty status, and pipeline health flags.
+
+The families and sample names include examples such as Cerber, Dharma, GandCrab, GoldenEye, WannaCry, PowerLoader, RedTail, Win32.BlackWorm, W32.MyDoom.A, and others. These names show the dataset has malware-family variety, but the dissertation does not treat one malware type as the full topic.
+
+The corpus uses paired folders: \texttt{Family-WithVirus} and \texttt{Family-NoVirus}. This pairing supports controlled comparison within the same malware family context. It also highlights label difficulty when benign baselines still contain suspicious indicators.
+
+The manifest also shows a key issue. Some NoVirus rows are marked as uncertain because they contain high or critical suspicious signals. In total, 14 of 15 benign-labelled rows are flagged uncertain in the current manifest. This does not mean the pipeline failed. It means benign baselines can contain suspicious-looking memory artefacts. The project handles this by recording uncertainty instead of hiding it.
+
+\section{Volatility 3 Extraction}
+
+Volatility 3 is used to extract structured artefacts from Windows memory dumps \cite{volatility3docs}, \cite{volatility3github}. The project server and scripts support these plugin outputs:
+
+\begin{itemize}
+\item \texttt{windows.pslist}
+\item \texttt{windows.psscan}
+\item \texttt{windows.pstree}
+\item \texttt{windows.malfind}
+\item \texttt{windows.netscan}
+\item \texttt{windows.cmdline}
+\item \texttt{windows.dlllist}
+\item \texttt{windows.handles}
+\item \texttt{windows.threads}
+\item \texttt{windows.vadinfo}
+\item \texttt{windows.filescan}
+\item \texttt{windows.driverscan}
+\item \texttt{windows.ssdt}
+\item \texttt{windows.registry.hivelist}
+\end{itemize}
+
+Table~\ref{tab:plugin_mapping} maps plugins to forensic intent. This table helps explain why the graph schema includes process, memory, network, and kernel-related nodes.
+
+\begin{table}[htbp]
+\centering
+\caption{Volatility 3 plugins and primary forensic purpose in this project.}
+\label{tab:plugin_mapping}
+\small
+\begin{tabular}{p{3.8cm}p{8.2cm}}
+\toprule
+\textbf{Plugin} & \textbf{Primary purpose} \\
+\midrule
+\texttt{pslist}, \texttt{psscan}, \texttt{pstree} & Process visibility and parent-child structure \\
+\texttt{malfind}, \texttt{vadinfo} & Suspicious memory regions and VAD properties \\
+\texttt{netscan} & Active network connections and endpoints \\
+\texttt{cmdline}, \texttt{dlllist} & Execution context and module loading \\
+\texttt{handles}, \texttt{threads} & Process interaction and execution units \\
+\texttt{filescan}, \texttt{driverscan}, \texttt{ssdt} & File, driver, and syscall-table artefacts \\
+\texttt{registry.hivelist} & Registry hive presence in memory \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Each plugin gives a different view of the memory image. For example, \texttt{pslist} gives active process information, \texttt{psscan} can reveal process traces, \texttt{malfind} supports injected memory analysis, and \texttt{netscan} gives network connection information. The pipeline writes these outputs as CSV files for each sample folder.
+
+Extraction is run per sample directory. The design keeps plugin outputs close to the graph build step so that provenance is clear: every edge and node can be traced back to a plugin CSV row or a derived rule outcome. This traceability is important when an analyst challenges a model score and wants to see the underlying forensic evidence chain.
+
+\section{Graph Construction Method}
+
+The graph construction stage converts plugin CSV files into a NetworkX graph \cite{hagberg2008networkx}. The graph is later loaded by PyTorch Geometric \cite{fey2019pyg}. Table~\ref{tab:node_types} lists the main node types.
+
+\begin{table}[htbp]
+\centering
+\caption{Main node types in the heterogeneous memory graph.}
+\label{tab:node_types}
+\begin{tabular}{ll}
+\toprule
+\textbf{Node type} & \textbf{Meaning} \\
+\midrule
+\texttt{process} & Running or recorded process instance \\
+\texttt{thread} & Thread belonging to a process \\
+\texttt{dll} & Loaded module \\
+\texttt{memory\_region} & Virtual memory region (VAD-style unit) \\
+\texttt{network\_conn} & Network connection object \\
+\texttt{ip\_address} & Remote or local IP endpoint \\
+\texttt{handle} & Handle opened by a process \\
+\texttt{driver} & Loaded driver \\
+\texttt{kernel} & Kernel anchor node for system-level links \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:edge_types} summarises edge categories. Structural edges come from direct artefact relationships. Intent edges add security meaning for model input and analyst explanation.
+
+\begin{table}[htbp]
+\centering
+\caption{Representative edge types in the memory behaviour graph.}
+\label{tab:edge_types}
+\small
+\begin{tabular}{p{3.6cm}p{8.4cm}}
+\toprule
+\textbf{Edge type} & \textbf{Meaning} \\
+\midrule
+\texttt{spawned\_by}, \texttt{belongs\_to} & Process tree and ownership \\
+\texttt{loaded\_into}, \texttt{allocated\_in} & DLL and memory placement \\
+\texttt{injected\_into} & Suspicious memory injection link \\
+\texttt{connects\_from}, \texttt{connects\_to} & Network communication path \\
+\texttt{intent\_c2}, \texttt{intent\_injection} & Behaviour intent for triage and learning \\
+\texttt{lolbin\_execution\_chain} & Suspicious living-off-the-land style chain \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This schema is important because malware behaviour is not represented only by one score. It is represented by relationships across a graph.
+
+\section{Feature Engineering}
+
+The dataset loader creates node features, edge features, and graph-level attributes. Node features include node type, suspicious flags, RWX memory indicators, MZ header indicators, external connection flags, private memory values, commit charge values, load counts, process context, and per-node edge-role counts.
+
+Edge features are represented as categorical edge-type identifiers that can be embedded during GINE-style message passing \cite{xu2019gin}. Graph-level attributes include counts and derived signals such as graph size, graph density, suspicious behaviour flags, injection signals, C2 indicators, temporal chain counts, persistence counts, credential-access counts, privilege-escalation indicators, service mismatches, DLL trust anomalies, and graph motifs. These features are concatenated with graph embeddings during model inference.
+
+The triage layer writes \texttt{graph\_attr.json} with both a short legacy vector and an expanded attribute map. This design keeps backward compatibility while allowing richer graph-level features over time.
+
+\section{Model Methodology}
+
+The project supports several GNN backbones:
+
+\begin{itemize}
+\item \textbf{GIN:} useful for graph classification and structural differences \cite{xu2019gin}.
+\item \textbf{GraphSAGE:} useful for neighbourhood aggregation and inductive learning \cite{hamilton2017graphsage}.
+\item \textbf{GAT:} useful when attention over neighbours may improve representation \cite{velickovic2018gat}.
+\item \textbf{GINE:} useful because edge types can be included through edge embeddings \cite{xu2019gin}.
+\end{itemize}
+
+The binary model uses a GINE-style graph classifier for malware-versus-benign separation. The one-class models use GINE-style encoders to learn malware and benign conformity spaces. The analysis layer can then compare malware-pattern score, benign-conformity score, binary probability, heuristic risk, and uncertainty.
+
+Graph-level readout uses multiple pooling operations (mean, max, and sum). The pooled representation is combined with graph attributes before the final classification or scoring head. This allows the model to use both learned structure and explicit forensic signals.
+
+\section{Evaluation Method}
+
+The evaluation is based on available project artefacts. The manifest records graph sizes, labels, verdicts, suspicious counts, and uncertainty fields. The analysis JSON files record graph summaries and evidence. The dissertation discusses these outputs carefully and avoids claiming production-level performance.
+
+Important evaluation concerns are:
+
+\begin{itemize}
+\item small corpus size (30 graphs),
+\item possible family leakage,
+\item noisy benign baselines,
+\item uncertain labels,
+\item memory acquisition timing,
+\item plugin output variation,
+\item calibration quality,
+\item explainability needs.
+\end{itemize}
+
+Where classification metrics are reported, the project uses standard definitions. Precision is true positives divided by predicted positives. Recall is true positives divided by actual positives. F1 is the harmonic mean of precision and recall \cite{davis2006roc}. Calibration quality is discussed using reliability concepts from Guo et al.\ \cite{guo2017calibration}.
+
+Grouped cross-validation is important because samples from the same family can be similar. If related samples appear in both training and test folds, the result can be too optimistic \cite{sommer2010outside}. Family-grouped splits are therefore the recommended evaluation setting for any future model benchmarking on this corpus.
+
+\section{Ethics}
+
+Malware research must be handled safely. The project does not include malware binaries in the written dissertation. Memory dumps and extracted artefacts may contain sensitive system information. Therefore, raw memory data should be stored securely, shared only when allowed, and anonymised where possible. The research should follow university ethics guidance and legal rules, including guidance from standards such as ISO/IEC 27037 \cite{iso2012digital} and NIST incident response guidelines \cite{nist2012sp80061}.
+
+The written dissertation focuses on methods, aggregated statistics, and anonymised examples. It avoids publishing credentials, personal data, or live command lines that could identify individuals or organisations.
+
+\section{Data Collection and Sample Selection}
+
+Each sample in the corpus corresponds to a memory-forensics workspace folder under \texttt{extracted\_data}. The folder naming pattern encodes both family and infection condition. A \texttt{WithVirus} folder is treated as malware-labelled. A \texttt{NoVirus} folder is treated as benign-labelled for experiments, while still allowing uncertain flags when triage signals are strong.
+
+This pairing supports within-family comparison. For example, Cerber-WithVirus and Cerber-NoVirus share family context but may differ in process, memory, and network graphs. Such pairs are useful for error analysis because they show whether graph features capture infection-specific changes or only host-specific noise.
+
+Sample selection was driven by availability of complete pipeline outputs. Rows with failed graph or analysis stages would be excluded from training. In the current manifest, all 30 rows report successful filter, graph, and analysis stages.
+
+\section{Labelling Policy and Uncertainty Handling}
+
+The project uses folder naming as the primary label source. This is simple and reproducible, but it is not perfect. Rule-based triage can assign HIGH or CRITICAL verdicts to NoVirus samples when suspicious artefacts appear in baseline memory.
+
+The manifest therefore includes \texttt{uncertain} and \texttt{uncertain\_reason} fields. Typical reasons include \texttt{benign\_with\_high\_or\_critical\_verdict} and \texttt{benign\_with\_high\_process\_score}. This policy follows the idea that label quality should be reported rather than hidden \cite{goodman2016reproducibility}.
+
+For model training, uncertain benign rows can be handled in several ways: keep them as benign with sample weights, exclude them from training, or treat them as a third ambiguity class at inference time. The repository supports analyst-review states in the two-model analysis path so that these rows are not forced into a false sense of certainty.
+
+\section{Detailed Feature Groups}
+
+\textbf{Node features.} Node features combine categorical node type encodings with numeric forensic indicators. Suspicious flags summarise rule outcomes at node level. Memory-related nodes can include RWX and MZ-header indicators. Process-related nodes can include handle counts and lineage context.
+
+\textbf{Edge features.} Edge types are encoded as integer identifiers for embedding lookup. This allows the model to treat \texttt{injected\_into} differently from \texttt{belongs\_to}. Edge features are especially important in GINE-style layers because they enter message functions directly.
+
+\textbf{Graph features.} Graph features summarise global behaviour: size, density, suspicious counts, attack-step counts, injection and C2 indicators, temporal-chain counts, and motif counts. Many graph features come from \texttt{graph\_attr.json} and therefore connect learning to transparent triage rules.
+
+\section{Training and Validation Protocol}
+
+The binary trainer uses a train-validation split with class-weight adjustment and early stopping. Positive-class weight can be tuned manually or through a small sweep when validation recall is below a target. This is useful when false negatives are more costly than false positives.
+
+Grouped validation by \texttt{family} is the recommended setting for this corpus. A random split could place both Cerber-WithVirus and Cerber-NoVirus in different folds in unlucky ways, but family grouping reduces leakage more directly. Future work should report both random and grouped metrics to show how optimistic standard splits can be \cite{sommer2010outside}.
+
+\section{Threats to Validity}
+
+\textbf{Internal validity.} Pipeline bugs, schema drift, or incorrect edge construction could create artificial patterns. The project mitigates this with contracts, health flags, and manual inspection of sample graphs.
+
+\textbf{External validity.} The corpus is small and may not represent all Windows versions, enterprise baselines, or malware families. Conclusions generalise cautiously.
+
+\textbf{Construct validity.} Folder labels may not perfectly match ground truth infection state. Uncertainty flags make this explicit.
+
+\textbf{Conclusion validity.} With only 30 graphs, strong claims about SOTA detection performance are not justified. The dissertation focuses on pipeline feasibility and evidence quality instead.
+
+\section{Research Timeline and Artefact Milestones}
+
+The applied methodology followed an iterative order:
+
+\begin{enumerate}
+\item stabilise Volatility extraction outputs for each sample folder;
+\item implement graph build and verify node/edge counts;
+\item add triage filtering and graph attributes;
+\item generate analysis reports and attack-chain summaries;
+\item build the dataset manifest for all successful samples;
+\item implement dataset loader and GNN training scripts;
+\item add binary and two-model analysis outputs with evidence fields;
+\item integrate optional API scanning for interactive demos.
+\end{enumerate}
+
+This order reduced rework because manifest rows were only created after graph and analysis health checks passed. It also made dissertation writing easier: each chapter maps to a stable artefact layer rather than to temporary experimental files.
+
+\section{Relation to \texttt{docs.md} and Code Contracts}
+
+The repository includes \texttt{docs.md} as a narrative project document and \texttt{docs/pipeline\_contracts.md} as a contract reference. The dissertation chapters translate these materials into academic structure. When code and dissertation text differ, the manifest and contract files should be treated as authoritative for experiments because they reflect the latest pipeline behaviour.

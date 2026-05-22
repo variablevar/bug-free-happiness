@@ -1,0 +1,209 @@
+\chapter{Implementation}
+\label{ch:implementation}
+
+\section{Development Environment}
+
+The project is implemented mainly in Python. It uses Volatility 3 for forensic extraction \cite{volatility3docs}, pandas for CSV processing \cite{mckinney2010pandas}, NetworkX for graph construction \cite{hagberg2008networkx}, PyTorch and PyTorch Geometric for deep learning \cite{paszke2019pytorch}, \cite{fey2019pyg}, and FastAPI for the backend service \cite{fastapi2026docs}. The dashboard side uses TypeScript and web API routes to interact with the model scan flow.
+
+The implementation follows a script-oriented research codebase. Each major step has a command-line entry point. This makes it easier to rerun one stage after fixing a bug without rebuilding the entire corpus.
+
+\section{Main Repository Components}
+
+The main implementation components are:
+
+\begin{itemize}
+\item \texttt{auto\_vol.py}: runs Volatility extraction over memory dumps.
+\item \texttt{build\_graph.py}: builds heterogeneous graphs from CSV artefacts.
+\item \texttt{filter\_malicious.py}: produces triage signals and suspicious evidence.
+\item \texttt{analyze\_graph.py}: creates graph-level analysis reports.
+\item \texttt{build\_dataset.py}: builds the dataset manifest.
+\item \texttt{dataset.py}: loads graphs into PyTorch Geometric format.
+\item \texttt{model.py}: defines GIN, GraphSAGE, GAT, and GINE classifiers.
+\item \texttt{one\_class\_gnn.py}: defines one-class GINE utilities.
+\item \texttt{train\_binary\_model.py}: trains the binary GNN baseline.
+\item \texttt{train\_malware\_model.py} and \texttt{train\_benign\_model.py}: train one-class models.
+\item \texttt{analyze\_binary\_model.py}: produces calibrated binary model analysis.
+\item \texttt{analyze\_two\_model.py}: combines malware and benign model outputs.
+\item \texttt{model\_scan.py}: runs model scanning for one upload-session graph.
+\item \texttt{server.py}: exposes the extraction, graph, IOC, and scan workflow through an API.
+\end{itemize}
+
+\subsection{Extraction and graph build}
+
+\texttt{auto\_vol.py} orchestrates plugin execution and writes \texttt{windows\_*.csv} files into each sample directory. \texttt{build\_graph.py} reads these tables, normalises identifiers, and creates nodes and edges. The script also writes \texttt{graph.pkl} and \texttt{graph.json}. The JSON form supports manual inspection and dashboard rendering.
+
+\texttt{filter\_malicious.py} runs after an initial graph exists. It identifies suspicious PIDs and writes triage metadata used later as graph attributes. This step connects rule-based forensic reasoning with machine-learning features.
+
+\subsection{Dataset and model code}
+
+\texttt{build\_dataset.py} walks the corpus and writes \texttt{dataset\_manifest.csv}. The manifest is the single index used by training and evaluation scripts. \texttt{dataset.py} converts each graph into a PyTorch Geometric \texttt{Data} object with consistent feature shapes.
+
+\texttt{model.py} defines the GNN backbones and graph-level classifier head. The implementation uses global pooling and concatenates graph attributes before the final layer. \texttt{one\_class\_gnn.py} provides encoders and scoring utilities for the malware and benign conformity models.
+
+\section{Data Contracts}
+
+The project uses clear file contracts. Each sample can produce:
+
+\begin{itemize}
+\item \texttt{windows\_*.csv} plugin outputs,
+\item \texttt{graph.pkl},
+\item \texttt{graph.json},
+\item \texttt{filtered\_malicious.json},
+\item \texttt{graph\_attr.json},
+\item \texttt{analysis\_report.json}.
+\end{itemize}
+
+At dataset level, the main output is \texttt{dataset\_manifest.csv}. This file is used by the dataset loader and training scripts. Keeping these files consistent is important because machine learning results depend on stable input shape and meaning.
+
+If a contract changes, the project expects coordinated updates in the loader, manifest builder, and analysis scripts. Hidden schema drift is a common source of technical debt in ML systems \cite{sculley2015debt}.
+
+\section{Node and Edge Implementation}
+
+The graph schema is based on real memory-forensics entities. Processes, threads, DLLs, memory regions, network connections, handles, drivers, and kernel objects become nodes. Relationships become typed edges. The graph therefore represents a system snapshot as a connected behaviour structure.
+
+This approach is stronger than a simple count table because it preserves relationships. For example, the model can learn that injected memory connected to a process with unusual network activity may be more important than an isolated count of memory regions.
+
+Edge typing also allows the GINE encoder to treat different relations differently. This is useful when injection edges and ownership edges carry different security meaning.
+
+\section{Why GINE and What Alternatives Were Considered}
+
+\subsection{Why GINE over untyped convolutions}
+
+Forensic graphs are heterogeneous: edge types encode distinct semantics (parent--child, DLL load, injection, network ownership, behaviour-intent links). Standard GCN or mean-aggregation layers treat all edges similarly and can blur type-specific signals. GINE extends GIN with edge-conditioned message functions so each relation type contributes separately \cite{xu2019gin}. That matches the design goal: preserve forensic meaning in the message-passing path rather than collapsing relations into unlabeled adjacency.
+
+\subsection{Why graph-level classification, not node labels}
+
+Memory dumps in this corpus provide snapshot-level supervision (\texttt{WithVirus} vs \texttt{NoVirus}). Node-level malware labels are not available without expensive manual annotation. Graph-level classification answers the operational question ``should this memory image be prioritised?'' and aligns with manifest labels, at the cost of ignoring which specific process caused the label.
+
+\subsection{Supported backbones and expected trade-offs}
+
+\texttt{model.py} implements GIN, GraphSAGE, GAT, and GINE with the same pooling head and graph-attribute concatenation. Table~\ref{tab:gnn_comparison} (generated by \texttt{scripts/generate\_eval\_latex.py} after grouped CV) is the intended comparison point. Until CV JSON files exist, cells remain placeholders.
+
+\begin{itemize}
+\item \textbf{GIN:} strong baseline for graph classification; no edge-type conditioning.
+\item \textbf{GraphSAGE:} inductive neighbourhood sampling; useful if graphs grow beyond current corpus scale.
+\item \textbf{GAT:} attention over neighbours; higher compute on large graphs (many memory-region nodes).
+\item \textbf{GINE:} default for binary and one-class paths because edge types are informative.
+\end{itemize}
+
+\subsection{What did not work well in practice}
+
+Three trade-offs appeared during development. \textbf{Small $n$:} with 30 graphs, validation folds are unstable; family grouping is necessary but reduces effective training size per fold. \textbf{Train time vs graph size:} samples above 20,000 nodes dominate batch memory; training epochs are costly relative to tabular baselines on manifest features alone. \textbf{Heuristic features vs pure learning:} graph attributes already encode strong triage signals; GNN gains may be modest unless structure adds information beyond \texttt{graph\_attr.json}---an open question for the tabular-vs-GNN comparison in Chapter~\ref{ch:evaluation}.
+
+\section{GNN Implementation}
+
+The GNN models perform message passing over the graph \cite{hamilton2020graph}. Each graph is converted into PyTorch Geometric data \cite{fey2019pyg} with:
+
+\begin{itemize}
+\item \texttt{x} for node features,
+\item \texttt{edge\_index} for graph connectivity,
+\item \texttt{edge\_attr} for edge-type IDs,
+\item \texttt{graph\_attr} for graph-level features,
+\item \texttt{batch} for mini-batch processing.
+\end{itemize}
+
+The model then creates a graph-level representation using pooling operations. The implementation uses mean, max, and sum pooling. The pooled graph vector is joined with graph-level attributes before final classification or scoring.
+
+\subsection{Training configuration}
+
+The binary trainer supports class-weight tuning, early stopping, and optional learning-rate scheduling. Default training uses multiple epochs with validation-based model selection. The script can sweep positive-class weights to balance recall and specificity on small validation folds.
+
+One-class trainers learn embedding-space boundaries for malware-only or benign-only subsets. These models are later used by \texttt{analyze\_two\_model.py} to compare conformity scores on new graphs.
+
+\section{Evidence and Inference Implementation}
+
+The analysis scripts do more than return a score. They enrich nodes and edges with evidence metadata, align features with checkpoint expectations, apply calibration where needed, compute uncertainty fields, and write structured JSON so analysts can audit outputs.
+
+The two-model analysis produces fields such as:
+
+\begin{itemize}
+\item malware pattern score,
+\item benign conformity score,
+\item delta score,
+\item triage state,
+\item reasoning types,
+\item behavioural findings,
+\item model evidence,
+\item narrative explanation.
+\end{itemize}
+
+\texttt{model\_scan.py} exposes a single-graph inference path for the API workflow. This is useful for upload-session analysis in the dashboard prototype.
+
+\section{Implementation Challenges}
+
+Three challenges appeared repeatedly during development.
+
+\textbf{Missing or partial plugin output.} Not every sample had identical CSV coverage. The graph builder had to tolerate absent files while still recording health flags in the manifest.
+
+\textbf{Graph-size variation.} The corpus includes graphs from 86 nodes to more than 27,000 nodes. Batch training therefore required careful memory use and padding strategies.
+
+\textbf{Noisy benign labels.} Many NoVirus folders produced HIGH or CRITICAL rule-based verdicts. The implementation response was to add \texttt{uncertain} flags and analyst-review states instead of forcing clean benign labels.
+
+\section{Reproducibility}
+
+Reproducibility is supported by the manifest, saved model metadata, stable graph attributes, and fixed file contracts \cite{goodman2016reproducibility}. A future reader can inspect which samples were used, which graph attributes were present, and which steps completed successfully. This is important in cybersecurity research because small implementation changes can alter results, a problem known as hidden technical debt in machine learning systems \cite{sculley2015debt}.
+
+Appendix~\ref{app:repro} lists recommended commands to rebuild the dataset and regenerate dissertation figures.
+
+\section{Per-Module Implementation Notes}
+
+\subsection{\texttt{build\_graph.py}}
+
+The graph builder reads plugin CSV files and maps rows to node dictionaries. Processes are linked with parent-child relations when \texttt{pstree} or equivalent information is available. DLL and memory-region nodes attach to process nodes with typed edges. Network connections link to owning processes and remote IP nodes.
+
+The builder also computes derived indicators such as suspicious process scores and attack-step counts used later in triage. When enrichment is enabled, behaviour-intent edges are added from rule outcomes rather than from raw plugin rows alone.
+
+\subsection{\texttt{filter\_malicious.py}}
+
+The filter stage identifies suspicious PIDs and writes \texttt{filtered\_malicious.json}. This file includes metadata used by both graph attribute generation and analyst review. The filter is intentionally readable: an analyst can open the JSON file and see which PIDs triggered suspicion without reading model code.
+
+\subsection{\texttt{analyze\_graph.py}}
+
+The analysis stage produces \texttt{analysis\_report.json} with graph summaries, attack-chain steps, and structured suspicious-node listings. Version 3 of the analyser enriches outputs used by the dissertation case studies. The WannaCry example in Chapter~\ref{ch:evaluation} comes directly from this file format.
+
+\subsection{\texttt{dataset.py} and training scripts}
+
+The dataset loader reads \texttt{dataset\_manifest.csv}, loads each \texttt{graph.pkl}, and converts graphs to PyTorch Geometric batches. Feature alignment checks help prevent silent mismatches between training and inference checkpoints.
+
+\texttt{train\_binary\_model.py} trains the supervised baseline. \texttt{train\_malware\_model.py} and \texttt{train\_benign\_model.py} train one-class encoders. \texttt{analyze\_binary\_model.py} and \texttt{analyze\_two\_model.py} generate JSON outputs for single samples or batches.
+
+\subsection{\texttt{server.py} and \texttt{model\_scan.py}}
+
+The server exposes endpoints for extraction, graph build, and scanning workflows. \texttt{model\_scan.py} supports session-based inference when a graph already exists for an uploaded dump. This path is useful for interactive demos but is not required for batch evaluation on the 30-sample corpus.
+
+\section{Hyperparameters and Training Defaults}
+
+Table~\ref{tab:hyperparams} summarises main training defaults used in the binary trainer. These values are implementation defaults rather than fully tuned optimal settings. They are reported here for reproducibility.
+
+\begin{table}[htbp]
+\centering
+\caption{Representative binary training defaults (\texttt{train\_binary\_model.py}).}
+\label{tab:hyperparams}
+\begin{tabular}{ll}
+\toprule
+\textbf{Setting} & \textbf{Typical value / behaviour} \\
+\midrule
+Epochs & Configurable (default in script) \\
+Optimiser & Adam-style update with weight decay \\
+Learning rate schedule & Cosine annealing supported \\
+Early stopping & Enabled on validation F1 stall \\
+Class weight & Auto or manual positive-class weight \\
+Validation split & Hold-out split from manifest rows \\
+Output & Checkpoint and metadata JSON \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+One-class trainers follow a similar pattern but optimise embedding-space objectives rather than binary cross-entropy. Analysis scripts load checkpoints and align feature dimensions before inference. When checkpoint files are absent, analysis scripts cannot produce model scores and the evaluation must rely on triage artefacts alone.
+
+\section{Performance and Resource Considerations}
+
+Large graphs dominate memory use. Samples with more than 20,000 nodes require efficient batching and may limit hyperparameter search. The project mitigates this by graph-level classification (one label per graph) rather than node-level classification across the full corpus.
+
+CPU preprocessing time is also significant. Volatility extraction and graph construction can take much longer than one training epoch on small data. For research planning, artefact generation should be treated as a first-class timeline item, not as a one-time preliminary step.
+
+\section{Testing and Validation During Development}
+
+During development, samples were inspected manually at three checkpoints: after CSV extraction, after graph build, and after analysis JSON generation. This manual review caught issues such as missing plugin files, unexpected empty graphs, and extreme node counts. Manual review is not scalable to thousands of hosts, but it was valuable for a 30-sample research corpus.
+
+Regression checks should include: (1) manifest row count stable, (2) no missing health flags, (3) graph node counts within expected order of magnitude for family, and (4) analysis verdicts present. The dissertation figures provide a quick visual regression check for corpus-level shifts when graph rules change.

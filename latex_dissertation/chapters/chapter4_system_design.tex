@@ -1,0 +1,165 @@
+\chapter{System Design}
+\label{ch:design}
+
+\section{Overview}
+
+The system is designed as a pipeline from memory dump to model evidence. It is not only a model script. It includes extraction, graph construction, dataset creation, model training, analysis, and optional dashboard integration.
+
+Figure~\ref{fig:pipeline} shows the end-to-end flow. Each stage writes artefacts that can be inspected independently. This separation is important for forensic research because analysts may trust extraction and triage outputs even when they question a single model score.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=1.2cm,
+  every node/.style={draw, rounded corners, align=center, font=\small, text width=3.2cm},
+  arrow/.style={-{Latex}, thick}
+]
+\node (memoryDump) {Windows memory dump};
+\node (vol3) [below=of memoryDump] {Volatility 3 plugins};
+\node (csvFiles) [below=of vol3] {CSV artefacts};
+\node (graphBuild) [below=of csvFiles] {Heterogeneous graph construction};
+\node (graphFiles) [below=of graphBuild] {\texttt{graph.pkl}, \texttt{graph.json}, \texttt{graph\_attr.json}};
+\node (manifest) [below=of graphFiles] {\texttt{dataset\_manifest.csv}};
+\node (gnnModels) [below=of manifest] {GNN models};
+\node (evidence) [below=of gnnModels] {Triage state and model evidence};
+\node (analyst) [below=of evidence] {Analyst review};
+\draw[arrow] (memoryDump) -- (vol3);
+\draw[arrow] (vol3) -- (csvFiles);
+\draw[arrow] (csvFiles) -- (graphBuild);
+\draw[arrow] (graphBuild) -- (graphFiles);
+\draw[arrow] (graphFiles) -- (manifest);
+\draw[arrow] (manifest) -- (gnnModels);
+\draw[arrow] (gnnModels) -- (evidence);
+\draw[arrow] (evidence) -- (analyst);
+\end{tikzpicture}
+\caption{End-to-end memory-forensics and graph-learning pipeline.}
+\label{fig:pipeline}
+\end{figure}
+
+\section{Extraction Layer}
+
+The extraction layer runs Volatility 3 plugins and saves outputs in each sample folder \cite{volatility3docs}. This design makes the pipeline repeatable. It also separates raw forensic extraction from machine learning. This is useful because the same CSV artefacts can be used for manual review, rule-based scoring, and model training.
+
+The extraction layer is intentionally conservative. It prefers stable plugin outputs over experimental plugins that may change between Volatility versions. When a plugin file is missing for a sample, downstream stages record a pipeline health flag instead of failing silently.
+
+\section{Graph Layer}
+
+The graph layer builds a heterogeneous system graph. The graph is stored as \texttt{graph.pkl} for Python processing and \texttt{graph.json} for inspection or dashboard use. The graph structure is important because it keeps relationships between entities. For example, a memory region can be connected to the process it belongs to, and a network connection can be connected to the process that owns it.
+
+The graph also includes behaviour-intent edges. These edges do not only show basic ownership. They add security meaning, such as injection intent, C2 intent, credential-access intent, persistence behaviour, or suspicious parent-child relations, which correspond to well-documented adversary techniques \cite{mitre2026enterprise}, \cite{mitre2026t1055}, \cite{mitre2026t1486}. This improves the model input because it gives both structure and security context.
+
+\section{Triage and Graph Attributes}
+
+The rule-based triage layer creates \texttt{filtered\_malicious.json} and \texttt{graph\_attr.json}. These files contain structured signals such as suspicious PIDs, maximum process score, attack steps, injection counts, C2-style connections, and label signals. These attributes are not used to replace deep learning. They are used to support feature engineering and analyst explanation.
+
+This hybrid design is practical. Rules are transparent and easy to inspect. GNN models can learn structural patterns that rules may miss. The final analysis can use both.
+
+\section{Dataset Manifest Design}
+
+The dataset manifest is the central dataset file. It links each graph folder to its label, family, graph counts, verdict fields, graph attributes, uncertainty status, and pipeline health fields. This supports reproducibility because a model run can be traced back to the exact folders and artefacts used \cite{goodman2016reproducibility}.
+
+The manifest also records whether graph creation, filtering, and analysis were successful. This prevents silent failures from being treated as valid training data. Table~\ref{tab:artefact_contracts} summarises key artefact contracts used across the pipeline.
+
+\begin{table}[htbp]
+\centering
+\caption{Core artefact files and their role in the pipeline.}
+\label{tab:artefact_contracts}
+\small
+\begin{tabular}{p{3.4cm}p{2.4cm}p{6.2cm}}
+\toprule
+\textbf{File} & \textbf{Producer} & \textbf{Purpose} \\
+\midrule
+\texttt{graph.pkl} & \texttt{build\_graph.py} & Canonical graph object for ML and analysis \\
+\texttt{filtered\_malicious.json} & \texttt{filter\_malicious.py} & Triage evidence and suspicious PID list \\
+\texttt{graph\_attr.json} & \texttt{build\_graph.py} & Graph-level attributes and label signals \\
+\texttt{analysis\_report.json} & \texttt{analyze\_graph.py} & Per-sample graph summary and attack chain \\
+\texttt{dataset\_manifest.csv} & \texttt{build\_dataset.py} & Dataset index for training and evaluation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Model Stack}
+
+The model stack has three main paths:
+
+\begin{itemize}
+\item \textbf{Binary GNN baseline:} predicts malware probability and supports calibrated thresholding.
+\item \textbf{Malware one-class model:} scores how close a sample is to learned malware behaviour.
+\item \textbf{Benign one-class model:} scores how close a sample is to learned benign behaviour.
+\end{itemize}
+
+Figure~\ref{fig:two_model} shows how the two-model path combines conformity scores with heuristic risk to produce triage states.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=1.1cm,
+  every node/.style={draw, rounded corners, align=center, font=\small, text width=2.8cm},
+  arrow/.style={-{Latex}, thick}
+]
+\node (g) {Memory graph};
+\node (m) [below left=of g] {Malware conformity model};
+\node (b) [below right=of g] {Benign conformity model};
+\node (d) [below=1.4cm of g] {Delta and heuristic risk};
+\node (t) [below=of d] {Triage state};
+\node (e) [below=of t] {Evidence JSON and narrative};
+\draw[arrow] (g) -- (m);
+\draw[arrow] (g) -- (b);
+\draw[arrow] (m) -- (d);
+\draw[arrow] (b) -- (d);
+\draw[arrow] (d) -- (t);
+\draw[arrow] (t) -- (e);
+\end{tikzpicture}
+\caption{Two-model analysis flow from graph to structured evidence.}
+\label{fig:two_model}
+\end{figure}
+
+The two-model analysis combines malware conformity and benign conformity, drawing on one-class deep learning principles \cite{ruff2018deep}, \cite{pang2021deep}. This is useful because a memory snapshot can be suspicious but not clearly known malware. The output states include likely malicious, likely benign, anomalous unknown, and needs analyst review.
+
+\section{Evidence Design}
+
+The project is designed to preserve evidence. Analysis outputs include top graph attributes, top nodes, edge pairs, reasoning types, confidence fields, and a short narrative. This makes the result more useful for incident response, consistent with the argument that interpretability must be treated as a core requirement \cite{doshi2017interpretable}. Explanation methods such as GNNExplainer \cite{ying2019gnnexplainer} provide a direction for future work. An analyst can start from the model output and then check the related graph artefacts or raw CSV rows.
+
+\section{Interface Between Triage Rules and Learning}
+
+The triage layer and the GNN layer are connected but not identical. Triage rules operate on interpretable thresholds and pattern checks. GNNs operate on learned combinations of structure and attributes. The system design allows three interaction modes:
+
+\begin{enumerate}
+\item \textbf{Rules only:} analysts rely on verdicts and JSON evidence without model scores.
+\item \textbf{Rules + binary model:} analysts use probability and calibrated states with evidence.
+\item \textbf{Rules + two-model scores:} analysts compare malware and benign conformity to detect ambiguity.
+\end{enumerate}
+
+This flexibility supports different organisational maturity levels. A lab may use rules only while collecting more data. A research team may enable GNN paths when checkpoints and manifests are stable.
+
+\section{Dashboard and Operational Integration}
+
+The repository also contains server and dashboard components. The API supports memory dump upload, plugin execution, graph pipeline execution, and model scanning \cite{fastapi2026docs}. The dashboard client can request a model scan for a dump session when \texttt{graph.pkl} exists. This shows a possible operational route for the research: memory dump upload, Volatility extraction, graph build, model scan, and analyst review in a user interface.
+
+The operational path is optional for dissertation evaluation. The core research evidence comes from the batch pipeline and manifest, not from live UI demos.
+
+\section{Design Rationale by Layer}
+
+\subsection{Why separate extraction and learning}
+
+Extraction and learning are separated so that forensic outputs remain valid even when model code changes. If a GNN architecture is replaced, the underlying CSV and graph artefacts should still be usable for manual review. This separation also helps debugging: when a score is unexpected, analysts can inspect triage JSON and plugin outputs without retraining models.
+
+\subsection{Why use both rules and GNNs}
+
+Rules encode transparent heuristics that security teams already understand. GNNs can combine many weak signals across structure. The hybrid design avoids two extremes: pure rules that miss complex patterns, and pure deep learning that behaves like a black box. Graph attributes from rules are included as features, so the model can learn when to trust or discount heuristic signals.
+
+\subsection{Why graph-level classification}
+
+Node-level classification would require node labels that are expensive to produce in memory forensics. Graph-level labels (malware vs benign for the snapshot) match the folder-level supervision available in this corpus. Graph-level outputs also match operational questions such as ``should this memory image be prioritised for deeper review?''
+
+\section{Failure Handling and Health Flags}
+
+The manifest records \texttt{filter\_ok}, \texttt{graph\_ok}, and \texttt{analyze\_ok}. If any step fails, the row should not enter training silently. This design follows good MLOps practice for research code \cite{sculley2015debt}.
+
+Common failure modes include missing plugin CSV files, empty process lists, graph build exceptions, and analysis timeouts on very large graphs. Health flags make these cases visible in evaluation tables and help explain unexpected metric changes between manifest versions.
+
+\section{Security and Privacy Considerations in Design}
+
+Memory dumps may contain passwords, personal documents, browser history, and other sensitive data. The system design therefore assumes secure storage, restricted access, and controlled sharing. The dashboard/API path should run only in trusted lab environments.
+
+For dissertation reporting, aggregated statistics and anonymised examples are preferred over raw command lines or host-identifying strings. This reduces ethical risk while still allowing technical discussion of malware behaviour.

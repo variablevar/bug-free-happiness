@@ -1,0 +1,129 @@
+\chapter{Introduction}
+
+\section{Background}
+
+Cybercrime and cyber-enabled fraud continue to affect global economies. Malware is a core tool in many attack chains, including ransomware campaigns, credential theft, and long-term compromise. Organisations therefore invest in endpoint detection, logging, and forensic response capabilities. Despite these investments, skilled analysts remain necessary because automated tools can miss context, produce false positives, or fail on novel families.
+
+Malware is still a major problem for organisations, universities, public services, and personal users \cite{ucci2019survey}. Modern malware does not only exist as a file on disk. It may inject code into trusted processes, load suspicious modules, communicate with remote hosts, hide process activity, or perform actions only for a short time \cite{egele2012survey}. These behaviours are often visible in memory before they are fully visible in normal file logs.
+
+Attackers also use techniques described in public frameworks such as MITRE ATT\&CK, including process injection and impact operations \cite{mitre2026enterprise}, \cite{mitre2026t1055}. Security teams therefore need methods that can inspect live system state, not only files after the event.
+
+Digital forensics and incident response teams use memory forensics to investigate this type of activity. Memory forensics can show active processes, terminated process traces, DLLs, network connections, command-line arguments, file handles, registry hives, and suspicious memory pages \cite{ligh2014art}. Tools such as Volatility 3 make this analysis possible in a structured way \cite{volatility3docs}. Even so, the output of many plugins can be difficult to read. A single memory dump can produce many CSV files and thousands of rows.
+
+This project uses graph-based deep learning to improve how memory-forensics artefacts are represented and analysed. A graph is a natural format for memory evidence because operating system behaviour is relational \cite{russinovich2017internals1}. A process starts another process. A process loads a DLL. A memory region belongs to a process. A network connection is owned by a process. These relationships are important for malware detection. A flat table can store these values, but it does not show the structure as clearly as a graph.
+
+Graph neural networks can learn from both node features and graph structure \cite{hamilton2020graph}. This makes them suitable for malware detection from memory snapshots. Instead of checking only one indicator, the model can learn patterns across process trees, memory regions, network objects, and other forensic artefacts.
+
+\section{Motivation}
+
+The motivation for this work comes from three practical problems seen during project development.
+
+First, memory-forensics output is large. Analysts can spend significant time moving between plugin tables to build a mental model of one host. A graph representation can keep relationships visible in one structure.
+
+Second, malware labels are not always clean. Benign memory snapshots may still contain suspicious indicators such as injected pages or high process scores. A detection system should report uncertainty instead of hiding it \cite{guo2017calibration}.
+
+Third, research prototypes often lack reproducibility. Without manifests, contracts, and saved artefacts, it is hard to repeat experiments or explain a score months later \cite{goodman2016reproducibility}. This dissertation therefore treats the pipeline and dataset manifest as core research outputs, not only the model weights.
+
+\section{Problem Statement}
+
+The main problem is that Windows memory forensics produces rich evidence, but this evidence is hard to scale, compare, and interpret manually. Analysts can run Volatility plugins, but they still need to connect many separate outputs into one clear view of behaviour. This becomes harder when there are many samples or when the evidence is noisy.
+
+This dissertation addresses four practical gaps:
+
+\begin{itemize}
+\item \textbf{Representation gap:} plugin outputs are usually stored as separate tables, while malware behaviour is relational.
+\item \textbf{Learning gap:} many forensic workflows use rules or manual checks, but they do not learn structural patterns from complete memory snapshots.
+\item \textbf{Explainability gap:} a useful detection system should give evidence, not only a malware or benign label.
+\item \textbf{Reproducibility gap:} memory-forensics experiments need stable artefacts, manifests, data contracts, and repeatable commands.
+\end{itemize}
+
+\section{Research Aim}
+
+The aim of this dissertation is to design and evaluate a graph-based deep learning pipeline for malware detection using Windows memory-forensics artefacts extracted with Volatility 3.
+
+The work is positioned as a \textbf{proof-of-concept}: it demonstrates feasibility of graph-based memory-forensics machine learning with structured evidence and uncertainty reporting, not production-grade detection performance.
+
+\section{Key Definitions}
+
+For clarity, this dissertation uses the following working definitions:
+
+\textbf{Memory snapshot graph:} a heterogeneous graph built from one memory dump's Volatility artefacts, representing system entities and relationships at capture time.
+
+\textbf{Malware-labelled sample:} a manifest row with label 1, usually corresponding to a \texttt{WithVirus} folder.
+
+\textbf{Benign-labelled sample:} a manifest row with label 0, usually corresponding to a \texttt{NoVirus} folder, possibly flagged uncertain.
+
+\textbf{Evidence:} structured fields (attributes, nodes, edges, narratives) that explain why a sample received a score or triage state.
+
+\section{Primary Expected Contribution}
+
+The expected primary contribution is empirical and methodological rather than a new detection benchmark. On the available corpus, benign-labelled memory snapshots frequently exhibit HIGH or CRITICAL triage signals despite \texttt{NoVirus} folder names (14 of 15 benign rows marked uncertain in the manifest). This finding shows that memory-forensics labels derived from folder pairing can diverge sharply from rule-based risk signals.
+
+The secondary contributions are engineering artefacts: a Volatility-to-graph pipeline, manifest-indexed dataset, GNN and tabular evaluation scripts with family-grouped splits, and JSON evidence fields for analyst review. Together they support reproducible feasibility studies on small memory-forensics corpora.
+
+\section{Research Objectives}
+
+The objectives are:
+
+\begin{enumerate}
+\item To extract Windows memory-forensics artefacts from memory dumps using Volatility 3. This includes process, memory, network, and registry-related plugin outputs stored as repeatable CSV artefacts.
+\item To convert plugin outputs into typed memory-snapshot graphs with entities and relationships analysts recognise (process parentage, DLL loading, injection links).
+\item To engineer node, edge, and graph-level features suitable for graph neural networks. Features must remain stable across samples so training and inference use the same contracts.
+\item To train and analyse GNN-based malware detection models. The project includes binary classification and one-class conformity models for richer triage states.
+\item To preserve model evidence and uncertainty so that analyst review remains possible. Outputs should include top attributes, important nodes, and short narratives.
+\item To evaluate the strengths and limits of the approach using available project artefacts. Evaluation must discuss dataset size, label noise, and family overlap honestly.
+\end{enumerate}
+
+\section{Research Questions}
+
+This project is guided by the following questions:
+
+\begin{enumerate}
+\item How can Windows memory-forensics artefacts be represented as a graph for malware detection? The answer is developed through the node and edge schema in Chapters~\ref{ch:methodology} and~\ref{ch:design}, and through graph statistics in Chapter~\ref{ch:evaluation}.
+\item Which system entities and relationships are most useful for graph-based detection? The project prioritises process, memory, network, and DLL relationships, plus behaviour-intent edges aligned with common attack patterns.
+\item How can GNN models support malware detection while still providing structured evidence? The binary and two-model paths combine learned scores with rule-based graph attributes and JSON evidence fields.
+\item What limitations appear when graph-based learning is applied to a small memory-forensics corpus? Chapter~\ref{ch:evaluation} discusses uncertain benign rows, graph-size variation, and the risk of overconfident conclusions.
+\end{enumerate}
+
+\section{Contributions Preview}
+
+The main contributions of this dissertation are:
+
+\begin{itemize}
+\item a Volatility~3 extraction workflow for Windows memory artefacts;
+\item a heterogeneous graph schema for memory-forensics entities and relationships;
+\item graph-level feature engineering linked to triage signals;
+\item GNN model support for binary and one-class analysis paths;
+\item structured model evidence and uncertainty reporting;
+\item a dataset manifest for reproducible experiments;
+\item optional dashboard integration for upload-session model scanning.
+\end{itemize}
+
+\section{Scope}
+
+This is a writing and research project based on an implemented repository. The work focuses on Windows memory dumps, Volatility 3 artefacts, graph construction, and graph-based deep learning. The dataset includes several malware-family folders and paired NoVirus folders. Ransomware samples are included as part of the corpus, but the topic is not limited to ransomware. The correct topic is broader: graph-based deep learning for malware detection using Windows memory forensics.
+
+The dissertation does not include malware binaries in the written submission. It discusses memory dumps only at the artefact level. Ethics and safe handling are addressed in Chapter~\ref{ch:methodology}.
+
+\section{Dissertation Structure}
+
+Chapter~1 introduces the problem and the research aim. Chapter~2 reviews memory forensics, malware analysis, graph learning, GNNs, anomaly detection, and explainability. Chapter~3 explains the methodology. Chapter~4 presents the system design. Chapter~5 describes the implementation. Chapter~6 discusses the results and limitations. Chapter~7 concludes the dissertation and suggests future work. Chapter~8 gives a personal reflection.
+
+\section{Context: Memory Forensics in Incident Response}
+
+Incident response workflows often move from live collection to disk forensics and then to memory forensics when analysts suspect hidden processes, injection, or ransomware activity \cite{nist2012sp80061}. Commercial and open-source tools can acquire RAM images, but the analysis step remains difficult at scale. Analysts must decide which processes, memory regions, and network objects deserve deeper review.
+
+This dissertation does not replace Volatility or other forensic suites. Instead, it proposes a structured bridge between plugin outputs and machine-learning models. The bridge is a graph representation with explicit evidence fields. That design choice keeps the workflow understandable for security practitioners who may not be deep-learning specialists.
+
+\section{Expected Outcomes}
+
+By the end of this work, a reader should understand four outcomes:
+
+\begin{enumerate}
+\item how Windows memory artefacts are converted into heterogeneous graphs;
+\item how graph features and GNN models are used for malware triage;
+\item how uncertainty and evidence are reported in analysis outputs;
+\item what limitations apply when the corpus is small and labels are noisy.
+\end{enumerate}
+
+These outcomes align with the research questions and support a fair interpretation of results in later chapters. Together they define what success means for this applied security project.

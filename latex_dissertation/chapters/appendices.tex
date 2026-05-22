@@ -1,0 +1,177 @@
+\appendix
+\chapter{Project Artefacts and Reproducibility}
+\label{app:repro}
+
+\section{Project Artefact Map}
+\begin{longtable}{p{0.28\textwidth}p{0.62\textwidth}}
+\toprule
+\textbf{Artefact} & \textbf{Purpose} \\
+\midrule
+\endhead
+\texttt{windows\_*.csv} & Volatility 3 plugin output for each sample \\
+\texttt{graph.pkl} & NetworkX graph used by graph processing and model loading \\
+\texttt{graph.json} & JSON graph representation for inspection and UI use \\
+\texttt{filtered\_malicious.json} & Rule-based triage evidence and graph attributes \\
+\texttt{graph\_attr.json} & Graph-level attributes and label signals \\
+\texttt{analysis\_report.json} & Per-sample graph analysis report \\
+\texttt{dataset\_manifest.csv} & Dataset index used for training and evaluation \\
+\texttt{*.pt} model files & Saved PyTorch model checkpoints \\
+\texttt{*\_meta.json} & Model metadata and calibration information \\
+\bottomrule
+\end{longtable}
+
+\section{Manifest Column Glossary}
+\begin{longtable}{p{0.26\textwidth}p{0.64\textwidth}}
+\toprule
+\textbf{Column} & \textbf{Meaning} \\
+\midrule
+\endhead
+\texttt{sample\_id} & Numeric identifier for each graph row \\
+\texttt{folder} & Directory name for the sample \\
+\texttt{label} & 0 = NoVirus (benign), 1 = WithVirus (malware) \\
+\texttt{family} & Malware family tag used for grouped evaluation \\
+\texttt{nodes}, \texttt{edges} & Graph size statistics \\
+\texttt{max\_score} & Highest suspicious process score from triage \\
+\texttt{injections}, \texttt{c2\_conns} & Counts of injection and C2-style indicators \\
+\texttt{verdict} & Rule-based triage verdict string \\
+\texttt{uncertain} & Flag for label or baseline uncertainty \\
+\texttt{filter\_ok}, \texttt{graph\_ok}, \texttt{analyze\_ok} & Pipeline health indicators \\
+\bottomrule
+\end{longtable}
+
+\section{Core Plugin Set}
+The project uses the following main Volatility 3 plugins: \texttt{pslist}, \texttt{psscan}, \texttt{pstree}, \texttt{malfind}, \texttt{netscan}, \texttt{cmdline}, \texttt{dlllist}, \texttt{handles}, \texttt{threads}, \texttt{vadinfo}, \texttt{filescan}, \texttt{driverscan}, \texttt{ssdt}, and \texttt{registry.hivelist}.
+
+\section{Reproducibility Commands}
+The following commands rebuild dataset artefacts, run evaluation, and regenerate dissertation tables from the repository root:
+
+\begin{verbatim}
+python build_dataset.py
+python scripts/generate_dissertation_figures.py
+
+# Grouped CV -- GNN backbones (family-held-out)
+python train.py extracted_data/dataset_manifest.csv --cv stratified_group \
+  --group-by family --model gine --epochs 80 --seed 42
+
+# Binary GINE baseline
+python train_binary_model.py extracted_data/dataset_manifest.csv \
+  --output-model models/binary_gnn.pt --output-meta models/binary_meta.json
+
+# Tabular baselines (Logistic Regression, Random Forest)
+python scripts/tabular_baselines.py
+
+# Regenerate LaTeX tables and eval figures
+python scripts/generate_eval_latex.py
+
+python analyze_binary_model.py
+python analyze_two_model.py
+\end{verbatim}
+
+To compile the dissertation PDF:
+
+\begin{verbatim}
+cd latex_dissertation
+latexmk -pdf main.tex
+\end{verbatim}
+
+\section{Acronyms}
+\begin{tabular}{ll}
+\textbf{API} & Application Programming Interface \\
+\textbf{ATT\&CK} & Adversarial Tactics, Techniques, and Common Knowledge \\
+\textbf{C2} & Command and Control \\
+\textbf{CFG} & Control Flow Graph \\
+\textbf{CSV} & Comma-Separated Values \\
+\textbf{DLL} & Dynamic Link Library \\
+\textbf{GAT} & Graph Attention Network \\
+\textbf{GIN} & Graph Isomorphism Network \\
+\textbf{GINE} & Graph Isomorphism Network with Edge features \\
+\textbf{GNN} & Graph Neural Network \\
+\textbf{IOC} & Indicator of Compromise \\
+\textbf{ML} & Machine Learning \\
+\textbf{NDSS} & Network and Distributed System Security \\
+\textbf{PyG} & PyTorch Geometric \\
+\textbf{RWX} & Read-Write-Execute (memory protection) \\
+\textbf{SOC} & Security Operations Centre \\
+\textbf{VAD} & Virtual Address Descriptor \\
+\end{tabular}
+
+\section{Manifest Excerpt (First Five Rows)}
+\small
+\begin{longtable}{rrlrr}
+\toprule
+\textbf{ID} & \textbf{Label} & \textbf{Folder} & \textbf{Nodes} & \textbf{Uncertain} \\
+\midrule
+\endhead
+01 & 0 & Cerber-NoVirus & 9382 & True \\
+02 & 1 & Cerber-WithVirus & 7904 & False \\
+03 & 0 & DLLHijacking-NoVirus & 18477 & True \\
+04 & 1 & DLLHijacking-WithVirus & 27362 & False \\
+05 & 0 & DeriaLock-NoVirus & 24787 & True \\
+\bottomrule
+\end{longtable}
+
+\section{Figure Generation}
+Dissertation figures are produced from project data using:
+\begin{verbatim}
+python scripts/generate_dissertation_figures.py
+\end{verbatim}
+Outputs are written to \texttt{latex\_dissertation/figures/} as PDF files included in Chapter~\ref{ch:evaluation}.
+
+\chapter{Dataset Statistics Summary}
+\label{app:stats}
+
+This appendix summarises corpus-level statistics derived from \texttt{dataset\_manifest.csv} at dissertation writing time.
+
+\section{Label and uncertainty counts}
+\begin{itemize}
+\item Total samples: 30
+\item Malware-labelled (WithVirus): 15
+\item Benign-labelled (NoVirus): 15
+\item Benign rows with \texttt{uncertain=True}: 14
+\item Benign rows with \texttt{uncertain=False}: 1 (W32.MyDoom.A.-NoVirus)
+\end{itemize}
+
+\section{Graph size ranges}
+\begin{itemize}
+\item Nodes: minimum 86, maximum 27,362, median approximately 18,036
+\item Edges: minimum 7, maximum 32,556, median approximately 21,544
+\end{itemize}
+
+\section{Families represented}
+The manifest includes paired samples for families including Cerber, DLLHijacking, DeriaLock, Dharma, GandCrab, GoldenEye, InfinityCrypt, Locky.AZ, LuckyLcoker, PowerLoader, RedTail, SporaRansomware, W32.MyDoom.A., WannaCry, and Win32.BlackWorm. Each family contributes one WithVirus and one NoVirus row in the current manifest.
+
+\section{Interpretation notes}
+These statistics are descriptive, not performance metrics. They show that the corpus is balanced at the label level but unbalanced in difficulty and graph size. Any future model evaluation should report manifest version, family-grouped splits, and uncertainty-aware error analysis.
+
+\section{Recommended Reporting Checklist for Future Experiments}
+When extending this project, the following items should appear in any results table or dissertation chapter:
+\begin{enumerate}
+\item manifest row count and label balance;
+\item number and percentage of uncertain benign rows;
+\item min/median/max graph sizes;
+\item family-grouped split description;
+\item whether checkpoints and calibration files are archived;
+\item whether evaluation uses rules only, tabular ML, or full GNN;
+\item example evidence JSON excerpts for true positives and false positives.
+\end{enumerate}
+This checklist helps keep future results comparable with the baseline established here.
+
+\chapter{Glossary of Key Terms}
+\begin{description}
+\item[Memory dump] A captured image of volatile memory from a host at a point in time.
+\item[Volatility plugin] A module that extracts a specific artefact type from a memory dump.
+\item[Heterogeneous graph] A graph with multiple node and edge types.
+\item[Graph attribute] A feature vector summarising the whole graph, not a single node.
+\item[Triage] A first-pass risk ranking to prioritise analyst review.
+\item[WithVirus / NoVirus] Folder naming convention indicating malware-infected vs benign comparison sample in this corpus.
+\item[Uncertain label] Manifest flag when benign-labelled data still shows strong suspicious indicators.
+\item[Conformity score] One-class similarity score measuring closeness to a learned class embedding space.
+\item[Evidence field] Structured output explaining which attributes, nodes, or edges influenced a score.
+\end{description}
+
+\chapter{Volatility Plugin Notes (Extended)}
+The following notes summarise how plugins support the graph schema. \texttt{pslist} and \texttt{psscan} help identify process nodes and hidden process indicators. \texttt{pstree} supports parent-child process edges. \texttt{malfind} and \texttt{vadinfo} support memory-region nodes and injection-related edges. \texttt{netscan} supports network connection and IP nodes. \texttt{cmdline} and \texttt{dlllist} enrich process context. \texttt{handles} and \texttt{threads} add interaction structure. \texttt{filescan}, \texttt{driverscan}, and \texttt{ssdt} support driver and kernel-related nodes. Registry hive listing supports registry-related context where present.
+
+These plugins do not need to succeed equally on every sample. The pipeline records health flags when stages fail so that incomplete samples are visible in the manifest rather than silently polluting training data.
+
+Readers comparing this dissertation to \texttt{docs.md} should note that the LaTeX version is the submission-oriented document with IEEE references and figures, while \texttt{docs.md} remains a working project narrative in the repository root.

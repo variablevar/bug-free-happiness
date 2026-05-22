@@ -1,0 +1,39 @@
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+{\Large \textbf{Graph-Based Deep Learning for Malware Detection Using Windows Memory Forensics}\par}
+\vspace{2cm}
+{\large \textbf{Name:} VIRAJ RAJESHBHAI CHUDASAMA\par}
+\vspace{0.3cm}
+{\large \textbf{Supervisor:} Mohamed Ghanem\par}
+\vspace{0.3cm}
+{\large \textbf{Programme:} MSc Cyber Security\par}
+\vspace{0.3cm}
+{\large \textbf{Date:} May 2026\par}
+\vfill
+\end{titlepage}
+
+\chapter*{Declaration}
+\addcontentsline{toc}{chapter}{Declaration}
+I declare that this project is my own work and has been prepared in line with the rules and guidance of the University of Wales Trinity Saint David.
+
+\vspace{1cm}
+\noindent Signed: \rule{7cm}{0.4pt}
+
+\vspace{0.6cm}
+\noindent Date: \rule{7cm}{0.4pt}
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+Malware often hides in live memory, while file-based scanning can miss injection, covert processes, and short-lived network activity. Windows memory forensics captures processes, DLLs, memory regions, handles, and network objects at capture time, but Volatility plugin output is large and difficult to compare across samples by hand.
+
+This dissertation implements a proof-of-concept pipeline: Volatility~3 artefacts are converted into typed memory-snapshot graphs, scored by graph neural networks (GIN, GraphSAGE, GAT, GINE), and explained with structured evidence and uncertainty fields. A hybrid rule layer supplies graph attributes and triage verdicts; binary and two-model paths support analyst review.
+
+The central empirical finding is label--signal mismatch on benign baselines: in the current manifest ($n{=}30$), \textbf{14 of 15} benign-labelled (\texttt{NoVirus}) rows are flagged \texttt{uncertain=True} because rule-based triage still reports HIGH or CRITICAL activity (injection counts, process scores, C2-style connections). Folder names are therefore an imperfect proxy for ground truth; uncertainty must be reported, not hidden.
+
+Contributions include a reproducible extraction-to-graph workflow, manifest governance, GNN training scripts with family-grouped cross-validation, and optional dashboard scanning. Metrics tables in Chapter~\ref{ch:evaluation} use placeholders until grouped CV is run on archived checkpoints.
+
+\textbf{Limitation:} With $n{=}30$ graphs and noisy benign labels, the work demonstrates feasibility and evidence organisation---not production detection performance.
+
+\vspace{0.5cm}
+\noindent\textbf{Keywords:} malware detection, Windows memory forensics, Volatility 3, graph neural networks, heterogeneous graphs, PyTorch Geometric, GINE, anomaly detection, digital forensics, explainable AI
