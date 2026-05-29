@@ -1,14 +1,14 @@
 {
   "meta": {
-    "tool": "analyze_graph.py v3",
+    "tool": "analyze_graph.py v4",
     "source": "/Users/user/Documents/University/datasets/extracted_data/GoldenEye-WithVirus",
-    "version": "3.0"
+    "version": "4.0"
   },
   "summary": {
     "nodes_total": 24861,
-    "edges_total": 29908,
+    "edges_total": 36378,
     "is_directed": true,
-    "suspicious_total": 400,
+    "suspicious_total": 401,
     "node_types": {
       "kernel": 1,
       "process": 122,
@@ -21,7 +21,17 @@
       "driver": 120
     },
     "edge_types": {
-      "spawned_by": 116,
+      "intent_credential_access": 1,
+      "privilege_escalation_indicator": 1,
+      "temporal_near_creation": 4,
+      "temporal_execution_chain": 34,
+      "dll_trust_anomaly": 6382,
+      "spawned_by": 78,
+      "persistence_behavior": 15,
+      "intent_c2": 20,
+      "svchost_cmdline_anomaly": 8,
+      "intent_injection": 41,
+      "api_semantic_activity": 2,
       "belongs_to": 1845,
       "loaded_into": 6507,
       "allocated_in": 21161,
@@ -33,7 +43,7 @@
       "loaded_in_kernel": 120
     },
     "suspicious_by_type": {
-      "process": 14,
+      "process": 15,
       "thread": 202,
       "dll": 38,
       "memory_region": 91,
@@ -56,14 +66,14 @@
         "step": 2,
         "tactic": "Defense Evasion / Process Injection",
         "mitre": "T1055",
-        "detail": "Shellcode in 5 process(es): smartscreen.ex, SearchApp.exe, explorer.exe, WWAHost.exe, MsMpEng.exe",
+        "detail": "Shellcode in 5 process(es): WWAHost.exe, MsMpEng.exe, SearchApp.exe, smartscreen.ex, explorer.exe",
         "evidence": "4d 5a 90 00 03 00 00 00 04 00 00 00 ff ff 00 00 b8 00 00 00 00 00 00 00 40 00 00"
       },
       {
         "step": 3,
         "tactic": "Command & Control",
         "mitre": "T1071",
-        "detail": "34 ESTABLISHED C2 connection(s) to 19 unique IP(s) via svchost.exe, searchapp.exe, onedrive.exe, wwahost.exe, msedge.exe",
+        "detail": "19 unique external C2 IP(s) (34 socket row(s)) via msedge.exe, onedrive.exe, searchapp.exe, svchost.exe, wwahost.exe",
         "evidence": "['104.103.251.71', '104.77.161.175', '104.82.185.177', '13.107.42.12']"
       },
       {
@@ -77,12 +87,12 @@
         "step": 5,
         "tactic": "Execution / Impact",
         "mitre": "T1486",
-        "detail": "High-score process: explorer.exe (PID 3364) score=89 parent=userinit.exe",
+        "detail": "High-score process: explorer.exe (PID 3364) score=348 parent=userinit.exe",
         "evidence": "C:\\\\Windows\\\\Explorer.EXE"
       }
     ],
     "overall_verdict": "CRITICAL \u2014 Active malware: injection + C2 + credential access detected",
-    "max_process_score": 89
+    "max_process_score": 348
   },
   "entry_points": [
     {
@@ -244,89 +254,19 @@
       "args": "C:\\\\Windows\\\\Explorer.EXE",
       "path": "",
       "degree_in": 1452,
-      "degree_out": 1,
+      "degree_out": 331,
+      "lineage_depth": 1,
       "is_suspicious_flag": true,
-      "heuristic_score": 89,
+      "heuristic_score": 348,
       "severity": "CRITICAL",
       "reasons": [
+        "nonrwx_exec_private",
+        "reflective_pe_like",
         "rwx_injection",
         "no-path",
-        "28x-injected-mem"
-      ]
-    },
-    {
-      "node_id": "process_6008",
-      "name": "WWAHost.exe",
-      "pid": 6008,
-      "ppid": 768,
-      "parent_name": "svchost.exe",
-      "session": "2.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 21:00:22.000000 UTC",
-      "args": "\"C:\\\\Windows\\\\system32\\\\wwahost.exe\" -ServerName:App.wwa",
-      "path": "",
-      "degree_in": 885,
-      "degree_out": 1,
-      "is_suspicious_flag": true,
-      "heuristic_score": 24,
-      "severity": "CRITICAL",
-      "reasons": [
-        "no-path",
-        "9x-c2-conn",
-        "4x-injected-mem",
-        "high-in-degree885"
-      ]
-    },
-    {
-      "node_id": "process_7232",
-      "name": "WWAHost.exe",
-      "pid": 7232,
-      "ppid": 768,
-      "parent_name": "svchost.exe",
-      "session": "2.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 21:00:21.000000 UTC",
-      "args": "\"C:\\\\Windows\\\\system32\\\\wwahost.exe\" -ServerName:Microsoft.MicrosoftOfficeHub.wwa",
-      "path": "",
-      "degree_in": 672,
-      "degree_out": 1,
-      "is_suspicious_flag": true,
-      "heuristic_score": 19,
-      "severity": "CRITICAL",
-      "reasons": [
-        "no-path",
-        "10x-c2-conn",
-        "2x-injected-mem",
-        "high-in-degree672"
-      ]
-    },
-    {
-      "node_id": "process_1504",
-      "name": "smartscreen.ex",
-      "pid": 1504,
-      "ppid": 768,
-      "parent_name": "svchost.exe",
-      "session": "2.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:43:32.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\smartscreen.exe -Embedding",
-      "path": "",
-      "degree_in": 400,
-      "degree_out": 1,
-      "is_suspicious_flag": true,
-      "heuristic_score": 15,
-      "severity": "CRITICAL",
-      "reasons": [
-        "no-path",
-        "4x-injected-mem",
-        "high-in-degree400"
-      ]
+        "injected-mem"
+      ],
+      "norm_score": 1.0
     },
     {
       "node_id": "process_2376",
@@ -342,63 +282,105 @@
       "args": "\"C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe\"",
       "path": "",
       "degree_in": 554,
-      "degree_out": 1,
+      "degree_out": 81,
+      "lineage_depth": 0,
       "is_suspicious_flag": true,
-      "heuristic_score": 9,
-      "severity": "HIGH",
+      "heuristic_score": 57,
+      "severity": "CRITICAL",
       "reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection",
         "no-path",
-        "2x-injected-mem",
+        "injected-mem",
         "high-in-degree554"
-      ]
+      ],
+      "norm_score": 0.16379310344827586
     },
     {
-      "node_id": "process_7520",
-      "name": "OneDrive.exe",
-      "pid": 7520,
-      "ppid": 6584,
-      "parent_name": "?",
+      "node_id": "process_6008",
+      "name": "WWAHost.exe",
+      "pid": 6008,
+      "ppid": 768,
+      "parent_name": "svchost.exe",
       "session": "2.0",
-      "wow64": true,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:45:53.000000 UTC",
-      "args": "/updateInstalled /background",
-      "path": "",
-      "degree_in": 561,
-      "degree_out": 0,
-      "is_suspicious_flag": true,
-      "heuristic_score": 8,
-      "severity": "HIGH",
-      "reasons": [
-        "no-path",
-        "4x-c2-conn",
-        "wow64-suspicious",
-        "high-in-degree561"
-      ]
-    },
-    {
-      "node_id": "process_656",
-      "name": "lsass.exe",
-      "pid": 656,
-      "ppid": 500,
-      "parent_name": "wininit.exe",
-      "session": "0.0",
       "wow64": false,
       "in_pslist": true,
       "in_psscan": true,
-      "create_time": "2023-03-30 20:35:58.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\lsass.exe",
+      "create_time": "2023-03-30 21:00:22.000000 UTC",
+      "args": "\"C:\\\\Windows\\\\system32\\\\wwahost.exe\" -ServerName:App.wwa",
       "path": "",
-      "degree_in": 319,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 7,
-      "severity": "HIGH",
+      "degree_in": 885,
+      "degree_out": 151,
+      "lineage_depth": 0,
+      "is_suspicious_flag": true,
+      "heuristic_score": 51,
+      "severity": "CRITICAL",
       "reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection",
         "no-path",
-        "lsass-full-access"
-      ]
+        "4-unique-ip-c2-conn",
+        "injected-mem",
+        "high-in-degree885"
+      ],
+      "norm_score": 0.14655172413793102
+    },
+    {
+      "node_id": "process_1504",
+      "name": "smartscreen.ex",
+      "pid": 1504,
+      "ppid": 768,
+      "parent_name": "svchost.exe",
+      "session": "2.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:43:32.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\smartscreen.exe -Embedding",
+      "path": "",
+      "degree_in": 400,
+      "degree_out": 121,
+      "lineage_depth": 0,
+      "is_suspicious_flag": true,
+      "heuristic_score": 45,
+      "severity": "CRITICAL",
+      "reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection",
+        "no-path",
+        "injected-mem",
+        "high-in-degree400"
+      ],
+      "norm_score": 0.12931034482758622
+    },
+    {
+      "node_id": "process_7232",
+      "name": "WWAHost.exe",
+      "pid": 7232,
+      "ppid": 768,
+      "parent_name": "svchost.exe",
+      "session": "2.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 21:00:21.000000 UTC",
+      "args": "\"C:\\\\Windows\\\\system32\\\\wwahost.exe\" -ServerName:Microsoft.MicrosoftOfficeHub.wwa",
+      "path": "",
+      "degree_in": 672,
+      "degree_out": 136,
+      "lineage_depth": 0,
+      "is_suspicious_flag": true,
+      "heuristic_score": 33,
+      "severity": "CRITICAL",
+      "reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection",
+        "no-path",
+        "4-unique-ip-c2-conn",
+        "injected-mem",
+        "high-in-degree672"
+      ],
+      "norm_score": 0.09482758620689655
     },
     {
       "node_id": "process_5252",
@@ -414,38 +396,20 @@
       "args": "",
       "path": "",
       "degree_in": 890,
-      "degree_out": 1,
+      "degree_out": 3,
+      "lineage_depth": 0,
       "is_suspicious_flag": true,
-      "heuristic_score": 7,
-      "severity": "HIGH",
+      "heuristic_score": 23,
+      "severity": "CRITICAL",
       "reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection",
         "no-path",
-        "1x-c2-conn",
-        "1x-injected-mem",
+        "1-unique-ip-c2-conn",
+        "injected-mem",
         "high-in-degree890"
-      ]
-    },
-    {
-      "node_id": "process_4",
-      "name": "System",
-      "pid": 4,
-      "ppid": 0,
-      "parent_name": "?",
-      "session": "",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:35:57.000000 UTC",
-      "args": "",
-      "path": "",
-      "degree_in": 135,
-      "degree_out": 0,
-      "is_suspicious_flag": true,
-      "heuristic_score": 6,
-      "severity": "MEDIUM",
-      "reasons": [
-        "lsass-full-access"
-      ]
+      ],
+      "norm_score": 0.06609195402298851
     },
     {
       "node_id": "process_404",
@@ -461,39 +425,98 @@
       "args": "",
       "path": "",
       "degree_in": 1171,
-      "degree_out": 1,
+      "degree_out": 2,
+      "lineage_depth": 1,
       "is_suspicious_flag": true,
-      "heuristic_score": 5,
-      "severity": "MEDIUM",
+      "heuristic_score": 15,
+      "severity": "CRITICAL",
       "reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection",
         "no-path",
-        "2x-c2-conn",
+        "1-unique-ip-c2-conn",
         "high-in-degree1171"
-      ]
+      ],
+      "norm_score": 0.04310344827586207
     },
     {
-      "node_id": "process_4564",
-      "name": "msedge.exe",
-      "pid": 4564,
-      "ppid": 3968,
-      "parent_name": "msedge.exe",
+      "node_id": "process_7520",
+      "name": "OneDrive.exe",
+      "pid": 7520,
+      "ppid": 6584,
+      "parent_name": "?",
       "session": "2.0",
+      "wow64": true,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:45:53.000000 UTC",
+      "args": "/updateInstalled /background",
+      "path": "",
+      "degree_in": 561,
+      "degree_out": 174,
+      "lineage_depth": 0,
+      "is_suspicious_flag": true,
+      "heuristic_score": 11,
+      "severity": "HIGH",
+      "reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection",
+        "windows_update_profile",
+        "no-path",
+        "3-unique-ip-c2-conn",
+        "wow64-suspicious",
+        "high-in-degree561"
+      ],
+      "norm_score": 0.031609195402298854
+    },
+    {
+      "node_id": "process_656",
+      "name": "lsass.exe",
+      "pid": 656,
+      "ppid": 500,
+      "parent_name": "wininit.exe",
+      "session": "0.0",
       "wow64": false,
       "in_pslist": true,
       "in_psscan": true,
-      "create_time": "2023-03-30 20:44:49.000000 UTC",
-      "args": "\"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mojo-platform-channel-handle=2240 --field-trial-handle=2008,i,17505798324339821025,12710742180276585522,131072 /prefetch:3",
+      "create_time": "2023-03-30 20:35:58.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\lsass.exe",
       "path": "",
-      "degree_in": 182,
-      "degree_out": 1,
+      "degree_in": 320,
+      "degree_out": 115,
+      "lineage_depth": 2,
       "is_suspicious_flag": false,
-      "heuristic_score": 5,
-      "severity": "MEDIUM",
+      "heuristic_score": 7,
+      "severity": "HIGH",
       "reasons": [
         "no-path",
-        "2x-c2-conn",
-        "high-in-degree182"
-      ]
+        "lsass-full-access"
+      ],
+      "norm_score": 0.020114942528735632
+    },
+    {
+      "node_id": "process_4",
+      "name": "System",
+      "pid": 4,
+      "ppid": 0,
+      "parent_name": "?",
+      "session": "",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:35:57.000000 UTC",
+      "args": "",
+      "path": "",
+      "degree_in": 135,
+      "degree_out": 2,
+      "lineage_depth": 1,
+      "is_suspicious_flag": true,
+      "heuristic_score": 6,
+      "severity": "MEDIUM",
+      "reasons": [
+        "lsass-full-access"
+      ],
+      "norm_score": 0.017241379310344827
     },
     {
       "node_id": "process_5244",
@@ -509,7 +532,8 @@
       "args": "\"C:\\\\Windows\\\\system32\\\\cmd.exe\"",
       "path": "",
       "degree_in": 52,
-      "degree_out": 1,
+      "degree_out": 13,
+      "lineage_depth": 1,
       "is_suspicious_flag": false,
       "heuristic_score": 5,
       "severity": "MEDIUM",
@@ -517,7 +541,8 @@
         "lolbin",
         "no-path",
         "high-in-degree52"
-      ]
+      ],
+      "norm_score": 0.014367816091954023
     },
     {
       "node_id": "process_7852",
@@ -533,7 +558,8 @@
       "args": "\\\\??\\\\C:\\\\Windows\\\\system32\\\\conhost.exe 0x4",
       "path": "",
       "degree_in": 143,
-      "degree_out": 1,
+      "degree_out": 42,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 5,
       "severity": "MEDIUM",
@@ -541,7 +567,8 @@
         "no-path",
         "high-in-degree143",
         "spawned-lolbin-child"
-      ]
+      ],
+      "norm_score": 0.014367816091954023
     },
     {
       "node_id": "process_7036",
@@ -557,7 +584,8 @@
       "args": "rundll32.exe AppXDeploymentExtensions.OneCore.dll,ShellRefresh",
       "path": "",
       "degree_in": 122,
-      "degree_out": 1,
+      "degree_out": 41,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 5,
       "severity": "MEDIUM",
@@ -565,30 +593,34 @@
         "lolbin",
         "no-path",
         "high-in-degree122"
-      ]
+      ],
+      "norm_score": 0.014367816091954023
     },
     {
-      "node_id": "process_312",
-      "name": "svchost.exe",
-      "pid": 312,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
+      "node_id": "process_4564",
+      "name": "msedge.exe",
+      "pid": 4564,
+      "ppid": 3968,
+      "parent_name": "msedge.exe",
+      "session": "2.0",
       "wow64": false,
       "in_pslist": true,
       "in_psscan": true,
-      "create_time": "2023-03-30 20:35:59.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k netsvcs -p",
+      "create_time": "2023-03-30 20:44:49.000000 UTC",
+      "args": "\"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --mojo-platform-channel-handle=2240 --field-trial-handle=2008,i,17505798324339821025,12710742180276585522,131072 /prefetch:3",
       "path": "",
-      "degree_in": 1173,
-      "degree_out": 1,
+      "degree_in": 182,
+      "degree_out": 48,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 4,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
-        "3x-c2-conn"
-      ]
+        "2-unique-ip-c2-conn",
+        "high-in-degree182"
+      ],
+      "norm_score": 0.011494252873563218
     },
     {
       "node_id": "process_420",
@@ -604,14 +636,16 @@
       "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
       "path": "",
       "degree_in": 138,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
+      "degree_out": 21,
+      "lineage_depth": 0,
+      "is_suspicious_flag": true,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree138"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_500",
@@ -627,14 +661,16 @@
       "args": "wininit.exe",
       "path": "",
       "degree_in": 93,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
+      "degree_out": 24,
+      "lineage_depth": 3,
+      "is_suspicious_flag": true,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree93"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_640",
@@ -650,14 +686,16 @@
       "args": "C:\\\\Windows\\\\system32\\\\services.exe",
       "path": "",
       "degree_in": 131,
-      "degree_out": 1,
+      "degree_out": 28,
+      "lineage_depth": 2,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree131"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_804",
@@ -673,14 +711,16 @@
       "args": "\"fontdrvhost.exe\"",
       "path": "",
       "degree_in": 51,
-      "degree_out": 1,
+      "degree_out": 8,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree51"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_1960",
@@ -697,13 +737,15 @@
       "path": "",
       "degree_in": 1482,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree1482"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_648",
@@ -719,14 +761,16 @@
       "args": "taskhostw.exe",
       "path": "",
       "degree_in": 388,
-      "degree_out": 1,
+      "degree_out": 156,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree388"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_3156",
@@ -742,14 +786,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\CloudExperienceHostBroker.exe -Embedding",
       "path": "",
       "degree_in": 209,
-      "degree_out": 1,
+      "degree_out": 74,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree209"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_4888",
@@ -765,14 +811,16 @@
       "args": "C:\\\\Windows\\\\system32\\\\SgrmBroker.exe",
       "path": "",
       "degree_in": 79,
-      "degree_out": 1,
+      "degree_out": 19,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree79"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_2516",
@@ -788,14 +836,16 @@
       "args": "C:\\\\Windows\\\\system32\\\\SecurityHealthService.exe",
       "path": "",
       "degree_in": 223,
-      "degree_out": 1,
+      "degree_out": 80,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree223"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_5548",
@@ -811,14 +861,16 @@
       "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
       "path": "",
       "degree_in": 180,
-      "degree_out": 0,
+      "degree_out": 21,
+      "lineage_depth": 0,
       "is_suspicious_flag": true,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree180"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_5420",
@@ -834,14 +886,16 @@
       "args": "winlogon.exe",
       "path": "",
       "degree_in": 137,
-      "degree_out": 0,
+      "degree_out": 46,
+      "lineage_depth": 1,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree137"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_4124",
@@ -857,14 +911,16 @@
       "args": "\"fontdrvhost.exe\"",
       "path": "",
       "degree_in": 56,
-      "degree_out": 1,
+      "degree_out": 7,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree56"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_352",
@@ -880,14 +936,16 @@
       "args": "\"dwm.exe\"",
       "path": "",
       "degree_in": 505,
-      "degree_out": 1,
+      "degree_out": 78,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree505"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_1532",
@@ -903,37 +961,16 @@
       "args": "sihost.exe",
       "path": "",
       "degree_in": 253,
-      "degree_out": 1,
+      "degree_out": 91,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree253"
-      ]
-    },
-    {
-      "node_id": "process_5164",
-      "name": "svchost.exe",
-      "pid": 5164,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "2.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:43:30.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k UnistackSvcGroup",
-      "path": "",
-      "degree_in": 549,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "no-path",
-        "2x-c2-conn"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_4988",
@@ -949,14 +986,16 @@
       "args": "\"ctfmon.exe\"",
       "path": "",
       "degree_in": 176,
-      "degree_out": 1,
+      "degree_out": 53,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree176"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_3800",
@@ -972,14 +1011,16 @@
       "args": "C:\\\\Windows\\\\system32\\\\DllHost.exe /Processid:{3EB3C877-1F16-487C-9050-104DBCD66683}",
       "path": "",
       "degree_in": 233,
-      "degree_out": 1,
+      "degree_out": 35,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree233"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_3004",
@@ -995,14 +1036,16 @@
       "args": "\"C:\\\\Windows\\\\SystemApps\\\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\\\StartMenuExperienceHost.exe\" -ServerName:App.AppXywbrabmsek0gm3tkwpr5kwzbs55tkqay.mca",
       "path": "",
       "degree_in": 374,
-      "degree_out": 1,
+      "degree_out": 119,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree374"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_4608",
@@ -1018,14 +1061,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\RuntimeBroker.exe -Embedding",
       "path": "",
       "degree_in": 222,
-      "degree_out": 1,
+      "degree_out": 76,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree222"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_1452",
@@ -1041,14 +1086,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\RuntimeBroker.exe -Embedding",
       "path": "",
       "degree_in": 361,
-      "degree_out": 1,
+      "degree_out": 118,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree361"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_4896",
@@ -1064,14 +1111,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\RuntimeBroker.exe -Embedding",
       "path": "",
       "degree_in": 263,
-      "degree_out": 1,
+      "degree_out": 97,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree263"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_1128",
@@ -1087,14 +1136,16 @@
       "args": "",
       "path": "",
       "degree_in": 105,
-      "degree_out": 1,
+      "degree_out": 27,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree105"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_4432",
@@ -1110,14 +1161,16 @@
       "args": "\"C:\\\\Program Files\\\\WindowsApps\\\\Microsoft.Windows.Photos_2019.19071.12548.0_x64__8wekyb3d8bbwe\\\\Microsoft.Photos.exe\" -ServerName:App.AppXzst44mncqdg84v7sv6p7yznqwssy6f7f.mca",
       "path": "",
       "degree_in": 307,
-      "degree_out": 1,
+      "degree_out": 86,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree307"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_4528",
@@ -1133,14 +1186,16 @@
       "args": "taskhostw.exe {222A245B-E637-4AE9-A93F-A59CA119A75E}",
       "path": "",
       "degree_in": 150,
-      "degree_out": 1,
+      "degree_out": 45,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree150"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_3968",
@@ -1156,14 +1211,16 @@
       "args": "\"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --no-startup-window --continue-active-setup",
       "path": "",
       "degree_in": 780,
-      "degree_out": 0,
+      "degree_out": 162,
+      "lineage_depth": 1,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree780"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_2112",
@@ -1179,14 +1236,16 @@
       "args": "\"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=crashpad-handler \"--user-data-dir=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler \"--database=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User ",
       "path": "",
       "degree_in": 99,
-      "degree_out": 1,
+      "degree_out": 21,
+      "lineage_depth": 0,
       "is_suspicious_flag": true,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree99"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_4612",
@@ -1202,14 +1261,16 @@
       "args": "\"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=gpu-process --gpu-preferences=UAAAAAAAAADgAAAYAAAAAAAAAAAAAAAAAABgAAAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAAAAGAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --mojo-platform-channel-handle=1788 --field-trial-hand",
       "path": "",
       "degree_in": 222,
-      "degree_out": 1,
+      "degree_out": 57,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree222"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_2284",
@@ -1225,14 +1286,16 @@
       "args": "\"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --mojo-platform-channel-handle=2460 --field-trial-handle=2008,i,17505798324339821025,12710742180276585522,131072 /prefetch:8",
       "path": "",
       "degree_in": 149,
-      "degree_out": 1,
+      "degree_out": 38,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree149"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6764",
@@ -1249,13 +1312,15 @@
       "path": "",
       "degree_in": 240,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree240"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6996",
@@ -1271,14 +1336,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\RuntimeBroker.exe -Embedding",
       "path": "",
       "degree_in": 211,
-      "degree_out": 1,
+      "degree_out": 76,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree211"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_1280",
@@ -1294,14 +1361,16 @@
       "args": "\"C:\\\\Windows\\\\System32\\\\SecurityHealthSystray.exe\"",
       "path": "",
       "degree_in": 100,
-      "degree_out": 1,
+      "degree_out": 32,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree100"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_5820",
@@ -1317,14 +1386,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\RuntimeBroker.exe -Embedding",
       "path": "",
       "degree_in": 193,
-      "degree_out": 1,
+      "degree_out": 66,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree193"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6376",
@@ -1340,14 +1411,16 @@
       "args": "\"C:\\\\Windows\\\\SystemApps\\\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\\\TextInputHost.exe\" -ServerName:InputApp.AppXjd5de1g66v206tj52m9d0dtpppx4cgpn.mca",
       "path": "",
       "degree_in": 258,
-      "degree_out": 1,
+      "degree_out": 85,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree258"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_8008",
@@ -1363,14 +1436,16 @@
       "args": "\"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=29 --time-ticks-at-unix-epoch=-1680208556341991 --launch-time-ticks=5815653",
       "path": "",
       "degree_in": 163,
-      "degree_out": 1,
+      "degree_out": 33,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree163"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6272",
@@ -1386,14 +1461,16 @@
       "args": "",
       "path": "",
       "degree_in": 164,
-      "degree_out": 1,
+      "degree_out": 33,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree164"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6408",
@@ -1409,14 +1486,16 @@
       "args": "\"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=31 --time-ticks-at-unix-epoch=-1680208556341991 --launch-time-ticks=5920160",
       "path": "",
       "degree_in": 162,
-      "degree_out": 1,
+      "degree_out": 33,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree162"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6980",
@@ -1432,14 +1511,16 @@
       "args": "\"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=audio --mojo-platform-channel-handle=9800 --field-trial-handle=2008,i,17505798324339821025,12710742180276585522,131072 /prefetch:8",
       "path": "",
       "degree_in": 177,
-      "degree_out": 1,
+      "degree_out": 49,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree177"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_7084",
@@ -1455,14 +1536,16 @@
       "args": "",
       "path": "",
       "degree_in": 171,
-      "degree_out": 1,
+      "degree_out": 16,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree171"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_8032",
@@ -1478,14 +1561,16 @@
       "args": "\"C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\21.220.1024.0005\\\\FileCoAuth.exe\" -Embedding",
       "path": "",
       "degree_in": 177,
-      "degree_out": 1,
+      "degree_out": 58,
+      "lineage_depth": 0,
       "is_suspicious_flag": true,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree177"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_4864",
@@ -1501,14 +1586,16 @@
       "args": "",
       "path": "",
       "degree_in": 188,
-      "degree_out": 1,
+      "degree_out": 17,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree188"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6732",
@@ -1524,14 +1611,16 @@
       "args": "C:\\\\Windows\\\\system32\\\\DllHost.exe /Processid:{973D20D7-562D-44B9-B70B-5A0F49CCDF3F}",
       "path": "",
       "degree_in": 165,
-      "degree_out": 1,
+      "degree_out": 32,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree165"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6784",
@@ -1547,14 +1636,16 @@
       "args": "\"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=renderer --disable-gpu-compositing --lang=en-US --js-flags=--ms-user-locale=en_GB --device-scale-factor=1 --num-raster-threads=1 --renderer-client-id=89 --time-ticks-at-unix-epoch=-1680208556341991 --launch-time-ticks=1006324",
       "path": "",
       "degree_in": 153,
-      "degree_out": 1,
+      "degree_out": 16,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree153"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6908",
@@ -1570,14 +1661,16 @@
       "args": "taskhostw.exe",
       "path": "",
       "degree_in": 211,
-      "degree_out": 1,
+      "degree_out": 71,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree211"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_3104",
@@ -1593,14 +1686,16 @@
       "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe5_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe5 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthrsv",
       "path": "",
       "degree_in": 153,
-      "degree_out": 1,
+      "degree_out": 48,
+      "lineage_depth": 0,
       "is_suspicious_flag": true,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree153"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_556",
@@ -1616,14 +1711,16 @@
       "args": "C:\\\\Windows\\\\system32\\\\AUDIODG.EXE 0x490",
       "path": "",
       "degree_in": 114,
-      "degree_out": 1,
+      "degree_out": 33,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree114"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6180",
@@ -1639,14 +1736,16 @@
       "args": "C:\\\\Windows\\\\system32\\\\ApplicationFrameHost.exe -Embedding",
       "path": "",
       "degree_in": 258,
-      "degree_out": 1,
+      "degree_out": 63,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree258"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_7840",
@@ -1662,14 +1761,16 @@
       "args": "",
       "path": "",
       "degree_in": 154,
-      "degree_out": 1,
+      "degree_out": 33,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree154"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6160",
@@ -1685,14 +1786,16 @@
       "args": "C:\\\\Windows\\\\system32\\\\wbem\\\\wmiprvse.exe",
       "path": "",
       "degree_in": 121,
-      "degree_out": 1,
+      "degree_out": 37,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree121"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6220",
@@ -1708,14 +1811,16 @@
       "args": "C:\\\\Windows\\\\servicing\\\\TrustedInstaller.exe",
       "path": "",
       "degree_in": 95,
-      "degree_out": 1,
+      "degree_out": 25,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree95"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_4704",
@@ -1731,14 +1836,16 @@
       "args": "C:\\\\Windows\\\\winsxs\\\\amd64_microsoft-windows-servicingstack_31bf3856ad364e35_10.0.19041.1940_none_7dd80d767cb5c7b0\\\\TiWorker.exe -Embedding",
       "path": "",
       "degree_in": 535,
-      "degree_out": 1,
+      "degree_out": 66,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree535"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_7676",
@@ -1754,14 +1861,16 @@
       "args": "C:\\\\Windows\\\\system32\\\\DllHost.exe /Processid:{3AD05575-8857-4850-9277-11B85BDB8E09}",
       "path": "",
       "degree_in": 132,
-      "degree_out": 1,
+      "degree_out": 30,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree132"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_2052",
@@ -1777,14 +1886,16 @@
       "args": "C:\\\\Windows\\\\system32\\\\vssvc.exe",
       "path": "",
       "degree_in": 110,
-      "degree_out": 1,
+      "degree_out": 23,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree110"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6600",
@@ -1800,14 +1911,16 @@
       "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe_S-1-5-21-768819175-3918086651-1568104824-10016_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe_S-1-5-21-768819175-3918086651-1568104824-10016 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0;",
       "path": "",
       "degree_in": 102,
-      "degree_out": 1,
-      "is_suspicious_flag": true,
+      "degree_out": 27,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree102"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_2928",
@@ -1824,13 +1937,15 @@
       "path": "",
       "degree_in": 208,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree208"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_8016",
@@ -1846,14 +1961,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\RuntimeBroker.exe -Embedding",
       "path": "",
       "degree_in": 115,
-      "degree_out": 1,
+      "degree_out": 39,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree115"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_2896",
@@ -1870,13 +1987,15 @@
       "path": "",
       "degree_in": 74,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree74"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_1720",
@@ -1892,14 +2011,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\RuntimeBroker.exe -Embedding",
       "path": "",
       "degree_in": 124,
-      "degree_out": 1,
+      "degree_out": 42,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree124"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_3780",
@@ -1916,13 +2037,15 @@
       "path": "",
       "degree_in": 98,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree98"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_7048",
@@ -1938,14 +2061,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\RuntimeBroker.exe -Embedding",
       "path": "",
       "degree_in": 132,
-      "degree_out": 1,
+      "degree_out": 46,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree132"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_2996",
@@ -1962,13 +2087,15 @@
       "path": "",
       "degree_in": 183,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree183"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_7756",
@@ -1984,14 +2111,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\RuntimeBroker.exe -Embedding",
       "path": "",
       "degree_in": 126,
-      "degree_out": 1,
+      "degree_out": 44,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree126"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_4292",
@@ -2008,13 +2137,15 @@
       "path": "",
       "degree_in": 82,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree82"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_7608",
@@ -2030,14 +2161,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\RuntimeBroker.exe -Embedding",
       "path": "",
       "degree_in": 102,
-      "degree_out": 1,
+      "degree_out": 33,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree102"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_4372",
@@ -2054,13 +2187,15 @@
       "path": "",
       "degree_in": 129,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree129"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_7092",
@@ -2076,14 +2211,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\RuntimeBroker.exe -Embedding",
       "path": "",
       "degree_in": 108,
-      "degree_out": 1,
+      "degree_out": 33,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree108"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_5624",
@@ -2100,13 +2237,15 @@
       "path": "",
       "degree_in": 95,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree95"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_1600",
@@ -2122,14 +2261,16 @@
       "args": "\"C:\\\\Windows\\\\system32\\\\SearchFilterHost.exe\" 0 772 804 812 8192 808 792",
       "path": "",
       "degree_in": 92,
-      "degree_out": 1,
+      "degree_out": 29,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree92"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_7440",
@@ -2145,14 +2286,16 @@
       "args": "consent.exe 312 272 0000019E8E39E500",
       "path": "",
       "degree_in": 158,
-      "degree_out": 1,
+      "degree_out": 48,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree158"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_3140",
@@ -2169,13 +2312,15 @@
       "path": "",
       "degree_in": 86,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree86"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_7060",
@@ -2191,14 +2336,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\RuntimeBroker.exe -Embedding",
       "path": "",
       "degree_in": 196,
-      "degree_out": 1,
+      "degree_out": 71,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree196"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_8124",
@@ -2214,14 +2361,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\RuntimeBroker.exe -Embedding",
       "path": "",
       "degree_in": 251,
-      "degree_out": 1,
+      "degree_out": 84,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree251"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_6436",
@@ -2238,13 +2387,15 @@
       "path": "",
       "degree_in": 130,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree130"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_7312",
@@ -2260,14 +2411,16 @@
       "args": "winpmem_mini_x64_rc2  WithVirus.raw",
       "path": "",
       "degree_in": 44,
-      "degree_out": 1,
+      "degree_out": 9,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "spawned-lolbin-child"
-      ]
+      ],
+      "norm_score": 0.008620689655172414
     },
     {
       "node_id": "process_92",
@@ -2284,35 +2437,14 @@
       "path": "",
       "degree_in": 148,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 2,
       "severity": "LOW",
       "reasons": [
         "high-in-degree148"
-      ]
-    },
-    {
-      "node_id": "process_800",
-      "name": "svchost.exe",
-      "pid": 800,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:35:59.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalService -p",
-      "path": "",
-      "degree_in": 331,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 2,
-      "severity": "LOW",
-      "reasons": [
-        "no-path",
-        "1x-c2-conn"
-      ]
+      ],
+      "norm_score": 0.005747126436781609
     },
     {
       "node_id": "process_328",
@@ -2328,57 +2460,15 @@
       "args": "\\\\SystemRoot\\\\System32\\\\smss.exe",
       "path": "",
       "degree_in": 22,
-      "degree_out": 1,
+      "degree_out": 2,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
         "no-path"
-      ]
-    },
-    {
-      "node_id": "process_768",
-      "name": "svchost.exe",
-      "pid": 768,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:35:58.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k DcomLaunch -p",
-      "path": "",
-      "degree_in": 329,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_892",
-      "name": "svchost.exe",
-      "pid": 892,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:35:58.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k RPCSS -p",
-      "path": "",
-      "degree_in": 216,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
+      ],
+      "norm_score": 0.0028735632183908046
     },
     {
       "node_id": "process_952",
@@ -2395,34 +2485,14 @@
       "path": "",
       "degree_in": 0,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
         "no-path"
-      ]
-    },
-    {
-      "node_id": "process_424",
-      "name": "svchost.exe",
-      "pid": 424,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:35:59.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalServiceNoNetwork -p",
-      "path": "",
-      "degree_in": 202,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
+      ],
+      "norm_score": 0.0028735632183908046
     },
     {
       "node_id": "process_1108",
@@ -2439,188 +2509,14 @@
       "path": "",
       "degree_in": 1,
       "degree_out": 0,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
         "no-path"
-      ]
-    },
-    {
-      "node_id": "process_1132",
-      "name": "svchost.exe",
-      "pid": 1132,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:36:03.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalSystemNetworkRestricted -p",
-      "path": "",
-      "degree_in": 334,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_1172",
-      "name": "svchost.exe",
-      "pid": 1172,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:36:03.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalServiceNetworkRestricted -p",
-      "path": "",
-      "degree_in": 161,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_1232",
-      "name": "svchost.exe",
-      "pid": 1232,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:36:03.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k appmodel -p",
-      "path": "",
-      "degree_in": 188,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_1268",
-      "name": "svchost.exe",
-      "pid": 1268,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:36:04.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k wsappx -p",
-      "path": "",
-      "degree_in": 378,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_1320",
-      "name": "svchost.exe",
-      "pid": 1320,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:36:04.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k NetworkService -p",
-      "path": "",
-      "degree_in": 360,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_1384",
-      "name": "svchost.exe",
-      "pid": 1384,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:36:05.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalServiceNetworkRestricted -p",
-      "path": "",
-      "degree_in": 266,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_2008",
-      "name": "svchost.exe",
-      "pid": 2008,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:36:06.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalServiceNetworkRestricted -p",
-      "path": "",
-      "degree_in": 92,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_2016",
-      "name": "svchost.exe",
-      "pid": 2016,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:36:06.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalServiceNetworkRestricted -p",
-      "path": "",
-      "degree_in": 140,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
+      ],
+      "norm_score": 0.0028735632183908046
     },
     {
       "node_id": "process_1368",
@@ -2636,79 +2532,15 @@
       "args": "C:\\\\Windows\\\\System32\\\\spoolsv.exe",
       "path": "",
       "degree_in": 320,
-      "degree_out": 1,
+      "degree_out": 110,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
         "no-path"
-      ]
-    },
-    {
-      "node_id": "process_2056",
-      "name": "svchost.exe",
-      "pid": 2056,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:36:07.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalServiceNoNetworkFirewall -p",
-      "path": "",
-      "degree_in": 183,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_2224",
-      "name": "svchost.exe",
-      "pid": 2224,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:36:07.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k AppReadiness -p",
-      "path": "",
-      "degree_in": 165,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_2288",
-      "name": "svchost.exe",
-      "pid": 2288,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:36:08.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k utcsvc -p",
-      "path": "",
-      "degree_in": 303,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
+      ],
+      "norm_score": 0.0028735632183908046
     },
     {
       "node_id": "process_2584",
@@ -2724,101 +2556,15 @@
       "args": "C:\\\\Windows\\\\system32\\\\SearchIndexer.exe /Embedding",
       "path": "",
       "degree_in": 434,
-      "degree_out": 1,
+      "degree_out": 60,
+      "lineage_depth": 1,
       "is_suspicious_flag": false,
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
         "no-path"
-      ]
-    },
-    {
-      "node_id": "process_4052",
-      "name": "svchost.exe",
-      "pid": 4052,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:37:57.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalServiceAndNoImpersonation -p",
-      "path": "",
-      "degree_in": 126,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_3896",
-      "name": "svchost.exe",
-      "pid": 3896,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:38:07.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k wusvcs -p",
-      "path": "",
-      "degree_in": 84,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_4908",
-      "name": "svchost.exe",
-      "pid": 4908,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:38:09.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalServiceNetworkRestricted -p",
-      "path": "",
-      "degree_in": 161,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_4604",
-      "name": "svchost.exe",
-      "pid": 4604,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:38:15.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k WbioSvcGroup",
-      "path": "",
-      "degree_in": 174,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
+      ],
+      "norm_score": 0.0028735632183908046
     },
     {
       "node_id": "process_1536",
@@ -2835,56 +2581,14 @@
       "path": "",
       "degree_in": 1,
       "degree_out": 1,
+      "lineage_depth": 2,
       "is_suspicious_flag": false,
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
         "no-path"
-      ]
-    },
-    {
-      "node_id": "process_5460",
-      "name": "svchost.exe",
-      "pid": 5460,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "2.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:43:36.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k ClipboardSvcGroup -p",
-      "path": "",
-      "degree_in": 169,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_4800",
-      "name": "svchost.exe",
-      "pid": 4800,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:43:54.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k netsvcs -p",
-      "path": "",
-      "degree_in": 217,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
+      ],
+      "norm_score": 0.0028735632183908046
     },
     {
       "node_id": "process_196",
@@ -2901,56 +2605,14 @@
       "path": "",
       "degree_in": 0,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
         "no-path"
-      ]
-    },
-    {
-      "node_id": "process_7384",
-      "name": "svchost.exe",
-      "pid": 7384,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:54:49.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k swprv",
-      "path": "",
-      "degree_in": 116,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
-    },
-    {
-      "node_id": "process_3428",
-      "name": "svchost.exe",
-      "pid": 3428,
-      "ppid": 640,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 20:58:44.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k NetworkService -p",
-      "path": "",
-      "degree_in": 222,
-      "degree_out": 1,
-      "is_suspicious_flag": false,
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "no-path"
-      ]
+      ],
+      "norm_score": 0.0028735632183908046
     },
     {
       "node_id": "process_3940",
@@ -2967,12 +2629,642 @@
       "path": "",
       "degree_in": 10,
       "degree_out": 1,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
         "no-path"
-      ]
+      ],
+      "norm_score": 0.0028735632183908046
+    },
+    {
+      "node_id": "process_768",
+      "name": "svchost.exe",
+      "pid": 768,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:35:58.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k DcomLaunch -p",
+      "path": "",
+      "degree_in": 329,
+      "degree_out": 101,
+      "lineage_depth": 1,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_892",
+      "name": "svchost.exe",
+      "pid": 892,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:35:58.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k RPCSS -p",
+      "path": "",
+      "degree_in": 216,
+      "degree_out": 53,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_312",
+      "name": "svchost.exe",
+      "pid": 312,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:35:59.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k netsvcs -p",
+      "path": "",
+      "degree_in": 1173,
+      "degree_out": 271,
+      "lineage_depth": 1,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "2-unique-ip-c2-conn",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_424",
+      "name": "svchost.exe",
+      "pid": 424,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:35:59.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalServiceNoNetwork -p",
+      "path": "",
+      "degree_in": 202,
+      "degree_out": 60,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_800",
+      "name": "svchost.exe",
+      "pid": 800,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:35:59.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalService -p",
+      "path": "",
+      "degree_in": 331,
+      "degree_out": 109,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "1-unique-ip-c2-conn",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_1132",
+      "name": "svchost.exe",
+      "pid": 1132,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:36:03.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalSystemNetworkRestricted -p",
+      "path": "",
+      "degree_in": 334,
+      "degree_out": 111,
+      "lineage_depth": 1,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_1172",
+      "name": "svchost.exe",
+      "pid": 1172,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:36:03.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalServiceNetworkRestricted -p",
+      "path": "",
+      "degree_in": 161,
+      "degree_out": 51,
+      "lineage_depth": 1,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_1232",
+      "name": "svchost.exe",
+      "pid": 1232,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:36:03.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k appmodel -p",
+      "path": "",
+      "degree_in": 188,
+      "degree_out": 50,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_1268",
+      "name": "svchost.exe",
+      "pid": 1268,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:36:04.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k wsappx -p",
+      "path": "",
+      "degree_in": 378,
+      "degree_out": 108,
+      "lineage_depth": 1,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_1320",
+      "name": "svchost.exe",
+      "pid": 1320,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:36:04.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k NetworkService -p",
+      "path": "",
+      "degree_in": 360,
+      "degree_out": 87,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_1384",
+      "name": "svchost.exe",
+      "pid": 1384,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:36:05.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalServiceNetworkRestricted -p",
+      "path": "",
+      "degree_in": 266,
+      "degree_out": 90,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_2008",
+      "name": "svchost.exe",
+      "pid": 2008,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:36:06.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalServiceNetworkRestricted -p",
+      "path": "",
+      "degree_in": 92,
+      "degree_out": 29,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_2016",
+      "name": "svchost.exe",
+      "pid": 2016,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:36:06.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalServiceNetworkRestricted -p",
+      "path": "",
+      "degree_in": 140,
+      "degree_out": 45,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_2056",
+      "name": "svchost.exe",
+      "pid": 2056,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:36:07.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalServiceNoNetworkFirewall -p",
+      "path": "",
+      "degree_in": 183,
+      "degree_out": 55,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_2224",
+      "name": "svchost.exe",
+      "pid": 2224,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:36:07.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k AppReadiness -p",
+      "path": "",
+      "degree_in": 165,
+      "degree_out": 55,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_2288",
+      "name": "svchost.exe",
+      "pid": 2288,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:36:08.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k utcsvc -p",
+      "path": "",
+      "degree_in": 303,
+      "degree_out": 99,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_4052",
+      "name": "svchost.exe",
+      "pid": 4052,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:37:57.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalServiceAndNoImpersonation -p",
+      "path": "",
+      "degree_in": 126,
+      "degree_out": 36,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_3896",
+      "name": "svchost.exe",
+      "pid": 3896,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:38:07.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k wusvcs -p",
+      "path": "",
+      "degree_in": 84,
+      "degree_out": 26,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_4908",
+      "name": "svchost.exe",
+      "pid": 4908,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:38:09.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalServiceNetworkRestricted -p",
+      "path": "",
+      "degree_in": 161,
+      "degree_out": 54,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_4604",
+      "name": "svchost.exe",
+      "pid": 4604,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:38:15.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k WbioSvcGroup",
+      "path": "",
+      "degree_in": 174,
+      "degree_out": 61,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_5164",
+      "name": "svchost.exe",
+      "pid": 5164,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "2.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:43:30.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k UnistackSvcGroup",
+      "path": "",
+      "degree_in": 549,
+      "degree_out": 194,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "2-unique-ip-c2-conn",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_5460",
+      "name": "svchost.exe",
+      "pid": 5460,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "2.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:43:36.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k ClipboardSvcGroup -p",
+      "path": "",
+      "degree_in": 169,
+      "degree_out": 61,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_4800",
+      "name": "svchost.exe",
+      "pid": 4800,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:43:54.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k netsvcs -p",
+      "path": "",
+      "degree_in": 217,
+      "degree_out": 77,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_7384",
+      "name": "svchost.exe",
+      "pid": 7384,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:54:49.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k swprv",
+      "path": "",
+      "degree_in": 116,
+      "degree_out": 35,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
+    },
+    {
+      "node_id": "process_3428",
+      "name": "svchost.exe",
+      "pid": 3428,
+      "ppid": 640,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 20:58:44.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k NetworkService -p",
+      "path": "",
+      "degree_in": 222,
+      "degree_out": 76,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "heuristic_score": 0,
+      "severity": "LOW",
+      "reasons": [
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
     },
     {
       "node_id": "process_6904",
@@ -2988,13 +3280,16 @@
       "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalService -p",
       "path": "",
       "degree_in": 157,
-      "degree_out": 1,
+      "degree_out": 54,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
-      "heuristic_score": 1,
+      "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
-        "no-path"
-      ]
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
     },
     {
       "node_id": "process_4368",
@@ -3010,13 +3305,16 @@
       "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k WerSvcGroup",
       "path": "",
       "degree_in": 78,
-      "degree_out": 1,
+      "degree_out": 23,
+      "lineage_depth": 0,
       "is_suspicious_flag": false,
-      "heuristic_score": 1,
+      "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
-        "no-path"
-      ]
+        "no-path",
+        "popularity-dampened"
+      ],
+      "norm_score": 0.0
     }
   ],
   "hidden_processes": [],
@@ -152459,8 +152757,8 @@
       "handle_type": "Process",
       "granted_access": "0x1fffff",
       "is_full_access": true,
-      "severity": "CRITICAL",
-      "reason": "Full process access to lsass \u2014 T1003 credential dumping"
+      "severity": "HIGH",
+      "reason": "Legitimate or elevated LSASS access"
     }
   ],
   "drivers": [
@@ -152477,18 +152775,39 @@
     }
   ],
   "graph_attr": [
+    342.0,
     4.0,
-    5.0,
     28.0,
     0.0,
     0.0
   ],
   "label_signals": {
-    "behavioural_suspects_found": true,
-    "lolbin_c2_found": false,
-    "ransom_note_found": false,
-    "rwx_injections": 41,
-    "hidden_processes": 2,
-    "top_suspect_score": 4
+    "behavioural_suspects_found": 1,
+    "lolbin_c2_found": 0,
+    "ransom_note_found": 0,
+    "rwx_injections": 91,
+    "hidden_processes": 0,
+    "top_suspect_score": 342,
+    "triage_confidence": 0.99,
+    "stage_coverage_score": 0.8,
+    "lineage_depth_p95": 5,
+    "nonrwx_exec_count": 50,
+    "credential_access_count": 1,
+    "num_attack_motifs": 360,
+    "service_boundary_violations": 0,
+    "temporal_chain_signals": 0,
+    "trusted_host_dll_anomalies": 0
+  },
+  "graph_attr_extra": {
+    "num_processes": 122,
+    "num_network": 82,
+    "num_injections": 41,
+    "num_credentials": 1,
+    "num_hidden": 0,
+    "service_user_boundary_violations": 27,
+    "office_lolbin_chain_count": 0,
+    "trusted_host_dll_anomalies": 0,
+    "dual_use_admin_tool_count": 1,
+    "popularity_dampened_processes": 27
   }
 }

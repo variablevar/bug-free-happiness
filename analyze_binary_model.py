@@ -261,12 +261,16 @@ def run(args):
     base_dir = args.base_dir or str(manifest.parent)
     df = pd.read_csv(manifest)
     sample_id_by_folder = {str(r["folder"]): str(r.get("sample_id", "")) for _, r in df.iterrows()}
+    profile = str(payload.get("graph_attr_profile", "full") or "full")
+    view = str(payload.get("graph_view", "full") or "full")
     ds = MalwareGraphDataset(
         args.manifest,
         base_dir=base_dir,
         include_uncertain=True,
         include_unknown=False,
         target="label",
+        graph_attr_profile=profile,
+        graph_view=view,
     )
 
     samples = []

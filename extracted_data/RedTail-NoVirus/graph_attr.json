@@ -1,17 +1,50 @@
 {
   "graph_attr": [
-    4.0,
+    144.0,
     2.0,
     0.0,
     0.0,
     0.0
   ],
+  "graph_attr_map": {
+    "max_process_score": 144,
+    "attack_steps": 2,
+    "high_severity_injections": 0,
+    "lolbin_c2_connections": 0,
+    "ransom_note_signal": 0,
+    "suspect_rate": 0.02381,
+    "hidden_rate": 0.0,
+    "inject_rate": 0.301587,
+    "external_conn_rate": 0.0,
+    "largest_suspicious_component_ratio": 0.087302,
+    "lineage_depth_p95": 4,
+    "lolbin_chain_count": 0,
+    "nonrwx_exec_count": 20,
+    "credential_access_count": 0,
+    "triage_confidence": 0.99,
+    "stage_coverage_score": 0.6,
+    "proc_degree_zmax": 5.744882,
+    "proc_betweenness_p95": 0.093738,
+    "num_attack_motifs": 93,
+    "service_boundary_violations": 0,
+    "temporal_chain_signals": 0,
+    "trusted_host_dll_anomalies": 0
+  },
   "label_signals": {
-    "behavioural_suspects_found": true,
-    "lolbin_c2_found": false,
-    "ransom_note_found": false,
-    "rwx_injections": 18,
+    "behavioural_suspects_found": 1,
+    "lolbin_c2_found": 0,
+    "ransom_note_found": 0,
+    "rwx_injections": 38,
     "hidden_processes": 0,
-    "top_suspect_score": 4
+    "top_suspect_score": 144,
+    "triage_confidence": 0.99,
+    "stage_coverage_score": 0.6,
+    "lineage_depth_p95": 4,
+    "nonrwx_exec_count": 20,
+    "credential_access_count": 0,
+    "num_attack_motifs": 93,
+    "service_boundary_violations": 0,
+    "temporal_chain_signals": 0,
+    "trusted_host_dll_anomalies": 0
   }
 }

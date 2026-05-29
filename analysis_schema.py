@@ -11,39 +11,55 @@ from typing import List
 
 HIGH_THRESHOLD = 0.60
 LOW_THRESHOLD = 0.40
-SCHEMA_VERSION = "2.1"
+SCHEMA_VERSION = "2.3"
 
 
-def bucket(score: float) -> str:
-    if score >= HIGH_THRESHOLD:
+def bucket(score: float, *, low: float = LOW_THRESHOLD, high: float = HIGH_THRESHOLD) -> str:
+    if score >= high:
         return "HIGH"
-    if score < LOW_THRESHOLD:
+    if score < low:
         return "LOW"
     return "MEDIUM"
 
 
-def triage_state(malware_score: float, benign_score: float) -> str:
-    malware_high = malware_score >= HIGH_THRESHOLD
-    benign_high = benign_score >= HIGH_THRESHOLD
-    malware_low = malware_score < LOW_THRESHOLD
-    benign_low = benign_score < LOW_THRESHOLD
+def triage_state(
+    malware_score: float,
+    benign_score: float,
+    *,
+    malware_low: float = LOW_THRESHOLD,
+    malware_high: float = HIGH_THRESHOLD,
+    benign_low: float = LOW_THRESHOLD,
+    benign_high: float = HIGH_THRESHOLD,
+) -> str:
+    malware_high_hit = malware_score >= malware_high
+    benign_high_hit = benign_score >= benign_high
+    malware_low_hit = malware_score < malware_low
+    benign_low_hit = benign_score < benign_low
 
-    if malware_high and benign_low:
+    if malware_high_hit and benign_low_hit:
         return "likely_malicious"
-    if malware_high and benign_high:
+    if malware_high_hit and benign_high_hit:
         return "needs_analyst_review"
-    if malware_low and benign_low:
+    if malware_low_hit and benign_low_hit:
         return "anomalous_unknown"
-    if malware_low and benign_high:
+    if malware_low_hit and benign_high_hit:
         return "likely_benign"
     return "needs_analyst_review"
 
 
-def triage_state_two_model_fused(state_dual: str, state_fused: str, memory_injection_evidence: bool) -> str:
+def triage_state_two_model_fused(
+    state_dual: str,
+    state_fused: str,
+    memory_injection_evidence: bool,
+    *,
+    uncertainty_gate_triggered: bool = False,
+) -> str:
     """
     Four-way triage for two-model reports: combine dual one-class triage with
     fusion final_triage (3-way), plus injection guardrail (never likely_benign).
     """
+    if uncertainty_gate_triggered:
+        return "needs_analyst_review"
     if state_dual == "anomalous_unknown":
         if state_fused == "likely_malicious":
             return "likely_malicious"
@@ -97,9 +113,12 @@ class SampleAnalysis:
     malware_model_evidence: dict
     benign_model_evidence: dict
     narrative: str
+    abstention_reason: str | None = None
+    uncertainty_gate_triggered: bool | None = None
     fusion: dict | None = None
     uncertainty: dict | None = None
     attention_evidence: dict | None = None
+    benign_subtype: str = ""
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -117,6 +136,8 @@ class BinarySampleAnalysis:
     behavioral_findings: List[dict]
     binary_model_evidence: dict
     narrative: str
+    abstention_reason: str | None = None
+    uncertainty_gate_triggered: bool | None = None
     fusion: dict | None = None
     uncertainty: dict | None = None
     attention_evidence: dict | None = None

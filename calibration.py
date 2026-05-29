@@ -236,3 +236,114 @@ def choose_thresholds_by_roc(
                 t_low = max(0.0, 1.0 - min_ambiguity_width)
     return t_low, t_high
 
+
+@dataclass
+class IsotonicCalibrator:
+    """Piecewise-linear isotonic map for P(malware) on validation data."""
+
+    x_thresholds: list[float]
+    y_thresholds: list[float]
+
+    def transform(self, p: np.ndarray) -> np.ndarray:
+        p = np.asarray(p, dtype=float).reshape(-1)
+        if not self.x_thresholds:
+            return p
+        xs = np.asarray(self.x_thresholds, dtype=float)
+        ys = np.asarray(self.y_thresholds, dtype=float)
+        return np.clip(np.interp(p, xs, ys), 0.0, 1.0)
+
+    def to_dict(self) -> dict:
+        return {"x_thresholds": self.x_thresholds, "y_thresholds": self.y_thresholds}
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "IsotonicCalibrator":
+        return cls(
+            x_thresholds=list(d.get("x_thresholds") or []),
+            y_thresholds=list(d.get("y_thresholds") or []),
+        )
+
+
+def fit_isotonic(p_mal: np.ndarray, labels: np.ndarray, n_bins: int = 15) -> IsotonicCalibrator:
+    """Bucket-sort calibration (isotonic on bin means)."""
+    p = np.asarray(p_mal, dtype=float).reshape(-1)
+    y = np.asarray(labels, dtype=int).reshape(-1)
+    if len(p) < 4:
+        return IsotonicCalibrator(x_thresholds=[0.0, 1.0], y_thresholds=[0.0, 1.0])
+    order = np.argsort(p)
+    p_sorted = p[order]
+    y_sorted = y[order]
+    bins = np.array_split(np.arange(len(p)), max(2, min(n_bins, len(p) // 2)))
+    xs, ys = [0.0], [0.0]
+    for b in bins:
+        if len(b) == 0:
+            continue
+        xs.append(float(np.mean(p_sorted[b])))
+        ys.append(float(np.mean(y_sorted[b])))
+    xs.append(1.0)
+    ys.append(1.0)
+    # enforce monotonicity on y
+    for i in range(1, len(ys)):
+        ys[i] = max(ys[i], ys[i - 1])
+    return IsotonicCalibrator(x_thresholds=xs, y_thresholds=ys)
+
+
+@dataclass
+class SplitConformalBundle:
+    """Split conformal thresholds for fused malware score."""
+
+    alpha: float
+    q_malicious: float
+    q_benign: float
+    nonconformity_malicious: list[float]
+    nonconformity_benign: list[float]
+
+    def conformal_review(self, p_mal: float, label_hint: int | None = None) -> bool:
+        """If True, route to analyst review (score in ambiguous conformal set)."""
+        p = float(p_mal)
+        nc_mal = 1.0 - p
+        nc_ben = p
+        if label_hint == 1:
+            return nc_mal > self.q_malicious
+        if label_hint == 0:
+            return nc_ben > self.q_benign
+        return nc_mal > self.q_malicious and nc_ben > self.q_benign
+
+    def to_dict(self) -> dict:
+        return {
+            "alpha": self.alpha,
+            "q_malicious": self.q_malicious,
+            "q_benign": self.q_benign,
+            "nonconformity_malicious": self.nonconformity_malicious,
+            "nonconformity_benign": self.nonconformity_benign,
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "SplitConformalBundle":
+        return cls(
+            alpha=float(d.get("alpha", 0.05)),
+            q_malicious=float(d.get("q_malicious", 1.0)),
+            q_benign=float(d.get("q_benign", 1.0)),
+            nonconformity_malicious=list(d.get("nonconformity_malicious") or []),
+            nonconformity_benign=list(d.get("nonconformity_benign") or []),
+        )
+
+
+def fit_split_conformal(
+    p_mal: np.ndarray,
+    labels: np.ndarray,
+    alpha: float = 0.05,
+) -> SplitConformalBundle:
+    p = np.asarray(p_mal, dtype=float).reshape(-1)
+    y = np.asarray(labels, dtype=int).reshape(-1)
+    nc_mal = (1.0 - p)[y == 1]
+    nc_ben = p[y == 0]
+    q_mal = float(np.quantile(nc_mal, 1.0 - alpha)) if len(nc_mal) else 1.0
+    q_ben = float(np.quantile(nc_ben, 1.0 - alpha)) if len(nc_ben) else 1.0
+    return SplitConformalBundle(
+        alpha=float(alpha),
+        q_malicious=q_mal,
+        q_benign=q_ben,
+        nonconformity_malicious=nc_mal.tolist(),
+        nonconformity_benign=nc_ben.tolist(),
+    )
+

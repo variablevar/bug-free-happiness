@@ -20,6 +20,7 @@ from calibration import (
     brier_score,
     choose_thresholds_by_roc,
     expected_calibration_error,
+    fit_isotonic,
     fit_temperature,
     ks_separation,
     reliability_curve_bins,
@@ -174,13 +175,24 @@ def run(args):
         merged_tmp = manifest_path
         print(f"[BinaryModel] Merged {len(extra_manifests)} extra manifest(s) → {manifest_path}")
     try:
+        allowed_benign = None
+        if args.require_governance_manifest:
+            allowed_benign = tuple(
+                x.strip()
+                for x in str(args.allowed_benign_subtypes).split(",")
+                if x.strip()
+            )
         ds = MalwareGraphDataset(
             manifest_path,
             base_dir=args.base_dir,
             include_uncertain=not args.exclude_uncertain,
             include_unknown=False,
             require_train_eligible=not args.disable_strict_train_filter,
+            require_governance_columns=args.require_governance_manifest,
+            allowed_benign_subtypes=allowed_benign,
             target="label",
+            graph_attr_profile=args.graph_attr_profile,
+            graph_view=args.graph_view,
         )
     finally:
         if merged_tmp and merged_tmp != os.path.abspath(args.manifest) and os.path.isfile(merged_tmp):
@@ -354,7 +366,12 @@ def run(args):
     ts = fit_temperature(val_logits, val_y, max_iter=200)
     val_probs_raw = apply_temperature(val_logits, 1.0)
     val_probs_cal = apply_temperature(val_logits, ts.temperature)
+    iso = fit_isotonic(val_probs_cal[:, 1], val_y)
+    val_probs_iso = val_probs_cal.copy()
+    val_probs_iso[:, 1] = iso.transform(val_probs_cal[:, 1])
+    val_probs_iso[:, 0] = 1.0 - val_probs_iso[:, 1]
     t_low, t_high = choose_thresholds_by_roc(
+        val_probs_iso,
         val_probs_cal,
         val_y,
         target_recall=args.target_recall,
@@ -376,7 +393,7 @@ def run(args):
     _, tpr, fpr = roc_curve_points(val_probs_cal, val_y)
     auroc = auc_from_roc(tpr, fpr)
     val_pr_auc = pr_auc(val_probs_cal, val_y)
-    val_precision_at_th, val_recall_at_th = precision_recall_at_threshold(val_probs_cal, val_y, t_high)
+    val_precision_at_th, val_recall_at_th = precision_recall_at_threshold(val_probs_iso, val_y, t_high)
 
     payload = {
         "model_type": "binary_gnn_gine",
@@ -388,6 +405,9 @@ def run(args):
         "edge_emb_dim": args.edge_emb_dim,
         "graph_attr_dim": int(train_ds[0].graph_attr.size(1)),
         "temperature": ts.temperature,
+        "isotonic_calibrator": iso.to_dict(),
+        "graph_attr_profile": args.graph_attr_profile,
+        "graph_view": args.graph_view,
         "threshold_low": t_low,
         "threshold_high": t_high,
         "target_recall": args.target_recall,
@@ -490,7 +510,31 @@ if __name__ == "__main__":
     p.add_argument("--precision-floor", type=float, default=0.55, dest="precision_floor")
     p.add_argument("--recall-floor", type=float, default=0.75, dest="recall_floor")
     p.add_argument("--max-ambiguity-width", type=float, default=0.12, dest="max_ambiguity_width")
-    p.add_argument("--min-ambiguity-width", type=float, default=0.06, dest="min_ambiguity_width")
+    p.add_argument("--min-ambiguity-width", type=float, default=0.08, dest="min_ambiguity_width")
+    p.add_argument(
+        "--graph-attr-profile",
+        choices=["full", "no_manifest_leakage", "structure_only"],
+        default="no_manifest_leakage",
+        dest="graph_attr_profile",
+    )
+    p.add_argument(
+        "--graph-view",
+        choices=["full", "attack_subgraph"],
+        default="full",
+        dest="graph_view",
+    )
+    p.add_argument(
+        "--require-governance-manifest",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        dest="require_governance_manifest",
+    )
+    p.add_argument(
+        "--allowed-benign-subtypes",
+        default="clean_benign,hard_benign_admin_tooling",
+        dest="allowed_benign_subtypes",
+        help="Comma-separated benign_subtype values permitted when governance is on.",
+    )
     p.add_argument("--reliability-bins", type=int, default=10, dest="reliability_bins")
     p.add_argument("--pos-weight-mode", choices=["auto", "manual", "sweep"], default="auto", dest="pos_weight_mode")
     p.add_argument("--pos-weight-manual", type=float, default=1.0, dest="pos_weight_manual")

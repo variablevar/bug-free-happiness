@@ -1,4 +1,4 @@
-Sample: InfinityCrypt-NoVirus | label=0 | family=infinitycrypt
-SKIP filter_malicious.py
-SKIP build_graph.py
-SKIP analyze_graph.py
+Sample: InfinityCrypt-NoVirus | label=0 | family=infinitycrypt | benign_subtype=ambiguous_novirus_control
+filter_malicious.py: OK (0.9s)
+build_graph.py: OK (10.4s)
+analyze_graph.py: OK (1.2s)

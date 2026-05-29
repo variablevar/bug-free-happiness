@@ -1,8 +1,8 @@
 {
   "meta": {
-    "tool": "analyze_graph.py v3",
+    "tool": "analyze_graph.py v4",
     "source": "/Users/user/Documents/University/datasets/extracted_data/W32.MyDoom.A.-WithVirus",
-    "version": "3.0"
+    "version": "4.0"
   },
   "summary": {
     "nodes_total": 164,
@@ -28,7 +28,7 @@
         "step": 3,
         "tactic": "Command & Control",
         "mitre": "T1071",
-        "detail": "10 ESTABLISHED C2 connection(s) to 5 unique IP(s) via chrome.exe, svchost.exe",
+        "detail": "5 unique external C2 IP(s) (10 socket row(s)) via chrome.exe, svchost.exe",
         "evidence": "['142.250.200.46', '142.251.5.188', '172.217.169.36', '216.58.212.202']"
       }
     ],
@@ -255,11 +255,32 @@
     0.0
   ],
   "label_signals": {
-    "behavioural_suspects_found": false,
-    "lolbin_c2_found": false,
-    "ransom_note_found": false,
+    "behavioural_suspects_found": 0,
+    "lolbin_c2_found": 0,
+    "ransom_note_found": 0,
     "rwx_injections": 0,
     "hidden_processes": 0,
-    "top_suspect_score": 0
+    "top_suspect_score": 0,
+    "triage_confidence": 0.0,
+    "stage_coverage_score": 0.0,
+    "lineage_depth_p95": 0,
+    "nonrwx_exec_count": 0,
+    "credential_access_count": 0,
+    "num_attack_motifs": 0,
+    "service_boundary_violations": 0,
+    "temporal_chain_signals": 0,
+    "trusted_host_dll_anomalies": 0
+  },
+  "graph_attr_extra": {
+    "num_processes": 0,
+    "num_network": 158,
+    "num_injections": 0,
+    "num_credentials": 0,
+    "num_hidden": 0,
+    "service_user_boundary_violations": 0,
+    "office_lolbin_chain_count": 0,
+    "trusted_host_dll_anomalies": 0,
+    "dual_use_admin_tool_count": 0,
+    "popularity_dampened_processes": 0
   }
 }

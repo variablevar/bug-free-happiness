@@ -1,4 +1,4 @@
-Sample: WannaCry-NoVirus | label=0 | family=wannacry
-SKIP filter_malicious.py
-SKIP build_graph.py
-SKIP analyze_graph.py
+Sample: WannaCry-NoVirus | label=0 | family=wannacry | benign_subtype=ambiguous_novirus_control
+filter_malicious.py: OK (0.7s)
+build_graph.py: OK (4.8s)
+analyze_graph.py: OK (0.7s)

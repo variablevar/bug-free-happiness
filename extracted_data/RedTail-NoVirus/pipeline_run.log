@@ -1,4 +1,4 @@
-Sample: RedTail-NoVirus | label=0 | family=redtail
-SKIP filter_malicious.py
-SKIP build_graph.py
-SKIP analyze_graph.py
+Sample: RedTail-NoVirus | label=0 | family=redtail | benign_subtype=ambiguous_novirus_control
+filter_malicious.py: OK (0.8s)
+build_graph.py: OK (9.7s)
+analyze_graph.py: OK (1.2s)

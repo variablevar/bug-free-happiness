@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 from datetime import datetime, timezone
 import json
 import os
@@ -19,6 +20,15 @@ from one_class_gnn import train_one_class
 def run(args):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"[BenignModel] Device: {device}")
+    allowed_benign_subtypes = ["clean_benign"]
+    if args.include_hard_benign:
+        allowed_benign_subtypes.append("hard_benign_admin_tooling")
+    if args.include_ambiguous_benign_controls:
+        allowed_benign_subtypes.append("ambiguous_novirus_control")
+    print(
+        "[BenignModel] Allowed benign subtypes:",
+        ", ".join(allowed_benign_subtypes),
+    )
 
     manifest_path = args.manifest
     merged_tmp = None
@@ -34,7 +44,11 @@ def run(args):
             include_uncertain=not args.exclude_uncertain,
             include_unknown=False,
             require_train_eligible=not args.disable_strict_train_filter,
+            require_governance_columns=args.require_governance_manifest,
+            allowed_benign_subtypes=tuple(allowed_benign_subtypes),
             target="label",
+            graph_attr_profile=getattr(args, "graph_attr_profile", "no_manifest_leakage"),
+            graph_view=getattr(args, "graph_view", "full"),
         )
     finally:
         if merged_tmp and merged_tmp != os.path.abspath(args.manifest) and os.path.isfile(merged_tmp):
@@ -45,6 +59,11 @@ def run(args):
     benign_ds = [ds[i] for i in range(len(ds)) if int(ds[i].y.item()) == 0]
     if len(benign_ds) < 10:
         raise SystemExit("[ERROR] Need at least 10 benign samples for one-class benign model")
+    subtype_counts = Counter(str(getattr(d, "benign_subtype", "")) for d in benign_ds)
+    print(
+        "[BenignModel] Training benign subtype counts:",
+        ", ".join(f"{k or 'unspecified'}={v}" for k, v in sorted(subtype_counts.items())),
+    )
 
     art = train_one_class(
         benign_ds,
@@ -63,6 +82,9 @@ def run(args):
         contrastive_weight=args.contrastive_weight,
         radius_min=args.radius_min,
         radius_max=args.radius_max,
+        trim_fraction=args.trim_fraction,
+        calibration_fraction=args.calibration_fraction,
+        center_update_interval=args.center_update_interval,
     )
 
     payload = {
@@ -77,6 +99,15 @@ def run(args):
         "dropout": art.dropout,
         "edge_emb_dim": art.edge_emb_dim,
         "out_dim": art.out_dim,
+        "train_size": art.train_size,
+        "calibration_size": art.calibration_size,
+        "radius_source": art.radius_source,
+        "radius_quantile": art.radius_quantile,
+        "trim_fraction": art.trim_fraction,
+        "calibration_fraction": art.calibration_fraction,
+        "center_update_interval": art.center_update_interval,
+        "score_threshold_low": art.score_threshold_low,
+        "score_threshold_high": art.score_threshold_high,
         "schema_version": SCHEMA_VERSION,
         "trained_at_utc": datetime.now(timezone.utc).isoformat(),
     }
@@ -91,6 +122,9 @@ def run(args):
         "base_dir": args.base_dir,
         "exclude_uncertain": args.exclude_uncertain,
         "strict_train_filter": (not args.disable_strict_train_filter),
+        "require_governance_manifest": bool(args.require_governance_manifest),
+        "allowed_benign_subtypes": allowed_benign_subtypes,
+        "benign_subtype_counts": dict(sorted(subtype_counts.items())),
         "n_benign_train": len(benign_ds),
         "seed": args.seed,
         "hidden": args.hidden,
@@ -106,7 +140,15 @@ def run(args):
         "radius_min": args.radius_min,
         "radius_max": args.radius_max,
         "contrastive_weight": args.contrastive_weight,
+        "trim_fraction": args.trim_fraction,
+        "calibration_fraction": args.calibration_fraction,
+        "center_update_interval": args.center_update_interval,
         "radius": art.radius,
+        "radius_source": art.radius_source,
+        "train_size": art.train_size,
+        "calibration_size": art.calibration_size,
+        "score_threshold_low": art.score_threshold_low,
+        "score_threshold_high": art.score_threshold_high,
         "schema_version": SCHEMA_VERSION,
         "trained_at_utc": datetime.now(timezone.utc).isoformat(),
     }
@@ -123,10 +165,29 @@ if __name__ == "__main__":
     p.add_argument("--base-dir", default=None, dest="base_dir")
     p.add_argument("--exclude-uncertain", action="store_true", dest="exclude_uncertain")
     p.add_argument(
+        "--include-hard-benign",
+        action="store_true",
+        dest="include_hard_benign",
+        help="Include hard_benign_admin_tooling rows in benign one-class training.",
+    )
+    p.add_argument(
+        "--include-ambiguous-benign-controls",
+        action="store_true",
+        dest="include_ambiguous_benign_controls",
+        help="Include ambiguous_novirus_control rows if governance metadata also marks them train_eligible.",
+    )
+    p.add_argument(
         "--disable-strict-train-filter",
         action="store_true",
         dest="disable_strict_train_filter",
         help="Allow rows with train_eligible=false (default strict filter keeps them out).",
+    )
+    p.add_argument(
+        "--require-governance-manifest/--no-require-governance-manifest",
+        default=True,
+        action=argparse.BooleanOptionalAction,
+        dest="require_governance_manifest",
+        help="Require benign_subtype / train_eligible governance columns in the manifest.",
     )
     p.add_argument("--hidden", type=int, default=32)
     p.add_argument("--layers", type=int, default=2)
@@ -140,6 +201,9 @@ if __name__ == "__main__":
     p.add_argument("--radius-quantile", type=float, default=0.9, dest="radius_quantile")
     p.add_argument("--radius-min", type=float, default=1e-3, dest="radius_min")
     p.add_argument("--radius-max", type=float, default=25.0, dest="radius_max")
+    p.add_argument("--trim-fraction", type=float, default=0.10, dest="trim_fraction")
+    p.add_argument("--calibration-fraction", type=float, default=0.20, dest="calibration_fraction")
+    p.add_argument("--center-update-interval", type=int, default=5, dest="center_update_interval")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--contrastive-weight", type=float, default=0.10, dest="contrastive_weight")
     p.add_argument("--output-model", default="outputs/benign_model.pt", dest="output_model")
@@ -149,6 +213,18 @@ if __name__ == "__main__":
         default="",
         dest="extra_manifest",
         help="Comma-separated extra manifest CSV paths merged after primary (dedupe by folder; primary wins).",
+    )
+    p.add_argument(
+        "--graph-attr-profile",
+        choices=["full", "no_manifest_leakage", "structure_only"],
+        default="no_manifest_leakage",
+        dest="graph_attr_profile",
+    )
+    p.add_argument(
+        "--graph-view",
+        choices=["full", "attack_subgraph"],
+        default="full",
+        dest="graph_view",
     )
     run(p.parse_args())
 

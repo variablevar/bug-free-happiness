@@ -24,9 +24,16 @@ from analysis_schema import (
     triage_state_two_model_fused,
 )
 from analyze_binary_model import _apply_feature_group_weights, build_model, explain_binary
-from calibration import apply_temperature
+from calibration import IsotonicCalibrator, SplitConformalBundle, apply_temperature
 from dataset import MalwareGraphDataset
-from fusion import ensemble_score, final_triage, heuristic_risk_score
+from fusion import (
+    build_uncertainty_gate,
+    ensemble_score,
+    ensemble_score_logit,
+    final_triage,
+    heuristic_risk_score,
+    routing_tier,
+)
 from utils.inference_align import align_pyg_data_to_binary_checkpoint
 from one_class_gnn import build_model_from_payload, explain_graph, score_graph
 
@@ -181,6 +188,7 @@ def _narrative(
     binary_p_effective: float | None = None,
     dual_triage: str | None = None,
     fused_three_way: str | None = None,
+    abstention_reason: str | None = None,
 ) -> str:
     mal_feats = [x.get("feature_name") for x in mal_evd.get("top_graph_attrs", [])[:3]]
     ben_feats = [x.get("feature_name") for x in ben_evd.get("top_graph_attrs", [])[:3]]
@@ -194,6 +202,8 @@ def _narrative(
             f" Binary GNN P(malware) effective={binary_p_effective:.3f} (after fusion gate); "
             f"dual_triage={dual_triage}, fusion_3way={fused_three_way}."
         )
+    if abstention_reason:
+        base += f" Abstention trigger={abstention_reason}."
     return base
 
 
@@ -214,6 +224,28 @@ def _uncertainty_from_scores(scores: list[float]) -> dict:
     return {"method": "mc_dropout", "mean": float(arr.mean()), "variance": float(arr.var())}
 
 
+def _load_uncertainty_thresholds(path: Path | None, args) -> dict:
+    if path and path.is_file():
+        return json.loads(path.read_text(encoding="utf-8"))
+    return {}
+
+
+def _apply_isotonic(p: float, payload: dict) -> float:
+    raw = payload.get("isotonic_calibrator")
+    if not raw:
+        return p
+    iso = IsotonicCalibrator.from_dict(raw)
+    return float(iso.transform(np.asarray([p]))[0])
+
+
+def _score_thresholds_from_payload(payload: dict) -> tuple[float, float]:
+    low = float(payload.get("score_threshold_low", LOW_THRESHOLD))
+    high = float(payload.get("score_threshold_high", HIGH_THRESHOLD))
+    if not (0.0 < low < high < 1.0):
+        return LOW_THRESHOLD, HIGH_THRESHOLD
+    return low, high
+
+
 def run(args):
     _validate_fusion_args(
         args.fusion_w_binary,
@@ -228,16 +260,27 @@ def run(args):
     df = pd.read_csv(manifest_path)
     sample_id_by_folder = {str(r["folder"]): str(r.get("sample_id", "")) for _, r in df.iterrows()}
     label_by_folder = {str(r["folder"]): int(r["label"]) for _, r in df.iterrows()}
+    subtype_by_folder = {
+        str(r["folder"]): str(r.get("benign_subtype", "") or "") for _, r in df.iterrows()
+    }
+    graph_attr_profile = str(
+        getattr(args, "graph_attr_profile", None)
+        or "full"
+    ).strip().lower()
     ds = MalwareGraphDataset(
         args.manifest,
         base_dir=str(base_dir),
         include_uncertain=True,
         include_unknown=False,
         target="label",
+        graph_attr_profile=graph_attr_profile,
+        graph_view=str(getattr(args, "graph_view", "full") or "full"),
     )
 
     malware_payload = torch.load(args.malware_model, map_location="cpu")
     benign_payload = torch.load(args.benign_model, map_location="cpu")
+    malware_low, malware_high = _score_thresholds_from_payload(malware_payload)
+    benign_low, benign_high = _score_thresholds_from_payload(benign_payload)
     malware_model, malware_center, malware_radius = build_model_from_payload(malware_payload, device)
     benign_model, benign_center, benign_radius = build_model_from_payload(benign_payload, device)
     malware_ensemble = []
@@ -253,7 +296,40 @@ def run(args):
     if not binary_model_path.is_file():
         raise SystemExit(f"[Analyze] binary model not found: {binary_model_path.resolve()}")
     binary_payload = torch.load(args.binary_model, map_location="cpu")
+    if graph_attr_profile == "full" and binary_payload.get("graph_attr_profile"):
+        graph_attr_profile = str(binary_payload["graph_attr_profile"])
+        ds = MalwareGraphDataset(
+            args.manifest,
+            base_dir=str(base_dir),
+            include_uncertain=True,
+            include_unknown=False,
+            target="label",
+            graph_attr_profile=graph_attr_profile,
+            graph_view=str(getattr(args, "graph_view", "full") or "full"),
+        )
     binary_model = build_model(binary_payload, device)
+    conformal_bundle = None
+    conf_path = Path(getattr(args, "conformal_bundle", "") or "outputs/conformal_bundle.json")
+    if conf_path.is_file():
+        conformal_bundle = SplitConformalBundle.from_dict(
+            json.loads(conf_path.read_text(encoding="utf-8"))
+        )
+    unc_thr = _load_uncertainty_thresholds(
+        Path(args.uncertainty_thresholds_json) if getattr(args, "uncertainty_thresholds_json", None) else None,
+        args,
+    )
+    if unc_thr:
+        args.uncertainty_disagreement_threshold = float(
+            unc_thr.get("disagreement_threshold", args.uncertainty_disagreement_threshold)
+        )
+        args.uncertainty_dual_margin_threshold = float(
+            unc_thr.get("dual_score_margin_threshold", args.uncertainty_dual_margin_threshold)
+        )
+        args.uncertainty_mc_variance_threshold = float(
+            unc_thr.get("mc_variance_threshold", args.uncertainty_mc_variance_threshold)
+        )
+        if unc_thr.get("abstention_mode"):
+            args.abstention_mode = str(unc_thr["abstention_mode"])
     binary_ensemble_models: list = []
     for pth in args.binary_ensemble_models or []:
         pld = torch.load(pth, map_location="cpu")
@@ -296,7 +372,14 @@ def run(args):
         benign_raw = explain_graph(benign_model, benign_center, data, device)
         malware_evd = _normalize_evidence(malware_raw)
         benign_evd = _normalize_evidence(benign_raw)
-        state_dual = triage_state(malware_score, benign_score)
+        state_dual = triage_state(
+            malware_score,
+            benign_score,
+            malware_low=malware_low,
+            malware_high=malware_high,
+            benign_low=benign_low,
+            benign_high=benign_high,
+        )
         reasons = _reasoning_types(malware_score, benign_score, malware_evd, benign_evd)
         findings = _build_findings(malware_evd, benign_evd)
 
@@ -330,11 +413,12 @@ def run(args):
                 ens_probs.append(float(pb[0, 1]))
         p_mal_raw = float(probs_raw[0, 1])
         p_mal_cal = float(np.mean(ens_probs))
+        p_mal_cal = _apply_isotonic(p_mal_cal, binary_payload)
 
         dual_high_high = (
             state_dual == "needs_analyst_review"
-            and malware_score >= HIGH_THRESHOLD
-            and benign_score >= HIGH_THRESHOLD
+            and malware_score >= malware_high
+            and benign_score >= benign_high
         )
         gate_on = bool(args.fusion_gate_dual_high_high)
         gate_applied = gate_on and dual_high_high
@@ -347,36 +431,25 @@ def run(args):
                 "credential_access_signal": float(reasons.credential_access_evidence),
             }
         )
-        ens = ensemble_score(
-            p_mal_eff,
-            malware_score - benign_score,
-            hr,
-            w_binary=args.fusion_w_binary,
-            w_dual=args.fusion_w_dual,
-            w_heuristic=args.fusion_w_heuristic,
-        )
-        state_fused = final_triage(ens, low=args.fusion_triage_low, high=args.fusion_triage_high)
-        state = triage_state_two_model_fused(state_dual, state_fused, reasons.memory_injection_evidence)
-        narrative = _narrative(
-            malware_score,
-            benign_score,
-            state,
-            malware_evd,
-            benign_evd,
-            binary_p_effective=p_mal_eff,
-            dual_triage=state_dual,
-            fused_three_way=state_fused,
-        )
-        fusion = {
-            "dual_triage_state": state_dual,
-            "binary_malware_probability_raw": round(p_mal_raw, 6),
-            "binary_malware_probability_calibrated": round(p_mal_cal, 6),
-            "binary_probability_effective": round(p_mal_eff, 6),
-            "dual_high_high_gate_applied": gate_applied,
-            "heuristic_risk_score": round(hr, 6),
-            "ensemble_score": round(ens, 6),
-            "final_triage_state": state_fused,
-        }
+        dual_delta = malware_score - benign_score
+        if str(getattr(args, "fusion_mode", "probability")).lower() == "logit":
+            ens = ensemble_score_logit(
+                p_mal_eff,
+                dual_delta,
+                hr,
+                w_binary=args.fusion_w_binary,
+                w_dual=args.fusion_w_dual,
+                w_heuristic=args.fusion_w_heuristic,
+            )
+        else:
+            ens = ensemble_score(
+                p_mal_eff,
+                dual_delta,
+                hr,
+                w_binary=args.fusion_w_binary,
+                w_dual=args.fusion_w_dual,
+                w_heuristic=args.fusion_w_heuristic,
+            )
         uncertainty = {
             "malware_model": _uncertainty_from_scores(mc_mal),
             "benign_model": _uncertainty_from_scores(mc_ben),
@@ -386,6 +459,83 @@ def run(args):
                 "benign_size": len(ben_ens_scores),
                 "benign_variance": float(np.var(ben_ens_scores)),
             },
+        }
+        dual_norm = max(0.0, min(1.0, (malware_score - benign_score + 1.0) / 2.0))
+        dual_score_margin = abs(malware_score - benign_score)
+        structural_attack = bool(
+            reasons.memory_injection_evidence
+            or reasons.credential_access_evidence
+            or reasons.network_c2_evidence
+        )
+        conformal_review = False
+        if conformal_bundle is not None:
+            conformal_review = conformal_bundle.conformal_review(p_mal_eff)
+        uncertainty_gate = build_uncertainty_gate(
+            dual_high_high=dual_high_high,
+            mc_mal_variance=uncertainty["malware_model"]["variance"],
+            mc_ben_variance=uncertainty["benign_model"]["variance"],
+            ens_mal_variance=uncertainty["deep_ensemble"]["malware_variance"],
+            ens_ben_variance=uncertainty["deep_ensemble"]["benign_variance"],
+            binary_dual_gap=abs(p_mal_eff - dual_norm),
+            dual_score_margin=dual_score_margin,
+            binary_probability=p_mal_eff,
+            mc_variance_threshold=args.uncertainty_mc_variance_threshold,
+            ensemble_variance_threshold=args.uncertainty_ensemble_variance_threshold,
+            disagreement_threshold=args.uncertainty_disagreement_threshold,
+            dual_score_margin_threshold=args.uncertainty_dual_margin_threshold,
+            abstention_mode=str(getattr(args, "abstention_mode", "calibrated")),
+        )
+        tier = routing_tier(
+            ensemble=ens,
+            p_malware=p_mal_eff,
+            dual_margin=dual_score_margin,
+            structural_attack=structural_attack,
+            conformal_review=conformal_review,
+        )
+        state_fused_pre_gate = final_triage(
+            ens,
+            low=args.fusion_triage_low,
+            high=args.fusion_triage_high,
+        )
+        state_fused = final_triage(
+            ens,
+            low=args.fusion_triage_low,
+            high=args.fusion_triage_high,
+            uncertainty_gate=uncertainty_gate,
+        )
+        state = triage_state_two_model_fused(
+            state_dual,
+            state_fused,
+            reasons.memory_injection_evidence,
+            uncertainty_gate_triggered=uncertainty_gate.triggered,
+        )
+        narrative = _narrative(
+            malware_score,
+            benign_score,
+            state,
+            malware_evd,
+            benign_evd,
+            binary_p_effective=p_mal_eff,
+            dual_triage=state_dual,
+            fused_three_way=state_fused,
+            abstention_reason=uncertainty_gate.reason,
+        )
+        fusion = {
+            "dual_triage_state": state_dual,
+            "binary_malware_probability_raw": round(p_mal_raw, 6),
+            "binary_malware_probability_calibrated": round(p_mal_cal, 6),
+            "binary_probability_effective": round(p_mal_eff, 6),
+            "dual_high_high_gate_applied": gate_applied,
+            "dual_score_margin": round(dual_score_margin, 6),
+            "binary_dual_gap": round(abs(p_mal_eff - dual_norm), 6),
+            "heuristic_risk_score": round(hr, 6),
+            "ensemble_score": round(ens, 6),
+            "final_triage_state_pre_gate": state_fused_pre_gate,
+            "final_triage_state": state_fused,
+            "uncertainty_gate": uncertainty_gate.to_dict(),
+            "fusion_mode": str(getattr(args, "fusion_mode", "probability")),
+            "conformal_review": conformal_review,
+            "routing_tier": tier,
         }
         attention_evidence = {
             "method": "edge_attention_proxy",
@@ -403,17 +553,20 @@ def run(args):
                 triage_state=state,
                 label_from_manifest=manifest_label,
                 confidence_split={
-                    "malware_evidence": bucket(malware_score),
-                    "benign_baseline_match": bucket(benign_score),
+                    "malware_evidence": bucket(malware_score, low=malware_low, high=malware_high),
+                    "benign_baseline_match": bucket(benign_score, low=benign_low, high=benign_high),
                 },
                 reasoning_types=reasons.__dict__,
                 behavioral_findings=findings,
                 malware_model_evidence=malware_evd,
                 benign_model_evidence=benign_evd,
+                abstention_reason=uncertainty_gate.reason,
+                uncertainty_gate_triggered=uncertainty_gate.triggered,
                 fusion=fusion,
                 uncertainty=uncertainty,
                 attention_evidence=attention_evidence,
                 narrative=narrative,
+                benign_subtype=subtype_by_folder.get(folder, ""),
             ).to_dict()
         )
 
@@ -424,10 +577,19 @@ def run(args):
         "triage_low": args.fusion_triage_low,
         "triage_high": args.fusion_triage_high,
         "gate_dual_high_high": bool(args.fusion_gate_dual_high_high),
+        "uncertainty_mc_variance_threshold": args.uncertainty_mc_variance_threshold,
+        "uncertainty_ensemble_variance_threshold": args.uncertainty_ensemble_variance_threshold,
+        "uncertainty_disagreement_threshold": args.uncertainty_disagreement_threshold,
+        "uncertainty_dual_margin_threshold": args.uncertainty_dual_margin_threshold,
+        "abstention_mode": str(getattr(args, "abstention_mode", "calibrated")),
+        "fusion_mode": str(getattr(args, "fusion_mode", "probability")),
     }
     payload = {
         "summary": {
             "schema_version": SCHEMA_VERSION,
+            "abstention_mode": str(getattr(args, "abstention_mode", "calibrated")),
+            "fusion_mode": str(getattr(args, "fusion_mode", "probability")),
+            "graph_attr_profile": graph_attr_profile,
             "samples_analyzed": len(out),
             "triage_counts": {
                 "likely_malicious": sum(1 for x in out if x["triage_state"] == "likely_malicious"),
@@ -435,7 +597,25 @@ def run(args):
                 "anomalous_unknown": sum(1 for x in out if x["triage_state"] == "anomalous_unknown"),
                 "likely_benign": sum(1 for x in out if x["triage_state"] == "likely_benign"),
             },
-            "thresholds": {"high": 0.60, "low": LOW_THRESHOLD},
+            "uncertainty_gated": sum(1 for x in out if x.get("uncertainty_gate_triggered")),
+            "review_routing_rate": round(
+                sum(1 for x in out if x["triage_state"] == "needs_analyst_review") / max(len(out), 1),
+                6,
+            ),
+            "decisive_coverage": round(
+                sum(1 for x in out if x["triage_state"] in {"likely_malicious", "likely_benign"}) / max(len(out), 1),
+                6,
+            ),
+            "thresholds": {
+                "high": 0.60,
+                "low": LOW_THRESHOLD,
+                "default_high": 0.60,
+                "default_low": LOW_THRESHOLD,
+                "malware_model_low": round(malware_low, 6),
+                "malware_model_high": round(malware_high, 6),
+                "benign_model_low": round(benign_low, 6),
+                "benign_model_high": round(benign_high, 6),
+            },
             "fusion_config": fusion_config,
         },
         "samples": out,
@@ -495,11 +675,74 @@ if __name__ == "__main__":
         help="When dual is needs_analyst_review and both one-class scores are HIGH, blend binary prob: 0.5*p+0.25 before ensemble.",
     )
     p.add_argument(
+        "--uncertainty-mc-variance-threshold",
+        type=float,
+        default=0.03,
+        dest="uncertainty_mc_variance_threshold",
+        help="Route to analyst review when max MC-dropout variance exceeds this threshold.",
+    )
+    p.add_argument(
+        "--uncertainty-ensemble-variance-threshold",
+        type=float,
+        default=0.01,
+        dest="uncertainty_ensemble_variance_threshold",
+        help="Route to analyst review when deep-ensemble variance exceeds this threshold.",
+    )
+    p.add_argument(
+        "--uncertainty-disagreement-threshold",
+        type=float,
+        default=0.35,
+        dest="uncertainty_disagreement_threshold",
+        help="Route to analyst review when binary and dual evidence disagree by more than this amount.",
+    )
+    p.add_argument(
+        "--uncertainty-dual-margin-threshold",
+        type=float,
+        default=0.05,
+        dest="uncertainty_dual_margin_threshold",
+        help="Route to analyst review when malware and benign conformity are too close together.",
+    )
+    p.add_argument(
         "--logit-clip",
         type=float,
         default=0.0,
         dest="logit_clip",
         help="If >0, clamp binary GNN logits to [-clip, clip] before softmax/temperature.",
+    )
+    p.add_argument(
+        "--abstention-mode",
+        choices=["calibrated", "legacy_or", "disabled"],
+        default="calibrated",
+        dest="abstention_mode",
+    )
+    p.add_argument(
+        "--fusion-mode",
+        choices=["probability", "logit"],
+        default="probability",
+        dest="fusion_mode",
+    )
+    p.add_argument(
+        "--graph-attr-profile",
+        choices=["full", "no_manifest_leakage", "structure_only"],
+        default="full",
+        dest="graph_attr_profile",
+    )
+    p.add_argument(
+        "--graph-view",
+        choices=["full", "attack_subgraph"],
+        default="full",
+        dest="graph_view",
+    )
+    p.add_argument(
+        "--uncertainty-thresholds-json",
+        default="",
+        dest="uncertainty_thresholds_json",
+        help="Optional JSON from scripts/calibrate_uncertainty_thresholds.py",
+    )
+    p.add_argument(
+        "--conformal-bundle",
+        default="outputs/conformal_bundle.json",
+        dest="conformal_bundle",
     )
     run(p.parse_args())
 

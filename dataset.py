@@ -16,13 +16,16 @@ import os
 import math
 import pickle
 import re
+from collections import Counter
 
 import numpy as np
 import pandas as pd
 import torch
 from torch_geometric.data import Data, Dataset
+from utils.graph_attr_profile import apply_graph_attr_profile
 from utils.graph_motif_signals import MOTIF_FEATURE_COUNT, graph_differentiation_signals
 from utils.schema import EXPECTED_GRAPH_ATTR_DIM
+from utils.subgraph_extract import extract_attack_subgraph
 
 # ── Vocabularies ───────────────────────────────────────────────────────────
 NODE_TYPES = [
@@ -413,19 +416,40 @@ class MalwareGraphDataset(Dataset):
         include_uncertain: bool = True,
         include_unknown: bool = False,
         require_train_eligible: bool = False,
+        require_governance_columns: bool = False,
+        allowed_benign_subtypes: tuple[str, ...] | None = None,
         target: str = "label",
+        graph_attr_profile: str = "full",
+        graph_view: str = "full",
     ):
         super().__init__()
         self.manifest  = pd.read_csv(manifest_csv)
         self.base_dir  = base_dir or os.path.dirname(manifest_csv)
+        self.graph_attr_profile = str(graph_attr_profile or "full").strip().lower()
+        self.graph_view = str(graph_view or "full").strip().lower()
         self.include_uncertain = include_uncertain
         self.include_unknown = include_unknown
         self.require_train_eligible = require_train_eligible
+        self.require_governance_columns = require_governance_columns
+        self.allowed_benign_subtypes = (
+            {self._normalize_benign_subtype(x) for x in allowed_benign_subtypes}
+            if allowed_benign_subtypes is not None
+            else None
+        )
         self.target = str(target).strip().lower()
         if self.target not in {"label", "risk", "curated_label"}:
             raise ValueError(
                 f"Invalid target '{target}'. Expected one of: label, risk, curated_label."
             )
+        if self.require_governance_columns:
+            required = {"benign_subtype", "label_quality_flag", "label_quality_reason", "train_eligible"}
+            missing = [c for c in sorted(required) if c not in self.manifest.columns]
+            if missing:
+                raise ValueError(
+                    "Manifest is missing required governance column(s): "
+                    + ", ".join(missing)
+                    + ". Rebuild the manifest with build_dataset.py before training."
+                )
         self._data_list: list[Data] = []
         self._load_all()
 
@@ -437,8 +461,27 @@ class MalwareGraphDataset(Dataset):
             return value != 0
         return str(value).strip().lower() in {"1", "true", "yes", "y"}
 
+    @staticmethod
+    def _normalize_benign_subtype(value: str) -> str:
+        text = str(value or "").strip().lower().replace("-", "_")
+        aliases = {
+            "clean": "clean_benign",
+            "clean_software": "clean_benign",
+            "clean_benign": "clean_benign",
+            "admin_tool": "hard_benign_admin_tooling",
+            "admin_security_tool": "hard_benign_admin_tooling",
+            "admin_or_security_tool": "hard_benign_admin_tooling",
+            "security_tool": "hard_benign_admin_tooling",
+            "hard_benign": "hard_benign_admin_tooling",
+            "hard_benign_admin_tooling": "hard_benign_admin_tooling",
+            "ambiguous_novirus_control": "ambiguous_novirus_control",
+        }
+        return aliases.get(text, text)
+
     def _load_all(self) -> None:
         ok = fail = skipped_uncertain = 0
+        skip_reasons: Counter[str] = Counter()
+        subtype_counts: Counter[str] = Counter()
 
         for _, row in self.manifest.iterrows():
             name   = str(row["folder"])
@@ -446,19 +489,40 @@ class MalwareGraphDataset(Dataset):
             family = row.get("family", "unknown")
             uncertain = self._as_bool(row.get("uncertain", False))
             train_eligible = self._as_bool(row.get("train_eligible", True))
+            benign_subtype = self._normalize_benign_subtype(row.get("benign_subtype", ""))
+            if label == 0:
+                subtype_counts[benign_subtype or "unspecified"] += 1
             if uncertain and not self.include_uncertain:
                 print(f"  [SKIP] {name} — marked uncertain in manifest")
                 skipped_uncertain += 1
+                skip_reasons["uncertain"] += 1
                 continue
             if self.require_train_eligible and not train_eligible:
                 print(f"  [SKIP] {name} — train_eligible=false (strict training filter)")
                 skipped_uncertain += 1
+                skip_reasons["train_eligible_false"] += 1
                 continue
             if label < 0 and not self.include_unknown:
                 print(f"  [SKIP] {name} — unknown label={label}")
                 skipped_uncertain += 1
+                skip_reasons["unknown_label"] += 1
                 continue
+            if (
+                self.allowed_benign_subtypes is not None
+                and label == 0
+            ):
+                if not benign_subtype:
+                    print(f"  [SKIP] {name} — missing benign_subtype in governance-aware load")
+                    skipped_uncertain += 1
+                    skip_reasons["missing_benign_subtype"] += 1
+                    continue
+                if benign_subtype not in self.allowed_benign_subtypes:
+                    print(f"  [SKIP] {name} — benign_subtype={benign_subtype} excluded")
+                    skipped_uncertain += 1
+                    skip_reasons[f"benign_subtype:{benign_subtype}"] += 1
+                    continue
             pkl    = os.path.join(self.base_dir, name, "graph.pkl")
+            sub_pkl = os.path.join(self.base_dir, name, "graph_subgraph.pkl")
 
             if not os.path.exists(pkl):
                 print(f"  [SKIP] {name} — graph.pkl not found")
@@ -466,8 +530,14 @@ class MalwareGraphDataset(Dataset):
                 continue
 
             try:
-                with open(pkl, "rb") as f:
-                    G = pickle.load(f)
+                if self.graph_view == "attack_subgraph" and os.path.exists(sub_pkl):
+                    with open(sub_pkl, "rb") as f:
+                        G = pickle.load(f)
+                else:
+                    with open(pkl, "rb") as f:
+                        G = pickle.load(f)
+                    if self.graph_view == "attack_subgraph":
+                        G = extract_attack_subgraph(G)
             except Exception as exc:
                 print(f"  [SKIP] {name} — failed to load pkl: {exc}")
                 fail += 1
@@ -533,17 +603,12 @@ class MalwareGraphDataset(Dataset):
             signal_c2_relation_pattern_count = _safe_float(row.get("signal_c2_relation_pattern_count", 0), default=0.0)
             benign_hub_n = count_benign_high_volume_hubs(G)
             rwx_thread_n = count_rwx_thread_context(G)
-            benign_subtype = str(row.get("benign_subtype", "") or "").strip().lower()
+            benign_subtype = self._normalize_benign_subtype(row.get("benign_subtype", ""))
             benign_clean_software_flag = float(
-                benign_subtype in {"clean_software", "clean-software", "clean"}
+                benign_subtype in {"clean_benign"}
             )
             benign_admin_or_security_tool_flag = float(
-                benign_subtype in {
-                    "admin_tool",
-                    "admin-security-tool",
-                    "admin_security_tool",
-                    "security_tool",
-                }
+                benign_subtype == "hard_benign_admin_tooling"
             )
 
             # Soft downweight weak shared structural/noisy injection channels.
@@ -589,11 +654,15 @@ class MalwareGraphDataset(Dataset):
                 )
 
             # Shape [1, GRAPH_ATTR_DIM] so DataLoader stacks to [B, GRAPH_ATTR_DIM]
-            pyg.graph_attr = torch.tensor(
-                [merged_graph_attr], dtype=torch.float
-            )
+            ga = torch.tensor([merged_graph_attr], dtype=torch.float)
+            pyg.graph_attr = apply_graph_attr_profile(ga, self.graph_attr_profile)
             pyg.name   = name
             pyg.family = family
+            pyg.benign_subtype = benign_subtype
+            pyg.train_eligible = bool(train_eligible)
+            pyg.uncertain = bool(uncertain)
+            pyg.label_quality_flag = self._as_bool(row.get("label_quality_flag", False))
+            pyg.label_quality_reason = str(row.get("label_quality_reason", "") or "")
             self._data_list.append(pyg)
             ok += 1
 
@@ -609,6 +678,12 @@ class MalwareGraphDataset(Dataset):
             print(f"[Dataset] {skipped_uncertain} uncertain/unknown sample(s) excluded.")
         if fail:
             print(f"[Dataset] {fail} sample(s) skipped.")
+        if subtype_counts:
+            details = ", ".join(f"{k}={v}" for k, v in sorted(subtype_counts.items()))
+            print(f"[Dataset] Benign subtype counts: {details}")
+        if skip_reasons:
+            details = ", ".join(f"{k}={v}" for k, v in sorted(skip_reasons.items()))
+            print(f"[Dataset] Governance exclusions: {details}")
 
     def _row_target(self, row, default_label: int) -> int:
         if self.target == "label":

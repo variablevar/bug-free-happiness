@@ -123,6 +123,15 @@ class OneClassArtifacts:
     dropout: float
     edge_emb_dim: int
     out_dim: int
+    train_size: int = 0
+    calibration_size: int = 0
+    radius_source: str = "train"
+    radius_quantile: float = 0.9
+    trim_fraction: float = 0.0
+    calibration_fraction: float = 0.0
+    center_update_interval: int = 1
+    score_threshold_low: float = 0.40
+    score_threshold_high: float = 0.60
 
 
 def _batch_embeddings(model: OneClassGINE, loader: DataLoader, device: torch.device) -> torch.Tensor:
@@ -155,6 +164,69 @@ def _intra_class_spread_loss(z: torch.Tensor) -> torch.Tensor:
     return (1.0 - sim[mask]).mean()
 
 
+def _trimmed_mean(values: torch.Tensor, trim_fraction: float) -> torch.Tensor:
+    if values.numel() == 0:
+        return values.new_tensor(0.0)
+    if trim_fraction <= 0.0 or values.numel() < 4:
+        return values.mean()
+    keep_n = max(int(round(values.numel() * (1.0 - float(trim_fraction)))), 1)
+    vals, _ = torch.sort(values)
+    return vals[:keep_n].mean()
+
+
+def _robust_center(
+    emb: torch.Tensor,
+    trim_fraction: float,
+    reference: torch.Tensor | None = None,
+) -> torch.Tensor:
+    if emb.numel() == 0:
+        raise ValueError("Cannot compute center from empty embeddings")
+    if emb.size(0) == 1 or trim_fraction <= 0.0:
+        return emb.mean(dim=0)
+    ref = reference if reference is not None else emb.mean(dim=0)
+    d2 = torch.sum((emb - ref.unsqueeze(0)) ** 2, dim=1)
+    keep_n = max(int(round(emb.size(0) * (1.0 - float(trim_fraction)))), 1)
+    keep_idx = torch.argsort(d2)[:keep_n]
+    return emb[keep_idx].mean(dim=0)
+
+
+def _split_train_calibration(
+    ds_list: list[Data],
+    calibration_fraction: float,
+) -> tuple[list[Data], list[Data]]:
+    if len(ds_list) < 10 or calibration_fraction <= 0.0:
+        return list(ds_list), []
+    n_cal = int(round(len(ds_list) * float(calibration_fraction)))
+    n_cal = min(max(n_cal, 1), max(len(ds_list) - 4, 0))
+    if n_cal <= 0:
+        return list(ds_list), []
+    idx = np.arange(len(ds_list))
+    np.random.shuffle(idx)
+    cal_idx = set(idx[:n_cal].tolist())
+    train_list = [ds_list[i] for i in range(len(ds_list)) if i not in cal_idx]
+    cal_list = [ds_list[i] for i in range(len(ds_list)) if i in cal_idx]
+    return train_list, cal_list
+
+
+def _score_from_distance(distance_sq: np.ndarray, radius: float) -> np.ndarray:
+    return 1.0 / (1.0 + np.exp((distance_sq - radius) / max(radius, 1e-6)))
+
+
+def _derive_score_thresholds(scores: np.ndarray) -> tuple[float, float]:
+    arr = np.asarray(scores, dtype=float)
+    if arr.size == 0:
+        return 0.40, 0.60
+    high = float(np.percentile(arr, 25))
+    high = max(0.55, min(0.90, high))
+    low = float(np.percentile(arr, 5))
+    low = max(0.20, min(0.50, low))
+    if low >= high:
+        low = max(0.20, high - 0.15)
+    if high <= low:
+        high = min(0.90, low + 0.15)
+    return low, high
+
+
 def train_one_class(
     ds_list: list[Data],
     device: torch.device,
@@ -173,16 +245,22 @@ def train_one_class(
     contrastive_weight: float = 0.10,
     radius_min: float = 1e-3,
     radius_max: float = 25.0,
+    trim_fraction: float = 0.10,
+    calibration_fraction: float = 0.20,
+    center_update_interval: int = 5,
 ) -> OneClassArtifacts:
     if len(ds_list) == 0:
         raise ValueError("Empty training dataset")
     torch.manual_seed(seed)
     np.random.seed(seed)
+    train_list, calibration_list = _split_train_calibration(ds_list, calibration_fraction)
+    if not train_list:
+        raise ValueError("Empty post-split training dataset")
 
-    in_channels = int(ds_list[0].x.size(1))
+    in_channels = int(train_list[0].x.size(1))
     graph_attr_dim = (
-        int(ds_list[0].graph_attr.size(1))
-        if getattr(ds_list[0], "graph_attr", None) is not None
+        int(train_list[0].graph_attr.size(1))
+        if getattr(train_list[0], "graph_attr", None) is not None
         else EXPECTED_GRAPH_ATTR_DIM
     )
     model = OneClassGINE(
@@ -194,13 +272,19 @@ def train_one_class(
         out_dim=out_dim,
         graph_attr_dim=graph_attr_dim,
     ).to(device)
-    loader = DataLoader(ds_list, batch_size=batch_size, shuffle=True)
+    loader = DataLoader(train_list, batch_size=batch_size, shuffle=True)
+    eval_loader = DataLoader(train_list, batch_size=batch_size, shuffle=False)
+    cal_loader = (
+        DataLoader(calibration_list, batch_size=batch_size, shuffle=False)
+        if calibration_list
+        else None
+    )
 
-    # Initialize center from random features
-    init_emb = _batch_embeddings(model, loader, device)
+    # Initialize center from current embeddings on the actual training split.
+    init_emb = _batch_embeddings(model, eval_loader, device)
     if init_emb.numel() == 0:
         raise ValueError("Could not initialize embeddings")
-    center = init_emb.mean(dim=0).to(device)
+    center = _robust_center(init_emb, trim_fraction).to(device)
 
     opt = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=max(epochs, 1), eta_min=1e-5)
@@ -218,21 +302,41 @@ def train_one_class(
                 getattr(batch, "edge_attr", None),
             )
             dist = torch.sum((z - center.unsqueeze(0)) ** 2, dim=1)
-            loss = dist.mean() + (max(0.0, contrastive_weight) * _intra_class_spread_loss(z))
+            loss = _trimmed_mean(dist, trim_fraction) + (
+                max(0.0, contrastive_weight) * _intra_class_spread_loss(z)
+            )
             opt.zero_grad()
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
             opt.step()
             running += float(loss.item())
         scheduler.step()
+        if epoch % max(int(center_update_interval), 1) == 0 or epoch == epochs:
+            current_emb = _batch_embeddings(model, eval_loader, device)
+            center = _robust_center(current_emb, trim_fraction, reference=center.detach().cpu()).to(device)
         if epoch % 10 == 0 or epoch == epochs:
             print(f"  Epoch {epoch:>3} loss={running / max(len(loader), 1):.5f}")
 
-    final_emb = _batch_embeddings(model, loader, device)
-    center_np = final_emb.mean(dim=0).numpy()
-    d2 = ((final_emb.numpy() - center_np) ** 2).sum(axis=1)
-    radius = float(np.quantile(d2, min(max(radius_quantile, 0.5), 0.999)))
+    final_train_emb = _batch_embeddings(model, eval_loader, device)
+    final_center = _robust_center(final_train_emb, trim_fraction, reference=center.detach().cpu())
+    center_np = final_center.numpy()
+    radius_source = "train"
+    radius_emb = final_train_emb
+    if cal_loader is not None:
+        cal_emb = _batch_embeddings(model, cal_loader, device)
+        if cal_emb.numel() > 0:
+            radius_source = "calibration"
+            radius_emb = cal_emb
+    d2 = ((radius_emb.numpy() - center_np) ** 2).sum(axis=1)
+    d2_for_radius = np.sort(d2)
+    if radius_source == "train" and trim_fraction > 0.0 and d2_for_radius.size >= 4:
+        keep_n = max(int(round(d2_for_radius.size * (1.0 - float(trim_fraction)))), 1)
+        d2_for_radius = d2_for_radius[:keep_n]
+    radius = float(np.quantile(d2_for_radius, min(max(radius_quantile, 0.5), 0.999)))
     radius = max(float(radius_min), min(float(radius_max), radius))
+    score_threshold_low, score_threshold_high = _derive_score_thresholds(
+        _score_from_distance(d2_for_radius, radius)
+    )
 
     return OneClassArtifacts(
         state_dict={k: v.detach().cpu() for k, v in model.state_dict().items()},
@@ -245,6 +349,15 @@ def train_one_class(
         dropout=dropout,
         edge_emb_dim=edge_emb_dim,
         out_dim=out_dim,
+        train_size=len(train_list),
+        calibration_size=len(calibration_list),
+        radius_source=radius_source,
+        radius_quantile=radius_quantile,
+        trim_fraction=trim_fraction,
+        calibration_fraction=calibration_fraction,
+        center_update_interval=max(int(center_update_interval), 1),
+        score_threshold_low=score_threshold_low,
+        score_threshold_high=score_threshold_high,
     )
 
 

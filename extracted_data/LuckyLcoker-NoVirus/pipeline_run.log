@@ -1,4 +1,4 @@
-Sample: LuckyLcoker-NoVirus | label=0 | family=luckylcoker
-SKIP filter_malicious.py
-SKIP build_graph.py
-SKIP analyze_graph.py
+Sample: LuckyLcoker-NoVirus | label=0 | family=luckylcoker | benign_subtype=ambiguous_novirus_control
+filter_malicious.py: OK (0.7s)
+build_graph.py: OK (8.4s)
+analyze_graph.py: OK (1.0s)

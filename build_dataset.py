@@ -47,6 +47,7 @@ Usage:
 import os, sys, subprocess, json, csv, time, argparse, threading, pickle, re
 
 from utils.graph_motif_signals import graph_differentiation_signals
+from utils.subgraph_extract import extract_attack_subgraph
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
@@ -117,12 +118,46 @@ def resolve_label_family(
 
 
 def _infer_benign_subtype(folder_name: str, label: int) -> str:
+    return _normalize_benign_subtype("", label, folder_name=folder_name)
+
+
+def _coerce_bool(value, default: bool = False) -> bool:
+    if value is None:
+        return default
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return value != 0
+    text = str(value).strip().lower()
+    if not text:
+        return default
+    return text in {"1", "true", "yes", "y", "on"}
+
+
+def _normalize_benign_subtype(value: str, label: int, *, folder_name: str = "") -> str:
     if int(label) != 0:
         return ""
-    n = str(folder_name).lower()
-    if any(k in n for k in ("admin", "security", "sysinternals", "defender", "monitor", "av", "edr")):
-        return "admin_security_tool"
-    return "clean_software"
+    normalized = str(value or "").strip().lower().replace("-", "_")
+    aliases = {
+        "clean": "clean_benign",
+        "clean_software": "clean_benign",
+        "clean_benign": "clean_benign",
+        "admin_tool": "hard_benign_admin_tooling",
+        "admin_security_tool": "hard_benign_admin_tooling",
+        "admin_or_security_tool": "hard_benign_admin_tooling",
+        "security_tool": "hard_benign_admin_tooling",
+        "hard_benign": "hard_benign_admin_tooling",
+        "hard_benign_admin_tooling": "hard_benign_admin_tooling",
+        "ambiguous_novirus_control": "ambiguous_novirus_control",
+    }
+    if normalized in aliases:
+        return aliases[normalized]
+    name_l = str(folder_name or "").lower()
+    if "-novirus" in name_l:
+        return "ambiguous_novirus_control"
+    if any(k in name_l for k in ("admin", "security", "sysinternals", "defender", "monitor", "av", "edr")):
+        return "hard_benign_admin_tooling"
+    return "clean_benign"
 
 
 def _is_hash_like_name(name: str) -> bool:
@@ -134,21 +169,28 @@ def _label_quality_flags(job: dict) -> tuple[bool, list[str]]:
     name_l = str(job.get("name", "")).lower()
     family_l = str(job.get("family", "")).lower()
     source = str(job.get("label_source", "")).lower()
+    benign_subtype = _normalize_benign_subtype(
+        job.get("benign_subtype", ""),
+        int(job.get("label", -1)),
+        folder_name=job.get("name", ""),
+    )
     reasons: list[str] = []
     if source == "name_inference":
         if "timeout" in name_l or "timeout" in family_l:
             reasons.append("timeout_derived_label")
         if _is_hash_like_name(name_l) or _is_hash_like_name(family_l):
             reasons.append("hash_derived_label")
+    if benign_subtype == "ambiguous_novirus_control":
+        reasons.append("ambiguous_novirus_control")
     return bool(reasons), reasons
 
 
 def load_explicit_label_rows(labels_csv_path, base_dir):
     """
     CSV columns: folder (basename under base_dir), label (0/1), optional family,
-    optional benign_subtype.
+    optional benign_subtype plus optional governance/review columns.
     Duplicate folder values abort. Rows missing on disk are skipped with a warning.
-    Returns sorted list of (abs_folder_path, label:int, family:str, benign_subtype:str).
+    Returns sorted list of row dicts with normalized governance metadata.
     """
     base_dir = os.path.abspath(base_dir)
     if not os.path.isfile(labels_csv_path):
@@ -170,6 +212,15 @@ def load_explicit_label_rows(labels_csv_path, base_dir):
         fk_label = fields["label"]
         fk_family = fields.get("family")
         fk_benign_subtype = fields.get("benign_subtype")
+        fk_label_source = fields.get("label_source")
+        fk_label_version = fields.get("label_version")
+        fk_reviewer_id = fields.get("reviewer_id")
+        fk_reviewed_at = fields.get("reviewed_at")
+        fk_feedback_state = fields.get("feedback_state")
+        fk_curated_label = fields.get("curated_label")
+        fk_label_quality_flag = fields.get("label_quality_flag")
+        fk_label_quality_reason = fields.get("label_quality_reason")
+        fk_train_eligible = fields.get("train_eligible")
         for lineno, row in enumerate(reader, start=2):
             if not row:
                 continue
@@ -191,15 +242,38 @@ def load_explicit_label_rows(labels_csv_path, base_dir):
             fam = "unknown"
             if fk_family:
                 fam = str(row.get(fk_family, "") or "").strip() or "unknown"
-            benign_subtype = ""
-            if fk_benign_subtype:
-                benign_subtype = str(row.get(fk_benign_subtype, "") or "").strip()
-            if not benign_subtype:
-                benign_subtype = _infer_benign_subtype(folder, label)
-            rows_raw.append((folder, label, fam, benign_subtype, lineno))
+            subtype_raw = str(row.get(fk_benign_subtype, "") or "").strip() if fk_benign_subtype else ""
+            benign_subtype = _normalize_benign_subtype(subtype_raw, label, folder_name=folder)
+            quality_flag = _coerce_bool(row.get(fk_label_quality_flag), False) if fk_label_quality_flag else False
+            quality_reason = str(row.get(fk_label_quality_reason, "") or "").strip() if fk_label_quality_reason else ""
+            train_eligible_override = None
+            if fk_train_eligible:
+                raw_train = row.get(fk_train_eligible, "")
+                if str(raw_train).strip():
+                    train_eligible_override = _coerce_bool(raw_train, True)
+            rows_raw.append(
+                {
+                    "folder": folder,
+                    "label": label,
+                    "family": fam,
+                    "benign_subtype": benign_subtype,
+                    "label_source": str(row.get(fk_label_source, "") or "").strip() if fk_label_source else "labels_csv",
+                    "label_version": str(row.get(fk_label_version, "") or "").strip() if fk_label_version else "v1",
+                    "reviewer_id": str(row.get(fk_reviewer_id, "") or "").strip() if fk_reviewer_id else "",
+                    "reviewed_at": str(row.get(fk_reviewed_at, "") or "").strip() if fk_reviewed_at else "",
+                    "feedback_state": str(row.get(fk_feedback_state, "") or "").strip() if fk_feedback_state else "unreviewed",
+                    "curated_label": str(row.get(fk_curated_label, "") or "").strip() if fk_curated_label else "",
+                    "label_quality_flag": quality_flag,
+                    "label_quality_reason": quality_reason,
+                    "train_eligible_override": train_eligible_override,
+                    "lineno": lineno,
+                }
+            )
 
     resolved = []
-    for folder, label, fam, benign_subtype, lineno in rows_raw:
+    for item in rows_raw:
+        folder = item["folder"]
+        lineno = item["lineno"]
         abs_path = os.path.join(base_dir, folder)
         if not os.path.isdir(abs_path):
             print(
@@ -207,9 +281,11 @@ def load_explicit_label_rows(labels_csv_path, base_dir):
                 f"not found under {base_dir}, skipped"
             )
             continue
-        resolved.append((abs_path, label, fam, benign_subtype))
+        item = {k: v for k, v in item.items() if k != "lineno"}
+        item["abs_path"] = abs_path
+        resolved.append(item)
 
-    resolved.sort(key=lambda x: os.path.basename(x[0]).lower())
+    resolved.sort(key=lambda x: os.path.basename(x["abs_path"]).lower())
     return resolved
 
 
@@ -411,7 +487,24 @@ def uncertainty_flags(row):
 
 
 # ── Per-sample worker ────────────────────────────────────────────────────────
-def process_sample(job, scripts, skip, run_steps):
+def write_attack_subgraph_pkl(folder: str) -> bool:
+    """Persist graph_subgraph.pkl next to graph.pkl for attack-centric training."""
+    pp = os.path.join(folder, "graph.pkl")
+    out = os.path.join(folder, "graph_subgraph.pkl")
+    if not os.path.isfile(pp):
+        return False
+    try:
+        with open(pp, "rb") as f:
+            G = pickle.load(f)
+        sub = extract_attack_subgraph(G)
+        with open(out, "wb") as f:
+            pickle.dump(sub, f)
+        return True
+    except Exception:
+        return False
+
+
+def process_sample(job, scripts, skip, run_steps, write_subgraphs: bool = False):
     """
     Runs the full pipeline for one sample folder.
     Returns (row_dict, stats_dict, log_lines, lines_to_print).
@@ -502,6 +595,12 @@ def process_sample(job, scripts, skip, run_steps):
     else:
         row["graph_ok"] = existing["graph.json"] and existing["graph.pkl"]
 
+    if write_subgraphs and row["graph_ok"]:
+        if write_attack_subgraph_pkl(folder):
+            log.append("Wrote graph_subgraph.pkl")
+        else:
+            log.append("graph_subgraph.pkl write skipped/failed")
+
     # ─ Step 3: analyze_graph.py ─────────────────────────────────────────
     if "analyze" in run_steps:
         if skip and existing["analysis_report.json"]:
@@ -555,6 +654,12 @@ def main():
     parser.add_argument("--only", nargs="+",
                         choices=["filter", "graph", "analyze"],
                         help="Run only specific step(s): filter graph analyze")
+    parser.add_argument(
+        "--write-subgraphs",
+        action="store_true",
+        dest="write_subgraphs",
+        help="After graph build, write graph_subgraph.pkl (attack-centric extract) per sample.",
+    )
     parser.add_argument("--workers", type=int, default=4,
                         help="Number of parallel worker threads (default: 4)")
     parser.add_argument(
@@ -604,6 +709,14 @@ def main():
         help=(
             "Allow timeout/hash-derived labels from name-inference into training eligibility. "
             "Default: excluded from training via train_eligible=false."
+        ),
+    )
+    parser.add_argument(
+        "--allow-ambiguous-novirus-controls",
+        action="store_true",
+        help=(
+            "Allow inferred -NoVirus malware-family controls to remain train_eligible. "
+            "Default: mark them as ambiguous_novirus_control and exclude from training."
         ),
     )
     args = parser.parse_args()
@@ -656,24 +769,27 @@ def main():
         explicit = load_explicit_label_rows(labels_csv, base_dir)
         if not explicit:
             print("[ERROR] --labels-csv produced no valid sample folders"); sys.exit(1)
-        sample_dirs = [p for p, _, _ in explicit]
+        sample_dirs = [item["abs_path"] for item in explicit]
         jobs = [
             {
-                "folder": f,
-                "name":   os.path.basename(f),
-                "label":  lab,
-                "family": fam,
-                "benign_subtype": benign_subtype,
-                "label_source": "labels_csv",
-                "label_version": "v1",
-                "reviewer_id": "",
-                "reviewed_at": "",
-                "feedback_state": "unreviewed",
-                "curated_label": "",
+                "folder": item["abs_path"],
+                "name":   os.path.basename(item["abs_path"]),
+                "label":  item["label"],
+                "family": item["family"],
+                "benign_subtype": item["benign_subtype"],
+                "label_source": item.get("label_source", "labels_csv") or "labels_csv",
+                "label_version": item.get("label_version", "v1") or "v1",
+                "reviewer_id": item.get("reviewer_id", ""),
+                "reviewed_at": item.get("reviewed_at", ""),
+                "feedback_state": item.get("feedback_state", "unreviewed") or "unreviewed",
+                "curated_label": item.get("curated_label", ""),
+                "label_quality_flag": bool(item.get("label_quality_flag", False)),
+                "label_quality_reason": str(item.get("label_quality_reason", "")),
+                "train_eligible_override": item.get("train_eligible_override"),
                 "idx":    i,
                 "total":  len(sample_dirs),
             }
-            for i, (f, lab, fam, benign_subtype) in enumerate(explicit, 1)
+            for i, item in enumerate(explicit, 1)
         ]
     else:
         sample_dirs = sorted([
@@ -711,10 +827,29 @@ def main():
             )
 
     for job in jobs:
-        flagged, reasons = _label_quality_flags(job)
-        job["label_quality_flag"] = flagged
-        job["label_quality_reason"] = "|".join(reasons)
-        job["train_eligible"] = not (flagged and not args.allow_timeout_hash_labels)
+        flagged, inferred_reasons = _label_quality_flags(job)
+        existing_reasons = [
+            r.strip()
+            for r in str(job.get("label_quality_reason", "") or "").split("|")
+            if r.strip()
+        ]
+        merged_reasons: list[str] = []
+        for reason in existing_reasons + inferred_reasons:
+            if reason and reason not in merged_reasons:
+                merged_reasons.append(reason)
+        job["label_quality_flag"] = bool(job.get("label_quality_flag", False) or flagged or merged_reasons)
+        job["label_quality_reason"] = "|".join(merged_reasons)
+        allowed_reasons = set()
+        if args.allow_timeout_hash_labels:
+            allowed_reasons.update({"timeout_derived_label", "hash_derived_label"})
+        if args.allow_ambiguous_novirus_controls:
+            allowed_reasons.add("ambiguous_novirus_control")
+        explicit_train_eligible = job.get("train_eligible_override")
+        if explicit_train_eligible is None:
+            effective_reasons = [r for r in merged_reasons if r not in allowed_reasons]
+            job["train_eligible"] = not effective_reasons
+        else:
+            job["train_eligible"] = bool(explicit_train_eligible)
 
     # ─ Dry run ────────────────────────────────────────────────────────────
     if args.dry_run:
@@ -771,7 +906,9 @@ def main():
     total_start   = time.time()
 
     def submit(job):
-        row, stats, _log, lines = process_sample(job, scripts, skip, run_steps)
+        row, stats, _log, lines = process_sample(
+            job, scripts, skip, run_steps, write_subgraphs=args.write_subgraphs
+        )
         elapsed = round(time.time() - total_start, 1)
         with print_lock:
             done_counter[0] += 1
