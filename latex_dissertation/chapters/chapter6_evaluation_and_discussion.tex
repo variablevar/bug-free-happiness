@@ -5,56 +5,33 @@
 
 The strongest result from the current corpus is not a detection F1 score. It is the systematic mismatch between benign folder labels and rule-based triage signals.
 
-In \texttt{dataset\_manifest.csv} ($n{=}30$), \textbf{14 of 15} benign-labelled (\texttt{NoVirus}) rows are marked \texttt{uncertain=True}. Reasons include HIGH or CRITICAL verdicts, elevated process scores, injection counts, and C2-style connection counts despite benign labels. Only the W32.MyDoom.A.-NoVirus row is not uncertain. Malware-labelled rows are not flagged uncertain in the manifest.
+In \texttt{extracted\_data/dataset\_manifest.csv} ($n{=}30$), \textbf{all 15} benign-labelled (\texttt{NoVirus}) rows are marked \texttt{uncertain=True}. Reasons include HIGH or CRITICAL verdicts, elevated process scores, injection counts, and C2-style connection counts despite benign labels; even the W32.MyDoom.A.-NoVirus row is flagged \texttt{ambiguous\_novirus\_control} despite LOW triage verdicts. Malware-labelled rows are not flagged uncertain in the manifest.
 
-Figure~\ref{fig:uncertainty_benign} summarises the split. Figure~\ref{fig:dataset_overview} places it in the wider label balance. This pattern means folder naming is an imperfect proxy for ground truth: ``clean'' baselines in memory forensics can still contain suspicious artefacts from security tools, prior activity, or capture timing.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.62\textwidth]{fig_uncertainty_benign.pdf}
-\caption{Benign-labelled samples: uncertain vs not uncertain ($n{=}15$).}
-\label{fig:uncertainty_benign}
-\end{figure}
+Figure~\ref{fig:dataset_overview} summarises label balance and the uncertain-benign split. This pattern means folder naming is an imperfect proxy for ground truth: ``clean'' baselines in memory forensics can still contain suspicious artefacts from security tools, prior activity, or capture timing.
 
 For machine learning, uncertain benign rows should be excluded, down-weighted, or reported separately in evaluation. Treating all NoVirus folders as definitively benign will inflate false conclusions about separability.
 
 \section{Proof-of-Concept Scope}
 
-This chapter evaluates whether the pipeline produces consistent artefacts, meaningful graphs, and auditable evidence on a small research corpus. It does \textbf{not} claim production malware detection performance. Quantitative ML tables use placeholders until grouped cross-validation is run and checkpoints are archived (see \S\ref{sec:quant_ml_eval}).
+This chapter evaluates whether the pipeline produces consistent artefacts, meaningful graphs, and auditable evidence on a small research corpus. It does \textbf{not} claim production malware detection performance. The main quantitative ML results are Tracks~2 and~3 (binary GNN and two-model fusion) on the expanded \texttt{extracted\_csvs} manifest ($n{=}43$).
+
+Two manifest views are used. The \texttt{extracted\_data} corpus ($n{=}30$) supports descriptive statistics, uncertainty figures, and family case studies in \S\ref{sec:descriptive_corpus}--\S\ref{sec:failure_cases}. The \texttt{extracted\_csvs} corpus ($n{=}43$) is the primary evaluation set for trained checkpoints, calibration, and abstention (Tables in \S\ref{sec:quant_ml_eval}). Benign-labelled rows in both corpora remain dominated by \texttt{ambiguous\_novirus\_control}; they stress-test false-positive pressure but are not a clean enterprise benign baseline.
 
 \section{Descriptive Corpus Statistics}
+\label{sec:descriptive_corpus}
 
 Table~\ref{tab:corpus_summary} summarises manifest-level scale statistics (from \texttt{figures/dataset\_stats.json}). Graph size spans more than two orders of magnitude; both labels include very large graphs.
 
 \begin{table}[htbp]
 \centering
-\caption{Corpus summary statistics (30 manifest rows).}
+\caption{Corpus summary statistics (\texttt{extracted\_data}, 30 manifest rows).}
 \label{tab:corpus_summary}
-\begin{tabular}{lrrrr}
-\toprule
-\textbf{Statistic} & \textbf{Min} & \textbf{Median} & \textbf{Max} & \textbf{Notes} \\
-\midrule
-Nodes (all) & 86 & 18,036 & 27,362 & MyDoom pair smallest \\
-Edges (all) & 7 & 21,544 & 32,556 & \\
-Malware-labelled & 15 & --- & --- & No uncertain flags \\
-Benign-labelled & 15 & --- & --- & 14 uncertain \\
-\bottomrule
-\end{tabular}
+\input{tables/corpus_summary.tex}
 \end{table}
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.95\textwidth]{fig_dataset_overview.pdf}
-\caption{Dataset composition: malware vs benign labels and uncertain benign subset.}
-\label{fig:dataset_overview}
-\end{figure}
+\input{figures/fig_dataset_overview.tex}
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.95\textwidth]{fig_graph_scale.pdf}
-\caption{Node and edge counts by label (log scale).}
-\label{fig:graph_scale}
-\end{figure}
+\input{figures/fig_graph_scale.tex}
 
 All listed rows completed filter, graph, and analysis stages (\texttt{filter\_ok}, \texttt{graph\_ok}, \texttt{analyze\_ok}), giving a stable artefact base for discussion.
 
@@ -64,69 +41,80 @@ Rule-based signals in the manifest show false-positive pressure on NoVirus rows.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.85\textwidth]{fig_forensic_signals.pdf}
-\caption{Mean forensic signal values by label (manifest-derived).}
+\input{figures/fig_forensic_signals.tex}
+\caption{Mean forensic signal values by label (\texttt{extracted\_data}, manifest-derived).}
 \label{fig:forensic_signals}
 \end{figure}
 
-Figure~\ref{fig:verdict_dist} shows that most samples receive HIGH or CRITICAL verdicts. Only the MyDoom pair reports LOW verdicts. Benign-labelled rows therefore often receive the same verdict bands as malware-labelled rows, which explains the uncertain flags.
+Figure~\ref{fig:verdict_dist} shows that most samples receive HIGH or CRITICAL verdicts. Only the MyDoom pair reports LOW verdicts, yet all benign-labelled rows remain \texttt{uncertain=True} in the manifest. Benign-labelled rows therefore often receive the same verdict bands as malware-labelled rows, which explains the uncertain flags.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.78\textwidth]{fig_verdict_distribution.pdf}
-\caption{Rule-based triage verdict categories across the corpus.}
+\input{figures/fig_verdict_distribution.tex}
+\caption{Rule-based triage verdict categories (\texttt{extracted\_data}, $n{=}30$).}
 \label{fig:verdict_dist}
 \end{figure}
 
-Figure~\ref{fig:family_coverage} shows each malware family contributes paired WithVirus and NoVirus rows. Family-grouped splits are mandatory for honest evaluation \cite{sommer2010outside}.
+Figure~\ref{fig:family_coverage} shows each malware family contributes paired WithVirus and NoVirus rows (see Table~\ref{tab:malware_family_taxonomy} for threat types). Family-grouped splits are mandatory for honest evaluation \cite{sommer2010outside}.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.72\textwidth]{fig_family_coverage.pdf}
-\caption{Manifest rows per malware family.}
+\input{figures/fig_family_coverage.tex}
+\caption{Manifest rows per malware family (\texttt{extracted\_data}, $n{=}30$).}
 \label{fig:family_coverage}
 \end{figure}
 
 \section{Quantitative Machine Learning Evaluation}
 \label{sec:quant_ml_eval}
 
-Grouped evaluation is implemented in \texttt{train.py} (StratifiedGroupKFold by \texttt{family}), \texttt{train\_binary\_model.py}, and \texttt{scripts/tabular\_baselines.py}. Saved \texttt{results\_*.json} files were not present in the repository at writing time; Table~\ref{tab:gnn_comparison}--\ref{tab:cv_protocol} therefore show ``--'' placeholders. After running experiments, regenerate tables with:
-
-\begin{verbatim}
-python train.py extracted_data/dataset_manifest.csv --cv stratified_group \
-  --group-by family --model gine --epochs 80 --seed 42
-python scripts/tabular_baselines.py
-python scripts/generate_eval_latex.py
-\end{verbatim}
+\input{tables/track1_note.tex}
 
 \input{tables/eval_results.tex}
 
-\subsection{Evaluation figures (placeholders until predictions exist)}
+\subsection{Tracks 2 and 3: primary evaluation}
 
-When \texttt{outputs/predictions.csv} is produced from grouped CV, \texttt{scripts/generate\_eval\_latex.py} can render confusion-matrix and ROC PDFs (\texttt{fig\_confusion\_matrix.pdf}, \texttt{fig\_roc\_curve.pdf}). Until then, only manifest-derived figures (including Figure~\ref{fig:uncertainty_benign}) are included.
+Tracks~2 and~3 are the main reported machine-learning paths. Track~2 trains a calibrated binary GINE classifier (\texttt{train\_binary\_model.py}) with strict training filters, feature-group weighting, and temperature scaling. Track~3 trains malware and benign one-class GINE models and fuses them with heuristic risk and calibrated abstention (\texttt{fusion.py}, \texttt{analyze\_two\_model.py}).
 
-% Uncomment after running generate_eval_latex.py with predictions:
-% \begin{figure}[htbp]
-% \centering
-% \includegraphics[width=0.55\textwidth]{fig_confusion_matrix.pdf}
-% \caption{Confusion matrix for GINE (grouped CV).}
-% \label{fig:confusion_matrix}
-% \end{figure}
-%
-% \begin{figure}[htbp]
-% \centering
-% \includegraphics[width=0.55\textwidth]{fig_roc_curve.pdf}
-% \caption{ROC curve for GINE (grouped CV).}
-% \label{fig:roc_curve}
-% \end{figure}
+Checkpoints under \texttt{outputs/} were produced on \texttt{extracted\_csvs}. Inference JSON and tables below were generated with \texttt{analyze\_binary\_model.py}, \texttt{analyze\_two\_model.py}, and \texttt{scripts/generate\_analysis\_latex.py}. These results should be read as \textbf{feasibility and triage-behaviour evidence}, not as proof of production-grade detection: on the latest run the binary path assigns all 43 rows to \texttt{likely\_malicious} at high calibrated probability (saturation), while the two-model path routes ${\approx}98\%$ to \texttt{needs\_analyst\_review} with near-zero decisive coverage---consistent with label--signal mismatch and rule-feature coupling.
 
-A natural comparison is tabular classifiers on \texttt{graph\_attr} features versus full-graph GNNs on the same manifest version. If tabular models match GNNs, relational structure may add little on this small, heuristic-rich corpus; if GNNs improve under grouped CV, that supports the graph design.
+\input{tables/analysis_results.tex}
+
+\begin{figure}[htbp]
+\centering
+\input{figures/fig_binary_triage.tex}
+\caption{Binary GNN triage states (\texttt{extracted\_csvs}, $n{=}43$).}
+\label{fig:binary_triage}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\vspace{0.25cm}
+\input{figures/fig_binary_confusion.tex}
+\vspace{0.35cm}
+\caption{Binary model decisive predictions vs manifest labels (likely malicious/benign only).}
+\label{fig:binary_confusion}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\input{figures/fig_two_model_triage.tex}
+\caption{Two-model fused triage states (\texttt{extracted\_csvs}, $n{=}43$).}
+\label{fig:two_model_triage}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\input{figures/fig_two_model_confusion.tex}
+\caption{Two-model decisive predictions vs manifest labels. No matrix is shown because the evaluation run assigned zero decisive classes; all rows were routed to analyst review or ambiguous states (Figure~\ref{fig:two_model_triage}).}
+\label{fig:two_model_confusion}
+\end{figure}
 
 \section{Failure Cases and Edge Families}
+\label{sec:failure_cases}
 
 \subsection{W32.MyDoom.A. pair (very small graphs)}
 
-W32.MyDoom.A.-NoVirus (86 nodes) and W32.MyDoom.A.-WithVirus (164 nodes) are outliers. Both report LOW verdicts and zero injections; neither benign row is uncertain. Models trained mainly on large graphs may underfit or overfit on tiny topologies---pooling and normalisation should be checked on this pair.
+W32.MyDoom.A.-NoVirus (86 nodes) and W32.MyDoom.A.-WithVirus (164 nodes) are outliers. Both report LOW verdicts and zero injections; the benign row is still \texttt{uncertain=True} as an \texttt{ambiguous\_novirus\_control}. Models trained mainly on large graphs may underfit or overfit on tiny topologies---pooling and normalisation should be checked on this pair.
 
 \subsection{Cerber pair (similar scale, divergent C2 counts)}
 
@@ -142,7 +130,7 @@ WannaCry-WithVirus (8,098 nodes) shows injection-related attack-chain steps and 
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.62\textwidth]{fig_wannacry_node_types.pdf}
+\input{figures/fig_wannacry_node_types.tex}
 \caption{Node-type composition for WannaCry-WithVirus.}
 \label{fig:wannacry_nodes}
 \end{figure}
@@ -165,11 +153,27 @@ WannaCry-NoVirus & Benign & 7,590 & 9 & Yes \\
 
 GNNs add value when relational structure carries signal beyond graph-level heuristics. They may add little when: (1) labels are dominated by triage noise; (2) graphs differ mainly in size, not infection topology; (3) train and test families are too few for stable grouped metrics; or (4) edge and node features already encode the decision rules. The uncertain-benign prevalence pushes toward analyst-review workflows and two-model conformity scores rather than hard binary automation.
 
-\section{Binary and Two-Model Paths}
+\section{Binary and Two-Model Discussion}
 
-The binary GNN path supports calibrated probabilities and ambiguous states \cite{guo2017calibration}. On noisy labels, a single threshold can encode triage noise rather than infection state. The two-model path compares malware and benign conformity \cite{ruff2018deep}, surfacing cases where both scores are elevated---consistent with uncertain benign rows.
+The binary path assigns calibrated malware probability and four triage bands \cite{guo2017calibration}. On the latest 43-row run, all samples received \texttt{likely\_malicious} at very high calibrated probability---a saturated pattern that reflects both label--signal mismatch and coupling between rule-derived graph attributes and the classifier. Hold-out validation metrics (Table~\ref{tab:binary_train_meta}) remain modest (AUROC near chance on the strict split), so decisive F1 against folder labels is not a reliable success criterion.
 
-Saved checkpoints were not archived in the repository at writing time. Implementation capability is documented; grouped metrics require the user to train, save \texttt{*.pt} files, and regenerate LaTeX tables.
+The two-model path fuses binary probability, malware/benign conformity scores, and heuristic risk \cite{ruff2018deep}. With \texttt{abstention\_mode=calibrated}, it routes most rows to \texttt{needs\_analyst\_review} (review rate ${\approx}0.98$, decisive coverage ${\approx}0$). That behaviour matches the design goal on this corpus: surface ambiguity instead of forcing a binary verdict when dual scores overlap.
+
+These paths are \textbf{inference evaluations} on trained checkpoints (hold-out validation for binary training; one-class spheres for malware/benign). They are reported separately from the exploratory grouped CV in Track~1.
+
+\subsection{Forensic diagnosis of the two-model run}
+
+The 43-row evaluation made the score geometry explicit. Malware and benign one-class conformity scores often occupy overlapping bands, so the dual-model margin is small. The fusion layer therefore abstains rather than issuing decisive \texttt{likely\_malicious} or \texttt{likely\_benign} states.
+
+This is not best interpreted as a single implementation bug. It reflects three connected issues: rule-derived features can leak triage decisions into the binary model; the benign one-class model lacks a clean benign manifold when trained on ambiguous \texttt{NoVirus} controls; and fixed OR-style abstention gates can saturate review routing when score geometry is poorly separated.
+
+The redesigned evaluation scripts therefore report review-routing rate, decisive coverage, gate-trigger counts, and score percentiles. These quantities are more informative than accuracy alone for this corpus because many rows are not cleanly separable by label.
+
+\subsection{Redesign ablations and remaining data gap}
+
+The final codebase supports several ablations that directly target the diagnosis. The \texttt{no\_manifest\_leakage} graph-attribute profile masks rule-derived manifest fields during training and inference. The calibrated abstention mode reduces reliance on binary--dual disagreement when the binary probability is already saturated. The gate-ablation path in \texttt{evaluate.py} compares disabled, legacy, and calibrated uncertainty routing. The \texttt{attack\_subgraph} view supports experiments on causal subgraphs rather than full memory-heavy graphs.
+
+These ablations are implemented as evaluation support. Their scientific value depends on data quality. In strict mode, both binary training and benign one-class training require train-eligible benign rows with \texttt{clean\_benign} or explicitly included hard-benign subtype labels. Without those rows, the only immediate option is to train experimentally on \texttt{ambiguous\_novirus\_control} rows, which should be reported as a stress test rather than as a clean benign baseline.
 
 \section{Explainability}
 
@@ -179,29 +183,32 @@ The project records top graph attributes, important nodes, and edge pairs in JSO
 
 \textbf{Proven on current artefacts:}
 \begin{itemize}
-\item Volatility artefacts can be converted into typed graphs from 86 to 27,362 nodes.
-\item Rule-based triage produces HIGH/CRITICAL verdicts on most benign-labelled rows (14/15 uncertain).
-\item Manifest governance supports reproducible, family-aware evaluation design.
+\item Volatility artefacts can be converted into typed graphs from 86 to 27,362 nodes (descriptive corpus).
+\item Rule-based triage produces HIGH/CRITICAL verdicts on most benign-labelled rows: 15/15 uncertain on \texttt{extracted\_data}; 22/22 uncertain on \texttt{extracted\_csvs}.
+\item Manifest governance (\texttt{benign\_subtype}, \texttt{train\_eligible}) supports reproducible, family-aware evaluation design.
 \item Evidence JSON and uncertainty fields are implementable alongside GNN scores.
+\item Track~2/3 inference runs complete on $n{=}43$ and expose saturation and review-routing behaviour honestly.
 \end{itemize}
 
 \textbf{Not proven:}
 \begin{itemize}
 \item Superior detection accuracy versus production AV or EDR on enterprise hosts.
 \item Generalisation to unseen malware families without grouped CV on larger $n$.
-\item That GNN structure beats strong tabular baselines on the same manifest (pending experiments).
+\item That GNN structure beats strong tabular baselines on the same manifest (tabular CV is reference-only; Table~\ref{tab:tabular_baselines}).
 \item Robustness to adversarial graph manipulation \cite{apruzzese2023sok}.
 \end{itemize}
 
 \section{Limitations}
 
 \begin{itemize}
-\item Small corpus ($n{=}30$) with high metric variance under grouped CV.
-\item Noisy benign labels (14/15 uncertain).
-\item Family-level pairing limits independent test families.
+\item Small corpora: $n{=}30$ descriptive, $n{=}43$ ML---high metric variance under grouped CV.
+\item Noisy benign labels: 15/15 uncertain on descriptive corpus; all 22 benign rows uncertain on ML corpus (\texttt{ambiguous\_novirus\_control}).
+\item No \texttt{clean\_benign} manifold for strict benign one-class training at dissertation writing time.
+\item Binary decisive accuracy against folder labels ${\approx}49\%$ when all rows are classified \texttt{likely\_malicious}; two-model decisive coverage ${\approx}0$.
+\item Family-level pairing and numeric host IDs limit independent held-out family tests.
 \item Capture timing and Windows build affect plugin output.
 \item Heuristic graph attributes couple rules and learning.
-\item Missing archived checkpoints and prediction CSVs at submission time.
+\item Track~1 grouped CV was exploratory only; no backbone ranking is reported.
 \end{itemize}
 
 Sommer and Paxson \cite{sommer2010outside} and Sculley et al.\ \cite{sculley2015debt} apply: evaluation design and pipeline debt can dominate headline metrics.
@@ -213,9 +220,9 @@ The pipeline supports evidence-led triage \cite{case2017memory}: organise plugin
 \section{Summary}
 
 \begin{enumerate}
-\item Benign-labelled rows frequently exhibit HIGH/CRITICAL triage signals (14/15 uncertain)---the central empirical finding.
+\item Benign-labelled rows frequently exhibit HIGH/CRITICAL triage signals (15/15 uncertain on \texttt{extracted\_data}; 22/22 on \texttt{extracted\_csvs})---the central empirical finding.
 \item Graph construction scales from tiny to very large memory snapshots.
 \item Rule-based triage alone cannot define benign status from folder names.
-\item Grouped CV and tabular baselines are implemented; numeric ML tables await experiment runs.
+\item Binary and two-model inference (Tracks~2/3) on $n{=}43$ show calibration, saturation, and analyst-review routing; Track~1 informed engineering but is not reported numerically.
 \item Structured evidence improves usefulness over a single probability.
 \end{enumerate}

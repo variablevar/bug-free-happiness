@@ -1,0 +1,19 @@
+\IfFileExists{figures/data/values_two_model_triage.tex}{%
+\input{figures/data/values_two_model_triage.tex}
+\begin{tikzpicture}[x=1.55cm, y=0.11cm, font=\small]
+\pgfmathsetmacro{\ymax}{50}
+\draw[->] (-0.1,0) -- (6.8,0);
+\draw[->] (0,-0.1) -- (0,\ymax);
+\node[anchor=east] at (-0.15,25) {Samples};
+\foreach \lbl/\cnt [count=\i from 0] in \BarRows {
+  \pgfmathsetmacro{\x}{\i*1.55}
+  \draw[fill=benignblue, draw=black, line width=0.3pt]
+    (\x,0) rectangle (\x+1.15,{\cnt});
+  \node[anchor=south] at (\x+0.575,{\cnt}) {\cnt};
+  \node[font=\footnotesize, anchor=north, align=center, text width=1.3cm]
+    at (\x+0.575,-1.1) {\lbl};
+}
+\end{tikzpicture}
+}{%
+\fbox{\parbox{0.55\textwidth}{\centering\small Two-model triage data missing.}}%
+}

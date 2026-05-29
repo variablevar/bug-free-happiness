@@ -1,0 +1,28 @@
+\input{figures/data/values_label_balance.tex}
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}[t]{0.48\textwidth}
+\centering
+\begin{tikzpicture}[x=1.4cm,y=0.38cm]
+\draw[->] (-0.1,0) -- (3.0,0);
+\draw[->] (0,-0.1) -- (0,6.5);
+\node[anchor=east, font=\small] at (-0.15,3) {Samples};
+\draw[fill=benignblue, draw=black, line width=0.3pt] (0.3,0) rectangle (1.0,{\BenignN});
+\node[font=\small, anchor=south] at (0.65,{\BenignN}) {\BenignN};
+\node[font=\small, anchor=north] at (0.65,-0.3) {Benign};
+\draw[fill=malwarered, draw=black, line width=0.3pt] (1.8,0) rectangle (2.5,{\MalwareN});
+\node[font=\small, anchor=south] at (2.15,{\MalwareN}) {\MalwareN};
+\node[font=\small, anchor=north] at (2.15,-0.3) {Malware};
+\end{tikzpicture}
+\caption{Dataset label balance ($n{=}30$).}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.48\textwidth}
+\centering
+\input{figures/fig_uncertainty_benign.tex}
+\caption{Benign rows flagged uncertain (all 15 benign-labelled rows).}
+\label{fig:uncertainty_benign}
+\end{subfigure}
+\caption{Dataset composition: malware vs benign labels and uncertain benign subset.}
+\label{fig:dataset_overview}
+\end{figure}

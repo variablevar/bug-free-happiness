@@ -4,9 +4,9 @@
 
 This dissertation implemented a proof-of-concept pipeline for graph-based malware triage from Windows memory forensics: Volatility~3 extraction, typed memory-snapshot graphs, graph-level features, GNN scoring (GIN, GraphSAGE, GAT, GINE), and structured evidence with uncertainty fields \cite{volatility3docs}, \cite{fey2019pyg}.
 
-The primary empirical finding is label--signal mismatch on benign baselines: \textbf{14 of 15} benign-labelled manifest rows are marked uncertain because rule-based triage still reports HIGH or CRITICAL activity. Folder names (\texttt{NoVirus}) are an imperfect proxy for ground truth. This result should be reported openly in any memory-forensics ML study, not treated as a labelling failure to hide.
+The primary empirical finding is label--signal mismatch on benign baselines: on \texttt{extracted\_data} ($n{=}30$), \textbf{all 15} benign-labelled manifest rows are marked uncertain because rule-based triage still reports HIGH or CRITICAL activity; on \texttt{extracted\_csvs} ($n{=}43$), all 22 benign-labelled rows are uncertain \texttt{ambiguous\_novirus\_control}. Folder names (\texttt{NoVirus}) are an imperfect proxy for ground truth. Track~2/3 ML runs on the larger corpus show binary saturation (\texttt{likely\_malicious} on all rows) and two-model review routing (${\approx}98\%$ \texttt{needs\_analyst\_review})---honest triage behaviour, not production detection success.
 
-Secondary contributions are reproducible engineering artefacts: manifests, data contracts, grouped evaluation scripts, tabular baselines, and JSON evidence for analyst review. Together they show that graph-based representation can organise memory-forensics evidence at scale, while detection metrics on $n{=}30$ remain feasibility evidence until larger corpora and archived checkpoints are available.
+Secondary contributions are reproducible engineering artefacts: manifests, data contracts, grouped evaluation scripts, tabular baselines, JSON evidence for analyst review, governance-aware training controls, uncertainty-aware fusion, and ablation support for graph-attribute leakage and attack-centred subgraphs. Together they show that graph-based representation can organise memory-forensics evidence at scale, while detection metrics on the current small corpora remain feasibility evidence until larger clean-benign corpora and archived checkpoints are available.
 
 \section{Answers to Research Questions}
 
@@ -16,11 +16,11 @@ Secondary contributions are reproducible engineering artefacts: manifests, data 
 
 \textbf{RQ3: How can GNNs support detection with readable evidence?} Binary and two-model paths combine learned scores with graph attributes, top nodes, and JSON evidence. Uncertain benign flags motivate analyst-review states rather than forced binary decisions.
 
-\textbf{RQ4: What limitations appear on a small corpus?} High graph-size variance, 14/15 uncertain benign rows, and family pairing require grouped splits and modest claims \cite{sommer2010outside}. Placeholder metric tables document what remains to be run experimentally.
+\textbf{RQ4: What limitations appear on a small corpus?} High graph-size variance; 15/15 uncertain benign rows on the 30-row descriptive corpus and 22/22 on the 43-row ML corpus; family pairing requires grouped splits and modest claims \cite{sommer2010outside}. Track~2/3 metrics support triage-behaviour analysis (saturation, review routing, AUROC near chance on strict binary validation) rather than definitive detection ranking.
 
 \section{Reflection on the Research Aim}
 
-The aim---to design and evaluate a graph-based deep learning pipeline for memory-forensics malware detection---was met at the pipeline and evidence level. Extraction, graph construction, manifests, models, and analyst-facing outputs are implemented. Full quantitative detection evaluation is partial because checkpoints and \texttt{results\_*.json} files were not archived; Chapter~\ref{ch:evaluation} states that boundary explicitly.
+The aim---to design and evaluate a graph-based deep learning pipeline for memory-forensics malware detection---was met at the pipeline and evidence level. Extraction, graph construction, manifests, models, leakage-control profiles, uncertainty diagnostics, and analyst-facing outputs are implemented. Full quantitative detection evaluation remains partial because the clean benign manifold is not yet available; Chapter~\ref{ch:evaluation} states that boundary explicitly.
 
 The work does not claim GNNs outperform all alternatives on all malware. It demonstrates feasibility, foregrounds benign-label uncertainty, and specifies the next experiments (grouped CV, tabular comparison, calibration plots).
 
@@ -30,8 +30,13 @@ The work does not claim GNNs outperform all alternatives on all malware. It demo
 \item Volatility~3 extraction workflow and artefact contracts;
 \item heterogeneous memory-snapshot graph schema;
 \item graph-level feature engineering linked to triage;
-\item GNN and tabular evaluation scripts with family-grouped CV;
+\item GNN training scripts (binary, one-class, and optional grouped CV);
 \item structured evidence and uncertainty reporting;
+\item governance-aware manifest fields for benign-subtype and training eligibility;
+\item graph-attribute leakage-control profiles for fairer binary-model ablations;
+\item calibrated abstention and gate-diagnosis scripts for review-routing analysis;
+\item attack-centred subgraph extraction support for hub-dominance experiments;
+\item conformal calibration hooks for controlled abstention studies;
 \item dataset manifest for reproducibility;
 \item optional dashboard upload-session scanning.
 \end{itemize}
@@ -40,7 +45,11 @@ The work does not claim GNNs outperform all alternatives on all malware. It demo
 
 \begin{itemize}
 \item Expand corpus with clean enterprise baselines and known-good capture times;
-\item Run and archive grouped CV for GIN/SAGE/GAT/GINE and tabular baselines; populate Table~\ref{tab:gnn_comparison};
+\item Add hard-benign admin and developer-workstation captures with \texttt{train\_eligible=True};
+\item Run full family-grouped CV for GIN/SAGE/GAT/GINE on a larger clean-benign corpus with dedicated GPU time;
+\item Compare \texttt{full}, \texttt{no\_manifest\_leakage}, and \texttt{structure\_only} graph-attribute profiles;
+\item Compare full-graph training with attack-centred subgraph training;
+\item Calibrate abstention thresholds on a held-out validation split and report review-routing rate;
 \item Add GNNExplainer \cite{ying2019gnnexplainer} or similar graph explanations;
 \item Test on families held out entirely from training;
 \item Improve label curation with analyst feedback on uncertain rows;
@@ -48,10 +57,16 @@ The work does not claim GNNs outperform all alternatives on all malware. It demo
 \item Compare against gradient boosting and operational EDR telemetry \cite{pedregosa2011sklearn}, \cite{ucci2019survey}.
 \end{itemize}
 
+\section{Longer-Term Research Direction}
+
+The final redesign work points beyond snapshot classification. A production-grade system would need temporal causal subgraphs, enterprise prevalence baselines, long-horizon host and user memory, campaign-scale correlation, and retrieval-assisted reasoning over previous benign and malicious workflows. Those components are outside the empirical scope of this dissertation, but they follow from the same central finding: isolated graph labels are too weak when benign and malicious behaviours overlap.
+
+The most realistic next research contribution is not a claim that one GNN architecture is best. It is an uncertainty-aware memory-forensics triage framework that separates clean benign training data, ambiguous controls, malware conformity, rule evidence, calibrated abstention, and analyst review.
+
 \section{Implications for Practice}
 
 Practitioners should treat HIGH or CRITICAL verdicts on benign-labelled baselines as expected when memory contains security tools or noisy host state. Workflow: acquire memory, run plugins, build graphs, inspect triage JSON, then use GNN scores as a secondary signal. Educators can use manifests and figures without requiring enterprise-scale labelled data.
 
 \section{Final Statement}
 
-Graph-based deep learning is a plausible direction for memory-forensics malware triage because system behaviour is relational. The strongest outcome of this project is a reproducible, explainable path from memory dump to evidence---with honest reporting that benign labels and triage signals often disagree. Detection metrics on the current corpus should support feasibility claims only until grouped benchmarks on larger data replace the placeholders in Chapter~\ref{ch:evaluation}.
+Graph-based deep learning is a plausible direction for memory-forensics malware triage because system behaviour is relational. The strongest outcome of this project is a reproducible, explainable path from memory dump to evidence---with honest reporting that benign labels and triage signals often disagree. The final implementation also adds the controls needed to study that disagreement: governance-aware manifests, leakage-aware features, calibrated abstention, and subgraph ablations. Detection metrics on the current corpus should support feasibility and triage-design claims only until larger, cleaner corpora enable fair backbone comparison and higher decisive coverage.

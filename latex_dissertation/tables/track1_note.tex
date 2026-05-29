@@ -1,0 +1,9 @@
+% Track 1: exploratory grouped CV — narrative only (no numeric results table)
+
+\subsection{Track 1: exploratory grouped cross-validation}
+
+\texttt{train.py} implements StratifiedGroupKFold evaluation by malware \texttt{family} for GIN, GraphSAGE, GAT, and GINE. This path was used during development to compare backbones and to stress-test training on large memory graphs.
+
+Experiments were run, but the outcome did not support a fair headline comparison within the project timeline. Training was slow on graphs above roughly 20{,}000 nodes; fold sizes were small; and benign labels remained noisy (most \texttt{NoVirus} rows are \texttt{ambiguous\_novirus\_control} with HIGH triage signals). Under these constraints, validation metrics were unstable and did not improve consistently with additional epochs.
+
+\textbf{What Track~1 contributed:} engineering experience with grouped splits, graph batching, and backbone wiring---not a reported model ranking. Multi-backbone grouped CV on a larger, cleaner corpus with dedicated GPU time is listed as future work (Chapter~7).

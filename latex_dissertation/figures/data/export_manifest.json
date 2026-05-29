@@ -1,0 +1,5 @@
+{
+  "source_manifest": "/Users/user/Documents/University/datasets/extracted_data/dataset_manifest.csv",
+  "n_rows": 30,
+  "data_dir": "latex_dissertation/figures/data"
+}

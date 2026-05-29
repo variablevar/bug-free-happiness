@@ -1,0 +1,104 @@
+{
+  "source": "two_model_analysis",
+  "schema_version": "2.2",
+  "samples": 43,
+  "review_routing_rate": 1.0,
+  "decisive_coverage": 0.0,
+  "uncertainty_gated": 43,
+  "gate_reason_counts": {
+    "binary_dual_disagreement": 42,
+    "low_dual_margin": 27,
+    "high_mc_dropout_variance": 15,
+    "dual_high_high_conflict": 1
+  },
+  "binary_p_malware": {
+    "p0": 0.897073,
+    "p25": 0.990541,
+    "p50": 0.999668,
+    "p75": 0.999886,
+    "p100": 0.999996
+  },
+  "dual_margin": {
+    "p0": 0.000591,
+    "p50": 0.079826,
+    "p100": 0.291558
+  },
+  "binary_dual_gap": {
+    "p0": 0.246527,
+    "p50": 0.526137,
+    "p100": 0.625966
+  },
+  "triage_state_counts": {
+    "needs_analyst_review": 43
+  },
+  "by_benign_subtype": {
+    "unknown": {
+      "n": 43,
+      "p_mal": {
+        "p0": 0.897073,
+        "p50": 0.999668,
+        "p100": 0.999996
+      },
+      "dual_margin": {
+        "p0": 0.000591,
+        "p50": 0.079826,
+        "p100": 0.291558
+      }
+    }
+  },
+  "benign_label_fp_process_hints": [
+    {
+      "process": "svchost.exe",
+      "count": 56
+    },
+    {
+      "process": "explorer.exe",
+      "count": 18
+    },
+    {
+      "process": "powershell.exe",
+      "count": 12
+    },
+    {
+      "process": "searchhost.exe",
+      "count": 10
+    },
+    {
+      "process": "onedrive.exe",
+      "count": 5
+    },
+    {
+      "process": "smartscreen.ex",
+      "count": 2
+    },
+    {
+      "process": "ntdll.dll",
+      "count": 1
+    },
+    {
+      "process": "msvcrt.dll",
+      "count": 1
+    },
+    {
+      "process": "msvcp_win.dll",
+      "count": 1
+    },
+    {
+      "process": "rpcrt4.dll",
+      "count": 1
+    },
+    {
+      "process": "searchui.exe",
+      "count": 1
+    },
+    {
+      "process": "msmpeng.exe",
+      "count": 1
+    },
+    {
+      "process": "msedgewebview2",
+      "count": 1
+    }
+  ],
+  "thresholds_from_summary": {}
+}

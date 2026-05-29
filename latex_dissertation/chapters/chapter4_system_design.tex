@@ -56,7 +56,7 @@ This hybrid design is practical. Rules are transparent and easy to inspect. GNN 
 
 \section{Dataset Manifest Design}
 
-The dataset manifest is the central dataset file. It links each graph folder to its label, family, graph counts, verdict fields, graph attributes, uncertainty status, and pipeline health fields. This supports reproducibility because a model run can be traced back to the exact folders and artefacts used \cite{goodman2016reproducibility}.
+The dataset manifest is the central dataset file. It links each graph folder to its label, family, graph counts, verdict fields, graph attributes, uncertainty status, governance fields, and pipeline health flags. The repository maintains manifests under both \texttt{extracted\_data} and \texttt{extracted\_csvs}; they share the same artefact contracts but differ in row count and labelling governance (Chapter~\ref{ch:methodology}, Table~\ref{tab:dual_corpus}). This supports reproducibility because a model run can be traced back to the exact folders and artefacts used \cite{goodman2016reproducibility}.
 
 The manifest also records whether graph creation, filtering, and analysis were successful. This prevents silent failures from being treated as valid training data. Table~\ref{tab:artefact_contracts} summarises key artefact contracts used across the pipeline.
 
@@ -64,18 +64,20 @@ The manifest also records whether graph creation, filtering, and analysis were s
 \centering
 \caption{Core artefact files and their role in the pipeline.}
 \label{tab:artefact_contracts}
-\small
-\begin{tabular}{p{3.4cm}p{2.4cm}p{6.2cm}}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth} >{\raggedright\arraybackslash}p{0.24\textwidth} >{\raggedright\arraybackslash}X@{}}
 \toprule
 \textbf{File} & \textbf{Producer} & \textbf{Purpose} \\
 \midrule
-\texttt{graph.pkl} & \texttt{build\_graph.py} & Canonical graph object for ML and analysis \\
-\texttt{filtered\_malicious.json} & \texttt{filter\_malicious.py} & Triage evidence and suspicious PID list \\
+\texttt{graph.pkl} & \texttt{build\_graph.py} & Canonical graph object for machine learning and analysis \\
+\texttt{filtered\_malicious.json} & \texttt{filter\_malicious.py} & Triage evidence and suspicious process identifier list \\
 \texttt{graph\_attr.json} & \texttt{build\_graph.py} & Graph-level attributes and label signals \\
 \texttt{analysis\_report.json} & \texttt{analyze\_graph.py} & Per-sample graph summary and attack chain \\
 \texttt{dataset\_manifest.csv} & \texttt{build\_dataset.py} & Dataset index for training and evaluation \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \section{Model Stack}
@@ -93,16 +95,17 @@ Figure~\ref{fig:two_model} shows how the two-model path combines conformity scor
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
-  node distance=1.1cm,
-  every node/.style={draw, rounded corners, align=center, font=\small, text width=2.8cm},
+  node distance=1.35cm and 2.2cm,
+  flowbox/.style={draw, rounded corners, align=center, font=\footnotesize,
+    minimum width=3.2cm, minimum height=1.05cm, inner sep=4pt},
   arrow/.style={-{Latex}, thick}
 ]
-\node (g) {Memory graph};
-\node (m) [below left=of g] {Malware conformity model};
-\node (b) [below right=of g] {Benign conformity model};
-\node (d) [below=1.4cm of g] {Delta and heuristic risk};
-\node (t) [below=of d] {Triage state};
-\node (e) [below=of t] {Evidence JSON and narrative};
+\node (g) [flowbox] {Memory graph};
+\node (m) [flowbox, below left=1.35cm and 2.4cm of g] {Malware\\conformity model};
+\node (b) [flowbox, below right=1.35cm and 2.4cm of g] {Benign\\conformity model};
+\node (d) [flowbox, below=1.6cm of g] {$\Delta$ score +\\heuristic risk};
+\node (t) [flowbox, below=of d] {Triage state};
+\node (e) [flowbox, below=of t] {Evidence JSON\\and narrative};
 \draw[arrow] (g) -- (m);
 \draw[arrow] (g) -- (b);
 \draw[arrow] (m) -- (d);
@@ -131,6 +134,20 @@ The triage layer and the GNN layer are connected but not identical. Triage rules
 \end{enumerate}
 
 This flexibility supports different organisational maturity levels. A lab may use rules only while collecting more data. A research team may enable GNN paths when checkpoints and manifests are stable.
+
+\section{Final Redesign Additions}
+
+The final implementation adds several controls around the original model stack. These additions do not change the basic memory-dump to graph pipeline. They make the pipeline more explicit about label quality, uncertainty, and feature leakage.
+
+First, the manifest now supports governance fields such as \texttt{benign\_subtype}, \texttt{label\_quality\_flag}, \texttt{label\_quality\_reason}, and \texttt{train\_eligible}. These fields separate clean benign data from ambiguous \texttt{NoVirus} controls. This distinction is important because a benign folder name is not the same as a clean enterprise baseline.
+
+Second, the training path can mask graph attributes that come directly from rule-based triage. The \texttt{no\_manifest\_leakage} profile keeps structural and graph-derived signals while suppressing manifest features such as maximum score, attack steps, injection counts, and C2 counts. This enables a fairer test of whether graph structure adds information beyond the triage layer.
+
+Third, the analysis path includes calibrated abstention modes. The legacy design could route all samples to analyst review when binary and dual one-class scores disagreed. The revised design keeps the safe analyst-review state but records the reason for abstention, supports threshold calibration, and allows gate-ablation experiments.
+
+Fourth, the graph loader can use an attack-centred subgraph view. This view extracts neighbourhoods around injection, credential-access, C2, persistence, LOLBin, and parent-child anomaly seeds. It is intended as an evaluation option for reducing memory-region and DLL hub dominance, not as a replacement for the full forensic graph.
+
+Finally, conformal-routing hooks and diagnosis scripts were added for dissertation evaluation. These support reproducible measurement of review routing, decisive coverage, and uncertainty geometry. They should be read as research instrumentation rather than a claim of production EDR readiness.
 
 \section{Dashboard and Operational Integration}
 

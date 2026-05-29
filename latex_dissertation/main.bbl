@@ -33,11 +33,12 @@ M.~Egele, T.~Scholte, E.~Kirda, and C.~Kruegel, ``A survey on automated dynamic
 
 \bibitem{mitre2026enterprise}
 {MITRE}, ``Mitre att\&ck enterprise matrix,'' \url{https://attack.mitre.org/},
-  2026.
+  2026, accessed: 28 May 2026.
 
 \bibitem{mitre2026t1055}
 ------, ``Process injection, technique t1055,''
-  \url{https://attack.mitre.org/techniques/T1055/}, 2026.
+  \url{https://attack.mitre.org/techniques/T1055/}, 2026, accessed: 28 May
+  2026.
 
 \bibitem{ligh2014art}
 M.~H. Ligh, A.~Case, J.~Levy, and A.~Walters, \emph{The Art of Memory
@@ -47,7 +48,7 @@ M.~H. Ligh, A.~Case, J.~Levy, and A.~Walters, \emph{The Art of Memory
 
 \bibitem{volatility3docs}
 {The Volatility Foundation}, ``Volatility 3 documentation,''
-  \url{https://volatility3.readthedocs.io/}, 2026.
+  \url{https://volatility3.readthedocs.io/}, 2026, accessed: 28 May 2026.
 
 \bibitem{russinovich2017internals1}
 M.~Russinovich, D.~A. Solomon, A.~Ionescu, and P.~Yosifovich, \emph{Windows
@@ -79,7 +80,8 @@ S.~N. Goodman, D.~Fanelli, and J.~P.~A. Ioannidis, ``What does research
 
 \bibitem{cisa2026advisories}
 ------, ``Malware analysis report resources,''
-  \url{https://www.cisa.gov/news-events/cybersecurity-advisories}, 2026.
+  \url{https://www.cisa.gov/news-events/cybersecurity-advisories}, 2026,
+  accessed: 28 May 2026.
 
 \bibitem{santos2009ngrams}
 I.~Santos, Y.~K. Penya, J.~Devesa, and P.~G. Bringas, ``N-grams-based file
@@ -120,7 +122,8 @@ K.~Kent, S.~Chevalier, T.~Grance, and H.~Dang, ``Guide to integrating forensic
 
 \bibitem{volatility3github}
 {The Volatility Foundation}, ``Volatility 3,''
-  \url{https://github.com/volatilityfoundation/volatility3}, 2026.
+  \url{https://github.com/volatilityfoundation/volatility3}, 2026, accessed: 28
+  May 2026.
 
 \bibitem{case2017memory}
 A.~Case and G.~G. Richard, ``Memory forensics: The path forward,''
@@ -138,7 +141,7 @@ M.~Russinovich, A.~Ionescu, D.~A. Solomon, and P.~Yosifovich, \emph{Windows
 \bibitem{microsoft2026windowsinternals}
 {Microsoft}, ``Windows internals documentation,''
   \url{https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals},
-  2026.
+  2026, accessed: 28 May 2026.
 
 \bibitem{graziano2013hypervisor}
 M.~Graziano, A.~Lanzi, and D.~Balzarotti, ``Hypervisor memory forensics,'' in
@@ -161,7 +164,8 @@ B.~Carrier, \emph{File System Forensic Analysis}.\hskip 1em plus 0.5em minus
 
 \bibitem{mitre2026t1486}
 {MITRE}, ``Data encrypted for impact, technique t1486,''
-  \url{https://attack.mitre.org/techniques/T1486/}, 2026.
+  \url{https://attack.mitre.org/techniques/T1486/}, 2026, accessed: 28 May
+  2026.
 
 \bibitem{perozzi2014deepwalk}
 B.~Perozzi, R.~Al-Rfou, and S.~Skiena, ``Deepwalk: Online learning of social
@@ -235,6 +239,10 @@ H.~Dai, H.~Li, T.~Tian, X.~Huang, L.~Wang, J.~Zhu, and L.~Song, ``Adversarial
   Conference on Machine Learning}, pp. 1115--1124, 2018, foundational graph
   attack; cited for threat model.
 
+\bibitem{wu2023gnnsecurity}
+H.~Wu \emph{et~al.}, ``Graph neural networks in cybersecurity: A survey,''
+  \emph{ACM Computing Surveys}, vol.~56, no.~4, pp. 1--35, 2023.
+
 \bibitem{sommer2010outside}
 R.~Sommer and V.~Paxson, ``Outside the closed world: On using machine learning
   for network intrusion detection,'' in \emph{Proceedings of the IEEE Symposium
@@ -307,9 +315,14 @@ A.~Paszke \emph{et~al.}, ``Pytorch: An imperative style, high-performance deep
   learning library,'' in \emph{Advances in Neural Information Processing
   Systems}, vol.~32, 2019.
 
+\bibitem{pytorchdocs2026}
+{PyTorch Foundation}, ``Pytorch documentation,''
+  \url{https://pytorch.org/docs/stable/index.html}, 2026, accessed: 28 May
+  2026.
+
 \bibitem{pygdocs2026}
 {PyTorch Geometric Team}, ``Pytorch geometric documentation,''
-  \url{https://pytorch-geometric.readthedocs.io/}, 2026.
+  \url{https://pytorch-geometric.readthedocs.io/}, 2026, accessed: 28 May 2026.
 
 \bibitem{pedregosa2011sklearn}
 F.~Pedregosa \emph{et~al.}, ``Scikit-learn: Machine learning in python,''
@@ -330,16 +343,27 @@ A.~Hagberg, P.~Swart, and D.~S. Chult, ``Exploring network structure, dynamics,
 
 \bibitem{fastapi2026docs}
 {FastAPI}, ``Fastapi documentation,'' \url{https://fastapi.tiangolo.com/},
-  2026.
+  2026, accessed: 28 May 2026.
 
-\bibitem{sculley2015debt}
-D.~Sculley \emph{et~al.}, ``Hidden technical debt in machine learning
-  systems,'' in \emph{Advances in Neural Information Processing Systems},
-  vol.~28, 2015.
+\bibitem{mcafee2016cerber}
+{McAfee Labs}, ``Cerber ransomware evades detection with many components,''
+  \url{https://www.mcafee.com/blogs/other-blogs/mcafee-labs/cerber-ransomware-evades-detection-with-many-components/},
+  2016.
 
-\bibitem{pytorchdocs2026}
-{PyTorch Foundation}, ``Pytorch documentation,''
-  \url{https://pytorch.org/docs/stable/index.html}, 2026.
+\bibitem{malwiki2026locky}
+{Malware Wiki}, ``Locky,'' \url{https://www.malwiki.org/index.php/Locky}, 2026,
+  accessed: 28 May 2026.
+
+\bibitem{malvol2025londonmet}
+M.~Al-Saleh \emph{et~al.}, ``Malvol-25: A diverse, labelled and detailed
+  malware volatile memory dataset for detection and response testing and
+  validation,'' \url{https://repository.londonmet.ac.uk/10786/}, London
+  Metropolitan University, Tech. Rep., 2025.
+
+\bibitem{mandiant2017wannacry}
+{Mandiant / Google Cloud}, ``Wannacry malware profile,''
+  \url{https://cloud.google.com/blog/topics/threat-intelligence/wannacry-malware-profile},
+  2017.
 
 \bibitem{nist2020sp80053}
 {National Institute of Standards and Technology}, ``Security and privacy
@@ -347,8 +371,9 @@ D.~Sculley \emph{et~al.}, ``Hidden technical debt in machine learning
   Standards and Technology, Tech. Rep. Special Publication 800-53 Revision 5,
   2020.
 
-\bibitem{wu2023gnnsecurity}
-H.~Wu \emph{et~al.}, ``Graph neural networks in cybersecurity: A survey,''
-  \emph{ACM Computing Surveys}, vol.~56, no.~4, pp. 1--35, 2023.
+\bibitem{sculley2015debt}
+D.~Sculley \emph{et~al.}, ``Hidden technical debt in machine learning
+  systems,'' in \emph{Advances in Neural Information Processing Systems},
+  vol.~28, 2015.
 
 \end{thebibliography}

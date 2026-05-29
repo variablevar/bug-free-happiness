@@ -10,7 +10,7 @@ I also learned that dissertation scope must match the evidence. The project cont
 
 The most difficult technical challenge was joining many Volatility outputs into one stable graph. Each plugin gives different columns and different levels of detail. The graph builder had to handle missing files, different object types, and noisy evidence. This taught me that cybersecurity machine learning depends strongly on data engineering \cite{sculley2015debt}.
 
-Another challenge was uncertainty. Some NoVirus samples had suspicious features and HIGH or CRITICAL verdicts. Instead of ignoring this, the project records uncertainty in the manifest. This is a more honest approach and fits real forensic work, where evidence is often mixed.
+Another challenge was uncertainty. Some NoVirus samples had suspicious features and HIGH or CRITICAL verdicts. Instead of ignoring this, the project records uncertainty in the manifest---15/15 on the descriptive corpus, all benign rows on the ML corpus. Track~1 grouped CV was run during development but not reported numerically because fold metrics were unstable and labels too noisy for a fair backbone comparison. The honest outcome on Track~2/3 was abstention-first triage: binary saturation and analyst-review routing rather than inflated detection scores.
 
 Graph-size variation was also difficult for training. A graph with fewer than 200 nodes and a graph with more than 25,000 nodes appear in the same dataset. This required careful batching and realistic expectations about model stability on small data.
 
@@ -38,7 +38,7 @@ Through this project I developed practical skills in Volatility-based artefact i
 
 \section{What I Would Do Differently}
 
-If starting again, I would collect more clean benign baselines from known-good enterprise images and document acquisition timing for every dump. I would also archive trained checkpoints with manifest version IDs from the first successful training run. That would make Chapter~\ref{ch:evaluation} stronger because model metrics could be reported alongside corpus statistics.
+If starting again, I would collect more clean benign baselines from known-good enterprise images and document acquisition timing for every dump. I would also archive trained checkpoints with manifest version IDs from the first successful training run on \textbf{both} \texttt{extracted\_data} and \texttt{extracted\_csvs}. That would make Chapter~\ref{ch:evaluation} stronger because model metrics could be traced to exact manifest snapshots.
 
 Finally, I would add automated grouped cross-validation scripts earlier in the project. This would reduce the risk of optimistic results when related family folders leak between train and test splits.
 

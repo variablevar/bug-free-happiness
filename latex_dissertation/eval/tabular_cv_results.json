@@ -1,0 +1,147 @@
+{
+  "manifest": "/Users/user/Documents/University/datasets/extracted_data/dataset_manifest.csv",
+  "n_samples": 30,
+  "n_splits": 5,
+  "seed": 42,
+  "group_by": "family",
+  "exclude_uncertain": false,
+  "feature_cols": [
+    "nodes",
+    "edges",
+    "max_score",
+    "attack_steps",
+    "injections",
+    "c2_conns",
+    "signal_behavioural_suspects_found",
+    "signal_lolbin_c2_found",
+    "signal_ransom_note_found",
+    "signal_rwx_injections",
+    "signal_hidden_processes",
+    "signal_top_suspect_score",
+    "signal_num_attack_motifs"
+  ],
+  "models": {
+    "logistic_regression": {
+      "folds": [
+        {
+          "fold": 0,
+          "precision": 0.5,
+          "recall": 0.6666666666666666,
+          "f1": 0.5714285714285714,
+          "accuracy": 0.5,
+          "roc_auc": 0.5555555555555556,
+          "n_test": 6
+        },
+        {
+          "fold": 1,
+          "precision": 0.5,
+          "recall": 0.6666666666666666,
+          "f1": 0.5714285714285714,
+          "accuracy": 0.5,
+          "roc_auc": 0.33333333333333337,
+          "n_test": 6
+        },
+        {
+          "fold": 2,
+          "precision": 0.5,
+          "recall": 0.3333333333333333,
+          "f1": 0.4,
+          "accuracy": 0.5,
+          "roc_auc": 0.4444444444444444,
+          "n_test": 6
+        },
+        {
+          "fold": 3,
+          "precision": 0.5,
+          "recall": 0.3333333333333333,
+          "f1": 0.4,
+          "accuracy": 0.5,
+          "roc_auc": 0.5555555555555556,
+          "n_test": 6
+        },
+        {
+          "fold": 4,
+          "precision": 0.5,
+          "recall": 0.3333333333333333,
+          "f1": 0.4,
+          "accuracy": 0.5,
+          "roc_auc": 0.5555555555555556,
+          "n_test": 6
+        }
+      ],
+      "summary": {
+        "precision_mean": 0.5,
+        "precision_std": 0.0,
+        "recall_mean": 0.4666666666666666,
+        "recall_std": 0.1632993161855452,
+        "f1_mean": 0.4685714285714285,
+        "f1_std": 0.08398250546685179,
+        "accuracy_mean": 0.5,
+        "accuracy_std": 0.0,
+        "roc_auc_mean": 0.48888888888888893,
+        "roc_auc_std": 0.0888888888888889
+      }
+    },
+    "random_forest": {
+      "folds": [
+        {
+          "fold": 0,
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1": 0.6666666666666666,
+          "accuracy": 0.6666666666666666,
+          "roc_auc": 0.7777777777777778,
+          "n_test": 6
+        },
+        {
+          "fold": 1,
+          "precision": 0.6,
+          "recall": 1.0,
+          "f1": 0.75,
+          "accuracy": 0.6666666666666666,
+          "roc_auc": 1.0,
+          "n_test": 6
+        },
+        {
+          "fold": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1": 0.5,
+          "accuracy": 0.6666666666666666,
+          "roc_auc": 0.3333333333333333,
+          "n_test": 6
+        },
+        {
+          "fold": 3,
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1": 0.6666666666666666,
+          "accuracy": 0.6666666666666666,
+          "roc_auc": 0.7777777777777778,
+          "n_test": 6
+        },
+        {
+          "fold": 4,
+          "precision": 0.5,
+          "recall": 0.6666666666666666,
+          "f1": 0.5714285714285714,
+          "accuracy": 0.5,
+          "roc_auc": 0.6666666666666667,
+          "n_test": 6
+        }
+      ],
+      "summary": {
+        "precision_mean": 0.6866666666666666,
+        "precision_std": 0.16812693617224655,
+        "recall_mean": 0.6666666666666666,
+        "recall_std": 0.21081851067789195,
+        "f1_mean": 0.6309523809523808,
+        "f1_std": 0.08650429583135691,
+        "accuracy_mean": 0.6333333333333333,
+        "accuracy_std": 0.06666666666666665,
+        "roc_auc_mean": 0.711111111111111,
+        "roc_auc_std": 0.21773242158072695
+      }
+    }
+  }
+}

@@ -21,13 +21,34 @@ Each stage produces files with defined contracts. This reduces silent errors and
 
 \section{Data Sources}
 
-The main dataset is stored under the project \texttt{extracted\_data} folder. The dataset manifest contains 30 rows. These rows represent malware-labelled and benign-labelled graph samples. The manifest includes fields such as sample ID, folder, label, family, node count, edge count, maximum score, attack steps, injection counts, C2 connection counts, verdict, graph attributes, label signals, uncertainty status, and pipeline health flags.
+The dissertation uses \textbf{two manifest views} over the same pipeline artefacts. Both share file contracts (\texttt{graph.pkl}, \texttt{graph\_attr.json}, \texttt{analysis\_report.json}) but differ in sample count and labelling governance. Table~\ref{tab:dual_corpus} summarises their roles.
 
-The families and sample names include examples such as Cerber, Dharma, GandCrab, GoldenEye, WannaCry, PowerLoader, RedTail, Win32.BlackWorm, W32.MyDoom.A, and others. These names show the dataset has malware-family variety, but the dissertation does not treat one malware type as the full topic.
+\begin{table}[htbp]
+\centering
+\caption{Dual corpus used in this dissertation.}
+\label{tab:dual_corpus}
+\small
+\begin{tabular}{p{2.4cm}p{3.2cm}cp{4.8cm}}
+\toprule
+\textbf{Corpus} & \textbf{Manifest path} & \textbf{$n$} & \textbf{Primary use} \\
+\midrule
+Descriptive & \texttt{extracted\_data/} & 30 & Figures, case studies, tabular baselines (reference) \\
+ML evaluation & \texttt{extracted\_csvs/} & 43 & Tracks~2/3 training and inference tables \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-The corpus uses paired folders: \texttt{Family-WithVirus} and \texttt{Family-NoVirus}. This pairing supports controlled comparison within the same malware family context. It also highlights label difficulty when benign baselines still contain suspicious indicators.
+\textbf{Descriptive corpus (\texttt{extracted\_data}, $n{=}30$).}
+Fifteen malware families each contribute one \texttt{WithVirus} and one \texttt{NoVirus} row (Cerber, Dharma, GandCrab, GoldenEye, WannaCry, PowerLoader, RedTail, Win32.BlackWorm, W32.MyDoom.A., and others). The manifest records sample ID, folder, label, family, graph size, triage verdicts, injection and C2 counts, graph attributes, uncertainty status, and pipeline health flags. On this corpus, \textbf{all 15} benign-labelled rows are \texttt{uncertain=True} in the manifest (including W32.MyDoom.A.-NoVirus, which still reports LOW triage verdicts but is tagged \texttt{ambiguous\_novirus\_control}).
 
-The manifest also shows a key issue. Some NoVirus rows are marked as uncertain because they contain high or critical suspicious signals. In total, 14 of 15 benign-labelled rows are flagged uncertain in the current manifest. This does not mean the pipeline failed. It means benign baselines can contain suspicious-looking memory artefacts. The project handles this by recording uncertainty instead of hiding it.
+\textbf{ML evaluation corpus (\texttt{extracted\_csvs}, $n{=}43$).}
+This expanded manifest retains the paired family rows and adds further samples (numeric family identifiers such as \texttt{3340\_*}, additional NoVirus captures, and \texttt{pat-2009-11-24-WithVirus}). It includes governance fields: \texttt{benign\_subtype} (\texttt{clean\_benign}, \texttt{hard\_benign\_admin\_tooling}, or \texttt{ambiguous\_novirus\_control}), \texttt{train\_eligible}, \texttt{label\_quality\_flag}, and \texttt{label\_quality\_reason}. At dissertation writing time, benign rows are predominantly \texttt{ambiguous\_novirus\_control} with \texttt{train\_eligible=False}; \textbf{22 of 22} benign-labelled rows are uncertain. This corpus is the authoritative source for Track~2/3 metrics in Chapter~\ref{ch:evaluation}.
+
+Paired \texttt{WithVirus}/\texttt{NoVirus} folders support within-family comparison but are not a substitute for clean enterprise baselines. The project records label difficulty rather than hiding it \cite{goodman2016reproducibility}.
+
+Table~\ref{tab:malware_family_taxonomy} summarises the threat taxonomy of the fifteen paired families. Most samples are ransomware or worms; \texttt{dllhijacking} denotes an attack-technique scenario rather than a named malware family. This diversity supports graph-level evaluation across encryption, propagation, loader, and mining behaviours, while the dissertation topic remains general memory-forensics graph learning rather than ransomware-only detection.
+
+\input{tables/malware_family_taxonomy.tex}
 
 \section{Volatility 3 Extraction}
 
@@ -149,46 +170,54 @@ Graph-level readout uses multiple pooling operations (mean, max, and sum). The p
 
 \section{Evaluation Method}
 
-The evaluation is based on available project artefacts. The manifest records graph sizes, labels, verdicts, suspicious counts, and uncertainty fields. The analysis JSON files record graph summaries and evidence. The dissertation discusses these outputs carefully and avoids claiming production-level performance.
-
-Important evaluation concerns are:
+Evaluation is organised in three tracks plus a reference tabular baseline. The dissertation avoids claiming production-level detection performance on either corpus \cite{sommer2010outside}, \cite{apruzzese2023sok}.
 
 \begin{itemize}
-\item small corpus size (30 graphs),
-\item possible family leakage,
-\item noisy benign baselines,
-\item uncertain labels,
-\item memory acquisition timing,
-\item plugin output variation,
-\item calibration quality,
-\item explainability needs.
+\item \textbf{Track~1} (\texttt{train.py}): exploratory StratifiedGroupKFold by \texttt{family} for GIN, GraphSAGE, GAT, and GINE. Used during development; \textbf{no numeric backbone ranking} is reported (Chapter~\ref{ch:evaluation}).
+\item \textbf{Track~2} (\texttt{train\_binary\_model.py}, \texttt{analyze\_binary\_model.py}): calibrated binary GINE on \texttt{extracted\_csvs} with strict train filters, temperature scaling, and graph-attribute profiles (including \texttt{no\_manifest\_leakage}).
+\item \textbf{Track~3} (\texttt{train\_malware\_model.py}, \texttt{train\_benign\_model.py}, \texttt{analyze\_two\_model.py}): malware and benign one-class conformity with fusion, calibrated abstention, and analyst-review states \cite{ruff2018deep}, \cite{guo2017calibration}.
+\item \textbf{Tabular baselines} (\texttt{tabular\_baselines.py}): logistic regression and random forest on manifest graph-level features---\textbf{reference-only} on the descriptive corpus ($n{=}30$), not the primary ML comparison set.
 \end{itemize}
 
-Where classification metrics are reported, the project uses standard definitions. Precision is true positives divided by predicted positives. Recall is true positives divided by actual positives. F1 is the harmonic mean of precision and recall \cite{davis2006roc}. Calibration quality is discussed using reliability concepts from Guo et al.\ \cite{guo2017calibration}.
+Important evaluation concerns apply to \textbf{both} corpora:
 
-Grouped cross-validation is important because samples from the same family can be similar. If related samples appear in both training and test folds, the result can be too optimistic \cite{sommer2010outside}. Family-grouped splits are therefore the recommended evaluation setting for any future model benchmarking on this corpus.
+\begin{itemize}
+\item small $n$ (30 descriptive, 43 ML) with high variance under grouped splits;
+\item family leakage if folds are not grouped by \texttt{family};
+\item benign labels dominated by \texttt{ambiguous\_novirus\_control} and HIGH/CRITICAL triage;
+\item rule-derived graph attributes coupling triage rules to learning;
+\item calibration and abstention behaviour (review routing vs decisive coverage);
+\item explainability needs for analyst-facing outputs \cite{doshi2017interpretable}.
+\end{itemize}
+
+Where classification metrics are reported, the project uses standard definitions \cite{davis2006roc}. Calibration is discussed using reliability concepts from Guo et al.\ \cite{guo2017calibration}. Family-grouped splits remain the recommended setting for any future benchmarking \cite{sommer2010outside}.
 
 \section{Ethics}
 
-Malware research must be handled safely. The project does not include malware binaries in the written dissertation. Memory dumps and extracted artefacts may contain sensitive system information. Therefore, raw memory data should be stored securely, shared only when allowed, and anonymised where possible. The research should follow university ethics guidance and legal rules, including guidance from standards such as ISO/IEC 27037 \cite{iso2012digital} and NIST incident response guidelines \cite{nist2012sp80061}.
+Malware research must be handled safely. The project does not include malware binaries in the written dissertation. Memory dumps and extracted artefacts may contain sensitive system information. Therefore, raw memory data should be stored securely, shared only when allowed, and anonymised where possible. The research should follow university ethics guidance and legal rules, including guidance from standards such as ISO/IEC 27037 \cite{iso2012digital}, NIST incident response guidelines \cite{nist2012sp80061}, and security control catalogues such as NIST SP~800-53 \cite{nist2020sp80053}.
 
 The written dissertation focuses on methods, aggregated statistics, and anonymised examples. It avoids publishing credentials, personal data, or live command lines that could identify individuals or organisations.
 
 \section{Data Collection and Sample Selection}
 
-Each sample in the corpus corresponds to a memory-forensics workspace folder under \texttt{extracted\_data}. The folder naming pattern encodes both family and infection condition. A \texttt{WithVirus} folder is treated as malware-labelled. A \texttt{NoVirus} folder is treated as benign-labelled for experiments, while still allowing uncertain flags when triage signals are strong.
+Each sample corresponds to a memory-forensics workspace folder under \texttt{extracted\_data} and/or \texttt{extracted\_csvs}. The folder naming pattern encodes family and infection condition: \texttt{WithVirus} $\rightarrow$ malware-labelled (label~1), \texttt{NoVirus} $\rightarrow$ benign-labelled (label~0), with uncertain flags when triage signals are strong.
 
-This pairing supports within-family comparison. For example, Cerber-WithVirus and Cerber-NoVirus share family context but may differ in process, memory, and network graphs. Such pairs are useful for error analysis because they show whether graph features capture infection-specific changes or only host-specific noise.
+The descriptive corpus selects 15 paired families with complete pipeline outputs (all 30 rows report \texttt{filter\_ok}, \texttt{graph\_ok}, \texttt{analyze\_ok}). The ML corpus adds rows that passed the same health checks but may use different family identifiers (numeric host IDs, repeated captures). Sample selection was driven by availability of complete artefacts, not by operational prevalence.
 
-Sample selection was driven by availability of complete pipeline outputs. Rows with failed graph or analysis stages would be excluded from training. In the current manifest, all 30 rows report successful filter, graph, and analysis stages.
+Within-family pairs (e.g.\ Cerber-WithVirus vs Cerber-NoVirus) support error analysis: they reveal whether graph features capture infection-specific change or only shared suspicious host noise.
 
 \section{Labelling Policy and Uncertainty Handling}
 
-The project uses folder naming as the primary label source. This is simple and reproducible, but it is not perfect. Rule-based triage can assign HIGH or CRITICAL verdicts to NoVirus samples when suspicious artefacts appear in baseline memory.
+The project uses folder naming as the primary label source. Rule-based triage can assign HIGH or CRITICAL verdicts to NoVirus samples when suspicious artefacts appear in baseline memory.
 
-The manifest therefore includes \texttt{uncertain} and \texttt{uncertain\_reason} fields. Typical reasons include \texttt{benign\_with\_high\_or\_critical\_verdict} and \texttt{benign\_with\_high\_process\_score}. This policy follows the idea that label quality should be reported rather than hidden \cite{goodman2016reproducibility}.
+The manifest records:
+\begin{itemize}
+\item \texttt{uncertain} and \texttt{uncertain\_reason} (e.g.\ \texttt{ambiguous\_novirus\_control} on the ML corpus);
+\item \texttt{benign\_subtype} to separate \texttt{clean\_benign}, \texttt{hard\_benign\_admin\_tooling}, and \texttt{ambiguous\_novirus\_control};
+\item \texttt{train\_eligible} and \texttt{label\_quality\_flag} for strict training filters.
+\end{itemize}
 
-For model training, uncertain benign rows can be handled in several ways: keep them as benign with sample weights, exclude them from training, or treat them as a third ambiguity class at inference time. The repository supports analyst-review states in the two-model analysis path so that these rows are not forced into a false sense of certainty.
+Strict binary and benign one-class training expects \texttt{clean\_benign} or explicitly curated hard-benign rows. Training on \texttt{ambiguous\_novirus\_control} alone is a \textbf{stress test}, not a claim of clean benign manifold learning. The two-model path issues \texttt{needs\_analyst\_review} when scores overlap, rather than forcing a binary verdict \cite{goodman2016reproducibility}.
 
 \section{Detailed Feature Groups}
 
@@ -200,9 +229,14 @@ For model training, uncertain benign rows can be handled in several ways: keep t
 
 \section{Training and Validation Protocol}
 
-The binary trainer uses a train-validation split with class-weight adjustment and early stopping. Positive-class weight can be tuned manually or through a small sweep when validation recall is below a target. This is useful when false negatives are more costly than false positives.
+\textbf{Track~2 (binary).}
+Training uses a hold-out validation split with class-weight adjustment, early stopping, and temperature scaling on the validation fold. The strict train filter excludes non-eligible benign rows when configured. Graph-attribute profile \texttt{no\_manifest\_leakage} masks rule-derived manifest fields (max score, attack steps, injection/C2 counts) to test whether structure adds signal beyond triage heuristics.
 
-Grouped validation by \texttt{family} is the recommended setting for this corpus. A random split could place both Cerber-WithVirus and Cerber-NoVirus in different folds in unlucky ways, but family grouping reduces leakage more directly. Future work should report both random and grouped metrics to show how optimistic standard splits can be \cite{sommer2010outside}.
+\textbf{Track~3 (two-model).}
+Malware and benign one-class encoders are trained separately; \texttt{analyze\_two\_model.py} fuses conformity scores with binary probability and heuristic risk. Abstention mode \texttt{calibrated} records gate reasons (variance, margin, disagreement) and supports gate-ablation via \texttt{evaluate.py}.
+
+\textbf{Track~1 (exploratory).}
+Grouped validation by \texttt{family} is the recommended setting when reporting multi-backbone CV in future work \cite{sommer2010outside}. This dissertation does not publish Track~1 fold metrics because fold sizes were too small and labels too noisy for a fair ranking.
 
 \section{Threats to Validity}
 
@@ -212,7 +246,7 @@ Grouped validation by \texttt{family} is the recommended setting for this corpus
 
 \textbf{Construct validity.} Folder labels may not perfectly match ground truth infection state. Uncertainty flags make this explicit.
 
-\textbf{Conclusion validity.} With only 30 graphs, strong claims about SOTA detection performance are not justified. The dissertation focuses on pipeline feasibility and evidence quality instead.
+\textbf{Conclusion validity.} With only 30 descriptive and 43 ML graphs---and no clean benign manifold in strict training---strong claims about state-of-the-art detection performance are not justified. The dissertation focuses on pipeline feasibility, triage behaviour, and evidence quality instead.
 
 \section{Research Timeline and Artefact Milestones}
 

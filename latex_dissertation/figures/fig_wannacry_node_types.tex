@@ -1,0 +1,27 @@
+\IfFileExists{figures/data/values_wannacry.tex}{%
+\input{figures/data/values_wannacry.tex}
+\begin{tikzpicture}[x=0.09cm, y=0.5cm, font=\small]
+\draw[->] (0,0.2) -- (92,0.2);
+\node[font=\footnotesize, anchor=north] at (46,0.05) {Share (\%)};
+\foreach \typ/\pct [count=\i from 0] in \BarRows {
+  \pgfmathparse{int(\pct)>0 ? 1 : 0}
+  \ifnum\pgfmathresult=1
+  \pgfmathsetmacro{\y}{-\i}
+  \draw[fill=benignblue!70, draw=black, line width=0.25pt]
+    (0,\y-0.38) rectangle (\pct,\y);
+  \node[anchor=east, font=\footnotesize] at (-0.2,\y-0.19) {\typ};
+  \fi
+}
+\end{tikzpicture}
+}{%
+\begin{tabular}{lr}
+\toprule
+\textbf{Node type} & \textbf{Approx. share} \\
+\midrule
+Memory regions & 81\% \\
+Threads & 8\% \\
+DLLs & 7\% \\
+Other node types & 4\% \\
+\bottomrule
+\end{tabular}
+}

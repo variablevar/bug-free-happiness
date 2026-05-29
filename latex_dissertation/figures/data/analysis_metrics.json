@@ -1,0 +1,16 @@
+{
+  "binary_model": {
+    "samples": 28,
+    "decisive_coverage": 1.0,
+    "abstention_coverage": 0.0,
+    "review_routing_rate": 0.0,
+    "uncertain_benign_abstention_rate": 0.0
+  },
+  "two_model": {
+    "samples": 28,
+    "decisive_coverage": 0.0,
+    "abstention_coverage": 1.0,
+    "review_routing_rate": 0.964286,
+    "uncertain_benign_review_rate": 1.0
+  }
+}

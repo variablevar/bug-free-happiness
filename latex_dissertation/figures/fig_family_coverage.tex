@@ -1,0 +1,24 @@
+\IfFileExists{figures/data/values_family.tex}{%
+\input{figures/data/values_family.tex}
+\vspace{0.25em}
+\noindent
+{\small\textbf{\FamilyN\ malware families} --- \FamilyCount\ manifest rows each
+(paired \texttt{WithVirus} / \texttt{NoVirus}).}
+\vspace{0.5em}
+
+\noindent
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.31\linewidth}
+                 >{\raggedright\arraybackslash}p{0.31\linewidth}
+                 >{\raggedright\arraybackslash}p{0.31\linewidth}@{}}
+\IfFileExists{figures/data/family_grid.tex}{\input{figures/data/family_grid.tex}}{}
+\end{tabular}
+}{%
+\begin{tabular}{lr}
+\toprule
+\textbf{Family coverage} & \textbf{Rows} \\
+\midrule
+Fifteen paired families & 30 \\
+Rows per family & 2 \\
+\bottomrule
+\end{tabular}
+}

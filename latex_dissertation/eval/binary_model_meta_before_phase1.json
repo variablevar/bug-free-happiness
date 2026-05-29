@@ -1,0 +1,22 @@
+{
+  "manifest": "extracted_csvs/dataset_manifest.csv",
+  "base_dir": "extracted_csvs",
+  "exclude_uncertain": false,
+  "n_train": 42,
+  "n_val": 10,
+  "n_train_benign": 24,
+  "n_train_malware": 18,
+  "pos_weight": 1.3333333333333333,
+  "best_val_f1": 0.75,
+  "temperature": 2.1246161460876465,
+  "val_nll_before": 0.3163771629333496,
+  "val_nll_after": 0.2598506510257721,
+  "val_brier_raw": 0.10906543582677841,
+  "val_brier_cal": 0.09034229815006256,
+  "val_ece_raw": 0.1331943690776825,
+  "val_ece_cal": 0.11860453486442567,
+  "val_ks": 0.75,
+  "val_auroc": 0.8541666666666666,
+  "threshold_low": 0.6172480305433273,
+  "threshold_high": 0.6192480305433273
+}

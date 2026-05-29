@@ -1,0 +1,37 @@
+\input{figures/data/values_graph_scale.tex}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[font=\small, x=1cm, y=1cm]
+\foreach \y/\lbl in \GraphGrid {
+  \draw[gray!50] (0.15,\y) -- (5.5,\y);
+  \node[font=\footnotesize, anchor=east] at (0.12,\y) {\lbl};
+}
+\draw[->] (0.15,0) -- (0.15,\GraphPlotH);
+\draw[->] (0.15,0) -- (5.55,0);
+\node[anchor=east, rotate=90, font=\small] at (-0.02,0.5*\GraphPlotH) {Count (log scale)};
+\node at (1.55,-0.5) {Nodes};
+\node at (4.05,-0.5) {Edges};
+\foreach \y [count=\i] in \NodesBenignY {
+  \pgfmathsetmacro{\dx}{mod(\i-1,2)==0 ? 0.08 : -0.08}
+  \fill[benignblue] (1.55+\dx,\y) circle (1.6pt);
+}
+\foreach \y [count=\i] in \NodesMalwareY {
+  \pgfmathsetmacro{\dx}{mod(\i-1,2)==0 ? 0.08 : -0.08}
+  \fill[malwarered] (2.15+\dx,\y) circle (1.6pt);
+}
+\foreach \y [count=\i] in \EdgesBenignY {
+  \pgfmathsetmacro{\dx}{mod(\i-1,2)==0 ? 0.08 : -0.08}
+  \fill[benignblue] (4.05+\dx,\y) circle (1.6pt);
+}
+\foreach \y [count=\i] in \EdgesMalwareY {
+  \pgfmathsetmacro{\dx}{mod(\i-1,2)==0 ? 0.08 : -0.08}
+  \fill[malwarered] (4.65+\dx,\y) circle (1.6pt);
+}
+\node[font=\footnotesize, anchor=west] at (5.65,0.35) {Benign};
+\node[font=\footnotesize, anchor=west] at (5.65,0.15) {Malware};
+\fill[benignblue] (5.48,0.32) circle (1.6pt);
+\fill[malwarered] (5.48,0.12) circle (1.6pt);
+\end{tikzpicture}
+\caption{Node and edge counts by manifest label ($n{=}30$). Each dot is one sample; the MyDoom pair appears at the low-count end.}
+\label{fig:graph_scale}
+\end{figure}

@@ -1,0 +1,22 @@
+\IfFileExists{figures/data/values_binary_triage.tex}{%
+\input{figures/data/values_binary_triage.tex}
+\begin{tikzpicture}[x=1cm, y=1cm, font=\small]
+\pgfmathsetmacro{\maxcnt}{1}
+\foreach \lbl/\cnt in \BarRows { \pgfmathsetmacro{\maxcnt}{max(\maxcnt,\cnt)} }
+\pgfmathsetmacro{\barW}{9.0/\maxcnt}
+\pgfmathsetmacro{\chartH}{max(1.15, 0.95)}
+\draw[->] (-0.05,0) -- (-0.05,\chartH);
+\draw[->] (0,0) -- (9.6,0);
+\node[anchor=east, rotate=90] at (-0.35,0.5*\chartH) {Samples};
+\foreach \lbl/\cnt [count=\i] in \BarRows {
+  \pgfmathsetmacro{\y}{(\i-1)*0.95}
+  \pgfmathsetmacro{\bw}{\cnt*\barW}
+  \draw[fill=benignblue!75, draw=black!60, line width=0.3pt]
+    (0,\y) rectangle (\bw,\y+0.72);
+  \node[anchor=west, font=\small] at (0.14,\y+0.36) {\lbl};
+  \node[anchor=east, font=\small\bfseries] at (\bw-0.14,\y+0.36) {\cnt};
+}
+\end{tikzpicture}
+}{%
+\fbox{\parbox{0.55\textwidth}{\centering\small Run \texttt{export\_dissertation\_figure\_data.py} after binary analysis.}}%
+}

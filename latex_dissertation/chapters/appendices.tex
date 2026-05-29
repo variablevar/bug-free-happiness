@@ -17,6 +17,9 @@
 \texttt{dataset\_manifest.csv} & Dataset index used for training and evaluation \\
 \texttt{*.pt} model files & Saved PyTorch model checkpoints \\
 \texttt{*\_meta.json} & Model metadata and calibration information \\
+\texttt{hard\_benign\_labels.csv} & User-authored governance labels for real benign folders \\
+\texttt{triage\_geometry\_report.json} & Score and abstention geometry report \\
+\texttt{gate\_ablation.csv} & Review-routing comparison across abstention presets \\
 \bottomrule
 \end{longtable}
 
@@ -35,6 +38,10 @@
 \texttt{injections}, \texttt{c2\_conns} & Counts of injection and C2-style indicators \\
 \texttt{verdict} & Rule-based triage verdict string \\
 \texttt{uncertain} & Flag for label or baseline uncertainty \\
+\texttt{benign\_subtype} & \texttt{clean\_benign}, \texttt{hard\_benign\_admin\_tooling}, or \texttt{ambiguous\_novirus\_control} \\
+\texttt{train\_eligible} & Whether row may enter strict training filters \\
+\texttt{label\_quality\_flag} & Curated label-quality indicator \\
+\texttt{label\_quality\_reason} & Text reason for label-quality state \\
 \texttt{filter\_ok}, \texttt{graph\_ok}, \texttt{analyze\_ok} & Pipeline health indicators \\
 \bottomrule
 \end{longtable}
@@ -42,37 +49,81 @@
 \section{Core Plugin Set}
 The project uses the following main Volatility 3 plugins: \texttt{pslist}, \texttt{psscan}, \texttt{pstree}, \texttt{malfind}, \texttt{netscan}, \texttt{cmdline}, \texttt{dlllist}, \texttt{handles}, \texttt{threads}, \texttt{vadinfo}, \texttt{filescan}, \texttt{driverscan}, \texttt{ssdt}, and \texttt{registry.hivelist}.
 
-\section{Reproducibility Commands}
-The following commands rebuild dataset artefacts, run evaluation, and regenerate dissertation tables from the repository root:
+\section{Hard-Benign Governance Labels}
+
+\texttt{hard\_benign\_labels.csv} is not provided evidence by itself. It is a user-authored label file that maps existing folders under \texttt{extracted\_csvs/} to curated benign subtypes. Each row should refer to a real benign capture folder and should use \texttt{clean\_benign} or \texttt{hard\_benign\_admin\_tooling}. Existing \texttt{NoVirus} malware-control folders should remain \texttt{ambiguous\_novirus\_control} unless they have been independently reviewed as clean enterprise baselines.
+
+The expected minimal format is:
 
 \begin{verbatim}
-python build_dataset.py
-python scripts/generate_dissertation_figures.py
-
-# Grouped CV -- GNN backbones (family-held-out)
-python train.py extracted_data/dataset_manifest.csv --cv stratified_group \
-  --group-by family --model gine --epochs 80 --seed 42
-
-# Binary GINE baseline
-python train_binary_model.py extracted_data/dataset_manifest.csv \
-  --output-model models/binary_gnn.pt --output-meta models/binary_meta.json
-
-# Tabular baselines (Logistic Regression, Random Forest)
-python scripts/tabular_baselines.py
-
-# Regenerate LaTeX tables and eval figures
-python scripts/generate_eval_latex.py
-
-python analyze_binary_model.py
-python analyze_two_model.py
+folder,benign_subtype,train_eligible,label
+CleanHost01,clean_benign,true,0
+AdminTools01,hard_benign_admin_tooling,true,0
 \end{verbatim}
+
+The helper script applies these governance labels to the manifest:
+
+\begin{verbatim}
+python scripts/apply_hard_benign_labels.py \
+  extracted_csvs/dataset_manifest.csv extracted_csvs/hard_benign_labels.csv
+\end{verbatim}
+
+If the file contains only a header row, the script should report zero matches. That means no benign training rows have been added yet.
+
+\section{Reproducibility Commands}
+The following commands rebuild dataset artefacts, run evaluation, and regenerate dissertation tables from the repository root. Commands using strict governance require real \texttt{clean\_benign} or hard-benign rows. If those rows are absent, ambiguous \texttt{NoVirus} controls can only be used for exploratory stress tests.
+
+\begin{lstlisting}
+python build_dataset.py ./extracted_data --workers 8
+python build_dataset.py ./extracted_csvs --workers 8 --write-subgraphs
+
+# Track 1 (exploratory only; not reported in dissertation tables)
+# python train.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs \
+#   --cv stratified_group --group-by family --model gin --epochs 40 --seed 42
+
+# Track 2 -- binary GINE + leakage-control profile
+python train_binary_model.py extracted_csvs/dataset_manifest.csv \
+  --base-dir extracted_csvs --graph-attr-profile no_manifest_leakage \
+  --require-governance-manifest --seed 42 \
+  --output-model outputs/binary_model.pt \
+  --output-meta outputs/binary_model_meta.json
+python analyze_binary_model.py extracted_csvs/dataset_manifest.csv \
+  --base-dir extracted_csvs \
+  --output-json latex_dissertation/eval/binary_analysis.json
+
+# Track 3 -- one-class malware + benign
+python train_malware_model.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs
+python train_benign_model.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs
+
+# Exploratory benign one-class run when only ambiguous NoVirus controls exist
+python train_benign_model.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs \
+  --include-ambiguous-benign-controls --disable-strict-train-filter
+
+# Uncertainty calibration and two-model analysis
+python scripts/calibrate_uncertainty_thresholds.py \
+  extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs
+python scripts/fit_conformal_bundle.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs
+python analyze_two_model.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs \
+  --abstention-mode calibrated \
+  --uncertainty-thresholds-json outputs/uncertainty_thresholds.json \
+  --output-json latex_dissertation/eval/two_model_analysis.json
+python scripts/diagnose_triage_geometry.py latex_dissertation/eval/two_model_analysis.json
+python evaluate.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs --gate-ablation
+
+# Tabular baselines, reports, and LaTeX tables
+python scripts/tabular_baselines.py
+python scripts/per_process_fp_report.py latex_dissertation/eval/two_model_analysis.json
+python scripts/export_dissertation_figure_data.py
+python scripts/generate_eval_latex.py
+python scripts/generate_analysis_latex.py
+\end{lstlisting}
 
 To compile the dissertation PDF:
 
-\begin{verbatim}
+\begin{lstlisting}
 cd latex_dissertation
 latexmk -pdf main.tex
-\end{verbatim}
+\end{lstlisting}
 
 \section{Acronyms}
 \begin{tabular}{ll}
@@ -95,8 +146,9 @@ latexmk -pdf main.tex
 \textbf{VAD} & Virtual Address Descriptor \\
 \end{tabular}
 
-\section{Manifest Excerpt (First Five Rows)}
+\section{Manifest Excerpt (Descriptive Corpus)}
 \small
+The following rows are from \texttt{extracted\_data/dataset\_manifest.csv} ($n{=}30$).
 \begin{longtable}{rrlrr}
 \toprule
 \textbf{ID} & \textbf{Label} & \textbf{Folder} & \textbf{Nodes} & \textbf{Uncertain} \\
@@ -110,35 +162,54 @@ latexmk -pdf main.tex
 \bottomrule
 \end{longtable}
 
-\section{Figure Generation}
-Dissertation figures are produced from project data using:
+\section{Figure data export}
+Chapter~\ref{ch:evaluation} figures are drawn in \LaTeX{} with \texttt{TikZ} from exported data files (not matplotlib PDFs). Export data, then compile:
 \begin{verbatim}
-python scripts/generate_dissertation_figures.py
+python scripts/export_dissertation_figure_data.py
+# or: python scripts/generate_dissertation_figures.py  (same export)
+python scripts/generate_analysis_latex.py   # tables + analysis figure data
+cd latex_dissertation && latexmk -pdf main.tex
 \end{verbatim}
-Outputs are written to \texttt{latex\_dissertation/figures/} as PDF files included in Chapter~\ref{ch:evaluation}.
+Numeric series are written to \texttt{latex\_dissertation/figures/data/}; plot definitions live in \texttt{latex\_dissertation/figures/fig\_*.tex}.
 
 \chapter{Dataset Statistics Summary}
 \label{app:stats}
 
-This appendix summarises corpus-level statistics derived from \texttt{dataset\_manifest.csv} at dissertation writing time.
+This appendix summarises corpus-level statistics derived from manifests at dissertation writing time.
 
-\section{Label and uncertainty counts}
+\section{Descriptive corpus (\texttt{extracted\_data}, $n{=}30$)}
+
+\subsection{Label and uncertainty counts}
 \begin{itemize}
 \item Total samples: 30
 \item Malware-labelled (WithVirus): 15
 \item Benign-labelled (NoVirus): 15
-\item Benign rows with \texttt{uncertain=True}: 14
-\item Benign rows with \texttt{uncertain=False}: 1 (W32.MyDoom.A.-NoVirus)
+\item Benign rows with \texttt{uncertain=True}: 15 (all benign-labelled rows)
 \end{itemize}
 
-\section{Graph size ranges}
+\subsection{Graph size ranges}
 \begin{itemize}
 \item Nodes: minimum 86, maximum 27,362, median approximately 18,036
-\item Edges: minimum 7, maximum 32,556, median approximately 21,544
+\item Edges: minimum 7, maximum 39,117, median approximately 25,659
 \end{itemize}
 
-\section{Families represented}
-The manifest includes paired samples for families including Cerber, DLLHijacking, DeriaLock, Dharma, GandCrab, GoldenEye, InfinityCrypt, Locky.AZ, LuckyLcoker, PowerLoader, RedTail, SporaRansomware, W32.MyDoom.A., WannaCry, and Win32.BlackWorm. Each family contributes one WithVirus and one NoVirus row in the current manifest.
+\subsection{Families represented}
+The manifest includes paired samples listed in Table~\ref{tab:malware_family_taxonomy}. Each family contributes one WithVirus and one NoVirus row in the descriptive corpus.
+
+\section{ML evaluation corpus (\texttt{extracted\_csvs}, $n{=}43$)}
+
+\subsection{Label and governance counts}
+\begin{itemize}
+\item Total samples: 43
+\item Malware-labelled: 21
+\item Benign-labelled: 22
+\item Benign rows with \texttt{uncertain=True}: 22 (all)
+\item Benign rows with \texttt{benign\_subtype=ambiguous\_novirus\_control}: 22 (all at writing time)
+\item Benign rows with \texttt{train\_eligible=True}: 0 (strict clean-benign rows not yet added)
+\end{itemize}
+
+\subsection{Composition notes}
+The ML corpus retains the 15 paired family rows and adds numeric host identifiers (e.g.\ \texttt{3340\_*}, \texttt{1860\_1}), additional NoVirus captures, and \texttt{pat-2009-11-24-WithVirus}. Track~2/3 tables in Chapter~\ref{ch:evaluation} are generated from this manifest.
 
 \section{Interpretation notes}
 These statistics are descriptive, not performance metrics. They show that the corpus is balanced at the label level but unbalanced in difficulty and graph size. Any future model evaluation should report manifest version, family-grouped splits, and uncertainty-aware error analysis.
@@ -164,6 +235,9 @@ This checklist helps keep future results comparable with the baseline establishe
 \item[Graph attribute] A feature vector summarising the whole graph, not a single node.
 \item[Triage] A first-pass risk ranking to prioritise analyst review.
 \item[WithVirus / NoVirus] Folder naming convention indicating malware-infected vs benign comparison sample in this corpus.
+\item[\texttt{ambiguous\_novirus\_control}] Benign subtype for paired NoVirus folders used as malware-family controls; not a clean enterprise baseline.
+\item[\texttt{clean\_benign}] Benign subtype for curated known-good captures suitable for strict training.
+\item[\texttt{needs\_analyst\_review}] Two-model triage state when fusion abstains and routes the sample for human review.
 \item[Uncertain label] Manifest flag when benign-labelled data still shows strong suspicious indicators.
 \item[Conformity score] One-class similarity score measuring closeness to a learned class embedding space.
 \item[Evidence field] Structured output explaining which attributes, nodes, or edges influenced a score.

@@ -57,9 +57,9 @@ For clarity, this dissertation uses the following working definitions:
 
 \section{Primary Expected Contribution}
 
-The expected primary contribution is empirical and methodological rather than a new detection benchmark. On the available corpus, benign-labelled memory snapshots frequently exhibit HIGH or CRITICAL triage signals despite \texttt{NoVirus} folder names (14 of 15 benign rows marked uncertain in the manifest). This finding shows that memory-forensics labels derived from folder pairing can diverge sharply from rule-based risk signals.
+The expected primary contribution is empirical and methodological rather than a new detection benchmark. On the descriptive corpus (\texttt{extracted\_data}, $n{=}30$), benign-labelled memory snapshots frequently exhibit HIGH or CRITICAL triage signals despite \texttt{NoVirus} folder names (all 15 benign rows marked uncertain). On the ML corpus (\texttt{extracted\_csvs}, $n{=}43$), all benign-labelled rows are uncertain \texttt{ambiguous\_novirus\_control}. This finding shows that memory-forensics labels derived from folder pairing can diverge sharply from rule-based risk signals.
 
-The secondary contributions are engineering artefacts: a Volatility-to-graph pipeline, manifest-indexed dataset, GNN and tabular evaluation scripts with family-grouped splits, and JSON evidence fields for analyst review. Together they support reproducible feasibility studies on small memory-forensics corpora.
+The secondary contributions are engineering artefacts: a Volatility-to-graph pipeline, manifest-indexed dataset, calibrated binary and two-model GNN paths with abstention-aware fusion, tabular baseline scripts, and JSON evidence fields for analyst review. Exploratory family-grouped CV (Track~1) informed design but is not the primary reported evaluation. Together they support reproducible feasibility studies on small memory-forensics corpora.
 
 \section{Research Objectives}
 
@@ -71,7 +71,7 @@ The objectives are:
 \item To engineer node, edge, and graph-level features suitable for graph neural networks. Features must remain stable across samples so training and inference use the same contracts.
 \item To train and analyse GNN-based malware detection models. The project includes binary classification and one-class conformity models for richer triage states.
 \item To preserve model evidence and uncertainty so that analyst review remains possible. Outputs should include top attributes, important nodes, and short narratives.
-\item To evaluate the strengths and limits of the approach using available project artefacts. Evaluation must discuss dataset size, label noise, and family overlap honestly.
+\item To evaluate the strengths and limits of the approach using available project artefacts. Evaluation separates descriptive statistics on \texttt{extracted\_data} ($n{=}30$) from Track~2/3 ML inference on \texttt{extracted\_csvs} ($n{=}43$), and discusses dataset size, label noise, and family overlap honestly.
 \end{enumerate}
 
 \section{Research Questions}
@@ -101,7 +101,7 @@ The main contributions of this dissertation are:
 
 \section{Scope}
 
-This is a writing and research project based on an implemented repository. The work focuses on Windows memory dumps, Volatility 3 artefacts, graph construction, and graph-based deep learning. The dataset includes several malware-family folders and paired NoVirus folders. Ransomware samples are included as part of the corpus, but the topic is not limited to ransomware. The correct topic is broader: graph-based deep learning for malware detection using Windows memory forensics.
+This is a writing and research project based on an implemented repository. The work focuses on Windows memory dumps, Volatility 3 artefacts, graph construction, and graph-based deep learning. The dataset includes several malware-family folders and paired NoVirus folders, organised in two manifest views: \texttt{extracted\_data} ($n{=}30$) for descriptive analysis and \texttt{extracted\_csvs} ($n{=}43$) for primary ML evaluation. Ransomware samples are included as part of the corpus, but the topic is not limited to ransomware. The correct topic is broader: graph-based deep learning for malware detection using Windows memory forensics.
 
 The dissertation does not include malware binaries in the written submission. It discusses memory dumps only at the artefact level. Ethics and safe handling are addressed in Chapter~\ref{ch:methodology}.
 

@@ -6,6 +6,11 @@
 \usepackage{setspace}
 \usepackage{graphicx}
 \graphicspath{{figures/}}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\input{figures/tikz_setup.tex}
+\input{figures/fig_macros.tex}
 \usepackage{microtype}
 \hyphenation{artefacts malware forensics Volatility heterogeneous}
 \usepackage{booktabs}
@@ -13,10 +18,21 @@
 \usepackage{subcaption}
 \usepackage{longtable}
 \usepackage{array}
+\usepackage{tabularx}
 \usepackage{cite}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
 \usepackage{xurl}
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  breakatwhitespace=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  frame=single,
+  framerule=0.4pt,
+  literate={_}{\textunderscore}1
+}
 \usepackage{hyperref}
 
 \hypersetup{

@@ -93,7 +93,7 @@ GNNs are not a default win for forensic malware detection. Several structural li
 
 \textbf{Explainability gaps.} Post-hoc explainers (GNNExplainer, SHAP) help, but they do not guarantee faithful forensic narratives \cite{ying2019gnnexplainer}, \cite{lundberg2017shap}. This project mitigates the gap with rule-derived attributes and explicit evidence JSON, not with explanation methods alone.
 
-\textbf{Adversarial manipulation.} Attackers can perturb graph structure or features---for example by hiding processes, splitting activity across benign parents, or injecting decoy edges \cite{jin2022adversarialgnn}, \cite{dai2023adversarial}. A model trained on laboratory families may not resist adaptive evasion.
+\textbf{Adversarial manipulation.} Attackers can perturb graph structure or features---for example by hiding processes, splitting activity across benign parents, or injecting decoy edges \cite{jin2022adversarialgnn}, \cite{dai2023adversarial}, \cite{wu2023gnnsecurity}. A model trained on laboratory families may not resist adaptive evasion.
 
 GNNs do not remove the need for sound data collection. Incomplete plugin output yields incomplete graphs. Noisy labels induce spurious correlations. These limits motivate grouped evaluation and uncertainty reporting in Chapter~\ref{ch:evaluation}.
 
@@ -101,7 +101,7 @@ GNNs do not remove the need for sound data collection. Incomplete plugin output 
 
 Sommer and Paxson argue that security machine-learning papers often overstate results because train and test distributions overlap or because labels do not reflect deployment base rates \cite{sommer2010outside}. In malware research, family-level leakage is common: variants from the same family share packers, C2 patterns, or host profiles. Random row splits can inflate metrics when WithVirus and NoVirus pairs from one family appear in both train and test.
 
-This dissertation uses \texttt{family} as the grouping key for StratifiedGroupKFold, matching the paired-folder structure of the corpus. Even with grouped splits, $n{=}30$ yields high variance; metrics should be reported with fold detail and interpreted as feasibility evidence, not operational guarantees \cite{apruzzese2023sok}.
+This dissertation uses \texttt{family} as the grouping key for StratifiedGroupKFold in Track~1, matching the paired-folder structure of the descriptive corpus. Even with grouped splits, both corpora are small ($n{=}30$ descriptive, $n{=}43$ ML); metrics should be reported with fold detail and interpreted as feasibility evidence, not operational guarantees \cite{apruzzese2023sok}. Track~1 fold results are not published numerically in Chapter~\ref{ch:evaluation}; Tracks~2 and~3 inference on \texttt{extracted\_csvs} are the primary ML evaluation.
 
 \subsection{Adversarial machine learning in malware detection}
 
@@ -111,7 +111,7 @@ For memory-forensics graphs, adversarial risk includes both ML evasion and foren
 
 \section{Ransomware and Memory-Resident Behaviour}
 
-Several families in the project corpus are ransomware-related (for example WannaCry, Cerber, GandCrab, and Locky variants). Ransomware often combines encryption behaviour with process injection and network activity. MITRE technique T1486 (data encrypted for impact) is relevant when interpreting ransom-note signals and high-impact process scores \cite{mitre2026t1486}.
+Several families in the project corpus are ransomware-related (Table~\ref{tab:malware_family_taxonomy}); examples include WannaCry, Cerber, GandCrab, and Locky variants. Ransomware often combines encryption behaviour with process injection and network activity. MITRE technique T1486 (data encrypted for impact) is relevant when interpreting ransom-note signals and high-impact process scores \cite{mitre2026t1486}.
 
 Memory forensics can capture pre-encryption activity that disk-only analysis misses. However, ransomware detection from memory is still difficult because benign administrative tools and security software can produce overlapping indicators. This supports the dissertation's focus on triage and evidence rather than automatic blocking.
 
@@ -153,7 +153,7 @@ This dissertation contributes by joining Volatility 3 extraction, heterogeneous 
 
 \section{Machine Learning Tooling for Security Research}
 
-Several general-purpose libraries support the implementation side of this work. PyTorch provides the core deep learning framework \cite{paszke2019pytorch}. PyTorch Geometric extends it for graph data \cite{fey2019pyg}, \cite{pygdocs2026}. Scikit-learn remains a common baseline toolkit for tabular malware features \cite{pedregosa2011sklearn}. Pandas, NumPy, and NetworkX support data processing and graph construction \cite{mckinney2010pandas}, \cite{harris2020numpy}, \cite{hagberg2008networkx}.
+Several general-purpose libraries support the implementation side of this work. PyTorch provides the core deep learning framework \cite{paszke2019pytorch}, \cite{pytorchdocs2026}. PyTorch Geometric extends it for graph data \cite{fey2019pyg}, \cite{pygdocs2026}. Scikit-learn remains a common baseline toolkit for tabular malware features \cite{pedregosa2011sklearn}. Pandas, NumPy, and NetworkX support data processing and graph construction \cite{mckinney2010pandas}, \cite{harris2020numpy}, \cite{hagberg2008networkx}.
 
 FastAPI is used in the project server layer for HTTP-based orchestration \cite{fastapi2026docs}. While framework choice is not the research contribution, these tools reduce engineering friction and make the pipeline easier to reproduce.
 
@@ -164,5 +164,7 @@ The literature review suggests four design principles for this project.
 \textbf{First}, memory evidence is relational and should be stored as a graph rather than only as isolated plugin tables. \textbf{Second}, learning methods must handle small, noisy datasets and report uncertainty openly. \textbf{Third}, explainability is not optional in security operations; evidence fields should accompany scores. \textbf{Fourth}, reproducibility requires manifests, contracts, and versioned artefacts.
 
 Chapter~\ref{ch:methodology} translates these principles into a concrete methodology. Chapter~\ref{ch:design} and Chapter~\ref{ch:implementation} describe the system realisation. Chapter~\ref{ch:evaluation} tests the claims against project data and discusses limitations without overstating detection performance.
+
+In this project specifically, evaluation follows the literature on grouped splits and calibration \cite{sommer2010outside}, \cite{guo2017calibration}: Track~1 grouped CV informed engineering but is not reported as a backbone ranking; Tracks~2 and~3 on \texttt{extracted\_csvs} foreground triage behaviour (saturation, abstention, review routing) over headline accuracy; tabular baselines on \texttt{extracted\_data} serve as reference only.
 
 Finally, the literature review highlights a simple practical lesson: in memory-forensics ML, data engineering and evaluation design are not supporting tasks. They are core research contributions. The novelty of this dissertation is therefore not only the GNN classifier choice. It is the end-to-end connection between Volatility artefacts, heterogeneous graphs, manifest governance, and explainable outputs in one reproducible system.

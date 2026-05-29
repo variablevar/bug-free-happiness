@@ -1,0 +1,327 @@
+{
+  "model": "gine",
+  "eval": "StratifiedGroupKFold",
+  "cv": "stratified_group",
+  "group_by": "family",
+  "n_splits": 5,
+  "n_outer_folds": 5,
+  "n_predictions": 30,
+  "epochs": 80,
+  "hidden": 16,
+  "layers": 2,
+  "gat_heads": null,
+  "edge_emb_dim": 8,
+  "seed": 42,
+  "batch_size": 4,
+  "target": "label",
+  "num_classes": 2,
+  "benign_boost": 2.0,
+  "augment": false,
+  "val_fraction": 0.0,
+  "label_smoothing": 0.0,
+  "timestamp": "2026-05-22T04:35:18.511738+00:00",
+  "git_hash": "922be27",
+  "overall_acc": 0.5,
+  "fold_results": [
+    {
+      "outer_fold": 1,
+      "fold": 1,
+      "test_source": "Cerber-NoVirus",
+      "held_group": "cerber",
+      "true_label": 0,
+      "pred": 0,
+      "prob": 0.4942,
+      "correct": true
+    },
+    {
+      "outer_fold": 1,
+      "fold": 1,
+      "test_source": "Cerber-WithVirus",
+      "held_group": "cerber",
+      "true_label": 1,
+      "pred": 0,
+      "prob": 0.4997,
+      "correct": false
+    },
+    {
+      "outer_fold": 1,
+      "fold": 1,
+      "test_source": "GoldenEye-NoVirus",
+      "held_group": "goldeneye",
+      "true_label": 0,
+      "pred": 1,
+      "prob": 0.9974,
+      "correct": false
+    },
+    {
+      "outer_fold": 1,
+      "fold": 1,
+      "test_source": "GoldenEye-WithVirus",
+      "held_group": "goldeneye",
+      "true_label": 1,
+      "pred": 1,
+      "prob": 0.999,
+      "correct": true
+    },
+    {
+      "outer_fold": 1,
+      "fold": 1,
+      "test_source": "RedTail-NoVirus",
+      "held_group": "redtail",
+      "true_label": 0,
+      "pred": 1,
+      "prob": 0.996,
+      "correct": false
+    },
+    {
+      "outer_fold": 1,
+      "fold": 1,
+      "test_source": "RedTail-WithVirus",
+      "held_group": "redtail",
+      "true_label": 1,
+      "pred": 1,
+      "prob": 0.9999,
+      "correct": true
+    },
+    {
+      "outer_fold": 2,
+      "fold": 2,
+      "test_source": "DeriaLock-NoVirus",
+      "held_group": "derialock",
+      "true_label": 0,
+      "pred": 1,
+      "prob": 0.5544,
+      "correct": false
+    },
+    {
+      "outer_fold": 2,
+      "fold": 2,
+      "test_source": "DeriaLock-WithVirus",
+      "held_group": "derialock",
+      "true_label": 1,
+      "pred": 0,
+      "prob": 0.4872,
+      "correct": false
+    },
+    {
+      "outer_fold": 2,
+      "fold": 2,
+      "test_source": "InfinityCrypt-NoVirus",
+      "held_group": "infinitycrypt",
+      "true_label": 0,
+      "pred": 1,
+      "prob": 0.5081,
+      "correct": false
+    },
+    {
+      "outer_fold": 2,
+      "fold": 2,
+      "test_source": "InfinityCrypt-WithVirus",
+      "held_group": "infinitycrypt",
+      "true_label": 1,
+      "pred": 1,
+      "prob": 0.5136,
+      "correct": true
+    },
+    {
+      "outer_fold": 2,
+      "fold": 2,
+      "test_source": "WannaCry-NoVirus",
+      "held_group": "wannacry",
+      "true_label": 0,
+      "pred": 1,
+      "prob": 0.5229,
+      "correct": false
+    },
+    {
+      "outer_fold": 2,
+      "fold": 2,
+      "test_source": "WannaCry-WithVirus",
+      "held_group": "wannacry",
+      "true_label": 1,
+      "pred": 1,
+      "prob": 0.5277,
+      "correct": true
+    },
+    {
+      "outer_fold": 3,
+      "fold": 3,
+      "test_source": "Dharma-NoVirus",
+      "held_group": "dharma",
+      "true_label": 0,
+      "pred": 1,
+      "prob": 0.5852,
+      "correct": false
+    },
+    {
+      "outer_fold": 3,
+      "fold": 3,
+      "test_source": "Dharma-WithVirus",
+      "held_group": "dharma",
+      "true_label": 1,
+      "pred": 1,
+      "prob": 0.9817,
+      "correct": true
+    },
+    {
+      "outer_fold": 3,
+      "fold": 3,
+      "test_source": "LuckyLcoker-NoVirus",
+      "held_group": "luckylcoker",
+      "true_label": 0,
+      "pred": 0,
+      "prob": 0.0002,
+      "correct": true
+    },
+    {
+      "outer_fold": 3,
+      "fold": 3,
+      "test_source": "LuckyLcoker-WithVirus",
+      "held_group": "luckylcoker",
+      "true_label": 1,
+      "pred": 0,
+      "prob": 0.0003,
+      "correct": false
+    },
+    {
+      "outer_fold": 3,
+      "fold": 3,
+      "test_source": "SporaRansomware-NoVirus",
+      "held_group": "sporaransomware",
+      "true_label": 0,
+      "pred": 1,
+      "prob": 0.9959,
+      "correct": false
+    },
+    {
+      "outer_fold": 3,
+      "fold": 3,
+      "test_source": "SporaRansomware-WithVirus",
+      "held_group": "sporaransomware",
+      "true_label": 1,
+      "pred": 1,
+      "prob": 0.9803,
+      "correct": true
+    },
+    {
+      "outer_fold": 4,
+      "fold": 4,
+      "test_source": "DLLHijacking-NoVirus",
+      "held_group": "dllhijacking",
+      "true_label": 0,
+      "pred": 1,
+      "prob": 0.9989,
+      "correct": false
+    },
+    {
+      "outer_fold": 4,
+      "fold": 4,
+      "test_source": "DLLHijacking-WithVirus",
+      "held_group": "dllhijacking",
+      "true_label": 1,
+      "pred": 1,
+      "prob": 0.9999,
+      "correct": true
+    },
+    {
+      "outer_fold": 4,
+      "fold": 4,
+      "test_source": "Locky.AZ-NoVirus",
+      "held_group": "locky.az",
+      "true_label": 0,
+      "pred": 1,
+      "prob": 1.0,
+      "correct": false
+    },
+    {
+      "outer_fold": 4,
+      "fold": 4,
+      "test_source": "Locky.AZ-WithVirus",
+      "held_group": "locky.az",
+      "true_label": 1,
+      "pred": 1,
+      "prob": 1.0,
+      "correct": true
+    },
+    {
+      "outer_fold": 4,
+      "fold": 4,
+      "test_source": "W32.MyDoom.A.-NoVirus",
+      "held_group": "w32.mydoom.a.",
+      "true_label": 0,
+      "pred": 0,
+      "prob": 0.4908,
+      "correct": true
+    },
+    {
+      "outer_fold": 4,
+      "fold": 4,
+      "test_source": "W32.MyDoom.A.-WithVirus",
+      "held_group": "w32.mydoom.a.",
+      "true_label": 1,
+      "pred": 1,
+      "prob": 0.5249,
+      "correct": true
+    },
+    {
+      "outer_fold": 5,
+      "fold": 5,
+      "test_source": "GandCrab-NoVirus",
+      "held_group": "gandcrab",
+      "true_label": 0,
+      "pred": 1,
+      "prob": 0.5139,
+      "correct": false
+    },
+    {
+      "outer_fold": 5,
+      "fold": 5,
+      "test_source": "GandCrab-WithVirus",
+      "held_group": "gandcrab",
+      "true_label": 1,
+      "pred": 1,
+      "prob": 0.5747,
+      "correct": true
+    },
+    {
+      "outer_fold": 5,
+      "fold": 5,
+      "test_source": "PowerLoader-NoVirus",
+      "held_group": "powerloader",
+      "true_label": 0,
+      "pred": 1,
+      "prob": 0.5715,
+      "correct": false
+    },
+    {
+      "outer_fold": 5,
+      "fold": 5,
+      "test_source": "PowerLoader-WithVirus",
+      "held_group": "powerloader",
+      "true_label": 1,
+      "pred": 1,
+      "prob": 0.5802,
+      "correct": true
+    },
+    {
+      "outer_fold": 5,
+      "fold": 5,
+      "test_source": "Win32.BlackWorm-NoVirus",
+      "held_group": "win32.blackworm",
+      "true_label": 0,
+      "pred": 1,
+      "prob": 0.5603,
+      "correct": false
+    },
+    {
+      "outer_fold": 5,
+      "fold": 5,
+      "test_source": "Win32.BlackWorm-WithVirus",
+      "held_group": "win32.blackworm",
+      "true_label": 1,
+      "pred": 1,
+      "prob": 0.5695,
+      "correct": true
+    }
+  ]
+}

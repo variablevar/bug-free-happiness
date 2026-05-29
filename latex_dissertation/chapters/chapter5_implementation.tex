@@ -20,10 +20,19 @@ The main implementation components are:
 \item \texttt{dataset.py}: loads graphs into PyTorch Geometric format.
 \item \texttt{model.py}: defines GIN, GraphSAGE, GAT, and GINE classifiers.
 \item \texttt{one\_class\_gnn.py}: defines one-class GINE utilities.
-\item \texttt{train\_binary\_model.py}: trains the binary GNN baseline.
-\item \texttt{train\_malware\_model.py} and \texttt{train\_benign\_model.py}: train one-class models.
+\item \texttt{train.py}: optional grouped CV for GIN, GraphSAGE, GAT, and GINE (Track~1, exploratory).
+\item \texttt{train\_binary\_model.py}: trains the binary GNN baseline (Track~2).
+\item \texttt{train\_malware\_model.py} and \texttt{train\_benign\_model.py}: train one-class models (Track~3); \texttt{train\_stack.py} runs both.
 \item \texttt{analyze\_binary\_model.py}: produces calibrated binary model analysis.
 \item \texttt{analyze\_two\_model.py}: combines malware and benign model outputs.
+\item \texttt{fusion.py}: combines binary, one-class, heuristic, uncertainty, and abstention outputs.
+\item \texttt{utils/graph\_attr\_profile.py}: masks graph-attribute groups for leakage-control ablations.
+\item \texttt{utils/subgraph\_extract.py}: extracts attack-centred subgraphs around high-value behavioural seeds.
+\item \texttt{scripts/diagnose\_triage\_geometry.py}: summarises score distributions, uncertainty gates, and review-routing behaviour.
+\item \texttt{scripts/calibrate\_uncertainty\_thresholds.py}: searches uncertainty thresholds for controlled analyst-review rates.
+\item \texttt{scripts/fit\_conformal\_bundle.py}: exports conformal calibration data for abstention experiments.
+\item \texttt{scripts/per\_process\_fp\_report.py}: ranks process names associated with benign-labelled review pressure.
+\item \texttt{scripts/apply\_hard\_benign\_labels.py}: applies curated benign-subtype labels to the manifest.
 \item \texttt{model\_scan.py}: runs model scanning for one upload-session graph.
 \item \texttt{server.py}: exposes the extraction, graph, IOC, and scan workflow through an API.
 \end{itemize}
@@ -39,6 +48,24 @@ The main implementation components are:
 \texttt{build\_dataset.py} walks the corpus and writes \texttt{dataset\_manifest.csv}. The manifest is the single index used by training and evaluation scripts. \texttt{dataset.py} converts each graph into a PyTorch Geometric \texttt{Data} object with consistent feature shapes.
 
 \texttt{model.py} defines the GNN backbones and graph-level classifier head. The implementation uses global pooling and concatenates graph attributes before the final layer. \texttt{one\_class\_gnn.py} provides encoders and scoring utilities for the malware and benign conformity models.
+
+\subsection{Governance fields and benign-subtype handling}
+
+The manifest now records label-quality and training-eligibility fields. In particular, \texttt{benign\_subtype} separates \texttt{clean\_benign}, \texttt{hard\_benign\_admin\_tooling}, and \texttt{ambiguous\_novirus\_control}. The default benign one-class trainer accepts clean benign rows only. Hard-benign rows can be included explicitly. Ambiguous \texttt{NoVirus} controls can be used for exploratory runs, but they are not treated as clean benign data under the strict training path.
+
+The helper \texttt{scripts/apply\_hard\_benign\_labels.py} updates these governance fields from a user-authored CSV file. This file is not a source of new data. It only marks existing folders after real benign captures have been added and reviewed.
+
+\subsection{Graph-attribute leakage controls}
+
+\texttt{dataset.py} supports graph-attribute profiles through \texttt{utils/graph\_attr\_profile.py}. The \texttt{full} profile keeps all graph attributes. The \texttt{no\_manifest\_leakage} profile masks rule-derived manifest fields such as \texttt{max\_score}, \texttt{attack\_steps}, injection counts, C2 counts, triage flags, and benign-subtype flags. The \texttt{structure\_only} profile keeps graph scale, edge distributions, and motif tails for a stronger ablation.
+
+This does not remove the rule engine from the project. It prevents the binary model from trivially learning the same rule outputs that later appear in evaluation. The distinction is useful when asking whether graph structure contributes beyond manifest-level heuristics.
+
+\subsection{Attack-centred subgraph view}
+
+The loader can also use \texttt{graph\_view=attack\_subgraph}. This view extracts neighbourhoods around semantically important seeds such as \texttt{injected\_into}, \texttt{intent\_credential\_access}, \texttt{intent\_c2}, \texttt{persistence\_behavior}, \texttt{lolbin\_execution\_chain}, and suspicious parent-child edges. Bulk memory-region nodes are dropped unless they carry suspicious memory semantics.
+
+The original \texttt{graph.pkl} remains the canonical forensic graph. The subgraph view is an ablation path for reducing hub dominance and large-graph training cost.
 
 \section{Data Contracts}
 
@@ -77,7 +104,7 @@ Memory dumps in this corpus provide snapshot-level supervision (\texttt{WithViru
 
 \subsection{Supported backbones and expected trade-offs}
 
-\texttt{model.py} implements GIN, GraphSAGE, GAT, and GINE with the same pooling head and graph-attribute concatenation. Table~\ref{tab:gnn_comparison} (generated by \texttt{scripts/generate\_eval\_latex.py} after grouped CV) is the intended comparison point. Until CV JSON files exist, cells remain placeholders.
+\texttt{model.py} implements GIN, GraphSAGE, GAT, and GINE with the same pooling head and graph-attribute concatenation. The binary and one-class trainers use GINE by default. Track~1 grouped CV via \texttt{train.py} was used for development but is not reported numerically in Chapter~\ref{ch:evaluation}.
 
 \begin{itemize}
 \item \textbf{GIN:} strong baseline for graph classification; no edge-type conditioning.
@@ -88,7 +115,7 @@ Memory dumps in this corpus provide snapshot-level supervision (\texttt{WithViru
 
 \subsection{What did not work well in practice}
 
-Three trade-offs appeared during development. \textbf{Small $n$:} with 30 graphs, validation folds are unstable; family grouping is necessary but reduces effective training size per fold. \textbf{Train time vs graph size:} samples above 20,000 nodes dominate batch memory; training epochs are costly relative to tabular baselines on manifest features alone. \textbf{Heuristic features vs pure learning:} graph attributes already encode strong triage signals; GNN gains may be modest unless structure adds information beyond \texttt{graph\_attr.json}---an open question for the tabular-vs-GNN comparison in Chapter~\ref{ch:evaluation}.
+Three trade-offs appeared during development. \textbf{Small $n$:} with 30 descriptive and 43 ML graphs, validation folds are unstable; family grouping is necessary but reduces effective training size per fold. \textbf{Train time vs graph size:} samples above 20,000 nodes dominate batch memory; training epochs are costly relative to tabular baselines on manifest features alone. \textbf{Heuristic features vs pure learning:} graph attributes already encode strong triage signals; GNN gains may be modest unless structure adds information beyond \texttt{graph\_attr.json}---an open question addressed by leakage-control profiles in Chapter~\ref{ch:evaluation}.
 
 \section{GNN Implementation}
 
@@ -129,6 +156,14 @@ The two-model analysis produces fields such as:
 
 \texttt{model\_scan.py} exposes a single-graph inference path for the API workflow. This is useful for upload-session analysis in the dashboard prototype.
 
+\subsection{Uncertainty, abstention, and conformal hooks}
+
+\texttt{fusion.py} implements the final triage logic. The calibrated abstention mode records reasons such as high MC-dropout variance, high ensemble variance, low dual-model margin, and binary--dual disagreement. The binary--dual disagreement gate is only meaningful when the binary probability is not already saturated. This avoids treating an overconfident binary head as reliable evidence of uncertainty.
+
+\texttt{scripts/diagnose\_triage\_geometry.py} summarises these behaviours after inference. It reports score percentiles, gate-trigger counts, review-routing rate, decisive coverage, and process names associated with benign-labelled review pressure. \texttt{scripts/calibrate\_uncertainty\_thresholds.py} provides a simple threshold-search path for review-rate experiments.
+
+\texttt{calibration.py} includes temperature scaling, isotonic calibration support, and split-conformal utilities. \texttt{scripts/fit\_conformal\_bundle.py} exports a conformal bundle that can be loaded by \texttt{analyze\_two\_model.py}. These hooks support controlled abstention experiments. They do not remove the need for a separate, high-quality calibration set.
+
 \section{Implementation Challenges}
 
 Three challenges appeared repeatedly during development.
@@ -138,6 +173,8 @@ Three challenges appeared repeatedly during development.
 \textbf{Graph-size variation.} The corpus includes graphs from 86 nodes to more than 27,000 nodes. Batch training therefore required careful memory use and padding strategies.
 
 \textbf{Noisy benign labels.} Many NoVirus folders produced HIGH or CRITICAL rule-based verdicts. The implementation response was to add \texttt{uncertain} flags and analyst-review states instead of forcing clean benign labels.
+
+\textbf{Benign-manifold availability.} Strict benign one-class training requires at least ten rows marked as \texttt{clean\_benign} or explicitly included hard-benign data. The current \texttt{NoVirus} controls are useful for stress-testing false-positive pressure, but they are not sufficient to claim a clean benign manifold.
 
 \section{Reproducibility}
 
@@ -169,7 +206,7 @@ The dataset loader reads \texttt{dataset\_manifest.csv}, loads each \texttt{grap
 
 \subsection{\texttt{server.py} and \texttt{model\_scan.py}}
 
-The server exposes endpoints for extraction, graph build, and scanning workflows. \texttt{model\_scan.py} supports session-based inference when a graph already exists for an uploaded dump. This path is useful for interactive demos but is not required for batch evaluation on the 30-sample corpus.
+The server exposes endpoints for extraction, graph build, and scanning workflows. \texttt{model\_scan.py} supports session-based inference when a graph already exists for an uploaded dump. This path is useful for interactive demos; batch ML evaluation in Chapter~\ref{ch:evaluation} uses \texttt{extracted\_csvs} ($n{=}43$), while descriptive figures use \texttt{extracted\_data} ($n{=}30$).
 
 \section{Hyperparameters and Training Defaults}
 
@@ -204,6 +241,6 @@ CPU preprocessing time is also significant. Volatility extraction and graph cons
 
 \section{Testing and Validation During Development}
 
-During development, samples were inspected manually at three checkpoints: after CSV extraction, after graph build, and after analysis JSON generation. This manual review caught issues such as missing plugin files, unexpected empty graphs, and extreme node counts. Manual review is not scalable to thousands of hosts, but it was valuable for a 30-sample research corpus.
+During development, samples were inspected manually at three checkpoints: after CSV extraction, after graph build, and after analysis JSON generation. This manual review caught issues such as missing plugin files, unexpected empty graphs, and extreme node counts. Manual review is not scalable to thousands of hosts, but it was valuable for the 30-row descriptive corpus and spot checks on the expanded ML set.
 
 Regression checks should include: (1) manifest row count stable, (2) no missing health flags, (3) graph node counts within expected order of magnitude for family, and (4) analysis verdicts present. The dissertation figures provide a quick visual regression check for corpus-level shifts when graph rules change.
