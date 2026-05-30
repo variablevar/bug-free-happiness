@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """Hybrid ML + rules fusion utilities.
 
+Model-score uncertainty gates here are independent of manifest governance
+(``uncertain`` / ``train_eligible`` in dataset_manifest.csv). Manifest flags
+filter training and optional analysis loads; runtime gates use MC variance,
+ensemble spread, and binary/dual disagreement (see ``build_uncertainty_gate``).
+
 For systematically miscalibrated binary heads, prefer retraining or val-set
 calibration (temperature / Platt) in train_binary_model + calibration.py;
 runtime weights here are a stopgap for reporting."""

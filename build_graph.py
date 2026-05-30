@@ -33,7 +33,9 @@ from utils.rules import (
     LOLBIN_NET,
     LSASS_WHITELIST,
     HIGH_ACCESS_MASKS as HIGH_ACCESS,
+    is_known_benign_ip,
 )
+from utils.triage_zone import merge_triage_zone, node_triage_zone
 
 SHELLCODE_EB_RE = re.compile(r"(eb\s+[0-9a-f]{2}\s+){3,}", re.IGNORECASE)
 PERSISTENCE_HINTS = ("startup", "\\run", "/run", "scheduledtask", "taskcache", "services")
@@ -147,6 +149,105 @@ def _mark_benign_volume_hubs(G):
             continue
         if any(p in ok_parents for p in parent_names):
             G.nodes[nid]["benign_high_volume_hub"] = 1
+            reasons = list(G.nodes[nid].get("benign_reasons") or [])
+            if "benign_high_volume_hub" not in reasons:
+                reasons.append("benign_high_volume_hub")
+            G.nodes[nid]["benign_reasons"] = reasons
+            if G.nodes[nid].get("triage_zone") != "suspect":
+                G.nodes[nid]["triage_zone"] = "benign"
+                G.nodes[nid]["is_suspicious"] = 0
+
+
+def _process_zone(pid, suspicious_pids, benign_zone_pids):
+    if pid in suspicious_pids:
+        return "suspect"
+    if pid in benign_zone_pids:
+        return "benign"
+    return "neutral"
+
+
+def _apply_triage_zone_inheritance(G, benign_zone_reasons=None):
+    """Propagate process triage_zone to child artefacts; tag CDN IPs as benign."""
+    benign_zone_reasons = benign_zone_reasons or {}
+    pid_zone = {}
+    for nid, d in G.nodes(data=True):
+        if d.get("node_type") != "process":
+            continue
+        pid = safe_int(d.get("pid", 0))
+        if pid > 0:
+            pid_zone[pid] = node_triage_zone(d)
+
+    inject_suspect_pids = set()
+    for u, v, ed in G.edges(data=True):
+        if ed.get("edge_type") in ("injected_into", "intent_injection"):
+            for n in (u, v):
+                if G.nodes[n].get("node_type") == "process":
+                    inject_suspect_pids.add(safe_int(G.nodes[n].get("pid", 0)))
+
+    for nid, d in list(G.nodes(data=True)):
+        ntype = d.get("node_type")
+        zone = node_triage_zone(d)
+        raw = int(d.get("raw_is_suspicious", d.get("is_suspicious", 0)) or 0)
+
+        if ntype == "ip_address":
+            addr = safe_str(d.get("address", d.get("label", "")))
+            if is_known_benign_ip(addr):
+                zone = "benign"
+                reasons = list(d.get("benign_reasons") or [])
+                if "known_cdn_ip" not in reasons:
+                    reasons.append("known_cdn_ip")
+                G.nodes[nid]["benign_reasons"] = reasons
+        elif ntype == "network_conn":
+            foreign = safe_str(d.get("foreign_addr", ""))
+            owner = safe_str(d.get("owner", "")).lower()
+            pid = safe_int(d.get("pid", 0))
+            pzone = pid_zone.get(pid, "neutral")
+            if is_known_benign_ip(foreign) and owner in BENIGN_HUB_PROCESS_NAMES | {"svchost.exe"}:
+                zone = "benign"
+            else:
+                zone = merge_triage_zone(pzone, zone)
+        elif ntype in ("thread", "dll", "memory_region"):
+            pid = safe_int(d.get("pid", 0))
+            pzone = pid_zone.get(pid, "neutral")
+            hs = safe_int(d.get("heuristic_score", 0))
+            if pid in inject_suspect_pids and hs >= 7:
+                zone = "suspect"
+            else:
+                zone = merge_triage_zone(pzone, zone)
+
+        G.nodes[nid]["triage_zone"] = zone
+        G.nodes[nid]["raw_is_suspicious"] = raw
+        G.nodes[nid]["is_suspicious"] = int(zone == "suspect")
+
+    for u, v, ed in G.edges(data=True):
+        if ed.get("edge_type") not in (
+            "dll_trust_anomaly", "intent_injection", "intent_c2", "injected_into"
+        ):
+            continue
+        zu = node_triage_zone(G.nodes[u]) if G.has_node(u) else "neutral"
+        zv = node_triage_zone(G.nodes[v]) if G.has_node(v) else "neutral"
+        z = zu if merge_triage_zone(zu, zv) == zu else zv
+        if merge_triage_zone(zu, zv) == "suspect" or zu == "suspect" or zv == "suspect":
+            z = "suspect"
+        elif zu == "benign" and zv == "benign":
+            z = "benign"
+        else:
+            z = merge_triage_zone(zu, zv)
+        ed["triage_zone"] = z
+
+
+def _stamp_process_triage(G, pid, suspicious_pids, benign_zone_pids, benign_zone_reasons):
+    nid = pid_node(pid)
+    if not G.has_node(nid):
+        return
+    zone = _process_zone(pid, suspicious_pids, benign_zone_pids)
+    raw = int(G.nodes[nid].get("is_suspicious", 0))
+    reasons = list(benign_zone_reasons.get(str(pid), benign_zone_reasons.get(pid, [])))
+    G.nodes[nid]["triage_zone"] = zone
+    G.nodes[nid]["raw_is_suspicious"] = raw
+    G.nodes[nid]["is_suspicious"] = int(zone == "suspect")
+    G.nodes[nid]["benign_reasons"] = reasons
+
 
 _BAD_XML = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
 
@@ -284,6 +385,8 @@ def build(folder):
     # ── Load filtered_malicious.json ──────────────────────────────────────────
     mal_path = os.path.join(folder, "filtered_malicious.json")
     suspicious_pids  = set()
+    benign_zone_pids = set()
+    benign_zone_reasons = {}
     pid_suspicion    = {}   # pid -> {"score": int, "reasons": [...]}
     graph_attr_meta  = {}
     label_signals    = {}
@@ -292,7 +395,9 @@ def build(folder):
         with open(mal_path) as f:
             mal = json.load(f)
         meta = mal.get("_meta", {})
-        suspicious_pids = set(meta.get("suspicious_pids", []))
+        suspicious_pids = set(meta.get("suspicious_pids", meta.get("suspect_zone_pids", [])))
+        benign_zone_pids = set(meta.get("benign_zone_pids", []))
+        benign_zone_reasons = meta.get("benign_zone_reasons", {}) or {}
         graph_attr_meta = meta.get("graph_attr", {})
         label_signals   = meta.get("label_signals", {})
         # Build per-pid suspicion score map from behavioural_suspects
@@ -333,8 +438,10 @@ def build(folder):
         pid_to_name[pid] = safe_str(r.get("ImageFileName", "")).lower()
         nid     = pid_node(pid)
         is_sus  = pid in suspicious_pids
+        zone    = _process_zone(pid, suspicious_pids, benign_zone_pids)
         sus_inf = pid_suspicion.get(pid, {"score": 0, "reasons": []})
         name    = safe_str(r.get("ImageFileName", ""))
+        breasons = list(benign_zone_reasons.get(str(pid), benign_zone_reasons.get(pid, [])))
 
         G.add_node(nid,
             node_type        = "process",
@@ -350,9 +457,12 @@ def build(folder):
             exit_time        = safe_str(r.get("ExitTime", "")),
             in_pslist        = int(pid in pl_pids),
             in_psscan        = int(pid in ps_pids),
-            is_suspicious    = int(is_sus),
+            triage_zone      = zone,
+            raw_is_suspicious= int(is_sus or pid in benign_zone_pids),
+            is_suspicious    = int(zone == "suspect"),
             heuristic_score  = sus_inf["score"],
             suspicion_reasons= str(sus_inf["reasons"]),
+            benign_reasons   = breasons,
         )
 
     # ── Cmdline args → enrich process nodes ──────────────────────────────────
@@ -776,6 +886,7 @@ def build(folder):
                         G.add_edge(snid, KERNEL_NODE, edge_type="service_orphan", orphan_pid=pid)
 
     _mark_benign_volume_hubs(G)
+    _apply_triage_zone_inheritance(G, benign_zone_reasons)
 
     # ── Summary ───────────────────────────────────────────────────────────────
     print(f"\n[OK] Graph: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
@@ -824,10 +935,20 @@ def save_graph(G, folder, graph_attr_meta, label_signals):
         float(graph_attr_map.get("lolbin_c2_connections",   0)),
         float(graph_attr_map.get("ransom_note_signal",      0)),
     ]
+    suspect_proc = sum(
+        1 for _, d in G.nodes(data=True)
+        if d.get("node_type") == "process" and d.get("triage_zone") == "suspect"
+    )
+    benign_proc = sum(
+        1 for _, d in G.nodes(data=True)
+        if d.get("node_type") == "process" and d.get("triage_zone") == "benign"
+    )
     ga_out = {
         "graph_attr": graph_attr_tensor,
         "graph_attr_map": graph_attr_map,
         "label_signals": label_signals,
+        "suspect_zone_process_count": suspect_proc,
+        "benign_zone_process_count": benign_proc,
     }
     with open(ga_path, "w") as f:
         json.dump(ga_out, f, indent=2)

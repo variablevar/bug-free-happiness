@@ -1,4 +1,4 @@
 Sample: DeriaLock-WithVirus | label=1 | family=derialock | benign_subtype=
-filter_malicious.py: OK (0.9s)
-build_graph.py: OK (11.6s)
-analyze_graph.py: OK (1.4s)
+filter_malicious.py: OK (0.7s)
+build_graph.py: OK (8.6s)
+analyze_graph.py: OK (1.0s)

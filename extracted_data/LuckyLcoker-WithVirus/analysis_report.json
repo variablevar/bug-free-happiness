@@ -8,7 +8,7 @@
     "nodes_total": 16410,
     "edges_total": 21274,
     "is_directed": true,
-    "suspicious_total": 204,
+    "suspicious_total": 3159,
     "node_types": {
       "kernel": 1,
       "process": 55,
@@ -37,12 +37,12 @@
       "loaded_in_kernel": 102
     },
     "suspicious_by_type": {
-      "process": 16,
-      "thread": 111,
+      "process": 13,
+      "thread": 252,
       "dll": 2,
-      "memory_region": 32,
-      "network_conn": 21,
-      "ip_address": 21,
+      "memory_region": 2879,
+      "network_conn": 7,
+      "ip_address": 5,
       "driver": 1
     }
   },
@@ -52,22 +52,15 @@
         "step": 1,
         "tactic": "Initial Access / Execution",
         "mitre": "T1218 / T1566",
-        "detail": "svchost.exe PID 768 via external-network",
-        "evidence": "C:\\\\Windows\\\\system32\\\\svchost.exe -k netsvcs"
+        "detail": "explorer.exe PID 1928 via external-network",
+        "evidence": "C:\\\\Windows\\\\Explorer.EXE"
       },
       {
         "step": 2,
         "tactic": "Defense Evasion / Process Injection",
         "mitre": "T1055",
-        "detail": "Shellcode in 7 process(es): svchost.exe, MsMpEng.exe, wmpnetwk.exe, chrome.exe, $uckyLocker.ex, audiodg.exe, explorer.exe",
+        "detail": "Shellcode in 5 process(es): explorer.exe, audiodg.exe, MsMpEng.exe, wmpnetwk.exe, $uckyLocker.ex",
         "evidence": "20 00 00 00 e0 ff 0f 00 0c 00 00 00 01 00 05 00 00 42 00 50 00 30 00 70 00 60 00"
-      },
-      {
-        "step": 3,
-        "tactic": "Command & Control",
-        "mitre": "T1071",
-        "detail": "21 unique external C2 IP(s) (21 socket row(s)) via chrome.exe, explorer.exe, svchost.exe",
-        "evidence": "['142.250.178.14', '142.250.179.234', '142.250.180.14', '142.250.180.3']"
       },
       {
         "step": 5,
@@ -78,7 +71,7 @@
       }
     ],
     "overall_verdict": "HIGH \u2014 Multiple malicious behaviours detected",
-    "max_process_score": 47
+    "max_process_score": 37
   },
   "entry_points": [
     {
@@ -152,6 +145,8 @@
       "degree_out": 64,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 47,
       "severity": "CRITICAL",
       "reasons": [
@@ -178,6 +173,8 @@
       "degree_out": 47,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 37,
       "severity": "CRITICAL",
       "reasons": [
@@ -207,6 +204,8 @@
       "degree_out": 227,
       "lineage_depth": 1,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 29,
       "severity": "CRITICAL",
       "reasons": [
@@ -236,6 +235,8 @@
       "degree_out": 60,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 26,
       "severity": "CRITICAL",
       "reasons": [
@@ -264,6 +265,8 @@
       "degree_out": 74,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 26,
       "severity": "CRITICAL",
       "reasons": [
@@ -274,60 +277,6 @@
         "high-in-degree216"
       ],
       "norm_score": 0.5531914893617021
-    },
-    {
-      "node_id": "process_4008",
-      "name": "chrome.exe",
-      "pid": 4008,
-      "ppid": 1480,
-      "parent_name": "chrome.exe",
-      "session": "1.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-29 00:14:25.000000 UTC",
-      "args": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --type=gpu-process --gpu-preferences=UAAAAAAAAADgAAAYAAAAAAAAAAAAAAAAAABgAAAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAASAAAAAAAAAAYAAAAAgAAABAAAAAAAAAAGAAAAAAAAAAQAAAAAAAAAAAAAAAOAAAAEAAAAAAAAAABAAAADgAAAAgAAAAAAAAACAAAAAAAAA",
-      "path": "",
-      "degree_in": 257,
-      "degree_out": 52,
-      "lineage_depth": 0,
-      "is_suspicious_flag": true,
-      "heuristic_score": 24,
-      "severity": "CRITICAL",
-      "reasons": [
-        "nonrwx_exec_private",
-        "rwx_injection",
-        "no-path",
-        "injected-mem"
-      ],
-      "norm_score": 0.5106382978723404
-    },
-    {
-      "node_id": "process_640",
-      "name": "svchost.exe",
-      "pid": 640,
-      "ppid": 484,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-29 00:20:32.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k wsappx",
-      "path": "",
-      "degree_in": 175,
-      "degree_out": 36,
-      "lineage_depth": 0,
-      "is_suspicious_flag": true,
-      "heuristic_score": 24,
-      "severity": "CRITICAL",
-      "reasons": [
-        "nonrwx_exec_private",
-        "rwx_injection",
-        "no-path",
-        "injected-mem"
-      ],
-      "norm_score": 0.5106382978723404
     },
     {
       "node_id": "process_2912",
@@ -346,6 +295,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 16,
       "severity": "CRITICAL",
       "reasons": [
@@ -356,33 +307,6 @@
         "high-in-degree108"
       ],
       "norm_score": 0.3404255319148936
-    },
-    {
-      "node_id": "process_1480",
-      "name": "chrome.exe",
-      "pid": 1480,
-      "ppid": 2660,
-      "parent_name": "?",
-      "session": "1.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-29 00:14:25.000000 UTC",
-      "args": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --from-installer",
-      "path": "",
-      "degree_in": 531,
-      "degree_out": 114,
-      "lineage_depth": 1,
-      "is_suspicious_flag": true,
-      "heuristic_score": 14,
-      "severity": "CRITICAL",
-      "reasons": [
-        "nonrwx_exec_private",
-        "rwx_injection",
-        "no-path",
-        "injected-mem"
-      ],
-      "norm_score": 0.2978723404255319
     },
     {
       "node_id": "process_2060",
@@ -401,6 +325,8 @@
       "degree_out": 47,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 9,
       "severity": "HIGH",
       "reasons": [
@@ -429,6 +355,8 @@
       "degree_out": 91,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 8,
       "severity": "HIGH",
       "reasons": [
@@ -438,32 +366,6 @@
         "high-in-degree258"
       ],
       "norm_score": 0.1702127659574468
-    },
-    {
-      "node_id": "process_3244",
-      "name": "msiexec.exe",
-      "pid": 3244,
-      "ppid": 484,
-      "parent_name": "services.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-29 00:19:05.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\msiexec.exe /V",
-      "path": "",
-      "degree_in": 199,
-      "degree_out": 67,
-      "lineage_depth": 0,
-      "is_suspicious_flag": true,
-      "heuristic_score": 5,
-      "severity": "MEDIUM",
-      "reasons": [
-        "lolbin",
-        "no-path",
-        "high-in-degree199"
-      ],
-      "norm_score": 0.10638297872340426
     },
     {
       "node_id": "process_340",
@@ -482,13 +384,16 @@
       "degree_out": 13,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
-      "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 6,
       "severity": "MEDIUM",
       "reasons": [
+        "abnormal_parent",
         "no-path",
         "high-in-degree116"
       ],
-      "norm_score": 0.06382978723404255
+      "norm_score": 0.1276595744680851
     },
     {
       "node_id": "process_392",
@@ -507,13 +412,16 @@
       "degree_out": 14,
       "lineage_depth": 3,
       "is_suspicious_flag": true,
-      "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 6,
       "severity": "MEDIUM",
       "reasons": [
+        "abnormal_parent",
         "no-path",
         "high-in-degree61"
       ],
-      "norm_score": 0.06382978723404255
+      "norm_score": 0.1276595744680851
     },
     {
       "node_id": "process_400",
@@ -532,13 +440,163 @@
       "degree_out": 14,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
-      "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 6,
       "severity": "MEDIUM",
       "reasons": [
+        "abnormal_parent",
         "no-path",
         "high-in-degree138"
       ],
-      "norm_score": 0.06382978723404255
+      "norm_score": 0.1276595744680851
+    },
+    {
+      "node_id": "process_1480",
+      "name": "chrome.exe",
+      "pid": 1480,
+      "ppid": 2660,
+      "parent_name": "?",
+      "session": "1.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-29 00:14:25.000000 UTC",
+      "args": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --from-installer",
+      "path": "",
+      "degree_in": 531,
+      "degree_out": 114,
+      "lineage_depth": 1,
+      "is_suspicious_flag": false,
+      "triage_zone": "benign",
+      "benign_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "heuristic_score": 6,
+      "severity": "MEDIUM",
+      "reasons": [
+        "no-path",
+        "injected-mem"
+      ],
+      "norm_score": 0.1276595744680851
+    },
+    {
+      "node_id": "process_4008",
+      "name": "chrome.exe",
+      "pid": 4008,
+      "ppid": 1480,
+      "parent_name": "chrome.exe",
+      "session": "1.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-29 00:14:25.000000 UTC",
+      "args": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --type=gpu-process --gpu-preferences=UAAAAAAAAADgAAAYAAAAAAAAAAAAAAAAAABgAAAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAASAAAAAAAAAAYAAAAAgAAABAAAAAAAAAAGAAAAAAAAAAQAAAAAAAAAAAAAAAOAAAAEAAAAAAAAAABAAAADgAAAAgAAAAAAAAACAAAAAAAAA",
+      "path": "",
+      "degree_in": 257,
+      "degree_out": 52,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "triage_zone": "benign",
+      "benign_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "heuristic_score": 6,
+      "severity": "MEDIUM",
+      "reasons": [
+        "no-path",
+        "injected-mem"
+      ],
+      "norm_score": 0.1276595744680851
+    },
+    {
+      "node_id": "process_3244",
+      "name": "msiexec.exe",
+      "pid": 3244,
+      "ppid": 484,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-29 00:19:05.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\msiexec.exe /V",
+      "path": "",
+      "degree_in": 199,
+      "degree_out": 67,
+      "lineage_depth": 0,
+      "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 6,
+      "severity": "MEDIUM",
+      "reasons": [
+        "suspicious_cmdline",
+        "lolbin",
+        "no-path",
+        "high-in-degree199"
+      ],
+      "norm_score": 0.1276595744680851
+    },
+    {
+      "node_id": "process_640",
+      "name": "svchost.exe",
+      "pid": 640,
+      "ppid": 484,
+      "parent_name": "services.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-29 00:20:32.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k wsappx",
+      "path": "",
+      "degree_in": 175,
+      "degree_out": 36,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "triage_zone": "benign",
+      "benign_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "heuristic_score": 6,
+      "severity": "MEDIUM",
+      "reasons": [
+        "no-path",
+        "injected-mem"
+      ],
+      "norm_score": 0.1276595744680851
+    },
+    {
+      "node_id": "process_3424",
+      "name": "SearchProtocol",
+      "pid": 3424,
+      "ppid": 2564,
+      "parent_name": "SearchIndexer.",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-29 00:22:17.000000 UTC",
+      "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe4_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe4 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthrsv",
+      "path": "",
+      "degree_in": 127,
+      "degree_out": 38,
+      "lineage_depth": 0,
+      "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 4,
+      "severity": "MEDIUM",
+      "reasons": [
+        "suspicious_cmdline",
+        "no-path",
+        "high-in-degree127"
+      ],
+      "norm_score": 0.0851063829787234
     },
     {
       "node_id": "process_428",
@@ -557,6 +615,8 @@
       "degree_out": 27,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -582,6 +642,8 @@
       "degree_out": 24,
       "lineage_depth": 2,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -607,6 +669,8 @@
       "degree_out": 31,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -632,6 +696,8 @@
       "degree_out": 52,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -657,6 +723,8 @@
       "degree_out": 92,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -682,6 +750,8 @@
       "degree_out": 36,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -707,6 +777,8 @@
       "degree_out": 29,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -732,6 +804,8 @@
       "degree_out": 25,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -757,6 +831,8 @@
       "degree_out": 29,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -782,6 +858,8 @@
       "degree_out": 83,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -807,6 +885,8 @@
       "degree_out": 57,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -832,6 +912,8 @@
       "degree_out": 81,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -857,36 +939,13 @@
       "degree_out": 30,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree92"
-      ],
-      "norm_score": 0.06382978723404255
-    },
-    {
-      "node_id": "process_3424",
-      "name": "SearchProtocol",
-      "pid": 3424,
-      "ppid": 2564,
-      "parent_name": "SearchIndexer.",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-29 00:22:17.000000 UTC",
-      "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe4_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe4 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthrsv",
-      "path": "",
-      "degree_in": 127,
-      "degree_out": 38,
-      "lineage_depth": 0,
-      "is_suspicious_flag": true,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "no-path",
-        "high-in-degree127"
       ],
       "norm_score": 0.06382978723404255
     },
@@ -907,6 +966,8 @@
       "degree_out": 30,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -932,6 +993,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -956,6 +1019,8 @@
       "degree_out": 63,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -980,6 +1045,8 @@
       "degree_out": 68,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1004,6 +1071,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1028,6 +1097,8 @@
       "degree_out": 62,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1052,6 +1123,8 @@
       "degree_out": 0,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [],
@@ -1074,6 +1147,8 @@
       "degree_out": 49,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1099,6 +1174,8 @@
       "degree_out": 27,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1124,6 +1201,8 @@
       "degree_out": 91,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1149,6 +1228,8 @@
       "degree_out": 184,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1175,6 +1256,8 @@
       "degree_out": 65,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1200,6 +1283,8 @@
       "degree_out": 94,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1225,6 +1310,8 @@
       "degree_out": 78,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1250,6 +1337,8 @@
       "degree_out": 79,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1275,6 +1364,8 @@
       "degree_out": 55,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1300,6 +1391,8 @@
       "degree_out": 53,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1325,9 +1418,12 @@
       "degree_out": 18,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
+        "suspicious_cmdline",
         "no-path",
         "popularity-dampened"
       ],
@@ -1350,6 +1446,8 @@
       "degree_out": 40,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1375,6 +1473,8 @@
       "degree_out": 44,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1400,6 +1500,8 @@
       "degree_out": 38,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1425,6 +1527,8 @@
       "degree_out": 37,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1450,6 +1554,8 @@
       "degree_out": 37,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1475,6 +1581,8 @@
       "degree_out": 37,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1500,6 +1608,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1525,6 +1635,8 @@
       "degree_out": 38,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1537,6 +1649,7 @@
   "hidden_processes": [],
   "network": [
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.72.2.52",
       "local_port": 54209,
@@ -1555,6 +1668,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.72.2.52",
       "local_port": 54307,
@@ -1573,23 +1687,7 @@
       ]
     },
     {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54286,
-      "foreign_addr": "142.250.180.14",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.72.2.52",
       "local_port": 54227,
@@ -1607,91 +1705,7 @@
       ]
     },
     {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54289,
-      "foreign_addr": "142.250.178.14",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54302,
-      "foreign_addr": "142.250.200.35",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54292,
-      "foreign_addr": "142.250.200.36",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54309,
-      "foreign_addr": "142.250.200.46",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54285,
-      "foreign_addr": "142.250.187.238",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.72.2.52",
       "local_port": 54291,
@@ -1709,6 +1723,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.72.2.52",
       "local_port": 54234,
@@ -1726,40 +1741,7 @@
       ]
     },
     {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54280,
-      "foreign_addr": "172.217.16.234",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54284,
-      "foreign_addr": "172.217.16.227",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.72.2.52",
       "local_port": 53924,
@@ -1777,112 +1759,11 @@
       ]
     },
     {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54299,
-      "foreign_addr": "172.217.169.35",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54225,
-      "foreign_addr": "142.250.179.234",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54300,
-      "foreign_addr": "172.217.169.10",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54308,
-      "foreign_addr": "142.250.200.1",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54287,
-      "foreign_addr": "172.217.169.14",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.72.2.52",
       "local_port": 54312,
       "foreign_addr": "35.215.90.198",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.72.2.52",
-      "local_port": 54290,
-      "foreign_addr": "142.250.180.3",
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "owner": "chrome.exe",
@@ -49033,1752 +48914,6 @@
       ]
     },
     {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x30312c0000",
-      "end_vpn": "0x30313bffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3019340000",
-      "end_vpn": "0x301934cfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ffe0000",
-      "end_vpn": "0x7ffeffff",
-      "protection": "PAGE_READONLY",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7f101000",
-      "end_vpn": "0x7f101fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x30191b0000",
-      "end_vpn": "0x30191b1fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3018990000",
-      "end_vpn": "0x301918ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x30191c0000",
-      "end_vpn": "0x30192bffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3019380000",
-      "end_vpn": "0x3019380fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3019350000",
-      "end_vpn": "0x301935cfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3019370000",
-      "end_vpn": "0x3019370fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x30193b0000",
-      "end_vpn": "0x30193bcfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x30193d0000",
-      "end_vpn": "0x30193dffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x301bfe0000",
-      "end_vpn": "0x301c7dffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x301ade0000",
-      "end_vpn": "0x301b5dffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x301c930000",
-      "end_vpn": "0x301c93ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x301f660000",
-      "end_vpn": "0x301fe5ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x301e660000",
-      "end_vpn": "0x301ee5ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x301de60000",
-      "end_vpn": "0x301e65ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x301d660000",
-      "end_vpn": "0x301de5ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x301ff30000",
-      "end_vpn": "0x301ff30fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x301ff50000",
-      "end_vpn": "0x301ff58fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3020200000",
-      "end_vpn": "0x3020200fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x30201d0000",
-      "end_vpn": "0x30201f3fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3020210000",
-      "end_vpn": "0x302030ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3020e60000",
-      "end_vpn": "0x302165ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3020650000",
-      "end_vpn": "0x3020661fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3020670000",
-      "end_vpn": "0x30206b7fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3023ef0000",
-      "end_vpn": "0x30246effff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x30236d0000",
-      "end_vpn": "0x3023ecffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x30226d0000",
-      "end_vpn": "0x3022ecffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3021660000",
-      "end_vpn": "0x3021e5ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3021ed0000",
-      "end_vpn": "0x30226cffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x30246f0000",
-      "end_vpn": "0x3024eeffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3026750000",
-      "end_vpn": "0x3026b4ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3026f30000",
-      "end_vpn": "0x302772ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3028870000",
-      "end_vpn": "0x302906ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3028740000",
-      "end_vpn": "0x302883ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3027f40000",
-      "end_vpn": "0x302873ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3027740000",
-      "end_vpn": "0x3027f3ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3029120000",
-      "end_vpn": "0x302921ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x302a4d0000",
-      "end_vpn": "0x302accffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x30294d0000",
-      "end_vpn": "0x3029ccffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3029cd0000",
-      "end_vpn": "0x302a4cffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x302acf0000",
-      "end_vpn": "0x302b4effff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x302d530000",
-      "end_vpn": "0x302dd2ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x302bd30000",
-      "end_vpn": "0x302c52ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x302b530000",
-      "end_vpn": "0x302bd2ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x302cd30000",
-      "end_vpn": "0x302d52ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x302ed30000",
-      "end_vpn": "0x302ed30fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3030a30000",
-      "end_vpn": "0x303122ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3030620000",
-      "end_vpn": "0x3030a1ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x1e2bffff0000",
-      "end_vpn": "0x1e2fffffffff",
-      "protection": "PAGE_NOACCESS",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3031820000",
-      "end_vpn": "0x303191ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x30313c0000",
-      "end_vpn": "0x30315bffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3031a50000",
-      "end_vpn": "0x3031a50fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3031cd0000",
-      "end_vpn": "0x30324cffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3032a40000",
-      "end_vpn": "0x3032c3ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3033c60000",
-      "end_vpn": "0x303445ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3034860000",
-      "end_vpn": "0x3034c5ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3034460000",
-      "end_vpn": "0x303485ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x3034c60000",
-      "end_vpn": "0x303545ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x85c00000000",
-      "end_vpn": "0x85fffffffff",
-      "protection": "PAGE_NOACCESS",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x1217ffff0000",
-      "end_vpn": "0x121bffffffff",
-      "protection": "PAGE_NOACCESS",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619542000",
-      "end_vpn": "0x7ff619543fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x6b2800000000",
-      "end_vpn": "0x6b2bffffffff",
-      "protection": "PAGE_NOACCESS",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x387000000000",
-      "end_vpn": "0x3873ffffffff",
-      "protection": "PAGE_NOACCESS",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x233bffff0000",
-      "end_vpn": "0x233fffffffff",
-      "protection": "PAGE_NOACCESS",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619530000",
-      "end_vpn": "0x7ff619531fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff61952e000",
-      "end_vpn": "0x7ff61952ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff61952a000",
-      "end_vpn": "0x7ff61952bfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619540000",
-      "end_vpn": "0x7ff619541fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff61955c000",
-      "end_vpn": "0x7ff61955dfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff61954e000",
-      "end_vpn": "0x7ff61954ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff61954a000",
-      "end_vpn": "0x7ff61954bfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619546000",
-      "end_vpn": "0x7ff619547fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619544000",
-      "end_vpn": "0x7ff619545fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619548000",
-      "end_vpn": "0x7ff619549fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff61954c000",
-      "end_vpn": "0x7ff61954dfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619552000",
-      "end_vpn": "0x7ff619553fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619550000",
-      "end_vpn": "0x7ff619551fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff61955a000",
-      "end_vpn": "0x7ff61955bfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619556000",
-      "end_vpn": "0x7ff619557fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619566000",
-      "end_vpn": "0x7ff619567fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619562000",
-      "end_vpn": "0x7ff619563fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619560000",
-      "end_vpn": "0x7ff619561fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619564000",
-      "end_vpn": "0x7ff619565fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff61956c000",
-      "end_vpn": "0x7ff61956dfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff61956a000",
-      "end_vpn": "0x7ff61956bfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619568000",
-      "end_vpn": "0x7ff619569fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff61956e000",
-      "end_vpn": "0x7ff61956ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619699000",
-      "end_vpn": "0x7ff61969afff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619695000",
-      "end_vpn": "0x7ff619696fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619693000",
-      "end_vpn": "0x7ff619694fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff619697000",
-      "end_vpn": "0x7ff619698fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff61969d000",
-      "end_vpn": "0x7ff61969efff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff61969b000",
-      "end_vpn": "0x7ff61969cfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 1480,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff61969f000",
-      "end_vpn": "0x7ff61969ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
       "pid": 672,
       "process_name": "chrome.exe",
       "start_vpn": "0xb041880000",
@@ -51323,942 +49458,6 @@
       "process_name": "chrome.exe",
       "start_vpn": "0x7ff619a2e000",
       "end_vpn": "0x7ff619a2ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa53e0000",
-      "end_vpn": "0xeaa5bdffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa1af0000",
-      "end_vpn": "0xeaa1beffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa1a30000",
-      "end_vpn": "0xeaa1a30fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa1200000",
-      "end_vpn": "0xeaa19fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ffe0000",
-      "end_vpn": "0x7ffeffff",
-      "protection": "PAGE_READONLY",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa1a20000",
-      "end_vpn": "0xeaa1a21fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa1a40000",
-      "end_vpn": "0xeaa1a4ffff",
-      "protection": "PAGE_NOACCESS",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa1ad0000",
-      "end_vpn": "0xeaa1adcfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa1ae0000",
-      "end_vpn": "0xeaa1aecfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa1c40000",
-      "end_vpn": "0xeaa1c4ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa1c10000",
-      "end_vpn": "0xeaa1c10fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa1c00000",
-      "end_vpn": "0xeaa1c0cfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa1c20000",
-      "end_vpn": "0xeaa1c20fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa1cb0000",
-      "end_vpn": "0xeaa1cbcfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa1cd0000",
-      "end_vpn": "0xeaa1cdffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa36e0000",
-      "end_vpn": "0xeaa3edffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa50e0000",
-      "end_vpn": "0xeaa51dffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa48e0000",
-      "end_vpn": "0xeaa50dffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa51e0000",
-      "end_vpn": "0xeaa53dffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa7570000",
-      "end_vpn": "0xeaa757ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa6be0000",
-      "end_vpn": "0xeaa73dffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa63e0000",
-      "end_vpn": "0xeaa6bdffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa5be0000",
-      "end_vpn": "0xeaa63dffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa7d80000",
-      "end_vpn": "0xeaa857ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa8d80000",
-      "end_vpn": "0xeaa957ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa8580000",
-      "end_vpn": "0xeaa8d7ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaa9580000",
-      "end_vpn": "0xeaa9d7ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaaa580000",
-      "end_vpn": "0xeaaad7ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaaae80000",
-      "end_vpn": "0xeaab28afff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaaad80000",
-      "end_vpn": "0xeaaae7ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x71e000000000",
-      "end_vpn": "0x71e3ffffffff",
-      "protection": "PAGE_NOACCESS",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaad4e0000",
-      "end_vpn": "0xeaad8e8fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaac510000",
-      "end_vpn": "0xeaac90ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0xeaacb40000",
-      "end_vpn": "0xeaacc3ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x2c8bffff0000",
-      "end_vpn": "0x2c8fffffffff",
-      "protection": "PAGE_NOACCESS",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x1a3ffff0000",
-      "end_vpn": "0x1a7ffffffff",
-      "protection": "PAGE_NOACCESS",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x2a4000000000",
-      "end_vpn": "0x2a43ffffffff",
-      "protection": "PAGE_NOACCESS",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x58ebffff0000",
-      "end_vpn": "0x58efffffffff",
-      "protection": "PAGE_NOACCESS",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x58ac00000000",
-      "end_vpn": "0x58afffffffff",
-      "protection": "PAGE_NOACCESS",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff618e06000",
-      "end_vpn": "0x7ff618e07fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff618e02000",
-      "end_vpn": "0x7ff618e03fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff618dfe000",
-      "end_vpn": "0x7ff618dfffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff618e04000",
-      "end_vpn": "0x7ff618e05fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff618e0c000",
-      "end_vpn": "0x7ff618e0dfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff618e08000",
-      "end_vpn": "0x7ff618e09fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff618e0e000",
-      "end_vpn": "0x7ff618e0ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff618f38000",
-      "end_vpn": "0x7ff618f39fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff618f36000",
-      "end_vpn": "0x7ff618f36fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff618f34000",
-      "end_vpn": "0x7ff618f35fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff618f3c000",
-      "end_vpn": "0x7ff618f3dfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff618f3a000",
-      "end_vpn": "0x7ff618f3bfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 4008,
-      "process_name": "chrome.exe",
-      "start_vpn": "0x7ff618f3e000",
-      "end_vpn": "0x7ff618f3ffff",
       "protection": "PAGE_READWRITE",
       "private": true,
       "backing_file": "",
@@ -63559,888 +60758,6 @@
       ]
     },
     {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1eeed0000",
-      "end_vpn": "0xd1eef4ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1edde0000",
-      "end_vpn": "0xd1ede5ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0x7ffe0000",
-      "end_vpn": "0x7ffeffff",
-      "protection": "PAGE_READONLY",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1eddc0000",
-      "end_vpn": "0xd1eddccfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1ede80000",
-      "end_vpn": "0xd1ede8cfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1edeb0000",
-      "end_vpn": "0xd1edeb0fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1edea0000",
-      "end_vpn": "0xd1edea0fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1edec0000",
-      "end_vpn": "0xd1edec4fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1edef0000",
-      "end_vpn": "0xd1edfeffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1edee0000",
-      "end_vpn": "0xd1edee0fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1ee160000",
-      "end_vpn": "0xd1ee167fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1ee140000",
-      "end_vpn": "0xd1ee14ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1ee180000",
-      "end_vpn": "0xd1ee18ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1ee170000",
-      "end_vpn": "0xd1ee17ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1ee530000",
-      "end_vpn": "0xd1ee5affff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1eead0000",
-      "end_vpn": "0xd1eebcffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1eea10000",
-      "end_vpn": "0xd1eeacafff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1ee890000",
-      "end_vpn": "0xd1ee98ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1eecd0000",
-      "end_vpn": "0xd1eedcffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1eebd0000",
-      "end_vpn": "0xd1eeccffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1eedd0000",
-      "end_vpn": "0xd1eeecffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1ef130000",
-      "end_vpn": "0xd1f112ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1eefb0000",
-      "end_vpn": "0xd1ef02ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1ef0e0000",
-      "end_vpn": "0xd1ef12bfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f12d0000",
-      "end_vpn": "0xd1f12d0fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f1160000",
-      "end_vpn": "0xd1f119ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f1140000",
-      "end_vpn": "0xd1f1140fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f1130000",
-      "end_vpn": "0xd1f113ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f1150000",
-      "end_vpn": "0xd1f1150fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f11c0000",
-      "end_vpn": "0xd1f12bffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f12c0000",
-      "end_vpn": "0xd1f12c1fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f5400000",
-      "end_vpn": "0xd1f93fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f13f0000",
-      "end_vpn": "0xd1f13fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f12e0000",
-      "end_vpn": "0xd1f13effff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f1400000",
-      "end_vpn": "0xd1f53fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f9400000",
-      "end_vpn": "0xd1f9407fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f9530000",
-      "end_vpn": "0xd1f953ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f9510000",
-      "end_vpn": "0xd1f951ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f9520000",
-      "end_vpn": "0xd1f952ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f9550000",
-      "end_vpn": "0xd1f955ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f9540000",
-      "end_vpn": "0xd1f954ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f9560000",
-      "end_vpn": "0xd1f9567fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f9590000",
-      "end_vpn": "0xd1f959ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0xd1f96e0000",
-      "end_vpn": "0xd1f97dffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0x7ff7db109000",
-      "end_vpn": "0x7ff7db10afff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0x7ff7db105000",
-      "end_vpn": "0x7ff7db106fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0x7ff7db103000",
-      "end_vpn": "0x7ff7db104fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0x7ff7db10e000",
-      "end_vpn": "0x7ff7db10ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 640,
-      "process_name": "svchost.exe",
-      "start_vpn": "0x7ff7db10b000",
-      "end_vpn": "0x7ff7db10bfff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
       "pid": 4016,
       "process_name": "FTK Imager.exe",
       "start_vpn": "0x3030000",
@@ -68552,7 +64869,8 @@
     "behavioural_suspects_found": 1,
     "lolbin_c2_found": 0,
     "ransom_note_found": 0,
-    "rwx_injections": 32,
+    "rwx_injections": 22,
+    "raw_rwx_injections": 32,
     "hidden_processes": 0,
     "top_suspect_score": 28,
     "triage_confidence": 0.9371,
@@ -68576,5 +64894,13 @@
     "trusted_host_dll_anomalies": 0,
     "dual_use_admin_tool_count": 0,
     "popularity_dampened_processes": 20
+  },
+  "benign_zone_summary": {
+    "process_count": 3,
+    "top_reasons": [
+      "nonrwx_exec_private",
+      "rwx_injection"
+    ],
+    "excluded_from_verdict": true
   }
 }

@@ -372,7 +372,6 @@ def run(args):
     val_probs_iso[:, 0] = 1.0 - val_probs_iso[:, 1]
     t_low, t_high = choose_thresholds_by_roc(
         val_probs_iso,
-        val_probs_cal,
         val_y,
         target_recall=args.target_recall,
         target_specificity=args.target_specificity,
@@ -531,9 +530,13 @@ if __name__ == "__main__":
     )
     p.add_argument(
         "--allowed-benign-subtypes",
-        default="clean_benign,hard_benign_admin_tooling",
+        default="clean_benign,hard_benign_admin_tooling,ambiguous_novirus_control",
         dest="allowed_benign_subtypes",
-        help="Comma-separated benign_subtype values permitted when governance is on.",
+        help=(
+            "Comma-separated benign_subtype values permitted when governance is on. "
+            "With the default strict train filter, rows with train_eligible=true bypass "
+            "this list (manifest is authoritative)."
+        ),
     )
     p.add_argument("--reliability-bins", type=int, default=10, dest="reliability_bins")
     p.add_argument("--pos-weight-mode", choices=["auto", "manual", "sweep"], default="auto", dest="pos_weight_mode")

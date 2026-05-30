@@ -19,7 +19,7 @@ Typical deployment story
 
 Tensor contract (matches `MalwareGraphDataset` in `dataset.py`)
 -----------------------------------------------------------------
-- `x`: node features, last dim **31** (type one-hot + numeric flags + role counts).
+- `x`: node features, last dim **33** (type one-hot + numeric flags + triage zone + role counts).
 - `edge_index`: `[2, E]` PyG COO.
 - `batch`: batch vector for `global_*_pool`.
 - `graph_attr`: `[B, D]` (or omitted → zeros); see `EXPECTED_GRAPH_ATTR_DIM` in `utils/schema.py`.
@@ -50,8 +50,18 @@ from dataset import N_EDGE_TYPES
 from utils.schema import EXPECTED_GRAPH_ATTR_DIM
 
 
-def _graph_readout(x: torch.Tensor, batch: torch.Tensor) -> torch.Tensor:
+def _graph_readout(
+    x: torch.Tensor,
+    batch: torch.Tensor,
+    node_mask: torch.Tensor | None = None,
+) -> torch.Tensor:
     """Per-graph vector: concat(mean, max, sum) over nodes → dim `3 * F`."""
+    if node_mask is not None:
+        if node_mask.dtype != torch.bool:
+            node_mask = node_mask.bool()
+        if torch.any(node_mask):
+            x = x[node_mask]
+            batch = batch[node_mask]
     return torch.cat(
         [
             global_mean_pool(x, batch),
@@ -113,6 +123,7 @@ class GINMalwareClassifier(nn.Module):
         batch: torch.Tensor,
         graph_attr: torch.Tensor | None = None,
         edge_attr: torch.Tensor | None = None,
+        node_mask: torch.Tensor | None = None,
     ) -> torch.Tensor:
         del edge_attr
 
@@ -120,7 +131,7 @@ class GINMalwareClassifier(nn.Module):
         for conv, bn in zip(self.convs, self.bns):
             x = F.relu(bn(conv(x, edge_index)))
             x = F.dropout(x, p=self.dropout, training=self.training)
-            chunks.append(_graph_readout(x, batch))
+            chunks.append(_graph_readout(x, batch, node_mask=node_mask))
 
         gnn_vec = torch.cat(chunks, dim=1)
         if graph_attr is None:
@@ -172,6 +183,7 @@ class SAGEMalwareClassifier(nn.Module):
         batch: torch.Tensor,
         graph_attr: torch.Tensor | None = None,
         edge_attr: torch.Tensor | None = None,
+        node_mask: torch.Tensor | None = None,
     ) -> torch.Tensor:
         del edge_attr
 
@@ -179,7 +191,7 @@ class SAGEMalwareClassifier(nn.Module):
             x = F.relu(bn(conv(x, edge_index)))
             x = F.dropout(x, p=self.dropout, training=self.training)
 
-        gnn_vec = _graph_readout(x, batch)
+        gnn_vec = _graph_readout(x, batch, node_mask=node_mask)
         if graph_attr is None:
             graph_attr = _zeros_graph_attr(gnn_vec.size(0), gnn_vec.device)
 
@@ -246,6 +258,7 @@ class GATMalwareClassifier(nn.Module):
         batch: torch.Tensor,
         graph_attr: torch.Tensor | None = None,
         edge_attr: torch.Tensor | None = None,
+        node_mask: torch.Tensor | None = None,
     ) -> torch.Tensor:
         del edge_attr
 
@@ -253,7 +266,7 @@ class GATMalwareClassifier(nn.Module):
             x = F.elu(bn(conv(x, edge_index)))
             x = F.dropout(x, p=self.dropout, training=self.training)
 
-        gnn_vec = _graph_readout(x, batch)
+        gnn_vec = _graph_readout(x, batch, node_mask=node_mask)
         if graph_attr is None:
             graph_attr = _zeros_graph_attr(gnn_vec.size(0), gnn_vec.device)
 
@@ -316,6 +329,7 @@ class GINEMalwareClassifier(nn.Module):
         batch: torch.Tensor,
         graph_attr: torch.Tensor | None = None,
         edge_attr: torch.Tensor | None = None,
+        node_mask: torch.Tensor | None = None,
     ) -> torch.Tensor:
         if edge_attr is None:
             raise ValueError("GINEMalwareClassifier requires edge_attr (edge-type indices).")
@@ -329,7 +343,7 @@ class GINEMalwareClassifier(nn.Module):
         for conv, bn in zip(self.convs, self.bns):
             x = F.relu(bn(conv(x, edge_index, edge_attr=edge_feat)))
             x = F.dropout(x, p=self.dropout, training=self.training)
-            chunks.append(_graph_readout(x, batch))
+            chunks.append(_graph_readout(x, batch, node_mask=node_mask))
 
         gnn_vec = torch.cat(chunks, dim=1)
         if graph_attr is None:
@@ -344,10 +358,14 @@ class GINEMalwareClassifier(nn.Module):
         batch: torch.Tensor,
         graph_attr: torch.Tensor | None = None,
         edge_attr: torch.Tensor | None = None,
+        node_mask: torch.Tensor | None = None,
         *,
         return_embedding: bool = False,
     ) -> torch.Tensor | tuple[torch.Tensor, torch.Tensor]:
-        emb = self.encode_graph(x, edge_index, batch, graph_attr=graph_attr, edge_attr=edge_attr)
+        emb = self.encode_graph(
+            x, edge_index, batch,
+            graph_attr=graph_attr, edge_attr=edge_attr, node_mask=node_mask,
+        )
         if self._head is None:
             self._build_head(emb.size(1), emb.device)
         logits = self._head(emb)

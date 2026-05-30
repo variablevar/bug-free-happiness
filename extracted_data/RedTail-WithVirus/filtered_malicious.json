@@ -730,6 +730,138 @@
   ],
   "behavioural_suspects": [
     {
+      "PID": 4,
+      "pid": 4,
+      "name": "System",
+      "ppid": 0,
+      "parent_name": "?",
+      "create_time": "2025-06-27 15:38:28.000000 UTC",
+      "args": "",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 0,
+      "attack_stages": [
+        "credential_or_discovery"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "lsass_full_access",
+          "stage": "credential_or_discovery",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "system:0x1fffff"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "lsass_full_access"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 636,
+      "pid": 636,
+      "name": "csrss.exe",
+      "ppid": 592,
+      "parent_name": "?",
+      "create_time": "2025-06-27 15:38:33.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 1,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "unknown->csrss.exe"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "abnormal_parent"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 704,
+      "pid": 704,
+      "name": "wininit.exe",
+      "ppid": 592,
+      "parent_name": "?",
+      "create_time": "2025-06-27 15:38:33.000000 UTC",
+      "args": "wininit.exe",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 1,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "unknown->wininit.exe"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "abnormal_parent"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 712,
+      "pid": 712,
+      "name": "csrss.exe",
+      "ppid": 696,
+      "parent_name": "?",
+      "create_time": "2025-06-27 15:38:33.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 1,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "unknown->csrss.exe"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "abnormal_parent"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
       "PID": 3284,
       "pid": 3284,
       "name": "MsMpEng.exe",
@@ -848,7 +980,8 @@
         "rwx_injection"
       ],
       "_confidence": 0.99,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 5204,
@@ -969,7 +1102,8 @@
         "rwx_injection"
       ],
       "_confidence": 0.9705,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 1332,
@@ -1030,7 +1164,8 @@
         "windows_update_profile"
       ],
       "_confidence": 0.5305,
-      "_severity": "High"
+      "_severity": "High",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 2316,
@@ -1087,13 +1222,14 @@
         "rwx_injection"
       ],
       "_confidence": 0.6584,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
     }
   ],
+  "benign_context_processes": [],
   "_meta": {
-    "total_suspicious_pids": 9,
+    "total_suspicious_pids": 8,
     "suspicious_pids": [
-      0,
       4,
       636,
       704,
@@ -1103,25 +1239,40 @@
       3284,
       5204
     ],
+    "suspect_zone_pids": [
+      4,
+      636,
+      704,
+      712,
+      1332,
+      2316,
+      3284,
+      5204
+    ],
+    "benign_zone_pids": [],
+    "benign_zone_reasons": {},
     "graph_attr": {
       "max_process_score": 99,
+      "raw_rwx_injections": 27,
+      "benign_zone_process_count": 0,
+      "suspect_zone_process_count": 8,
       "attack_steps": 3,
       "high_severity_injections": 0,
       "lolbin_c2_connections": 0,
       "ransom_note_signal": 0,
-      "suspect_rate": 0.028986,
+      "suspect_rate": 0.057971,
       "hidden_rate": 0.0,
       "inject_rate": 0.195652,
       "external_conn_rate": 0.0,
-      "largest_suspicious_component_ratio": 0.065217,
+      "largest_suspicious_component_ratio": 0.057971,
       "lineage_depth_p95": 4,
       "lolbin_chain_count": 0,
       "nonrwx_exec_count": 23,
       "credential_access_count": 1,
       "triage_confidence": 0.99,
       "stage_coverage_score": 0.8,
-      "proc_degree_zmax": 6.286953,
-      "proc_betweenness_p95": 0.031247,
+      "proc_degree_zmax": 6.19866,
+      "proc_betweenness_p95": 0.040273,
       "num_attack_motifs": 135,
       "service_boundary_violations": 0,
       "temporal_chain_signals": 0,
@@ -1132,6 +1283,7 @@
       "lolbin_c2_found": 0,
       "ransom_note_found": 0,
       "rwx_injections": 27,
+      "raw_rwx_injections": 27,
       "hidden_processes": 0,
       "top_suspect_score": 99,
       "triage_confidence": 0.99,
@@ -1203,12 +1355,10 @@
       "sequence_quality": 0.8
     },
     "root_cause_process": {
-      "pid": 3284,
-      "name": "msmpeng.exe",
+      "pid": 4,
+      "name": "system",
       "why": [
-        "rwx_injection:vadinfo:PAGE_EXECUTE_READWRITE",
-        "rwx_injection:vadinfo:PAGE_EXECUTE_READWRITE",
-        "rwx_injection:vadinfo:PAGE_EXECUTE_READWRITE"
+        "lsass_full_access:system:0x1fffff"
       ]
     },
     "evidence_graph": {
@@ -1216,29 +1366,36 @@
         "process_1332",
         "process_2316",
         "process_3284",
-        "process_5204"
+        "process_4",
+        "process_5204",
+        "process_636",
+        "process_704",
+        "process_712"
       ],
       "edges": []
     },
     "model_features": {
       "max_process_score": 99,
+      "raw_rwx_injections": 27,
+      "benign_zone_process_count": 0,
+      "suspect_zone_process_count": 8,
       "attack_steps": 3,
       "high_severity_injections": 0,
       "lolbin_c2_connections": 0,
       "ransom_note_signal": 0,
-      "suspect_rate": 0.028986,
+      "suspect_rate": 0.057971,
       "hidden_rate": 0.0,
       "inject_rate": 0.195652,
       "external_conn_rate": 0.0,
-      "largest_suspicious_component_ratio": 0.065217,
+      "largest_suspicious_component_ratio": 0.057971,
       "lineage_depth_p95": 4,
       "lolbin_chain_count": 0,
       "nonrwx_exec_count": 23,
       "credential_access_count": 1,
       "triage_confidence": 0.99,
       "stage_coverage_score": 0.8,
-      "proc_degree_zmax": 6.286953,
-      "proc_betweenness_p95": 0.031247,
+      "proc_degree_zmax": 6.19866,
+      "proc_betweenness_p95": 0.040273,
       "num_attack_motifs": 135,
       "service_boundary_violations": 0,
       "temporal_chain_signals": 0,

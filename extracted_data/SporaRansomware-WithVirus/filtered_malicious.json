@@ -547,288 +547,13 @@
       "pid": 0,
       "process_name": "?",
       "owner": "",
-      "foreign_addr": "142.250.178.14",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "172.217.16.225",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "142.250.178.14",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "20.189.173.12",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "172.217.169.13",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "142.250.200.14",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "172.217.169.10",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "20.90.156.32",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "142.250.200.14",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "172.217.169.46",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "13.107.42.12",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "172.217.16.225",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "142.250.187.202",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "172.217.169.10",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "172.217.16.238",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "142.250.180.14",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "142.250.200.42",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "13.107.42.12",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
       "foreign_addr": "185.199.111.133",
       "foreign_port": 443,
       "state": "ESTABLISHED",
       "proto": "TCPv4",
       "is_lolbin_c2": false,
       "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "142.250.187.195",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "20.90.153.243",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "142.250.200.4",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "172.217.16.238",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "142.250.200.14",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
+      "_benign_zone": 0,
       "_severity": "High"
     },
     {
@@ -841,42 +566,7 @@
       "proto": "TCPv4",
       "is_lolbin_c2": false,
       "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "142.250.187.195",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "172.217.16.234",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "142.250.200.3",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
+      "_benign_zone": 0,
       "_severity": "High"
     },
     {
@@ -889,30 +579,7 @@
       "proto": "TCPv4",
       "is_lolbin_c2": false,
       "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "142.250.200.3",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
-      "_severity": "High"
-    },
-    {
-      "pid": 0,
-      "process_name": "?",
-      "owner": "",
-      "foreign_addr": "142.250.178.14",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "proto": "TCPv4",
-      "is_lolbin_c2": false,
-      "_is_lolbin_c2": false,
+      "_benign_zone": 0,
       "_severity": "High"
     }
   ],
@@ -1051,6 +718,13 @@
       "process_name": "?",
       "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\LogUploader.dll",
       "name": "LogUploader.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSyncSessions.dll",
+      "name": "FileSyncSessions.dll",
       "_severity": "High"
     },
     {
@@ -1512,6 +1186,138 @@
   ],
   "behavioural_suspects": [
     {
+      "PID": 4,
+      "pid": 4,
+      "name": "System",
+      "ppid": 0,
+      "parent_name": "?",
+      "create_time": "2023-03-29 15:18:14.000000 UTC",
+      "args": "",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 0,
+      "attack_stages": [
+        "credential_or_discovery"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "lsass_full_access",
+          "stage": "credential_or_discovery",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "system:0x1fffff"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "lsass_full_access"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 448,
+      "pid": 448,
+      "name": "csrss.exe",
+      "ppid": 436,
+      "parent_name": "?",
+      "create_time": "2023-03-29 15:18:16.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 1,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "unknown->csrss.exe"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "abnormal_parent"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 524,
+      "pid": 524,
+      "name": "wininit.exe",
+      "ppid": 436,
+      "parent_name": "?",
+      "create_time": "2023-03-29 15:18:16.000000 UTC",
+      "args": "wininit.exe",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 1,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "unknown->wininit.exe"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "abnormal_parent"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 544,
+      "pid": 544,
+      "name": "csrss.exe",
+      "ppid": 516,
+      "parent_name": "svchost.exe",
+      "create_time": "2023-03-29 15:18:16.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "svchost.exe->csrss.exe"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "abnormal_parent"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
       "PID": 2100,
       "pid": 2100,
       "name": "MsMpEng.exe",
@@ -1630,7 +1436,8 @@
         "rwx_injection"
       ],
       "_confidence": 0.9762,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 1212,
@@ -1751,7 +1558,8 @@
         "rwx_injection"
       ],
       "_confidence": 0.9762,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 4948,
@@ -1824,7 +1632,8 @@
         "rwx_injection"
       ],
       "_confidence": 0.8147,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 5904,
@@ -1885,7 +1694,74 @@
         "windows_update_profile"
       ],
       "_confidence": 0.5305,
-      "_severity": "High"
+      "_severity": "High",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 6392,
+      "pid": 6392,
+      "name": "msedge.exe",
+      "ppid": 6372,
+      "parent_name": "msedge.exe",
+      "create_time": "2023-03-29 15:18:55.000000 UTC",
+      "args": "\"C:\\\\Program Files\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=crashpad-handler \"--user-data-dir=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler \"--database=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\\\\",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 8,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "suspicious_cmdline",
+          "stage": "initial_execution",
+          "weight": 2.0,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "SuspiciousPath"
+        }
+      ],
+      "_suspicion_score": 1,
+      "_reasons": [
+        "suspicious_cmdline"
+      ],
+      "_confidence": 0.1341,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 7500,
+      "pid": 7500,
+      "name": "FileCoAuth.exe",
+      "ppid": 860,
+      "parent_name": "svchost.exe",
+      "create_time": "2023-03-29 15:19:04.000000 UTC",
+      "args": "\"C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileCoAuth.exe\" -Embedding",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "suspicious_cmdline",
+          "stage": "initial_execution",
+          "weight": 2.0,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "SuspiciousPath"
+        }
+      ],
+      "_suspicion_score": 1,
+      "_reasons": [
+        "suspicious_cmdline"
+      ],
+      "_confidence": 0.1341,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 880,
@@ -1982,7 +1858,41 @@
         "rwx_injection"
       ],
       "_confidence": 0.9371,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 5600,
+      "pid": 5600,
+      "name": "SearchProtocol",
+      "ppid": 2140,
+      "parent_name": "searchindexer.",
+      "create_time": "2023-03-29 17:19:11.000000 UTC",
+      "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe16_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe16 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthr",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "suspicious_cmdline",
+          "stage": "initial_execution",
+          "weight": 2.0,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "SuspiciousPath"
+        }
+      ],
+      "_suspicion_score": 1,
+      "_reasons": [
+        "suspicious_cmdline"
+      ],
+      "_confidence": 0.1341,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 2360,
@@ -2055,13 +1965,14 @@
         "rwx_injection"
       ],
       "_confidence": 0.8337,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
     }
   ],
+  "benign_context_processes": [],
   "_meta": {
-    "total_suspicious_pids": 14,
+    "total_suspicious_pids": 13,
     "suspicious_pids": [
-      0,
       4,
       448,
       524,
@@ -2076,25 +1987,45 @@
       6392,
       7500
     ],
+    "suspect_zone_pids": [
+      4,
+      448,
+      524,
+      544,
+      880,
+      1212,
+      2100,
+      2360,
+      4948,
+      5600,
+      5904,
+      6392,
+      7500
+    ],
+    "benign_zone_pids": [],
+    "benign_zone_reasons": {},
     "graph_attr": {
       "max_process_score": 37,
+      "raw_rwx_injections": 30,
+      "benign_zone_process_count": 0,
+      "suspect_zone_process_count": 13,
       "attack_steps": 4,
       "high_severity_injections": 0,
       "lolbin_c2_connections": 0,
       "ransom_note_signal": 0,
-      "suspect_rate": 0.061856,
+      "suspect_rate": 0.134021,
       "hidden_rate": 0.0,
       "inject_rate": 0.309278,
-      "external_conn_rate": 0.319588,
-      "largest_suspicious_component_ratio": 0.14433,
-      "lineage_depth_p95": 4,
+      "external_conn_rate": 0.030928,
+      "largest_suspicious_component_ratio": 0.134021,
+      "lineage_depth_p95": 7,
       "lolbin_chain_count": 0,
       "nonrwx_exec_count": 17,
       "credential_access_count": 1,
       "triage_confidence": 0.9762,
       "stage_coverage_score": 0.8,
-      "proc_degree_zmax": 4.580916,
-      "proc_betweenness_p95": 0.333703,
+      "proc_degree_zmax": 3.811572,
+      "proc_betweenness_p95": 0.35697,
       "num_attack_motifs": 193,
       "service_boundary_violations": 0,
       "temporal_chain_signals": 0,
@@ -2105,11 +2036,12 @@
       "lolbin_c2_found": 0,
       "ransom_note_found": 0,
       "rwx_injections": 30,
+      "raw_rwx_injections": 30,
       "hidden_processes": 0,
       "top_suspect_score": 37,
       "triage_confidence": 0.9762,
       "stage_coverage_score": 0.8,
-      "lineage_depth_p95": 4,
+      "lineage_depth_p95": 7,
       "nonrwx_exec_count": 17,
       "credential_access_count": 1,
       "num_attack_motifs": 193,
@@ -2176,12 +2108,10 @@
       "sequence_quality": 0.8
     },
     "root_cause_process": {
-      "pid": 2100,
-      "name": "msmpeng.exe",
+      "pid": 4,
+      "name": "system",
       "why": [
-        "rwx_injection:vadinfo:PAGE_EXECUTE_READWRITE",
-        "rwx_injection:vadinfo:PAGE_EXECUTE_READWRITE",
-        "rwx_injection:vadinfo:PAGE_EXECUTE_READWRITE"
+        "lsass_full_access:system:0x1fffff"
       ]
     },
     "evidence_graph": {
@@ -2189,31 +2119,41 @@
         "process_1212",
         "process_2100",
         "process_2360",
+        "process_4",
+        "process_448",
         "process_4948",
+        "process_524",
+        "process_544",
+        "process_5600",
         "process_5904",
+        "process_6392",
+        "process_7500",
         "process_880"
       ],
       "edges": []
     },
     "model_features": {
       "max_process_score": 37,
+      "raw_rwx_injections": 30,
+      "benign_zone_process_count": 0,
+      "suspect_zone_process_count": 13,
       "attack_steps": 4,
       "high_severity_injections": 0,
       "lolbin_c2_connections": 0,
       "ransom_note_signal": 0,
-      "suspect_rate": 0.061856,
+      "suspect_rate": 0.134021,
       "hidden_rate": 0.0,
       "inject_rate": 0.309278,
-      "external_conn_rate": 0.319588,
-      "largest_suspicious_component_ratio": 0.14433,
-      "lineage_depth_p95": 4,
+      "external_conn_rate": 0.030928,
+      "largest_suspicious_component_ratio": 0.134021,
+      "lineage_depth_p95": 7,
       "lolbin_chain_count": 0,
       "nonrwx_exec_count": 17,
       "credential_access_count": 1,
       "triage_confidence": 0.9762,
       "stage_coverage_score": 0.8,
-      "proc_degree_zmax": 4.580916,
-      "proc_betweenness_p95": 0.333703,
+      "proc_degree_zmax": 3.811572,
+      "proc_betweenness_p95": 0.35697,
       "num_attack_motifs": 193,
       "service_boundary_violations": 0,
       "temporal_chain_signals": 0,

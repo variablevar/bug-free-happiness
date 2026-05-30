@@ -1,4 +1,4 @@
 Sample: SporaRansomware-WithVirus | label=1 | family=sporaransomware | benign_subtype=
-filter_malicious.py: OK (0.9s)
-build_graph.py: OK (11.2s)
-analyze_graph.py: OK (1.4s)
+filter_malicious.py: OK (0.7s)
+build_graph.py: OK (7.7s)
+analyze_graph.py: OK (0.9s)

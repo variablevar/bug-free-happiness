@@ -228,9 +228,10 @@ def train_epoch(model, loader, optimiser, device, class_weights, label_smoothing
             )
 
         edge_attr = getattr(batch, "edge_attr", None)
+        node_mask = getattr(batch, "suspect_node_mask", None)
         out  = model(
             batch.x, batch.edge_index, batch.batch,
-            graph_attr=graph_attr, edge_attr=edge_attr,
+            graph_attr=graph_attr, edge_attr=edge_attr, node_mask=node_mask,
         )
         loss = F.cross_entropy(
             out, batch.y, weight=class_weights,
@@ -253,9 +254,10 @@ def evaluate(model, loader, device, num_classes: int = 2):
         graph_attr = getattr(batch, "graph_attr", None)
 
         edge_attr = getattr(batch, "edge_attr", None)
+        node_mask = getattr(batch, "suspect_node_mask", None)
         out   = model(
             batch.x, batch.edge_index, batch.batch,
-            graph_attr=graph_attr, edge_attr=edge_attr,
+            graph_attr=graph_attr, edge_attr=edge_attr, node_mask=node_mask,
         )
         prob_tensor = F.softmax(out, dim=1)
         if num_classes == 2:

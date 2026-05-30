@@ -8,7 +8,7 @@
     "nodes_total": 86,
     "edges_total": 7,
     "is_directed": true,
-    "suspicious_total": 13,
+    "suspicious_total": 6,
     "node_types": {
       "kernel": 1,
       "network_conn": 79,
@@ -18,20 +18,12 @@
       "connects_to": 7
     },
     "suspicious_by_type": {
-      "network_conn": 7,
-      "ip_address": 6
+      "network_conn": 3,
+      "ip_address": 3
     }
   },
   "attack_chain": {
-    "steps": [
-      {
-        "step": 3,
-        "tactic": "Command & Control",
-        "mitre": "T1071",
-        "detail": "6 unique external C2 IP(s) (7 socket row(s)) via chrome.exe, svchost.exe",
-        "evidence": "['142.250.187.238', '142.250.200.46', '142.251.5.188', '172.217.16.227']"
-      }
-    ],
+    "steps": [],
     "overall_verdict": "LOW \u2014 No significant threats identified",
     "max_process_score": 0
   },
@@ -40,6 +32,7 @@
   "hidden_processes": [],
   "network": [
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.15",
       "local_port": 49289,
@@ -58,74 +51,7 @@
       ]
     },
     {
-      "proto": "TCPv4",
-      "local_addr": "10.0.2.15",
-      "local_port": 49359,
-      "foreign_addr": "142.250.187.238",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.0.2.15",
-      "local_port": 49353,
-      "foreign_addr": "142.250.200.46",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.0.2.15",
-      "local_port": 49360,
-      "foreign_addr": "172.217.16.227",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.0.2.15",
-      "local_port": 49361,
-      "foreign_addr": "172.217.16.227",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "chrome.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.15",
       "local_port": 49287,
@@ -143,6 +69,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.15",
       "local_port": 49294,
@@ -160,6 +87,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.15",
       "local_port": 49240,
@@ -181,7 +109,7 @@
   "drivers": [],
   "graph_attr": [
     0.0,
-    0.0,
+    1.0,
     0.0,
     0.0,
     0.0
@@ -191,6 +119,7 @@
     "lolbin_c2_found": 0,
     "ransom_note_found": 0,
     "rwx_injections": 0,
+    "raw_rwx_injections": 0,
     "hidden_processes": 0,
     "top_suspect_score": 0,
     "triage_confidence": 0.0,
@@ -214,5 +143,10 @@
     "trusted_host_dll_anomalies": 0,
     "dual_use_admin_tool_count": 0,
     "popularity_dampened_processes": 0
+  },
+  "benign_zone_summary": {
+    "process_count": 0,
+    "top_reasons": [],
+    "excluded_from_verdict": true
   }
 }

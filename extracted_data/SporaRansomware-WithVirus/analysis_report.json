@@ -8,7 +8,7 @@
     "nodes_total": 21795,
     "edges_total": 32148,
     "is_directed": true,
-    "suspicious_total": 298,
+    "suspicious_total": 4578,
     "node_types": {
       "kernel": 1,
       "process": 97,
@@ -42,11 +42,11 @@
     },
     "suspicious_by_type": {
       "process": 13,
-      "thread": 147,
+      "thread": 483,
       "dll": 54,
-      "memory_region": 30,
+      "memory_region": 3992,
       "network_conn": 31,
-      "ip_address": 20,
+      "ip_address": 2,
       "handle": 1,
       "driver": 2
     }
@@ -57,15 +57,8 @@
         "step": 2,
         "tactic": "Defense Evasion / Process Injection",
         "mitre": "T1055",
-        "detail": "Shellcode in 3 process(es): SearchApp.exe, smartscreen.ex, MsMpEng.exe",
+        "detail": "Shellcode in 3 process(es): smartscreen.ex, SearchApp.exe, MsMpEng.exe",
         "evidence": "00 00 40 00 80 00 00 00 89 e9 b8 d0 de 58 7b ff d0 ff a5 fc 36 00 00 00 00 00 00"
-      },
-      {
-        "step": 3,
-        "tactic": "Command & Control",
-        "mitre": "T1071",
-        "detail": "20 unique external C2 IP(s) (31 socket row(s)) via (unknown)",
-        "evidence": "['13.107.42.12', '142.250.178.14', '142.250.180.14', '142.250.187.195']"
       },
       {
         "step": 4,
@@ -82,7 +75,7 @@
         "evidence": "\"C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\platform\\\\4.18.2302.7-0\\\\MsMpEng."
       }
     ],
-    "overall_verdict": "CRITICAL \u2014 Active malware: injection + C2 + credential access detected",
+    "overall_verdict": "HIGH \u2014 Multiple malicious behaviours detected",
     "max_process_score": 45
   },
   "entry_points": [],
@@ -104,6 +97,8 @@
       "degree_out": 103,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 45,
       "severity": "CRITICAL",
       "reasons": [
@@ -132,6 +127,8 @@
       "degree_out": 198,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 45,
       "severity": "CRITICAL",
       "reasons": [
@@ -160,6 +157,8 @@
       "degree_out": 171,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 36,
       "severity": "CRITICAL",
       "reasons": [
@@ -188,6 +187,8 @@
       "degree_out": 111,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 26,
       "severity": "CRITICAL",
       "reasons": [
@@ -216,6 +217,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 20,
       "severity": "CRITICAL",
       "reasons": [
@@ -243,6 +246,8 @@
       "degree_out": 180,
       "lineage_depth": 1,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 11,
       "severity": "HIGH",
       "reasons": [
@@ -254,31 +259,6 @@
         "high-in-degree556"
       ],
       "norm_score": 0.24444444444444444
-    },
-    {
-      "node_id": "process_692",
-      "name": "lsass.exe",
-      "pid": 692,
-      "ppid": 524,
-      "parent_name": "wininit.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-29 15:18:16.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\lsass.exe",
-      "path": "",
-      "degree_in": 278,
-      "degree_out": 101,
-      "lineage_depth": 2,
-      "is_suspicious_flag": false,
-      "heuristic_score": 7,
-      "severity": "HIGH",
-      "reasons": [
-        "no-path",
-        "lsass-full-access"
-      ],
-      "norm_score": 0.15555555555555556
     },
     {
       "node_id": "process_4",
@@ -297,12 +277,42 @@
       "degree_out": 2,
       "lineage_depth": 1,
       "is_suspicious_flag": true,
-      "heuristic_score": 6,
-      "severity": "MEDIUM",
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 9,
+      "severity": "HIGH",
       "reasons": [
+        "lsass_full_access",
         "lsass-full-access"
       ],
-      "norm_score": 0.13333333333333333
+      "norm_score": 0.2
+    },
+    {
+      "node_id": "process_692",
+      "name": "lsass.exe",
+      "pid": 692,
+      "ppid": 524,
+      "parent_name": "wininit.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-29 15:18:16.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\lsass.exe",
+      "path": "",
+      "degree_in": 278,
+      "degree_out": 101,
+      "lineage_depth": 2,
+      "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
+      "heuristic_score": 7,
+      "severity": "HIGH",
+      "reasons": [
+        "no-path",
+        "lsass-full-access"
+      ],
+      "norm_score": 0.15555555555555556
     },
     {
       "node_id": "process_448",
@@ -321,13 +331,16 @@
       "degree_out": 19,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
-      "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 6,
       "severity": "MEDIUM",
       "reasons": [
+        "abnormal_parent",
         "no-path",
         "high-in-degree129"
       ],
-      "norm_score": 0.06666666666666667
+      "norm_score": 0.13333333333333333
     },
     {
       "node_id": "process_524",
@@ -346,13 +359,16 @@
       "degree_out": 29,
       "lineage_depth": 3,
       "is_suspicious_flag": true,
-      "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 6,
       "severity": "MEDIUM",
       "reasons": [
+        "abnormal_parent",
         "no-path",
         "high-in-degree96"
       ],
-      "norm_score": 0.06666666666666667
+      "norm_score": 0.13333333333333333
     },
     {
       "node_id": "process_544",
@@ -371,13 +387,100 @@
       "degree_out": 22,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
-      "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 6,
       "severity": "MEDIUM",
       "reasons": [
+        "abnormal_parent",
         "no-path",
         "high-in-degree166"
       ],
-      "norm_score": 0.06666666666666667
+      "norm_score": 0.13333333333333333
+    },
+    {
+      "node_id": "process_6392",
+      "name": "msedge.exe",
+      "pid": 6392,
+      "ppid": 6372,
+      "parent_name": "msedge.exe",
+      "session": "1.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-29 15:18:55.000000 UTC",
+      "args": "\"C:\\\\Program Files\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=crashpad-handler \"--user-data-dir=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler \"--database=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\\\\",
+      "path": "",
+      "degree_in": 105,
+      "degree_out": 21,
+      "lineage_depth": 0,
+      "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 4,
+      "severity": "MEDIUM",
+      "reasons": [
+        "suspicious_cmdline",
+        "no-path",
+        "high-in-degree105"
+      ],
+      "norm_score": 0.08888888888888889
+    },
+    {
+      "node_id": "process_7500",
+      "name": "FileCoAuth.exe",
+      "pid": 7500,
+      "ppid": 860,
+      "parent_name": "svchost.exe",
+      "session": "1.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-29 15:19:04.000000 UTC",
+      "args": "\"C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileCoAuth.exe\" -Embedding",
+      "path": "",
+      "degree_in": 233,
+      "degree_out": 85,
+      "lineage_depth": 0,
+      "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 4,
+      "severity": "MEDIUM",
+      "reasons": [
+        "suspicious_cmdline",
+        "no-path",
+        "high-in-degree233"
+      ],
+      "norm_score": 0.08888888888888889
+    },
+    {
+      "node_id": "process_5600",
+      "name": "SearchProtocol",
+      "pid": 5600,
+      "ppid": 2140,
+      "parent_name": "SearchIndexer.",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-29 17:19:11.000000 UTC",
+      "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe16_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe16 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthr",
+      "path": "",
+      "degree_in": 156,
+      "degree_out": 49,
+      "lineage_depth": 0,
+      "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 4,
+      "severity": "MEDIUM",
+      "reasons": [
+        "suspicious_cmdline",
+        "no-path",
+        "high-in-degree156"
+      ],
+      "norm_score": 0.08888888888888889
     },
     {
       "node_id": "process_624",
@@ -396,6 +499,8 @@
       "degree_out": 50,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -421,6 +526,8 @@
       "degree_out": 28,
       "lineage_depth": 2,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -446,6 +553,8 @@
       "degree_out": 8,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -471,6 +580,8 @@
       "degree_out": 8,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -496,6 +607,8 @@
       "degree_out": 78,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -521,6 +634,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -546,6 +661,8 @@
       "degree_out": 86,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -571,6 +688,8 @@
       "degree_out": 40,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -596,6 +715,8 @@
       "degree_out": 51,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -621,6 +742,8 @@
       "degree_out": 111,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -646,6 +769,8 @@
       "degree_out": 71,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -671,6 +796,8 @@
       "degree_out": 104,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -696,6 +823,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -721,6 +850,8 @@
       "degree_out": 83,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -746,6 +877,8 @@
       "degree_out": 64,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -771,6 +904,8 @@
       "degree_out": 32,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -796,6 +931,8 @@
       "degree_out": 80,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -821,6 +958,8 @@
       "degree_out": 84,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -846,6 +985,8 @@
       "degree_out": 31,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -871,6 +1012,8 @@
       "degree_out": 120,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -896,6 +1039,8 @@
       "degree_out": 90,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -921,36 +1066,13 @@
       "degree_out": 170,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree972"
-      ],
-      "norm_score": 0.06666666666666667
-    },
-    {
-      "node_id": "process_6392",
-      "name": "msedge.exe",
-      "pid": 6392,
-      "ppid": 6372,
-      "parent_name": "msedge.exe",
-      "session": "1.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-29 15:18:55.000000 UTC",
-      "args": "\"C:\\\\Program Files\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=crashpad-handler \"--user-data-dir=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler \"--database=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\\\\",
-      "path": "",
-      "degree_in": 105,
-      "degree_out": 21,
-      "lineage_depth": 0,
-      "is_suspicious_flag": true,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "no-path",
-        "high-in-degree105"
       ],
       "norm_score": 0.06666666666666667
     },
@@ -971,6 +1093,8 @@
       "degree_out": 57,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -996,6 +1120,8 @@
       "degree_out": 47,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1021,36 +1147,13 @@
       "degree_out": 38,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree161"
-      ],
-      "norm_score": 0.06666666666666667
-    },
-    {
-      "node_id": "process_7500",
-      "name": "FileCoAuth.exe",
-      "pid": 7500,
-      "ppid": 860,
-      "parent_name": "svchost.exe",
-      "session": "1.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-29 15:19:04.000000 UTC",
-      "args": "\"C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileCoAuth.exe\" -Embedding",
-      "path": "",
-      "degree_in": 233,
-      "degree_out": 85,
-      "lineage_depth": 0,
-      "is_suspicious_flag": true,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "no-path",
-        "high-in-degree233"
       ],
       "norm_score": 0.06666666666666667
     },
@@ -1071,6 +1174,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1096,6 +1201,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1121,6 +1228,8 @@
       "degree_out": 47,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1146,6 +1255,8 @@
       "degree_out": 55,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1171,6 +1282,8 @@
       "degree_out": 66,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1196,6 +1309,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1221,6 +1336,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1246,6 +1363,8 @@
       "degree_out": 104,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1271,6 +1390,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1296,6 +1417,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1321,6 +1444,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1346,6 +1471,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1371,6 +1498,8 @@
       "degree_out": 68,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1396,6 +1525,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1421,6 +1552,8 @@
       "degree_out": 42,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1446,6 +1579,8 @@
       "degree_out": 73,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1471,6 +1606,8 @@
       "degree_out": 63,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1496,36 +1633,13 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree112"
-      ],
-      "norm_score": 0.06666666666666667
-    },
-    {
-      "node_id": "process_5600",
-      "name": "SearchProtocol",
-      "pid": 5600,
-      "ppid": 2140,
-      "parent_name": "SearchIndexer.",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-29 17:19:11.000000 UTC",
-      "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe16_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe16 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthr",
-      "path": "",
-      "degree_in": 156,
-      "degree_out": 49,
-      "lineage_depth": 0,
-      "is_suspicious_flag": true,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "no-path",
-        "high-in-degree156"
       ],
       "norm_score": 0.06666666666666667
     },
@@ -1546,6 +1660,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1571,6 +1687,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1596,6 +1714,8 @@
       "degree_out": 29,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1621,6 +1741,8 @@
       "degree_out": 30,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1646,6 +1768,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 2,
       "severity": "LOW",
       "reasons": [
@@ -1670,6 +1794,8 @@
       "degree_out": 2,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1694,6 +1820,8 @@
       "degree_out": 65,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1718,6 +1846,8 @@
       "degree_out": 1,
       "lineage_depth": 2,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1742,6 +1872,8 @@
       "degree_out": 66,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1766,6 +1898,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1790,6 +1924,8 @@
       "degree_out": 208,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1814,6 +1950,8 @@
       "degree_out": 54,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1838,6 +1976,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1862,6 +2002,8 @@
       "degree_out": 97,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1887,6 +2029,8 @@
       "degree_out": 47,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1912,6 +2056,8 @@
       "degree_out": 225,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1937,6 +2083,8 @@
       "degree_out": 60,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1962,6 +2110,8 @@
       "degree_out": 81,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1987,6 +2137,8 @@
       "degree_out": 109,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2012,6 +2164,8 @@
       "degree_out": 108,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2037,6 +2191,8 @@
       "degree_out": 48,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2062,6 +2218,8 @@
       "degree_out": 89,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2087,6 +2245,8 @@
       "degree_out": 50,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2112,6 +2272,8 @@
       "degree_out": 27,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2137,6 +2299,8 @@
       "degree_out": 41,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2162,6 +2326,8 @@
       "degree_out": 40,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2187,6 +2353,8 @@
       "degree_out": 59,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2212,6 +2380,8 @@
       "degree_out": 76,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2237,6 +2407,8 @@
       "degree_out": 36,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2262,6 +2434,8 @@
       "degree_out": 153,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2287,6 +2461,8 @@
       "degree_out": 287,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2312,6 +2488,8 @@
       "degree_out": 62,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2337,6 +2515,8 @@
       "degree_out": 40,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2362,6 +2542,8 @@
       "degree_out": 53,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2387,6 +2569,8 @@
       "degree_out": 28,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2412,6 +2596,8 @@
       "degree_out": 52,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2437,6 +2623,8 @@
       "degree_out": 29,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2462,6 +2650,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2487,6 +2677,8 @@
       "degree_out": 36,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2512,6 +2704,8 @@
       "degree_out": 35,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2524,6 +2718,7 @@
   "hidden_processes": [],
   "network": [
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50468,
@@ -2541,6 +2736,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50475,
@@ -2558,6 +2754,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50468,
@@ -2575,6 +2772,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50494,
@@ -2592,6 +2790,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50476,
@@ -2609,6 +2808,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50484,
@@ -2626,6 +2826,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50201,
@@ -2643,6 +2844,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 49673,
@@ -2660,6 +2862,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50472,
@@ -2677,6 +2880,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50473,
@@ -2694,6 +2898,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50491,
@@ -2711,6 +2916,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50475,
@@ -2728,6 +2934,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50477,
@@ -2745,6 +2952,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50211,
@@ -2762,6 +2970,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50465,
@@ -2779,6 +2988,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50202,
@@ -2796,6 +3006,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50469,
@@ -2813,6 +3024,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50492,
@@ -2830,6 +3042,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50451,
@@ -2847,6 +3060,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50471,
@@ -2864,6 +3078,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 49712,
@@ -2881,6 +3096,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50479,
@@ -2898,6 +3114,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50481,
@@ -2915,6 +3132,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50474,
@@ -2932,6 +3150,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50466,
@@ -2949,6 +3168,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50470,
@@ -2966,6 +3186,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50433,
@@ -2983,6 +3204,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50213,
@@ -3000,6 +3222,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50447,
@@ -3017,6 +3240,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50480,
@@ -3034,6 +3258,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 50483,
@@ -3051,6 +3276,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.47",
       "local_port": 49696,
@@ -143371,11 +143597,12 @@
     "lolbin_c2_found": 0,
     "ransom_note_found": 0,
     "rwx_injections": 30,
+    "raw_rwx_injections": 30,
     "hidden_processes": 0,
     "top_suspect_score": 37,
     "triage_confidence": 0.9762,
     "stage_coverage_score": 0.8,
-    "lineage_depth_p95": 4,
+    "lineage_depth_p95": 7,
     "nonrwx_exec_count": 17,
     "credential_access_count": 1,
     "num_attack_motifs": 193,
@@ -143394,5 +143621,10 @@
     "trusted_host_dll_anomalies": 0,
     "dual_use_admin_tool_count": 0,
     "popularity_dampened_processes": 27
+  },
+  "benign_zone_summary": {
+    "process_count": 0,
+    "top_reasons": [],
+    "excluded_from_verdict": true
   }
 }

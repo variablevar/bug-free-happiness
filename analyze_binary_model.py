@@ -14,7 +14,12 @@ import torch.nn.functional as F
 
 from analysis_schema import SCHEMA_VERSION
 from calibration import apply_temperature
-from dataset import MalwareGraphDataset
+from dataset import (
+    DEFAULT_ALLOWED_BENIGN_SUBTYPES,
+    MalwareGraphDataset,
+    governance_load_options,
+    manifest_row_governance,
+)
 from fusion import ensemble_score, final_triage, heuristic_risk_score
 from model import GINEMalwareClassifier
 from utils.evidence_metadata import enrich_edge, enrich_node
@@ -261,16 +266,25 @@ def run(args):
     base_dir = args.base_dir or str(manifest.parent)
     df = pd.read_csv(manifest)
     sample_id_by_folder = {str(r["folder"]): str(r.get("sample_id", "")) for _, r in df.iterrows()}
+    governance_by_folder = {
+        str(r["folder"]): manifest_row_governance(dict(r)) for _, r in df.iterrows()
+    }
     profile = str(payload.get("graph_attr_profile", "full") or "full")
     view = str(payload.get("graph_view", "full") or "full")
     ds = MalwareGraphDataset(
         args.manifest,
         base_dir=base_dir,
-        include_uncertain=True,
-        include_unknown=False,
         target="label",
         graph_attr_profile=profile,
         graph_view=view,
+        **governance_load_options(
+            require_governance_manifest=bool(getattr(args, "require_governance_manifest", False)),
+            allowed_benign_subtypes=str(
+                getattr(args, "allowed_benign_subtypes", DEFAULT_ALLOWED_BENIGN_SUBTYPES)
+            ),
+            require_train_eligible=bool(getattr(args, "train_eligible_only", False)),
+            include_uncertain=not bool(getattr(args, "exclude_uncertain", False)),
+        ),
     )
 
     samples = []
@@ -372,10 +386,12 @@ def run(args):
             }
             for x in evidence["top_graph_attrs"][:5]
         ]
+        gov = governance_by_folder.get(folder, {})
         samples.append(
             {
                 "sample_id": sample_id_by_folder.get(folder) or f"{i+1:02d}",
                 "folder": folder,
+                **gov,
                 "malware_probability_raw": round(p_mal_raw, 6),
                 "malware_probability_calibrated": round(p_mal, 6),
                 "threshold_low": t_low,
@@ -435,6 +451,26 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser(description="Analyze samples with binary GNN model")
     p.add_argument("manifest", help="Path to dataset_manifest.csv")
     p.add_argument("--base-dir", default=None, dest="base_dir")
+    p.add_argument("--exclude-uncertain", action="store_true", dest="exclude_uncertain")
+    p.add_argument(
+        "--train-eligible-only",
+        action="store_true",
+        dest="train_eligible_only",
+        help="Load only manifest rows with train_eligible=true.",
+    )
+    p.add_argument(
+        "--require-governance-manifest/--no-require-governance-manifest",
+        default=False,
+        action=argparse.BooleanOptionalAction,
+        dest="require_governance_manifest",
+        help="Apply benign_subtype allowlist when loading (default: analyze all manifest rows).",
+    )
+    p.add_argument(
+        "--allowed-benign-subtypes",
+        default=DEFAULT_ALLOWED_BENIGN_SUBTYPES,
+        dest="allowed_benign_subtypes",
+        help="Benign subtype allowlist when --require-governance-manifest is on.",
+    )
     p.add_argument("--model", default="outputs/binary_model.pt")
     p.add_argument("--output-json", default="outputs/binary_analysis.json", dest="output_json")
     p.add_argument("--mc-samples", type=int, default=8, dest="mc_samples")

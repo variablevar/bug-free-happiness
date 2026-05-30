@@ -2,8 +2,9 @@
 """
 Legacy placeholder.
 
-The previous binary evaluation script was retired in favor of fused two-model
-analysis output.
+The previous binary evaluation script was retired in favor of `evaluate.py`,
+which merges two-model + binary analysis and reports manifest subset metrics
+(`ambiguous_novirus_control`, `train_eligible`, `manifest_uncertain`, etc.).
 """
 
 if __name__ == "__main__":

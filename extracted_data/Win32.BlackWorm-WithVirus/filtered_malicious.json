@@ -28,24 +28,6 @@
       "in_psscan": true
     },
     {
-      "pid": 728,
-      "name": "svchost.exe",
-      "ppid": 448,
-      "create_time": "2023-03-28 22:35:25.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalServiceNetworkRestricted",
-      "in_pslist": true,
-      "in_psscan": true
-    },
-    {
-      "pid": 940,
-      "name": "svchost.exe",
-      "ppid": 448,
-      "create_time": "2023-03-28 22:35:26.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalService",
-      "in_pslist": true,
-      "in_psscan": true
-    },
-    {
       "pid": 2000,
       "name": "explorer.exe",
       "ppid": 1964,
@@ -64,29 +46,11 @@
       "in_psscan": true
     },
     {
-      "pid": 2764,
-      "name": "svchost.exe",
-      "ppid": 448,
-      "create_time": "2023-03-28 22:37:28.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k secsvcs",
-      "in_pslist": true,
-      "in_psscan": true
-    },
-    {
       "pid": 2932,
       "name": "GoogleCrashHan",
       "ppid": 2380,
       "create_time": "2023-03-28 22:37:35.000000 UTC",
       "args": "\"C:\\\\Program Files (x86)\\\\Google\\\\Update\\\\1.3.36.152\\\\GoogleCrashHandler.exe\"",
-      "in_pslist": true,
-      "in_psscan": true
-    },
-    {
-      "pid": 2980,
-      "name": "chrome.exe",
-      "ppid": 2344,
-      "create_time": "2023-03-28 22:37:35.000000 UTC",
-      "args": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --from-installer",
       "in_pslist": true,
       "in_psscan": true
     },
@@ -467,7 +431,47 @@
     }
   ],
   "ssdt_hooks": [],
-  "network_suspicious": [],
+  "network_suspicious": [
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "chrome.exe",
+      "foreign_addr": "142.250.187.228",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 1,
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "chrome.exe",
+      "foreign_addr": "172.217.169.74",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 1,
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "chrome.exe",
+      "foreign_addr": "142.250.187.238",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 1,
+      "_severity": "High"
+    }
+  ],
   "cmdline_suspicious": [
     {
       "pid": 2204,
@@ -659,86 +663,103 @@
   ],
   "behavioural_suspects": [
     {
-      "PID": 728,
-      "pid": 728,
-      "name": "svchost.exe",
-      "ppid": 448,
-      "parent_name": "services.exe",
-      "create_time": "2023-03-28 22:35:25.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalServiceNetworkRestricted",
+      "PID": 308,
+      "pid": 308,
+      "name": "csrss.exe",
+      "ppid": 292,
+      "parent_name": "?",
+      "create_time": "2023-03-28 22:35:24.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
       "wow64": false,
       "in_pslist": true,
-      "lineage_depth": 3,
+      "lineage_depth": 1,
       "attack_stages": [
-        "memory_manipulation"
+        "initial_execution"
       ],
-      "execution_technique": "injection_like",
+      "execution_technique": "n/a",
       "rule_hits": [
         {
-          "rule_id": "rwx_injection",
-          "stage": "memory_manipulation",
-          "weight": 4.0,
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
           "confidence": 0.9,
           "quality": 1.0,
-          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "nonrwx_exec_private",
-          "stage": "memory_manipulation",
-          "weight": 3.5,
-          "confidence": 0.8,
-          "quality": 0.9,
-          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+          "evidence": "unknown->csrss.exe"
         }
       ],
-      "_suspicion_score": 5,
+      "_suspicion_score": 3,
       "_reasons": [
-        "nonrwx_exec_private",
-        "rwx_injection"
+        "abnormal_parent"
       ],
-      "_confidence": 0.37,
-      "_severity": "Medium"
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
     },
     {
-      "PID": 940,
-      "pid": 940,
-      "name": "svchost.exe",
-      "ppid": 448,
-      "parent_name": "services.exe",
-      "create_time": "2023-03-28 22:35:26.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalService",
+      "PID": 356,
+      "pid": 356,
+      "name": "wininit.exe",
+      "ppid": 292,
+      "parent_name": "?",
+      "create_time": "2023-03-28 22:35:24.000000 UTC",
+      "args": "wininit.exe",
       "wow64": false,
       "in_pslist": true,
-      "lineage_depth": 3,
+      "lineage_depth": 1,
       "attack_stages": [
-        "memory_manipulation"
+        "initial_execution"
       ],
-      "execution_technique": "injection_like",
+      "execution_technique": "n/a",
       "rule_hits": [
         {
-          "rule_id": "rwx_injection",
-          "stage": "memory_manipulation",
-          "weight": 4.0,
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
           "confidence": 0.9,
           "quality": 1.0,
-          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "nonrwx_exec_private",
-          "stage": "memory_manipulation",
-          "weight": 3.5,
-          "confidence": 0.8,
-          "quality": 0.9,
-          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+          "evidence": "unknown->wininit.exe"
         }
       ],
-      "_suspicion_score": 5,
+      "_suspicion_score": 3,
       "_reasons": [
-        "nonrwx_exec_private",
-        "rwx_injection"
+        "abnormal_parent"
       ],
-      "_confidence": 0.37,
-      "_severity": "Medium"
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 368,
+      "pid": 368,
+      "name": "csrss.exe",
+      "ppid": 348,
+      "parent_name": "?",
+      "create_time": "2023-03-28 22:35:24.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 1,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "unknown->csrss.exe"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "abnormal_parent"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 2000,
@@ -821,7 +842,8 @@
         "rwx_injection"
       ],
       "_confidence": 0.8907,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 720,
@@ -870,80 +892,8 @@
         "rwx_injection"
       ],
       "_confidence": 0.5604,
-      "_severity": "High"
-    },
-    {
-      "PID": 2764,
-      "pid": 2764,
-      "name": "svchost.exe",
-      "ppid": 448,
-      "parent_name": "services.exe",
-      "create_time": "2023-03-28 22:37:28.000000 UTC",
-      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k secsvcs",
-      "wow64": false,
-      "in_pslist": true,
-      "lineage_depth": 3,
-      "attack_stages": [
-        "memory_manipulation"
-      ],
-      "execution_technique": "injection_like",
-      "rule_hits": [
-        {
-          "rule_id": "rwx_injection",
-          "stage": "memory_manipulation",
-          "weight": 4.0,
-          "confidence": 0.9,
-          "quality": 1.0,
-          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "rwx_injection",
-          "stage": "memory_manipulation",
-          "weight": 4.0,
-          "confidence": 0.9,
-          "quality": 1.0,
-          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "rwx_injection",
-          "stage": "memory_manipulation",
-          "weight": 4.0,
-          "confidence": 0.9,
-          "quality": 1.0,
-          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "rwx_injection",
-          "stage": "memory_manipulation",
-          "weight": 4.0,
-          "confidence": 0.9,
-          "quality": 1.0,
-          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "nonrwx_exec_private",
-          "stage": "memory_manipulation",
-          "weight": 3.5,
-          "confidence": 0.8,
-          "quality": 0.9,
-          "evidence": "vad:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "nonrwx_exec_private",
-          "stage": "memory_manipulation",
-          "weight": 3.5,
-          "confidence": 0.8,
-          "quality": 0.9,
-          "evidence": "vad:PAGE_EXECUTE_READWRITE"
-        }
-      ],
-      "_suspicion_score": 18,
-      "_reasons": [
-        "nonrwx_exec_private",
-        "rwx_injection"
-      ],
-      "_confidence": 0.8337,
-      "_severity": "Critical"
+      "_severity": "High",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 2932,
@@ -1016,7 +966,354 @@
         "rwx_injection"
       ],
       "_confidence": 0.8337,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 2204,
+      "pid": 2204,
+      "name": "chrome.exe",
+      "ppid": 2980,
+      "parent_name": "chrome.exe",
+      "create_time": "2023-03-28 22:37:35.000000 UTC",
+      "args": "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --type=crashpad-handler \"--user-data-dir=C:\\\\Users\\\\devmac\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler \"--database=C:\\\\Users\\\\devmac\\\\AppData\\\\Local\\\\Google\\\\Chrome\\\\User Data\\\\C",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 2,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "suspicious_cmdline",
+          "stage": "initial_execution",
+          "weight": 2.0,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "SuspiciousPath"
+        }
+      ],
+      "_suspicion_score": 1,
+      "_reasons": [
+        "suspicious_cmdline"
+      ],
+      "_confidence": 0.1341,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 2620,
+      "pid": 2620,
+      "name": "FTK Imager.exe",
+      "ppid": 2536,
+      "parent_name": "?",
+      "create_time": "2023-03-28 22:44:13.000000 UTC",
+      "args": "\"C:\\\\Program Files (x86)\\\\AccessData\\\\FTK Imager\\\\FTK Imager.exe\"",
+      "wow64": true,
+      "in_pslist": true,
+      "lineage_depth": 1,
+      "attack_stages": [
+        "memory_manipulation"
+      ],
+      "execution_technique": "injection_like",
+      "rule_hits": [
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        }
+      ],
+      "_suspicion_score": 11,
+      "_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "_confidence": 0.6584,
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 2076,
+      "pid": 2076,
+      "name": "SearchProtocol",
+      "ppid": 1168,
+      "parent_name": "searchindexer.",
+      "create_time": "2023-03-28 23:03:39.000000 UTC",
+      "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe7_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe7 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthrsv",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "suspicious_cmdline",
+          "stage": "initial_execution",
+          "weight": 2.0,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "SuspiciousPath"
+        }
+      ],
+      "_suspicion_score": 1,
+      "_reasons": [
+        "suspicious_cmdline"
+      ],
+      "_confidence": 0.1341,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 3192,
+      "pid": 3192,
+      "name": "SearchFilterHo",
+      "ppid": 1168,
+      "parent_name": "searchindexer.",
+      "create_time": "2023-03-28 23:13:01.000000 UTC",
+      "args": "\"C:\\\\Windows\\\\system32\\\\SearchFilterHost.exe\" 0 512 516 524 65536 520",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "memory_manipulation"
+      ],
+      "execution_technique": "injection_like",
+      "rule_hits": [
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        }
+      ],
+      "_suspicion_score": 8,
+      "_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "_confidence": 0.5604,
+      "_severity": "High",
+      "_triage_zone": "suspect"
+    }
+  ],
+  "benign_context_processes": [
+    {
+      "PID": 728,
+      "pid": 728,
+      "name": "svchost.exe",
+      "ppid": 448,
+      "parent_name": "services.exe",
+      "create_time": "2023-03-28 22:35:25.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k LocalServiceNetworkRestricted",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 3,
+      "attack_stages": [
+        "memory_manipulation"
+      ],
+      "execution_technique": "injection_like",
+      "rule_hits": [
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        }
+      ],
+      "_suspicion_score": 5,
+      "_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "_confidence": 0.37,
+      "_severity": "Medium",
+      "_triage_zone": "benign",
+      "_benign_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ]
+    },
+    {
+      "PID": 940,
+      "pid": 940,
+      "name": "svchost.exe",
+      "ppid": 448,
+      "parent_name": "services.exe",
+      "create_time": "2023-03-28 22:35:26.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\svchost.exe -k LocalService",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 3,
+      "attack_stages": [
+        "memory_manipulation"
+      ],
+      "execution_technique": "injection_like",
+      "rule_hits": [
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        }
+      ],
+      "_suspicion_score": 5,
+      "_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "_confidence": 0.37,
+      "_severity": "Medium",
+      "_triage_zone": "benign",
+      "_benign_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ]
+    },
+    {
+      "PID": 2764,
+      "pid": 2764,
+      "name": "svchost.exe",
+      "ppid": 448,
+      "parent_name": "services.exe",
+      "create_time": "2023-03-28 22:37:28.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\svchost.exe -k secsvcs",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 3,
+      "attack_stages": [
+        "memory_manipulation"
+      ],
+      "execution_technique": "injection_like",
+      "rule_hits": [
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        }
+      ],
+      "_suspicion_score": 18,
+      "_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "_confidence": 0.8337,
+      "_severity": "Critical",
+      "_triage_zone": "benign",
+      "_benign_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ]
     },
     {
       "PID": 2980,
@@ -1089,152 +1386,86 @@
         "rwx_injection"
       ],
       "_confidence": 0.8337,
-      "_severity": "Critical"
-    },
-    {
-      "PID": 2620,
-      "pid": 2620,
-      "name": "FTK Imager.exe",
-      "ppid": 2536,
-      "parent_name": "?",
-      "create_time": "2023-03-28 22:44:13.000000 UTC",
-      "args": "\"C:\\\\Program Files (x86)\\\\AccessData\\\\FTK Imager\\\\FTK Imager.exe\"",
-      "wow64": true,
-      "in_pslist": true,
-      "lineage_depth": 1,
-      "attack_stages": [
-        "memory_manipulation"
-      ],
-      "execution_technique": "injection_like",
-      "rule_hits": [
-        {
-          "rule_id": "rwx_injection",
-          "stage": "memory_manipulation",
-          "weight": 4.0,
-          "confidence": 0.9,
-          "quality": 1.0,
-          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "rwx_injection",
-          "stage": "memory_manipulation",
-          "weight": 4.0,
-          "confidence": 0.9,
-          "quality": 1.0,
-          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "nonrwx_exec_private",
-          "stage": "memory_manipulation",
-          "weight": 3.5,
-          "confidence": 0.8,
-          "quality": 0.9,
-          "evidence": "vad:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "nonrwx_exec_private",
-          "stage": "memory_manipulation",
-          "weight": 3.5,
-          "confidence": 0.8,
-          "quality": 0.9,
-          "evidence": "vad:PAGE_EXECUTE_READWRITE"
-        }
-      ],
-      "_suspicion_score": 11,
-      "_reasons": [
+      "_severity": "Critical",
+      "_triage_zone": "benign",
+      "_benign_reasons": [
         "nonrwx_exec_private",
         "rwx_injection"
-      ],
-      "_confidence": 0.6584,
-      "_severity": "Critical"
-    },
-    {
-      "PID": 3192,
-      "pid": 3192,
-      "name": "SearchFilterHo",
-      "ppid": 1168,
-      "parent_name": "searchindexer.",
-      "create_time": "2023-03-28 23:13:01.000000 UTC",
-      "args": "\"C:\\\\Windows\\\\system32\\\\SearchFilterHost.exe\" 0 512 516 524 65536 520",
-      "wow64": false,
-      "in_pslist": true,
-      "lineage_depth": 4,
-      "attack_stages": [
-        "memory_manipulation"
-      ],
-      "execution_technique": "injection_like",
-      "rule_hits": [
-        {
-          "rule_id": "rwx_injection",
-          "stage": "memory_manipulation",
-          "weight": 4.0,
-          "confidence": 0.9,
-          "quality": 1.0,
-          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "rwx_injection",
-          "stage": "memory_manipulation",
-          "weight": 4.0,
-          "confidence": 0.9,
-          "quality": 1.0,
-          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "nonrwx_exec_private",
-          "stage": "memory_manipulation",
-          "weight": 3.5,
-          "confidence": 0.8,
-          "quality": 0.9,
-          "evidence": "vad:PAGE_EXECUTE_READWRITE"
-        }
-      ],
-      "_suspicion_score": 8,
-      "_reasons": [
-        "nonrwx_exec_private",
-        "rwx_injection"
-      ],
-      "_confidence": 0.5604,
-      "_severity": "High"
+      ]
     }
   ],
   "_meta": {
-    "total_suspicious_pids": 14,
+    "total_suspicious_pids": 10,
     "suspicious_pids": [
       308,
       356,
       368,
       720,
-      728,
-      940,
       2000,
       2076,
       2204,
       2620,
-      2764,
       2932,
-      2980,
       3192
     ],
+    "suspect_zone_pids": [
+      308,
+      356,
+      368,
+      720,
+      2000,
+      2076,
+      2204,
+      2620,
+      2932,
+      3192
+    ],
+    "benign_zone_pids": [
+      728,
+      940,
+      2764,
+      2980
+    ],
+    "benign_zone_reasons": {
+      "728": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "940": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "2764": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "2980": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ]
+    },
     "graph_attr": {
       "max_process_score": 22,
-      "attack_steps": 2,
+      "raw_rwx_injections": 24,
+      "benign_zone_process_count": 4,
+      "suspect_zone_process_count": 10,
+      "attack_steps": 3,
       "high_severity_injections": 0,
       "lolbin_c2_connections": 0,
       "ransom_note_signal": 0,
-      "suspect_rate": 0.204545,
+      "suspect_rate": 0.227273,
       "hidden_rate": 0.0,
       "inject_rate": 0.545455,
-      "external_conn_rate": 0.0,
-      "largest_suspicious_component_ratio": 0.318182,
-      "lineage_depth_p95": 3,
+      "external_conn_rate": 0.068182,
+      "largest_suspicious_component_ratio": 0.227273,
+      "lineage_depth_p95": 4,
       "lolbin_chain_count": 0,
       "nonrwx_exec_count": 14,
       "credential_access_count": 0,
       "triage_confidence": 0.8907,
       "stage_coverage_score": 0.6,
-      "proc_degree_zmax": 4.024897,
-      "proc_betweenness_p95": 0.031977,
+      "proc_degree_zmax": 4.020584,
+      "proc_betweenness_p95": 0.037306,
       "num_attack_motifs": 174,
       "service_boundary_violations": 0,
       "temporal_chain_signals": 0,
@@ -1244,12 +1475,13 @@
       "behavioural_suspects_found": 1,
       "lolbin_c2_found": 0,
       "ransom_note_found": 0,
-      "rwx_injections": 24,
+      "rwx_injections": 14,
+      "raw_rwx_injections": 24,
       "hidden_processes": 0,
       "top_suspect_score": 22,
       "triage_confidence": 0.8907,
       "stage_coverage_score": 0.6,
-      "lineage_depth_p95": 3,
+      "lineage_depth_p95": 4,
       "nonrwx_exec_count": 14,
       "credential_access_count": 0,
       "num_attack_motifs": 174,
@@ -1305,46 +1537,49 @@
       "sequence_quality": 0.6
     },
     "root_cause_process": {
-      "pid": 728,
-      "name": "svchost.exe",
+      "pid": 308,
+      "name": "csrss.exe",
       "why": [
-        "rwx_injection:vadinfo:PAGE_EXECUTE_READWRITE",
-        "nonrwx_exec_private:vad:PAGE_EXECUTE_READWRITE"
+        "abnormal_parent:unknown->csrss.exe"
       ]
     },
     "evidence_graph": {
       "nodes": [
         "process_2000",
+        "process_2076",
+        "process_2204",
         "process_2620",
-        "process_2764",
         "process_2932",
-        "process_2980",
+        "process_308",
         "process_3192",
-        "process_720",
-        "process_728",
-        "process_940"
+        "process_356",
+        "process_368",
+        "process_720"
       ],
       "edges": []
     },
     "model_features": {
       "max_process_score": 22,
-      "attack_steps": 2,
+      "raw_rwx_injections": 24,
+      "benign_zone_process_count": 4,
+      "suspect_zone_process_count": 10,
+      "attack_steps": 3,
       "high_severity_injections": 0,
       "lolbin_c2_connections": 0,
       "ransom_note_signal": 0,
-      "suspect_rate": 0.204545,
+      "suspect_rate": 0.227273,
       "hidden_rate": 0.0,
       "inject_rate": 0.545455,
-      "external_conn_rate": 0.0,
-      "largest_suspicious_component_ratio": 0.318182,
-      "lineage_depth_p95": 3,
+      "external_conn_rate": 0.068182,
+      "largest_suspicious_component_ratio": 0.227273,
+      "lineage_depth_p95": 4,
       "lolbin_chain_count": 0,
       "nonrwx_exec_count": 14,
       "credential_access_count": 0,
       "triage_confidence": 0.8907,
       "stage_coverage_score": 0.6,
-      "proc_degree_zmax": 4.024897,
-      "proc_betweenness_p95": 0.031977,
+      "proc_degree_zmax": 4.020584,
+      "proc_betweenness_p95": 0.037306,
       "num_attack_motifs": 174,
       "service_boundary_violations": 0,
       "temporal_chain_signals": 0,

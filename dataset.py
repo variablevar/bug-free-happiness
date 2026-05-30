@@ -26,6 +26,7 @@ from utils.graph_attr_profile import apply_graph_attr_profile
 from utils.graph_motif_signals import MOTIF_FEATURE_COUNT, graph_differentiation_signals
 from utils.schema import EXPECTED_GRAPH_ATTR_DIM
 from utils.subgraph_extract import extract_attack_subgraph
+from utils.triage_zone import node_triage_zone
 
 # ── Vocabularies ───────────────────────────────────────────────────────────
 NODE_TYPES = [
@@ -50,9 +51,9 @@ N_EDGE_TYPES   = len(EDGE_TYPES)
 
 # ── Feature layout ───────────────────────────────────────────────────────────
 #  [0:9]   one-hot node type          (9 dims)
-#  [9:19]  semantic/context attrs     (10 dims)
-#  [19:30] per-node edge-role counts  (11 dims)
-NODE_FEAT_DIM = 9 + 11 + 11
+#  [9:21]  semantic/context attrs     (12 dims, includes triage zone flags)
+#  [21:32] per-node edge-role counts  (11 dims)
+NODE_FEAT_DIM = 9 + 13 + 11
 
 # Graph-level attrs:
 #   4  base manifest counts
@@ -128,6 +129,9 @@ def node_features(nid, data: dict,
     is_powershell = float("powershell" in pname)
     is_noisy_trusted = float(pname in {"svchost.exe", "explorer.exe", "chrome.exe", "lsass.exe"})
     hub_benign = float(int(data.get("benign_high_volume_hub", 0) or 0))
+    zone = node_triage_zone(data)
+    is_benign_zone = float(zone == "benign")
+    is_suspect_zone = float(zone == "suspect")
     session_id = str(data.get("session_id", ""))
     boundary_cross_risk = float(is_svchost > 0 and session_id not in {"", "0"})
     net_base = 20.0 if is_svchost > 0 else (4.0 if is_powershell > 0 else 8.0)
@@ -145,6 +149,8 @@ def node_features(nid, data: dict,
         is_powershell,
         normalized_net_pressure + boundary_cross_risk + (0.25 * is_noisy_trusted),
         hub_benign,
+        is_benign_zone,
+        is_suspect_zone,
     ]
 
     roles = [
@@ -360,7 +366,106 @@ def nx_to_pyg(G, label: int) -> Data:
     )
     data.node_metadata = node_metadata
     data.edge_metadata = edge_metadata
+    data.suspect_node_mask = torch.tensor(
+        [node_triage_zone(data) != "benign" for _, data in nodes],
+        dtype=torch.bool,
+    )
     return data
+
+
+# ── Manifest governance (shared by trainers / analyzers / evaluate) ─────────────
+
+DEFAULT_ALLOWED_BENIGN_SUBTYPES = (
+    "clean_benign,hard_benign_admin_tooling,ambiguous_novirus_control"
+)
+
+
+def parse_allowed_benign_subtypes(csv_value: str) -> tuple[str, ...]:
+    return tuple(x.strip() for x in str(csv_value or "").split(",") if x.strip())
+
+
+def manifest_coerce_bool(value, default: bool = False) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return value != 0
+    text = str(value or "").strip().lower()
+    if not text:
+        return default
+    return text in {"1", "true", "yes", "y"}
+
+
+def governance_load_options(
+    *,
+    require_governance_manifest: bool = False,
+    allowed_benign_subtypes: str = DEFAULT_ALLOWED_BENIGN_SUBTYPES,
+    require_train_eligible: bool = False,
+    include_uncertain: bool = True,
+) -> dict:
+    """Keyword args for MalwareGraphDataset governance-aware loading."""
+    allowed = None
+    if require_governance_manifest:
+        allowed = parse_allowed_benign_subtypes(allowed_benign_subtypes)
+    return {
+        "include_uncertain": include_uncertain,
+        "require_train_eligible": require_train_eligible,
+        "require_governance_columns": require_governance_manifest,
+        "allowed_benign_subtypes": allowed,
+    }
+
+
+def manifest_row_governance(row: dict) -> dict:
+    """Governance fields copied into analysis JSON per sample."""
+    try:
+        label = int(row.get("label", -1))
+    except (TypeError, ValueError):
+        label = -1
+    return {
+        "label_from_manifest": label,
+        "benign_subtype": str(row.get("benign_subtype", "") or ""),
+        "train_eligible": manifest_coerce_bool(row.get("train_eligible", True), True),
+        "uncertain": manifest_coerce_bool(row.get("uncertain", False), False),
+        "uncertain_reason": str(row.get("uncertain_reason", "") or ""),
+        "label_quality_flag": manifest_coerce_bool(row.get("label_quality_flag", False), False),
+        "label_quality_reason": str(row.get("label_quality_reason", "") or ""),
+    }
+
+
+def evaluation_subset_predicates() -> dict:
+    """Named manifest slices for evaluate.py subset metrics."""
+
+    def _subtype(row: dict, name: str) -> bool:
+        return str(row.get("benign_subtype", "")).strip().lower() == name
+
+    def _label(row: dict, value: int) -> bool:
+        return str(row.get("label", "")).strip() == str(value)
+
+    def _uncertain(row: dict) -> bool:
+        return manifest_coerce_bool(row.get("uncertain", False), False)
+
+    def _train_eligible(row: dict) -> bool:
+        return manifest_coerce_bool(row.get("train_eligible", True), True)
+
+    def _suspect_disagreement(row: dict) -> bool:
+        reason = str(row.get("uncertain_reason", "") or "")
+        return (
+            "benign_label_critical_verdict" in reason
+            or "benign_label_high_suspect_zone" in reason
+        )
+
+    return {
+        "all_rows": lambda row: True,
+        "manifest_uncertain": _uncertain,
+        "train_eligible": _train_eligible,
+        "train_ineligible": lambda row: not _train_eligible(row),
+        "uncertain_benign": lambda row: _label(row, 0) and _uncertain(row),
+        "train_eligible_benign": lambda row: _label(row, 0) and _train_eligible(row),
+        "suspect_disagreement_benign": lambda row: _label(row, 0) and _suspect_disagreement(row),
+        "clean_benign": lambda row: _label(row, 0) and _subtype(row, "clean_benign"),
+        "hard_benign_admin_tooling": lambda row: _label(row, 0) and _subtype(row, "hard_benign_admin_tooling"),
+        "ambiguous_novirus_control": lambda row: _label(row, 0) and _subtype(row, "ambiguous_novirus_control"),
+        "malware_labelled": lambda row: _label(row, 1),
+    }
 
 
 # ── Dataset class ─────────────────────────────────────────────────────────────────
@@ -511,12 +616,17 @@ class MalwareGraphDataset(Dataset):
                 self.allowed_benign_subtypes is not None
                 and label == 0
             ):
-                if not benign_subtype:
+                # Manifest train_eligible is authoritative when strict training filter is on.
+                subtype_ok = (
+                    self.require_train_eligible
+                    and train_eligible
+                ) or benign_subtype in self.allowed_benign_subtypes
+                if not benign_subtype and not subtype_ok:
                     print(f"  [SKIP] {name} — missing benign_subtype in governance-aware load")
                     skipped_uncertain += 1
                     skip_reasons["missing_benign_subtype"] += 1
                     continue
-                if benign_subtype not in self.allowed_benign_subtypes:
+                if not subtype_ok:
                     print(f"  [SKIP] {name} — benign_subtype={benign_subtype} excluded")
                     skipped_uncertain += 1
                     skip_reasons[f"benign_subtype:{benign_subtype}"] += 1

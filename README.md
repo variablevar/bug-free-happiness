@@ -1,70 +1,23 @@
-# MalVol — Ransomware Detection via Memory Forensics & Graph Neural Networks
+# MalVol — Memory Forensics Behavioural Graphs & ML Triage
 
-> **MSc Cybersecurity Dissertation Project**  
-> Automated ransomware detection from Windows memory dumps using Volatility 3 forensics and graph neural networks (GIN, GraphSAGE, GAT, GINE).
-
----
-
-## Overview
-
-MalVol is an end-to-end pipeline that:
-
-1. **Extracts** forensic artefacts from Windows memory dumps using **Volatility 3** (pslist, psscan, malfind, filescan, netscan, and many more plugins).
-2. **Analyses** memory-resident Indicators of Compromise (IOCs): code injection, hidden processes, suspicious files, C2-style network activity.
-3. **Scores** each sample with a rule-based triage engine (`filter_malicious.py`) that reads the behavioural graph (`graph.pkl`) and writes `filtered_malicious.json`.
-4. **Rebuilds** the graph with enrichment (`build_graph.py`): `graph.pkl`, `graph.json`, and `graph_attr.json` (legacy 5-float `graph_attr` plus full `graph_attr_map`).
-5. **Analyses** attack chains and reports (`analyze_graph.py` → `analysis_report.json`).
-6. **Trains** a graph-level classifier (`train.py`) with **leave-one-group-out** or **stratified group** cross-validation.
-
-The dissertation corpus (MalVol-25) is on the order of tens of paired WithVirus / NoVirus samples; exact counts depend on your local `memory_dumps/` and manifest.
+Automated analysis of Windows memory dumps using **Volatility 3**, rule-based behavioural triage, and graph neural networks. Samples are modelled as heterogeneous OS behaviour graphs; ML heads produce calibrated triage states with explicit abstention when evidence is ambiguous.
 
 ---
 
-## Repository structure
+## What this repository provides
 
-```text
-datasets/
-├── README.md
-├── requirements.txt
-├── auto_vol.py
-├── build_graph.py
-├── filter_malicious.py
-├── analyze_graph.py
-├── build_dataset.py
-├── dataset.py
-├── model.py
-├── train.py
-├── evaluate.py
-├── parity_checks.py
-├── graphml_to_formats.py
-├── memory_triage.py
-├── server.py
-├── socket_server.py
-├── scripts/ioc/          # IOC corpus scripts
-├── scripts/tools/
-├── ioc_analysis/
-├── utils/
-├── docs/                 # Obsidian notes + pipeline_contracts.md
-├── notebook/             # e.g. train.ipynb (Colab-friendly)
-├── memory_dumps/         # local only
-├── extracted_data/
-├── extracted_csvs/
-└── outputs/
-```
-
-Memory images and malware binaries are **not** shipped in the repo. Use Git LFS or local storage for `.mem` files.
-
-### Root hygiene
-
-Ignored or generated paths include `__pycache__/`, `extracted_data/`, `extracted_csvs/`, `outputs/`. To clear bytecode:
-
-```bash
-find . -type d -name "__pycache__" -prune -exec rm -rf {} + && find . -type f -name "*.pyc" -delete
-```
+| Layer | Role |
+|-------|------|
+| **Extraction** | Run Volatility plugins over `.mem` images → per-sample CSVs |
+| **Graph + rules** | Build behavioural graphs, score IOCs, emit structured forensic reports |
+| **Manifest** | Join labels, graph stats, triage signals, and pipeline health in `dataset_manifest.csv` |
+| **ML (primary)** | Dual one-class GNNs (malware + benign) fused with a calibrated binary head |
+| **ML (legacy)** | Supervised GNN cross-validation (`train.py`) for separability experiments |
+| **Evaluation** | Orchestrated inference, subset metrics, gate ablation, geometry diagnostics |
 
 ---
 
-## Installation
+## Quick start
 
 ```bash
 git clone https://github.com/variablevar/bug-free-happiness.git
@@ -74,52 +27,69 @@ source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Install Volatility 3 so the `vol` CLI is available (see [Volatility 3](https://github.com/volatilityfoundation/volatility3)).
+Install [Volatility 3](https://github.com/volatilityfoundation/volatility3) so the `vol` CLI is on your `PATH`.
 
-### Dashboard (optional)
+Optional dashboard:
 
 ```bash
 python server.py
 ```
 
-Then open the app in the browser. For a narrative of stages and scripts, see [docs/Pipeline.md](docs/Pipeline.md) and [docs/pipeline_contracts.md](docs/pipeline_contracts.md).
+---
+
+## Repository layout
+
+```text
+datasets/
+├── README.md
+├── requirements.txt
+├── auto_vol.py              # Volatility batch extraction
+├── build_graph.py           # Behavioural graph + graph_attr.json
+├── filter_malicious.py      # Rule triage → filtered_malicious.json
+├── analyze_graph.py         # Attack chain → analysis_report.json
+├── build_dataset.py         # Corpus manifest builder
+├── dataset.py               # PyG dataset loader
+├── train_stack.py           # Train malware + benign one-class models
+├── train_malware_model.py
+├── train_benign_model.py
+├── train_binary_model.py    # Calibrated binary GNN
+├── analyze_two_model.py     # Fused triage inference
+├── analyze_binary_model.py
+├── evaluate.py              # Run two-model + binary + merged summary
+├── fusion.py                # Uncertainty gates & ensemble scoring
+├── calibration.py
+├── train.py                 # Legacy supervised GNN CV (GIN/SAGE/GAT/GINE)
+├── model.py / one_class_gnn.py
+├── utils/
+│   ├── graph_attr_profile.py
+│   └── subgraph_extract.py
+├── scripts/                 # See scripts/README.md
+├── docs/                    # Obsidian vault + pipeline contracts
+├── memory_dumps/            # Local only (not in git)
+├── extracted_data/          # ~30 paired WithVirus/NoVirus samples
+├── extracted_csvs/          # Primary manifest corpus (~43 rows)
+└── outputs/                 # Models, analysis JSON, diagnostics
+```
+
+Memory images and malware binaries are **not** shipped. Store `.mem` files locally or via Git LFS.
 
 ---
 
-## Pipeline
+## End-to-end pipeline
 
-### Step 1 — Volatility extraction
+### 1. Extract forensic artefacts
 
-Place memory images under `memory_dumps/`, then:
+Place dumps under `memory_dumps/`, then:
 
 ```bash
 python auto_vol.py
 ```
 
-Per-sample plugin CSVs land under `extracted_data/<SampleName>/`.
+Output: `extracted_data/<SampleName>/*.csv` (or your chosen output tree).
 
-### Step 2 — IOC analysis (optional reporting)
+### 2. Build graphs and triage (per sample or corpus)
 
-```bash
-python scripts/ioc/code_injection_analysis.py
-python scripts/ioc/hidden_proc_analysis.py
-python scripts/ioc/filescan_analysis.py
-python scripts/ioc/network_analysis.py
-python scripts/ioc/analysis_corpus.py
-```
-
-Shared helpers live under `ioc_analysis/`.
-
-### Step 3–5 — Filter, graph, analyse (per sample)
-
-`build_dataset.py` orchestrates a stable order (see `docs/pipeline_contracts.md`):
-
-1. Ensure `graph.pkl` exists (bootstrap via `build_graph.py` if needed).
-2. Run `filter_malicious.py` on `graph.pkl` → `filtered_malicious.json`.
-3. Run `build_graph.py` again to persist graphs and `graph_attr.json`.
-4. Run `analyze_graph.py` → `analysis_report.json`.
-
-For a **single** folder after extraction:
+**Single folder** (after CSVs exist):
 
 ```bash
 python build_graph.py extracted_data/WannaCry-WithVirus/
@@ -128,163 +98,200 @@ python build_graph.py extracted_data/WannaCry-WithVirus/
 python analyze_graph.py extracted_data/WannaCry-WithVirus/
 ```
 
-Full corpus + manifest:
+**Full corpus + manifest:**
 
 ```bash
 python build_dataset.py
+# or with explicit base:
+python build_dataset.py --base-dir extracted_csvs
 ```
 
-Manifest path defaults to `extracted_data/dataset_manifest.csv` (or the base you pass in).
+Stable step order is documented in [docs/pipeline_contracts.md](docs/pipeline_contracts.md).
 
-For folders that are not named `…-WithVirus` / `…-NoVirus` (e.g. BCCC benign dumps under `extracted_csvs/`), set manifest labels with `--default-label-for-unmatched 0` or a `--labels-csv` with `folder,label[,family]`; see `python build_dataset.py --help`.
+### 3. Train ML models
 
-### Manifest columns (high level)
-
-Besides `sample_id`, `folder`, `label` (`1` malware, `0` benign, `-1` unknown), `family`, graph counts, verdict-style fields (`max_score`, `attack_steps`, …), the manifest includes:
-
-- `graph_attr` — JSON list of graph-level floats consumed by `dataset.py` (dimension matches the loader).
-- `label_signals_top`, `label_signals_json` — serialised triage / label signals for inspection and tooling.
-- Typed `signal_*` columns (counts / scores) for spreadsheets and ablations.
-- `uncertain`, `uncertain_reason` — heuristic curation flags; one-class trainers include these rows by default. Use `--exclude-uncertain` on train commands to drop them.
-- `filter_ok`, `graph_ok`, `analyze_ok`, `error` — pipeline health.
-
-Training includes `uncertain` rows by default. Rows with `label=-1` are excluded from both one-class trainers.
-
----
-
-## Two-model analysis stack
-
-This repository now uses an explainability-first stack instead of one binary classifier:
-
-- **Model A: malware one-class GNN** (`train_malware_model.py`) outputs `malware_pattern_score`.
-- **Model B: benign one-class GNN** (`train_benign_model.py`) outputs `benign_conformity_score`.
-- **Fusion analyzer** (`analyze_two_model.py`) combines both into a triage state and model-derived evidence.
-
-### Train the two models
+Primary stack (dual one-class):
 
 ```bash
-# Train both models with one command (wrapper)
-python train.py extracted_csvs/dataset_manifest.csv
-
-# Or train each model separately
-python train_malware_model.py extracted_csvs/dataset_manifest.csv \
-  --hidden 32 --layers 2 --out-dim 64 --epochs 120
-
-python train_benign_model.py extracted_csvs/dataset_manifest.csv \
-  --hidden 32 --layers 2 --out-dim 64 --epochs 120
+python train_stack.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs
 ```
 
-Artifacts are written under `outputs/` by default:
-
-- `outputs/malware_model.pt`
-- `outputs/malware_model_meta.json`
-- `outputs/benign_model.pt`
-- `outputs/benign_model_meta.json`
-
-### Run fused analysis
+Or train heads separately:
 
 ```bash
-python evaluate.py extracted_csvs/dataset_manifest.csv
+python train_malware_model.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs
+python train_benign_model.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs
+```
 
-# equivalent direct command:
+Binary calibrated classifier (recommended `no_manifest_leakage` profile):
+
+```bash
+python train_binary_model.py extracted_csvs/dataset_manifest.csv \
+  --base-dir extracted_csvs \
+  --graph-attr-profile no_manifest_leakage \
+  --epochs 120 --hidden 32 --layers 2
+```
+
+Legacy supervised GNN (grouped CV):
+
+```bash
+python train.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs --model gin
+```
+
+### 4. Run evaluation
+
+```bash
+python evaluate.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs
+```
+
+Writes by default:
+
+- `outputs/two_model_analysis.json`
+- `outputs/binary_analysis.json`
+- `outputs/evaluate_merged_analysis.json`
+
+Optional diagnostics:
+
+```bash
+python evaluate.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs --gate-ablation
+python scripts/calibrate_uncertainty_thresholds.py
+python scripts/diagnose_triage_geometry.py outputs/two_model_analysis.json
+```
+
+Calibrated two-model inference (explicit):
+
+```bash
 python analyze_two_model.py extracted_csvs/dataset_manifest.csv \
-  --malware-model outputs/malware_model.pt \
-  --benign-model outputs/benign_model.pt \
+  --base-dir extracted_csvs \
+  --abstention-mode calibrated \
   --output-json outputs/two_model_analysis.json
 ```
 
-Per-sample JSON includes:
+### 5. Per-sample reports
 
-- `malware_pattern_score`
-- `benign_conformity_score`
-- `delta_score`
-- `triage_state` (`likely_malicious`, `needs_analyst_review`, `anomalous_unknown`, `likely_benign`)
-- `confidence_split`
-- `reasoning_types`:
-  - `execution_chain_anomaly`
-  - `memory_injection_evidence`
-  - `credential_access_evidence`
-  - `network_c2_evidence`
-  - `benign_admin_tooling_likelihood`
-- `behavioral_findings`
-- `malware_model_evidence` (top nodes, edge pairs, top graph attributes, distance)
-- `benign_model_evidence` (top nodes, edge pairs, top graph attributes, distance)
-- `narrative`
+```bash
+python scripts/generate_sample_reports.py --base-dir extracted_csvs \
+  --analysis-json outputs/two_model_analysis.json
 
-Use `python train.py --help`, `python train_malware_model.py --help`, and
-`python analyze_two_model.py --help` for full options.
+python scripts/generate_sample_reports.py --base-dir extracted_data
+```
+
+Creates `REPORT.md` in each folder that has `analysis_report.json`.
 
 ---
 
-## Binary GNN baseline (separability)
+## Data directories
 
-Use this path to force direct malware-vs-benign separation and reduce ambiguity.
+| Path | Contents |
+|------|----------|
+| `extracted_data/` | Paired ransomware-family WithVirus / NoVirus runs (~30 folders) |
+| `extracted_csvs/` | Extended manifest corpus (~43 labelled rows) |
+| `outputs/` | Checkpoints (`*.pt`), meta JSON, analysis and diagnostic outputs |
+
+For folders not named `*-WithVirus` / `*-NoVirus`, use `build_dataset.py --default-label-for-unmatched` or a `--labels-csv` with `folder,label[,family]`.
+
+---
+
+## Manifest and label governance
+
+Key columns (see [docs/pipeline_contracts.md](docs/pipeline_contracts.md)):
+
+- `label` — `1` malware, `0` benign, `-1` unknown (excluded from one-class trainers)
+- `uncertain`, `uncertain_reason` — heuristic ambiguity flags
+- `benign_subtype` — e.g. `clean_benign`, `hard_benign_admin_tooling`, `ambiguous_novirus_control`
+- `train_eligible` — strict training filter when governance manifest is required
+- `graph_attr`, `signal_*`, pipeline flags (`filter_ok`, `graph_ok`, `analyze_ok`)
+
+Author hard-benign overrides in `extracted_csvs/hard_benign_labels.csv` (see `hard_benign_labels.example.csv`), then:
 
 ```bash
-# Train binary GNN + calibration artifacts
-python train_binary_model.py extracted_csvs/dataset_manifest.csv \
-  --base-dir extracted_csvs \
-  --epochs 120 \
-  --hidden 32 --layers 2 --edge-emb-dim 16 \
-  --val-fraction 0.2 \
-  --target-recall 0.90 --target-specificity 0.90 \
-  --output-model outputs/binary_model.pt \
-  --output-meta outputs/binary_model_meta.json
+python scripts/apply_hard_benign_labels.py extracted_csvs/dataset_manifest.csv \
+  --labels-csv extracted_csvs/hard_benign_labels.csv
+```
 
-# Analyze with calibrated probabilities and 4-state triage
+`NoVirus` family controls are **not** a substitute for clean benign training data unless you explicitly pass `--include-ambiguous-benign-controls` to the benign trainer (experimental only).
+
+---
+
+## Two-model triage stack
+
+| Component | Output |
+|-----------|--------|
+| Malware one-class GNN | `malware_pattern_score` |
+| Benign one-class GNN | `benign_conformity_score` |
+| Binary GNN + calibration | `p_malware` (temperature / isotonic in checkpoint meta) |
+| `fusion.py` | `triage_state`, `routing_tier`, uncertainty gates |
+
+**Triage states:** `likely_malicious`, `likely_benign`, `needs_analyst_review`, `anomalous_unknown`
+
+**Abstention modes** (`--abstention-mode`):
+
+- `calibrated` — layered gates; binary disagreement only in mid-confidence band (default)
+- `legacy_or` — earlier OR-combined gates
+- `disabled` — diagnostic only; not for production routing
+
+**Graph attr profiles** (`--graph-attr-profile`): `full`, `no_manifest_leakage`, `structure_only`
+
+**Graph views** (`--graph-view`): `full`, `attack_subgraph`
+
+Artifacts default to `outputs/malware_model.pt`, `outputs/benign_model.pt`, `outputs/binary_model.pt`, and matching `*_meta.json` files.
+
+---
+
+## Binary baseline (separability)
+
+```bash
 python analyze_binary_model.py extracted_csvs/dataset_manifest.csv \
   --base-dir extracted_csvs \
   --model outputs/binary_model.pt \
   --output-json outputs/binary_analysis.json
 ```
 
-Binary output states:
+**States:** `likely_malicious`, `likely_benign`, `high_risk_ambiguous`, `low_risk_ambiguous`
 
-- `likely_malicious` (`p_malware >= threshold_high`)
-- `likely_benign` (`p_malware <= threshold_low`)
-- `high_risk_ambiguous` (between thresholds + risky signals present)
-- `low_risk_ambiguous` (between thresholds without risky signals)
-
-Calibration + separability metrics are written in `outputs/binary_model_meta.json`:
-
-- temperature scaling (`temperature`, `val_nll_before`, `val_nll_after`)
-- calibration quality (`val_brier_*`, `val_ece_*`)
-- class separation (`val_ks`, `val_auroc`)
+Calibration metrics (Brier, ECE, KS, AUROC) are stored in `outputs/binary_model_meta.json`.
 
 ---
 
-## Notebooks
+## Behavioural heuristics
 
-`notebook/train.ipynb` is set up for local runs and Google Colab (install cell, optional Drive mount, path to manifest). Point `ROOT` at this repo before `pip install -r requirements.txt`.
+`filter_malicious.py` scores processes using behavioural signals (LOLBin abuse, injection, C2-style edges, credential access, staging paths, lineage anomalies, etc.) — not static malware name lists. Full signal tables: [docs/IOCs.md](docs/IOCs.md).
 
 ---
 
-## Behavioural heuristics (MITRE-style)
+## Documentation index
 
-`filter_malicious.py` combines process- and graph-level signals (injections, C2-style edges, credential access patterns, staging, ransomware-note style indicators, lineage and stage coverage, benign-context discounts, etc.). Full logic lives in the script and in `_meta` sections of `filtered_malicious.json` / `graph_attr.json`.
+| Document | Description |
+|----------|-------------|
+| [docs/Overview.md](docs/Overview.md) | System overview |
+| [docs/Pipeline.md](docs/Pipeline.md) | Stage-by-stage pipeline |
+| [docs/Models.md](docs/Models.md) | GNN architectures and ML stacks |
+| [docs/IOCs.md](docs/IOCs.md) | IOC categories and MITRE mapping |
+| [docs/Results.md](docs/Results.md) | Metrics and output artifacts |
+| [docs/Future Work.md](docs/Future%20Work.md) | Roadmap |
+| [docs/pipeline_contracts.md](docs/pipeline_contracts.md) | File-level contracts |
+| [docs/evaluation_operations.md](docs/evaluation_operations.md) | Evaluation runs and ablations |
+| [docs/graph_audit_improvement_report.md](docs/graph_audit_improvement_report.md) | Graph corpus audit |
+| [scripts/README.md](scripts/README.md) | Helper scripts index |
+
+Open `docs/` as an [Obsidian](https://obsidian.md) vault for wiki-linked notes (`[[Pipeline]]`, etc.).
 
 ---
 
 ## Limitations
 
-- **Small N** — metrics vary sharply between seeds and splits; report mean ± std over seeds where possible.
-- **Group leakage** — default LOSO groups by folder; use `--cv stratified_group --group-by family` when families repeat across folders.
-- **Heuristic vs label noise** — benign captures with strong signals may be flagged `uncertain`; training includes them by default; use `--exclude-uncertain` to hold out.
-- **Features** — node features are hand-engineered categoricals and numerics; embeddings are future work.
+- **Small sample counts** — metrics vary sharply across seeds and folds; prefer multiple seeds and grouped CV.
+- **Group leakage** — default LOSO groups by folder; use `--cv stratified_group --group-by family` when families repeat.
+- **Ambiguous benign controls** — many `NoVirus` graphs carry high rule-based verdicts; treat as controls, not clean benign unless labelled otherwise.
+- **Features** — hand-engineered node/edge attributes; learned embeddings remain future work.
 
 ---
 
-## Related work (high level)
+## Development
 
-| Work | Idea | Contrast |
-|------|------|----------|
-| MDGraph-style FCG methods | Code / document features on static graphs | MalVol uses **runtime** memory artefacts, not disassembly of a single binary |
-| ProcGCN-style process graphs | Often single-process or static | MalVol builds a **system-wide** heterogeneous behavioural graph from Volatility |
+```bash
+python -m pytest tests/
+find . -type d -name __pycache__ -prune -exec rm -rf {} +
+```
 
----
-
-## Academic context
-
-This repository supports dissertation work on: MalVol-25-style corpora, automated Volatility extraction, IOC quantification, and GNNs on heterogeneous OS behaviour graphs.
-
-Further reading in-repo: [docs/Overview.md](docs/Overview.md), [docs/Models.md](docs/Models.md), [docs/Pipeline.md](docs/Pipeline.md), [docs/pipeline_contracts.md](docs/pipeline_contracts.md).
+Generated paths (`extracted_data/`, `extracted_csvs/`, `outputs/`) may be large; see `.gitignore` for local policy.

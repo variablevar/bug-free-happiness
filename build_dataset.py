@@ -365,6 +365,8 @@ def collect_stats(folder):
         "signal_motif_persistence_path_log": 0.0,
         "signal_benign_high_volume_hub_count": 0,
         "signal_rwx_thread_context_count": 0,
+        "suspect_zone_pids_count": 0,
+        "benign_zone_pids_count": 0,
     }
 
     # graph.pkl → node/edge count  (load the nx.DiGraph directly)
@@ -400,8 +402,29 @@ def collect_stats(folder):
             stats["signal_motif_persistence_path_log"] = float(m[6])
             stats["signal_benign_high_volume_hub_count"] = int(_count_benign_hubs_graph(G))
             stats["signal_rwx_thread_context_count"] = int(_count_rwx_thread_context_graph(G))
+            stats["suspect_zone_pids_count"] = sum(
+                1 for _, d in G.nodes(data=True)
+                if d.get("node_type") == "process" and d.get("triage_zone") == "suspect"
+            )
+            stats["benign_zone_pids_count"] = sum(
+                1 for _, d in G.nodes(data=True)
+                if d.get("node_type") == "process" and d.get("triage_zone") == "benign"
+            )
         except Exception:
             pass
+    else:
+        fmp = os.path.join(folder, "filtered_malicious.json")
+        if os.path.exists(fmp):
+            try:
+                with open(fmp) as f:
+                    fm = json.load(f)
+                meta = fm.get("_meta", {})
+                stats["suspect_zone_pids_count"] = len(
+                    meta.get("suspect_zone_pids", meta.get("suspicious_pids", []))
+                )
+                stats["benign_zone_pids_count"] = len(meta.get("benign_zone_pids", []))
+            except Exception:
+                pass
 
     # graph_attr.json → 5-element tensor + label_signals
     ap = os.path.join(folder, "graph_attr.json")
@@ -468,11 +491,46 @@ def progress_bar(done, total, elapsed, bar_width=28):
     return f"[{bar}] {done}/{total} ({pct*100:.0f}%){eta}"
 
 
+def _parse_reason_list(value: str) -> list[str]:
+    return [p.strip() for p in str(value or "").split("|") if p.strip()]
+
+
+def _benign_label_suspect_disagreement(row: dict) -> list[str]:
+    """
+    After benign-zone triage: flag label=0 rows that still look malware-hot in the
+    suspect zone (optional second gate; folder-name ambiguity alone is not enough).
+    """
+    try:
+        label = int(row.get("label", -1))
+    except (TypeError, ValueError):
+        return []
+    if label != 0:
+        return []
+
+    reasons: list[str] = []
+    verdict = str(row.get("verdict", "")).upper()
+    try:
+        suspect_n = int(row.get("suspect_zone_pids_count", 0) or 0)
+        max_score = int(row.get("max_score", -1) or -1)
+    except (TypeError, ValueError):
+        suspect_n, max_score = 0, -1
+
+    if "CRITICAL" in verdict:
+        reasons.append("benign_label_critical_verdict")
+    elif suspect_n >= 18 and max_score >= 100:
+        reasons.append("benign_label_high_suspect_zone")
+    return reasons
+
+
 def uncertainty_flags(row):
     """
-    Mark manifest uncertainty for label-quality or pipeline integrity reasons.
+    Mark manifest uncertainty for pipeline failures, non-novirus label-quality issues,
+    or strong suspect-zone disagreement on benign-labelled rows.
+
+    Post benign-zone policy: ``ambiguous_novirus_control`` alone does NOT make a
+    sample uncertain (folder name is metadata, not a failed triage).
     """
-    reasons = []
+    reasons: list[str] = []
     if not bool(row.get("filter_ok", False)):
         reasons.append("filter_failed")
     if not bool(row.get("graph_ok", False)):
@@ -480,10 +538,16 @@ def uncertainty_flags(row):
     if not bool(row.get("analyze_ok", False)):
         reasons.append("analyze_failed")
 
-    quality_reasons = str(row.get("label_quality_reason", "")).strip()
-    if quality_reasons:
-        reasons.append(quality_reasons)
-    return bool(reasons), "|".join([r for r in reasons if r])
+    strict = bool(row.get("_strict_novirus_policy", False))
+    for part in _parse_reason_list(row.get("label_quality_reason", "")):
+        if strict or part != "ambiguous_novirus_control":
+            reasons.append(part)
+
+    for part in _benign_label_suspect_disagreement(row):
+        if part not in reasons:
+            reasons.append(part)
+
+    return bool(reasons), "|".join(reasons)
 
 
 # ── Per-sample worker ────────────────────────────────────────────────────────
@@ -621,9 +685,15 @@ def process_sample(job, scripts, skip, run_steps, write_subgraphs: bool = False)
 
     stats = collect_stats(folder)
     row.update(stats)
+    row["_strict_novirus_policy"] = bool(job.get("strict_novirus_controls", False))
     uncertain, uncertain_reason = uncertainty_flags(row)
     row["uncertain"] = uncertain
     row["uncertain_reason"] = uncertain_reason
+    if (
+        str(row.get("benign_subtype", "")) == "ambiguous_novirus_control"
+        and not bool(job.get("strict_novirus_controls", False))
+    ):
+        row["train_eligible"] = not uncertain
     write_run_log(folder, log)
 
     ok_all = row["filter_ok"] and row["graph_ok"] and row["analyze_ok"]
@@ -715,8 +785,16 @@ def main():
         "--allow-ambiguous-novirus-controls",
         action="store_true",
         help=(
-            "Allow inferred -NoVirus malware-family controls to remain train_eligible. "
-            "Default: mark them as ambiguous_novirus_control and exclude from training."
+            "Legacy alias: -NoVirus controls are train_eligible by default after benign-zone "
+            "triage (unless --strict-novirus-controls)."
+        ),
+    )
+    parser.add_argument(
+        "--strict-novirus-controls",
+        action="store_true",
+        help=(
+            "Restore pre-zone policy: -NoVirus folders stay train_eligible=false and "
+            "ambiguous_novirus_control can contribute to uncertain (with signal gates)."
         ),
     )
     args = parser.parse_args()
@@ -839,10 +917,12 @@ def main():
                 merged_reasons.append(reason)
         job["label_quality_flag"] = bool(job.get("label_quality_flag", False) or flagged or merged_reasons)
         job["label_quality_reason"] = "|".join(merged_reasons)
+        job["strict_novirus_controls"] = bool(args.strict_novirus_controls)
         allowed_reasons = set()
         if args.allow_timeout_hash_labels:
             allowed_reasons.update({"timeout_derived_label", "hash_derived_label"})
-        if args.allow_ambiguous_novirus_controls:
+        # Post benign-zone default: NoVirus controls may train unless later marked uncertain.
+        if not args.strict_novirus_controls or args.allow_ambiguous_novirus_controls:
             allowed_reasons.add("ambiguous_novirus_control")
         explicit_train_eligible = job.get("train_eligible_override")
         if explicit_train_eligible is None:
@@ -984,6 +1064,8 @@ def main():
                     "signal_motif_persistence_path_log": 0.0,
                     "signal_benign_high_volume_hub_count": 0,
                     "signal_rwx_thread_context_count": 0,
+                    "suspect_zone_pids_count": 0,
+                    "benign_zone_pids_count": 0,
                     "uncertain": True,
                     "uncertain_reason": "pipeline_exception",
                 }
@@ -1030,6 +1112,8 @@ def main():
         "signal_motif_persistence_path_log",
         "signal_benign_high_volume_hub_count",
         "signal_rwx_thread_context_count",
+        "suspect_zone_pids_count",
+        "benign_zone_pids_count",
         "uncertain", "uncertain_reason",
         "filter_ok", "graph_ok", "analyze_ok", "error",
     ]

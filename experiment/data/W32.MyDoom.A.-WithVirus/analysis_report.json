@@ -1,0 +1,224 @@
+{
+  "meta": {
+    "tool": "analyze_graph.py v4",
+    "source": "extracted_data/W32.MyDoom.A.-WithVirus",
+    "version": "4.0"
+  },
+  "summary": {
+    "nodes_total": 164,
+    "edges_total": 10,
+    "is_directed": true,
+    "suspicious_total": 9,
+    "node_types": {
+      "kernel": 1,
+      "network_conn": 158,
+      "ip_address": 5
+    },
+    "edge_types": {
+      "connects_to": 10
+    },
+    "suspicious_by_type": {
+      "network_conn": 6,
+      "ip_address": 3
+    }
+  },
+  "attack_chain": {
+    "steps": [],
+    "overall_verdict": "LOW \u2014 No significant threats identified",
+    "max_process_score": 0
+  },
+  "entry_points": [],
+  "processes": [],
+  "hidden_processes": [],
+  "network": [
+    {
+      "pid": null,
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49289,
+      "foreign_addr": "34.104.35.123",
+      "foreign_port": 80,
+      "state": "ESTABLISHED",
+      "owner": "svchost.exe",
+      "is_external": true,
+      "is_lolbin_c2": false,
+      "heuristic_score": 4,
+      "severity": "MEDIUM",
+      "reasons": [
+        "external-ip",
+        "established",
+        "http-non-browser"
+      ]
+    },
+    {
+      "pid": null,
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49289,
+      "foreign_addr": "34.104.35.123",
+      "foreign_port": 80,
+      "state": "ESTABLISHED",
+      "owner": "svchost.exe",
+      "is_external": true,
+      "is_lolbin_c2": false,
+      "heuristic_score": 4,
+      "severity": "MEDIUM",
+      "reasons": [
+        "external-ip",
+        "established",
+        "http-non-browser"
+      ]
+    },
+    {
+      "pid": null,
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49287,
+      "foreign_addr": "216.58.212.202",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "owner": "chrome.exe",
+      "is_external": true,
+      "is_lolbin_c2": false,
+      "heuristic_score": 3,
+      "severity": "MEDIUM",
+      "reasons": [
+        "external-ip",
+        "established"
+      ]
+    },
+    {
+      "pid": null,
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49294,
+      "foreign_addr": "142.251.5.188",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "owner": "chrome.exe",
+      "is_external": true,
+      "is_lolbin_c2": false,
+      "heuristic_score": 3,
+      "severity": "MEDIUM",
+      "reasons": [
+        "external-ip",
+        "established"
+      ]
+    },
+    {
+      "pid": null,
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49287,
+      "foreign_addr": "216.58.212.202",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "owner": "chrome.exe",
+      "is_external": true,
+      "is_lolbin_c2": false,
+      "heuristic_score": 3,
+      "severity": "MEDIUM",
+      "reasons": [
+        "external-ip",
+        "established"
+      ]
+    },
+    {
+      "pid": null,
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49294,
+      "foreign_addr": "142.251.5.188",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "owner": "chrome.exe",
+      "is_external": true,
+      "is_lolbin_c2": false,
+      "heuristic_score": 3,
+      "severity": "MEDIUM",
+      "reasons": [
+        "external-ip",
+        "established"
+      ]
+    },
+    {
+      "pid": null,
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49240,
+      "foreign_addr": "34.104.35.123",
+      "foreign_port": 80,
+      "state": "CLOSED",
+      "owner": "",
+      "is_external": false,
+      "is_lolbin_c2": false,
+      "heuristic_score": 1,
+      "severity": "LOW",
+      "reasons": [
+        "http-non-browser"
+      ]
+    },
+    {
+      "pid": null,
+      "proto": "TCPv4",
+      "local_addr": "10.0.2.15",
+      "local_port": 49240,
+      "foreign_addr": "34.104.35.123",
+      "foreign_port": 80,
+      "state": "CLOSED",
+      "owner": "",
+      "is_external": false,
+      "is_lolbin_c2": false,
+      "heuristic_score": 1,
+      "severity": "LOW",
+      "reasons": [
+        "http-non-browser"
+      ]
+    }
+  ],
+  "injections": [],
+  "credentials": [],
+  "drivers": [],
+  "graph_attr": [
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "label_signals": {
+    "behavioural_suspects_found": 0,
+    "lolbin_c2_found": 0,
+    "ransom_note_found": 0,
+    "rwx_injections": 0,
+    "raw_rwx_injections": 0,
+    "hidden_processes": 0,
+    "top_suspect_score": 0,
+    "triage_confidence": 0.0,
+    "stage_coverage_score": 0.0,
+    "lineage_depth_p95": 0,
+    "nonrwx_exec_count": 0,
+    "credential_access_count": 0,
+    "num_attack_motifs": 0,
+    "service_boundary_violations": 0,
+    "temporal_chain_signals": 0,
+    "trusted_host_dll_anomalies": 0
+  },
+  "graph_attr_extra": {
+    "num_processes": 0,
+    "num_network": 158,
+    "num_injections": 0,
+    "num_credentials": 0,
+    "num_hidden": 0,
+    "service_user_boundary_violations": 0,
+    "office_lolbin_chain_count": 0,
+    "trusted_host_dll_anomalies": 0,
+    "dual_use_admin_tool_count": 0,
+    "popularity_dampened_processes": 0
+  },
+  "benign_zone_summary": {
+    "process_count": 0,
+    "top_reasons": [],
+    "excluded_from_verdict": true
+  }
+}

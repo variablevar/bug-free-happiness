@@ -4,7 +4,12 @@
 
 The current dataset and model stack support an uncertainty-aware triage workflow more naturally than a hard malware-vs-benign decision. The core reason is not just model quality; it is dataset structure. In the checked-in corpus, `14/15` benign-labelled rows are already marked `uncertain=True`, and many `NoVirus` control graphs carry `HIGH` or `CRITICAL` rule-based verdicts. A binary classifier therefore learns against overlapping classes, while the two-model path is better aligned with the real question: "does this graph look malware-like, benign-like, or too ambiguous to decide automatically?"
 
-This report focuses on the checked-in graph corpus under `extracted_data`, because that is where the current workspace stores the per-sample `graph.json` and `graph.pkl` artifacts that the training/evaluation code actually uses. The `extracted_csvs` directory in this workspace currently contains only `manifest_hard_benign.example.csv`, not the sample graph folders.
+This report references both corpora:
+
+- **`extracted_data/`** — ~30 paired `*-WithVirus` / `*-NoVirus` families (primary graph-audit statistics below)
+- **`extracted_csvs/`** — ~43 manifest rows with full per-folder `graph.pkl` / `analysis_report.json` (primary ML evaluation corpus)
+
+Training and evaluation typically use `extracted_csvs/dataset_manifest.csv` with `--base-dir extracted_csvs`.
 
 ## Scope And Evidence Base
 
@@ -18,8 +23,8 @@ Files reviewed for this report:
 - `train_benign_model.py`
 - `analyze_two_model.py`
 - `fusion.py`
-- `latex_dissertation/eval/binary_analysis.json`
-- `latex_dissertation/eval/two_model_analysis.json`
+- `outputs/binary_analysis.json`
+- `outputs/two_model_analysis.json`
 
 Corpus summary from the checked-in artifacts:
 
@@ -144,19 +149,14 @@ Why it matters:
 - the model may learn dataset templates rather than malware/benign behaviour
 - family-aware evaluation should remain explicit in reporting
 
-### 6. The current two-model stack measures uncertainty, but does not use it to abstain
+### 6. Uncertainty must stay operational in fusion
 
-`analyze_two_model.py` computes uncertainty summaries for both one-class models and the ensemble, but the final decision still comes from thresholded fusion logic. The pipeline also applies a policy-style gate in the dual-high/high case:
-
-- uncertainty is written into the output JSON
-- `p_mal_eff = (0.5 * p_mal_cal + 0.25)` is applied when both one-class models are high and `fusion_gate_dual_high_high` is enabled
-- `fusion.py` then maps the fused score to `likely_malicious`, `likely_benign`, or `needs_analyst_review`
+`analyze_two_model.py` and `fusion.py` now support layered abstention (`--abstention-mode calibrated` by default): MC variance, ensemble disagreement, dual-margin gates, and binary–dual disagreement in mid-confidence bands. Legacy `legacy_or` and diagnostic `disabled` modes remain for ablation.
 
 Why it matters:
 
-- uncertainty is currently descriptive, not operational
-- a sample can still be forced into a confident state without variance/disagreement gating
-- the system is closer to "policy-based fused triage" than "uncertainty-aware rejection"
+- review routing should reflect measured ambiguity, not fixed score bands alone
+- gate presets are comparable via `evaluate.py --gate-ablation` → `outputs/gate_ablation.csv`
 
 ### 7. One-class training is especially fragile on this dataset
 
@@ -168,35 +168,20 @@ Why it matters:
 - small-data one-class learning becomes sensitive to initialization and sample mix
 - training and inference are not optimized against exactly the same center/radius definition
 
-## What The Current Results Already Show
+## What Current Evaluation Outputs Show
 
-The checked-in evaluation outputs already support the dissertation's uncertainty-first framing.
+Inspect the latest run under `outputs/` (counts vary by checkpoint and abstention preset).
 
-Binary path (`latex_dissertation/eval/binary_analysis.json`):
+Typical pattern on ambiguous corpora:
 
-- benign-labelled rows:
-  - `12` `likely_malicious`
-  - `2` `likely_benign`
-  - `1` `low_risk_ambiguous`
-- malware-labelled rows:
-  - `12` `likely_malicious`
-  - `2` `high_risk_ambiguous`
-  - `1` `likely_benign`
-
-Two-model path (`latex_dissertation/eval/two_model_analysis.json`):
-
-- benign-labelled rows:
-  - `12` `needs_analyst_review`
-  - `3` `anomalous_unknown`
-- malware-labelled rows:
-  - `12` `needs_analyst_review`
-  - `3` `anomalous_unknown`
+- **Binary path** (`outputs/binary_analysis.json`) — tends to over-commit to `likely_malicious` when manifest leakage or calibration collapse is present
+- **Two-model path** (`outputs/two_model_analysis.json`) — routes more mass to `needs_analyst_review` / `anomalous_unknown`, matching overlapping benign controls
 
 Interpretation:
 
-- the binary path overcommits to malware on this corpus
-- the two-model path better reflects dataset ambiguity, but still lacks calibrated uncertainty-aware abstention
-- this supports using the system as a triage assistant, not a decisive malware verdict engine
+- use **triage metrics** (decisive coverage, review rate) rather than accuracy alone
+- recalibrate after `no_manifest_leakage` binary retrain and threshold fitting (`scripts/calibrate_uncertainty_thresholds.py`)
+- regenerate geometry report: `scripts/diagnose_triage_geometry.py outputs/two_model_analysis.json`
 
 ## Prioritized Improvements
 
@@ -289,7 +274,7 @@ Recommended actions:
 
 1. report abstention coverage, analyst-review routing, and family-paired ambiguity
 2. compare results with and without uncertain benign rows
-3. keep family-paired evaluation explicit in all dissertation tables and figures
+3. keep family-paired evaluation explicit in all summary tables and subset_metrics
 
 Why this matters:
 
@@ -300,8 +285,24 @@ Primary files:
 
 - `evaluate.py`
 - `analyze_two_model.py`
-- `scripts/export_dissertation_figure_data.py`
-- dissertation evaluation tables/figures
+- `scripts/diagnose_triage_geometry.py`
+- [[evaluation_operations]]
+
+## Implementation status
+
+| Priority | Theme | Status | Modules |
+|----------|-------|--------|---------|
+| 1 | Data governance | Partial | `dataset.py`, `scripts/apply_hard_benign_labels.py`, `train_*_model.py` flags |
+| 2 | Semantic motifs vs bulk | Partial | `utils/graph_motif_signals.py`, `dataset.py`, `build_graph.py` |
+| 3 | Operational abstention | Implemented | `fusion.py`, `analyze_two_model.py`, `evaluate.py --gate-ablation` |
+| 4 | One-class robustness | Partial | `one_class_gnn.py`, `scripts/calibrate_uncertainty_thresholds.py` |
+| 5 | Triage-first evaluation | Implemented | `evaluate.py` subset_metrics, `scripts/diagnose_triage_geometry.py` |
+
+**Remaining operational gaps:**
+
+- populate `hard_benign_labels.csv` with real clean/hard-benign rows
+- retrain binary head with `no_manifest_leakage` on full `extracted_csvs`
+- optional conformal bundle: `scripts/fit_conformal_bundle.py`
 
 ## Bottom Line
 

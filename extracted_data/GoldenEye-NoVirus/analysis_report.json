@@ -8,7 +8,7 @@
     "nodes_total": 17595,
     "edges_total": 25684,
     "is_directed": true,
-    "suspicious_total": 216,
+    "suspicious_total": 3046,
     "node_types": {
       "kernel": 1,
       "process": 85,
@@ -43,12 +43,12 @@
       "loaded_in_kernel": 122
     },
     "suspicious_by_type": {
-      "process": 11,
-      "thread": 123,
+      "process": 10,
+      "thread": 415,
       "dll": 39,
-      "memory_region": 30,
-      "network_conn": 6,
-      "ip_address": 5,
+      "memory_region": 2574,
+      "network_conn": 3,
+      "ip_address": 3,
       "handle": 1,
       "driver": 1
     }
@@ -59,8 +59,8 @@
         "step": 1,
         "tactic": "Initial Access / Execution",
         "mitre": "T1218 / T1566",
-        "detail": "svchost.exe PID 384 via external-network",
-        "evidence": "C:\\\\Windows\\\\system32\\\\svchost.exe -k netsvcs -p"
+        "detail": "SearchApp.exe PID 4352 via external-network",
+        "evidence": ""
       },
       {
         "step": 2,
@@ -68,13 +68,6 @@
         "mitre": "T1055",
         "detail": "Shellcode in 2 process(es): smartscreen.ex, MsMpEng.exe",
         "evidence": "e9 fb 07 07 00 00 00 00 00 cc cc cc cc cc cc cc e9 eb 0f 07 00 00 00 00 00 cc cc"
-      },
-      {
-        "step": 3,
-        "tactic": "Command & Control",
-        "mitre": "T1071",
-        "detail": "5 unique external C2 IP(s) (6 socket row(s)) via msedge.exe, searchapp.exe, svchost.exe",
-        "evidence": "['142.250.200.10', '20.90.153.243', '204.79.197.200', '204.79.197.222']"
       },
       {
         "step": 4,
@@ -91,7 +84,7 @@
         "evidence": "\"C:\\\\Program Files\\\\Windows Defender\\\\MsMpEng.exe\""
       }
     ],
-    "overall_verdict": "CRITICAL \u2014 Active malware: injection + C2 + credential access detected",
+    "overall_verdict": "HIGH \u2014 Multiple malicious behaviours detected",
     "max_process_score": 110
   },
   "entry_points": [
@@ -166,6 +159,8 @@
       "degree_out": 96,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 110,
       "severity": "CRITICAL",
       "reasons": [
@@ -194,6 +189,8 @@
       "degree_out": 113,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 36,
       "severity": "CRITICAL",
       "reasons": [
@@ -222,6 +219,8 @@
       "degree_out": 4,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 16,
       "severity": "CRITICAL",
       "reasons": [
@@ -250,6 +249,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 14,
       "severity": "CRITICAL",
       "reasons": [
@@ -259,59 +260,6 @@
         "high-in-degree381"
       ],
       "norm_score": 0.12727272727272726
-    },
-    {
-      "node_id": "process_6416",
-      "name": "OneDrive.exe",
-      "pid": 6416,
-      "ppid": 8160,
-      "parent_name": "?",
-      "session": "1.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 09:23:31.000000 UTC",
-      "args": "/updateInstalled /background",
-      "path": "",
-      "degree_in": 573,
-      "degree_out": 174,
-      "lineage_depth": 0,
-      "is_suspicious_flag": true,
-      "heuristic_score": 8,
-      "severity": "HIGH",
-      "reasons": [
-        "nonrwx_exec_private",
-        "rwx_injection",
-        "windows_update_profile",
-        "no-path",
-        "high-in-degree573"
-      ],
-      "norm_score": 0.07272727272727272
-    },
-    {
-      "node_id": "process_688",
-      "name": "lsass.exe",
-      "pid": 688,
-      "ppid": 520,
-      "parent_name": "wininit.exe",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 09:22:19.000000 UTC",
-      "args": "C:\\\\Windows\\\\system32\\\\lsass.exe",
-      "path": "",
-      "degree_in": 265,
-      "degree_out": 94,
-      "lineage_depth": 2,
-      "is_suspicious_flag": false,
-      "heuristic_score": 7,
-      "severity": "HIGH",
-      "reasons": [
-        "no-path",
-        "lsass-full-access"
-      ],
-      "norm_score": 0.06363636363636363
     },
     {
       "node_id": "process_4",
@@ -330,10 +278,124 @@
       "degree_out": 2,
       "lineage_depth": 1,
       "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 9,
+      "severity": "HIGH",
+      "reasons": [
+        "lsass_full_access",
+        "lsass-full-access"
+      ],
+      "norm_score": 0.08181818181818182
+    },
+    {
+      "node_id": "process_688",
+      "name": "lsass.exe",
+      "pid": 688,
+      "ppid": 520,
+      "parent_name": "wininit.exe",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 09:22:19.000000 UTC",
+      "args": "C:\\\\Windows\\\\system32\\\\lsass.exe",
+      "path": "",
+      "degree_in": 265,
+      "degree_out": 94,
+      "lineage_depth": 2,
+      "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
+      "heuristic_score": 7,
+      "severity": "HIGH",
+      "reasons": [
+        "no-path",
+        "lsass-full-access"
+      ],
+      "norm_score": 0.06363636363636363
+    },
+    {
+      "node_id": "process_444",
+      "name": "csrss.exe",
+      "pid": 444,
+      "ppid": 428,
+      "parent_name": "?",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 09:22:19.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "path": "",
+      "degree_in": 132,
+      "degree_out": 19,
+      "lineage_depth": 0,
+      "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
       "heuristic_score": 6,
       "severity": "MEDIUM",
       "reasons": [
-        "lsass-full-access"
+        "abnormal_parent",
+        "no-path",
+        "high-in-degree132"
+      ],
+      "norm_score": 0.05454545454545454
+    },
+    {
+      "node_id": "process_520",
+      "name": "wininit.exe",
+      "pid": 520,
+      "ppid": 428,
+      "parent_name": "?",
+      "session": "0.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 09:22:19.000000 UTC",
+      "args": "wininit.exe",
+      "path": "",
+      "degree_in": 99,
+      "degree_out": 29,
+      "lineage_depth": 3,
+      "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 6,
+      "severity": "MEDIUM",
+      "reasons": [
+        "abnormal_parent",
+        "no-path",
+        "high-in-degree99"
+      ],
+      "norm_score": 0.05454545454545454
+    },
+    {
+      "node_id": "process_540",
+      "name": "csrss.exe",
+      "pid": 540,
+      "ppid": 512,
+      "parent_name": "?",
+      "session": "1.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 09:22:19.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "path": "",
+      "degree_in": 149,
+      "degree_out": 20,
+      "lineage_depth": 0,
+      "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 6,
+      "severity": "MEDIUM",
+      "reasons": [
+        "abnormal_parent",
+        "no-path",
+        "high-in-degree149"
       ],
       "norm_score": 0.05454545454545454
     },
@@ -354,6 +416,8 @@
       "degree_out": 12,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 5,
       "severity": "MEDIUM",
       "reasons": [
@@ -380,6 +444,8 @@
       "degree_out": 42,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 5,
       "severity": "MEDIUM",
       "reasons": [
@@ -388,6 +454,34 @@
         "spawned-lolbin-child"
       ],
       "norm_score": 0.045454545454545456
+    },
+    {
+      "node_id": "process_5096",
+      "name": "msedge.exe",
+      "pid": 5096,
+      "ppid": 3212,
+      "parent_name": "msedge.exe",
+      "session": "1.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 09:22:44.000000 UTC",
+      "args": "\"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=crashpad-handler \"--user-data-dir=C:\\\\Users\\\\devmac\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler \"--database=C:\\\\Users\\\\devmac\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\Use",
+      "path": "",
+      "degree_in": 99,
+      "degree_out": 21,
+      "lineage_depth": 0,
+      "is_suspicious_flag": true,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 4,
+      "severity": "MEDIUM",
+      "reasons": [
+        "suspicious_cmdline",
+        "no-path",
+        "high-in-degree99"
+      ],
+      "norm_score": 0.03636363636363636
     },
     {
       "node_id": "process_2476",
@@ -406,6 +500,8 @@
       "degree_out": 29,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 4,
       "severity": "MEDIUM",
       "reasons": [
@@ -416,79 +512,32 @@
       "norm_score": 0.03636363636363636
     },
     {
-      "node_id": "process_444",
-      "name": "csrss.exe",
-      "pid": 444,
-      "ppid": 428,
-      "parent_name": "?",
+      "node_id": "process_2792",
+      "name": "SearchProtocol",
+      "pid": 2792,
+      "ppid": 4620,
+      "parent_name": "SearchIndexer.",
       "session": "0.0",
       "wow64": false,
       "in_pslist": true,
       "in_psscan": true,
-      "create_time": "2023-03-30 09:22:19.000000 UTC",
-      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "create_time": "2023-03-30 09:29:40.000000 UTC",
+      "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe2_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe2 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthrsv",
       "path": "",
-      "degree_in": 132,
-      "degree_out": 19,
+      "degree_in": 130,
+      "degree_out": 28,
       "lineage_depth": 0,
       "is_suspicious_flag": true,
-      "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "benign_reasons": [],
+      "heuristic_score": 4,
       "severity": "MEDIUM",
       "reasons": [
+        "suspicious_cmdline",
         "no-path",
-        "high-in-degree132"
+        "high-in-degree130"
       ],
-      "norm_score": 0.02727272727272727
-    },
-    {
-      "node_id": "process_520",
-      "name": "wininit.exe",
-      "pid": 520,
-      "ppid": 428,
-      "parent_name": "?",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 09:22:19.000000 UTC",
-      "args": "wininit.exe",
-      "path": "",
-      "degree_in": 99,
-      "degree_out": 29,
-      "lineage_depth": 3,
-      "is_suspicious_flag": true,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "no-path",
-        "high-in-degree99"
-      ],
-      "norm_score": 0.02727272727272727
-    },
-    {
-      "node_id": "process_540",
-      "name": "csrss.exe",
-      "pid": 540,
-      "ppid": 512,
-      "parent_name": "?",
-      "session": "1.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 09:22:19.000000 UTC",
-      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
-      "path": "",
-      "degree_in": 149,
-      "degree_out": 20,
-      "lineage_depth": 0,
-      "is_suspicious_flag": true,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "no-path",
-        "high-in-degree149"
-      ],
-      "norm_score": 0.02727272727272727
+      "norm_score": 0.03636363636363636
     },
     {
       "node_id": "process_620",
@@ -507,6 +556,8 @@
       "degree_out": 44,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -532,6 +583,8 @@
       "degree_out": 28,
       "lineage_depth": 2,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -557,6 +610,8 @@
       "degree_out": 8,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -582,6 +637,8 @@
       "degree_out": 8,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -607,6 +664,8 @@
       "degree_out": 77,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -632,6 +691,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -657,6 +718,8 @@
       "degree_out": 35,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -682,6 +745,8 @@
       "degree_out": 88,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -707,6 +772,8 @@
       "degree_out": 41,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -732,6 +799,8 @@
       "degree_out": 53,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -757,6 +826,8 @@
       "degree_out": 109,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -782,6 +853,8 @@
       "degree_out": 71,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -807,6 +880,8 @@
       "degree_out": 117,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -832,6 +907,8 @@
       "degree_out": 50,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -857,36 +934,13 @@
       "degree_out": 172,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree705"
-      ],
-      "norm_score": 0.02727272727272727
-    },
-    {
-      "node_id": "process_5096",
-      "name": "msedge.exe",
-      "pid": 5096,
-      "ppid": 3212,
-      "parent_name": "msedge.exe",
-      "session": "1.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 09:22:44.000000 UTC",
-      "args": "\"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=crashpad-handler \"--user-data-dir=C:\\\\Users\\\\devmac\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler \"--database=C:\\\\Users\\\\devmac\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\Use",
-      "path": "",
-      "degree_in": 99,
-      "degree_out": 21,
-      "lineage_depth": 0,
-      "is_suspicious_flag": true,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "no-path",
-        "high-in-degree99"
       ],
       "norm_score": 0.02727272727272727
     },
@@ -907,6 +961,8 @@
       "degree_out": 32,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -932,6 +988,8 @@
       "degree_out": 65,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -957,6 +1015,8 @@
       "degree_out": 57,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -982,6 +1042,8 @@
       "degree_out": 38,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1007,6 +1069,8 @@
       "degree_out": 85,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1032,6 +1096,8 @@
       "degree_out": 17,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1057,6 +1123,8 @@
       "degree_out": 17,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1082,6 +1150,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1107,6 +1177,8 @@
       "degree_out": 49,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1132,11 +1204,42 @@
       "degree_out": 18,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree175"
+      ],
+      "norm_score": 0.02727272727272727
+    },
+    {
+      "node_id": "process_6416",
+      "name": "OneDrive.exe",
+      "pid": 6416,
+      "ppid": 8160,
+      "parent_name": "?",
+      "session": "1.0",
+      "wow64": false,
+      "in_pslist": true,
+      "in_psscan": true,
+      "create_time": "2023-03-30 09:23:31.000000 UTC",
+      "args": "/updateInstalled /background",
+      "path": "",
+      "degree_in": 573,
+      "degree_out": 174,
+      "lineage_depth": 0,
+      "is_suspicious_flag": false,
+      "triage_zone": "benign",
+      "benign_reasons": [
+        "windows_update_profile"
+      ],
+      "heuristic_score": 3,
+      "severity": "MEDIUM",
+      "reasons": [
+        "no-path",
+        "high-in-degree573"
       ],
       "norm_score": 0.02727272727272727
     },
@@ -1157,6 +1260,8 @@
       "degree_out": 18,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1182,6 +1287,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1207,6 +1314,8 @@
       "degree_out": 40,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1232,6 +1341,8 @@
       "degree_out": 20,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1257,6 +1368,8 @@
       "degree_out": 61,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1282,6 +1395,8 @@
       "degree_out": 32,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1307,6 +1422,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1332,6 +1449,8 @@
       "degree_out": 32,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1357,6 +1476,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1382,6 +1503,8 @@
       "degree_out": 40,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1407,6 +1530,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1432,36 +1557,13 @@
       "degree_out": 31,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
         "no-path",
         "high-in-degree91"
-      ],
-      "norm_score": 0.02727272727272727
-    },
-    {
-      "node_id": "process_2792",
-      "name": "SearchProtocol",
-      "pid": 2792,
-      "ppid": 4620,
-      "parent_name": "SearchIndexer.",
-      "session": "0.0",
-      "wow64": false,
-      "in_pslist": true,
-      "in_psscan": true,
-      "create_time": "2023-03-30 09:29:40.000000 UTC",
-      "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe2_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe2 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthrsv",
-      "path": "",
-      "degree_in": 130,
-      "degree_out": 28,
-      "lineage_depth": 0,
-      "is_suspicious_flag": true,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "no-path",
-        "high-in-degree130"
       ],
       "norm_score": 0.02727272727272727
     },
@@ -1482,6 +1584,8 @@
       "degree_out": 29,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1507,6 +1611,8 @@
       "degree_out": 33,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1532,6 +1638,8 @@
       "degree_out": 9,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 3,
       "severity": "MEDIUM",
       "reasons": [
@@ -1557,6 +1665,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 2,
       "severity": "LOW",
       "reasons": [
@@ -1581,6 +1691,8 @@
       "degree_out": 1,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1605,6 +1717,8 @@
       "degree_out": 86,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1629,6 +1743,8 @@
       "degree_out": 1,
       "lineage_depth": 3,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1653,6 +1769,8 @@
       "degree_out": 67,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 1,
       "severity": "LOW",
       "reasons": [
@@ -1677,6 +1795,8 @@
       "degree_out": 93,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1702,6 +1822,8 @@
       "degree_out": 53,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1727,6 +1849,8 @@
       "degree_out": 253,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1753,6 +1877,8 @@
       "degree_out": 93,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1778,6 +1904,8 @@
       "degree_out": 60,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1803,6 +1931,8 @@
       "degree_out": 62,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1828,6 +1958,8 @@
       "degree_out": 110,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1853,6 +1985,8 @@
       "degree_out": 86,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1878,6 +2012,8 @@
       "degree_out": 45,
       "lineage_depth": 1,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1903,6 +2039,8 @@
       "degree_out": 45,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1928,6 +2066,8 @@
       "degree_out": 29,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1953,6 +2093,8 @@
       "degree_out": 60,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -1978,6 +2120,8 @@
       "degree_out": 54,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2003,6 +2147,8 @@
       "degree_out": 91,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2028,6 +2174,8 @@
       "degree_out": 38,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2053,6 +2201,8 @@
       "degree_out": 106,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2078,6 +2228,8 @@
       "degree_out": 179,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2103,6 +2255,8 @@
       "degree_out": 308,
       "lineage_depth": 2,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2128,6 +2282,8 @@
       "degree_out": 62,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2153,6 +2309,8 @@
       "degree_out": 37,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2178,6 +2336,8 @@
       "degree_out": 47,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2203,6 +2363,8 @@
       "degree_out": 54,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2228,6 +2390,8 @@
       "degree_out": 79,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2253,6 +2417,8 @@
       "degree_out": 76,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2278,6 +2444,8 @@
       "degree_out": 52,
       "lineage_depth": 0,
       "is_suspicious_flag": false,
+      "triage_zone": "neutral",
+      "benign_reasons": [],
       "heuristic_score": 0,
       "severity": "LOW",
       "reasons": [
@@ -2290,6 +2458,7 @@
   "hidden_processes": [],
   "network": [
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.45",
       "local_port": 50273,
@@ -2307,57 +2476,7 @@
       ]
     },
     {
-      "proto": "TCPv4",
-      "local_addr": "10.0.2.45",
-      "local_port": 50146,
-      "foreign_addr": "20.90.153.243",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "svchost.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.0.2.45",
-      "local_port": 49932,
-      "foreign_addr": "142.250.200.10",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "msedge.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
-      "proto": "TCPv4",
-      "local_addr": "10.0.2.45",
-      "local_port": 50250,
-      "foreign_addr": "20.90.153.243",
-      "foreign_port": 443,
-      "state": "ESTABLISHED",
-      "owner": "svchost.exe",
-      "is_external": true,
-      "is_lolbin_c2": false,
-      "heuristic_score": 3,
-      "severity": "MEDIUM",
-      "reasons": [
-        "external-ip",
-        "established"
-      ]
-    },
-    {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.45",
       "local_port": 50272,
@@ -2375,6 +2494,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.45",
       "local_port": 50279,
@@ -2392,6 +2512,7 @@
       ]
     },
     {
+      "pid": null,
       "proto": "TCPv4",
       "local_addr": "10.0.2.45",
       "local_port": 50061,
@@ -87337,2130 +87458,6 @@
       ]
     },
     {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ee000000",
-      "end_vpn": "0x1ee0fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ed600000",
-      "end_vpn": "0x1ed6fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ecc00000",
-      "end_vpn": "0x1ecdfffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x7ffe1000",
-      "end_vpn": "0x7ffe1fff",
-      "protection": "PAGE_READONLY",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x7ffe0000",
-      "end_vpn": "0x7ffe0fff",
-      "protection": "PAGE_READONLY",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ed100000",
-      "end_vpn": "0x1ed1fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ecf00000",
-      "end_vpn": "0x1ecffffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ece00000",
-      "end_vpn": "0x1ecefffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ed000000",
-      "end_vpn": "0x1ed0fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ed400000",
-      "end_vpn": "0x1ed4fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1edb00000",
-      "end_vpn": "0x1edbfffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ed900000",
-      "end_vpn": "0x1ed9fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ed800000",
-      "end_vpn": "0x1ed8fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1eda00000",
-      "end_vpn": "0x1edafffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1edd00000",
-      "end_vpn": "0x1eddfffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1edc00000",
-      "end_vpn": "0x1edcfffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1edf00000",
-      "end_vpn": "0x1edffffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ede00000",
-      "end_vpn": "0x1edefffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ef150000",
-      "end_vpn": "0x1ef19ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ee700000",
-      "end_vpn": "0x1ee7fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ee300000",
-      "end_vpn": "0x1ee3fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ee400000",
-      "end_vpn": "0x1ee4fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1eeb00000",
-      "end_vpn": "0x1eebfffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1ef1a0000",
-      "end_vpn": "0x1ef29ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc04480000",
-      "end_vpn": "0x1bc04486fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc02ae0000",
-      "end_vpn": "0x1bc02bdffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc02ac0000",
-      "end_vpn": "0x1bc02ac1fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc02cc0000",
-      "end_vpn": "0x1bc02cc6fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc044b0000",
-      "end_vpn": "0x1bc044bffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc044a0000",
-      "end_vpn": "0x1bc044a0fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc044c0000",
-      "end_vpn": "0x1bc044c0fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05830000",
-      "end_vpn": "0x1bc0583ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc04c60000",
-      "end_vpn": "0x1bc04c6ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc04620000",
-      "end_vpn": "0x1bc0462ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc045d0000",
-      "end_vpn": "0x1bc045d0fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc04bd0000",
-      "end_vpn": "0x1bc04bd0fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc04970000",
-      "end_vpn": "0x1bc04a6ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc04bb0000",
-      "end_vpn": "0x1bc04bb0fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc04ba0000",
-      "end_vpn": "0x1bc04ba0fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc04bc0000",
-      "end_vpn": "0x1bc04bc0fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc04bf0000",
-      "end_vpn": "0x1bc04bf0fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc04be0000",
-      "end_vpn": "0x1bc04be0fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc04c00000",
-      "end_vpn": "0x1bc04c00fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05790000",
-      "end_vpn": "0x1bc05796fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05360000",
-      "end_vpn": "0x1bc0575ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc04c70000",
-      "end_vpn": "0x1bc04e6ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05350000",
-      "end_vpn": "0x1bc05356fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05f00000",
-      "end_vpn": "0x1bc05ffffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05940000",
-      "end_vpn": "0x1bc05a3ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05840000",
-      "end_vpn": "0x1bc0593ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05b10000",
-      "end_vpn": "0x1bc05c0ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05d90000",
-      "end_vpn": "0x1bc05d98fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05d50000",
-      "end_vpn": "0x1bc05d73fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05d80000",
-      "end_vpn": "0x1bc05d80fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05ee0000",
-      "end_vpn": "0x1bc05ee5fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05dd0000",
-      "end_vpn": "0x1bc05dd8fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05da0000",
-      "end_vpn": "0x1bc05dc3fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc05de0000",
-      "end_vpn": "0x1bc05edffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc06260000",
-      "end_vpn": "0x1bc0627ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc06210000",
-      "end_vpn": "0x1bc0622ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc06310000",
-      "end_vpn": "0x1c40630ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc062a0000",
-      "end_vpn": "0x1bc062bffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc06280000",
-      "end_vpn": "0x1bc0629ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1bc06300000",
-      "end_vpn": "0x1bc0630ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c406410000",
-      "end_vpn": "0x1c40650ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c406310000",
-      "end_vpn": "0x1c40640ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40aab0000",
-      "end_vpn": "0x1c40aacffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c409bf0000",
-      "end_vpn": "0x1c409ceffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c408670000",
-      "end_vpn": "0x1c40868ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c4065b0000",
-      "end_vpn": "0x1c4065bffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c4086d0000",
-      "end_vpn": "0x1c4086effff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c4086b0000",
-      "end_vpn": "0x1c4086cffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c408690000",
-      "end_vpn": "0x1c4086affff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c408710000",
-      "end_vpn": "0x1c40871ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c409790000",
-      "end_vpn": "0x1c4097affff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c4097d0000",
-      "end_vpn": "0x1c4097effff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c4097b0000",
-      "end_vpn": "0x1c4097cffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c4097f0000",
-      "end_vpn": "0x1c409beffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40a8f0000",
-      "end_vpn": "0x1c40a90ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c409e70000",
-      "end_vpn": "0x1c409e8ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c409e30000",
-      "end_vpn": "0x1c409e4ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c409cf0000",
-      "end_vpn": "0x1c409deffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c409eb0000",
-      "end_vpn": "0x1c40a0affff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c409e90000",
-      "end_vpn": "0x1c409eaffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40a8d0000",
-      "end_vpn": "0x1c40a8effff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40a9b0000",
-      "end_vpn": "0x1c40a9cffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40a970000",
-      "end_vpn": "0x1c40a98ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40a930000",
-      "end_vpn": "0x1c40a94ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40a910000",
-      "end_vpn": "0x1c40a92ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40a990000",
-      "end_vpn": "0x1c40a9affff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40a9f0000",
-      "end_vpn": "0x1c40aa0ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40a9d0000",
-      "end_vpn": "0x1c40a9effff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40ba80000",
-      "end_vpn": "0x1c40ba9ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40b040000",
-      "end_vpn": "0x1c40b83ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40af50000",
-      "end_vpn": "0x1c40af6ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40ae60000",
-      "end_vpn": "0x1c40ae66fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40ae70000",
-      "end_vpn": "0x1c40ae8ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40af90000",
-      "end_vpn": "0x1c40af96fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40af70000",
-      "end_vpn": "0x1c40af8ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40b020000",
-      "end_vpn": "0x1c40b03ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40b9e0000",
-      "end_vpn": "0x1c40b9fffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40b960000",
-      "end_vpn": "0x1c40b97ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40b860000",
-      "end_vpn": "0x1c40b95ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40b840000",
-      "end_vpn": "0x1c40b85ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40b9a0000",
-      "end_vpn": "0x1c40b9bffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40ba20000",
-      "end_vpn": "0x1c40ba3ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40ba00000",
-      "end_vpn": "0x1c40ba1ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40ba40000",
-      "end_vpn": "0x1c40ba5ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40bb60000",
-      "end_vpn": "0x1c40bb7ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40bac0000",
-      "end_vpn": "0x1c40badffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40baa0000",
-      "end_vpn": "0x1c40babffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40bb00000",
-      "end_vpn": "0x1c40bb1ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40bae0000",
-      "end_vpn": "0x1c40bafffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40bba0000",
-      "end_vpn": "0x1c40bbbffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40bb80000",
-      "end_vpn": "0x1c40bb9ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x1c40bbe0000",
-      "end_vpn": "0x1c40bbfffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x7df43da60000",
-      "end_vpn": "0x7df53da7ffff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
-      "pid": 6416,
-      "process_name": "OneDrive.exe",
-      "start_vpn": "0x7df53da80000",
-      "end_vpn": "0x7df53fa80fff",
-      "protection": "PAGE_READWRITE",
-      "private": true,
-      "backing_file": "",
-      "has_mz_header": false,
-      "has_shellcode": false,
-      "disasm": "",
-      "source": "vadinfo",
-      "heuristic_score": 1,
-      "severity": "LOW",
-      "reasons": [
-        "private-no-backing-file"
-      ]
-    },
-    {
       "pid": 4016,
       "process_name": "msedge.exe",
       "start_vpn": "0xcac3400000",
@@ -102889,7 +100886,8 @@
     "behavioural_suspects_found": 1,
     "lolbin_c2_found": 0,
     "ransom_note_found": 0,
-    "rwx_injections": 30,
+    "rwx_injections": 29,
+    "raw_rwx_injections": 30,
     "hidden_processes": 0,
     "top_suspect_score": 102,
     "triage_confidence": 0.99,
@@ -102913,5 +100911,12 @@
     "trusted_host_dll_anomalies": 0,
     "dual_use_admin_tool_count": 1,
     "popularity_dampened_processes": 25
+  },
+  "benign_zone_summary": {
+    "process_count": 1,
+    "top_reasons": [
+      "windows_update_profile"
+    ],
+    "excluded_from_verdict": true
   }
 }

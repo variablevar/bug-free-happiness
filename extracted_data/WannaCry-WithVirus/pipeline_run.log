@@ -1,4 +1,4 @@
 Sample: WannaCry-WithVirus | label=1 | family=wannacry | benign_subtype=
-filter_malicious.py: OK (0.6s)
-build_graph.py: OK (5.0s)
-analyze_graph.py: OK (0.8s)
+filter_malicious.py: OK (0.5s)
+build_graph.py: OK (3.4s)
+analyze_graph.py: OK (0.5s)

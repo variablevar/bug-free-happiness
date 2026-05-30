@@ -1,0 +1,2117 @@
+{
+  "suspicious_processes": [
+    {
+      "pid": 4,
+      "name": "System",
+      "ppid": 0,
+      "create_time": "2023-03-29 15:18:14.000000 UTC",
+      "args": "",
+      "in_pslist": true,
+      "in_psscan": true
+    },
+    {
+      "pid": 448,
+      "name": "csrss.exe",
+      "ppid": 436,
+      "create_time": "2023-03-29 15:18:16.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "in_pslist": true,
+      "in_psscan": true
+    },
+    {
+      "pid": 524,
+      "name": "wininit.exe",
+      "ppid": 436,
+      "create_time": "2023-03-29 15:18:16.000000 UTC",
+      "args": "wininit.exe",
+      "in_pslist": true,
+      "in_psscan": true
+    },
+    {
+      "pid": 544,
+      "name": "csrss.exe",
+      "ppid": 516,
+      "create_time": "2023-03-29 15:18:16.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "in_pslist": true,
+      "in_psscan": true
+    },
+    {
+      "pid": 2100,
+      "name": "MsMpEng.exe",
+      "ppid": 668,
+      "create_time": "2023-03-29 15:18:18.000000 UTC",
+      "args": "\"C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\platform\\\\4.18.2302.7-0\\\\MsMpEng.exe\"",
+      "in_pslist": true,
+      "in_psscan": true
+    },
+    {
+      "pid": 1212,
+      "name": "SearchApp.exe",
+      "ppid": 860,
+      "create_time": "2023-03-29 15:18:29.000000 UTC",
+      "args": "",
+      "in_pslist": true,
+      "in_psscan": true
+    },
+    {
+      "pid": 4948,
+      "name": "SkypeApp.exe",
+      "ppid": 860,
+      "create_time": "2023-03-29 15:18:34.000000 UTC",
+      "args": "\"C:\\\\Program Files\\\\WindowsApps\\\\Microsoft.SkypeApp_14.53.77.0_x86__kzf8qxf38zg5c\\\\SkypeApp.exe\" -ServerName:App.AppXffn3yxqvgawq9fpmnhy90fr3y01d1t5b.mca",
+      "in_pslist": true,
+      "in_psscan": true
+    },
+    {
+      "pid": 5632,
+      "name": "smartscreen.ex",
+      "ppid": 860,
+      "create_time": "2023-03-29 15:18:45.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\smartscreen.exe -Embedding",
+      "in_pslist": true,
+      "in_psscan": true
+    },
+    {
+      "pid": 5904,
+      "name": "OneDrive.exe",
+      "ppid": 1848,
+      "create_time": "2023-03-29 15:18:45.000000 UTC",
+      "args": "\"C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\OneDrive.exe\" /background",
+      "in_pslist": true,
+      "in_psscan": true
+    },
+    {
+      "pid": 6392,
+      "name": "msedge.exe",
+      "ppid": 6372,
+      "create_time": "2023-03-29 15:18:55.000000 UTC",
+      "args": "\"C:\\\\Program Files\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=crashpad-handler \"--user-data-dir=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler \"--database=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\\\\",
+      "in_pslist": true,
+      "in_psscan": true
+    },
+    {
+      "pid": 7500,
+      "name": "FileCoAuth.exe",
+      "ppid": 860,
+      "create_time": "2023-03-29 15:19:04.000000 UTC",
+      "args": "\"C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileCoAuth.exe\" -Embedding",
+      "in_pslist": true,
+      "in_psscan": true
+    },
+    {
+      "pid": 8020,
+      "name": "MicrosoftEdgeU",
+      "ppid": 1104,
+      "create_time": "2023-03-29 15:21:17.000000 UTC",
+      "args": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\EdgeUpdate\\\\MicrosoftEdgeUpdate.exe /c",
+      "in_pslist": true,
+      "in_psscan": true
+    },
+    {
+      "pid": 2480,
+      "name": "OneDriveStanda",
+      "ppid": 1104,
+      "create_time": "2023-03-29 15:30:28.000000 UTC",
+      "args": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\OneDriveStandaloneUpdater.exe /reporting",
+      "in_pslist": true,
+      "in_psscan": true
+    },
+    {
+      "pid": 6132,
+      "name": "SearchProtocol",
+      "ppid": 2140,
+      "create_time": "2023-03-29 15:30:46.000000 UTC",
+      "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe5_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe5 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthrsv",
+      "in_pslist": true,
+      "in_psscan": true
+    }
+  ],
+  "hidden_processes": [],
+  "malfind_regions": [
+    {
+      "pid": 2100,
+      "process_name": "msmpeng.exe",
+      "start_vpn": "0x3bc0000",
+      "end_vpn": "0x3c9ffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 2100,
+      "process_name": "msmpeng.exe",
+      "start_vpn": "0x3ee0000",
+      "end_vpn": "0x3fbffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 2100,
+      "process_name": "msmpeng.exe",
+      "start_vpn": "0x21500000",
+      "end_vpn": "0x215fffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 2100,
+      "process_name": "msmpeng.exe",
+      "start_vpn": "0x21600000",
+      "end_vpn": "0x217fffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 1212,
+      "process_name": "searchapp.exe",
+      "start_vpn": "0xde00000",
+      "end_vpn": "0xde1ffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 1212,
+      "process_name": "searchapp.exe",
+      "start_vpn": "0xefa0000",
+      "end_vpn": "0xefbffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 1212,
+      "process_name": "searchapp.exe",
+      "start_vpn": "0xefe0000",
+      "end_vpn": "0xf043fff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 4948,
+      "process_name": "skypeapp.exe",
+      "start_vpn": "0xabe0000",
+      "end_vpn": "0xabfffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 4948,
+      "process_name": "skypeapp.exe",
+      "start_vpn": "0xab80000",
+      "end_vpn": "0xab9ffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 4948,
+      "process_name": "skypeapp.exe",
+      "start_vpn": "0xac20000",
+      "end_vpn": "0xac83fff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 5632,
+      "process_name": "smartscreen.ex",
+      "start_vpn": "0x4a60000",
+      "end_vpn": "0x4a7ffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 5632,
+      "process_name": "smartscreen.ex",
+      "start_vpn": "0x5120000",
+      "end_vpn": "0x5183fff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 5632,
+      "process_name": "smartscreen.ex",
+      "start_vpn": "0x6af0000",
+      "end_vpn": "0x6b0ffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 5904,
+      "process_name": "onedrive.exe",
+      "start_vpn": "0x42a0000",
+      "end_vpn": "0x42affff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "vadinfo",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 2100,
+      "process_name": "msmpeng.exe",
+      "start_vpn": "0x3bc0000",
+      "end_vpn": "0x3c9ffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "malfind",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "00 00 40 00 80 00 00 00 89 e9 b8 d0 de 58 7b ff d0 ff a5 fc 36 00 00 00 00 00 00 00 00 00 00 00 8b 93 38 00 00 00 8b b3 ",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 2100,
+      "process_name": "msmpeng.exe",
+      "start_vpn": "0x3ee0000",
+      "end_vpn": "0x3fbffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "malfind",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "00 00 40 00 80 00 00 00 89 e9 b8 d0 de 58 7b ff d0 ff a5 fc 36 00 00 00 00 00 00 00 00 00 00 00 8b 93 38 00 00 00 8b b3 ",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 2100,
+      "process_name": "msmpeng.exe",
+      "start_vpn": "0x21500000",
+      "end_vpn": "0x215fffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "malfind",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "08 00 42 00 00 00 00 05 8b 45 14 89 c2 8b 45 10 8b 08 8b 40 04 89 0a 89 42 04 8b 45 14 81 00 a0 00 00 00 8d 45 08 89 c2 ",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 2100,
+      "process_name": "msmpeng.exe",
+      "start_vpn": "0x21600000",
+      "end_vpn": "0x217fffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "malfind",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "09 00 34 00 09 00 01 05 8b 55 18 8b 4d 54 8d 54 0a fc 89 d6 b9 04 00 1a 00 ff 95 6c 37 00 00 8b 4d 1c 89 08 83 45 18 fc ",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 1212,
+      "process_name": "searchapp.exe",
+      "start_vpn": "0xefa0000",
+      "end_vpn": "0xefbffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "malfind",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 5632,
+      "process_name": "smartscreen.ex",
+      "start_vpn": "0x4a60000",
+      "end_vpn": "0x4a7ffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "malfind",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "55 8b ec 8b 45 08 8b 40 14 8b 40 04 8b 48 30 83 e1 f8 8b c1 2d 38 00 a6 04 3d b8 0f 00 00 76 07 b9 05 00 00 00 cd 29 8d ",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 5632,
+      "process_name": "smartscreen.ex",
+      "start_vpn": "0x5120000",
+      "end_vpn": "0x5183fff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "malfind",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "e9 fb 03 07 00 cc cc cc cc cc cc cc cc cc cc cc e9 eb 0f 07 00 cc cc cc cc cc cc cc cc cc cc cc e9 db 07 07 00 cc cc cc ",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 5632,
+      "process_name": "smartscreen.ex",
+      "start_vpn": "0x6af0000",
+      "end_vpn": "0x6b0ffff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "malfind",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "55 8b ec 8b 05 a0 06 6a 04 05 6c 09 00 00 70 04 3b e0 7f 16 6a 00 6a 00 68 d8 bc 6a 04 68 6c 09 00 00 e8 a9 47 91 57 0f ",
+      "_severity": "Medium"
+    },
+    {
+      "pid": 5904,
+      "process_name": "onedrive.exe",
+      "start_vpn": "0x42a0000",
+      "end_vpn": "0x42affff",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "source": "malfind",
+      "private": true,
+      "backing_file": "",
+      "has_mz": false,
+      "has_shellcode": false,
+      "disasm": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 f8 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ",
+      "_severity": "Medium"
+    }
+  ],
+  "ssdt_hooks": [],
+  "network_suspicious": [
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "",
+      "foreign_addr": "68.219.88.225",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 0,
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "",
+      "foreign_addr": "8.238.73.254",
+      "foreign_port": 80,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 0,
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "",
+      "foreign_addr": "216.58.212.206",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 0,
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "",
+      "foreign_addr": "68.219.88.225",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 0,
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "",
+      "foreign_addr": "199.232.57.44",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 0,
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "",
+      "foreign_addr": "199.232.57.44",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 0,
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "",
+      "foreign_addr": "199.232.57.229",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 0,
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "",
+      "foreign_addr": "216.58.212.234",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 0,
+      "_severity": "High"
+    }
+  ],
+  "cmdline_suspicious": [
+    {
+      "pid": 5904,
+      "name": "OneDrive.exe",
+      "args": "\"C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\OneDrive.exe\" /background",
+      "_triggered_rules": [
+        "SuspiciousPath"
+      ],
+      "_severity": "High"
+    },
+    {
+      "pid": 6392,
+      "name": "msedge.exe",
+      "args": "\"C:\\\\Program Files\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=crashpad-handler \"--user-data-dir=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler \"--database=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\\\\",
+      "_triggered_rules": [
+        "SuspiciousPath"
+      ],
+      "_severity": "High"
+    },
+    {
+      "pid": 7500,
+      "name": "FileCoAuth.exe",
+      "args": "\"C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileCoAuth.exe\" -Embedding",
+      "_triggered_rules": [
+        "SuspiciousPath"
+      ],
+      "_severity": "High"
+    },
+    {
+      "pid": 8020,
+      "name": "MicrosoftEdgeU",
+      "args": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\EdgeUpdate\\\\MicrosoftEdgeUpdate.exe /c",
+      "_triggered_rules": [
+        "SuspiciousPath"
+      ],
+      "_severity": "High"
+    },
+    {
+      "pid": 2480,
+      "name": "OneDriveStanda",
+      "args": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\OneDriveStandaloneUpdater.exe /reporting",
+      "_triggered_rules": [
+        "SuspiciousPath"
+      ],
+      "_severity": "High"
+    },
+    {
+      "pid": 6132,
+      "name": "SearchProtocol",
+      "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe5_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe5 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthrsv",
+      "_triggered_rules": [
+        "SuspiciousPath"
+      ],
+      "_severity": "High"
+    }
+  ],
+  "dll_suspicious": [
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSyncShell.dll",
+      "name": "FileSyncShell.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\OneDrive.exe",
+      "name": "OneDrive.exe",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\ucrtbase.dll",
+      "name": "ucrtbase.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\LoggingPlatform.dll",
+      "name": "LoggingPlatform.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\VCRUNTIME140.dll",
+      "name": "VCRUNTIME140.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\MSVCP140.dll",
+      "name": "MSVCP140.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\OneDriveTelemetryStable.dll",
+      "name": "OneDriveTelemetryStable.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSyncTelemetryExtensions.dll",
+      "name": "FileSyncTelemetryExtensions.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSyncClient.dll",
+      "name": "FileSyncClient.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSyncHost.DLL",
+      "name": "FileSyncHost.DLL",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\Telemetry.dll",
+      "name": "Telemetry.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\UpdateRingSettings.dll",
+      "name": "UpdateRingSettings.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSyncViews.dll",
+      "name": "FileSyncViews.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\LogUploader.dll",
+      "name": "LogUploader.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSyncSessions.dll",
+      "name": "FileSyncSessions.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\WebView2Loader.dll",
+      "name": "WebView2Loader.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSyncRNWin32Lib.dll",
+      "name": "FileSyncRNWin32Lib.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSyncFS.DLL",
+      "name": "FileSyncFS.DLL",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSyncSqlite3.dll",
+      "name": "FileSyncSqlite3.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\Qt5Core.dll",
+      "name": "Qt5Core.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\Qt5Qml.dll",
+      "name": "Qt5Qml.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\Qt5Quick.dll",
+      "name": "Qt5Quick.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\SyncEngine.DLL",
+      "name": "SyncEngine.DLL",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\Qt5Gui.dll",
+      "name": "Qt5Gui.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\Qt5WinExtras.dll",
+      "name": "Qt5WinExtras.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\libcrypto-1_1.dll",
+      "name": "libcrypto-1_1.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\Qt5Widgets.dll",
+      "name": "Qt5Widgets.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\MSVCP140_1.dll",
+      "name": "MSVCP140_1.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\adal.dll",
+      "name": "adal.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\Qt5Network.dll",
+      "name": "Qt5Network.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\Qt5QmlModels.dll",
+      "name": "Qt5QmlModels.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\WnsClientApi.dll",
+      "name": "WnsClientApi.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\libssl-1_1.dll",
+      "name": "libssl-1_1.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSyncFSNtfs.DLL",
+      "name": "FileSyncFSNtfs.DLL",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSyncFALWB.dll",
+      "name": "FileSyncFALWB.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSync.Resources.dll",
+      "name": "FileSync.Resources.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileSync.LocalizedResources.dll",
+      "name": "FileSync.LocalizedResources.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\platforms\\\\qwindows.dll",
+      "name": "qwindows.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\imageformats\\\\qgif.dll",
+      "name": "qgif.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\imageformats\\\\qjpeg.dll",
+      "name": "qjpeg.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\imageformats\\\\qsvg.dll",
+      "name": "qsvg.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\Qt5Svg.dll",
+      "name": "Qt5Svg.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\qml\\\\QtQml\\\\qmlplugin.dll",
+      "name": "qmlplugin.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\qml\\\\QtQuick.2\\\\qtquick2plugin.dll",
+      "name": "qtquick2plugin.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\Qt5QmlWorkerScript.dll",
+      "name": "Qt5QmlWorkerScript.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\qml\\\\QtQuick\\\\Controls.2\\\\qtquickcontrols2plugin.dll",
+      "name": "qtquickcontrols2plugin.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\Qt5QuickControls2.dll",
+      "name": "Qt5QuickControls2.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\Qt5QuickTemplates2.dll",
+      "name": "Qt5QuickTemplates2.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\qml\\\\QtQuick\\\\Window.2\\\\windowplugin.dll",
+      "name": "windowplugin.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\qml\\\\QtQuick\\\\Templates.2\\\\qtquicktemplates2plugin.dll",
+      "name": "qtquicktemplates2plugin.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileCoAuth.exe",
+      "name": "FileCoAuth.exe",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\LoggingPlatform.DLL",
+      "name": "LoggingPlatform.DLL",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\EdgeUpdate\\\\MicrosoftEdgeUpdate.exe",
+      "name": "MicrosoftEdgeUpdate.exe",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\EdgeUpdate\\\\1.3.173.51\\\\msedgeupdate.dll",
+      "name": "msedgeupdate.dll",
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "path": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\OneDriveStandaloneUpdater.exe",
+      "name": "OneDriveStandaloneUpdater.exe",
+      "_severity": "High"
+    }
+  ],
+  "handle_suspicious": [
+    {
+      "pid": 4,
+      "holder_process": "system",
+      "target": "lsass.exe Pid 692",
+      "handle_type": "Process",
+      "granted_access": "0x1fffff",
+      "_severity": "Critical"
+    }
+  ],
+  "thread_suspicious": [],
+  "vad_suspicious": [
+    {
+      "pid": 2100,
+      "process_name": "msmpeng.exe",
+      "start_vpn": "0x3bc0000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    },
+    {
+      "pid": 2100,
+      "process_name": "msmpeng.exe",
+      "start_vpn": "0x3ee0000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    },
+    {
+      "pid": 2100,
+      "process_name": "msmpeng.exe",
+      "start_vpn": "0x21500000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    },
+    {
+      "pid": 2100,
+      "process_name": "msmpeng.exe",
+      "start_vpn": "0x21600000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    },
+    {
+      "pid": 1212,
+      "process_name": "searchapp.exe",
+      "start_vpn": "0xde00000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    },
+    {
+      "pid": 1212,
+      "process_name": "searchapp.exe",
+      "start_vpn": "0xefa0000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    },
+    {
+      "pid": 1212,
+      "process_name": "searchapp.exe",
+      "start_vpn": "0xefe0000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    },
+    {
+      "pid": 4948,
+      "process_name": "skypeapp.exe",
+      "start_vpn": "0xabe0000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    },
+    {
+      "pid": 4948,
+      "process_name": "skypeapp.exe",
+      "start_vpn": "0xab80000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    },
+    {
+      "pid": 4948,
+      "process_name": "skypeapp.exe",
+      "start_vpn": "0xac20000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    },
+    {
+      "pid": 5632,
+      "process_name": "smartscreen.ex",
+      "start_vpn": "0x4a60000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    },
+    {
+      "pid": 5632,
+      "process_name": "smartscreen.ex",
+      "start_vpn": "0x5120000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    },
+    {
+      "pid": 5632,
+      "process_name": "smartscreen.ex",
+      "start_vpn": "0x6af0000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    },
+    {
+      "pid": 5904,
+      "process_name": "onedrive.exe",
+      "start_vpn": "0x42a0000",
+      "protection": "PAGE_EXECUTE_READWRITE",
+      "backing_file": "",
+      "_severity": "High"
+    }
+  ],
+  "driver_suspicious": [
+    {
+      "driver_name": "RAW",
+      "service_key": "",
+      "start": 0,
+      "size": 0,
+      "_severity": "Medium"
+    },
+    {
+      "driver_name": "\\\\Driver\\\\disk",
+      "service_key": "",
+      "start": 2222099686,
+      "size": 2222099686,
+      "_severity": "Medium"
+    }
+  ],
+  "abnormal_parents": [
+    {
+      "pid": 448,
+      "name": "csrss.exe",
+      "ppid": 436,
+      "actual_parent": "unknown",
+      "expected_parent": [
+        "smss.exe"
+      ],
+      "_severity": "High"
+    },
+    {
+      "pid": 524,
+      "name": "wininit.exe",
+      "ppid": 436,
+      "actual_parent": "unknown",
+      "expected_parent": [
+        "smss.exe"
+      ],
+      "_severity": "High"
+    },
+    {
+      "pid": 544,
+      "name": "csrss.exe",
+      "ppid": 516,
+      "actual_parent": "svchost.exe",
+      "expected_parent": [
+        "smss.exe"
+      ],
+      "_severity": "High"
+    }
+  ],
+  "behavioural_suspects": [
+    {
+      "PID": 4,
+      "pid": 4,
+      "name": "System",
+      "ppid": 0,
+      "parent_name": "?",
+      "create_time": "2023-03-29 15:18:14.000000 UTC",
+      "args": "",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 0,
+      "attack_stages": [
+        "credential_or_discovery"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "lsass_full_access",
+          "stage": "credential_or_discovery",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "system:0x1fffff"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "lsass_full_access"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 448,
+      "pid": 448,
+      "name": "csrss.exe",
+      "ppid": 436,
+      "parent_name": "?",
+      "create_time": "2023-03-29 15:18:16.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 1,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "unknown->csrss.exe"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "abnormal_parent"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 524,
+      "pid": 524,
+      "name": "wininit.exe",
+      "ppid": 436,
+      "parent_name": "?",
+      "create_time": "2023-03-29 15:18:16.000000 UTC",
+      "args": "wininit.exe",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 1,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "unknown->wininit.exe"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "abnormal_parent"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 544,
+      "pid": 544,
+      "name": "csrss.exe",
+      "ppid": 516,
+      "parent_name": "svchost.exe",
+      "create_time": "2023-03-29 15:18:16.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,12288,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "svchost.exe->csrss.exe"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "abnormal_parent"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 2100,
+      "pid": 2100,
+      "name": "MsMpEng.exe",
+      "ppid": 668,
+      "parent_name": "services.exe",
+      "create_time": "2023-03-29 15:18:18.000000 UTC",
+      "args": "\"C:\\\\ProgramData\\\\Microsoft\\\\Windows Defender\\\\platform\\\\4.18.2302.7-0\\\\MsMpEng.exe\"",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 3,
+      "attack_stages": [
+        "memory_manipulation"
+      ],
+      "execution_technique": "injection_like",
+      "rule_hits": [
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        }
+      ],
+      "_suspicion_score": 37,
+      "_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "_confidence": 0.9762,
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 1212,
+      "pid": 1212,
+      "name": "SearchApp.exe",
+      "ppid": 860,
+      "parent_name": "svchost.exe",
+      "create_time": "2023-03-29 15:18:29.000000 UTC",
+      "args": "",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "memory_manipulation"
+      ],
+      "execution_technique": "injection_like",
+      "rule_hits": [
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        }
+      ],
+      "_suspicion_score": 20,
+      "_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "_confidence": 0.8707,
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 4948,
+      "pid": 4948,
+      "name": "SkypeApp.exe",
+      "ppid": 860,
+      "parent_name": "svchost.exe",
+      "create_time": "2023-03-29 15:18:34.000000 UTC",
+      "args": "\"C:\\\\Program Files\\\\WindowsApps\\\\Microsoft.SkypeApp_14.53.77.0_x86__kzf8qxf38zg5c\\\\SkypeApp.exe\" -ServerName:App.AppXffn3yxqvgawq9fpmnhy90fr3y01d1t5b.mca",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "memory_manipulation"
+      ],
+      "execution_technique": "injection_like",
+      "rule_hits": [
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        }
+      ],
+      "_suspicion_score": 17,
+      "_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "_confidence": 0.8147,
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 5632,
+      "pid": 5632,
+      "name": "smartscreen.ex",
+      "ppid": 860,
+      "parent_name": "svchost.exe",
+      "create_time": "2023-03-29 15:18:45.000000 UTC",
+      "args": "C:\\\\Windows\\\\System32\\\\smartscreen.exe -Embedding",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "memory_manipulation"
+      ],
+      "execution_technique": "injection_like",
+      "rule_hits": [
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        }
+      ],
+      "_suspicion_score": 28,
+      "_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection"
+      ],
+      "_confidence": 0.9371,
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 5904,
+      "pid": 5904,
+      "name": "OneDrive.exe",
+      "ppid": 1848,
+      "parent_name": "explorer.exe",
+      "create_time": "2023-03-29 15:18:45.000000 UTC",
+      "args": "\"C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\OneDrive.exe\" /background",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 7,
+      "attack_stages": [
+        "c2_or_lateral",
+        "initial_execution",
+        "memory_manipulation"
+      ],
+      "execution_technique": "injection_like",
+      "rule_hits": [
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "malfind:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "suspicious_cmdline",
+          "stage": "initial_execution",
+          "weight": 2.0,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "SuspiciousPath"
+        },
+        {
+          "rule_id": "windows_update_profile",
+          "stage": "c2_or_lateral",
+          "weight": -1.5,
+          "confidence": 1.0,
+          "quality": 1.0,
+          "evidence": "onedrive.exe"
+        }
+      ],
+      "_suspicion_score": 11,
+      "_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection",
+        "suspicious_cmdline",
+        "windows_update_profile"
+      ],
+      "_confidence": 0.6724,
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 6392,
+      "pid": 6392,
+      "name": "msedge.exe",
+      "ppid": 6372,
+      "parent_name": "msedge.exe",
+      "create_time": "2023-03-29 15:18:55.000000 UTC",
+      "args": "\"C:\\\\Program Files\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=crashpad-handler \"--user-data-dir=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler \"--database=C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\\\\",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 8,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "suspicious_cmdline",
+          "stage": "initial_execution",
+          "weight": 2.0,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "SuspiciousPath"
+        }
+      ],
+      "_suspicion_score": 1,
+      "_reasons": [
+        "suspicious_cmdline"
+      ],
+      "_confidence": 0.1341,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 7500,
+      "pid": 7500,
+      "name": "FileCoAuth.exe",
+      "ppid": 860,
+      "parent_name": "svchost.exe",
+      "create_time": "2023-03-29 15:19:04.000000 UTC",
+      "args": "\"C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\23.048.0305.0002\\\\FileCoAuth.exe\" -Embedding",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "suspicious_cmdline",
+          "stage": "initial_execution",
+          "weight": 2.0,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "SuspiciousPath"
+        }
+      ],
+      "_suspicion_score": 1,
+      "_reasons": [
+        "suspicious_cmdline"
+      ],
+      "_confidence": 0.1341,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 8020,
+      "pid": 8020,
+      "name": "MicrosoftEdgeU",
+      "ppid": 1104,
+      "parent_name": "svchost.exe",
+      "create_time": "2023-03-29 15:21:17.000000 UTC",
+      "args": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\EdgeUpdate\\\\MicrosoftEdgeUpdate.exe /c",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "suspicious_cmdline",
+          "stage": "initial_execution",
+          "weight": 2.0,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "SuspiciousPath"
+        }
+      ],
+      "_suspicion_score": 1,
+      "_reasons": [
+        "suspicious_cmdline"
+      ],
+      "_confidence": 0.1341,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 2480,
+      "pid": 2480,
+      "name": "OneDriveStanda",
+      "ppid": 1104,
+      "parent_name": "svchost.exe",
+      "create_time": "2023-03-29 15:30:28.000000 UTC",
+      "args": "C:\\\\Users\\\\mapo9\\\\AppData\\\\Local\\\\Microsoft\\\\OneDrive\\\\OneDriveStandaloneUpdater.exe /reporting",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "suspicious_cmdline",
+          "stage": "initial_execution",
+          "weight": 2.0,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "SuspiciousPath"
+        }
+      ],
+      "_suspicion_score": 1,
+      "_reasons": [
+        "suspicious_cmdline"
+      ],
+      "_confidence": 0.1341,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 6132,
+      "pid": 6132,
+      "name": "SearchProtocol",
+      "ppid": 2140,
+      "parent_name": "searchindexer.",
+      "create_time": "2023-03-29 15:30:46.000000 UTC",
+      "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe5_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe5 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthrsv",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "suspicious_cmdline",
+          "stage": "initial_execution",
+          "weight": 2.0,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "SuspiciousPath"
+        }
+      ],
+      "_suspicion_score": 1,
+      "_reasons": [
+        "suspicious_cmdline"
+      ],
+      "_confidence": 0.1341,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    }
+  ],
+  "benign_context_processes": [],
+  "_meta": {
+    "total_suspicious_pids": 14,
+    "suspicious_pids": [
+      4,
+      448,
+      524,
+      544,
+      1212,
+      2100,
+      2480,
+      4948,
+      5632,
+      5904,
+      6132,
+      6392,
+      7500,
+      8020
+    ],
+    "suspect_zone_pids": [
+      4,
+      448,
+      524,
+      544,
+      1212,
+      2100,
+      2480,
+      4948,
+      5632,
+      5904,
+      6132,
+      6392,
+      7500,
+      8020
+    ],
+    "benign_zone_pids": [],
+    "benign_zone_reasons": {},
+    "graph_attr": {
+      "max_process_score": 37,
+      "raw_rwx_injections": 23,
+      "benign_zone_process_count": 0,
+      "suspect_zone_process_count": 14,
+      "attack_steps": 4,
+      "high_severity_injections": 0,
+      "lolbin_c2_connections": 0,
+      "ransom_note_signal": 0,
+      "suspect_rate": 0.150538,
+      "hidden_rate": 0.0,
+      "inject_rate": 0.247312,
+      "external_conn_rate": 0.086022,
+      "largest_suspicious_component_ratio": 0.150538,
+      "lineage_depth_p95": 7,
+      "lolbin_chain_count": 0,
+      "nonrwx_exec_count": 14,
+      "credential_access_count": 1,
+      "triage_confidence": 0.9762,
+      "stage_coverage_score": 0.8,
+      "proc_degree_zmax": 4.339261,
+      "proc_betweenness_p95": 0.358942,
+      "num_attack_motifs": 168,
+      "service_boundary_violations": 0,
+      "temporal_chain_signals": 0,
+      "trusted_host_dll_anomalies": 0
+    },
+    "label_signals": {
+      "behavioural_suspects_found": 1,
+      "lolbin_c2_found": 0,
+      "ransom_note_found": 0,
+      "rwx_injections": 23,
+      "raw_rwx_injections": 23,
+      "hidden_processes": 0,
+      "top_suspect_score": 37,
+      "triage_confidence": 0.9762,
+      "stage_coverage_score": 0.8,
+      "lineage_depth_p95": 7,
+      "nonrwx_exec_count": 14,
+      "credential_access_count": 1,
+      "num_attack_motifs": 168,
+      "service_boundary_violations": 0,
+      "temporal_chain_signals": 0,
+      "trusted_host_dll_anomalies": 0
+    },
+    "triage_confidence": 0.9762,
+    "attack_stages": [
+      {
+        "stage_id": "initial_execution",
+        "evidence_count": 9,
+        "rules": [
+          "abnormal_parent",
+          "suspicious_cmdline"
+        ],
+        "evidence_sample": [
+          "SuspiciousPath",
+          "unknown->csrss.exe",
+          "unknown->wininit.exe"
+        ]
+      },
+      {
+        "stage_id": "memory_manipulation",
+        "evidence_count": 37,
+        "rules": [
+          "nonrwx_exec_private",
+          "rwx_injection"
+        ],
+        "evidence_sample": [
+          "vadinfo:PAGE_EXECUTE_READWRITE",
+          "vadinfo:PAGE_EXECUTE_READWRITE",
+          "vadinfo:PAGE_EXECUTE_READWRITE"
+        ]
+      },
+      {
+        "stage_id": "credential_or_discovery",
+        "evidence_count": 1,
+        "rules": [
+          "lsass_full_access"
+        ],
+        "evidence_sample": [
+          "system:0x1fffff"
+        ]
+      },
+      {
+        "stage_id": "c2_or_lateral",
+        "evidence_count": 45,
+        "rules": [
+          "popularity_only_activity",
+          "svchost_expected_service_net",
+          "windows_update_profile"
+        ],
+        "evidence_sample": [
+          "onedrive.exe",
+          "svchost.exe",
+          "svchost.exe"
+        ]
+      }
+    ],
+    "attack_stage_classification": {
+      "stages_seen": 4,
+      "ordered_transitions": 4,
+      "sequence_quality": 0.8
+    },
+    "root_cause_process": {
+      "pid": 4,
+      "name": "system",
+      "why": [
+        "lsass_full_access:system:0x1fffff"
+      ]
+    },
+    "evidence_graph": {
+      "nodes": [
+        "process_1212",
+        "process_2100",
+        "process_2480",
+        "process_4",
+        "process_448",
+        "process_4948",
+        "process_524",
+        "process_544",
+        "process_5632",
+        "process_5904",
+        "process_6132",
+        "process_6392",
+        "process_7500",
+        "process_8020"
+      ],
+      "edges": []
+    },
+    "model_features": {
+      "max_process_score": 37,
+      "raw_rwx_injections": 23,
+      "benign_zone_process_count": 0,
+      "suspect_zone_process_count": 14,
+      "attack_steps": 4,
+      "high_severity_injections": 0,
+      "lolbin_c2_connections": 0,
+      "ransom_note_signal": 0,
+      "suspect_rate": 0.150538,
+      "hidden_rate": 0.0,
+      "inject_rate": 0.247312,
+      "external_conn_rate": 0.086022,
+      "largest_suspicious_component_ratio": 0.150538,
+      "lineage_depth_p95": 7,
+      "lolbin_chain_count": 0,
+      "nonrwx_exec_count": 14,
+      "credential_access_count": 1,
+      "triage_confidence": 0.9762,
+      "stage_coverage_score": 0.8,
+      "proc_degree_zmax": 4.339261,
+      "proc_betweenness_p95": 0.358942,
+      "num_attack_motifs": 168,
+      "service_boundary_violations": 0,
+      "temporal_chain_signals": 0,
+      "trusted_host_dll_anomalies": 0
+    }
+  }
+}

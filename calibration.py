@@ -163,6 +163,12 @@ def choose_thresholds_by_roc(
     precision_floor: float = 0.0,
     recall_floor: float = 0.0,
 ) -> tuple[float, float]:
+    """
+    Pick low/high probability thresholds from a validation ROC sweep.
+
+    ``probs`` must be an (N, 2) matrix (binary softmax / isotonic output);
+    ``labels`` is length-N with 0/1 ground truth.
+    """
     thresholds, tpr, fpr = roc_curve_points(probs, labels)
     spec = 1.0 - fpr
 

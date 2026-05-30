@@ -38,3 +38,27 @@ LSASS_WHITELIST = {
 
 HIGH_ACCESS_MASKS = {"0x1fffff", "0x1f0fff", "0x143a"}
 
+# Well-known CDN / cloud prefixes (browser/update traffic — not malware C2 by IP alone).
+KNOWN_BENIGN_IP_PREFIXES = (
+    "142.250.",
+    "172.217.",
+    "173.194.",
+    "216.239.",
+    "74.125.",
+    "13.107.",
+    "20.",
+    "40.",
+    "52.",
+    "104.",
+)
+
+
+def is_known_benign_ip(addr: str) -> bool:
+    """True for common Google/Microsoft/CDN ranges used by browsers and updates."""
+    if not addr or addr in ("*", "-", "0.0.0.0"):
+        return False
+    a = str(addr).strip()
+    if PRIVATE_IP_RE.match(a):
+        return True
+    return any(a.startswith(p) for p in KNOWN_BENIGN_IP_PREFIXES)
+

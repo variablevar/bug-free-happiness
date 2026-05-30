@@ -2,49 +2,81 @@
 
 tags: #results #benchmarks #evaluation
 
-## MalVol-25 benchmark (seed=42, grouped CV)
+## Where metrics live
 
-Default training uses **leave-one-group-out** (`--cv loso`). For stratified group folds, use `--cv stratified_group --n-splits 5` (and optionally `--group-by family`).
+After running `evaluate.py`, inspect:
+
+| Artifact | Contents |
+|----------|----------|
+| `outputs/two_model_analysis.json` | Per-sample fused triage, scores, evidence |
+| `outputs/binary_analysis.json` | Binary path states and `p_malware` |
+| `outputs/evaluate_merged_analysis.json` | Combined summary + `subset_metrics` |
+| `outputs/gate_ablation.csv` | Abstention preset comparison (`--gate-ablation`) |
+| `outputs/triage_geometry_report.json` | Score overlap / margin diagnostics |
+| `outputs/binary_model_meta.json` | Calibration (Brier, ECE, KS, AUROC) |
+
+Regenerate diagnostics:
+
+```bash
+python evaluate.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs
+python scripts/diagnose_triage_geometry.py outputs/two_model_analysis.json
+```
+
+See [[evaluation_operations]] for the full ablation matrix.
+
+---
+
+## Triage metrics (primary stack)
+
+Report these for production-style evaluation:
+
+- **decisive_coverage** — fraction in `likely_malicious` or `likely_benign`
+- **review_routing_rate** — fraction in `needs_analyst_review`
+- **abstention_coverage** — ambiguous / review states combined
+- **subset_metrics** — broken down by `benign_subtype` when manifest columns exist
+
+Do not rely on plain accuracy alone when many benign controls are heuristic-high.
+
+---
+
+## Legacy supervised GNN baseline (seed=42, grouped CV)
+
+Historical reference on ~30-sample paired corpus (`extracted_data/`), leave-one-group-out:
 
 | Model | Accuracy | F1 | AUC-ROC |
-|---|---|---|---|
+|-------|----------|-----|---------|
 | GIN (v2, baseline) | 0.633 ± 0.163 | 0.743 ± 0.093 | 0.644 ± 0.269 |
-| GIN (v3, weighted + clipped + graph_attr) | TBD | TBD | TBD |
-| GraphSAGE / GAT / GINE | TBD | TBD | TBD |
+| GIN (v3, weighted + graph_attr) | run locally | run locally | run locally |
+| GraphSAGE / GAT / GINE | run locally | run locally | run locally |
 
-> ⚠️ Dataset is small (30 samples). High variance is expected — run multiple seeds and average.
-
----
-
-## Interpreting the Numbers
-
-- **F1 (0.743)** is the most meaningful metric given the binary classification task and small dataset
-- **AUC-ROC (0.644)** suggests the model is learning a real signal but needs more data to generalise
-- **Accuracy (0.633)** is above random (0.5) but unstable across folds due to dataset size
+High variance is expected at this sample size — use multiple seeds and grouped CV.
 
 ---
 
-## How to Reproduce
+## How to reproduce legacy CV
 
 ```bash
-python train.py extracted_data/dataset_manifest.csv --seed 42
+python train.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs --seed 42
 ```
 
-Checkpoint evaluation (match `--model` / `--hidden` / `--layers` / GAT-GINE flags to training):
+Checkpoint evaluation:
 
 ```bash
-python evaluate.py extracted_data/dataset_manifest.csv path/to/checkpoint.pt --model gin
+python evaluate.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs
 ```
 
-For multi-seed averaging:
+Multi-seed loop:
 
 ```bash
 for seed in 0 1 2 3 4; do
-  python train.py extracted_data/dataset_manifest.csv --seed $seed
+  python train.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs --seed $seed
 done
 ```
 
-## Related Notes
+---
+
+## Related notes
 
 - [[Models]]
+- [[evaluation_operations]]
 - [[Future Work]]

@@ -1,4 +1,4 @@
 Sample: W32.MyDoom.A.-NoVirus | label=0 | family=w32.mydoom.a. | benign_subtype=ambiguous_novirus_control
-filter_malicious.py: OK (0.5s)
-build_graph.py: OK (1.3s)
-analyze_graph.py: OK (0.5s)
+filter_malicious.py: OK (0.4s)
+build_graph.py: OK (1.0s)
+analyze_graph.py: OK (0.3s)

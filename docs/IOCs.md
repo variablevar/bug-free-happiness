@@ -59,3 +59,16 @@ The `filter_malicious.py` heuristic engine scores across 5 MITRE dimensions:
 | Execution / Impact | T1486 | High-score processes, ransomware note args |
 
 Verdict levels: `CRITICAL` · `HIGH` · `MEDIUM` · `LOW`
+
+---
+
+## Per-sample reports
+
+After `analyze_graph.py`, generate a concise `REPORT.md` per folder:
+
+```bash
+python scripts/generate_sample_reports.py --base-dir extracted_csvs \
+  --analysis-json outputs/two_model_analysis.json
+```
+
+See [[Pipeline]] Stage 5.

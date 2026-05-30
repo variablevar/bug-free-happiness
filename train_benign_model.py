@@ -16,18 +16,40 @@ from dataset import MalwareGraphDataset, merge_manifest_csv_files
 from analysis_schema import SCHEMA_VERSION
 from one_class_gnn import train_one_class
 
+DEFAULT_ALLOWED_BENIGN_SUBTYPES = (
+    "clean_benign,hard_benign_admin_tooling,ambiguous_novirus_control"
+)
+
+
+def resolve_allowed_benign_subtypes(args) -> tuple[str, ...] | None:
+    """Parse governance benign_subtype allowlist (None when governance is off)."""
+    if not args.require_governance_manifest:
+        return None
+    parts = [
+        x.strip()
+        for x in str(args.allowed_benign_subtypes).split(",")
+        if x.strip()
+    ]
+    # Legacy flags still append when narrowing the allowlist explicitly.
+    if args.include_hard_benign and "hard_benign_admin_tooling" not in parts:
+        parts.append("hard_benign_admin_tooling")
+    if args.include_ambiguous_benign_controls and "ambiguous_novirus_control" not in parts:
+        parts.append("ambiguous_novirus_control")
+    return tuple(parts)
+
 
 def run(args):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"[BenignModel] Device: {device}")
-    allowed_benign_subtypes = ["clean_benign"]
-    if args.include_hard_benign:
-        allowed_benign_subtypes.append("hard_benign_admin_tooling")
-    if args.include_ambiguous_benign_controls:
-        allowed_benign_subtypes.append("ambiguous_novirus_control")
+    allowed_benign_subtypes = resolve_allowed_benign_subtypes(args)
+    if allowed_benign_subtypes is not None:
+        print(
+            "[BenignModel] Allowed benign subtypes:",
+            ", ".join(allowed_benign_subtypes),
+        )
     print(
-        "[BenignModel] Allowed benign subtypes:",
-        ", ".join(allowed_benign_subtypes),
+        "[BenignModel] Strict train filter:",
+        not args.disable_strict_train_filter,
     )
 
     manifest_path = args.manifest
@@ -45,7 +67,7 @@ def run(args):
             include_unknown=False,
             require_train_eligible=not args.disable_strict_train_filter,
             require_governance_columns=args.require_governance_manifest,
-            allowed_benign_subtypes=tuple(allowed_benign_subtypes),
+            allowed_benign_subtypes=allowed_benign_subtypes,
             target="label",
             graph_attr_profile=getattr(args, "graph_attr_profile", "no_manifest_leakage"),
             graph_view=getattr(args, "graph_view", "full"),
@@ -123,7 +145,7 @@ def run(args):
         "exclude_uncertain": args.exclude_uncertain,
         "strict_train_filter": (not args.disable_strict_train_filter),
         "require_governance_manifest": bool(args.require_governance_manifest),
-        "allowed_benign_subtypes": allowed_benign_subtypes,
+        "allowed_benign_subtypes": list(allowed_benign_subtypes or ()),
         "benign_subtype_counts": dict(sorted(subtype_counts.items())),
         "n_benign_train": len(benign_ds),
         "seed": args.seed,
@@ -168,13 +190,13 @@ if __name__ == "__main__":
         "--include-hard-benign",
         action="store_true",
         dest="include_hard_benign",
-        help="Include hard_benign_admin_tooling rows in benign one-class training.",
+        help="Legacy: append hard_benign_admin_tooling to --allowed-benign-subtypes.",
     )
     p.add_argument(
         "--include-ambiguous-benign-controls",
         action="store_true",
         dest="include_ambiguous_benign_controls",
-        help="Include ambiguous_novirus_control rows if governance metadata also marks them train_eligible.",
+        help="Legacy: append ambiguous_novirus_control to --allowed-benign-subtypes.",
     )
     p.add_argument(
         "--disable-strict-train-filter",
@@ -188,6 +210,16 @@ if __name__ == "__main__":
         action=argparse.BooleanOptionalAction,
         dest="require_governance_manifest",
         help="Require benign_subtype / train_eligible governance columns in the manifest.",
+    )
+    p.add_argument(
+        "--allowed-benign-subtypes",
+        default=DEFAULT_ALLOWED_BENIGN_SUBTYPES,
+        dest="allowed_benign_subtypes",
+        help=(
+            "Comma-separated benign_subtype values permitted when governance is on. "
+            "With the default strict train filter, rows with train_eligible=true bypass "
+            "this list (manifest is authoritative)."
+        ),
     )
     p.add_argument("--hidden", type=int, default=32)
     p.add_argument("--layers", type=int, default=2)

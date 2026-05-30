@@ -33,7 +33,8 @@ import json, sys, os, collections, math, pickle
 from networkx.readwrite import json_graph
 import networkx as nx
 from utils.graph_io import load_graph_from_path
-from utils.rules import HIGH_ACCESS_MASKS
+from utils.rules import HIGH_ACCESS_MASKS, is_known_benign_ip
+from utils.triage_zone import node_triage_zone
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -107,6 +108,27 @@ def label_severity(score):
 
 def nodes_of_type(G, t):
     return [(n, d) for n, d in G.nodes(data=True) if d.get("node_type") == t]
+
+
+def _is_suspect_node(d: dict) -> bool:
+    return node_triage_zone(d) == "suspect"
+
+
+def build_benign_zone_summary(G) -> dict:
+    from collections import Counter
+    reasons: list[str] = []
+    proc_count = 0
+    for _, d in nodes_of_type(G, "process"):
+        if node_triage_zone(d) != "benign":
+            continue
+        proc_count += 1
+        reasons.extend(d.get("benign_reasons") or [])
+    top = [r for r, _ in Counter(reasons).most_common(8)]
+    return {
+        "process_count": proc_count,
+        "top_reasons": top,
+        "excluded_from_verdict": True,
+    }
 
 
 def get_depth(G, node, max_depth=10):
@@ -375,6 +397,8 @@ def analyze_processes(G):
             "degree_out":         G.out_degree(n),
             "lineage_depth":      get_depth(G, n),
             "is_suspicious_flag": bool(safe_int(d.get("is_suspicious",0))),
+            "triage_zone":        node_triage_zone(d),
+            "benign_reasons":     list(d.get("benign_reasons") or []),
             "heuristic_score":    score,
             "severity":           label_severity(score),
             "reasons":            reasons,
@@ -458,9 +482,12 @@ def analyze_entry_points(G):
 def analyze_network(G):
     results = []
     for n, d in nodes_of_type(G, "network_conn"):
+        if node_triage_zone(d) == "benign":
+            continue
         score, reasons = heuristic_network(d)
         if score > 0:
             results.append({
+                "pid":             safe(d.get("pid")),
                 "proto":           d.get("proto",""),
                 "local_addr":      d.get("local_addr",""),
                 "local_port":      safe(d.get("local_port")),
@@ -489,6 +516,8 @@ def analyze_injections(G):
 
     results = []
     for n, d in nodes_of_type(G, "memory_region"):
+        if node_triage_zone(d) == "benign":
+            continue
         score, reasons = heuristic_memory(d)
         if score > 0:
             pid = safe_int(d.get("pid",0))
@@ -623,10 +652,17 @@ def analyze_behavioral_clarity_metrics(G, processes):
 def analyze_attack_chain(G, processes, entry_points, injections,
                           credentials, network):
     steps = []
+    suspect_processes = [p for p in processes if p.get("triage_zone") == "suspect"]
+    suspect_pids = {
+        safe_int(p["pid"]) for p in suspect_processes if p.get("pid") is not None
+    }
+    suspect_entry = [
+        e for e in entry_points if safe_int(e.get("pid")) in suspect_pids
+    ]
 
     # Step 1 — Initial Access / Execution
-    if entry_points:
-        e = entry_points[0]
+    if suspect_entry:
+        e = suspect_entry[0]
         steps.append({
             "step":     1,
             "tactic":   "Initial Access / Execution",
@@ -636,10 +672,14 @@ def analyze_attack_chain(G, processes, entry_points, injections,
         })
 
     # Step 2 — Process Injection
-    injected_procs = list({i["process_name"] for i in injections
-                           if i.get("source") == "malfind"})
+    suspect_injections = [
+        i for i in injections
+        if i.get("source") == "malfind"
+        and safe_int(i.get("pid")) in suspect_pids
+    ]
+    injected_procs = list({i["process_name"] for i in suspect_injections})
     if injected_procs:
-        shared = any("shared-stub" in str(i.get("reasons","")) for i in injections)
+        shared = any("shared-stub" in str(i.get("reasons","")) for i in suspect_injections)
         steps.append({
             "step":     2,
             "tactic":   "Defense Evasion / Process Injection",
@@ -647,12 +687,17 @@ def analyze_attack_chain(G, processes, entry_points, injections,
             "detail":   f"Shellcode in {len(injected_procs)} process(es): "
                         f"{', '.join(injected_procs)}"
                         + (" [identical stub = same campaign]" if shared else ""),
-            "evidence": injections[0].get("disasm","")[:80] if injections else "",
+            "evidence": suspect_injections[0].get("disasm","")[:80] if suspect_injections else "",
         })
 
     # Step 3 — C2 (count unique destinations, not raw socket rows)
-    c2 = [n for n in network
-          if safe_int(n.get("is_external",0)) and n.get("state") == "ESTABLISHED"]
+    c2 = [
+        n for n in network
+        if safe_int(n.get("is_external", 0))
+        and n.get("state") == "ESTABLISHED"
+        and not is_known_benign_ip(n.get("foreign_addr", ""))
+        and safe_int(n.get("pid")) in suspect_pids
+    ]
     unique_ips = {n.get("foreign_addr") or "" for n in c2}
     unique_ips.discard("")
     owners = {clean_str(n.get("owner", "")) for n in c2 if n.get("owner")}
@@ -686,8 +731,8 @@ def analyze_attack_chain(G, processes, entry_points, injections,
         "spoolsv.exe","dwm.exe","taskhost.exe","taskhostw.exe",
     }
     # FIX: entry_pids uses safe int cast; skip None pids
-    entry_pids = {safe_int(e["pid"]) for e in entry_points if e["pid"] is not None}
-    for p in processes:
+    entry_pids = {safe_int(e["pid"]) for e in suspect_entry if e["pid"] is not None}
+    for p in suspect_processes:
         if p["pid"] is None: continue
         if (p["heuristic_score"] >= 7
                 and str(p["name"]).lower() not in sys_procs
@@ -706,10 +751,12 @@ def analyze_attack_chain(G, processes, entry_points, injections,
     has_injection  = len(injected_procs) > 0
     has_c2         = len(unique_ips) > 0
     has_creds      = len(credentials) > 0
-    has_hidden     = any(safe_int(d.get("in_pslist",1)) == 0
-                         for _, d in G.nodes(data=True)
-                         if d.get("node_type") == "process")
-    max_score      = max((p["heuristic_score"] for p in processes), default=0)
+    has_hidden     = any(
+        safe_int(d.get("in_pslist", 1)) == 0
+        for _, d in G.nodes(data=True)
+        if d.get("node_type") == "process" and _is_suspect_node(d)
+    )
+    max_score      = max((p["heuristic_score"] for p in suspect_processes), default=0)
 
     if (has_injection and has_c2 and has_creds) or (has_hidden and max_score >= 10):
         verdict = "CRITICAL — Active malware: injection + C2 + credential access detected"
@@ -776,6 +823,7 @@ def main():
         "graph_attr":       graph_attr.get("graph_attr", [0.0]*5),
         "label_signals":    graph_attr.get("label_signals", {}),
         "graph_attr_extra": graph_attr_extra,
+        "benign_zone_summary": build_benign_zone_summary(G),
     }
 
     out_path = os.path.join(out_dir, "analysis_report.json")

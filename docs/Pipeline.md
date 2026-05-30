@@ -10,7 +10,7 @@ The MalVol pipeline has these major stages:
 
 **Script:** `auto_vol.py`
 
-Runs many Volatility 3 plugins in parallel over memory dumps in `memory_dumps/`. Writes per-sample CSVs into `extracted_data/<Sample>/`.
+Runs Volatility 3 plugins in parallel over memory dumps in `memory_dumps/`. Writes per-sample CSVs into `extracted_data/<Sample>/` (or your configured output tree).
 
 ```bash
 python auto_vol.py
@@ -24,7 +24,7 @@ Plugins include `pslist`, `psscan`, `malfind`, `filescan`, `netscan`, `dlllist`,
 
 **Scripts:** `scripts/ioc/code_injection_analysis.py`, `hidden_proc_analysis.py`, `filescan_analysis.py`, `network_analysis.py`, `analysis_corpus.py`
 
-Computes IOC-style metrics per sample and family. Exports CSVs and Markdown-friendly tables.
+Computes IOC-style metrics per sample and family. Exports CSVs and summary tables.
 
 ```bash
 python scripts/ioc/code_injection_analysis.py
@@ -46,9 +46,9 @@ See [[IOCs]] for indicator categories.
 
 2. **`filter_malicious.py`** — Reads **`graph.pkl`**, writes `filtered_malicious.json` (rule hits, `_meta.graph_attr`, `_meta.label_signals`).
 
-3. **`analyze_graph.py`** — Reads the graph and artefacts; writes `analysis_report.json`.
+3. **`analyze_graph.py`** — Reads the graph and artefacts; writes `analysis_report.json` (attack chain, entry points, IOC sections).
 
-`build_dataset.py` runs these in a fixed order (bootstrap graph if missing → filter → graph → analyse). See `docs/pipeline_contracts.md` for file contracts.
+`build_dataset.py` runs these in a fixed order (bootstrap graph if missing → filter → graph → analyse). See [[pipeline_contracts]] for file contracts.
 
 Single-folder example:
 
@@ -65,26 +65,90 @@ python analyze_graph.py extracted_data/WannaCry-WithVirus/
 
 **Script:** `build_dataset.py`
 
-Produces `extracted_data/dataset_manifest.csv` with labels, graph stats, verdict fields, `graph_attr`, `label_signals_json`, typed `signal_*` columns, `uncertain` / `uncertain_reason`, and step flags (`filter_ok`, `graph_ok`, `analyze_ok`).
+Produces `dataset_manifest.csv` with labels, graph stats, verdict fields, `graph_attr`, `label_signals_json`, typed `signal_*` columns, `uncertain` / `uncertain_reason`, governance fields when enabled, and step flags (`filter_ok`, `graph_ok`, `analyze_ok`).
+
+**Uncertainty (default):** `-NoVirus` folders still get `benign_subtype=ambiguous_novirus_control`, but that alone no longer sets `uncertain=True`. Rows become uncertain only on pipeline failure, other label-quality flags, or strong suspect-zone disagreement (`CRITICAL` verdict, or ≥18 suspect PIDs with `max_score` ≥100). Use `--strict-novirus-controls` to restore the old “all NoVirus controls uncertain” behaviour.
 
 ```bash
 python build_dataset.py
+python build_dataset.py --base-dir extracted_csvs
+python build_dataset.py extracted_data --skip-existing
+python build_dataset.py extracted_data --strict-novirus-controls
 ```
 
 ---
 
-## Stage 5 — GNN training and evaluation
+## Stage 5 — Per-sample reports (optional)
 
-**Scripts:** `train.py`, `evaluate.py`
+**Script:** `scripts/generate_sample_reports.py`
 
-Grouped CV (default LOSO on sample folders; optional stratified group K-fold by family). Models: `gin`, `sage`, `gat`, `gine`.
+Writes human-readable `REPORT.md` per folder from `analysis_report.json` and optional ML JSON.
 
 ```bash
-python train.py extracted_data/dataset_manifest.csv
-python train.py extracted_data/dataset_manifest.csv --model sage
-python train.py extracted_data/dataset_manifest.csv --cv stratified_group --group-by family
+python scripts/generate_sample_reports.py --base-dir extracted_csvs \
+  --analysis-json outputs/two_model_analysis.json
+```
 
-python evaluate.py extracted_data/dataset_manifest.csv path/to/checkpoint.pt --model gin
+---
+
+## Stage 6 — ML training
+
+### Primary: dual one-class stack
+
+```bash
+python train_stack.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs
+```
+
+Or separately: `train_malware_model.py`, `train_benign_model.py`.
+
+Key flags:
+
+- `--graph-attr-profile` — `full`, `no_manifest_leakage`, `structure_only`
+- `--graph-view` — `full`, `attack_subgraph`
+- `--exclude-uncertain` — drop manifest uncertain rows
+- `--require-governance-manifest` — enforce `train_eligible` / subtype columns
+
+### Binary calibrated classifier
+
+```bash
+python train_binary_model.py extracted_csvs/dataset_manifest.csv \
+  --base-dir extracted_csvs \
+  --graph-attr-profile no_manifest_leakage
+```
+
+### Legacy supervised GNN CV
+
+```bash
+python train.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs --model gin
+python train.py extracted_csvs/dataset_manifest.csv --cv stratified_group --group-by family
 ```
 
 See [[Models]] for architecture notes.
+
+---
+
+## Stage 7 — Evaluation and diagnostics
+
+**Script:** `evaluate.py` (orchestrates two-model + binary + merged JSON)
+
+```bash
+python evaluate.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs
+python evaluate.py extracted_csvs/dataset_manifest.csv --base-dir extracted_csvs --gate-ablation
+```
+
+Supporting scripts:
+
+- `scripts/calibrate_uncertainty_thresholds.py`
+- `scripts/fit_conformal_bundle.py`
+- `scripts/diagnose_triage_geometry.py`
+- `scripts/apply_hard_benign_labels.py`
+
+See [[evaluation_operations]] for ablation matrix and reproducibility commands.
+
+---
+
+## Related
+
+- [[Models]]
+- [[Results]]
+- [[pipeline_contracts]]

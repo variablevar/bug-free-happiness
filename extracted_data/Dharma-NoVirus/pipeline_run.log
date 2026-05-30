@@ -1,4 +1,4 @@
 Sample: Dharma-NoVirus | label=0 | family=dharma | benign_subtype=ambiguous_novirus_control
-filter_malicious.py: OK (0.7s)
-build_graph.py: OK (7.2s)
-analyze_graph.py: OK (1.0s)
+filter_malicious.py: OK (0.5s)
+build_graph.py: OK (5.4s)
+analyze_graph.py: OK (0.7s)

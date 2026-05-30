@@ -1,4 +1,4 @@
 Sample: GandCrab-WithVirus | label=1 | family=gandcrab | benign_subtype=
-filter_malicious.py: OK (0.9s)
-build_graph.py: OK (12.8s)
-analyze_graph.py: OK (1.5s)
+filter_malicious.py: OK (0.7s)
+build_graph.py: OK (8.9s)
+analyze_graph.py: OK (1.0s)

@@ -9,6 +9,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from dataset import evaluation_subset_predicates
+
 
 def _run(cmd: list[str]) -> int:
     return subprocess.call(cmd)
@@ -193,38 +195,23 @@ def main():
             source="binary_model",
         )
     if manifest_rows:
-        def _subtype(row: dict, name: str) -> bool:
-            return str(row.get("benign_subtype", "")).strip().lower() == name
-
-        subsets = {
-            "uncertain_benign": lambda row: str(row.get("label", "")).strip() == "0"
-            and str(row.get("uncertain", "")).strip().lower() == "true",
-            "clean_benign": lambda row: str(row.get("label", "")).strip() == "0"
-            and _subtype(row, "clean_benign"),
-            "hard_benign_admin_tooling": lambda row: str(row.get("label", "")).strip() == "0"
-            and _subtype(row, "hard_benign_admin_tooling"),
-            "ambiguous_novirus_control": lambda row: str(row.get("label", "")).strip() == "0"
-            and _subtype(row, "ambiguous_novirus_control"),
-            "malware_labelled": lambda row: str(row.get("label", "")).strip() == "1",
-            "other_rows": lambda row: not (
-                str(row.get("label", "")).strip() == "0"
-                and str(row.get("uncertain", "")).strip().lower() == "true"
-            ),
-        }
+        subsets = evaluation_subset_predicates()
         subset_metrics: dict[str, dict] = {}
         for subset_name, pred in subsets.items():
             rows = [folder for folder, row in manifest_rows.items() if pred(row)]
-            if rows:
-                subset_metrics[subset_name] = {
-                    "two_model": _model_triage_metrics(
-                        [two.get(folder, {}).get("triage_state", "") for folder in rows if folder in two],
-                        source="two_model",
-                    ),
-                    "binary_model": _model_triage_metrics(
-                        [binary.get(folder, {}).get("triage_state", "") for folder in rows if folder in binary],
-                        source="binary_model",
-                    ),
-                }
+            if not rows:
+                continue
+            subset_metrics[subset_name] = {
+                "folders": len(rows),
+                "two_model": _model_triage_metrics(
+                    [two.get(folder, {}).get("triage_state", "") for folder in rows if folder in two],
+                    source="two_model",
+                ),
+                "binary_model": _model_triage_metrics(
+                    [binary.get(folder, {}).get("triage_state", "") for folder in rows if folder in binary],
+                    source="binary_model",
+                ),
+            }
         if subset_metrics:
             payload["summary"]["subset_metrics"] = subset_metrics
     merge_out.write_text(json.dumps(payload, indent=2), encoding="utf-8")

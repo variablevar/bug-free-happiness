@@ -11,7 +11,7 @@ from typing import List
 
 HIGH_THRESHOLD = 0.60
 LOW_THRESHOLD = 0.40
-SCHEMA_VERSION = "2.3"
+SCHEMA_VERSION = "2.4"
 
 
 def bucket(score: float, *, low: float = LOW_THRESHOLD, high: float = HIGH_THRESHOLD) -> str:
@@ -113,6 +113,9 @@ class SampleAnalysis:
     malware_model_evidence: dict
     benign_model_evidence: dict
     narrative: str
+    train_eligible: bool | None = None
+    uncertain: bool | None = None
+    uncertain_reason: str = ""
     abstention_reason: str | None = None
     uncertainty_gate_triggered: bool | None = None
     fusion: dict | None = None
@@ -136,6 +139,11 @@ class BinarySampleAnalysis:
     behavioral_findings: List[dict]
     binary_model_evidence: dict
     narrative: str
+    label_from_manifest: int = -1
+    benign_subtype: str = ""
+    train_eligible: bool | None = None
+    uncertain: bool | None = None
+    uncertain_reason: str = ""
     abstention_reason: str | None = None
     uncertainty_gate_triggered: bool | None = None
     fusion: dict | None = None

@@ -25,7 +25,12 @@ from analysis_schema import (
 )
 from analyze_binary_model import _apply_feature_group_weights, build_model, explain_binary
 from calibration import IsotonicCalibrator, SplitConformalBundle, apply_temperature
-from dataset import MalwareGraphDataset
+from dataset import (
+    DEFAULT_ALLOWED_BENIGN_SUBTYPES,
+    MalwareGraphDataset,
+    governance_load_options,
+    manifest_row_governance,
+)
 from fusion import (
     build_uncertainty_gate,
     ensemble_score,
@@ -263,18 +268,27 @@ def run(args):
     subtype_by_folder = {
         str(r["folder"]): str(r.get("benign_subtype", "") or "") for _, r in df.iterrows()
     }
+    governance_by_folder = {
+        str(r["folder"]): manifest_row_governance(dict(r)) for _, r in df.iterrows()
+    }
     graph_attr_profile = str(
         getattr(args, "graph_attr_profile", None)
         or "full"
     ).strip().lower()
+    load_kwargs = governance_load_options(
+        require_governance_manifest=bool(getattr(args, "require_governance_manifest", False)),
+        allowed_benign_subtypes=str(getattr(args, "allowed_benign_subtypes", DEFAULT_ALLOWED_BENIGN_SUBTYPES)),
+        require_train_eligible=bool(getattr(args, "train_eligible_only", False)),
+        include_uncertain=not bool(getattr(args, "exclude_uncertain", False)),
+    )
     ds = MalwareGraphDataset(
         args.manifest,
         base_dir=str(base_dir),
-        include_uncertain=True,
         include_unknown=False,
         target="label",
         graph_attr_profile=graph_attr_profile,
         graph_view=str(getattr(args, "graph_view", "full") or "full"),
+        **load_kwargs,
     )
 
     malware_payload = torch.load(args.malware_model, map_location="cpu")
@@ -301,11 +315,11 @@ def run(args):
         ds = MalwareGraphDataset(
             args.manifest,
             base_dir=str(base_dir),
-            include_uncertain=True,
             include_unknown=False,
             target="label",
             graph_attr_profile=graph_attr_profile,
             graph_view=str(getattr(args, "graph_view", "full") or "full"),
+            **load_kwargs,
         )
     binary_model = build_model(binary_payload, device)
     conformal_bundle = None
@@ -543,6 +557,7 @@ def run(args):
         }
 
         manifest_label = label_by_folder.get(folder, int(data.y.item()))
+        gov = governance_by_folder.get(folder, {})
         out.append(
             SampleAnalysis(
                 sample_id=(sample_id_by_folder.get(folder) or f"{idx+1:02d}"),
@@ -560,6 +575,9 @@ def run(args):
                 behavioral_findings=findings,
                 malware_model_evidence=malware_evd,
                 benign_model_evidence=benign_evd,
+                train_eligible=gov.get("train_eligible"),
+                uncertain=gov.get("uncertain"),
+                uncertain_reason=str(gov.get("uncertain_reason", "") or ""),
                 abstention_reason=uncertainty_gate.reason,
                 uncertainty_gate_triggered=uncertainty_gate.triggered,
                 fusion=fusion,
@@ -631,6 +649,26 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser(description="Run two-model fused analysis")
     p.add_argument("manifest", help="Path to dataset_manifest.csv")
     p.add_argument("--base-dir", default=None, dest="base_dir")
+    p.add_argument("--exclude-uncertain", action="store_true", dest="exclude_uncertain")
+    p.add_argument(
+        "--train-eligible-only",
+        action="store_true",
+        dest="train_eligible_only",
+        help="Load only manifest rows with train_eligible=true.",
+    )
+    p.add_argument(
+        "--require-governance-manifest/--no-require-governance-manifest",
+        default=False,
+        action=argparse.BooleanOptionalAction,
+        dest="require_governance_manifest",
+        help="Apply benign_subtype allowlist when loading (default: analyze all manifest rows).",
+    )
+    p.add_argument(
+        "--allowed-benign-subtypes",
+        default=DEFAULT_ALLOWED_BENIGN_SUBTYPES,
+        dest="allowed_benign_subtypes",
+        help="Benign subtype allowlist when --require-governance-manifest is on.",
+    )
     p.add_argument("--malware-model", default="outputs/malware_model.pt", dest="malware_model")
     p.add_argument("--benign-model", default="outputs/benign_model.pt", dest="benign_model")
     p.add_argument("--output-json", default="outputs/two_model_analysis.json", dest="output_json")

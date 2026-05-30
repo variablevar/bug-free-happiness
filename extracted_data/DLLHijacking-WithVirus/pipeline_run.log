@@ -1,4 +1,4 @@
 Sample: DLLHijacking-WithVirus | label=1 | family=dllhijacking | benign_subtype=
 filter_malicious.py: OK (0.8s)
-build_graph.py: OK (10.7s)
-analyze_graph.py: OK (1.3s)
+build_graph.py: OK (9.0s)
+analyze_graph.py: OK (1.0s)

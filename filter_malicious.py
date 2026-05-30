@@ -33,6 +33,12 @@ from utils.rules import (
     LOLBIN_NET,
     LSASS_WHITELIST,
     HIGH_ACCESS_MASKS,
+    is_known_benign_ip,
+)
+from utils.triage_zone import (
+    BENIGN_CONTEXT_RULES,
+    classify_process_zone,
+    SUSPICION_THRESHOLD as ZONE_SUSPICION_THRESHOLD,
 )
 
 
@@ -258,6 +264,8 @@ def main():
     print(f"\n[*] Loaded graph: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges")
 
     suspicious_pids = set()
+    benign_zone_pids = set()
+    benign_zone_reasons: dict[int, list[str]] = {}
     pid_hits = {}
     evidence_graph = {"nodes": set(), "edges": set()}
     result = {
@@ -274,6 +282,7 @@ def main():
         "driver_suspicious":    [],
         "abnormal_parents":     [],
         "behavioural_suspects": [],
+        "benign_context_processes": [],
     }
 
     # ── Build pid → name map from process nodes ───────────────────────────────
@@ -314,7 +323,6 @@ def main():
                 "_reason":     "hidden_from_pslist",
             })
             hidden_pids_set.add(pid)
-            suspicious_pids.add(pid)
             add_hit(pid, "hidden_from_pslist", "memory_manipulation", "in_psscan=1,in_pslist=0", 0.95, 1.0)
 
     # ── 2. Memory regions: malfind RWX ───────────────────────────────────────
@@ -346,7 +354,6 @@ def main():
         }
         result["malfind_regions"].append(row)
         malfind_pids_set.add(pid)
-        suspicious_pids.add(pid)
         add_hit(pid, "rwx_injection", "memory_manipulation", f"{source}:{prot}", 0.90, 1.0)
         if has_mz and safe_str(d.get("backing_file", "")).strip() in ("", "N/A", "nan", "Disabled"):
             add_hit(pid, "reflective_pe_like", "memory_manipulation", "mz_header+no_backing", 0.85, 1.0)
@@ -370,7 +377,6 @@ def main():
             "backing_file": bf,
             "_severity":   "High",
         })
-        suspicious_pids.add(pid)
         add_hit(pid, "nonrwx_exec_private", "memory_manipulation", f"vad:{prot}", 0.80, 0.9)
 
     # ── 4. SSDT hooks ─────────────────────────────────────────────────────────
@@ -403,7 +409,6 @@ def main():
                 "_severity":       "High",
             })
             abnormal_pids_set.add(pid)
-            suspicious_pids.add(pid)
             add_hit(pid, "abnormal_parent", "initial_execution", f"{parent}->{name}", 0.9, 1.0)
 
         # Service-host vs user-space trust boundary abuse:
@@ -438,8 +443,10 @@ def main():
         is_pub  = is_ext and foreign not in ("", "-", "*") \
                   and not PRIVATE_IP.match(foreign)
         is_lolbin     = owner in LOLBIN_NET
-        is_non_browser = is_pub and owner not in LEGIT_NET_OWNERS
-        if not (is_lolbin or is_non_browser):
+        is_benign_ip  = is_known_benign_ip(foreign)
+        is_non_browser = is_pub and owner not in LEGIT_NET_OWNERS and not is_benign_ip
+        is_benign_net = is_pub and owner in LEGIT_NET_OWNERS and is_benign_ip
+        if not (is_lolbin or is_non_browser or is_benign_net):
             continue
         pid = safe_int(d.get("pid", 0))
         pid_net_rows[pid] = pid_net_rows.get(pid, 0) + 1
@@ -454,9 +461,12 @@ def main():
             "proto":         d.get("proto", ""),
             "is_lolbin_c2":  is_lolbin,
             "_is_lolbin_c2": is_lolbin,
+            "_benign_zone":  int(is_benign_net),
             "_severity":     "Critical" if is_lolbin else "High",
         })
-        suspicious_pids.add(pid)
+        if is_benign_net:
+            add_hit(pid, "browser_expected_traffic", "c2_or_lateral", f"{owner}->{foreign}", 1.0, 1.0)
+            continue
         if is_lolbin:
             net_lolbin_pids_local.add(pid)
             add_hit(pid, "lolbin_network", "c2_or_lateral", f"{owner}->{foreign}:{d.get('foreign_port')}", 0.9, 1.0)
@@ -485,7 +495,6 @@ def main():
                 else "High"
             ),
         })
-        suspicious_pids.add(pid)
         cmdline_pids_local.add(pid)
         add_hit(pid, "suspicious_cmdline", "initial_execution", "|".join(triggered[:3]), 0.8, 0.9)
 
@@ -510,7 +519,6 @@ def main():
             "_severity":      "Critical",
         })
         handle_pids_local.add(pid)
-        suspicious_pids.add(pid)
         add_hit(pid, "lsass_full_access", "credential_or_discovery", f"{proc_name}:{access}", 0.9, 1.0)
 
     # Additional sensitive handle patterns (non-LSASS)
@@ -536,7 +544,6 @@ def main():
                 "start_path":    start_path,
                 "_severity":     "High",
             })
-            suspicious_pids.add(pid)
             add_hit(pid, "thread_start_private_exec", "memory_manipulation", start_path[:120], 0.8, 0.9)
 
     # ── 10. Drivers with no service key ──────────────────────────────────────
@@ -563,7 +570,6 @@ def main():
                 "name":         d.get("name", ""),
                 "_severity":    "High",
             })
-            suspicious_pids.add(pid)
             host_name = pid_to_name.get(pid, "")
             if host_name in TRUSTED_SIGNED_HOSTS:
                 # Unsigned DLL trust is not always available, use non-system path
@@ -653,39 +659,59 @@ def main():
             if current_rules and weak_only:
                 add_hit(pid, "popularity_only_activity", "c2_or_lateral", pname, 1.0, 1.0)
 
+        if pid not in pid_hits:
+            continue
         score, reasons, confidence = score_process(pid, pid_hits)
-        if score >= SUSPICION_THRESHOLD:
-            if ("rwx_injection" in reasons) or ("thread_start_private_exec" in reasons):
-                exec_tech = "injection_like"
-            elif ("nonrwx_exec_private" in reasons and "abnormal_parent" in reasons):
-                exec_tech = "hollowing_like"
-            elif "reflective_pe_like" in reasons:
-                exec_tech = "reflective_like"
-            elif "nonrwx_exec_private" in reasons:
-                exec_tech = "unknown_memory_exec"
-            else:
-                exec_tech = "n/a"
-            result["behavioural_suspects"].append({
-                "PID":              pid,  # compat for build_graph.py legacy parser
-                "pid":              pid,
-                "name":             d.get("label", ""),
-                "ppid":             d.get("ppid"),
-                "parent_name":      pid_to_name.get(safe_int(d.get("ppid", 0)), "?"),
-                "create_time":      d.get("create_time", ""),
-                "args":             d.get("args", ""),
-                "wow64":            bool(safe_int(d.get("wow64", 0))),
-                "in_pslist":        bool(safe_int(d.get("in_pslist", 1))),
-                "lineage_depth":    _lineage_depth(pid, ppid_map),
-                "attack_stages":    sorted({h.stage for h in pid_hits.get(pid, [])}),
-                "execution_technique": exec_tech,
-                "rule_hits":        [h.__dict__ for h in pid_hits.get(pid, [])[:12]],
-                "_suspicion_score": score,
-                "_reasons":         reasons,
-                "_confidence":      round(confidence, 4),
-                "_severity":        _severity_from_score(score),
-            })
+        zone = classify_process_zone(
+            score,
+            reasons,
+            process_name=pname,
+            pid_hits=pid_hits,
+            pid=pid,
+            suspicion_threshold=ZONE_SUSPICION_THRESHOLD,
+        )
+        if zone == "neutral":
+            continue
+        if ("rwx_injection" in reasons) or ("thread_start_private_exec" in reasons):
+            exec_tech = "injection_like"
+        elif ("nonrwx_exec_private" in reasons and "abnormal_parent" in reasons):
+            exec_tech = "hollowing_like"
+        elif "reflective_pe_like" in reasons:
+            exec_tech = "reflective_like"
+        elif "nonrwx_exec_private" in reasons:
+            exec_tech = "unknown_memory_exec"
+        else:
+            exec_tech = "n/a"
+        proc_row = {
+            "PID":              pid,
+            "pid":              pid,
+            "name":             d.get("label", ""),
+            "ppid":             d.get("ppid"),
+            "parent_name":      pid_to_name.get(safe_int(d.get("ppid", 0)), "?"),
+            "create_time":      d.get("create_time", ""),
+            "args":             d.get("args", ""),
+            "wow64":            bool(safe_int(d.get("wow64", 0))),
+            "in_pslist":        bool(safe_int(d.get("in_pslist", 1))),
+            "lineage_depth":    _lineage_depth(pid, ppid_map),
+            "attack_stages":    sorted({h.stage for h in pid_hits.get(pid, [])}),
+            "execution_technique": exec_tech,
+            "rule_hits":        [h.__dict__ for h in pid_hits.get(pid, [])[:12]],
+            "_suspicion_score": score,
+            "_reasons":         reasons,
+            "_confidence":      round(confidence, 4),
+            "_severity":        _severity_from_score(score),
+            "_triage_zone":     zone,
+        }
+        if zone == "suspect":
+            result["behavioural_suspects"].append(proc_row)
             suspicious_pids.add(pid)
             evidence_graph["nodes"].add(f"process_{pid}")
+        else:
+            benign_reasons = sorted(set(reasons) & BENIGN_CONTEXT_RULES or reasons)
+            proc_row["_benign_reasons"] = benign_reasons
+            result["benign_context_processes"].append(proc_row)
+            benign_zone_pids.add(pid)
+            benign_zone_reasons[pid] = benign_reasons
 
     # ── 13. Collect suspicious process summary ────────────────────────────────
     seen = set()
@@ -732,11 +758,15 @@ def main():
     except Exception:
         proc_betweenness_p95 = 0.0
 
+    raw_rwx_injections = len(result["malfind_regions"])
     graph_attr = {
         "max_process_score": max(
             (r["_suspicion_score"] for r in result["behavioural_suspects"]),
             default=0
         ),
+        "raw_rwx_injections": raw_rwx_injections,
+        "benign_zone_process_count": len(benign_zone_pids),
+        "suspect_zone_process_count": len(suspicious_pids),
         "attack_steps": sum([
             1 if result["malfind_regions"]    else 0,
             1 if result["network_suspicious"] else 0,
@@ -797,7 +827,11 @@ def main():
         "behavioural_suspects_found": int(len(result["behavioural_suspects"]) > 0),
         "lolbin_c2_found":            int(graph_attr["lolbin_c2_connections"] > 0),
         "ransom_note_found":          int(graph_attr["ransom_note_signal"] == 1),
-        "rwx_injections":             len(result["malfind_regions"]),
+        "rwx_injections":             sum(
+            1 for r in result["malfind_regions"]
+            if safe_int(r.get("pid", 0)) in suspicious_pids
+        ),
+        "raw_rwx_injections":         raw_rwx_injections,
         "hidden_processes":           len(result["hidden_processes"]),
         "top_suspect_score":          graph_attr["max_process_score"],
         "triage_confidence":          round(triage_confidence, 6),
@@ -814,6 +848,9 @@ def main():
     result["_meta"] = {
         "total_suspicious_pids": len(suspicious_pids),
         "suspicious_pids":       sorted(list(suspicious_pids)),
+        "suspect_zone_pids":     sorted(list(suspicious_pids)),
+        "benign_zone_pids":      sorted(list(benign_zone_pids)),
+        "benign_zone_reasons":   {str(k): v for k, v in benign_zone_reasons.items()},
         "graph_attr":            graph_attr,
         "label_signals":         label_signals,
         "triage_confidence":     round(triage_confidence, 6),
@@ -838,7 +875,7 @@ def main():
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(clean(result), f, indent=2, default=str)
 
-    print(f"\n[\u2705] Suspicious PIDs: {len(suspicious_pids)}")
+    print(f"\n[\u2705] Suspect-zone PIDs: {len(suspicious_pids)}  Benign-zone PIDs: {len(benign_zone_pids)}")
     for k, v in result.items():
         if k.startswith("_"): continue
         print(f"  {k}: {len(v)} entries")

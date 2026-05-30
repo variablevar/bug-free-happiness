@@ -2,26 +2,41 @@
 
 tags: #future #improvements #roadmap
 
-## Short Term
+## Completed (in repo)
 
-- [ ] **Expand dataset to 100+ samples** — most critical improvement; will dramatically reduce CV variance
-- [x] **Family-aware grouped CV (train.py)** — use `--cv stratified_group --group-by family` (still validate on held-out families; expand N for stable estimates)
-- [ ] **CUDA testing** — GPU path is implemented but untested; needed for larger datasets
+- [x] Dual one-class + binary fusion stack (`train_stack.py`, `analyze_two_model.py`)
+- [x] Calibrated abstention gates (`fusion.py`, `--abstention-mode calibrated`)
+- [x] Graph attr leakage profiles (`utils/graph_attr_profile.py`)
+- [x] Attack subgraph view (`utils/subgraph_extract.py`)
+- [x] Gate ablation harness (`evaluate.py --gate-ablation`)
+- [x] Triage geometry diagnostics (`scripts/diagnose_triage_geometry.py`)
+- [x] Conformal bundle hooks (`scripts/fit_conformal_bundle.py`)
+- [x] Hard-benign label tooling (`scripts/apply_hard_benign_labels.py`)
+- [x] Per-sample `REPORT.md` generation (`scripts/generate_sample_reports.py`)
+- [x] Family-aware grouped CV (`train.py --cv stratified_group`)
 
-## Medium Term
+## Short term
 
-- [ ] **Pretrained node embeddings** — replace one-hot DLL/process name features with embeddings pretrained on Windows API call sequences
-- [ ] **Combined FCG + behavioural graph** — process nodes carry a code-structure subgraph from function call graph analysis
-- [ ] **Hyperparameter search** — automated tuning with Optuna or Ray Tune
+- [ ] **Populate `hard_benign_labels.csv`** with real `clean_benign` and `hard_benign_admin_tooling` rows
+- [ ] **Retrain binary head** with `no_manifest_leakage` on full `extracted_csvs` and recalibrate thresholds
+- [ ] **Expand corpus to 100+ samples** — reduce CV variance and stabilize one-class manifolds
+- [ ] **CUDA validation** — GPU path exists but needs systematic testing at scale
 
-## Long Term
+## Medium term
 
-- [ ] **GNNExplainer integration** — identify which nodes/edges drive the malware classification for interpretability
-- [ ] **Real-time scoring** — integrate with live Volatility memory acquisition for on-the-fly detection
-- [ ] **Multi-class classification** — extend beyond binary to family-level classification (WannaCry vs LockBit vs REvil etc.)
-- [ ] **Federated learning** — train across organisations without sharing raw memory dumps
+- [ ] **Pretrained node embeddings** — replace sparse categorical features
+- [ ] **Combined FCG + behavioural graph** — attach static call-structure subgraphs to process nodes
+- [ ] **Hyperparameter search** — Optuna or Ray Tune across heads and fusion weights
 
-## Related Notes
+## Long term
+
+- [ ] **GNNExplainer / attribution** — tie model scores to specific nodes and edges in analyst UI
+- [ ] **Live acquisition integration** — score graphs from on-the-fly memory capture
+- [ ] **Multi-class family classification** — beyond binary triage
+- [ ] **Federated training** — cross-org learning without sharing raw dumps
+
+## Related notes
 
 - [[Results]]
 - [[Models]]
+- [[graph_audit_improvement_report]]

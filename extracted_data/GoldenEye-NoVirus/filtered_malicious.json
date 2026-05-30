@@ -73,15 +73,6 @@
       "in_psscan": true
     },
     {
-      "pid": 6416,
-      "name": "OneDrive.exe",
-      "ppid": 8160,
-      "create_time": "2023-03-30 09:23:31.000000 UTC",
-      "args": "/updateInstalled /background",
-      "in_pslist": true,
-      "in_psscan": true
-    },
-    {
       "pid": 8044,
       "name": "WWAHost.exe",
       "ppid": 796,
@@ -535,6 +526,46 @@
       "proto": "TCPv4",
       "is_lolbin_c2": false,
       "_is_lolbin_c2": false,
+      "_benign_zone": 0,
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "svchost.exe",
+      "foreign_addr": "20.90.153.243",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 1,
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "msedge.exe",
+      "foreign_addr": "142.250.200.10",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 1,
+      "_severity": "High"
+    },
+    {
+      "pid": 0,
+      "process_name": "?",
+      "owner": "svchost.exe",
+      "foreign_addr": "20.90.153.243",
+      "foreign_port": 443,
+      "state": "ESTABLISHED",
+      "proto": "TCPv4",
+      "is_lolbin_c2": false,
+      "_is_lolbin_c2": false,
+      "_benign_zone": 1,
       "_severity": "High"
     },
     {
@@ -547,6 +578,7 @@
       "proto": "TCPv4",
       "is_lolbin_c2": false,
       "_is_lolbin_c2": false,
+      "_benign_zone": 0,
       "_severity": "High"
     },
     {
@@ -559,6 +591,7 @@
       "proto": "TCPv4",
       "is_lolbin_c2": false,
       "_is_lolbin_c2": false,
+      "_benign_zone": 0,
       "_severity": "High"
     }
   ],
@@ -1075,6 +1108,138 @@
   ],
   "behavioural_suspects": [
     {
+      "PID": 4,
+      "pid": 4,
+      "name": "System",
+      "ppid": 0,
+      "parent_name": "?",
+      "create_time": "2023-03-30 09:22:15.000000 UTC",
+      "args": "",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 0,
+      "attack_stages": [
+        "credential_or_discovery"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "lsass_full_access",
+          "stage": "credential_or_discovery",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "system:0x1fffff"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "lsass_full_access"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 444,
+      "pid": 444,
+      "name": "csrss.exe",
+      "ppid": 428,
+      "parent_name": "?",
+      "create_time": "2023-03-30 09:22:19.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 1,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "unknown->csrss.exe"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "abnormal_parent"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 520,
+      "pid": 520,
+      "name": "wininit.exe",
+      "ppid": 428,
+      "parent_name": "?",
+      "create_time": "2023-03-30 09:22:19.000000 UTC",
+      "args": "wininit.exe",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 1,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "unknown->wininit.exe"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "abnormal_parent"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 540,
+      "pid": 540,
+      "name": "csrss.exe",
+      "ppid": 512,
+      "parent_name": "?",
+      "create_time": "2023-03-30 09:22:19.000000 UTC",
+      "args": "%SystemRoot%\\\\system32\\\\csrss.exe ObjectDirectory=\\\\Windows SharedSection=1024,20480,768 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=sxssrv,4 ProfileControl=Off MaxRequestThreads=16",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 1,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "abnormal_parent",
+          "stage": "initial_execution",
+          "weight": 3.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "unknown->csrss.exe"
+        }
+      ],
+      "_suspicion_score": 3,
+      "_reasons": [
+        "abnormal_parent"
+      ],
+      "_confidence": 0.2366,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    },
+    {
       "PID": 2072,
       "pid": 2072,
       "name": "MsMpEng.exe",
@@ -1193,7 +1358,8 @@
         "rwx_injection"
       ],
       "_confidence": 0.99,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 4352,
@@ -1250,7 +1416,8 @@
         "rwx_injection"
       ],
       "_confidence": 0.6584,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 5332,
@@ -1347,58 +1514,41 @@
         "rwx_injection"
       ],
       "_confidence": 0.9371,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
     },
     {
-      "PID": 6416,
-      "pid": 6416,
-      "name": "OneDrive.exe",
-      "ppid": 8160,
-      "parent_name": "?",
-      "create_time": "2023-03-30 09:23:31.000000 UTC",
-      "args": "/updateInstalled /background",
+      "PID": 5096,
+      "pid": 5096,
+      "name": "msedge.exe",
+      "ppid": 3212,
+      "parent_name": "msedge.exe",
+      "create_time": "2023-03-30 09:22:44.000000 UTC",
+      "args": "\"C:\\\\Program Files (x86)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --type=crashpad-handler \"--user-data-dir=C:\\\\Users\\\\devmac\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\User Data\" /prefetch:7 --monitor-self-annotation=ptype=crashpad-handler \"--database=C:\\\\Users\\\\devmac\\\\AppData\\\\Local\\\\Microsoft\\\\Edge\\\\Use",
       "wow64": false,
       "in_pslist": true,
-      "lineage_depth": 1,
+      "lineage_depth": 5,
       "attack_stages": [
-        "c2_or_lateral",
-        "memory_manipulation"
+        "initial_execution"
       ],
-      "execution_technique": "injection_like",
+      "execution_technique": "n/a",
       "rule_hits": [
         {
-          "rule_id": "rwx_injection",
-          "stage": "memory_manipulation",
-          "weight": 4.0,
-          "confidence": 0.9,
-          "quality": 1.0,
-          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "nonrwx_exec_private",
-          "stage": "memory_manipulation",
-          "weight": 3.5,
+          "rule_id": "suspicious_cmdline",
+          "stage": "initial_execution",
+          "weight": 2.0,
           "confidence": 0.8,
           "quality": 0.9,
-          "evidence": "vad:PAGE_EXECUTE_READWRITE"
-        },
-        {
-          "rule_id": "windows_update_profile",
-          "stage": "c2_or_lateral",
-          "weight": -1.5,
-          "confidence": 1.0,
-          "quality": 1.0,
-          "evidence": "onedrive.exe"
+          "evidence": "SuspiciousPath"
         }
       ],
-      "_suspicion_score": 5,
+      "_suspicion_score": 1,
       "_reasons": [
-        "nonrwx_exec_private",
-        "rwx_injection",
-        "windows_update_profile"
+        "suspicious_cmdline"
       ],
-      "_confidence": 0.37,
-      "_severity": "Medium"
+      "_confidence": 0.1341,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
     },
     {
       "PID": 8044,
@@ -1455,13 +1605,103 @@
         "rwx_injection"
       ],
       "_confidence": 0.6584,
-      "_severity": "Critical"
+      "_severity": "Critical",
+      "_triage_zone": "suspect"
+    },
+    {
+      "PID": 2792,
+      "pid": 2792,
+      "name": "SearchProtocol",
+      "ppid": 4620,
+      "parent_name": "searchindexer.",
+      "create_time": "2023-03-30 09:29:40.000000 UTC",
+      "args": "\"C:\\\\Windows\\\\system32\\\\SearchProtocolHost.exe\" Global\\\\UsGthrFltPipeMssGthrPipe2_ Global\\\\UsGthrCtrlFltPipeMssGthrPipe2 1 -2147483646 \"Software\\\\Microsoft\\\\Windows Search\" \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT; MS Search 4.0 Robot)\" \"C:\\\\ProgramData\\\\Microsoft\\\\Search\\\\Data\\\\Temp\\\\usgthrsv",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 4,
+      "attack_stages": [
+        "initial_execution"
+      ],
+      "execution_technique": "n/a",
+      "rule_hits": [
+        {
+          "rule_id": "suspicious_cmdline",
+          "stage": "initial_execution",
+          "weight": 2.0,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "SuspiciousPath"
+        }
+      ],
+      "_suspicion_score": 1,
+      "_reasons": [
+        "suspicious_cmdline"
+      ],
+      "_confidence": 0.1341,
+      "_severity": "Medium",
+      "_triage_zone": "suspect"
+    }
+  ],
+  "benign_context_processes": [
+    {
+      "PID": 6416,
+      "pid": 6416,
+      "name": "OneDrive.exe",
+      "ppid": 8160,
+      "parent_name": "?",
+      "create_time": "2023-03-30 09:23:31.000000 UTC",
+      "args": "/updateInstalled /background",
+      "wow64": false,
+      "in_pslist": true,
+      "lineage_depth": 1,
+      "attack_stages": [
+        "c2_or_lateral",
+        "memory_manipulation"
+      ],
+      "execution_technique": "injection_like",
+      "rule_hits": [
+        {
+          "rule_id": "rwx_injection",
+          "stage": "memory_manipulation",
+          "weight": 4.0,
+          "confidence": 0.9,
+          "quality": 1.0,
+          "evidence": "vadinfo:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "nonrwx_exec_private",
+          "stage": "memory_manipulation",
+          "weight": 3.5,
+          "confidence": 0.8,
+          "quality": 0.9,
+          "evidence": "vad:PAGE_EXECUTE_READWRITE"
+        },
+        {
+          "rule_id": "windows_update_profile",
+          "stage": "c2_or_lateral",
+          "weight": -1.5,
+          "confidence": 1.0,
+          "quality": 1.0,
+          "evidence": "onedrive.exe"
+        }
+      ],
+      "_suspicion_score": 5,
+      "_reasons": [
+        "nonrwx_exec_private",
+        "rwx_injection",
+        "windows_update_profile"
+      ],
+      "_confidence": 0.37,
+      "_severity": "Medium",
+      "_triage_zone": "benign",
+      "_benign_reasons": [
+        "windows_update_profile"
+      ]
     }
   ],
   "_meta": {
-    "total_suspicious_pids": 12,
+    "total_suspicious_pids": 10,
     "suspicious_pids": [
-      0,
       4,
       444,
       520,
@@ -1471,28 +1711,50 @@
       4352,
       5096,
       5332,
-      6416,
       8044
     ],
+    "suspect_zone_pids": [
+      4,
+      444,
+      520,
+      540,
+      2072,
+      2792,
+      4352,
+      5096,
+      5332,
+      8044
+    ],
+    "benign_zone_pids": [
+      6416
+    ],
+    "benign_zone_reasons": {
+      "6416": [
+        "windows_update_profile"
+      ]
+    },
     "graph_attr": {
       "max_process_score": 102,
+      "raw_rwx_injections": 30,
+      "benign_zone_process_count": 1,
+      "suspect_zone_process_count": 10,
       "attack_steps": 4,
       "high_severity_injections": 0,
       "lolbin_c2_connections": 0,
       "ransom_note_signal": 0,
-      "suspect_rate": 0.058824,
+      "suspect_rate": 0.117647,
       "hidden_rate": 0.0,
       "inject_rate": 0.352941,
-      "external_conn_rate": 0.035294,
-      "largest_suspicious_component_ratio": 0.141176,
+      "external_conn_rate": 0.070588,
+      "largest_suspicious_component_ratio": 0.117647,
       "lineage_depth_p95": 4,
       "lolbin_chain_count": 0,
       "nonrwx_exec_count": 22,
       "credential_access_count": 1,
       "triage_confidence": 0.99,
       "stage_coverage_score": 0.8,
-      "proc_degree_zmax": 4.284248,
-      "proc_betweenness_p95": 0.035432,
+      "proc_degree_zmax": 4.350282,
+      "proc_betweenness_p95": 0.060577,
       "num_attack_motifs": 141,
       "service_boundary_violations": 0,
       "temporal_chain_signals": 0,
@@ -1502,7 +1764,8 @@
       "behavioural_suspects_found": 1,
       "lolbin_c2_found": 0,
       "ransom_note_found": 0,
-      "rwx_injections": 30,
+      "rwx_injections": 29,
+      "raw_rwx_injections": 30,
       "hidden_processes": 0,
       "top_suspect_score": 102,
       "triage_confidence": 0.99,
@@ -1574,43 +1837,49 @@
       "sequence_quality": 0.8
     },
     "root_cause_process": {
-      "pid": 2072,
-      "name": "msmpeng.exe",
+      "pid": 4,
+      "name": "system",
       "why": [
-        "rwx_injection:vadinfo:PAGE_EXECUTE_READWRITE",
-        "rwx_injection:vadinfo:PAGE_EXECUTE_READWRITE",
-        "rwx_injection:vadinfo:PAGE_EXECUTE_READWRITE"
+        "lsass_full_access:system:0x1fffff"
       ]
     },
     "evidence_graph": {
       "nodes": [
         "process_2072",
+        "process_2792",
+        "process_4",
         "process_4352",
+        "process_444",
+        "process_5096",
+        "process_520",
         "process_5332",
-        "process_6416",
+        "process_540",
         "process_8044"
       ],
       "edges": []
     },
     "model_features": {
       "max_process_score": 102,
+      "raw_rwx_injections": 30,
+      "benign_zone_process_count": 1,
+      "suspect_zone_process_count": 10,
       "attack_steps": 4,
       "high_severity_injections": 0,
       "lolbin_c2_connections": 0,
       "ransom_note_signal": 0,
-      "suspect_rate": 0.058824,
+      "suspect_rate": 0.117647,
       "hidden_rate": 0.0,
       "inject_rate": 0.352941,
-      "external_conn_rate": 0.035294,
-      "largest_suspicious_component_ratio": 0.141176,
+      "external_conn_rate": 0.070588,
+      "largest_suspicious_component_ratio": 0.117647,
       "lineage_depth_p95": 4,
       "lolbin_chain_count": 0,
       "nonrwx_exec_count": 22,
       "credential_access_count": 1,
       "triage_confidence": 0.99,
       "stage_coverage_score": 0.8,
-      "proc_degree_zmax": 4.284248,
-      "proc_betweenness_p95": 0.035432,
+      "proc_degree_zmax": 4.350282,
+      "proc_betweenness_p95": 0.060577,
       "num_attack_motifs": 141,
       "service_boundary_violations": 0,
       "temporal_chain_signals": 0,

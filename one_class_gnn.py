@@ -12,19 +12,14 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch_geometric.data import Data
 from torch_geometric.loader import DataLoader
-from torch_geometric.nn import GINEConv, global_add_pool, global_max_pool, global_mean_pool
+from torch_geometric.nn import GINEConv
+
+from model import _graph_readout
 
 from dataset import N_EDGE_TYPES
 from utils.evidence_metadata import enrich_edge, enrich_node
 from utils.inference_align import align_pyg_data_to_oneclass_model
 from utils.schema import EXPECTED_GRAPH_ATTR_DIM
-
-
-def _graph_readout(x: torch.Tensor, batch: torch.Tensor) -> torch.Tensor:
-    return torch.cat(
-        [global_mean_pool(x, batch), global_max_pool(x, batch), global_add_pool(x, batch)],
-        dim=-1,
-    )
 
 
 class OneClassGINE(nn.Module):
@@ -77,6 +72,7 @@ class OneClassGINE(nn.Module):
         batch: torch.Tensor,
         graph_attr: torch.Tensor | None,
         edge_attr: torch.Tensor | None,
+        node_mask: torch.Tensor | None = None,
     ) -> torch.Tensor:
         if edge_attr is None:
             raise ValueError("OneClassGINE requires edge_attr edge type ids")
@@ -88,7 +84,7 @@ class OneClassGINE(nn.Module):
         for conv, bn in zip(self.convs, self.bns):
             h = F.relu(bn(conv(h, edge_index, edge_attr=edge_feat)))
             h = F.dropout(h, p=self.dropout, training=self.training)
-            chunks.append(_graph_readout(h, batch))
+            chunks.append(_graph_readout(h, batch, node_mask=node_mask))
         gnn_vec = torch.cat(chunks, dim=1)
 
         if graph_attr is None:
@@ -107,8 +103,9 @@ class OneClassGINE(nn.Module):
         batch: torch.Tensor,
         graph_attr: torch.Tensor | None,
         edge_attr: torch.Tensor | None,
+        node_mask: torch.Tensor | None = None,
     ) -> torch.Tensor:
-        return self.encode(x, edge_index, batch, graph_attr, edge_attr)
+        return self.encode(x, edge_index, batch, graph_attr, edge_attr, node_mask=node_mask)
 
 
 @dataclass
@@ -146,6 +143,7 @@ def _batch_embeddings(model: OneClassGINE, loader: DataLoader, device: torch.dev
                 batch.batch,
                 getattr(batch, "graph_attr", None),
                 getattr(batch, "edge_attr", None),
+                getattr(batch, "suspect_node_mask", None),
             )
             emb.append(z.detach().cpu())
     if not emb:
@@ -300,6 +298,7 @@ def train_one_class(
                 batch.batch,
                 getattr(batch, "graph_attr", None),
                 getattr(batch, "edge_attr", None),
+                getattr(batch, "suspect_node_mask", None),
             )
             dist = torch.sum((z - center.unsqueeze(0)) ** 2, dim=1)
             loss = _trimmed_mean(dist, trim_fraction) + (

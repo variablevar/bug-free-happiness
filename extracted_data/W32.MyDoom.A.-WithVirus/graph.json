@@ -8,6 +8,8 @@
       "label": "KERNEL",
       "heuristic_score": 0,
       "is_suspicious": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "kernel_system"
     },
     {
@@ -24,6 +26,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0xc7a3e0"
     },
     {
@@ -40,6 +44,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0xc7a790"
     },
     {
@@ -56,6 +62,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x5aa7590"
     },
     {
@@ -70,8 +78,10 @@
       "owner": "chrome.exe",
       "is_external": 1,
       "is_lolbin_c2": 0,
-      "is_suspicious": 1,
+      "is_suspicious": 0,
       "heuristic_score": 3,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 1,
       "id": "net_0x67b8280"
     },
     {
@@ -79,8 +89,13 @@
       "label": "172.217.169.36",
       "address": "172.217.169.36",
       "is_external": 1,
-      "is_suspicious": 1,
+      "is_suspicious": 0,
       "heuristic_score": 3,
+      "benign_reasons": [
+        "known_cdn_ip"
+      ],
+      "triage_zone": "benign",
+      "raw_is_suspicious": 1,
       "id": "ip_172_217_169_36"
     },
     {
@@ -97,6 +112,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x743fad0"
     },
     {
@@ -113,6 +130,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0xa3a51f0"
     },
     {
@@ -129,6 +148,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0xa3a5340"
     },
     {
@@ -145,6 +166,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0xb4f2a20"
     },
     {
@@ -161,6 +184,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0xcb59ef0"
     },
     {
@@ -177,6 +202,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0xcbcd010"
     },
     {
@@ -193,6 +220,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0xcfd67f0"
     },
     {
@@ -209,6 +238,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0xd554550"
     },
     {
@@ -223,8 +254,10 @@
       "owner": "chrome.exe",
       "is_external": 1,
       "is_lolbin_c2": 0,
-      "is_suspicious": 1,
+      "is_suspicious": 0,
       "heuristic_score": 3,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 1,
       "id": "net_0x1fbcb250"
     },
     {
@@ -232,8 +265,13 @@
       "label": "142.250.200.46",
       "address": "142.250.200.46",
       "is_external": 1,
-      "is_suspicious": 1,
+      "is_suspicious": 0,
       "heuristic_score": 3,
+      "benign_reasons": [
+        "known_cdn_ip"
+      ],
+      "triage_zone": "benign",
+      "raw_is_suspicious": 1,
       "id": "ip_142_250_200_46"
     },
     {
@@ -250,6 +288,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x22047780"
     },
     {
@@ -266,6 +306,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x2685f150"
     },
     {
@@ -282,6 +324,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x27440a60"
     },
     {
@@ -298,6 +342,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x28aa8ec0"
     },
     {
@@ -312,8 +358,10 @@
       "owner": "chrome.exe",
       "is_external": 1,
       "is_lolbin_c2": 0,
-      "is_suspicious": 1,
+      "is_suspicious": 0,
       "heuristic_score": 3,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 1,
       "id": "net_0x2eee21f0"
     },
     {
@@ -330,6 +378,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x2eee2c60"
     },
     {
@@ -346,6 +396,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x2fbeb010"
     },
     {
@@ -362,6 +414,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x305cac80"
     },
     {
@@ -378,6 +432,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x308c4ae0"
     },
     {
@@ -394,6 +450,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x31b6fec0"
     },
     {
@@ -410,6 +468,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x36352010"
     },
     {
@@ -426,6 +486,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x36dcf8c0"
     },
     {
@@ -442,6 +504,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x37adf640"
     },
     {
@@ -458,6 +522,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x38683630"
     },
     {
@@ -474,6 +540,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x3c11aa10"
     },
     {
@@ -490,6 +558,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x3c11acb0"
     },
     {
@@ -506,6 +576,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x3c322010"
     },
     {
@@ -522,6 +594,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x3f7234f0"
     },
     {
@@ -538,6 +612,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x3fc3ccf0"
     },
     {
@@ -554,6 +630,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x4094c290"
     },
     {
@@ -570,6 +648,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x41c249b0"
     },
     {
@@ -586,6 +666,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x48434240"
     },
     {
@@ -602,6 +684,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x48604ce0"
     },
     {
@@ -618,6 +702,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x4d964870"
     },
     {
@@ -634,6 +720,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 1,
       "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "raw_is_suspicious": 1,
       "id": "net_0x4db8ecf0"
     },
     {
@@ -643,6 +731,8 @@
       "is_external": 1,
       "is_suspicious": 1,
       "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "raw_is_suspicious": 1,
       "id": "ip_216_58_212_202"
     },
     {
@@ -659,6 +749,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x50883a60"
     },
     {
@@ -675,6 +767,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x50cbbda0"
     },
     {
@@ -691,6 +785,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x51671010"
     },
     {
@@ -707,6 +803,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x51c79850"
     },
     {
@@ -723,6 +821,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x51db0100"
     },
     {
@@ -739,6 +839,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x51db0da0"
     },
     {
@@ -755,6 +857,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x51fc3930"
     },
     {
@@ -771,6 +875,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x5935daf0"
     },
     {
@@ -787,6 +893,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x59c3bcb0"
     },
     {
@@ -803,6 +911,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x5ac35540"
     },
     {
@@ -819,6 +929,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 1,
       "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "raw_is_suspicious": 1,
       "id": "net_0x5ccdbcf0"
     },
     {
@@ -828,6 +940,8 @@
       "is_external": 1,
       "is_suspicious": 1,
       "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "raw_is_suspicious": 1,
       "id": "ip_142_251_5_188"
     },
     {
@@ -844,6 +958,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x5fdd6310"
     },
     {
@@ -860,6 +976,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x604ea010"
     },
     {
@@ -876,6 +994,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x60566580"
     },
     {
@@ -892,6 +1012,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x60825470"
     },
     {
@@ -908,6 +1030,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x60866010"
     },
     {
@@ -924,6 +1048,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x609b2770"
     },
     {
@@ -940,6 +1066,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x611ee610"
     },
     {
@@ -956,6 +1084,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x611eeec0"
     },
     {
@@ -972,6 +1102,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x626a5cf0"
     },
     {
@@ -988,6 +1120,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x6499f740"
     },
     {
@@ -1004,6 +1138,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x66128010"
     },
     {
@@ -1020,6 +1156,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 1,
       "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "raw_is_suspicious": 1,
       "id": "net_0x66128cf0"
     },
     {
@@ -1029,6 +1167,8 @@
       "is_external": 1,
       "is_suspicious": 1,
       "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "raw_is_suspicious": 1,
       "id": "ip_34_104_35_123"
     },
     {
@@ -1045,6 +1185,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x662d7cf0"
     },
     {
@@ -1061,6 +1203,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x697347f0"
     },
     {
@@ -1077,6 +1221,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x697f7ac0"
     },
     {
@@ -1093,6 +1239,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x6dd451f0"
     },
     {
@@ -1109,6 +1257,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x6e09e510"
     },
     {
@@ -1125,6 +1275,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x6ea55cf0"
     },
     {
@@ -1141,6 +1293,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x707c1650"
     },
     {
@@ -1157,6 +1311,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x71a77cf0"
     },
     {
@@ -1173,6 +1329,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x73f6b9c0"
     },
     {
@@ -1187,8 +1345,10 @@
       "owner": "chrome.exe",
       "is_external": 1,
       "is_lolbin_c2": 0,
-      "is_suspicious": 1,
+      "is_suspicious": 0,
       "heuristic_score": 3,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 1,
       "id": "net_0x747b1010"
     },
     {
@@ -1205,6 +1365,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x74efcec0"
     },
     {
@@ -1221,6 +1383,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7711d9c0"
     },
     {
@@ -1237,6 +1401,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x786360f0"
     },
     {
@@ -1253,6 +1419,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7a44d5f0"
     },
     {
@@ -1269,6 +1437,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7a8391f0"
     },
     {
@@ -1285,6 +1455,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7a8396f0"
     },
     {
@@ -1301,6 +1473,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7a839ec0"
     },
     {
@@ -1317,6 +1491,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d435590"
     },
     {
@@ -1333,6 +1509,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d461ec0"
     },
     {
@@ -1349,6 +1527,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d469ad0"
     },
     {
@@ -1365,6 +1545,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d48d9c0"
     },
     {
@@ -1381,6 +1563,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d493c80"
     },
     {
@@ -1397,6 +1581,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d5030f0"
     },
     {
@@ -1413,6 +1599,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d5061f0"
     },
     {
@@ -1429,6 +1617,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d5066f0"
     },
     {
@@ -1445,6 +1635,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d506ec0"
     },
     {
@@ -1461,6 +1653,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d5073e0"
     },
     {
@@ -1477,6 +1671,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d507790"
     },
     {
@@ -1493,6 +1689,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d521ec0"
     },
     {
@@ -1509,6 +1707,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d5279c0"
     },
     {
@@ -1525,6 +1725,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d68ecf0"
     },
     {
@@ -1541,6 +1743,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d6b33a0"
     },
     {
@@ -1557,6 +1761,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d700960"
     },
     {
@@ -1573,6 +1779,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d773550"
     },
     {
@@ -1589,6 +1797,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d7deec0"
     },
     {
@@ -1605,6 +1815,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d8077f0"
     },
     {
@@ -1621,6 +1833,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d823550"
     },
     {
@@ -1637,6 +1851,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d828ef0"
     },
     {
@@ -1653,6 +1869,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d853010"
     },
     {
@@ -1669,6 +1887,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d8931f0"
     },
     {
@@ -1685,6 +1905,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d893c60"
     },
     {
@@ -1701,6 +1923,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d8f2ce0"
     },
     {
@@ -1717,6 +1941,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d922010"
     },
     {
@@ -1733,6 +1959,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7d95c010"
     },
     {
@@ -1749,6 +1977,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7da0a7f0"
     },
     {
@@ -1765,6 +1995,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7da0ea60"
     },
     {
@@ -1781,6 +2013,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7da221e0"
     },
     {
@@ -1797,6 +2031,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7da6e930"
     },
     {
@@ -1813,6 +2049,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7db1aec0"
     },
     {
@@ -1829,6 +2067,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7db8b150"
     },
     {
@@ -1845,6 +2085,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7dbaf4f0"
     },
     {
@@ -1861,6 +2103,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7dbd59b0"
     },
     {
@@ -1877,6 +2121,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7dbdf240"
     },
     {
@@ -1893,6 +2139,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7dbef650"
     },
     {
@@ -1909,6 +2157,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7dc081f0"
     },
     {
@@ -1925,6 +2175,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7dc08340"
     },
     {
@@ -1941,6 +2193,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7dc9bac0"
     },
     {
@@ -1957,6 +2211,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7dd00610"
     },
     {
@@ -1973,6 +2229,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7dd00ec0"
     },
     {
@@ -1989,6 +2247,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7dd54870"
     },
     {
@@ -2005,6 +2265,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7ddba640"
     },
     {
@@ -2021,6 +2283,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7ddd99e0"
     },
     {
@@ -2037,6 +2301,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7df4ca60"
     },
     {
@@ -2053,6 +2319,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7df4d290"
     },
     {
@@ -2069,6 +2337,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7df65100"
     },
     {
@@ -2085,6 +2355,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7df65da0"
     },
     {
@@ -2101,6 +2373,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7df81850"
     },
     {
@@ -2117,6 +2391,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7df83da0"
     },
     {
@@ -2133,6 +2409,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7df9faf0"
     },
     {
@@ -2149,6 +2427,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7dfab010"
     },
     {
@@ -2165,6 +2445,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7e1dc8a0"
     },
     {
@@ -2181,6 +2463,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7ea6a010"
     },
     {
@@ -2197,6 +2481,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7ebf8780"
     },
     {
@@ -2213,6 +2499,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7ed675d0"
     },
     {
@@ -2229,6 +2517,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7eebb470"
     },
     {
@@ -2245,6 +2535,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 1,
       "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "raw_is_suspicious": 1,
       "id": "net_0x7efc5cf0"
     },
     {
@@ -2261,6 +2553,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 1,
       "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "raw_is_suspicious": 1,
       "id": "net_0x7f105cf0"
     },
     {
@@ -2277,6 +2571,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7f1b7cb0"
     },
     {
@@ -2293,6 +2589,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fa1d620"
     },
     {
@@ -2309,6 +2607,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fabd8c0"
     },
     {
@@ -2325,6 +2625,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fb35a10"
     },
     {
@@ -2341,6 +2643,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fb35cb0"
     },
     {
@@ -2357,6 +2661,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fb40470"
     },
     {
@@ -2373,6 +2679,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fb45010"
     },
     {
@@ -2389,6 +2697,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fc1f540"
     },
     {
@@ -2405,6 +2715,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fc27770"
     },
     {
@@ -2421,6 +2733,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fc398b0"
     },
     {
@@ -2437,6 +2751,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fcc9580"
     },
     {
@@ -2453,6 +2769,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fcd2cf0"
     },
     {
@@ -2469,6 +2787,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fcd3740"
     },
     {
@@ -2485,6 +2805,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fd45b30"
     },
     {
@@ -2501,6 +2823,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fd54010"
     },
     {
@@ -2517,6 +2841,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fd7b010"
     },
     {
@@ -2533,6 +2859,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 1,
       "heuristic_score": 3,
+      "triage_zone": "suspect",
+      "raw_is_suspicious": 1,
       "id": "net_0x7fd7bcf0"
     },
     {
@@ -2549,6 +2877,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "neutral",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fe54ae0"
     },
     {
@@ -2565,6 +2895,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fe56bf0"
     },
     {
@@ -2581,6 +2913,8 @@
       "is_lolbin_c2": 0,
       "is_suspicious": 0,
       "heuristic_score": 0,
+      "triage_zone": "benign",
+      "raw_is_suspicious": 0,
       "id": "net_0x7fe5b4d0"
     }
   ],

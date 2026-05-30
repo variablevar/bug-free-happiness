@@ -1,4 +1,4 @@
 Sample: GoldenEye-NoVirus | label=0 | family=goldeneye | benign_subtype=ambiguous_novirus_control
-filter_malicious.py: OK (0.7s)
-build_graph.py: OK (8.9s)
-analyze_graph.py: OK (1.1s)
+filter_malicious.py: OK (0.5s)
+build_graph.py: OK (6.2s)
+analyze_graph.py: OK (0.7s)
